@@ -520,8 +520,23 @@ static int get_argv_utf8(int *argc_ptr, char ***argv_ptr)
  * 3 - unable to generate stream headers
  * 4 - encoder abort */
 
-int main(int argc, char **argv)
+//int main(int argc, char **argv)
+int main()
 {
+     int argc = 11;
+     char *argv[10];
+     argv[0] = (char *)"./x265";
+     argv[1] = (char *)"-o";
+     argv[2] = (char *)"test.265";
+     argv[3] = (char *)"--input";
+     argv[4] = (char *)"./test_176x144_15.yuv";		
+     argv[5] = (char *)"--input-res";
+     argv[6] = (char *)"176x144";
+     argv[7] = (char *)"--fps";
+     argv[8] = (char *)"15";
+     argv[9] = (char *)"-f";
+     argv[10] = (char *)"2";
+
 #if HAVE_VLD
     // This uses Microsoft's proprietary WCHAR type, but this only builds on Windows to start with
     VLDSetReportOptions(VLD_OPT_REPORT_TO_DEBUGGER | VLD_OPT_REPORT_TO_FILE, L"x265_leaks.txt");
