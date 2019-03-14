@@ -1,0 +1,746 @@
+The system is: Linux - 3.10.84-19.fc21.loongson.2.mips64el - mips64
+Compiling the C compiler identification source file "CMakeCCompilerId.c" succeeded.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the C compiler identification source "CMakeCCompilerId.c" produced "a.out"
+
+The C compiler identification is GNU, found in "/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/3.13.4/CompilerIdC/a.out"
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" succeeded.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++ 
+Build flags: 
+Id flags:  
+
+The output was:
+0
+
+
+Compilation of the CXX compiler identification source "CMakeCXXCompilerId.cpp" produced "a.out"
+
+The CXX compiler identification is GNU, found in "/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/3.13.4/CompilerIdCXX/a.out"
+
+Determining if the C compiler works passed with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_aa0e9/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_aa0e9.dir/build.make CMakeFiles/cmTC_aa0e9.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_aa0e9.dir/testCCompiler.c.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc    -o CMakeFiles/cmTC_aa0e9.dir/testCCompiler.c.o   -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp/testCCompiler.c
+Linking C executable cmTC_aa0e9
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aa0e9.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc      -rdynamic CMakeFiles/cmTC_aa0e9.dir/testCCompiler.c.o  -o cmTC_aa0e9 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+Detecting C compiler ABI info compiled with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_9347b/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_9347b.dir/build.make CMakeFiles/cmTC_9347b.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_9347b.dir/CMakeCCompilerABI.c.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc    -o CMakeFiles/cmTC_9347b.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.13/Modules/CMakeCCompilerABI.c
+Linking C executable cmTC_9347b
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9347b.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc     -v -rdynamic CMakeFiles/cmTC_9347b.dir/CMakeCCompilerABI.c.o  -o cmTC_9347b 
+Using built-in specs.
+COLLECT_GCC=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc
+COLLECT_LTO_WRAPPER=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/lto-wrapper
+Target: mips64el-loongson-linux
+Configured with: /export/GCC/gcc_git_trunk/configure --prefix=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr --with-sysroot=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr/mips64el-loongson-linux/sysroot --target=mips64el-loongson-linux --with-arch=loongson3a --with-abi=64 --with-mpc=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr --enable-threads=posix --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --disable-dssi --disable-werror --disable-multilib --enable-languages=c,c++,fortran --enable-shared --with-build-time-tools=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr/mips64el-loongson-linux/bin --without-isl
+Thread model: posix
+gcc version 7.3.0 (GCC) 
+COMPILER_PATH=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/bin/
+LIBRARY_PATH=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_9347b' '-march=loongson3a' '-mabi=64' '-mllsc' '-mips64r2' '-mno-shared' '-EL'
+ /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/collect2 -plugin /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/liblto_plugin.so -plugin-opt=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccaXhGEg.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot --eh-frame-hdr -EL -mips64r2 -export-dynamic -dynamic-linker /lib64/ld.so.1 -melf64ltsmip -o cmTC_9347b /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crt1.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crti.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtbegin.o -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64 CMakeFiles/cmTC_9347b.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtend.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_9347b' '-march=loongson3a' '-mabi=64' '-mllsc' '-mips64r2' '-mno-shared' '-EL'
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+Parsed C implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTC_9347b/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_9347b.dir/build.make CMakeFiles/cmTC_9347b.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp']
+  ignore line: [Building C object CMakeFiles/cmTC_9347b.dir/CMakeCCompilerABI.c.o]
+  ignore line: [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc    -o CMakeFiles/cmTC_9347b.dir/CMakeCCompilerABI.c.o   -c /usr/local/share/cmake-3.13/Modules/CMakeCCompilerABI.c]
+  ignore line: [Linking C executable cmTC_9347b]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_9347b.dir/link.txt --verbose=1]
+  ignore line: [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc     -v -rdynamic CMakeFiles/cmTC_9347b.dir/CMakeCCompilerABI.c.o  -o cmTC_9347b ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc]
+  ignore line: [COLLECT_LTO_WRAPPER=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/lto-wrapper]
+  ignore line: [Target: mips64el-loongson-linux]
+  ignore line: [Configured with: /export/GCC/gcc_git_trunk/configure --prefix=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr --with-sysroot=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr/mips64el-loongson-linux/sysroot --target=mips64el-loongson-linux --with-arch=loongson3a --with-abi=64 --with-mpc=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr --enable-threads=posix --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --disable-dssi --disable-werror --disable-multilib --enable-languages=c,c++,fortran --enable-shared --with-build-time-tools=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr/mips64el-loongson-linux/bin --without-isl]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 7.3.0 (GCC) ]
+  ignore line: [COMPILER_PATH=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/bin/]
+  ignore line: [LIBRARY_PATH=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_9347b' '-march=loongson3a' '-mabi=64' '-mllsc' '-mips64r2' '-mno-shared' '-EL']
+  link line: [ /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/collect2 -plugin /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/liblto_plugin.so -plugin-opt=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccaXhGEg.res -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lgcc_s --sysroot=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot --eh-frame-hdr -EL -mips64r2 -export-dynamic -dynamic-linker /lib64/ld.so.1 -melf64ltsmip -o cmTC_9347b /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crt1.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crti.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtbegin.o -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64 CMakeFiles/cmTC_9347b.dir/CMakeCCompilerABI.c.o -lgcc --as-needed -lgcc_s --no-as-needed -lc -lgcc --as-needed -lgcc_s --no-as-needed /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtend.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crtn.o]
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccaXhGEg.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [--sysroot=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-EL] ==> ignore
+    arg [-mips64r2] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld.so.1] ==> ignore
+    arg [-melf64ltsmip] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_9347b] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crt1.o] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crti.o] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtbegin.o] ==> ignore
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64]
+    arg [CMakeFiles/cmTC_9347b.dir/CMakeCCompilerABI.c.o] ==> ignore
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [-lc] ==> lib [c]
+    arg [-lgcc] ==> lib [gcc]
+    arg [--as-needed] ==> ignore
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [--no-as-needed] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtend.o] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crtn.o] ==> ignore
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/lib64]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/lib64]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/lib64]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/lib]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/lib64]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/lib64]
+  implicit libs: [gcc;gcc_s;c;gcc;gcc_s]
+  implicit dirs: [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0;/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc;/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/lib64;/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/lib64;/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/lib64;/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/lib]
+  implicit fwks: []
+
+
+
+
+Detecting C [-std=c11] compiler features compiled with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_1a2b8/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_1a2b8.dir/build.make CMakeFiles/cmTC_1a2b8.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_1a2b8.dir/feature_tests.c.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc   -std=c11 -o CMakeFiles/cmTC_1a2b8.dir/feature_tests.c.o   -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/feature_tests.c
+Linking C executable cmTC_1a2b8
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_1a2b8.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc      -rdynamic CMakeFiles/cmTC_1a2b8.dir/feature_tests.c.o  -o cmTC_1a2b8 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:1c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c99] compiler features compiled with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_cf421/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_cf421.dir/build.make CMakeFiles/cmTC_cf421.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_cf421.dir/feature_tests.c.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc   -std=c99 -o CMakeFiles/cmTC_cf421.dir/feature_tests.c.o   -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/feature_tests.c
+Linking C executable cmTC_cf421
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_cf421.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc      -rdynamic CMakeFiles/cmTC_cf421.dir/feature_tests.c.o  -o cmTC_cf421 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:1c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:1c_variadic_macros
+
+
+Detecting C [-std=c90] compiler features compiled with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_c233f/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_c233f.dir/build.make CMakeFiles/cmTC_c233f.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_c233f.dir/feature_tests.c.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc   -std=c90 -o CMakeFiles/cmTC_c233f.dir/feature_tests.c.o   -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/feature_tests.c
+Linking C executable cmTC_c233f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c233f.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc      -rdynamic CMakeFiles/cmTC_c233f.dir/feature_tests.c.o  -o cmTC_c233f 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+    Feature record: C_FEATURE:1c_function_prototypes
+    Feature record: C_FEATURE:0c_restrict
+    Feature record: C_FEATURE:0c_static_assert
+    Feature record: C_FEATURE:0c_variadic_macros
+Determining if the CXX compiler works passed with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_15b14/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_15b14.dir/build.make CMakeFiles/cmTC_15b14.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_15b14.dir/testCXXCompiler.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++     -o CMakeFiles/cmTC_15b14.dir/testCXXCompiler.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp/testCXXCompiler.cxx
+Linking CXX executable cmTC_15b14
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_15b14.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++       -rdynamic CMakeFiles/cmTC_15b14.dir/testCXXCompiler.cxx.o  -o cmTC_15b14 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+Detecting CXX compiler ABI info compiled with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_b7580/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_b7580.dir/build.make CMakeFiles/cmTC_b7580.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b7580.dir/CMakeCXXCompilerABI.cpp.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++     -o CMakeFiles/cmTC_b7580.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.13/Modules/CMakeCXXCompilerABI.cpp
+Linking CXX executable cmTC_b7580
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b7580.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++      -v -rdynamic CMakeFiles/cmTC_b7580.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_b7580 
+Using built-in specs.
+COLLECT_GCC=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++
+COLLECT_LTO_WRAPPER=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/lto-wrapper
+Target: mips64el-loongson-linux
+Configured with: /export/GCC/gcc_git_trunk/configure --prefix=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr --with-sysroot=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr/mips64el-loongson-linux/sysroot --target=mips64el-loongson-linux --with-arch=loongson3a --with-abi=64 --with-mpc=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr --enable-threads=posix --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --disable-dssi --disable-werror --disable-multilib --enable-languages=c,c++,fortran --enable-shared --with-build-time-tools=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr/mips64el-loongson-linux/bin --without-isl
+Thread model: posix
+gcc version 7.3.0 (GCC) 
+COMPILER_PATH=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/bin/
+LIBRARY_PATH=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_b7580' '-shared-libgcc' '-march=loongson3a' '-mabi=64' '-mllsc' '-mips64r2' '-mno-shared' '-EL'
+ /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/collect2 -plugin /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/liblto_plugin.so -plugin-opt=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccobOD8S.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot --eh-frame-hdr -EL -mips64r2 -export-dynamic -dynamic-linker /lib64/ld.so.1 -melf64ltsmip -o cmTC_b7580 /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crt1.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crti.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtbegin.o -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64 CMakeFiles/cmTC_b7580.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtend.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crtn.o
+COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_b7580' '-shared-libgcc' '-march=loongson3a' '-mabi=64' '-mllsc' '-mips64r2' '-mno-shared' '-EL'
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+Parsed CXX implicit link information from above output:
+  link line regex: [^( *|.*[/\])(ld|CMAKE_LINK_STARTFILE-NOTFOUND|([^/\]+-)?ld|collect2)[^/\]*( |$)]
+  ignore line: [Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp]
+  ignore line: []
+  ignore line: [Run Build Command:"/usr/bin/gmake" "cmTC_b7580/fast"]
+  ignore line: [/usr/bin/gmake -f CMakeFiles/cmTC_b7580.dir/build.make CMakeFiles/cmTC_b7580.dir/build]
+  ignore line: [gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp']
+  ignore line: [Building CXX object CMakeFiles/cmTC_b7580.dir/CMakeCXXCompilerABI.cpp.o]
+  ignore line: [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++     -o CMakeFiles/cmTC_b7580.dir/CMakeCXXCompilerABI.cpp.o -c /usr/local/share/cmake-3.13/Modules/CMakeCXXCompilerABI.cpp]
+  ignore line: [Linking CXX executable cmTC_b7580]
+  ignore line: [/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b7580.dir/link.txt --verbose=1]
+  ignore line: [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++      -v -rdynamic CMakeFiles/cmTC_b7580.dir/CMakeCXXCompilerABI.cpp.o  -o cmTC_b7580 ]
+  ignore line: [Using built-in specs.]
+  ignore line: [COLLECT_GCC=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++]
+  ignore line: [COLLECT_LTO_WRAPPER=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/lto-wrapper]
+  ignore line: [Target: mips64el-loongson-linux]
+  ignore line: [Configured with: /export/GCC/gcc_git_trunk/configure --prefix=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr --with-sysroot=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr/mips64el-loongson-linux/sysroot --target=mips64el-loongson-linux --with-arch=loongson3a --with-abi=64 --with-mpc=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr --enable-threads=posix --enable-__cxa_atexit --disable-libunwind-exceptions --enable-gnu-unique-object --disable-dssi --disable-werror --disable-multilib --enable-languages=c,c++,fortran --enable-shared --with-build-time-tools=/home/xuchenghua/toolchain/gcc-7.3.0-loongson-asx/usr/mips64el-loongson-linux/bin --without-isl]
+  ignore line: [Thread model: posix]
+  ignore line: [gcc version 7.3.0 (GCC) ]
+  ignore line: [COMPILER_PATH=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/bin/]
+  ignore line: [LIBRARY_PATH=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/:/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/]
+  ignore line: [COLLECT_GCC_OPTIONS='-v' '-rdynamic' '-o' 'cmTC_b7580' '-shared-libgcc' '-march=loongson3a' '-mabi=64' '-mllsc' '-mips64r2' '-mno-shared' '-EL']
+  link line: [ /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/collect2 -plugin /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/liblto_plugin.so -plugin-opt=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/lto-wrapper -plugin-opt=-fresolution=/tmp/ccobOD8S.res -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc -plugin-opt=-pass-through=-lc -plugin-opt=-pass-through=-lgcc_s -plugin-opt=-pass-through=-lgcc --sysroot=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot --eh-frame-hdr -EL -mips64r2 -export-dynamic -dynamic-linker /lib64/ld.so.1 -melf64ltsmip -o cmTC_b7580 /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crt1.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crti.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtbegin.o -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64 -L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64 CMakeFiles/cmTC_b7580.dir/CMakeCXXCompilerABI.cpp.o -lstdc++ -lm -lgcc_s -lgcc -lc -lgcc_s -lgcc /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtend.o /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crtn.o]
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/collect2] ==> ignore
+    arg [-plugin] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/liblto_plugin.so] ==> ignore
+    arg [-plugin-opt=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../libexec/gcc/mips64el-loongson-linux/7.3.0/lto-wrapper] ==> ignore
+    arg [-plugin-opt=-fresolution=/tmp/ccobOD8S.res] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lc] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc_s] ==> ignore
+    arg [-plugin-opt=-pass-through=-lgcc] ==> ignore
+    arg [--sysroot=/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot] ==> ignore
+    arg [--eh-frame-hdr] ==> ignore
+    arg [-EL] ==> ignore
+    arg [-mips64r2] ==> ignore
+    arg [-export-dynamic] ==> ignore
+    arg [-dynamic-linker] ==> ignore
+    arg [/lib64/ld.so.1] ==> ignore
+    arg [-melf64ltsmip] ==> ignore
+    arg [-o] ==> ignore
+    arg [cmTC_b7580] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crt1.o] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crti.o] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtbegin.o] ==> ignore
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64]
+    arg [-L/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64] ==> dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64]
+    arg [CMakeFiles/cmTC_b7580.dir/CMakeCXXCompilerABI.cpp.o] ==> ignore
+    arg [-lstdc++] ==> lib [stdc++]
+    arg [-lm] ==> lib [m]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [-lc] ==> lib [c]
+    arg [-lgcc_s] ==> lib [gcc_s]
+    arg [-lgcc] ==> lib [gcc]
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/crtend.o] ==> ignore
+    arg [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64/crtn.o] ==> ignore
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib/../lib64] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/lib64]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64/../lib64] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/lib64]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64/../lib64] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/lib64]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../lib/gcc/mips64el-loongson-linux/7.3.0/../../../../mips64el-loongson-linux/lib] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/lib]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/lib64] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/lib64]
+  collapse library dir [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/../mips64el-loongson-linux/sysroot/usr/lib64] ==> [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/lib64]
+  implicit libs: [stdc++;m;gcc_s;gcc;c;gcc_s;gcc]
+  implicit dirs: [/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0;/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc;/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/lib64;/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/lib64;/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/lib64;/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/lib]
+  implicit fwks: []
+
+
+
+
+Detecting CXX [-std=c++1z] compiler features compiled with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_107f3/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_107f3.dir/build.make CMakeFiles/cmTC_107f3.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_107f3.dir/feature_tests.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++    -std=c++1z -o CMakeFiles/cmTC_107f3.dir/feature_tests.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_107f3
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_107f3.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++       -rdynamic CMakeFiles/cmTC_107f3.dir/feature_tests.cxx.o  -o cmTC_107f3 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++14] compiler features compiled with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_b6733/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_b6733.dir/build.make CMakeFiles/cmTC_b6733.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_b6733.dir/feature_tests.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++    -std=c++14 -o CMakeFiles/cmTC_b6733.dir/feature_tests.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_b6733
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b6733.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++       -rdynamic CMakeFiles/cmTC_b6733.dir/feature_tests.cxx.o  -o cmTC_b6733 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:1cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:1cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:1cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:1cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:1cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:1cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:1cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:1cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:1cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:1cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:1cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++11] compiler features compiled with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_50a6e/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_50a6e.dir/build.make CMakeFiles/cmTC_50a6e.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_50a6e.dir/feature_tests.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++    -std=c++11 -o CMakeFiles/cmTC_50a6e.dir/feature_tests.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_50a6e
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_50a6e.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++       -rdynamic CMakeFiles/cmTC_50a6e.dir/feature_tests.cxx.o  -o cmTC_50a6e 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:1cxx_alias_templates
+    Feature record: CXX_FEATURE:1cxx_alignas
+    Feature record: CXX_FEATURE:1cxx_alignof
+    Feature record: CXX_FEATURE:1cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:1cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:1cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:1cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:1cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:1cxx_default_function_template_args
+    Feature record: CXX_FEATURE:1cxx_defaulted_functions
+    Feature record: CXX_FEATURE:1cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:1cxx_delegating_constructors
+    Feature record: CXX_FEATURE:1cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:1cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:1cxx_explicit_conversions
+    Feature record: CXX_FEATURE:1cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:1cxx_extern_templates
+    Feature record: CXX_FEATURE:1cxx_final
+    Feature record: CXX_FEATURE:1cxx_func_identifier
+    Feature record: CXX_FEATURE:1cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:1cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:1cxx_inline_namespaces
+    Feature record: CXX_FEATURE:1cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:1cxx_local_type_template_args
+    Feature record: CXX_FEATURE:1cxx_long_long_type
+    Feature record: CXX_FEATURE:1cxx_noexcept
+    Feature record: CXX_FEATURE:1cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:1cxx_nullptr
+    Feature record: CXX_FEATURE:1cxx_override
+    Feature record: CXX_FEATURE:1cxx_range_for
+    Feature record: CXX_FEATURE:1cxx_raw_string_literals
+    Feature record: CXX_FEATURE:1cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:1cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:1cxx_rvalue_references
+    Feature record: CXX_FEATURE:1cxx_sizeof_member
+    Feature record: CXX_FEATURE:1cxx_static_assert
+    Feature record: CXX_FEATURE:1cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:1cxx_thread_local
+    Feature record: CXX_FEATURE:1cxx_trailing_return_types
+    Feature record: CXX_FEATURE:1cxx_unicode_literals
+    Feature record: CXX_FEATURE:1cxx_uniform_initialization
+    Feature record: CXX_FEATURE:1cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:1cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:1cxx_variadic_macros
+    Feature record: CXX_FEATURE:1cxx_variadic_templates
+
+
+Detecting CXX [-std=c++98] compiler features compiled with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_5106c/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_5106c.dir/build.make CMakeFiles/cmTC_5106c.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_5106c.dir/feature_tests.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++    -std=c++98 -o CMakeFiles/cmTC_5106c.dir/feature_tests.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/feature_tests.cxx
+Linking CXX executable cmTC_5106c
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5106c.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++       -rdynamic CMakeFiles/cmTC_5106c.dir/feature_tests.cxx.o  -o cmTC_5106c 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+    Feature record: CXX_FEATURE:0cxx_aggregate_default_initializers
+    Feature record: CXX_FEATURE:0cxx_alias_templates
+    Feature record: CXX_FEATURE:0cxx_alignas
+    Feature record: CXX_FEATURE:0cxx_alignof
+    Feature record: CXX_FEATURE:0cxx_attributes
+    Feature record: CXX_FEATURE:0cxx_attribute_deprecated
+    Feature record: CXX_FEATURE:0cxx_auto_type
+    Feature record: CXX_FEATURE:0cxx_binary_literals
+    Feature record: CXX_FEATURE:0cxx_constexpr
+    Feature record: CXX_FEATURE:0cxx_contextual_conversions
+    Feature record: CXX_FEATURE:0cxx_decltype
+    Feature record: CXX_FEATURE:0cxx_decltype_auto
+    Feature record: CXX_FEATURE:0cxx_decltype_incomplete_return_types
+    Feature record: CXX_FEATURE:0cxx_default_function_template_args
+    Feature record: CXX_FEATURE:0cxx_defaulted_functions
+    Feature record: CXX_FEATURE:0cxx_defaulted_move_initializers
+    Feature record: CXX_FEATURE:0cxx_delegating_constructors
+    Feature record: CXX_FEATURE:0cxx_deleted_functions
+    Feature record: CXX_FEATURE:0cxx_digit_separators
+    Feature record: CXX_FEATURE:0cxx_enum_forward_declarations
+    Feature record: CXX_FEATURE:0cxx_explicit_conversions
+    Feature record: CXX_FEATURE:0cxx_extended_friend_declarations
+    Feature record: CXX_FEATURE:0cxx_extern_templates
+    Feature record: CXX_FEATURE:0cxx_final
+    Feature record: CXX_FEATURE:0cxx_func_identifier
+    Feature record: CXX_FEATURE:0cxx_generalized_initializers
+    Feature record: CXX_FEATURE:0cxx_generic_lambdas
+    Feature record: CXX_FEATURE:0cxx_inheriting_constructors
+    Feature record: CXX_FEATURE:0cxx_inline_namespaces
+    Feature record: CXX_FEATURE:0cxx_lambdas
+    Feature record: CXX_FEATURE:0cxx_lambda_init_captures
+    Feature record: CXX_FEATURE:0cxx_local_type_template_args
+    Feature record: CXX_FEATURE:0cxx_long_long_type
+    Feature record: CXX_FEATURE:0cxx_noexcept
+    Feature record: CXX_FEATURE:0cxx_nonstatic_member_init
+    Feature record: CXX_FEATURE:0cxx_nullptr
+    Feature record: CXX_FEATURE:0cxx_override
+    Feature record: CXX_FEATURE:0cxx_range_for
+    Feature record: CXX_FEATURE:0cxx_raw_string_literals
+    Feature record: CXX_FEATURE:0cxx_reference_qualified_functions
+    Feature record: CXX_FEATURE:0cxx_relaxed_constexpr
+    Feature record: CXX_FEATURE:0cxx_return_type_deduction
+    Feature record: CXX_FEATURE:0cxx_right_angle_brackets
+    Feature record: CXX_FEATURE:0cxx_rvalue_references
+    Feature record: CXX_FEATURE:0cxx_sizeof_member
+    Feature record: CXX_FEATURE:0cxx_static_assert
+    Feature record: CXX_FEATURE:0cxx_strong_enums
+    Feature record: CXX_FEATURE:1cxx_template_template_parameters
+    Feature record: CXX_FEATURE:0cxx_thread_local
+    Feature record: CXX_FEATURE:0cxx_trailing_return_types
+    Feature record: CXX_FEATURE:0cxx_unicode_literals
+    Feature record: CXX_FEATURE:0cxx_uniform_initialization
+    Feature record: CXX_FEATURE:0cxx_unrestricted_unions
+    Feature record: CXX_FEATURE:0cxx_user_literals
+    Feature record: CXX_FEATURE:0cxx_variable_templates
+    Feature record: CXX_FEATURE:0cxx_variadic_macros
+    Feature record: CXX_FEATURE:0cxx_variadic_templates
+Determining if files inttypes.h exist passed with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_754ef/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_754ef.dir/build.make CMakeFiles/cmTC_754ef.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_754ef.dir/HAVE_INT_TYPES_H.c.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc    -o CMakeFiles/cmTC_754ef.dir/HAVE_INT_TYPES_H.c.o   -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CheckIncludeFiles/HAVE_INT_TYPES_H.c
+Linking C executable cmTC_754ef
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_754ef.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc      -rdynamic CMakeFiles/cmTC_754ef.dir/HAVE_INT_TYPES_H.c.o  -o cmTC_754ef 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+
+Performing C++ SOURCE FILE Test CC_HAS_NO_STRICT_OVERFLOW succeeded with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_2670f/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_2670f.dir/build.make CMakeFiles/cmTC_2670f.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_2670f.dir/src.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++    -DCC_HAS_NO_STRICT_OVERFLOW   -Wno-strict-overflow -o CMakeFiles/cmTC_2670f.dir/src.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_2670f
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_2670f.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++   -DCC_HAS_NO_STRICT_OVERFLOW    -rdynamic CMakeFiles/cmTC_2670f.dir/src.cxx.o  -o cmTC_2670f 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test CC_HAS_NO_NARROWING succeeded with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_c0bbd/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_c0bbd.dir/build.make CMakeFiles/cmTC_c0bbd.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_c0bbd.dir/src.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++    -DCC_HAS_NO_NARROWING   -Wno-narrowing -o CMakeFiles/cmTC_c0bbd.dir/src.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_c0bbd
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_c0bbd.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++   -DCC_HAS_NO_NARROWING    -rdynamic CMakeFiles/cmTC_c0bbd.dir/src.cxx.o  -o cmTC_c0bbd 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test CC_HAS_NO_ARRAY_BOUNDS succeeded with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_033ba/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_033ba.dir/build.make CMakeFiles/cmTC_033ba.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_033ba.dir/src.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++    -DCC_HAS_NO_ARRAY_BOUNDS   -Wno-array-bounds -o CMakeFiles/cmTC_033ba.dir/src.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_033ba
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_033ba.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++   -DCC_HAS_NO_ARRAY_BOUNDS    -rdynamic CMakeFiles/cmTC_033ba.dir/src.cxx.o  -o cmTC_033ba 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test CC_HAS_FAST_MATH succeeded with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_aff03/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_aff03.dir/build.make CMakeFiles/cmTC_aff03.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_aff03.dir/src.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++    -DCC_HAS_FAST_MATH   -ffast-math -o CMakeFiles/cmTC_aff03.dir/src.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_aff03
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_aff03.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++   -DCC_HAS_FAST_MATH    -rdynamic CMakeFiles/cmTC_aff03.dir/src.cxx.o  -o cmTC_aff03 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test CC_HAS_FNO_EXCEPTIONS_FLAG succeeded with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_859ec/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_859ec.dir/build.make CMakeFiles/cmTC_859ec.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_859ec.dir/src.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++    -DCC_HAS_FNO_EXCEPTIONS_FLAG   -fno-exceptions -o CMakeFiles/cmTC_859ec.dir/src.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp/src.cxx
+Linking CXX executable cmTC_859ec
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_859ec.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++   -DCC_HAS_FNO_EXCEPTIONS_FLAG    -rdynamic CMakeFiles/cmTC_859ec.dir/src.cxx.o  -o cmTC_859ec 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+Source file was:
+int main() { return 0; }
+Determining if the strtok_r exist passed with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_80bf7/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_80bf7.dir/build.make CMakeFiles/cmTC_80bf7.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_80bf7.dir/CheckSymbolExists.c.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc    -o CMakeFiles/cmTC_80bf7.dir/CheckSymbolExists.c.o   -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp/CheckSymbolExists.c
+Linking C executable cmTC_80bf7
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_80bf7.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc      -rdynamic CMakeFiles/cmTC_80bf7.dir/CheckSymbolExists.c.o  -o cmTC_80bf7 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+File /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp/CheckSymbolExists.c:
+/* */
+#include <string.h>
+
+int main(int argc, char** argv)
+{
+  (void)argv;
+#ifndef strtok_r
+  return ((int*)(&strtok_r))[argc];
+#else
+  (void)argc;
+  return 0;
+#endif
+}
+
+Determining if files getopt.h exist passed with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_33cf3/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_33cf3.dir/build.make CMakeFiles/cmTC_33cf3.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_33cf3.dir/HAVE_GETOPT_H.c.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc    -o CMakeFiles/cmTC_33cf3.dir/HAVE_GETOPT_H.c.o   -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CheckIncludeFiles/HAVE_GETOPT_H.c
+Linking C executable cmTC_33cf3
+/usr/local/bin/cmake -E cmake_link_script CMakeFiles/cmTC_33cf3.dir/link.txt --verbose=1
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-gcc      -rdynamic CMakeFiles/cmTC_33cf3.dir/HAVE_GETOPT_H.c.o  -o cmTC_33cf3 
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+
+

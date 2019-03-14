@@ -1,0 +1,165 @@
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/gcc 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/gcc 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/gcc 
+Build flags: 
+Id flags: -Aa 
+
+The output was:
+No such file or directory
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/gcc 
+Build flags: 
+Id flags: -D__CLASSIC_C__ 
+
+The output was:
+No such file or directory
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/gcc 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/gcc 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/gcc 
+Build flags: 
+Id flags: -Aa 
+
+The output was:
+No such file or directory
+
+
+Compiling the C compiler identification source file "CMakeCCompilerId.c" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/gcc 
+Build flags: 
+Id flags: -D__CLASSIC_C__ 
+
+The output was:
+No such file or directory
+
+
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+Checking whether the C compiler is IAR using "" did not match "IAR .+ Compiler":
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/g++ 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/g++ 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/g++ 
+Build flags: 
+Id flags: --c++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/g++ 
+Build flags: 
+Id flags: --ec++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/g++ 
+Build flags: 
+Id flags:  
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/g++ 
+Build flags: 
+Id flags: -c 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/g++ 
+Build flags: 
+Id flags: --c++ 
+
+The output was:
+No such file or directory
+
+
+Compiling the CXX compiler identification source file "CMakeCXXCompilerId.cpp" failed.
+Compiler: /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/g++ 
+Build flags: 
+Id flags: --ec++ 
+
+The output was:
+No such file or directory
+
+
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+Checking whether the CXX compiler is IAR using "" did not match "IAR .+ Compiler":
+Performing C++ SOURCE FILE Test CC_HAS_STACK_REALIGN failed with the following output:
+Change Dir: /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp
+
+Run Build Command:"/usr/bin/gmake" "cmTC_7c25a/fast"
+/usr/bin/gmake -f CMakeFiles/cmTC_7c25a.dir/build.make CMakeFiles/cmTC_7c25a.dir/build
+gmake[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Building CXX object CMakeFiles/cmTC_7c25a.dir/src.cxx.o
+/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++    -DCC_HAS_STACK_REALIGN   -mstackrealign -o CMakeFiles/cmTC_7c25a.dir/src.cxx.o -c /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp/src.cxx
+mips64el-loongson-linux-g++: error: unrecognized command line option '-mstackrealign'
+CMakeFiles/cmTC_7c25a.dir/build.make:65: recipe for target 'CMakeFiles/cmTC_7c25a.dir/src.cxx.o' failed
+gmake[1]: *** [CMakeFiles/cmTC_7c25a.dir/src.cxx.o] Error 1
+gmake[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles/CMakeTmp'
+Makefile:121: recipe for target 'cmTC_7c25a/fast' failed
+gmake: *** [cmTC_7c25a/fast] Error 2
+
+Source file was:
+int main() { return 0; }

@@ -1,0 +1,170 @@
+/home/loongson/chenzeshuai/cmake-3.13.4/bin/cmake -S/home/loongson/chenzeshuai/x265_v2.6/source -B/home/loongson/chenzeshuai/x265_v2.6/build/linux --check-build-system CMakeFiles/Makefile.cmake 0
+make -f CMakeFiles/Makefile2 cli
+make[1]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux'
+/home/loongson/chenzeshuai/cmake-3.13.4/bin/cmake -S/home/loongson/chenzeshuai/x265_v2.6/source -B/home/loongson/chenzeshuai/x265_v2.6/build/linux --check-build-system CMakeFiles/Makefile.cmake 0
+/home/loongson/chenzeshuai/cmake-3.13.4/bin/cmake -E cmake_progress_start /home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles 59
+make -f CMakeFiles/Makefile2 CMakeFiles/cli.dir/all
+make[2]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux'
+make -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/depend
+make[3]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux'
+cd /home/loongson/chenzeshuai/x265_v2.6/build/linux && /home/loongson/chenzeshuai/cmake-3.13.4/bin/cmake -E cmake_depends "Unix Makefiles" /home/loongson/chenzeshuai/x265_v2.6/source /home/loongson/chenzeshuai/x265_v2.6/source/common /home/loongson/chenzeshuai/x265_v2.6/build/linux /home/loongson/chenzeshuai/x265_v2.6/build/linux/common /home/loongson/chenzeshuai/x265_v2.6/build/linux/common/CMakeFiles/common.dir/DependInfo.cmake --color=
+make[3]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux'
+make -f common/CMakeFiles/common.dir/build.make common/CMakeFiles/common.dir/build
+make[3]: Entering directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux'
+[  1%] Building CXX object common/CMakeFiles/common.dir/pixel.cpp.o
+cd /home/loongson/chenzeshuai/x265_v2.6/build/linux/common && /opt/gcc-7.3.0-loongson-asx-rc3/usr/bin/g++  -DEXPORT_C_API=1 -DHAVE_INT_TYPES_H=1 -DHIGH_BIT_DEPTH=0 -DX265_DEPTH=8 -DX265_NS=x265 -D__STDC_LIMIT_MACROS=1 -I/home/loongson/chenzeshuai/x265_v2.6/source/. -I/home/loongson/chenzeshuai/x265_v2.6/source/common -I/home/loongson/chenzeshuai/x265_v2.6/source/encoder -I/home/loongson/chenzeshuai/x265_v2.6/build/linux  -g   -Wall -Wextra -Wshadow -std=gnu++98 -Wno-array-bounds -ffast-math -fno-exceptions -mloongson-sx -O2 -save-temps -mmsa -mhard-float -mfp64 -o CMakeFiles/common.dir/pixel.cpp.o -c /home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp: In function ‘void {anonymous}::sub_ps_4x4(int16_t*, intptr_t, const pixel*, const pixel*, intptr_t, intptr_t)’:
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:19: error: expected primary-expression before ‘tmpp’
+  LD4(b0, sstride0, i0, i1, i2, i3);
+                   ^~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:19: error: expected ‘}’ before ‘tmpp’
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:19: warning: extended initializer lists only available with -std=c++11 or -std=gnu++11
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:19: error: cannot convert ‘<brace-enclosed initializer list>’ to ‘v2i64 {aka __vector(2) long long int}’ in assignment
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:25: error: ‘tmpp’ was not declared in this scope
+  LD4(b0, sstride0, i0, i1, i2, i3);
+                         ^~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:25: note: suggested alternative: ‘tmp3’
+  LD4(b0, sstride0, i0, i1, i2, i3);
+                         ^~~~
+                         tmp3
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:70: error: return-statement with a value, in function returning 'void' [-fpermissive]
+  LD4(b0, sstride0, i0, i1, i2, i3);
+                                                                      ^   
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:92: error: expected primary-expression before ‘tmpp’
+  LD4(b0, sstride0, i0, i1, i2, i3);
+                                                                                            ^   
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:92: error: expected ‘}’ before ‘tmpp’
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:92: warning: extended initializer lists only available with -std=c++11 or -std=gnu++11
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:92: error: cannot convert ‘<brace-enclosed initializer list>’ to ‘v2i64 {aka __vector(2) long long int}’ in assignment
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:98: error: ‘tmpp’ was not declared in this scope
+  LD4(b0, sstride0, i0, i1, i2, i3);
+                                                                                                  ^   
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:98: note: suggested alternative: ‘tmp3’
+  LD4(b0, sstride0, i0, i1, i2, i3);
+                                                                                                  ^   
+                                                                                                  tmp3
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:154: error: return-statement with a value, in function returning 'void' [-fpermissive]
+  LD4(b0, sstride0, i0, i1, i2, i3);
+                                                                                                                                                          ^   
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:865:8: warning: unused variable ‘tmp0’ [-Wunused-variable]
+  v8u16 tmp0, tmp1, tmp2, tmp3;
+        ^~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:865:14: warning: unused variable ‘tmp1’ [-Wunused-variable]
+  v8u16 tmp0, tmp1, tmp2, tmp3;
+              ^~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:865:20: warning: unused variable ‘tmp2’ [-Wunused-variable]
+  v8u16 tmp0, tmp1, tmp2, tmp3;
+                    ^~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:865:26: warning: unused variable ‘tmp3’ [-Wunused-variable]
+  v8u16 tmp0, tmp1, tmp2, tmp3;
+                          ^~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:866:8: warning: unused variable ‘rest0’ [-Wunused-variable]
+  v8i16 rest0, rest1;
+        ^~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:866:15: warning: unused variable ‘rest1’ [-Wunused-variable]
+  v8i16 rest0, rest1;
+               ^~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:867:16: warning: unused variable ‘i2’ [-Wunused-variable]
+  v2i64 i0, i1, i2, i3;
+                ^~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:867:20: warning: unused variable ‘i3’ [-Wunused-variable]
+  v2i64 i0, i1, i2, i3;
+                    ^~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:863:26: warning: unused parameter ‘a’ [-Wunused-parameter]
+ void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
+                          ^
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:863:38: warning: unused parameter ‘dstride’ [-Wunused-parameter]
+ void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
+                                      ^~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:863:77: warning: unused parameter ‘b1’ [-Wunused-parameter]
+ void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
+                                                                             ^~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:863:109: warning: unused parameter ‘sstride1’ [-Wunused-parameter]
+ void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
+                                                                                                             ^~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp: At global scope:
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:868:166: error: expected unqualified-id before ‘{’ token
+  LD4(b0, sstride0, i0, i1, i2, i3);
+                                                                                                                                                                      ^
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:869:11: error: expected constructor, destructor, or type conversion before ‘(’ token
+  L_4x4_B_H(b0, sstride0, &tmp0, &tmp1);
+           ^
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:870:11: error: expected constructor, destructor, or type conversion before ‘(’ token
+  L_4x4_B_H(b1, sstride1, &tmp2, &tmp3);
+           ^
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:871:2: error: ‘rest0’ does not name a type
+  rest0 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp2);
+  ^~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:872:2: error: ‘rest1’ does not name a type
+  rest1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp3);
+  ^~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:873:9: error: expected constructor, destructor, or type conversion before ‘(’ token
+  S_4x4_H(rest0, rest1, a, dstride);
+         ^
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:874:8: error: expected constructor, destructor, or type conversion before ‘(’ token
+  printf("\n\n\n");
+        ^
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:875:2: error: expected unqualified-id before ‘for’
+  for (int n = 0; n < 4; n++)
+  ^~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:875:18: error: ‘n’ does not name a type; did you mean ‘yn’?
+  for (int n = 0; n < 4; n++)
+                  ^
+                  yn
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:875:25: error: ‘n’ does not name a type; did you mean ‘yn’?
+  for (int n = 0; n < 4; n++)
+                         ^
+                         yn
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:882:9: error: expected constructor, destructor, or type conversion before ‘;’ token
+  abort();
+         ^
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:883:1: error: expected declaration before ‘}’ token
+ }
+ ^
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:863:6: warning: ‘void {anonymous}::sub_ps_4x4(int16_t*, intptr_t, const pixel*, const pixel*, intptr_t, intptr_t)’ defined but not used [-Wunused-function]
+ void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
+      ^~~~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:807:6: warning: ‘void {anonymous}::sub_ps_8x8(int16_t*, intptr_t, const pixel*, const pixel*, intptr_t, intptr_t)’ defined but not used [-Wunused-function]
+ void sub_ps_8x8(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
+      ^~~~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:680:14: warning: ‘float {anonymous}::ssim_end_4(int (*)[4], int (*)[4], int)’ defined but not used [-Wunused-function]
+ static float ssim_end_4(int sum0[5][4], int sum1[5][4], int width)
+              ^~~~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:623:13: warning: ‘void {anonymous}::ssim_4x4x2_core(const pixel*, intptr_t, const pixel*, intptr_t, int (*)[4])’ defined but not used [-Wunused-function]
+ static void ssim_4x4x2_core(const pixel* pix1, intptr_t stride1, const pixel* pix2, intptr_t stride2, int sums[2][4])
+             ^~~~~~~~~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:597:6: warning: ‘void {anonymous}::frame_init_lowres_core(const pixel*, pixel*, pixel*, pixel*, pixel*, intptr_t, intptr_t, int, int)’ defined but not used [-Wunused-function]
+ void frame_init_lowres_core(const pixel* src0, pixel* dst0, pixel* dsth, pixel* dstv, pixel* dstc,
+      ^~~~~~~~~~~~~~~~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:577:13: warning: ‘void {anonymous}::scale2D_64to32(pixel*, const pixel*, intptr_t)’ defined but not used [-Wunused-function]
+ static void scale2D_64to32(pixel* dst, const pixel* src, intptr_t stride)
+             ^~~~~~~~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:551:13: warning: ‘void {anonymous}::scale1D_128to64(pixel*, const pixel*)’ defined but not used [-Wunused-function]
+ static void scale1D_128to64(pixel *dst, const pixel *src)
+             ^~~~~~~~~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:510:13: warning: ‘void {anonymous}::weight_pp_c(const pixel*, pixel*, intptr_t, int, int, int, int, int, int)’ defined but not used [-Wunused-function]
+ static void weight_pp_c(const pixel* src, pixel* dst, intptr_t stride, int width, int height, int w0, int round, int shift, int offset)
+             ^~~~~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:485:13: warning: ‘void {anonymous}::weight_sp_c(const int16_t*, pixel*, intptr_t, intptr_t, int, int, int, int, int, int)’ defined but not used [-Wunused-function]
+ static void weight_sp_c(const int16_t* src, pixel* dst, intptr_t srcStride, intptr_t dstStride, int width, int height, int w0, int round, int shift, int offset)
+             ^~~~~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:333:12: warning: ‘int {anonymous}::sa8d_16x16(const pixel*, intptr_t, const pixel*, intptr_t)’ defined but not used [-Wunused-function]
+ static int sa8d_16x16(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
+            ^~~~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:239:12: warning: ‘int {anonymous}::satd_8x4(const pixel*, intptr_t, const pixel*, intptr_t)’ defined but not used [-Wunused-function]
+ static int satd_8x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+            ^~~~~~~~
+/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp:210:12: warning: ‘int {anonymous}::satd_4x4(const pixel*, intptr_t, const pixel*, intptr_t)’ defined but not used [-Wunused-function]
+ static int satd_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+            ^~~~~~~~
+common/CMakeFiles/common.dir/build.make:75: recipe for target 'common/CMakeFiles/common.dir/pixel.cpp.o' failed
+make[3]: *** [common/CMakeFiles/common.dir/pixel.cpp.o] Error 1
+make[3]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux'
+CMakeFiles/Makefile2:322: recipe for target 'common/CMakeFiles/common.dir/all' failed
+make[2]: *** [common/CMakeFiles/common.dir/all] Error 2
+make[2]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux'
+CMakeFiles/Makefile2:224: recipe for target 'CMakeFiles/cli.dir/rule' failed
+make[1]: *** [CMakeFiles/cli.dir/rule] Error 2
+make[1]: Leaving directory '/home/loongson/chenzeshuai/x265_v2.6/build/linux'
+Makefile:216: recipe for target 'cli' failed
+make: *** [cli] Error 2
