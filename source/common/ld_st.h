@@ -28,6 +28,18 @@ void LD4(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *ou
 	//LD2(ptr, stride, out2, out3);  		
 }
 
+void LD2_H(const pixel *psrc, v2i64 *out0, v2i64 *out1)
+{
+	*out0 = LD(psrc);
+	*out1 = LD(psrc + 8);		
+}
+
+void LD4_H(const pixel *psrc, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3)
+{
+	LD2_H(psrc, out0, out1);
+	LD2_H(psrc + 16, out2, out3);		
+}
+
 #define LH(psrc)	\
 {	\
 	v8i16 tmpp;	\
@@ -69,12 +81,17 @@ v2i64 LD_V(const pixel *psrc)
 #define LD_UW(...) LD_V(v4u32, __VA_ARGS__)
 #define LD_SW(...) LD_V(v4i32, __VA_ARGS__)
 
-void LD_V2(const pixel *psrc, intptr_t stride, v2i64 *out0,v2i64 *out1)	
+void LD_V2(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1)	
 {	
 	*out0 = LD_V(psrc);	
 	*out1 = LD_V(psrc + stride);	
 }
 
+void LD_V2_H(const pixel *psrc, v2i64 *out0, v2i64 *out1)
+{
+	*out0 = LD_V(psrc);
+	*out1 = LD_V(psrc + 16);	
+}
 #define LD_UB2(...) LD_V2(v16u8, __VA_ARGS__)
 #define LD_SB2(...) LD_V2(v16i8, __VA_ARGS__)
 #define LD_UH2(...) LD_V2(v8u16, __VA_ARGS__)
@@ -164,13 +181,15 @@ v4i32 L_4x4_B(const pixel *psrc,intptr_t stride)
 	return tmpp0;
 }
 
-void L_8x8_B(const pixel *psrc, intptr_t stride, v4i32 *out0, v4i32 *out1, v4i32 *out2, v4i32 *out3)
+void L_8x8_B(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3)
 {
-	*out0 = L_4x4_B(psrc, stride);
-	*out1 = L_4x4_B(psrc + 4, stride);
-	*out2 = L_4x4_B(psrc + 4 * stride, stride);
-	*out3 = L_4x4_B(psrc + 4 + 4 * stride, stride);
-	/*
+	v2i64 tmp0, tmp1, tmp2, tmp3;
+	//*out0 = L_4x4_B(psrc, stride);
+	//*out1 = L_4x4_B(psrc + 4, stride);
+	//*out2 = L_4x4_B(psrc + 4 * stride, stride);
+	//*out3 = L_4x4_B(psrc + 4 + 4 * stride, stride);
+	/* 		
+   		*****this function can not be used as macro****	
  		8x8
  	        - - - - - - - - -
 	       |       |       	|
@@ -181,9 +200,16 @@ void L_8x8_B(const pixel *psrc, intptr_t stride, v4i32 *out0, v4i32 *out1, v4i32
 		  out2    out3
 	       |       |        |
 	        - - - - - - - - -
-	*/	
+	*/		
+	LD4(psrc, stride, out0, out1, out2, out3);	
+	LD4(psrc + 4 * stride, stride, &tmp0, &tmp1, &tmp2, &tmp3);
+	*out0 = __builtin_msa_insve_d(*out0, 1, tmp0);
+	*out1 = __builtin_msa_insve_d(*out1, 1, tmp1);
+	*out2 = __builtin_msa_insve_d(*out2, 1, tmp2);
+	*out3 = __builtin_msa_insve_d(*out3, 1, tmp3);
+	//the first and fifth lines make up the out0 
 }
-
+	
 //out's type if v8u16 
 void L_4x4_B_H(const pixel *psrc,intptr_t stride, v8u16 *out0, v8u16 *out1)	
 {	
@@ -245,6 +271,18 @@ void ST_V4(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t str
 {	
 	ST_V2(in0, in1, pdst, stride);	
 	ST_V2(in2, in3, pdst + 2 * stride, stride);	
+}
+
+void ST_V2_H(v2i64 in0, v2i64 in1, pixel *pdst)
+{
+	ST_V(in0, pdst);
+	ST_V(in1, pdst + 16);	
+}
+
+void ST_V4_H(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst)
+{
+	ST_V2_H(in0, in1, pdst);
+	ST_V2_H(in2, in3, pdst + 32);
 }
 
 #define ST_V6(in0, in1, in2, in3, in4, in5, pdst, stride)	\
