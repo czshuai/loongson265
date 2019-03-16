@@ -520,11 +520,10 @@ static int get_argv_utf8(int *argc_ptr, char ***argv_ptr)
  * 3 - unable to generate stream headers
  * 4 - encoder abort */
 
-//int main(int argc, char **argv)
-int main()
+int main(int argc, char **argv)
+//int main()
 {
-     int argc = 11;
-     char *argv[10];
+     argc = 11;
      argv[0] = (char *)"./x265";
      argv[1] = (char *)"-o";
      argv[2] = (char *)"test.265";
@@ -535,7 +534,7 @@ int main()
      argv[7] = (char *)"--fps";
      argv[8] = (char *)"15";
      argv[9] = (char *)"-f";
-     argv[10] = (char *)"2";
+     argv[10] = (char *)"10";
 
 #if HAVE_VLD
     // This uses Microsoft's proprietary WCHAR type, but this only builds on Windows to start with

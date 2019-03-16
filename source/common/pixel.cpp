@@ -34,6 +34,10 @@
 
 using namespace X265_NS;
 
+
+namespace {
+// place functions in anonymous namespace (file static)
+
 int sad_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 	int sum = 0;
@@ -45,17 +49,33 @@ int sad_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t
 	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp1);
 	rest1 = __builtin_lsx_vacc8b_u_d(rest0);
 	sum = ((v4u32)rest1)[0] + ((v4u32)rest1)[2];
+	//printf("4x4 sum = %d\n", sum);
 	return sum;	
 }
 
 int sad_8x8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 	int sum = 0;
-	v4i32 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, mid4, mid5, mid6, mid7;
 	v16u8 rest0, rest1, rest2, rest3;
 	v2u64 mid0, mid1, mid2, mid3;
-	L_8x8_B(pix1, stride_pix1, &tmp0, &tmp1, &tmp2, &tmp3);
-	L_8x8_B(pix2, stride_pix2, &tmp4, &tmp5, &tmp6, &tmp7);
+	//L_8x8_B(pix1, stride_pix1, &tmp0, &tmp1, &tmp2, &tmp3);
+	//L_8x8_B(pix2, stride_pix2, &tmp4, &tmp5, &tmp6, &tmp7);
+	
+	LD4(pix1, stride_pix1, &tmp0, &tmp1, &tmp2, &tmp3);
+	LD4(pix1 + 4 * stride_pix1, stride_pix1, &tmp4, &tmp5, &tmp6, &tmp7);
+	tmp0 = __builtin_msa_insve_d(tmp0, 1, tmp4);
+	tmp1 = __builtin_msa_insve_d(tmp1, 1, tmp5);
+	tmp2 = __builtin_msa_insve_d(tmp2, 1, tmp6);
+	tmp3 = __builtin_msa_insve_d(tmp3, 1, tmp7);
+	
+	LD4(pix2, stride_pix2, &tmp4, &tmp5, &tmp6, &tmp7);
+	LD4(pix2 + 4 * stride_pix2, stride_pix2, &mid4, &mid5, &mid6, &mid7);
+	tmp4 = __builtin_msa_insve_d(tmp4, 1, mid4);
+	tmp5 = __builtin_msa_insve_d(tmp5, 1, mid5);
+	tmp6 = __builtin_msa_insve_d(tmp6, 1, mid6);
+	tmp7 = __builtin_msa_insve_d(tmp7, 1, mid7);
+	
 	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
 	rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
 	rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
@@ -68,11 +88,9 @@ int sad_8x8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t
 	mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
 	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
 	sum = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
+	//printf("8x8 sum = %d\n", sum);
 	return sum;
 }
-
-namespace {
-// place functions in anonymous namespace (file static)
 
 template<int lx, int ly>
 int sad(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
@@ -122,26 +140,221 @@ int sad(const int16_t* pix1, intptr_t stride_pix1, const int16_t* pix2, intptr_t
     return sum;
 }
 
+void sad_x3_8x8(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+{
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, mid4, mid5, mid6, mid7;
+	v16u8 rest0, rest1, rest2, rest3;	
+	v2u64 mid0, mid1, mid2, mid3;
+	
+	//L_8x8_B(pix1, (intptr_t)64, &tmp0, &tmp1, &tmp2, &tmp3);
+	//L_8x8_B(pix2, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+ 	
+	LD4(pix1, (intptr_t)64, &tmp0, &tmp1, &tmp2, &tmp3);
+	LD4(pix1 + 4 * (intptr_t)64, (intptr_t)64, &tmp4, &tmp5, &tmp6, &tmp7);
+	tmp0 = __builtin_msa_insve_d(tmp0, 1, tmp4);
+	tmp1 = __builtin_msa_insve_d(tmp1, 1, tmp5);
+	tmp2 = __builtin_msa_insve_d(tmp2, 1, tmp6);
+	tmp3 = __builtin_msa_insve_d(tmp3, 1, tmp7);
+
+	LD4(pix2, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	LD4(pix2 + 4 * frefstride, frefstride, &mid4, &mid5, &mid6, &mid7);
+	tmp4 = __builtin_msa_insve_d(tmp4, 1, mid4);
+	tmp5 = __builtin_msa_insve_d(tmp5, 1, mid5);
+	tmp6 = __builtin_msa_insve_d(tmp6, 1, mid6);
+	tmp7 = __builtin_msa_insve_d(tmp7, 1, mid7);
+	
+	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+	rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+	rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
+	rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+	mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+	mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+	mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+	mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid1);
+	mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
+	res[0] = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
+
+	//L_8x8_B(pix3, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	
+	LD4(pix3, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	LD4(pix3 + 4 * frefstride, frefstride, &mid4, &mid5, &mid6, &mid7);
+	tmp4 = __builtin_msa_insve_d(tmp4, 1, mid4);
+	tmp5 = __builtin_msa_insve_d(tmp5, 1, mid5);
+	tmp6 = __builtin_msa_insve_d(tmp6, 1, mid6);
+	tmp7 = __builtin_msa_insve_d(tmp7, 1, mid7);
+
+	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+	rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+	rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
+	rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+	mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+	mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+	mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+	mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid1);
+	mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
+	res[1] = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
+
+	//L_8x8_B(pix4, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	LD4(pix4, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	LD4(pix4 + 4 * frefstride, frefstride, &mid4, &mid5, &mid6, &mid7);
+	tmp4 = __builtin_msa_insve_d(tmp4, 1, mid4);
+	tmp5 = __builtin_msa_insve_d(tmp5, 1, mid5);
+	tmp6 = __builtin_msa_insve_d(tmp6, 1, mid6);
+	tmp7 = __builtin_msa_insve_d(tmp7, 1, mid7);
+
+	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+	rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+	rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
+	rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+	mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+	mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+	mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+	mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid1);
+	mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
+	res[2] = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
+	
+	//printf("8x8 result = %d\t%d\t%d\n", res[0], res[1], res[2]);
+}
+
+void sad_x3_16x16(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+{
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v16u8 rest0, rest1, rest2, rest3, rest4, rest5;	
+	v2u64 mid0, mid1, mid2, mid3, mid4, mid5;
+	v2i64 sum0, sum1, sum2;
+	
+	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
+	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
+	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
+
+	for (int i = 0; i < 8; i++)
+	{
+		LD_V2(pix1, (intptr_t)64, &tmp0, &tmp1);
+		LD_V2(pix2, frefstride, &tmp2, &tmp3);
+		LD_V2(pix3, frefstride, &tmp4, &tmp5);
+		LD_V2(pix4, frefstride, &tmp6, &tmp7);
+		
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp2);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp3);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp6);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp7);
+		
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+		
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid1);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid5);
+
+		pix1 += 2 * (intptr_t)64;
+		pix2 += 2 * frefstride;
+		pix3 += 2 * frefstride;
+		pix4 += 2 * frefstride;		
+	}
+	
+	res[0] = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
+	res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
+	res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
+	
+	//printf("16x16 result = %d\t%d\t%d\n", res[0], res[1], res[2]);
+}
+
+void sad_x3_32x32(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+{
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v16u8 rest0, rest1, rest2, rest3, rest4, rest5;	
+	v2u64 mid0, mid1, mid2, mid3, mid4, mid5;
+	v2i64 sum0, sum1, sum2;
+	
+	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
+	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
+	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
+
+	for (int i = 0; i < 32; i++)
+	{
+		LD_V2_H(pix1, &tmp0, &tmp1);
+		LD_V2_H(pix2, &tmp2, &tmp3);
+		LD_V2_H(pix3, &tmp4, &tmp5);
+		LD_V2_H(pix4, &tmp6, &tmp7);
+		
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp2);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp3);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp6);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp7);
+		
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+		
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid1);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid5);
+
+		pix1 += (intptr_t)64;
+		pix2 += frefstride;
+		pix3 += frefstride;
+		pix4 += frefstride;		
+	}
+	
+	res[0] = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
+	res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
+	res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
+	
+	//printf("32x32 result = %d\t%d\t%d\n", res[0], res[1], res[2]);
+}
+
 template<int lx, int ly>
 void sad_x3(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
     res[0] = 0;
     res[1] = 0;
     res[2] = 0;
-    for (int y = 0; y < ly; y++)
+    if (lx == 8 && ly == 8)
+	sad_x3_8x8(pix1, pix2, pix3, pix4, frefstride, res);
+    else if (lx == 16 && ly == 16)
+	sad_x3_16x16(pix1, pix2, pix3, pix4, frefstride, res);
+    else if (lx == 32 && ly == 32)
+	sad_x3_32x32(pix1, pix2, pix3, pix4, frefstride, res);
+    else 
     {
-        for (int x = 0; x < lx; x++)
-        {
-            res[0] += abs(pix1[x] - pix2[x]);
-            res[1] += abs(pix1[x] - pix3[x]);
-            res[2] += abs(pix1[x] - pix4[x]);
-        }
+    	for (int y = 0; y < ly; y++)
+    	{
+        	for (int x = 0; x < lx; x++)
+       		{
+            		res[0] += abs(pix1[x] - pix2[x]);
+            		res[1] += abs(pix1[x] - pix3[x]);
+            		res[2] += abs(pix1[x] - pix4[x]);
+        	}
 
-        pix1 += FENC_STRIDE;
-        pix2 += frefstride;
-        pix3 += frefstride;
-        pix4 += frefstride;
-    }
+        	pix1 += FENC_STRIDE;
+        	pix2 += frefstride;
+        	pix3 += frefstride;
+        	pix4 += frefstride;
+    	}
+    }	
 }
 
 template<int lx, int ly>
@@ -1039,51 +1252,58 @@ void sub_ps_32x32(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 	v8u16 tmp4, tmp5, tmp6, tmp7; 
 	v2i64 tmp8, tmp9, tmp10, tmp11;
 	v8u16 tmp12, tmp13, tmp14, tmp15;
-	for (int i = 8; i > 0; i--)
+	for (int i = 16; i > 0; i--)
 	{
-		for (int y = 0; y < 2; y++)
-		{
-			LD4(b0 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
-			LD4(b1 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
+		//LD4(b0 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
+		//LD4(b1 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
+	
+		LD4_H(b0, &tmp0, &tmp1, &tmp2, &tmp3);
+		LD4_H(b1, &tmp8, &tmp9, &tmp10, &tmp11);
+
+		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+		tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
+		tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
+		tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
+		tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
+		tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
+		tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
+			
+		tmp0 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
+		tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
+		tmp2 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
+		tmp3 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
+			
+		//ST_V4(tmp0, tmp1, tmp2, tmp3, (pixel *)(a + y * 16), dstride * 2);
+			
+		ST_V4_H(tmp0, tmp1, tmp2, tmp3, (pixel *)a);
+
+		//LD4(b0 + 8 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
+		//LD4(b1 + 8 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
+			
+		LD4_H(b0 + sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
+		LD4_H(b1 + sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
+
+		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+		tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
+		tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
+		tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
+		tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
+		tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
+		tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
+			
+		tmp8 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
+		tmp9 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
+		tmp10 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
+		tmp11 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
+			
+		//ST_V4(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + 8 + y * 16), dstride * 2);		
 		
-			tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
-			tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
-			tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
-			tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
-			tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
-			tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
-			tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
-			tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
-			
-			tmp0 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
-			tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
-			tmp2 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
-			tmp3 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
-			
-			ST_V4(tmp0, tmp1, tmp2, tmp3, (pixel *)(a + y * 16), dstride * 2);
-			
-			LD4(b0 + 8 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
-			LD4(b1 + 8 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
-			
-			tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
-			tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
-			tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
-			tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
-			tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
-			tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
-			tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
-			tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
-			
-			tmp8 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
-			tmp9 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
-			tmp10 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
-			tmp11 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
-			
-			ST_V4(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + 8 + y * 16), dstride * 2);		
-		}	
-		b0 = b0 + 4 * sstride0;
-		b1 = b1 + 4 * sstride1;
-		a = a + 4 * dstride;
+		ST_V4_H(tmp0, tmp1, tmp2, tmp3, (pixel *)(a + dstride));
+		b0 = b0 + 2 * sstride0;
+		b1 = b1 + 2 * sstride1;
+		a = a + 2 * dstride;
 	}
 	/*printf("\n\n\n");
 	a = a - 32 * dstride;
@@ -1103,51 +1323,57 @@ void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 	v8u16 tmp4, tmp5, tmp6, tmp7; 
 	v2i64 tmp8, tmp9, tmp10, tmp11;
 	v8u16 tmp12, tmp13, tmp14, tmp15;
-	for (int i = 16; i > 0; i--)
+	for (int i = 64; i > 0; i--)
 	{
-		for (int y = 0; y < 4; y++)
-		{
-			LD4(b0 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
-			LD4(b1 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
+		//LD4(b0 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
+		//LD4(b1 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
 		
-			tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
-			tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
-			tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
-			tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
-			tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
-			tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
-			tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
-			tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
+		LD4_H(b0, &tmp0, &tmp1, &tmp2, &tmp3);
+		LD4_H(b1, &tmp8, &tmp9, &tmp10, &tmp11);
+		
+		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+		tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
+		tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
+		tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
+		tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
+		tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
+		tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
+		
+		tmp0 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
+		tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
+		tmp2 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
+		tmp3 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
+		
+		ST_V4_H(tmp0, tmp1, tmp2, tmp3, (pixel *)a);
+		
+		//LD4(b0 + 8 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
+		//LD4(b1 + 8 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
 			
-			tmp0 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
-			tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
-			tmp2 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
-			tmp3 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
+		LD4_H(b0 + 32, &tmp0, &tmp1, &tmp2, &tmp3);
+		LD4_H(b1 + 32, &tmp8, &tmp9, &tmp10, &tmp11);
+
+		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+		tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
+		tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
+		tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
+		tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
+		tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
+		tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
+		
+		tmp8 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
+		tmp9 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
+		tmp10 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
+		tmp11 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
 			
-			ST_V4(tmp0, tmp1, tmp2, tmp3, (pixel *)(a + y * 16), dstride * 2);
-			
-			LD4(b0 + 8 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
-			LD4(b1 + 8 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
-			
-			tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
-			tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
-			tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
-			tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
-			tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
-			tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
-			tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
-			tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
-			
-			tmp8 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
-			tmp9 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
-			tmp10 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
-			tmp11 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
-			
-			ST_V4(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + 8 + y * 16), dstride * 2);		
-		}	
-		b0 = b0 + 4 * sstride0;
-		b1 = b1 + 4 * sstride1;
-		a = a + 4 * dstride;
+		//ST_V4(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + 8 + y * 16), dstride * 2);		
+		
+		ST_V4_H(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + 32));
+		
+		b0 = b0 + sstride0;
+		b1 = b1 + sstride1;
+		a = a + dstride;
 	}
 	/*printf("\n\n\n");
 	a = a - 64 * dstride;
