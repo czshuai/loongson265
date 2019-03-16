@@ -1300,7 +1300,7 @@ void sub_ps_32x32(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 			
 		//ST_V4(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + 8 + y * 16), dstride * 2);		
 		
-		ST_V4_H(tmp0, tmp1, tmp2, tmp3, (pixel *)(a + dstride));
+		ST_V4_H(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + dstride));
 		b0 = b0 + 2 * sstride0;
 		b1 = b1 + 2 * sstride1;
 		a = a + 2 * dstride;
@@ -1319,6 +1319,17 @@ void sub_ps_32x32(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 
 void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
+	/*
+	for (int n = 0; n < 64; n++)
+	{	
+		for (int m = 0; m < 64; m++)
+			printf("%x\t", b1[m]);
+		b1 = b1 + sstride1;
+		printf("\n\n");	
+	}
+	abort();
+	*/
+	
 	v2i64 tmp0, tmp1, tmp2, tmp3;
 	v8u16 tmp4, tmp5, tmp6, tmp7; 
 	v2i64 tmp8, tmp9, tmp10, tmp11;
@@ -1330,6 +1341,10 @@ void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		
 		LD4_H(b0, &tmp0, &tmp1, &tmp2, &tmp3);
 		LD4_H(b1, &tmp8, &tmp9, &tmp10, &tmp11);
+		
+		//printf("%lx\n", tmp8[0]);
+		//printf("%lx\n", tmp9[1]);
+		//abort();	
 		
 		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
 		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
@@ -1345,6 +1360,10 @@ void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		tmp2 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
 		tmp3 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
 		
+		//printf("%lx\n", tmp0[0]);
+		//printf("%lx\n", tmp0[1]);
+		//abort();		
+
 		ST_V4_H(tmp0, tmp1, tmp2, tmp3, (pixel *)a);
 		
 		//LD4(b0 + 8 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
@@ -1423,12 +1442,26 @@ void pixel_sub_ps_c(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* 
     else if (by == 64 && bx == 64)
 	{
 		//asm volatile ("rdhwr %0, $2\n":"=r"(begin));
-		sub_ps_64x64(a, dstride, b0, b1, sstride0, sstride1);
+		sub_ps_64x64(a, dstride, b0, b1, sstride0, sstride1);//have problem
 		//asm volatile ("rdhwr %0, $2\n":"=r"(end));
 		//printf("64x64 %d\t", end - begin);
 	}
     else
-    {	
+    {
+	/*	
+	if (by == 64 && bx == 64)
+	{
+		for (int n = 0; n < 64; n++)
+	{	
+		for (int m = 0; m < 64; m++)
+			printf("%x\t", b1[m]);
+		b1 = b1 + sstride1;
+		printf("\n\n");	
+	}
+	abort();
+
+	}
+	*/
     	for (int y = 0; y < by; y++)
     	{
         	for (int x = 0; x < bx; x++)
@@ -1438,7 +1471,7 @@ void pixel_sub_ps_c(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* 
         	b1 += sstride1;
         	a += dstride;
     	}
-    }
+   }
 }
 
 template<int bx, int by>

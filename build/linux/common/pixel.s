@@ -19821,67 +19821,106 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi64ELi64EEEvPslPKhS3_ll:
 	.ent	_ZN12_GLOBAL__N_114pixel_sub_ps_cILi32ELi32EEEvPslPKhS3_ll
 	.type	_ZN12_GLOBAL__N_114pixel_sub_ps_cILi32ELi32EEEvPslPKhS3_ll, @function
 _ZN12_GLOBAL__N_114pixel_sub_ps_cILi32ELi32EEEvPslPKhS3_ll:
-	.frame	$sp,16,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
-	.mask	0x10000000,-8
+	.frame	$sp,80,$31		# vars= 0, regs= 9/0, args= 0, gp= 0
+	.mask	0x10ff0000,-8
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	daddiu	$sp,$sp,-16
-	dsll	$13,$5,2
-	dsll	$9,$9,1
+	daddiu	$sp,$sp,-80
+	li	$24,16			# 0x10
+	sd	$23,64($sp)
+	dsll	$23,$8,1
+	dsll	$25,$5,2
+	sd	$22,56($sp)
 	dlsa	$5,$5,$4,1
-	li	$12,16			# 0x10
-	dsll	$25,$8,1
-	daddiu	$24,$8,8
-	daddiu	$15,$8,16
-	daddiu	$14,$8,24
+	dsll	$22,$9,1
+	sd	$21,48($sp)
+	daddiu	$21,$8,8
+	sd	$20,40($sp)
+	daddiu	$20,$8,16
+	sd	$19,32($sp)
+	daddiu	$19,$8,24
+	sd	$18,24($sp)
+	daddiu	$18,$9,8
+	sd	$17,16($sp)
+	daddiu	$17,$9,16
+	sd	$16,8($sp)
+	daddiu	$16,$9,24
 	.align	3
 .L2063:
 	daddu	$11,$6,$8
-	daddu	$10,$6,$24
+	daddu	$10,$6,$21
 	vbld	$w3,0($6)
 	vbld	$w2,8($6)
-	daddu	$3,$6,$15
-	daddu	$2,$6,$14
+	daddu	$3,$6,$20
+	daddu	$2,$6,$19
 	vbld	$w1,16($6)
 	vbld	$w0,24($6)
-	addiu	$12,$12,-1
+	daddu	$15,$7,$9
+	daddu	$14,$7,$18
 	vbld	$w7,0($7)
 	vbld	$w6,8($7)
+	daddu	$13,$7,$17
+	daddu	$12,$7,$16
 	vbld	$w5,16($7)
 	vbld	$w4,24($7)
+	addiu	$24,$24,-1
+	vextb_u.h	$w7,$w7
+	vextb_u.h	$w6,$w6
+	vextb_u.h	$w5,$w5
+	vextb_u.h	$w4,$w4
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w2,$w2
+	subv.h	$w3,$w3,$w7
+	subv.h	$w2,$w2,$w6
+	st.d	$w3,0($4)
+	st.d	$w2,16($4)
+	vextb_u.h	$w1,$w1
+	vextb_u.h	$w0,$w0
+	subv.h	$w1,$w1,$w5
+	subv.h	$w0,$w0,$w4
+	st.d	$w1,32($4)
+	st.d	$w0,48($4)
+	daddu	$6,$6,$23
+	vbld	$w3,0($11)
+	vbld	$w2,0($10)
+	vbld	$w1,0($3)
+	vbld	$w0,0($2)
+	vbld	$w7,0($15)
+	vbld	$w6,0($14)
+	vbld	$w5,0($13)
+	vbld	$w4,0($12)
 	vextb_u.h	$w3,$w3
 	vextb_u.h	$w2,$w2
 	vextb_u.h	$w1,$w1
 	vextb_u.h	$w0,$w0
 	vextb_u.h	$w7,$w7
 	vextb_u.h	$w6,$w6
-	subv.h	$w3,$w3,$w7
-	subv.h	$w2,$w2,$w6
-	st.d	$w3,0($4)
-	st.d	$w2,16($4)
 	vextb_u.h	$w5,$w5
 	vextb_u.h	$w4,$w4
+	subv.h	$w3,$w3,$w7
+	subv.h	$w2,$w2,$w6
 	subv.h	$w1,$w1,$w5
 	subv.h	$w0,$w0,$w4
-	st.d	$w1,32($4)
-	st.d	$w0,48($4)
-	daddu	$6,$6,$25
-	vbld	$w3,0($11)
-	vbld	$w2,0($10)
-	vbld	$w1,0($3)
-	vbld	$w0,0($2)
-	daddu	$7,$7,$9
 	st.d	$w3,0($5)
 	st.d	$w2,16($5)
 	st.d	$w1,32($5)
 	st.d	$w0,48($5)
-	daddu	$4,$4,$13
-	bne	$12,$0,.L2063
-	daddu	$5,$5,$13
+	daddu	$7,$7,$22
+	daddu	$4,$4,$25
+	bne	$24,$0,.L2063
+	daddu	$5,$5,$25
 
+	ld	$23,64($sp)
+	ld	$22,56($sp)
+	ld	$21,48($sp)
+	ld	$20,40($sp)
+	ld	$19,32($sp)
+	ld	$18,24($sp)
+	ld	$17,16($sp)
+	ld	$16,8($sp)
 	jr	$31
-	daddiu	$sp,$sp,16
+	daddiu	$sp,$sp,80
 
 	.set	macro
 	.set	reorder
