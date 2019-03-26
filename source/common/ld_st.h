@@ -28,6 +28,36 @@ void LD4(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *ou
 	//LD2(ptr, stride, out2, out3);  		
 }
 
+void LD2_BtoH(const pixel *psrc, intptr_t stride, v8u16 *out0, v8u16 *out1)
+{	
+	v2i64 tmp0, tmp1;
+	tmp0 = LD(psrc);
+	tmp1 = LD(psrc + stride);
+	*out0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+	*out1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+}
+		
+void LD4_BtoH(const pixel *psrc, intptr_t stride, v8u16 *out0, v8u16 *out1, v8u16 *out2, v8u16 *out3)
+{
+	LD2_BtoH(psrc, stride, out0, out1);
+	LD2_BtoH(psrc + 2 * stride, stride, out2, out3);	
+}
+
+void LD2_H_BtoH(const pixel *psrc, v8u16 *out0, v8u16 *out1)
+{
+	v2i64 tmp0, tmp1;
+	tmp0 = LD(psrc);
+	tmp1 = LD(psrc + 8);
+	*out0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+	*out1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+}
+
+void LD4_H_BtoH(const pixel *psrc, v8u16 *out0, v8u16 *out1, v8u16 *out2, v8u16 *out3)
+{
+	LD2_H_BtoH(psrc, out0, out1);
+	LD2_H_BtoH(psrc + 16, out2, out3);
+}
+
 void LD2_H(const pixel *psrc, v2i64 *out0, v2i64 *out1)
 {
 	*out0 = LD(psrc);
@@ -54,7 +84,7 @@ v4i32 LW(const pixel *psrc)
 	return tmpp;	
 }
 
-void LW4(const pixel *psrc, intptr_t stride,v4i32 *out0, v4i32 *out1, v4i32 *out2, v4i32 *out3)
+void LW4(const pixel *psrc, intptr_t stride, v4i32 *out0, v4i32 *out1, v4i32 *out2, v4i32 *out3)
 {	
 	*out0 = LW((psrc));	
 	*out1 = LW((psrc) + stride);	
@@ -111,6 +141,12 @@ void LD_V4(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *
 {	
 	LD_V2(psrc, stride, out0, out1);	
 	LD_V2(psrc + 2 * stride , stride, out2, out3);	
+}
+
+void LD_V4_H(const pixel *psrc, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3)
+{
+	LD_V2_H(psrc, out0, out1);
+	LD_V2_H(psrc + 32, out2, out3);
 }
 
 #define LD_UB4(...) LD_V4(v16u8, __VA_ARGS__)

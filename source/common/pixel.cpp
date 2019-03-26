@@ -39,7 +39,14 @@ namespace {
 // place functions in anonymous namespace (file static)
 
 int sad_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
-{
+{	
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	int t_sum = 0;
+	#endif
+
 	int sum = 0;
 	v4i32 tmp0, tmp1;
 	v16u8 rest0;
@@ -50,45 +57,357 @@ int sad_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t
 	rest1 = __builtin_lsx_vacc8b_u_d(rest0);
 	sum = ((v4u32)rest1)[0] + ((v4u32)rest1)[2];
 	//printf("4x4 sum = %d\n", sum);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 4; y++)
+    	{
+        	for (int x = 0; x < 4; x++)
+            		t_sum += abs(t_pix1[x] - t_pix2[x]);
+	
+        	t_pix1 += stride_pix1;
+       	 	t_pix2 += stride_pix2;
+    	}
+	if (t_sum == sum)
+		printf("sad_4x4 test success\n");
+	else 
+		printf("sad_4x4 test fail\n");
+	#endif
+
 	return sum;	
 }
 
 int sad_8x8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	int t_sum = 0;
+	#endif
+
 	int sum = 0;
-	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, mid4, mid5, mid6, mid7;
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
 	v16u8 rest0, rest1, rest2, rest3;
 	v2u64 mid0, mid1, mid2, mid3;
 	//L_8x8_B(pix1, stride_pix1, &tmp0, &tmp1, &tmp2, &tmp3);
 	//L_8x8_B(pix2, stride_pix2, &tmp4, &tmp5, &tmp6, &tmp7);
 	
 	LD4(pix1, stride_pix1, &tmp0, &tmp1, &tmp2, &tmp3);
-	LD4(pix1 + 4 * stride_pix1, stride_pix1, &tmp4, &tmp5, &tmp6, &tmp7);
-	tmp0 = __builtin_msa_insve_d(tmp0, 1, tmp4);
-	tmp1 = __builtin_msa_insve_d(tmp1, 1, tmp5);
-	tmp2 = __builtin_msa_insve_d(tmp2, 1, tmp6);
-	tmp3 = __builtin_msa_insve_d(tmp3, 1, tmp7);
+	LD4(pix1 + 4 * stride_pix1, stride_pix1, &tmp8, &tmp9, &tmp10, &tmp11);
+	tmp0 = __builtin_msa_insve_d(tmp0, 1, tmp8);
+	tmp1 = __builtin_msa_insve_d(tmp1, 1, tmp9);
+	tmp2 = __builtin_msa_insve_d(tmp2, 1, tmp10);
+	tmp3 = __builtin_msa_insve_d(tmp3, 1, tmp11);
 	
 	LD4(pix2, stride_pix2, &tmp4, &tmp5, &tmp6, &tmp7);
-	LD4(pix2 + 4 * stride_pix2, stride_pix2, &mid4, &mid5, &mid6, &mid7);
-	tmp4 = __builtin_msa_insve_d(tmp4, 1, mid4);
-	tmp5 = __builtin_msa_insve_d(tmp5, 1, mid5);
-	tmp6 = __builtin_msa_insve_d(tmp6, 1, mid6);
-	tmp7 = __builtin_msa_insve_d(tmp7, 1, mid7);
+	LD4(pix2 + 4 * stride_pix2, stride_pix2, &tmp12, &tmp13, &tmp14, &tmp15);
+	tmp4 = __builtin_msa_insve_d(tmp4, 1, tmp12);
+	tmp5 = __builtin_msa_insve_d(tmp5, 1, tmp13);
+	tmp6 = __builtin_msa_insve_d(tmp6, 1, tmp14);
+	tmp7 = __builtin_msa_insve_d(tmp7, 1, tmp15);
 	
 	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
 	rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
 	rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
 	rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+	
 	mid0 = __builtin_lsx_vacc8b_u_d(rest0);
 	mid1 = __builtin_lsx_vacc8b_u_d(rest1);
 	mid2 = __builtin_lsx_vacc8b_u_d(rest2);
 	mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+	
 	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid1);
 	mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
 	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
 	sum = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
 	//printf("8x8 sum = %d\n", sum);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 8; y++)
+    	{
+        	for (int x = 0; x < 8; x++)
+            		t_sum += abs(t_pix1[x] - t_pix2[x]);
+	
+        	t_pix1 += stride_pix1;
+       	 	t_pix2 += stride_pix2;
+    	}
+	if (t_sum == sum)
+		printf("sad_8x8 test success\n");
+	else 
+		printf("sad_8x8 test fail\n");
+	#endif
+
+	return sum;
+}
+
+int sad_16x16(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	int t_sum = 0;
+	#endif
+
+	int sum = 0;
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v2i64 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7;
+	v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v2i64 sum0, sum1, sum2, sum3;
+	
+	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
+	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
+	
+	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
+	sum3 = (v2i64)__builtin_msa_xor_v((v16u8)sum3, (v16u8)sum3);
+	
+	for (int i = 0; i < 2; i++)
+	{
+		LD_V4(pix1, stride_pix1, &tmp0, &tmp1, &tmp2, &tmp3);
+		LD_V4(pix2, stride_pix2, &tmp4, &tmp5, &tmp6, &tmp7);
+		
+		LD_V4(pix1 + 4 * stride_pix1, stride_pix1, &tmp8, &tmp9, &tmp10, &tmp11);
+		LD_V4(pix2 + 4 * stride_pix2, stride_pix2, &tmp12, &tmp13, &tmp14, &tmp15);	
+	
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp12);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp13);
+		rest6 = __builtin_msa_asub_u_b((v16u8)tmp10, (v16u8)tmp14);
+		rest7 = __builtin_msa_asub_u_b((v16u8)tmp11, (v16u8)tmp15);
+
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+		mid6 = __builtin_lsx_vacc8b_u_d(rest6);
+		mid7 = __builtin_lsx_vacc8b_u_d(rest7);
+
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid1);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid5);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid6);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid7);
+
+		pix1 = pix1 + 8 * stride_pix1;
+		pix2 = pix2 + 8 * stride_pix2;
+	}
+
+	sum = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
+	sum += ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
+	
+	sum += ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
+	sum += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
+	//printf("16x16 sum = %d\n", sum);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 16; y++)
+    	{
+        	for (int x = 0; x < 16; x++)
+            		t_sum += abs(t_pix1[x] - t_pix2[x]);
+	
+        	t_pix1 += stride_pix1;
+       	 	t_pix2 += stride_pix2;
+    	}
+	if (t_sum == sum)
+		printf("sad_16x16 test success\n");
+	else 
+		printf("sad_16x16 test fail\n");
+	#endif
+
+	return sum;
+}
+
+int sad_32x32(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	int t_sum = 0;
+	#endif
+
+	int sum = 0;
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v2i64 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7;
+	v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v2i64 sum0, sum1, sum2, sum3;
+	
+	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
+	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
+	
+	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
+	sum3 = (v2i64)__builtin_msa_xor_v((v16u8)sum3, (v16u8)sum3);
+
+	for (int i = 0; i < 8; i++)
+	{
+		LD_V2_H(pix1, &tmp0, &tmp1);
+		LD_V2_H(pix1 + stride_pix1, &tmp2, &tmp3);
+		LD_V2_H(pix2, &tmp4, &tmp5);
+		LD_V2_H(pix2 + stride_pix2, &tmp6, &tmp7);
+	
+		LD_V2_H(pix1 + 2 * stride_pix1, &tmp8, &tmp9);
+		LD_V2_H(pix1 + 3 * stride_pix1, &tmp10, &tmp11);
+		LD_V2_H(pix2 + 2 * stride_pix2, &tmp12, &tmp13);
+		LD_V2_H(pix2 + 3 * stride_pix2, &tmp14, &tmp15);
+				
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+	
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp12);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp13);
+		rest6 = __builtin_msa_asub_u_b((v16u8)tmp10, (v16u8)tmp14);
+		rest7 = __builtin_msa_asub_u_b((v16u8)tmp11, (v16u8)tmp15);
+
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+		mid6 = __builtin_lsx_vacc8b_u_d(rest6);
+		mid7 = __builtin_lsx_vacc8b_u_d(rest7);
+
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid1);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid5);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid6);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid7);
+	
+		pix1 += 4 * stride_pix1;
+		pix2 += 4 * stride_pix2;
+	}
+
+	sum = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
+	sum += ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
+	sum += ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
+	sum += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
+	
+	//printf("32x32 sum = %d\n", sum);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 32; y++)
+    	{
+        	for (int x = 0; x < 32; x++)
+            		t_sum += abs(t_pix1[x] - t_pix2[x]);
+	
+        	t_pix1 += stride_pix1;
+       	 	t_pix2 += stride_pix2;
+    	}
+	if (t_sum == sum)
+		printf("sad_32x32 test success\n");
+	else 
+		printf("sad_32x32 test fail\n");
+	#endif
+
+	return sum;
+}
+
+int sad_64x64(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	int t_sum = 0;
+	#endif
+
+	int sum = 0;
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v2i64 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7;
+	v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v2i64 sum0, sum1, sum2, sum3;
+	
+	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
+	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
+
+	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
+	sum3 = (v2i64)__builtin_msa_xor_v((v16u8)sum3, (v16u8)sum3);
+	
+	for (int i = 0; i < 32; i++)
+	{
+		LD_V4_H(pix1, &tmp0, &tmp1, &tmp2, &tmp3);
+		LD_V4_H(pix2, &tmp4, &tmp5, &tmp6, &tmp7);
+	
+		LD_V4_H(pix1 + stride_pix1, &tmp8, &tmp9, &tmp10, &tmp11);
+		LD_V4_H(pix2 + stride_pix2, &tmp12, &tmp13, &tmp14, &tmp15);
+			
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+	
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp12);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp13);
+		rest6 = __builtin_msa_asub_u_b((v16u8)tmp10, (v16u8)tmp14);
+		rest7 = __builtin_msa_asub_u_b((v16u8)tmp11, (v16u8)tmp15);
+
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+			
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+		mid6 = __builtin_lsx_vacc8b_u_d(rest6);
+		mid7 = __builtin_lsx_vacc8b_u_d(rest7);
+
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid1);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+	
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid5);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid6);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid7);
+		
+		pix1 += 2 * stride_pix1;
+		pix2 += 2 * stride_pix2;
+	}
+
+	sum = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
+	sum += ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
+	sum += ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
+	sum += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
+	
+	//printf("64x64 sum = %d\n", sum);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 64; y++)
+    	{
+        	for (int x = 0; x < 64; x++)
+            		t_sum += abs(t_pix1[x] - t_pix2[x]);
+	
+        	t_pix1 += stride_pix1;
+       	 	t_pix2 += stride_pix2;
+    	}
+	if (t_sum == sum)
+		printf("sad_64x64 test success\n");
+	else 
+		printf("sad_64x64 test fail\n");
+	#endif
+
 	return sum;
 }
 
@@ -105,6 +424,24 @@ int sad(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t str
     else if (lx == 8 && ly == 8)
 	{
 		sum = sad_8x8(pix1, stride_pix1, pix2, stride_pix2);
+		//printf("\n\n\n\n%d\n", sum);
+		//abort();
+	}
+    else if (lx == 16 && ly == 16)
+	{
+		sum = sad_16x16(pix1, stride_pix1, pix2, stride_pix2);
+		//printf("\n\n\n\n%d\n", sum);
+		//abort();
+	}
+    else if (lx == 32 && ly == 32)
+	{
+		sum = sad_32x32(pix1, stride_pix1, pix2, stride_pix2);
+		//printf("\n\n\n\n%d\n", sum);
+		//abort();
+	}
+    else if (lx == 64 && ly == 64)
+	{
+		sum = sad_64x64(pix1, stride_pix1, pix2, stride_pix2);
 		//printf("\n\n\n\n%d\n", sum);
 		//abort();
 	}
@@ -142,7 +479,17 @@ int sad(const int16_t* pix1, intptr_t stride_pix1, const int16_t* pix2, intptr_t
 
 void sad_x3_8x8(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
-	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, mid4, mid5, mid6, mid7;
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4;
+	int32_t t_res[3] = {0, 0, 0};
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	t_pix3 = pix3;
+	t_pix4 = pix4;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v2i64 mid4, mid5, mid6, mid7;
 	v16u8 rest0, rest1, rest2, rest3;	
 	v2u64 mid0, mid1, mid2, mid3;
 	
@@ -150,18 +497,18 @@ void sad_x3_8x8(const pixel* pix1, const pixel* pix2, const pixel* pix3, const p
 	//L_8x8_B(pix2, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
  	
 	LD4(pix1, (intptr_t)64, &tmp0, &tmp1, &tmp2, &tmp3);
-	LD4(pix1 + 4 * (intptr_t)64, (intptr_t)64, &tmp4, &tmp5, &tmp6, &tmp7);
-	tmp0 = __builtin_msa_insve_d(tmp0, 1, tmp4);
-	tmp1 = __builtin_msa_insve_d(tmp1, 1, tmp5);
-	tmp2 = __builtin_msa_insve_d(tmp2, 1, tmp6);
-	tmp3 = __builtin_msa_insve_d(tmp3, 1, tmp7);
+	LD4(pix1 + 4 * (intptr_t)64, (intptr_t)64, &tmp8, &tmp9, &tmp10, &tmp11);
+	tmp0 = __builtin_msa_insve_d(tmp0, 1, tmp8);
+	tmp1 = __builtin_msa_insve_d(tmp1, 1, tmp9);
+	tmp2 = __builtin_msa_insve_d(tmp2, 1, tmp10);
+	tmp3 = __builtin_msa_insve_d(tmp3, 1, tmp11);
 
 	LD4(pix2, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
-	LD4(pix2 + 4 * frefstride, frefstride, &mid4, &mid5, &mid6, &mid7);
-	tmp4 = __builtin_msa_insve_d(tmp4, 1, mid4);
-	tmp5 = __builtin_msa_insve_d(tmp5, 1, mid5);
-	tmp6 = __builtin_msa_insve_d(tmp6, 1, mid6);
-	tmp7 = __builtin_msa_insve_d(tmp7, 1, mid7);
+	LD4(pix2 + 4 * frefstride, frefstride, &tmp12, &tmp13, &tmp14, &tmp15);
+	tmp4 = __builtin_msa_insve_d(tmp4, 1, tmp12);
+	tmp5 = __builtin_msa_insve_d(tmp5, 1, tmp13);
+	tmp6 = __builtin_msa_insve_d(tmp6, 1, tmp14);
+	tmp7 = __builtin_msa_insve_d(tmp7, 1, tmp15);
 	
 	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
 	rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
@@ -220,10 +567,274 @@ void sad_x3_8x8(const pixel* pix1, const pixel* pix2, const pixel* pix3, const p
 	res[2] = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
 	
 	//printf("8x8 result = %d\t%d\t%d\n", res[0], res[1], res[2]);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 8; y++)
+    	{
+        	for (int x = 0; x < 8; x++)
+       		{
+            		t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+            		t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+            		t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+        	}
+
+        	t_pix1 += FENC_STRIDE;
+        	t_pix2 += frefstride;
+        	t_pix3 += frefstride;
+        	t_pix4 += frefstride;
+    	}
+	
+	if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2])
+		printf("sad_x3_8x8 test success\n");
+	else
+		printf("sad_x3_8x8 test fail\n");	
+	#endif
 }
 
 void sad_x3_16x16(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+{	
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4;
+	int32_t t_res[3] = {0, 0, 0};
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	t_pix3 = pix3;
+	t_pix4 = pix4;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7, rest8, rest9, rest10, rest11;	
+	v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7, mid8, mid9, mid10, mid11;
+	v2i64 sum0, sum1, sum2, sum3, sum4, sum5;
+	
+	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
+	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
+	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
+
+	sum3 = (v2i64)__builtin_msa_xor_v((v16u8)sum3, (v16u8)sum3);
+	sum4 = (v2i64)__builtin_msa_xor_v((v16u8)sum4, (v16u8)sum4);
+	sum5 = (v2i64)__builtin_msa_xor_v((v16u8)sum5, (v16u8)sum5);
+
+	for (int i = 0; i < 4; i++)
+	{
+		LD_V2(pix1, (intptr_t)64, &tmp0, &tmp1);
+		LD_V2(pix2, frefstride, &tmp2, &tmp3);
+		LD_V2(pix3, frefstride, &tmp4, &tmp5);
+		LD_V2(pix4, frefstride, &tmp6, &tmp7);
+			
+		LD_V2(pix1 + 2 * (intptr_t)64, (intptr_t)64, &tmp8, &tmp9);
+		LD_V2(pix2 + 2 * frefstride, frefstride, &tmp10, &tmp11);
+		LD_V2(pix3 + 2 * frefstride, frefstride, &tmp12, &tmp13);
+		LD_V2(pix4 + 2 * frefstride, frefstride, &tmp14, &tmp15);
+	
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp2);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp3);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp6);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp7);
+	
+		rest6 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp10);
+		rest7 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp11);
+		rest8 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp12);
+		rest9 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp13);
+		rest10 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp14);
+		rest11 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp15);
+
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+	
+		mid6 = __builtin_lsx_vacc8b_u_d(rest6);
+		mid7 = __builtin_lsx_vacc8b_u_d(rest7);
+		mid8 = __builtin_lsx_vacc8b_u_d(rest8);
+		mid9 = __builtin_lsx_vacc8b_u_d(rest9);
+		mid10 = __builtin_lsx_vacc8b_u_d(rest10);
+		mid11 = __builtin_lsx_vacc8b_u_d(rest11);
+
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid1);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid5);
+
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid6);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid7);
+		sum4 = __builtin_msa_addv_d(sum4, (v2i64)mid8);
+		sum4 = __builtin_msa_addv_d(sum4, (v2i64)mid9);
+		sum5 = __builtin_msa_addv_d(sum5, (v2i64)mid10);
+		sum5 = __builtin_msa_addv_d(sum5, (v2i64)mid11);
+		
+		pix1 += 4 * (intptr_t)64;
+		pix2 += 4 * frefstride;
+		pix3 += 4 * frefstride;
+	 	pix4 += 4 * frefstride;
+	}
+	
+	res[0] = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
+	res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
+	res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
+	
+	res[0] += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
+	res[1] += ((v4u32)sum4)[0] + ((v4u32)sum4)[2];
+	res[2] += ((v4u32)sum5)[0] + ((v4u32)sum5)[2];
+
+	//printf("16x16 result = %d\t%d\t%d\n", res[0], res[1], res[2]);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 16; y++)
+    	{
+        	for (int x = 0; x < 16; x++)
+       		{
+            		t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+            		t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+            		t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+        	}
+
+        	t_pix1 += FENC_STRIDE;
+        	t_pix2 += frefstride;
+        	t_pix3 += frefstride;
+        	t_pix4 += frefstride;
+    	}
+	
+	if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2])
+		printf("sad_x3_16x16 test success\n");
+	else
+		printf("sad_x3_16x16 test fail\n");	
+	#endif
+}
+
+void sad_x3_32x32(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4;
+	int32_t t_res[3] = {0, 0, 0};
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	t_pix3 = pix3;
+	t_pix4 = pix4;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7, rest8, rest9, rest10, rest11;	
+	v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7, mid8, mid9, mid10, mid11;
+	v2i64 sum0, sum1, sum2, sum3, sum4, sum5;
+	
+	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
+	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
+	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
+
+	sum3 = (v2i64)__builtin_msa_xor_v((v16u8)sum3, (v16u8)sum3);
+	sum4 = (v2i64)__builtin_msa_xor_v((v16u8)sum4, (v16u8)sum4);
+	sum5 = (v2i64)__builtin_msa_xor_v((v16u8)sum5, (v16u8)sum5);
+	
+	for (int i = 0; i < 16; i++)
+	{
+		LD_V2_H(pix1, &tmp0, &tmp1);
+		LD_V2_H(pix2, &tmp2, &tmp3);
+		LD_V2_H(pix3, &tmp4, &tmp5);
+		LD_V2_H(pix4, &tmp6, &tmp7);
+		
+		LD_V2_H(pix1 + (intptr_t)64, &tmp8, &tmp9);
+		LD_V2_H(pix2 + frefstride, &tmp10, &tmp11);
+		LD_V2_H(pix3 + frefstride, &tmp12, &tmp13);
+		LD_V2_H(pix4 + frefstride, &tmp14, &tmp15);
+		
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp2);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp3);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp6);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp7);
+	
+		rest6 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp10);
+		rest7 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp11);
+		rest8 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp12);
+		rest9 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp13);
+		rest10 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp14);
+		rest11 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp15);
+		
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+	
+		mid6 = __builtin_lsx_vacc8b_u_d(rest6);
+		mid7 = __builtin_lsx_vacc8b_u_d(rest7);
+		mid8 = __builtin_lsx_vacc8b_u_d(rest8);
+		mid9 = __builtin_lsx_vacc8b_u_d(rest9);
+		mid10 = __builtin_lsx_vacc8b_u_d(rest10);
+		mid11 = __builtin_lsx_vacc8b_u_d(rest11);
+		
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid1);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid5);
+		
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid6);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid7);
+		sum4 = __builtin_msa_addv_d(sum4, (v2i64)mid8);
+		sum4 = __builtin_msa_addv_d(sum4, (v2i64)mid9);
+		sum5 = __builtin_msa_addv_d(sum5, (v2i64)mid10);
+		sum5 = __builtin_msa_addv_d(sum5, (v2i64)mid11);
+		
+		pix1 += 2 * (intptr_t)64;
+		pix2 += 2 * frefstride;
+		pix3 += 2 * frefstride;
+		pix4 += 2 * frefstride;		
+	}
+	
+	res[0] = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
+	res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
+	res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
+
+	res[0] += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
+	res[1] += ((v4u32)sum4)[0] + ((v4u32)sum4)[2];	
+	res[2] += ((v4u32)sum5)[0] + ((v4u32)sum5)[2];
+	//printf("32x32 result = %d\t%d\t%d\n", res[0], res[1], res[2]);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 32; y++)
+    	{
+        	for (int x = 0; x < 32; x++)
+       		{
+            		t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+            		t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+            		t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+        	}
+
+        	t_pix1 += FENC_STRIDE;
+        	t_pix2 += frefstride;
+        	t_pix3 += frefstride;
+        	t_pix4 += frefstride;
+    	}
+	
+	if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2])
+		printf("sad_x3_32x32 test success\n");
+	else
+		printf("sad_x3_32x32 test fail\n");	
+	#endif
+}
+
+void sad_x3_64x64(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4;
+	int32_t t_res[3] = {0, 0, 0};
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	t_pix3 = pix3;
+	t_pix4 = pix4;
+	#endif
+
 	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
 	v16u8 rest0, rest1, rest2, rest3, rest4, rest5;	
 	v2u64 mid0, mid1, mid2, mid3, mid4, mid5;
@@ -233,12 +844,12 @@ void sad_x3_16x16(const pixel* pix1, const pixel* pix2, const pixel* pix3, const
 	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
 	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
 
-	for (int i = 0; i < 8; i++)
+	for (int i = 0; i < 64; i++)
 	{
-		LD_V2(pix1, (intptr_t)64, &tmp0, &tmp1);
-		LD_V2(pix2, frefstride, &tmp2, &tmp3);
-		LD_V2(pix3, frefstride, &tmp4, &tmp5);
-		LD_V2(pix4, frefstride, &tmp6, &tmp7);
+		LD_V2_H(pix1, &tmp0, &tmp1);
+		LD_V2_H(pix2, &tmp2, &tmp3);
+		LD_V2_H(pix3, &tmp4, &tmp5);
+		LD_V2_H(pix4, &tmp6, &tmp7);
 		
 		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp2);
 		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp3);
@@ -260,37 +871,11 @@ void sad_x3_16x16(const pixel* pix1, const pixel* pix2, const pixel* pix3, const
 		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
 		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
 		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid5);
-
-		pix1 += 2 * (intptr_t)64;
-		pix2 += 2 * frefstride;
-		pix3 += 2 * frefstride;
-		pix4 += 2 * frefstride;		
-	}
-	
-	res[0] = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
-	res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
-	res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
-	
-	//printf("16x16 result = %d\t%d\t%d\n", res[0], res[1], res[2]);
-}
-
-void sad_x3_32x32(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
-{
-	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
-	v16u8 rest0, rest1, rest2, rest3, rest4, rest5;	
-	v2u64 mid0, mid1, mid2, mid3, mid4, mid5;
-	v2i64 sum0, sum1, sum2;
-	
-	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
-	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
-	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
-
-	for (int i = 0; i < 32; i++)
-	{
-		LD_V2_H(pix1, &tmp0, &tmp1);
-		LD_V2_H(pix2, &tmp2, &tmp3);
-		LD_V2_H(pix3, &tmp4, &tmp5);
-		LD_V2_H(pix4, &tmp6, &tmp7);
+		
+		LD_V2_H(pix1 + 32, &tmp0, &tmp1);
+		LD_V2_H(pix2 + 32, &tmp2, &tmp3);
+		LD_V2_H(pix3 + 32, &tmp4, &tmp5);
+		LD_V2_H(pix4 + 32, &tmp6, &tmp7);
 		
 		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp2);
 		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp3);
@@ -323,7 +908,29 @@ void sad_x3_32x32(const pixel* pix1, const pixel* pix2, const pixel* pix3, const
 	res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
 	res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
 	
-	//printf("32x32 result = %d\t%d\t%d\n", res[0], res[1], res[2]);
+	//printf("64x64 result = %d\t%d\t%d\n", res[0], res[1], res[2]);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 64; y++)
+    	{
+        	for (int x = 0; x < 64; x++)
+       		{
+            		t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+            		t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+            		t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+        	}
+
+        	t_pix1 += FENC_STRIDE;
+        	t_pix2 += frefstride;
+        	t_pix3 += frefstride;
+        	t_pix4 += frefstride;
+    	}
+	
+	if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2])
+		printf("sad_x3_64x64 test success\n");
+	else
+		printf("sad_x3_64x64 test fail\n");	
+	#endif
 }
 
 template<int lx, int ly>
@@ -338,6 +945,8 @@ void sad_x3(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel
 	sad_x3_16x16(pix1, pix2, pix3, pix4, frefstride, res);
     else if (lx == 32 && ly == 32)
 	sad_x3_32x32(pix1, pix2, pix3, pix4, frefstride, res);
+    else if (lx == 64 && ly == 64)
+	sad_x3_64x64(pix1, pix2, pix3, pix4, frefstride, res);
     else 
     {
     	for (int y = 0; y < ly; y++)
@@ -357,6 +966,559 @@ void sad_x3(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel
     }	
 }
 
+void sad_x4_8x8(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4, *t_pix5;
+	int32_t t_res[4] = {0, 0, 0, 0};
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	t_pix3 = pix3;
+	t_pix4 = pix4;
+	t_pix5 = pix5;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v2i64 mid4, mid5, mid6, mid7;
+	v16u8 rest0, rest1, rest2, rest3;	
+	v2u64 mid0, mid1, mid2, mid3;
+	
+	//L_8x8_B(pix1, (intptr_t)64, &tmp0, &tmp1, &tmp2, &tmp3);
+	//L_8x8_B(pix2, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+ 	
+	LD4(pix1, (intptr_t)64, &tmp0, &tmp1, &tmp2, &tmp3);
+	LD4(pix1 + 4 * (intptr_t)64, (intptr_t)64, &tmp8, &tmp9, &tmp10, &tmp11);
+	tmp0 = __builtin_msa_insve_d(tmp0, 1, tmp8);
+	tmp1 = __builtin_msa_insve_d(tmp1, 1, tmp9);
+	tmp2 = __builtin_msa_insve_d(tmp2, 1, tmp10);
+	tmp3 = __builtin_msa_insve_d(tmp3, 1, tmp11);
+
+	LD4(pix2, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	LD4(pix2 + 4 * frefstride, frefstride, &tmp12, &tmp13, &tmp14, &tmp15);
+	tmp4 = __builtin_msa_insve_d(tmp4, 1, tmp12);
+	tmp5 = __builtin_msa_insve_d(tmp5, 1, tmp13);
+	tmp6 = __builtin_msa_insve_d(tmp6, 1, tmp14);
+	tmp7 = __builtin_msa_insve_d(tmp7, 1, tmp15);
+	
+	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+	rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+	rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
+	rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+	mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+	mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+	mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+	mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid1);
+	mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
+	res[0] = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
+
+	//L_8x8_B(pix3, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	
+	LD4(pix3, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	LD4(pix3 + 4 * frefstride, frefstride, &mid4, &mid5, &mid6, &mid7);
+	tmp4 = __builtin_msa_insve_d(tmp4, 1, mid4);
+	tmp5 = __builtin_msa_insve_d(tmp5, 1, mid5);
+	tmp6 = __builtin_msa_insve_d(tmp6, 1, mid6);
+	tmp7 = __builtin_msa_insve_d(tmp7, 1, mid7);
+
+	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+	rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+	rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
+	rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+	mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+	mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+	mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+	mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid1);
+	mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
+	res[1] = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
+
+	//L_8x8_B(pix4, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	LD4(pix4, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	LD4(pix4 + 4 * frefstride, frefstride, &mid4, &mid5, &mid6, &mid7);
+	tmp4 = __builtin_msa_insve_d(tmp4, 1, mid4);
+	tmp5 = __builtin_msa_insve_d(tmp5, 1, mid5);
+	tmp6 = __builtin_msa_insve_d(tmp6, 1, mid6);
+	tmp7 = __builtin_msa_insve_d(tmp7, 1, mid7);
+
+	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+	rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+	rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
+	rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+	mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+	mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+	mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+	mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid1);
+	mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
+	res[2] = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
+	
+	LD4(pix5, frefstride, &tmp4, &tmp5, &tmp6, &tmp7);
+	LD4(pix5 + 4 * frefstride, frefstride, &mid4, &mid5, &mid6, &mid7);
+	tmp4 = __builtin_msa_insve_d(tmp4, 1, mid4);
+	tmp5 = __builtin_msa_insve_d(tmp5, 1, mid5);
+	tmp6 = __builtin_msa_insve_d(tmp6, 1, mid6);
+	tmp7 = __builtin_msa_insve_d(tmp7, 1, mid7);
+
+	rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+	rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+	rest2 = __builtin_msa_asub_u_b((v16u8)tmp2, (v16u8)tmp6);
+	rest3 = __builtin_msa_asub_u_b((v16u8)tmp3, (v16u8)tmp7);
+	mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+	mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+	mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+	mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid1);
+	mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
+	mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
+	res[3] = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
+
+	//printf("8x8 result = %d\t%d\t%d\n", res[0], res[1], res[2]);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 8; y++)
+    	{
+        	for (int x = 0; x < 8; x++)
+        	{
+            		t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+            		t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+            		t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+            		t_res[3] += abs(t_pix1[x] - t_pix5[x]);
+        	}	
+
+        		t_pix1 += FENC_STRIDE;
+        		t_pix2 += frefstride;
+        		t_pix3 += frefstride;
+        		t_pix4 += frefstride;
+        		t_pix5 += frefstride;
+    	}
+	
+	if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2] && t_res[3] == res[3])
+		printf("sad_x4_8x8 test success\n");
+	else 
+		printf("sad_x4_8x8 test fail\n");
+	#endif
+}
+
+void sad_x4_16x16(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4, *t_pix5;
+	int32_t t_res[4] = {0, 0, 0, 0};
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	t_pix3 = pix3;
+	t_pix4 = pix4;
+	t_pix5 = pix5;
+	#endif
+	
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7, rest8, rest9, rest10, rest11, cen4, cen5, cen6, cen7;
+	v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7, mid8, mid9, mid10, mid11, cen8, cen9, cen10, cen11;
+	v2i64 sum0, sum1, sum2, sum3, sum4, sum5, sum6, sum7;
+	v2i64 cen0, cen1, cen2, cen3;
+	
+	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
+	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
+	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
+
+	sum3 = (v2i64)__builtin_msa_xor_v((v16u8)sum3, (v16u8)sum3);
+	sum4 = (v2i64)__builtin_msa_xor_v((v16u8)sum4, (v16u8)sum4);
+	sum5 = (v2i64)__builtin_msa_xor_v((v16u8)sum5, (v16u8)sum5);
+
+	sum6 = (v2i64)__builtin_msa_xor_v((v16u8)sum6, (v16u8)sum6);
+	sum7 = (v2i64)__builtin_msa_xor_v((v16u8)sum7, (v16u8)sum7);
+
+	for (int i = 0; i < 4; i++)
+	{
+		LD_V2(pix1, (intptr_t)64, &tmp0, &tmp1);
+		LD_V2(pix2, frefstride, &tmp2, &tmp3);
+		LD_V2(pix3, frefstride, &tmp4, &tmp5);
+		LD_V2(pix4, frefstride, &tmp6, &tmp7);
+		LD_V2(pix5, frefstride, &cen0, &cen1);	
+		
+		LD_V2(pix1 + 2 * (intptr_t)64, (intptr_t)64, &tmp8, &tmp9);
+		LD_V2(pix2 + 2 * frefstride, frefstride, &tmp10, &tmp11);
+		LD_V2(pix3 + 2 * frefstride, frefstride, &tmp12, &tmp13);
+		LD_V2(pix4 + 2 * frefstride, frefstride, &tmp14, &tmp15);
+		LD_V2(pix5 + 2 * frefstride, frefstride, &cen2, &cen3);
+		
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp2);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp3);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp6);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp7);
+		cen4 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)cen0);
+		cen5 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)cen1);
+		
+		rest6 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp10);
+		rest7 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp11);
+		rest8 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp12);
+		rest9 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp13);
+		rest10 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp14);
+		rest11 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp15);
+		cen6 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)cen2);
+		cen7 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)cen3);
+
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+		cen8 = __builtin_lsx_vacc8b_u_d(cen4);
+		cen9 = __builtin_lsx_vacc8b_u_d(cen5);
+		
+		mid6 = __builtin_lsx_vacc8b_u_d(rest6);
+		mid7 = __builtin_lsx_vacc8b_u_d(rest7);
+		mid8 = __builtin_lsx_vacc8b_u_d(rest8);
+		mid9 = __builtin_lsx_vacc8b_u_d(rest9);
+		mid10 = __builtin_lsx_vacc8b_u_d(rest10);
+		mid11 = __builtin_lsx_vacc8b_u_d(rest11);
+		cen10 = __builtin_lsx_vacc8b_u_d(cen6);
+		cen11 = __builtin_lsx_vacc8b_u_d(cen7);
+		
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid1);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid5);
+
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid6);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid7);
+		sum4 = __builtin_msa_addv_d(sum4, (v2i64)mid8);
+		sum4 = __builtin_msa_addv_d(sum4, (v2i64)mid9);
+		sum5 = __builtin_msa_addv_d(sum5, (v2i64)mid10);
+		sum5 = __builtin_msa_addv_d(sum5, (v2i64)mid11);
+	
+		sum6 = __builtin_msa_addv_d(sum6, (v2i64)cen8);
+		sum6 = __builtin_msa_addv_d(sum6, (v2i64)cen9);
+		sum7 = __builtin_msa_addv_d(sum7, (v2i64)cen10);
+		sum7 = __builtin_msa_addv_d(sum7, (v2i64)cen11);	
+	
+		pix1 += 4 * (intptr_t)64;
+		pix2 += 4 * frefstride;
+		pix3 += 4 * frefstride;
+	 	pix4 += 4 * frefstride;
+		pix5 += 4 * frefstride;
+	}
+	
+	res[0] = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
+	res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
+	res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
+	
+	res[0] += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
+	res[1] += ((v4u32)sum4)[0] + ((v4u32)sum4)[2];
+	res[2] += ((v4u32)sum5)[0] + ((v4u32)sum5)[2];
+
+	res[3] = ((v4u32)sum6)[0] + ((v4u32)sum6)[2];
+	res[3] += ((v4u32)sum7)[0] + ((v4u32)sum7)[2];	
+	
+	//printf("16x16 result = %d\t%d\t%d\t%d\n", res[0], res[1], res[2], res[3]);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 16; y++)
+    	{
+        	for (int x = 0; x < 16; x++)
+        	{
+            		t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+            		t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+            		t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+            		t_res[3] += abs(t_pix1[x] - t_pix5[x]);
+        	}	
+
+        		t_pix1 += FENC_STRIDE;
+        		t_pix2 += frefstride;
+        		t_pix3 += frefstride;
+        		t_pix4 += frefstride;
+        		t_pix5 += frefstride;
+    	}
+	
+	if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2] && t_res[3] == res[3])
+		printf("sad_x4_16x16 test success\n");
+	else 
+		printf("sad_x4_16x16 test fail\n");
+	#endif
+}
+
+void sad_x4_32x32(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4, *t_pix5;
+	int32_t t_res[4] = {0, 0, 0, 0};
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	t_pix3 = pix3;
+	t_pix4 = pix4;
+	t_pix5 = pix5;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7, rest8, rest9, rest10, rest11, cen4, cen5, cen6, cen7;	
+	v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7, mid8, mid9, mid10, mid11, cen8, cen9, cen10, cen11;
+	v2i64 sum0, sum1, sum2, sum3, sum4, sum5, sum6, sum7;
+	v2i64 cen0, cen1, cen2, cen3;
+	
+	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
+	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
+	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
+
+	sum3 = (v2i64)__builtin_msa_xor_v((v16u8)sum3, (v16u8)sum3);
+	sum4 = (v2i64)__builtin_msa_xor_v((v16u8)sum4, (v16u8)sum4);
+	sum5 = (v2i64)__builtin_msa_xor_v((v16u8)sum5, (v16u8)sum5);
+	
+	sum6 = (v2i64)__builtin_msa_xor_v((v16u8)sum6, (v16u8)sum6);
+	sum7 = (v2i64)__builtin_msa_xor_v((v16u8)sum7, (v16u8)sum7);
+
+	for (int i = 0; i < 16; i++)
+	{
+		LD_V2_H(pix1, &tmp0, &tmp1);
+		LD_V2_H(pix2, &tmp2, &tmp3);
+		LD_V2_H(pix3, &tmp4, &tmp5);
+		LD_V2_H(pix4, &tmp6, &tmp7);
+		LD_V2_H(pix5, &cen0, &cen1);	
+		
+		LD_V2_H(pix1 + (intptr_t)64, &tmp8, &tmp9);
+		LD_V2_H(pix2 + frefstride, &tmp10, &tmp11);
+		LD_V2_H(pix3 + frefstride, &tmp12, &tmp13);
+		LD_V2_H(pix4 + frefstride, &tmp14, &tmp15);
+		LD_V2_H(pix5 + frefstride, &cen2, &cen3);
+		
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp2);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp3);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp6);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp7);
+		cen4 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)cen0);
+		cen5 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)cen1);
+		
+		rest6 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp10);
+		rest7 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp11);
+		rest8 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp12);
+		rest9 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp13);
+		rest10 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)tmp14);
+		rest11 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)tmp15);
+		cen6 = __builtin_msa_asub_u_b((v16u8)tmp8, (v16u8)cen2);
+		cen7 = __builtin_msa_asub_u_b((v16u8)tmp9, (v16u8)cen3);
+		
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+		cen8 = __builtin_lsx_vacc8b_u_d(cen4);
+		cen9 = __builtin_lsx_vacc8b_u_d(cen5);
+		
+		mid6 = __builtin_lsx_vacc8b_u_d(rest6);
+		mid7 = __builtin_lsx_vacc8b_u_d(rest7);
+		mid8 = __builtin_lsx_vacc8b_u_d(rest8);
+		mid9 = __builtin_lsx_vacc8b_u_d(rest9);
+		mid10 = __builtin_lsx_vacc8b_u_d(rest10);
+		mid11 = __builtin_lsx_vacc8b_u_d(rest11);
+		cen10 = __builtin_lsx_vacc8b_u_d(cen6);
+		cen11 = __builtin_lsx_vacc8b_u_d(cen7);
+
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid1);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid5);
+		
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid6);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid7);
+		sum4 = __builtin_msa_addv_d(sum4, (v2i64)mid8);
+		sum4 = __builtin_msa_addv_d(sum4, (v2i64)mid9);
+		sum5 = __builtin_msa_addv_d(sum5, (v2i64)mid10);
+		sum5 = __builtin_msa_addv_d(sum5, (v2i64)mid11);
+			
+		sum6 = __builtin_msa_addv_d(sum6, (v2i64)cen8);
+		sum6 = __builtin_msa_addv_d(sum6, (v2i64)cen9);
+		sum7 = __builtin_msa_addv_d(sum7, (v2i64)cen10);
+		sum7 = __builtin_msa_addv_d(sum7, (v2i64)cen11);	
+		
+		pix1 += 2 * (intptr_t)64;
+		pix2 += 2 * frefstride;
+		pix3 += 2 * frefstride;
+		pix4 += 2 * frefstride;		
+		pix5 += 2 * frefstride;
+	}
+	
+	res[0] = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
+	res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
+	res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
+
+	res[0] += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
+	res[1] += ((v4u32)sum4)[0] + ((v4u32)sum4)[2];	
+	res[2] += ((v4u32)sum5)[0] + ((v4u32)sum5)[2];
+	
+	res[3] = ((v4u32)sum6)[0] + ((v4u32)sum6)[2];
+	res[3] += ((v4u32)sum7)[0] + ((v4u32)sum7)[2];	
+	
+	//printf("32x32 result = %d\t%d\t%d\t%d \n", res[0], res[1], res[2], rest[3]);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 32; y++)
+    	{
+        	for (int x = 0; x < 32; x++)
+        	{
+            		t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+            		t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+            		t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+            		t_res[3] += abs(t_pix1[x] - t_pix5[x]);
+        	}	
+
+        		t_pix1 += FENC_STRIDE;
+        		t_pix2 += frefstride;
+        		t_pix3 += frefstride;
+        		t_pix4 += frefstride;
+        		t_pix5 += frefstride;
+    	}
+	
+	if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2] && t_res[3] == res[3])
+		printf("sad_x4_32x32 test success\n");
+	else 
+		printf("sad_x4_32x32 test fail\n");
+	#endif
+}
+
+void sad_x4_64x64(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4, *t_pix5;
+	int32_t t_res[4] = {0, 0, 0, 0};
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	t_pix3 = pix3;
+	t_pix4 = pix4;
+	t_pix5 = pix5;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7;	
+	v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v2i64 sum0, sum1, sum2, sum3;
+	v2i64 cen0, cen1;
+	
+	sum0 = (v2i64)__builtin_msa_xor_v((v16u8)sum0, (v16u8)sum0);
+	sum1 = (v2i64)__builtin_msa_xor_v((v16u8)sum1, (v16u8)sum1);
+	sum2 = (v2i64)__builtin_msa_xor_v((v16u8)sum2, (v16u8)sum2);
+	sum3 = (v2i64)__builtin_msa_xor_v((v16u8)sum3, (v16u8)sum3);
+	
+	for (int i = 0; i < 64; i++)
+	{
+		LD_V2_H(pix1, &tmp0, &tmp1);
+		LD_V2_H(pix2, &tmp2, &tmp3);
+		LD_V2_H(pix3, &tmp4, &tmp5);
+		LD_V2_H(pix4, &tmp6, &tmp7);
+		LD_V2_H(pix5, &cen0, &cen1);
+	
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp2);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp3);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp6);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp7);
+		rest6 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)cen0);
+		rest7 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)cen1);
+		
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+		mid6 = __builtin_lsx_vacc8b_u_d(rest6);
+		mid7 = __builtin_lsx_vacc8b_u_d(rest7);
+		
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid1);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid5);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid6);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid7);
+		
+		LD_V2_H(pix1 + 32, &tmp0, &tmp1);
+		LD_V2_H(pix2 + 32, &tmp2, &tmp3);
+		LD_V2_H(pix3 + 32, &tmp4, &tmp5);
+		LD_V2_H(pix4 + 32, &tmp6, &tmp7);
+		LD_V2_H(pix5 + 32, &cen0, &cen1);
+
+		rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp2);
+		rest1 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp3);
+		rest2 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp4);
+		rest3 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp5);
+		rest4 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp6);
+		rest5 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)tmp7);
+		rest6 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)cen0);
+		rest7 = __builtin_msa_asub_u_b((v16u8)tmp1, (v16u8)cen1);
+
+		mid0 = __builtin_lsx_vacc8b_u_d(rest0);
+		mid1 = __builtin_lsx_vacc8b_u_d(rest1);
+		mid2 = __builtin_lsx_vacc8b_u_d(rest2);
+		mid3 = __builtin_lsx_vacc8b_u_d(rest3);
+		mid4 = __builtin_lsx_vacc8b_u_d(rest4);
+		mid5 = __builtin_lsx_vacc8b_u_d(rest5);
+		mid6 = __builtin_lsx_vacc8b_u_d(rest6);
+		mid7 = __builtin_lsx_vacc8b_u_d(rest7);
+
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid0);
+		sum0 = __builtin_msa_addv_d(sum0, (v2i64)mid1);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid2);
+		sum1 = __builtin_msa_addv_d(sum1, (v2i64)mid3);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid4);
+		sum2 = __builtin_msa_addv_d(sum2, (v2i64)mid5);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid6);
+		sum3 = __builtin_msa_addv_d(sum3, (v2i64)mid7);
+
+		pix1 += (intptr_t)64;
+		pix2 += frefstride;
+		pix3 += frefstride;
+		pix4 += frefstride;		
+		pix5 += frefstride;
+	}
+	
+	res[0] = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
+	res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
+	res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
+	res[3] = ((v4u32)sum3)[0] + ((v4u32)sum3)[2]; 	
+
+	//printf("64x64 result = %d\t%d\t%d\t%d\n", res[0], res[1], res[2], res[3]);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 64; y++)
+    	{
+        	for (int x = 0; x < 64; x++)
+        	{
+            		t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+            		t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+            		t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+            		t_res[3] += abs(t_pix1[x] - t_pix5[x]);
+        	}	
+
+        		t_pix1 += FENC_STRIDE;
+        		t_pix2 += frefstride;
+        		t_pix3 += frefstride;
+        		t_pix4 += frefstride;
+        		t_pix5 += frefstride;
+    	}
+	
+	if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2] && t_res[3] == res[3])
+		printf("sad_x4_64x64 test success\n");
+	else 
+		printf("sad_x4_64x64 test fail\n");
+	#endif
+}
+
 template<int lx, int ly>
 void sad_x4(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
@@ -364,21 +1526,41 @@ void sad_x4(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel
     res[1] = 0;
     res[2] = 0;
     res[3] = 0;
-    for (int y = 0; y < ly; y++)
-    {
-        for (int x = 0; x < lx; x++)
-        {
-            res[0] += abs(pix1[x] - pix2[x]);
-            res[1] += abs(pix1[x] - pix3[x]);
-            res[2] += abs(pix1[x] - pix4[x]);
-            res[3] += abs(pix1[x] - pix5[x]);
-        }
 
-        pix1 += FENC_STRIDE;
-        pix2 += frefstride;
-        pix3 += frefstride;
-        pix4 += frefstride;
-        pix5 += frefstride;
+    if (lx == 8 && ly == 8)
+    {
+	sad_x4_8x8(pix1, pix2, pix3, pix4, pix5, frefstride, res);	
+    } 
+    else if (lx == 16 && ly == 16)
+    {
+	sad_x4_16x16(pix1, pix2, pix3, pix4, pix5, frefstride, res);
+    }
+    else if (lx == 32 && ly == 32)
+    {
+	sad_x4_32x32(pix1, pix2, pix3, pix4, pix5, frefstride, res);
+    }
+    else if (lx == 64 && ly == 64)
+    {
+	sad_x4_64x64(pix1, pix2, pix3, pix4, pix5, frefstride, res);
+    }
+    else
+    {
+  	for (int y = 0; y < ly; y++)
+    	{
+        	for (int x = 0; x < lx; x++)
+        	{
+            		res[0] += abs(pix1[x] - pix2[x]);
+            		res[1] += abs(pix1[x] - pix3[x]);
+            		res[2] += abs(pix1[x] - pix4[x]);
+            		res[3] += abs(pix1[x] - pix5[x]);
+        	}	
+
+        		pix1 += FENC_STRIDE;
+        		pix2 += frefstride;
+        		pix3 += frefstride;
+        		pix4 += frefstride;
+        		pix5 += frefstride;
+    	}
     }
 }
 
@@ -428,18 +1610,412 @@ int ads_x1(int encDC[1], uint32_t *sums, int, uint16_t *costMvX, int16_t *mvs, i
     return nmv;
 }
 
+uint32_t sse_pp_a_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2;
+	uint32_t t_sum = 0;
+	int tmp;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	#endif
+	
+	uint32_t sum = 0;
+	v8u16 tmp0, tmp1, tmp2, tmp3;
+	v8i16 mid0, mid1;
+	v4i32 res0;
+	
+	L_4x4_B_H(pix1, stride_pix1, &tmp0, &tmp1);
+	L_4x4_B_H(pix2, stride_pix2, &tmp2, &tmp3);
+
+	mid0 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp2);
+	mid1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp3);		
+
+	res0 = __builtin_msa_dotp_s_w(mid0, mid0);
+	res0 = __builtin_msa_dpadd_s_w(res0, mid1, mid1);
+
+	sum = res0[0] + res0[1] + res0[2] + res0[3];
+		
+	#ifdef DEBUG
+	for (int y = 0; y < 4; y++)
+	{
+		for (int x = 0; x < 4; x++)
+		{
+			tmp = t_pix1[x] - t_pix2[x];
+			t_sum += (tmp * tmp);
+		}
+		t_pix1 += stride_pix1;
+		t_pix2 += stride_pix2;	
+	}
+	
+	if (sum == t_sum)
+		printf("sse_pp_a_4x4 test success\n");
+	else 
+		printf("sse_pp_a_4x4 test fail\n");
+	#endif
+	
+	return sum;
+}
+
+uint32_t sse_pp_a_8x8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2;
+	uint32_t t_sum = 0;
+	int tmp;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	#endif
+
+	uint32_t sum = 0;
+	v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v8u16 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v8i16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v4i32 res0, res1, res2, res3;
+
+	LD4_BtoH(pix1, stride_pix1, &tmp0, &tmp1, &tmp2, &tmp3);
+	LD4_BtoH(pix2, stride_pix2, &tmp4, &tmp5, &tmp6, &tmp7);
+
+	LD4_BtoH(pix1 + 4 * stride_pix1, stride_pix1, &tmp8, &tmp9, &tmp10, &tmp11);
+	LD4_BtoH(pix2 + 4 * stride_pix2, stride_pix2, &tmp12, &tmp13, &tmp14, &tmp15);	
+	
+	mid0 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp4);
+	mid1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp5);
+	mid2 = __builtin_msa_subv_h((v8i16)tmp2, (v8i16)tmp6);
+	mid3 = __builtin_msa_subv_h((v8i16)tmp3, (v8i16)tmp7);
+	mid4 = __builtin_msa_subv_h((v8i16)tmp8, (v8i16)tmp12);
+	mid5 = __builtin_msa_subv_h((v8i16)tmp9, (v8i16)tmp13);
+	mid6 = __builtin_msa_subv_h((v8i16)tmp10, (v8i16)tmp14);
+	mid7 = __builtin_msa_subv_h((v8i16)tmp11, (v8i16)tmp15);
+
+	res0 = __builtin_msa_dotp_s_w(mid0, mid0);
+	res1 = __builtin_msa_dotp_s_w(mid1, mid1);
+	res2 = __builtin_msa_dotp_s_w(mid2, mid2);
+	res3 = __builtin_msa_dotp_s_w(mid3, mid3);
+	res0 = __builtin_msa_dpadd_s_w(res0, mid4, mid4);
+	res1 = __builtin_msa_dpadd_s_w(res1, mid5, mid5);
+	res2 = __builtin_msa_dpadd_s_w(res2, mid6, mid6);
+	res3 = __builtin_msa_dpadd_s_w(res3, mid7, mid7);
+		
+	res0 = __builtin_msa_addv_w(res0, res1);
+	res2 = __builtin_msa_addv_w(res2, res3);
+	res0 = __builtin_msa_addv_w(res0, res2);
+	
+	sum = res0[0] + res0[1] + res0[2] + res0[3];
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 8; y++)
+	{
+		for (int x = 0; x < 8; x++)
+		{
+			tmp = t_pix1[x] - t_pix2[x];
+			t_sum += (tmp * tmp);
+		}
+		t_pix1 += stride_pix1;
+		t_pix2 += stride_pix2;	
+	}
+	
+	if (sum == t_sum)
+		printf("sse_pp_a_8x8 test success\n");
+	else 
+		printf("sse_pp_a_8x8 test fail\n");
+	#endif
+
+	return sum;
+}
+
+uint32_t sse_pp_a_16x16(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2;
+	uint32_t t_sum = 0;
+	int tmp;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	#endif
+
+	uint32_t sum = 0;	
+	v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v8u16 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v8i16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v4i32 res0, res1, res2, res3;
+	
+	res0 = (v4i32)__builtin_msa_xor_v((v16u8)res0, (v16u8)res0);
+	res1 = (v4i32)__builtin_msa_xor_v((v16u8)res1, (v16u8)res1);
+	res2 = (v4i32)__builtin_msa_xor_v((v16u8)res2, (v16u8)res2);
+	res3 = (v4i32)__builtin_msa_xor_v((v16u8)res3, (v16u8)res3);
+	
+	for (int i = 4; i > 0; i--)
+	{
+		LD2_H_BtoH(pix1, &tmp0, &tmp1);
+		LD2_H_BtoH(pix1 + stride_pix1, &tmp2, &tmp3);	
+		LD2_H_BtoH(pix1 + 2 * stride_pix1, &tmp4, &tmp5);
+		LD2_H_BtoH(pix1 + 3 * stride_pix1, &tmp6, &tmp7);
+		LD2_H_BtoH(pix2, &tmp8, &tmp9);
+		LD2_H_BtoH(pix2 + stride_pix2, &tmp10, &tmp11);
+		LD2_H_BtoH(pix2 + 2 * stride_pix2, &tmp12, &tmp13);
+		LD2_H_BtoH(pix2 + 3 * stride_pix2, &tmp14, &tmp15);
+
+		mid0 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp8);
+		mid1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp9);
+		mid2 = __builtin_msa_subv_h((v8i16)tmp2, (v8i16)tmp10);
+		mid3 = __builtin_msa_subv_h((v8i16)tmp3, (v8i16)tmp11);
+		mid4 = __builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
+		mid5 = __builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);
+		mid6 = __builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
+		mid7 = __builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
+
+		res0 = __builtin_msa_dpadd_s_w(res0, mid0, mid0);
+		res1 = __builtin_msa_dpadd_s_w(res1, mid1, mid1);
+		res2 = __builtin_msa_dpadd_s_w(res2, mid2, mid2);
+		res3 = __builtin_msa_dpadd_s_w(res3, mid3, mid3);
+		res0 = __builtin_msa_dpadd_s_w(res0, mid4, mid4);
+		res1 = __builtin_msa_dpadd_s_w(res1, mid5, mid5);
+		res2 = __builtin_msa_dpadd_s_w(res2, mid6, mid6);
+		res3 = __builtin_msa_dpadd_s_w(res3, mid7, mid7);
+		
+		pix1 += 4 * stride_pix1;
+		pix2 += 4 * stride_pix2;
+	}
+	
+	res0 = __builtin_msa_addv_w(res0, res1);
+	res2 = __builtin_msa_addv_w(res2, res3);
+	res0 = __builtin_msa_addv_w(res0, res2);
+	
+	sum = res0[0] + res0[1] + res0[2] + res0[3];
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 16; y++)
+	{
+		for (int x = 0; x < 16; x++)
+		{
+			tmp = t_pix1[x] - t_pix2[x];
+			t_sum += (tmp * tmp);
+		}
+		t_pix1 += stride_pix1;
+		t_pix2 += stride_pix2;	
+	}
+	
+	if (sum == t_sum)
+		printf("sse_pp_a_16x16 test success\n");
+	else 
+		printf("sse_pp_a_16x16 test fail\n");
+	#endif
+
+	return sum;
+}
+
+uint32_t sse_pp_a_32x32(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2;
+	uint32_t t_sum = 0;
+	int tmp;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	#endif
+
+	uint32_t sum = 0;	
+	v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v8u16 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v8i16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v4i32 res0, res1, res2, res3;
+	
+	res0 = (v4i32)__builtin_msa_xor_v((v16u8)res0, (v16u8)res0);
+	res1 = (v4i32)__builtin_msa_xor_v((v16u8)res1, (v16u8)res1);
+	res2 = (v4i32)__builtin_msa_xor_v((v16u8)res2, (v16u8)res2);
+	res3 = (v4i32)__builtin_msa_xor_v((v16u8)res3, (v16u8)res3);
+	
+	for (int i = 16; i > 0; i--)
+	{
+		LD4_H_BtoH(pix1, &tmp0, &tmp1, &tmp2, &tmp3);
+		LD4_H_BtoH(pix1 + stride_pix1, &tmp4, &tmp5, &tmp6, &tmp7);
+		LD4_H_BtoH(pix2, &tmp8, &tmp9, &tmp10, &tmp11);
+		LD4_H_BtoH(pix2 + stride_pix2, &tmp12, &tmp13, &tmp14, &tmp15);
+
+		mid0 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp8);
+		mid1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp9);
+		mid2 = __builtin_msa_subv_h((v8i16)tmp2, (v8i16)tmp10);
+		mid3 = __builtin_msa_subv_h((v8i16)tmp3, (v8i16)tmp11);
+		mid4 = __builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
+		mid5 = __builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);
+		mid6 = __builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
+		mid7 = __builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
+
+		res0 = __builtin_msa_dpadd_s_w(res0, mid0, mid0);
+		res1 = __builtin_msa_dpadd_s_w(res1, mid1, mid1);
+		res2 = __builtin_msa_dpadd_s_w(res2, mid2, mid2);
+		res3 = __builtin_msa_dpadd_s_w(res3, mid3, mid3);
+		res0 = __builtin_msa_dpadd_s_w(res0, mid4, mid4);
+		res1 = __builtin_msa_dpadd_s_w(res1, mid5, mid5);
+		res2 = __builtin_msa_dpadd_s_w(res2, mid6, mid6);
+		res3 = __builtin_msa_dpadd_s_w(res3, mid7, mid7);
+		
+		pix1 += 2 * stride_pix1;
+		pix2 += 2 * stride_pix2;
+	}
+	
+	res0 = __builtin_msa_addv_w(res0, res1);
+	res2 = __builtin_msa_addv_w(res2, res3);
+	res0 = __builtin_msa_addv_w(res0, res2);
+	
+	sum = res0[0] + res0[1] + res0[2] + res0[3];
+
+	#ifdef DEBUG
+	for (int y = 0; y < 32; y++)
+	{
+		for (int x = 0; x < 32; x++)
+		{
+			tmp = t_pix1[x] - t_pix2[x];
+			t_sum += (tmp * tmp);
+		}
+		t_pix1 += stride_pix1;
+		t_pix2 += stride_pix2;	
+	}
+	
+	if (sum == t_sum)
+		printf("sse_pp_a_32x32 test success\n");
+	else 
+		printf("sse_pp_a_32x32 test fail\n");
+	#endif
+
+	return sum;
+}
+
+uint32_t sse_pp_a_64x64(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+{
+	#ifdef DEBUG
+	const pixel *t_pix1, *t_pix2;
+	uint32_t t_sum = 0;
+	int tmp;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	#endif
+
+	uint32_t sum = 0;	
+	v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v8u16 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+	v8i16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v4i32 res0, res1, res2, res3;
+	
+	res0 = (v4i32)__builtin_msa_xor_v((v16u8)res0, (v16u8)res0);
+	res1 = (v4i32)__builtin_msa_xor_v((v16u8)res1, (v16u8)res1);
+	res2 = (v4i32)__builtin_msa_xor_v((v16u8)res2, (v16u8)res2);
+	res3 = (v4i32)__builtin_msa_xor_v((v16u8)res3, (v16u8)res3);
+	
+	for (int i = 64; i > 0; i--)
+	{
+		LD4_H_BtoH(pix1, &tmp0, &tmp1, &tmp2, &tmp3);
+		LD4_H_BtoH(pix1 + 32, &tmp4, &tmp5, &tmp6, &tmp7);
+		LD4_H_BtoH(pix2, &tmp8, &tmp9, &tmp10, &tmp11);
+		LD4_H_BtoH(pix2 + 32, &tmp12, &tmp13, &tmp14, &tmp15);
+
+		mid0 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp8);
+		mid1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp9);
+		mid2 = __builtin_msa_subv_h((v8i16)tmp2, (v8i16)tmp10);
+		mid3 = __builtin_msa_subv_h((v8i16)tmp3, (v8i16)tmp11);
+		mid4 = __builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
+		mid5 = __builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);
+		mid6 = __builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
+		mid7 = __builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
+
+		res0 = __builtin_msa_dpadd_s_w(res0, mid0, mid0);
+		res1 = __builtin_msa_dpadd_s_w(res1, mid1, mid1);
+		res2 = __builtin_msa_dpadd_s_w(res2, mid2, mid2);
+		res3 = __builtin_msa_dpadd_s_w(res3, mid3, mid3);
+		res0 = __builtin_msa_dpadd_s_w(res0, mid4, mid4);
+		res1 = __builtin_msa_dpadd_s_w(res1, mid5, mid5);
+		res2 = __builtin_msa_dpadd_s_w(res2, mid6, mid6);
+		res3 = __builtin_msa_dpadd_s_w(res3, mid7, mid7);
+		
+		pix1 += stride_pix1;
+		pix2 += stride_pix2;
+	}
+	
+	res0 = __builtin_msa_addv_w(res0, res1);
+	res2 = __builtin_msa_addv_w(res2, res3);
+	res0 = __builtin_msa_addv_w(res0, res2);
+	
+	sum = res0[0] + res0[1] + res0[2] + res0[3];
+
+	#ifdef DEBUG
+	for (int y = 0; y < 64; y++)
+	{
+		for (int x = 0; x < 64; x++)
+		{
+			tmp = t_pix1[x] - t_pix2[x];
+			t_sum += (tmp * tmp);
+		}
+		t_pix1 += stride_pix1;
+		t_pix2 += stride_pix2;	
+	}
+	
+	if (sum == t_sum)
+		printf("sse_pp_a_64x64 test success\n");
+	else 
+		printf("sse_pp_a_64x64 test fail\n");
+	#endif
+
+	return sum;
+}
+
+template<int lx, int ly>
+sse_t sse_pp_a(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
+{
+    sse_t sum = 0;
+    int tmp;
+	
+    if (lx == 4 && ly == 4)
+    {
+	sum = sse_pp_a_4x4(pix1, stride_pix1, pix2, stride_pix2); 
+    }
+    else if (lx == 8 && ly == 8)
+    {
+	sum = sse_pp_a_8x8(pix1, stride_pix1, pix2, stride_pix2);
+    }
+    else if (lx == 16 && ly == 16)
+    {
+	sum = sse_pp_a_16x16(pix1, stride_pix1, pix2, stride_pix2);
+    }  
+    else if (lx == 32 && ly == 32)
+    {
+	sum = sse_pp_a_32x32(pix1, stride_pix1, pix2, stride_pix2);
+    }
+    else if (lx == 64 && ly == 64)
+    {
+	sum = sse_pp_a_64x64(pix1, stride_pix1, pix2, stride_pix2);
+    }
+    else
+    {
+    	for (int y = 0; y < ly; y++)
+    	{
+        	for (int x = 0; x < lx; x++)
+        	{
+         		tmp = pix1[x] - pix2[x];
+          		sum += (tmp * tmp);
+        	}
+
+        	pix1 += stride_pix1;
+        	pix2 += stride_pix2;
+    	}
+    }
+
+    return sum;
+}
+
+
 template<int lx, int ly, class T1, class T2>
 sse_t sse(const T1* pix1, intptr_t stride_pix1, const T2* pix2, intptr_t stride_pix2)
 {
     sse_t sum = 0;
     int tmp;
-
+	
     for (int y = 0; y < ly; y++)
     {
         for (int x = 0; x < lx; x++)
         {
-            tmp = pix1[x] - pix2[x];
-            sum += (tmp * tmp);
+         	tmp = pix1[x] - pix2[x];
+          	sum += (tmp * tmp);
         }
 
         pix1 += stride_pix1;
@@ -473,30 +2049,114 @@ inline sum2_t abs2(sum2_t a)
 
 static int satd_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
-    sum2_t tmp[4][2];
-    sum2_t a0, a1, a2, a3, b0, b1;
-    sum2_t sum = 0;
+    	#ifdef DEBUG
+    	sum2_t tmp[4][2];
+    	sum2_t a0, a1, a2, a3, b0, b1;
+    	sum2_t t_sum = 0;
+    	const pixel *t_pix1, *t_pix2;
+    	t_pix1 = pix1;
+    	t_pix2 = pix2;   
+        #endif
 
-    for (int i = 0; i < 4; i++, pix1 += stride_pix1, pix2 += stride_pix2)
-    {
-        a0 = pix1[0] - pix2[0];
-        a1 = pix1[1] - pix2[1];
-        b0 = (a0 + a1) + ((a0 - a1) << BITS_PER_SUM);
-        a2 = pix1[2] - pix2[2];
-        a3 = pix1[3] - pix2[3];
-        b1 = (a2 + a3) + ((a2 - a3) << BITS_PER_SUM);
-        tmp[i][0] = b0 + b1;
-        tmp[i][1] = b0 - b1;
-    }
+	int sum;
+	v4i32 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+    	//v16i8 con = {-1, 1, -1, 1, 1, 1, 1, 1, -1, 1, -1, 1, 1, 1, 1, 1};
+	v8i16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7, mid8, mid9;
+	v8i16 cen0, cen1, cen2;
+	v4i32 res0;
+	v8u16 bet0, bet1, bet2, bet3;
+	v8i16 bet4, bet5, bet6, bet7;
+			
+	LW4(pix1, stride_pix1, &tmp0, &tmp1, &tmp2, &tmp3);
+	LW4(pix2, stride_pix2, &tmp4, &tmp5, &tmp6, &tmp7);
 
-    for (int i = 0; i < 2; i++)
-    {
-        HADAMARD4(a0, a1, a2, a3, tmp[0][i], tmp[1][i], tmp[2][i], tmp[3][i]);
-        a0 = abs2(a0) + abs2(a1) + abs2(a2) + abs2(a3);
-        sum += ((sum_t)a0) + (a0 >> BITS_PER_SUM);
-    }
+	tmp0 = __builtin_msa_insve_w(tmp0, 1, tmp1);
+	tmp2 = __builtin_msa_insve_w(tmp2, 1, tmp3);
+	tmp4 = __builtin_msa_insve_w(tmp4, 1, tmp5);
+	tmp6 = __builtin_msa_insve_w(tmp6, 1, tmp7);
+	
+	//mid0 = __builtin_msa_subv_h((v8i16)bet0, (v8i16)bet2);
+	//mid1 = __builtin_msa_subv_h((v8i16)bet1, (v8i16)bet3);
+	
+	//tmp1 = __builtin_msa_shf_w(tmp0, 160);
+	//tmp3 = __builtin_msa_shf_w(tmp2, 160);
+	//tmp5 = __builtin_msa_shf_w(tmp4, 160);
+	//tmp7 = __builtin_msa_shf_w(tmp6, 160);
+	
+	//tmp1 = (v4i32)__builtin_msa_subv_b((v16i8)tmp1, (v16i8)tmp5);
+	//tmp3 = (v4i32)__builtin_msa_subv_b((v16i8)tmp3, (v16i8)tmp7);
+		
+	bet0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
+	bet1 = __builtin_msa_hadd_u_h((v16u8)tmp2, (v16u8)tmp2);
+	bet2 = __builtin_msa_hadd_u_h((v16u8)tmp4, (v16u8)tmp4);
+	bet3 = __builtin_msa_hadd_u_h((v16u8)tmp6, (v16u8)tmp6);
 
-    return (int)(sum >> 1);
+	bet4 = __builtin_msa_hsub_u_h((v16u8)tmp0, (v16u8)tmp0);
+	bet5 = __builtin_msa_hsub_u_h((v16u8)tmp2, (v16u8)tmp2);
+	bet6 = __builtin_msa_hsub_u_h((v16u8)tmp4, (v16u8)tmp4);
+	bet7 = __builtin_msa_hsub_u_h((v16u8)tmp6, (v16u8)tmp6);
+
+	tmp0 = __builtin_msa_ilvr_w((v4i32)bet4, (v4i32)bet0);
+	tmp1 = __builtin_msa_ilvr_w((v4i32)bet5, (v4i32)bet1);
+	tmp2 = __builtin_msa_ilvr_w((v4i32)bet6, (v4i32)bet2);	
+	tmp3 = __builtin_msa_ilvr_w((v4i32)bet7, (v4i32)bet3);	
+
+	//mid0 = __builtin_msa_dotp_s_h((v16i8)tmp1, con);
+	//mid1 = __builtin_msa_dotp_s_h((v16i8)tmp3, con);
+	//mid2 = __builtin_msa_dotp_s_h((v16i8)tmp5, con);
+	//mid3 = __builtin_msa_dotp_s_h((v16i8)tmp7, con);
+
+	mid0 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp2);
+	mid1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp3);
+ 	
+	mid4 = __builtin_msa_addv_h(mid0, mid1);
+	mid5 = __builtin_msa_subv_h(mid1, mid0);
+
+	mid6 = (v8i16)__builtin_msa_insve_d((v2i64)mid4, 1, (v2i64)mid5);
+	mid7 = (v8i16)__builtin_msa_ilvl_d((v2i64)mid5, (v2i64)mid4);
+	
+	mid8 = __builtin_msa_addv_h(mid6, mid7);
+	mid9 = __builtin_msa_subv_h(mid7, mid6);	
+
+	cen0 = __builtin_msa_ilvod_h(mid9, mid8);
+	cen1 = __builtin_msa_ilvev_h(mid9, mid8);
+
+	cen0 = __builtin_lsx_vabs_h(cen0);
+	cen1 = __builtin_lsx_vabs_h(cen1);
+
+	cen2 = __builtin_msa_max_s_h(cen0, cen1);	
+	
+	res0 = __builtin_msa_hadd_s_w(cen2, cen2);
+	
+	sum = res0[0] + res0[1] + res0[2] + res0[3];
+
+	#ifdef DEBUG
+	for (int i = 0; i < 4; i++, t_pix1 += stride_pix1, t_pix2 += stride_pix2)
+    	{
+        	a0 = t_pix1[0] - t_pix2[0];
+        	a1 = t_pix1[1] - t_pix2[1];
+        	b0 = (a0 + a1) + ((a0 - a1) << BITS_PER_SUM);
+        	a2 = t_pix1[2] - t_pix2[2];
+        	a3 = t_pix1[3] - t_pix2[3];
+        	b1 = (a2 + a3) + ((a2 - a3) << BITS_PER_SUM);
+        	tmp[i][0] = b0 + b1;
+        	tmp[i][1] = b0 - b1;
+    	}
+
+    	for (int i = 0; i < 2; i++)
+    	{
+    	    HADAMARD4(a0, a1, a2, a3, tmp[0][i], tmp[1][i], tmp[2][i], tmp[3][i]);
+    	    a0 = abs2(a0) + abs2(a1) + abs2(a2) + abs2(a3);
+    	    t_sum += ((sum_t)a0) + (a0 >> BITS_PER_SUM);
+    	}
+	
+	if (sum == (t_sum >> 1))
+		printf("satd_4x4 test success\n");
+	else 
+		printf("satd_4x4 test fail\n");
+	#endif
+
+	return sum;
 }
 
 // x264's SWAR version of satd 8x4, performs two 4x4 SATDs at once
@@ -1070,11 +2730,18 @@ void blockcopy_ps_c(int16_t* a, intptr_t stridea, const pixel* b, intptr_t strid
 
 void sub_ps_8x8(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-	int i;
+	#ifdef DEBUG
+	int16_t* t_a;
+	const pixel *t_b0, *t_b1;
+	t_a = a;
+	t_b0 = b0;
+	t_b1 = b1;
+	#endif
+
 	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
 	v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
 	v8i16 res0, res1, res2, res3;
-	for(i = 1; i >= 0; i--)
+	for(int i = 1; i >= 0; i--)
 	{
 		tmp0 = __builtin_lsx_vbld(0, b0);
 		tmp1 = __builtin_lsx_vbld(0, b0 + sstride0);
@@ -1122,6 +2789,24 @@ void sub_ps_8x8(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, 
 	}
 	abort();		
  	*/		
+	#ifdef DEBUG
+	for (int y = 0; y < 8; y++)
+    	{
+        	for (int x = 0; x < 8; x++)
+		{
+            		if (t_a[x] != (int16_t)(t_b0[x] - t_b1[x]))
+			{
+				printf("sub_ps_8x8 test fail\n");
+				return;
+			}
+		}	
+        	t_b0 += sstride0;
+        	t_b1 += sstride1;
+        	t_a += dstride;
+    	}
+	printf("sub_ps_8x8 test success\n");
+	#endif
+
 }
 
 void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
@@ -1135,6 +2820,15 @@ void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, 
 		printf("\n");	
 	}
 	abort();*/	
+	
+	#ifdef DEBUG
+	int16_t* t_a;
+	const pixel *t_b0, *t_b1;
+	t_a = a;
+	t_b0 = b0;
+	t_b1 = b1;
+	#endif
+
 	v8u16 tmp0, tmp1, tmp2, tmp3;
 	v8i16 rest0, rest1;
 	//v2i64 i0, i1, i2, i3;	
@@ -1153,6 +2847,24 @@ void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, 
 		printf("\n");	
 	}
 	abort();*/	
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 4; y++)
+    	{
+        	for (int x = 0; x < 4; x++)
+		{
+            		if (t_a[x] != (int16_t)(t_b0[x] - t_b1[x]))
+			{
+				printf("sub_ps_4x4 test fail\n");
+				return;
+			}
+		}	
+        	t_b0 += sstride0;
+        	t_b1 += sstride1;
+        	t_a += dstride;
+    	}
+	printf("sub_ps_4x4 test success\n");
+	#endif
 }
 
 void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
@@ -1166,13 +2878,21 @@ void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		printf("\n\n");	
 	}
 	abort();	*/
-	v2i64 tmp0, tmp1, tmp2, tmp3;
-	v8u16 tmp4, tmp5, tmp6, tmp7; 
-	v2i64 tmp8, tmp9, tmp10, tmp11;
-	v8u16 tmp12, tmp13, tmp14, tmp15;
-	for (int i = 4; i > 0; i--)
+	#ifdef DEBUG
+	int16_t* t_a;
+	const pixel *t_b0, *t_b1;
+	t_a = a;
+	t_b0 = b0;
+	t_b1 = b1;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3; //mid0, mid1, mid2, mid3;¾
+	v8u16 tmp4, tmp5, tmp6, tmp7; //mid4, mid5, mid6, mid7; 
+	v2i64 tmp8, tmp9, tmp10, tmp11; //mid8, mid9, mid10, mid11;
+	v8u16 tmp12, tmp13, tmp14, tmp15; //mid12, mid13, mid14, mid15;
+	for (int i = 8; i > 0; i--)
 	{
-		LD4(b0, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
+		//LD4(b0, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
 		/*printf("%x\t", ((v4i32)tmp0)[0]);	
 		printf("%x\t", ((v4i32)tmp0)[1]);	
 		printf("%x\t", ((v4i32)tmp1)[0]);
@@ -1181,8 +2901,21 @@ void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		printf("%x\t", ((v4i32)tmp2)[1]);
 		printf("%x\t", ((v4i32)tmp3)[0]);
 		printf("%x\t", ((v4i32)tmp3)[1]);*/
-		LD4(b1, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
+		//LD4(b1, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
 		
+		//LD4(b0 + 8, sstride0, &mid0, &mid1, &mid2, &mid3);
+		//LD4(b1 + 8, sstride1, &mid8, &mid9, &mid10, &mid11);
+
+		LD2_H(b0, &tmp0, &tmp1);
+		LD2_H(b0 + sstride0, &tmp2, &tmp3);
+		LD2_H(b1, &tmp8, &tmp9);
+		LD2_H(b1 + sstride1, &tmp10, &tmp11);
+
+		/*LD2_H(b0 + 2 * sstride0, &mid0, &mid1);
+		LD2_H(b0 + 3 * sstride0, &mid2, &mid3);
+		LD2_H(b1 + 2 * sstride1, &mid8, &mid9);
+		LD2_H(b1 + 3 * sstride1, &mid10, &mid11);
+		*/	
 		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
 		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
 		tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
@@ -1192,11 +2925,26 @@ void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
 		tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
 		
+		/*mid4 = __builtin_lsx_vextb_u_h((v16i8)mid0);
+		mid5 = __builtin_lsx_vextb_u_h((v16i8)mid1);
+		mid6 = __builtin_lsx_vextb_u_h((v16i8)mid2);
+		mid7 = __builtin_lsx_vextb_u_h((v16i8)mid3);
+		mid12 = __builtin_lsx_vextb_u_h((v16i8)mid8);
+		mid13 = __builtin_lsx_vextb_u_h((v16i8)mid9);
+		mid14 = __builtin_lsx_vextb_u_h((v16i8)mid10);
+		mid15 = __builtin_lsx_vextb_u_h((v16i8)mid11);
+		*/
 		tmp0 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
-		tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
+		tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);
 		tmp2 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
 		tmp3 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
 		
+		/*
+		mid0 = (v2i64)__builtin_msa_subv_h((v8i16)mid4, (v8i16)mid12);
+		mid1 = (v2i64)__builtin_msa_subv_h((v8i16)mid5, (v8i16)mid13);
+		mid2 = (v2i64)__builtin_msa_subv_h((v8i16)mid6, (v8i16)mid14);
+		mid3 = (v2i64)__builtin_msa_subv_h((v8i16)mid7, (v8i16)mid15);
+		*/
 		/*printf("\n\n\n");
 		printf("%x\n", ((v4i32)tmp0)[0]);
 		printf("%x\n", ((v4i32)tmp0)[1]);
@@ -1207,30 +2955,17 @@ void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		printf("%x\n", ((v4i32)tmp3)[0]);
 		printf("%x\n", ((v4i32)tmp3)[1]);*/
 				
-		ST_V4(tmp0, tmp1, tmp2, tmp3, (pixel *)a, dstride * 2);
-
-		LD4(b0 + 8, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
-		LD4(b1 + 8, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
+		//ST_V4(tmp0, tmp1, tmp2, tmp3, (pixel *)a, dstride * 2);
+		//ST_V4(mid0, mid1, mid2, mid3, (pixel *)(a + 8), dstride * 2);
 		
-		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
-		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
-		tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
-		tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
-		tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
-		tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
-		tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
-		tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
-		
-		tmp8 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
-		tmp9 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
-		tmp10 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
-		tmp11 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
-		
-		ST_V4(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + 8), dstride * 2);		
-		
-		b0 = b0 + 4 * sstride0;
-		b1 = b1 + 4 * sstride1;
-		a = a + 4 * dstride;
+		ST_V2_H(tmp0, tmp1, (pixel *)a);
+		ST_V2_H(tmp2, tmp3, (pixel *)(a + dstride));
+		//ST_V2_H(mid0, mid1, (pixel *)(a + 2 * dstride));
+		//ST_V2_H(mid2, mid3, (pixel *)(a + 3 * dstride));
+				
+		b0 += 2 * sstride0;
+		b1 += 2 * sstride1;
+		a += 2 * dstride;
 	}
 
        /*printf("\n\n\n");
@@ -1243,22 +2978,46 @@ void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		printf("\n\n");	
 	}
 	abort();*/
-
+	#ifdef DEBUG
+	for (int y = 0; y < 16; y++)
+    	{
+        	for (int x = 0; x < 16; x++)
+		{
+            		if (t_a[x] != (int16_t)(t_b0[x] - t_b1[x]))
+			{
+				printf("sub_ps_16x16 test fail\n");
+				return;
+			}
+		}	
+        	t_b0 += sstride0;
+        	t_b1 += sstride1;
+        	t_a += dstride;
+    	}
+	printf("sub_ps_16x16 test success\n");
+	#endif
 }
 
 void sub_ps_32x32(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-	v2i64 tmp0, tmp1, tmp2, tmp3;
-	v8u16 tmp4, tmp5, tmp6, tmp7; 
-	v2i64 tmp8, tmp9, tmp10, tmp11;
-	v8u16 tmp12, tmp13, tmp14, tmp15;
+	#ifdef DEBUG
+	int16_t* t_a;
+	const pixel *t_b0, *t_b1;
+	t_a = a;
+	t_b0 = b0;
+	t_b1 = b1;
+	#endif
+	
+	v2i64 tmp0, tmp1, tmp2, tmp3, mid0, mid1, mid2, mid3;
+	v8u16 tmp4, tmp5, tmp6, tmp7, mid4, mid5, mid6, mid7; 
+	v2i64 tmp8, tmp9, tmp10, tmp11, mid8, mid9, mid10, mid11;
+	v8u16 tmp12, tmp13, tmp14, tmp15, mid12, mid13, mid14, mid15;
 	for (int i = 16; i > 0; i--)
 	{
-		//LD4(b0 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
-		//LD4(b1 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
-	
 		LD4_H(b0, &tmp0, &tmp1, &tmp2, &tmp3);
 		LD4_H(b1, &tmp8, &tmp9, &tmp10, &tmp11);
+		
+		LD4_H(b0 + sstride0, &mid0, &mid1, &mid2, &mid3);
+		LD4_H(b1 + sstride1, &mid8, &mid9, &mid10, &mid11);
 
 		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
 		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
@@ -1268,42 +3027,32 @@ void sub_ps_32x32(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
 		tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
 		tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
-			
+		
+		mid4 = __builtin_lsx_vextb_u_h((v16i8)mid0);
+		mid5 = __builtin_lsx_vextb_u_h((v16i8)mid1);
+		mid6 = __builtin_lsx_vextb_u_h((v16i8)mid2);
+		mid7 = __builtin_lsx_vextb_u_h((v16i8)mid3);
+		mid12 = __builtin_lsx_vextb_u_h((v16i8)mid8);
+		mid13 = __builtin_lsx_vextb_u_h((v16i8)mid9);
+		mid14 = __builtin_lsx_vextb_u_h((v16i8)mid10);
+		mid15 = __builtin_lsx_vextb_u_h((v16i8)mid11);
+	
 		tmp0 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
-		tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
+		tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);
 		tmp2 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
 		tmp3 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
-			
-		//ST_V4(tmp0, tmp1, tmp2, tmp3, (pixel *)(a + y * 16), dstride * 2);
-			
-		ST_V4_H(tmp0, tmp1, tmp2, tmp3, (pixel *)a);
-
-		//LD4(b0 + 8 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
-		//LD4(b1 + 8 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
-			
-		LD4_H(b0 + sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
-		LD4_H(b1 + sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
-
-		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
-		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
-		tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
-		tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
-		tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
-		tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
-		tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
-		tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
-			
-		tmp8 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
-		tmp9 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
-		tmp10 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
-		tmp11 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
-			
-		//ST_V4(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + 8 + y * 16), dstride * 2);		
 		
-		ST_V4_H(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + dstride));
+		mid0 = (v2i64)__builtin_msa_subv_h((v8i16)mid4, (v8i16)mid12);
+		mid1 = (v2i64)__builtin_msa_subv_h((v8i16)mid5, (v8i16)mid13);
+		mid2 = (v2i64)__builtin_msa_subv_h((v8i16)mid6, (v8i16)mid14);
+		mid3 = (v2i64)__builtin_msa_subv_h((v8i16)mid7, (v8i16)mid15);
+		
+		ST_V4_H(tmp0, tmp1, tmp2, tmp3, (pixel *)a);
+		ST_V4_H(mid0, mid1, mid2, mid3, (pixel *)(a + dstride));
+		
 		b0 = b0 + 2 * sstride0;
 		b1 = b1 + 2 * sstride1;
-		a = a + 2 * dstride;
+		a = a + 2 * dstride;	
 	}
 	/*printf("\n\n\n");
 	a = a - 32 * dstride;
@@ -1314,38 +3063,52 @@ void sub_ps_32x32(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		a = a + dstride;
 		printf("\n\n");	
 	}
-	abort();*/		
+	abort();*/	
+	#ifdef DEBUG
+	for (int y = 0; y < 32; y++)
+    	{
+        	for (int x = 0; x < 32; x++)
+		{
+            		if (t_a[x] != (int16_t)(t_b0[x] - t_b1[x]))
+			{
+				printf("sub_ps_32x32 test fail\n");
+				return;
+			}
+		}	
+        	t_b0 += sstride0;
+        	t_b1 += sstride1;
+        	t_a += dstride;
+    	}
+	printf("sub_ps_32x32 test success\n");
+	#endif
+	
 }
 
 void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-	/*
-	for (int n = 0; n < 64; n++)
-	{	
-		for (int m = 0; m < 64; m++)
-			printf("%x\t", b1[m]);
-		b1 = b1 + sstride1;
-		printf("\n\n");	
-	}
-	abort();
-	*/
-	
-	v2i64 tmp0, tmp1, tmp2, tmp3;
-	v8u16 tmp4, tmp5, tmp6, tmp7; 
-	v2i64 tmp8, tmp9, tmp10, tmp11;
-	v8u16 tmp12, tmp13, tmp14, tmp15;
+	#ifdef DEBUG
+	int16_t* t_a;
+	const pixel *t_b0, *t_b1;
+	t_a = a;
+	t_b0 = b0;
+	t_b1 = b1;
+	#endif
+			
+	v2i64 tmp0, tmp1, tmp2, tmp3, mid0, mid1, mid2, mid3;
+	v8u16 tmp4, tmp5, tmp6, tmp7, mid4, mid5, mid6, mid7; 
+	v2i64 tmp8, tmp9, tmp10, tmp11, mid8, mid9, mid10, mid11;
+	v8u16 tmp12, tmp13, tmp14, tmp15, mid12, mid13, mid14, mid15;
 	for (int i = 64; i > 0; i--)
 	{
-		//LD4(b0 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
-		//LD4(b1 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
-		
 		LD4_H(b0, &tmp0, &tmp1, &tmp2, &tmp3);
 		LD4_H(b1, &tmp8, &tmp9, &tmp10, &tmp11);
 		
 		//printf("%lx\n", tmp8[0]);
 		//printf("%lx\n", tmp9[1]);
 		//abort();	
-		
+		LD4_H(b0 + 32, &mid0, &mid1, &mid2, &mid3);
+		LD4_H(b1 + 32, &mid8, &mid9, &mid10, &mid11);
+
 		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
 		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
 		tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
@@ -1354,45 +3117,37 @@ void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
 		tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
 		tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
-		
+	
+		mid4 = __builtin_lsx_vextb_u_h((v16i8)mid0);
+		mid5 = __builtin_lsx_vextb_u_h((v16i8)mid1);
+		mid6 = __builtin_lsx_vextb_u_h((v16i8)mid2);
+		mid7 = __builtin_lsx_vextb_u_h((v16i8)mid3);
+		mid12 = __builtin_lsx_vextb_u_h((v16i8)mid8);
+		mid13 = __builtin_lsx_vextb_u_h((v16i8)mid9);
+		mid14 = __builtin_lsx_vextb_u_h((v16i8)mid10);
+		mid15 = __builtin_lsx_vextb_u_h((v16i8)mid11);
+
 		tmp0 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
-		tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
+		tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);
 		tmp2 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
 		tmp3 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
-		
+	
+		mid0 = (v2i64)__builtin_msa_subv_h((v8i16)mid4, (v8i16)mid12);
+		mid1 = (v2i64)__builtin_msa_subv_h((v8i16)mid5, (v8i16)mid13);
+		mid2 = (v2i64)__builtin_msa_subv_h((v8i16)mid6, (v8i16)mid14);
+		mid3 = (v2i64)__builtin_msa_subv_h((v8i16)mid7, (v8i16)mid15);
+
 		//printf("%lx\n", tmp0[0]);
 		//printf("%lx\n", tmp0[1]);
 		//abort();		
 
 		ST_V4_H(tmp0, tmp1, tmp2, tmp3, (pixel *)a);
-		
-		//LD4(b0 + 8 + y * 16, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);
-		//LD4(b1 + 8 + y * 16, sstride1, &tmp8, &tmp9, &tmp10, &tmp11);
-			
-		LD4_H(b0 + 32, &tmp0, &tmp1, &tmp2, &tmp3);
-		LD4_H(b1 + 32, &tmp8, &tmp9, &tmp10, &tmp11);
+		ST_V4_H(mid0, mid1, mid2, mid3, (pixel *)(a + 32));
 
-		tmp4 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
-		tmp5 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
-		tmp6 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
-		tmp7 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
-		tmp12 = __builtin_lsx_vextb_u_h((v16i8)tmp8);
-		tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
-		tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
-		tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
-		
-		tmp8 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
-		tmp9 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);	
-		tmp10 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
-		tmp11 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
-			
-		//ST_V4(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + 8 + y * 16), dstride * 2);		
-		
-		ST_V4_H(tmp8, tmp9, tmp10, tmp11, (pixel *)(a + 32));
-		
 		b0 = b0 + sstride0;
 		b1 = b1 + sstride1;
 		a = a + dstride;
+		
 	}
 	/*printf("\n\n\n");
 	a = a - 64 * dstride;
@@ -1404,6 +3159,23 @@ void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 		printf("\n\n");	
 	}
 	abort();*/		
+	#ifdef DEBUG
+	for (int y = 0; y < 64; y++)
+    	{
+        	for (int x = 0; x < 64; x++)
+		{
+            		if (t_a[x] != (int16_t)(t_b0[x] - t_b1[x]))
+			{
+				printf("sub_ps_64x64 test fail\n");
+				return;
+			}
+		}	
+        	t_b0 += sstride0;
+        	t_b1 += sstride1;
+        	t_a += dstride;
+    	}
+	printf("sub_ps_64x64 test success\n");
+	#endif
 }
 
 
@@ -1666,7 +3438,7 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.cu[BLOCK_ ## W ## x ## H].ssd_s         = pixel_ssd_s_c<W>; \
     p.cu[BLOCK_ ## W ## x ## H].var           = pixel_var<W>; \
     p.cu[BLOCK_ ## W ## x ## H].calcresidual  = getResidual<W>; \
-    p.cu[BLOCK_ ## W ## x ## H].sse_pp        = sse<W, H, pixel, pixel>; \
+    p.cu[BLOCK_ ## W ## x ## H].sse_pp        = sse_pp_a<W, H>; \
     p.cu[BLOCK_ ## W ## x ## H].sse_ss        = sse<W, H, int16_t, int16_t>;
 
     LUMA_PU(4, 4);
@@ -1818,7 +3590,7 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[X265_CSP_I420].pu[CHROMA_420_8x32].satd  = satd8<8, 32>;
 
 #define CHROMA_CU_420(W, H) \
-    p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].sse_pp  = sse<W, H, pixel, pixel>; \
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].sse_pp  = sse_pp_a<W, H>; \
     p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].copy_sp = blockcopy_sp_c<W, H>; \
     p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].copy_ps = blockcopy_ps_c<W, H>; \
     p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].copy_ss = blockcopy_ss_c<W, H>; \
@@ -1895,7 +3667,7 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[X265_CSP_I422].pu[CHROMA_422_8x64].satd  = satd8<8, 64>;
 
 #define CHROMA_CU_422(W, H) \
-    p.chroma[X265_CSP_I422].cu[BLOCK_422_ ## W ## x ## H].sse_pp  = sse<W, H, pixel, pixel>; \
+    p.chroma[X265_CSP_I422].cu[BLOCK_422_ ## W ## x ## H].sse_pp  = sse_pp_a<W, H>; \
     p.chroma[X265_CSP_I422].cu[BLOCK_422_ ## W ## x ## H].copy_sp = blockcopy_sp_c<W, H>; \
     p.chroma[X265_CSP_I422].cu[BLOCK_422_ ## W ## x ## H].copy_ps = blockcopy_ps_c<W, H>; \
     p.chroma[X265_CSP_I422].cu[BLOCK_422_ ## W ## x ## H].copy_ss = blockcopy_ss_c<W, H>; \
