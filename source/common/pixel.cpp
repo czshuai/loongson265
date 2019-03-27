@@ -2741,42 +2741,71 @@ void sub_ps_8x8(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, 
 	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
 	v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
 	v8i16 res0, res1, res2, res3;
-	for(int i = 1; i >= 0; i--)
-	{
-		tmp0 = __builtin_lsx_vbld(0, b0);
-		tmp1 = __builtin_lsx_vbld(0, b0 + sstride0);
-		tmp2 = __builtin_lsx_vbld(0, b0 + 2 * sstride0);
-		tmp3 = __builtin_lsx_vbld(0, b0 + 3 * sstride0);
 		
-		mid0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
-		mid1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
-		mid2 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
-		mid3 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
+	tmp0 = __builtin_lsx_vbld(0, b0);
+	tmp1 = __builtin_lsx_vbld(0, b0 + sstride0);
+	tmp2 = __builtin_lsx_vbld(0, b0 + 2 * sstride0);
+	tmp3 = __builtin_lsx_vbld(0, b0 + 3 * sstride0);
+		
+	mid0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+	mid1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+	mid2 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
+	mid3 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
 
-		tmp4 = __builtin_lsx_vbld(0, b1);
-		tmp5 = __builtin_lsx_vbld(0, b1 + sstride1);
-		tmp6 = __builtin_lsx_vbld(0, b1 + 2 * sstride1);
-		tmp7 = __builtin_lsx_vbld(0, b1 + 3 * sstride1);
+	tmp4 = __builtin_lsx_vbld(0, b1);
+	tmp5 = __builtin_lsx_vbld(0, b1 + sstride1);
+	tmp6 = __builtin_lsx_vbld(0, b1 + 2 * sstride1);
+	tmp7 = __builtin_lsx_vbld(0, b1 + 3 * sstride1);
 		
-		mid4 = __builtin_lsx_vextb_u_h((v16i8)tmp4);
-		mid5 = __builtin_lsx_vextb_u_h((v16i8)tmp5);
-		mid6 = __builtin_lsx_vextb_u_h((v16i8)tmp6);
-		mid7 = __builtin_lsx_vextb_u_h((v16i8)tmp7);	
+	mid4 = __builtin_lsx_vextb_u_h((v16i8)tmp4);
+	mid5 = __builtin_lsx_vextb_u_h((v16i8)tmp5);
+	mid6 = __builtin_lsx_vextb_u_h((v16i8)tmp6);
+	mid7 = __builtin_lsx_vextb_u_h((v16i8)tmp7);	
 	
-		res0 = __builtin_msa_subv_h((v8i16)mid0, (v8i16)mid4);
-		res1 = __builtin_msa_subv_h((v8i16)mid1, (v8i16)mid5);
-		res2 = __builtin_msa_subv_h((v8i16)mid2, (v8i16)mid6);
-		res3 = __builtin_msa_subv_h((v8i16)mid3, (v8i16)mid7);
+	res0 = __builtin_msa_subv_h((v8i16)mid0, (v8i16)mid4);
+	res1 = __builtin_msa_subv_h((v8i16)mid1, (v8i16)mid5);
+	res2 = __builtin_msa_subv_h((v8i16)mid2, (v8i16)mid6);
+	res3 = __builtin_msa_subv_h((v8i16)mid3, (v8i16)mid7);
 
-		__builtin_msa_st_d((v2i64)res0, a, 0);
-		__builtin_msa_st_d((v2i64)res1, a + dstride, 0);
-		__builtin_msa_st_d((v2i64)res2, a + 2 * dstride, 0);	
-		__builtin_msa_st_d((v2i64)res3, a + 3 * dstride, 0);
+	__builtin_msa_st_d((v2i64)res0, a, 0);
+	__builtin_msa_st_d((v2i64)res1, a + dstride, 0);
+	__builtin_msa_st_d((v2i64)res2, a + 2 * dstride, 0);	
+	__builtin_msa_st_d((v2i64)res3, a + 3 * dstride, 0);
 
-		b0 = b0 + 4 * sstride0;
-		b1 = b1 + 4 * sstride1;
-		a = a + 4 * dstride;						 
-        }
+	b0 += 4 * sstride0;
+	b1 += 4 * sstride1;
+	a += 4 * dstride;						 
+       
+	tmp0 = __builtin_lsx_vbld(0, b0);
+	tmp1 = __builtin_lsx_vbld(0, b0 + sstride0);
+	tmp2 = __builtin_lsx_vbld(0, b0 + 2 * sstride0);
+	tmp3 = __builtin_lsx_vbld(0, b0 + 3 * sstride0);
+		
+	mid0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+	mid1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+	mid2 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
+	mid3 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
+
+	tmp4 = __builtin_lsx_vbld(0, b1);
+	tmp5 = __builtin_lsx_vbld(0, b1 + sstride1);
+	tmp6 = __builtin_lsx_vbld(0, b1 + 2 * sstride1);
+	tmp7 = __builtin_lsx_vbld(0, b1 + 3 * sstride1);
+		
+	mid4 = __builtin_lsx_vextb_u_h((v16i8)tmp4);
+	mid5 = __builtin_lsx_vextb_u_h((v16i8)tmp5);
+	mid6 = __builtin_lsx_vextb_u_h((v16i8)tmp6);
+	mid7 = __builtin_lsx_vextb_u_h((v16i8)tmp7);	
+	
+	res0 = __builtin_msa_subv_h((v8i16)mid0, (v8i16)mid4);
+	res1 = __builtin_msa_subv_h((v8i16)mid1, (v8i16)mid5);
+	res2 = __builtin_msa_subv_h((v8i16)mid2, (v8i16)mid6);
+	res3 = __builtin_msa_subv_h((v8i16)mid3, (v8i16)mid7);
+
+	__builtin_msa_st_d((v2i64)res0, a, 0);
+	__builtin_msa_st_d((v2i64)res1, a + dstride, 0);
+	__builtin_msa_st_d((v2i64)res2, a + 2 * dstride, 0);	
+	__builtin_msa_st_d((v2i64)res3, a + 3 * dstride, 0);
+
 	/*Debug
  	a = a - 8 * dstride;
 	printf("\n\n\n");
@@ -2806,7 +2835,6 @@ void sub_ps_8x8(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, 
     	}
 	printf("sub_ps_8x8 test success\n");
 	#endif
-
 }
 
 void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)

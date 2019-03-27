@@ -22977,48 +22977,76 @@ void sub_ps_8x8(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, 
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
  v8i16 res0, res1, res2, res3;
- for(int i = 1; i >= 0; i--)
- {
-  tmp0 = __builtin_lsx_vbld(0, b0);
-  tmp1 = __builtin_lsx_vbld(0, b0 + sstride0);
-  tmp2 = __builtin_lsx_vbld(0, b0 + 2 * sstride0);
-  tmp3 = __builtin_lsx_vbld(0, b0 + 3 * sstride0);
 
-  mid0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
-  mid1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
-  mid2 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
-  mid3 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
+ tmp0 = __builtin_lsx_vbld(0, b0);
+ tmp1 = __builtin_lsx_vbld(0, b0 + sstride0);
+ tmp2 = __builtin_lsx_vbld(0, b0 + 2 * sstride0);
+ tmp3 = __builtin_lsx_vbld(0, b0 + 3 * sstride0);
 
-  tmp4 = __builtin_lsx_vbld(0, b1);
-  tmp5 = __builtin_lsx_vbld(0, b1 + sstride1);
-  tmp6 = __builtin_lsx_vbld(0, b1 + 2 * sstride1);
-  tmp7 = __builtin_lsx_vbld(0, b1 + 3 * sstride1);
+ mid0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+ mid1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+ mid2 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
+ mid3 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
 
-  mid4 = __builtin_lsx_vextb_u_h((v16i8)tmp4);
-  mid5 = __builtin_lsx_vextb_u_h((v16i8)tmp5);
-  mid6 = __builtin_lsx_vextb_u_h((v16i8)tmp6);
-  mid7 = __builtin_lsx_vextb_u_h((v16i8)tmp7);
+ tmp4 = __builtin_lsx_vbld(0, b1);
+ tmp5 = __builtin_lsx_vbld(0, b1 + sstride1);
+ tmp6 = __builtin_lsx_vbld(0, b1 + 2 * sstride1);
+ tmp7 = __builtin_lsx_vbld(0, b1 + 3 * sstride1);
 
-  res0 = __builtin_msa_subv_h((v8i16)mid0, (v8i16)mid4);
-  res1 = __builtin_msa_subv_h((v8i16)mid1, (v8i16)mid5);
-  res2 = __builtin_msa_subv_h((v8i16)mid2, (v8i16)mid6);
-  res3 = __builtin_msa_subv_h((v8i16)mid3, (v8i16)mid7);
+ mid4 = __builtin_lsx_vextb_u_h((v16i8)tmp4);
+ mid5 = __builtin_lsx_vextb_u_h((v16i8)tmp5);
+ mid6 = __builtin_lsx_vextb_u_h((v16i8)tmp6);
+ mid7 = __builtin_lsx_vextb_u_h((v16i8)tmp7);
 
-  __builtin_msa_st_d((v2i64)res0, a, 0);
-  __builtin_msa_st_d((v2i64)res1, a + dstride, 0);
-  __builtin_msa_st_d((v2i64)res2, a + 2 * dstride, 0);
-  __builtin_msa_st_d((v2i64)res3, a + 3 * dstride, 0);
+ res0 = __builtin_msa_subv_h((v8i16)mid0, (v8i16)mid4);
+ res1 = __builtin_msa_subv_h((v8i16)mid1, (v8i16)mid5);
+ res2 = __builtin_msa_subv_h((v8i16)mid2, (v8i16)mid6);
+ res3 = __builtin_msa_subv_h((v8i16)mid3, (v8i16)mid7);
 
-  b0 = b0 + 4 * sstride0;
-  b1 = b1 + 4 * sstride1;
-  a = a + 4 * dstride;
-        }
-# 2810 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+ __builtin_msa_st_d((v2i64)res0, a, 0);
+ __builtin_msa_st_d((v2i64)res1, a + dstride, 0);
+ __builtin_msa_st_d((v2i64)res2, a + 2 * dstride, 0);
+ __builtin_msa_st_d((v2i64)res3, a + 3 * dstride, 0);
+
+ b0 += 4 * sstride0;
+ b1 += 4 * sstride1;
+ a += 4 * dstride;
+
+ tmp0 = __builtin_lsx_vbld(0, b0);
+ tmp1 = __builtin_lsx_vbld(0, b0 + sstride0);
+ tmp2 = __builtin_lsx_vbld(0, b0 + 2 * sstride0);
+ tmp3 = __builtin_lsx_vbld(0, b0 + 3 * sstride0);
+
+ mid0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+ mid1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+ mid2 = __builtin_lsx_vextb_u_h((v16i8)tmp2);
+ mid3 = __builtin_lsx_vextb_u_h((v16i8)tmp3);
+
+ tmp4 = __builtin_lsx_vbld(0, b1);
+ tmp5 = __builtin_lsx_vbld(0, b1 + sstride1);
+ tmp6 = __builtin_lsx_vbld(0, b1 + 2 * sstride1);
+ tmp7 = __builtin_lsx_vbld(0, b1 + 3 * sstride1);
+
+ mid4 = __builtin_lsx_vextb_u_h((v16i8)tmp4);
+ mid5 = __builtin_lsx_vextb_u_h((v16i8)tmp5);
+ mid6 = __builtin_lsx_vextb_u_h((v16i8)tmp6);
+ mid7 = __builtin_lsx_vextb_u_h((v16i8)tmp7);
+
+ res0 = __builtin_msa_subv_h((v8i16)mid0, (v8i16)mid4);
+ res1 = __builtin_msa_subv_h((v8i16)mid1, (v8i16)mid5);
+ res2 = __builtin_msa_subv_h((v8i16)mid2, (v8i16)mid6);
+ res3 = __builtin_msa_subv_h((v8i16)mid3, (v8i16)mid7);
+
+ __builtin_msa_st_d((v2i64)res0, a, 0);
+ __builtin_msa_st_d((v2i64)res1, a + dstride, 0);
+ __builtin_msa_st_d((v2i64)res2, a + 2 * dstride, 0);
+ __builtin_msa_st_d((v2i64)res3, a + 3 * dstride, 0);
+# 2838 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
 }
 
 void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-# 2832 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 2860 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
  v8u16 tmp0, tmp1, tmp2, tmp3;
  v8i16 rest0, rest1;
 
@@ -23028,19 +23056,19 @@ void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, 
  rest0 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp2);
  rest1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp3);
  S_4x4_H(rest0, rest1, a, dstride);
-# 2868 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 2896 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
 }
 
 void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-# 2889 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 2917 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
  v2i64 tmp0, tmp1, tmp2, tmp3;
  v8u16 tmp4, tmp5, tmp6, tmp7;
  v2i64 tmp8, tmp9, tmp10, tmp11;
  v8u16 tmp12, tmp13, tmp14, tmp15;
  for (int i = 8; i > 0; i--)
  {
-# 2909 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 2937 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
   LD2_H(b0, &tmp0, &tmp1);
   LD2_H(b0 + sstride0, &tmp2, &tmp3);
   LD2_H(b1, &tmp8, &tmp9);
@@ -23059,12 +23087,12 @@ void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
   tmp13 = __builtin_lsx_vextb_u_h((v16i8)tmp9);
   tmp14 = __builtin_lsx_vextb_u_h((v16i8)tmp10);
   tmp15 = __builtin_lsx_vextb_u_h((v16i8)tmp11);
-# 2937 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 2965 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
   tmp0 = (v2i64)__builtin_msa_subv_h((v8i16)tmp4, (v8i16)tmp12);
   tmp1 = (v2i64)__builtin_msa_subv_h((v8i16)tmp5, (v8i16)tmp13);
   tmp2 = (v2i64)__builtin_msa_subv_h((v8i16)tmp6, (v8i16)tmp14);
   tmp3 = (v2i64)__builtin_msa_subv_h((v8i16)tmp7, (v8i16)tmp15);
-# 2961 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 2989 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
   ST_V2_H(tmp0, tmp1, (pixel *)a);
   ST_V2_H(tmp2, tmp3, (pixel *)(a + dstride));
 
@@ -23074,12 +23102,12 @@ void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
   b1 += 2 * sstride1;
   a += 2 * dstride;
  }
-# 2998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3026 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
 }
 
 void sub_ps_32x32(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-# 3010 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3038 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
  v2i64 tmp0, tmp1, tmp2, tmp3, mid0, mid1, mid2, mid3;
  v8u16 tmp4, tmp5, tmp6, tmp7, mid4, mid5, mid6, mid7;
  v2i64 tmp8, tmp9, tmp10, tmp11, mid8, mid9, mid10, mid11;
@@ -23127,12 +23155,12 @@ void sub_ps_32x32(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
   b1 = b1 + 2 * sstride1;
   a = a + 2 * dstride;
  }
-# 3085 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3113 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
 }
 
 void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-# 3097 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3125 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
  v2i64 tmp0, tmp1, tmp2, tmp3, mid0, mid1, mid2, mid3;
  v8u16 tmp4, tmp5, tmp6, tmp7, mid4, mid5, mid6, mid7;
  v2i64 tmp8, tmp9, tmp10, tmp11, mid8, mid9, mid10, mid11;
@@ -23188,7 +23216,7 @@ void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
   a = a + dstride;
 
  }
-# 3179 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3207 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
 }
 
 
@@ -23233,7 +23261,7 @@ void pixel_sub_ps_c(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* 
  }
     else
     {
-# 3237 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3265 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
      for (int y = 0; y < by; y++)
      {
          for (int x = 0; x < bx; x++)
@@ -23331,7 +23359,7 @@ static void estimateCUPropagateCost(int* dst, const uint16_t* propagateIn, const
         double propagateIntra = intraCost * invQscales[i];
         double propagateAmount = (double)propagateIn[i] + propagateIntra * fps;
         double propagateNum = (double)(intraCost - interCost);
-# 3344 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3372 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
         double propagateDenom = (double)intraCost;
         dst[i] = (int)(propagateAmount * propagateNum / propagateDenom + 0.5);
 
@@ -23354,7 +23382,7 @@ static void cuTreeFix8Unpack(double *dst, uint16_t *src, int count)
         dst[i] = (double)(qpFix8) / 256.0;
     }
 }
-# 3390 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3418 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
 }
 
 namespace x265 {
@@ -23382,7 +23410,7 @@ void extendPicBorder(pixel* pic, intptr_t stride, int width, int height, int mar
 
 void setupPixelPrimitives_c(EncoderPrimitives &p)
 {
-# 3444 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3472 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
     p.pu[LUMA_4x4].copy_pp = blockcopy_pp_c<4, 4>; p.pu[LUMA_4x4].addAvg = addAvg<4, 4>; p.pu[LUMA_4x4].sad = sad<4, 4>; p.pu[LUMA_4x4].sad_x3 = sad_x3<4, 4>; p.pu[LUMA_4x4].sad_x4 = sad_x4<4, 4>; p.pu[LUMA_4x4].pixelavg_pp = pixelavg_pp<4, 4>;;
     p.pu[LUMA_8x8].copy_pp = blockcopy_pp_c<8, 8>; p.pu[LUMA_8x8].addAvg = addAvg<8, 8>; p.pu[LUMA_8x8].sad = sad<8, 8>; p.pu[LUMA_8x8].sad_x3 = sad_x3<8, 8>; p.pu[LUMA_8x8].sad_x4 = sad_x4<8, 8>; p.pu[LUMA_8x8].pixelavg_pp = pixelavg_pp<8, 8>;;
     p.pu[LUMA_16x16].copy_pp = blockcopy_pp_c<16, 16>; p.pu[LUMA_16x16].addAvg = addAvg<16, 16>; p.pu[LUMA_16x16].sad = sad<16, 16>; p.pu[LUMA_16x16].sad_x3 = sad_x3<16, 16>; p.pu[LUMA_16x16].sad_x4 = sad_x4<16, 16>; p.pu[LUMA_16x16].pixelavg_pp = pixelavg_pp<16, 16>;;
@@ -23504,9 +23532,9 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[1].pu[CHROMA_420_8x32].addAvg = addAvg<8, 32>; p.chroma[1].pu[CHROMA_420_8x32].copy_pp = blockcopy_pp_c<8, 32>;;
 
     p.chroma[1].pu[CHROMA_420_2x2].satd = 
-# 3564 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3592 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3564 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3592 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_4x4].satd = satd_4x4;
     p.chroma[1].pu[CHROMA_420_8x8].satd = satd8<8, 8>;
@@ -23514,14 +23542,14 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[1].pu[CHROMA_420_32x32].satd = satd8<32, 32>;
 
     p.chroma[1].pu[CHROMA_420_4x2].satd = 
-# 3570 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3598 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3570 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3598 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_2x4].satd = 
-# 3571 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3599 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3571 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3599 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_8x4].satd = satd_8x4;
     p.chroma[1].pu[CHROMA_420_4x8].satd = satd4<4, 8>;
@@ -23531,24 +23559,24 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[1].pu[CHROMA_420_16x32].satd = satd8<16, 32>;
 
     p.chroma[1].pu[CHROMA_420_8x6].satd = 
-# 3579 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3607 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3579 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3607 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_6x8].satd = 
-# 3580 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3608 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3580 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3608 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_8x2].satd = 
-# 3581 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3609 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3581 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3609 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_2x8].satd = 
-# 3582 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3610 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3582 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3610 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_16x12].satd = satd4<16, 12>;
     p.chroma[1].pu[CHROMA_420_12x16].satd = satd4<12, 16>;
@@ -23558,7 +23586,7 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[1].pu[CHROMA_420_24x32].satd = satd8<24, 32>;
     p.chroma[1].pu[CHROMA_420_32x8].satd = satd8<32, 8>;
     p.chroma[1].pu[CHROMA_420_8x32].satd = satd8<8, 32>;
-# 3600 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3628 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
     p.chroma[1].cu[BLOCK_420_2x2].sse_pp = sse_pp_a<2, 2>; p.chroma[1].cu[BLOCK_420_2x2].copy_sp = blockcopy_sp_c<2, 2>; p.chroma[1].cu[BLOCK_420_2x2].copy_ps = blockcopy_ps_c<2, 2>; p.chroma[1].cu[BLOCK_420_2x2].copy_ss = blockcopy_ss_c<2, 2>; p.chroma[1].cu[BLOCK_420_2x2].sub_ps = pixel_sub_ps_c<2, 2>; p.chroma[1].cu[BLOCK_420_2x2].add_ps = pixel_add_ps_c<2, 2>;
     p.chroma[1].cu[BLOCK_420_4x4].sse_pp = sse_pp_a<4, 4>; p.chroma[1].cu[BLOCK_420_4x4].copy_sp = blockcopy_sp_c<4, 4>; p.chroma[1].cu[BLOCK_420_4x4].copy_ps = blockcopy_ps_c<4, 4>; p.chroma[1].cu[BLOCK_420_4x4].copy_ss = blockcopy_ss_c<4, 4>; p.chroma[1].cu[BLOCK_420_4x4].sub_ps = pixel_sub_ps_c<4, 4>; p.chroma[1].cu[BLOCK_420_4x4].add_ps = pixel_add_ps_c<4, 4>;
     p.chroma[1].cu[BLOCK_420_8x8].sse_pp = sse_pp_a<8, 8>; p.chroma[1].cu[BLOCK_420_8x8].copy_sp = blockcopy_sp_c<8, 8>; p.chroma[1].cu[BLOCK_420_8x8].copy_ps = blockcopy_ps_c<8, 8>; p.chroma[1].cu[BLOCK_420_8x8].copy_ss = blockcopy_ss_c<8, 8>; p.chroma[1].cu[BLOCK_420_8x8].sub_ps = pixel_sub_ps_c<8, 8>; p.chroma[1].cu[BLOCK_420_8x8].add_ps = pixel_add_ps_c<8, 8>;
@@ -23601,9 +23629,9 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[2].pu[CHROMA_422_8x64].addAvg = addAvg<8, 64>; p.chroma[2].pu[CHROMA_422_8x64].copy_pp = blockcopy_pp_c<8, 64>;;
 
     p.chroma[2].pu[CHROMA_422_2x4].satd = 
-# 3641 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3669 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3641 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3669 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[2].pu[CHROMA_422_4x8].satd = satd4<4, 8>;
     p.chroma[2].pu[CHROMA_422_8x16].satd = satd8<8, 16>;
@@ -23612,9 +23640,9 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
 
     p.chroma[2].pu[CHROMA_422_4x4].satd = satd_4x4;
     p.chroma[2].pu[CHROMA_422_2x8].satd = 
-# 3648 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3676 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3648 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3676 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[2].pu[CHROMA_422_8x8].satd = satd8<8, 8>;
     p.chroma[2].pu[CHROMA_422_4x16].satd = satd4<4, 16>;
@@ -23625,15 +23653,15 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
 
     p.chroma[2].pu[CHROMA_422_8x12].satd = satd4<8, 12>;
     p.chroma[2].pu[CHROMA_422_6x16].satd = 
-# 3657 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3685 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3657 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3685 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[2].pu[CHROMA_422_8x4].satd = satd4<8, 4>;
     p.chroma[2].pu[CHROMA_422_2x16].satd = 
-# 3659 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 3687 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 3659 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3687 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[2].pu[CHROMA_422_16x24].satd = satd8<16, 24>;
     p.chroma[2].pu[CHROMA_422_12x32].satd = satd4<12, 32>;
@@ -23643,7 +23671,7 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[2].pu[CHROMA_422_24x64].satd = satd8<24, 64>;
     p.chroma[2].pu[CHROMA_422_32x16].satd = satd8<32, 16>;
     p.chroma[2].pu[CHROMA_422_8x64].satd = satd8<8, 64>;
-# 3677 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 3705 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
     p.chroma[2].cu[BLOCK_422_2x4].sse_pp = sse_pp_a<2, 4>; p.chroma[2].cu[BLOCK_422_2x4].copy_sp = blockcopy_sp_c<2, 4>; p.chroma[2].cu[BLOCK_422_2x4].copy_ps = blockcopy_ps_c<2, 4>; p.chroma[2].cu[BLOCK_422_2x4].copy_ss = blockcopy_ss_c<2, 4>; p.chroma[2].cu[BLOCK_422_2x4].sub_ps = pixel_sub_ps_c<2, 4>; p.chroma[2].cu[BLOCK_422_2x4].add_ps = pixel_add_ps_c<2, 4>;
     p.chroma[2].cu[BLOCK_422_4x8].sse_pp = sse_pp_a<4, 8>; p.chroma[2].cu[BLOCK_422_4x8].copy_sp = blockcopy_sp_c<4, 8>; p.chroma[2].cu[BLOCK_422_4x8].copy_ps = blockcopy_ps_c<4, 8>; p.chroma[2].cu[BLOCK_422_4x8].copy_ss = blockcopy_ss_c<4, 8>; p.chroma[2].cu[BLOCK_422_4x8].sub_ps = pixel_sub_ps_c<4, 8>; p.chroma[2].cu[BLOCK_422_4x8].add_ps = pixel_add_ps_c<4, 8>;
     p.chroma[2].cu[BLOCK_422_8x16].sse_pp = sse_pp_a<8, 16>; p.chroma[2].cu[BLOCK_422_8x16].copy_sp = blockcopy_sp_c<8, 16>; p.chroma[2].cu[BLOCK_422_8x16].copy_ps = blockcopy_ps_c<8, 16>; p.chroma[2].cu[BLOCK_422_8x16].copy_ss = blockcopy_ss_c<8, 16>; p.chroma[2].cu[BLOCK_422_8x16].sub_ps = pixel_sub_ps_c<8, 16>; p.chroma[2].cu[BLOCK_422_8x16].add_ps = pixel_add_ps_c<8, 16>;
