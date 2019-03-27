@@ -17922,83 +17922,84 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi32ELi64EEEvPhlPKhPKsll:
 	.ent	_ZN12_GLOBAL__N_114pixel_sub_ps_cILi8ELi8EEEvPslPKhS3_ll
 	.type	_ZN12_GLOBAL__N_114pixel_sub_ps_cILi8ELi8EEEvPslPKhS3_ll, @function
 _ZN12_GLOBAL__N_114pixel_sub_ps_cILi8ELi8EEEvPslPKhS3_ll:
-	.frame	$sp,64,$31		# vars= 0, regs= 7/0, args= 0, gp= 0
-	.mask	0x103f0000,-8
+	.frame	$sp,16,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+	.mask	0x10000000,-8
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	dsll	$24,$5,1
-	daddiu	$sp,$sp,-64
-	daddu	$12,$24,$5
-	dsll	$15,$8,1
-	sd	$20,40($sp)
-	dsll	$14,$9,1
-	sd	$19,32($sp)
-	dsll	$12,$12,1
-	sd	$18,24($sp)
-	daddu	$19,$15,$8
-	daddu	$18,$14,$9
-	sd	$17,16($sp)
-	dsll	$25,$9,2
-	dsll	$17,$5,2
-	sd	$16,8($sp)
-	dsll	$5,$5,3
-	dsll	$16,$8,2
-	li	$13,2			# 0x2
-	li	$20,1			# 0x1
-	sd	$21,48($sp)
-.L1927:
+	dsll	$5,$5,1
+	daddiu	$sp,$sp,-16
 	daddu	$10,$6,$8
-	daddu	$3,$15,$6
-	vbld	$w5,0($6)
-	vbld	$w7,0($7)
-	daddu	$2,$19,$6
-	daddu	$11,$7,$9
+	daddu	$3,$7,$9
+	vbld	$w3,0($6)
+	vbld	$w4,0($7)
+	daddu	$25,$4,$5
+	daddu	$2,$10,$8
+	vbld	$w7,0($3)
 	vbld	$w2,0($10)
-	vbld	$w1,0($3)
-	vbld	$w0,0($2)
-	vbld	$w6,0($11)
-	daddu	$10,$14,$7
-	daddu	$3,$18,$7
-	daddu	$21,$24,$4
-	daddu	$11,$17,$4
-	vbld	$w4,0($10)
-	vbld	$w3,0($3)
-	daddu	$2,$4,$12
+	daddu	$6,$3,$9
+	daddu	$24,$25,$5
+	vbld	$w5,0($2)
+	vextb_u.h	$w4,$w4
+	daddu	$3,$6,$9
+	daddu	$2,$2,$8
+	vbld	$w1,0($6)
 	vextb_u.h	$w5,$w5
-	vextb_u.h	$w2,$w2
-	vextb_u.h	$w1,$w1
-	vextb_u.h	$w0,$w0
+	daddu	$15,$24,$5
+	vbld	$w0,0($2)
+	daddu	$7,$2,$8
+	vbld	$w6,0($3)
+	daddu	$2,$3,$9
+	daddu	$14,$15,$5
 	vextb_u.h	$w7,$w7
 	vextb_u.h	$w6,$w6
+	daddu	$6,$7,$8
+	daddu	$11,$2,$9
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w2,$w2
+	daddu	$13,$14,$5
+	daddu	$3,$6,$8
+	subv.h	$w3,$w3,$w4
+	subv.h	$w2,$w2,$w7
+	daddu	$10,$11,$9
+	daddu	$12,$13,$5
+	st.d	$w3,0($4)
+	vextb_u.h	$w0,$w0
+	daddu	$8,$3,$8
+	daddu	$9,$10,$9
+	st.d	$w2,0($25)
+	subv.h	$w0,$w0,$w6
+	daddu	$5,$12,$5
+	vextb_u.h	$w1,$w1
+	subv.h	$w1,$w5,$w1
+	st.d	$w1,0($24)
+	st.d	$w0,0($15)
+	vbld	$w5,0($7)
+	vbld	$w4,0($6)
+	vbld	$w3,0($3)
+	vbld	$w0,0($8)
+	vbld	$w2,0($2)
+	vbld	$w7,0($11)
+	vbld	$w6,0($10)
+	vbld	$w1,0($9)
+	vextb_u.h	$w5,$w5
 	vextb_u.h	$w4,$w4
 	vextb_u.h	$w3,$w3
-	subv.h	$w5,$w5,$w7
-	subv.h	$w2,$w2,$w6
-	st.d	$w5,0($4)
-	subv.h	$w1,$w1,$w4
-	st.d	$w2,0($21)
-	subv.h	$w0,$w0,$w3
-	st.d	$w1,0($11)
-	daddu	$6,$6,$16
-	st.d	$w0,0($2)
-	daddu	$7,$7,$25
-	bne	$13,$20,.L1928
-	daddu	$4,$4,$5
-
-	ld	$21,48($sp)
-	ld	$20,40($sp)
-	ld	$19,32($sp)
-	ld	$18,24($sp)
-	ld	$17,16($sp)
-	ld	$16,8($sp)
+	vextb_u.h	$w0,$w0
+	vextb_u.h	$w2,$w2
+	vextb_u.h	$w7,$w7
+	subv.h	$w2,$w5,$w2
+	vextb_u.h	$w6,$w6
+	st.d	$w2,0($14)
+	vextb_u.h	$w1,$w1
+	subv.h	$w4,$w4,$w7
+	subv.h	$w2,$w3,$w6
+	st.d	$w4,0($13)
+	subv.h	$w0,$w0,$w1
+	st.d	$w2,0($12)
+	st.d	$w0,0($5)
 	jr	$31
-	daddiu	$sp,$sp,64
-
-	.align	3
-.L1928:
-	b	.L1927
-	li	$13,1			# 0x1
+	daddiu	$sp,$sp,16
 
 	.set	macro
 	.set	reorder
@@ -18079,7 +18080,7 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi16ELi16EEEvPslPKhS3_ll:
 	daddiu	$16,$8,8
 	daddiu	$24,$15,16
 	.align	3
-.L1933:
+.L1931:
 	daddu	$3,$6,$8
 	daddu	$2,$6,$16
 	vbld	$w5,0($6)
@@ -18113,7 +18114,7 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi16ELi16EEEvPslPKhS3_ll:
 	daddu	$6,$6,$18
 	st.d	$w0,0($13)
 	daddu	$7,$7,$17
-	bne	$12,$0,.L1933
+	bne	$12,$0,.L1931
 	daddu	$4,$4,$5
 
 	ld	$18,16($sp)
@@ -18141,7 +18142,7 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi64ELi64EEEvPslPKhS3_ll:
 	dsll	$5,$5,1
 	li	$2,64			# 0x40
 	.align	3
-.L1937:
+.L1935:
 	addiu	$2,$2,-1
 	vbld	$w7,0($6)
 	vbld	$w6,8($6)
@@ -18193,7 +18194,7 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi64ELi64EEEvPslPKhS3_ll:
 	st.d	$w0,112($4)
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$2,$0,.L1937
+	bne	$2,$0,.L1935
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -18236,7 +18237,7 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi32ELi32EEEvPslPKhS3_ll:
 	sd	$16,8($sp)
 	daddiu	$16,$9,24
 	.align	3
-.L1941:
+.L1939:
 	daddu	$11,$6,$8
 	daddu	$10,$6,$21
 	vbld	$w11,0($6)
@@ -18297,7 +18298,7 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi32ELi32EEEvPslPKhS3_ll:
 	daddu	$6,$6,$23
 	daddu	$7,$7,$22
 	daddu	$4,$4,$25
-	bne	$24,$0,.L1941
+	bne	$24,$0,.L1939
 	daddu	$5,$5,$25
 
 	ld	$23,64($sp)
@@ -18346,7 +18347,7 @@ _ZN12_GLOBAL__N_18sse_pp_aILi16ELi16EEEjPKhlS2_l:
 	dsll	$18,$5,2
 	sd	$17,8($sp)
 	dsll	$17,$7,2
-.L1945:
+.L1943:
 	daddu	$10,$2,$5
 	daddu	$9,$3,$7
 	vbld	$w1,0($3)
@@ -18411,7 +18412,7 @@ _ZN12_GLOBAL__N_18sse_pp_aILi16ELi16EEEjPKhlS2_l:
 	daddu	$4,$4,$18
 	daddu	$6,$6,$17
 	daddu	$2,$5,$2
-	bne	$24,$0,.L1945
+	bne	$24,$0,.L1943
 	daddu	$3,$7,$3
 
 	addv.w	$w1,$w12,$w15
@@ -18454,7 +18455,7 @@ _ZN12_GLOBAL__N_18sse_pp_aILi64ELi64EEEjPKhlS2_l:
 	move.v	$w9,$w8
 	move.v	$w10,$w8
 	.align	3
-.L1949:
+.L1947:
 	addiu	$2,$2,-1
 	vbld	$w7,0($4)
 	vbld	$w6,8($4)
@@ -18505,7 +18506,7 @@ _ZN12_GLOBAL__N_18sse_pp_aILi64ELi64EEEjPKhlS2_l:
 	dpadd_s.w	$w9,$w1,$w1
 	dpadd_s.w	$w10,$w0,$w0
 	daddu	$4,$4,$5
-	bne	$2,$0,.L1949
+	bne	$2,$0,.L1947
 	daddu	$6,$6,$7
 
 	addv.w	$w8,$w8,$w11
@@ -18556,7 +18557,7 @@ _ZN12_GLOBAL__N_18sse_pp_aILi32ELi32EEEjPKhlS2_l:
 	sd	$16,0($sp)
 	daddiu	$16,$5,24
 	.align	3
-.L1953:
+.L1951:
 	daddu	$13,$4,$5
 	daddu	$12,$4,$18
 	vbld	$w7,0($4)
@@ -18615,7 +18616,7 @@ _ZN12_GLOBAL__N_18sse_pp_aILi32ELi32EEEjPKhlS2_l:
 	dpadd_s.w	$w13,$w1,$w1
 	dpadd_s.w	$w14,$w0,$w0
 	daddu	$4,$4,$20
-	bne	$14,$0,.L1953
+	bne	$14,$0,.L1951
 	daddu	$6,$6,$19
 
 	addv.w	$w12,$w12,$w15
@@ -18883,7 +18884,7 @@ _ZN12_GLOBAL__N_15satd4ILi4ELi32EEEiPKhlS2_l:
 	sd	$31,24($sp)
 	daddiu	$25,$25,%got_ofst(_ZN12_GLOBAL__N_1L8satd_4x4EPKhlS1_l)
 	.align	3
-.L1963:
+.L1961:
 	move	$6,$12
 	move	$4,$13
 	move	$7,$15
@@ -18895,7 +18896,7 @@ _ZN12_GLOBAL__N_15satd4ILi4ELi32EEEiPKhlS2_l:
 	addiu	$11,$11,-1
 	daddu	$13,$13,$17
 	move	$14,$2
-	bne	$11,$0,.L1963
+	bne	$11,$0,.L1961
 	daddu	$12,$12,$16
 
 	ld	$31,24($sp)
@@ -18943,11 +18944,11 @@ _ZN12_GLOBAL__N_15satd4ILi12ELi32EEEiPKhlS2_l:
 	move	$16,$5
 	sd	$31,56($sp)
 	.align	3
-.L1968:
+.L1966:
 	daddiu	$15,$14,12
 	move	$12,$18
 	move	$11,$14
-.L1967:
+.L1965:
 	move	$6,$12
 	move	$4,$11
 	move	$7,$24
@@ -18958,12 +18959,12 @@ _ZN12_GLOBAL__N_15satd4ILi12ELi32EEEiPKhlS2_l:
 	addu	$2,$2,$13
 	daddiu	$11,$11,4
 	daddiu	$12,$12,4
-	bne	$11,$15,.L1967
+	bne	$11,$15,.L1965
 	move	$13,$2
 
 	addiu	$17,$17,-1
 	daddu	$14,$14,$20
-	bne	$17,$0,.L1968
+	bne	$17,$0,.L1966
 	daddu	$18,$18,$19
 
 	ld	$31,56($sp)
@@ -19053,7 +19054,7 @@ _ZN12_GLOBAL__N_15satd4ILi8ELi12EEEiPKhlS2_l:
 	move	$11,$0
 	sd	$31,24($sp)
 	daddiu	$25,$25,%got_ofst(_ZN12_GLOBAL__N_1L8satd_4x4EPKhlS1_l)
-.L1975:
+.L1973:
 	move	$6,$12
 	move	$4,$13
 	move	$7,$15
@@ -19073,7 +19074,7 @@ _ZN12_GLOBAL__N_15satd4ILi8ELi12EEEiPKhlS2_l:
 	addiu	$14,$14,-1
 	daddu	$13,$13,$17
 	move	$11,$2
-	bne	$14,$0,.L1975
+	bne	$14,$0,.L1973
 	daddu	$12,$12,$16
 
 	ld	$31,24($sp)
@@ -19113,7 +19114,7 @@ _ZN12_GLOBAL__N_15satd4ILi16ELi4EEEiPKhlS2_l:
 	daddiu	$14,$4,16
 	move	$13,$0
 	daddiu	$25,$25,%got_ofst(_ZN12_GLOBAL__N_1L8satd_4x4EPKhlS1_l)
-.L1979:
+.L1977:
 	move	$6,$12
 	move	$4,$11
 	move	$7,$15
@@ -19124,7 +19125,7 @@ _ZN12_GLOBAL__N_15satd4ILi16ELi4EEEiPKhlS2_l:
 	addu	$2,$2,$13
 	daddiu	$11,$11,4
 	daddiu	$12,$12,4
-	bne	$11,$14,.L1979
+	bne	$11,$14,.L1977
 	move	$13,$2
 
 	ld	$31,8($sp)
@@ -19169,11 +19170,11 @@ _ZN12_GLOBAL__N_15satd4ILi16ELi12EEEiPKhlS2_l:
 	daddiu	$25,$25,%got_ofst(_ZN12_GLOBAL__N_1L8satd_4x4EPKhlS1_l)
 	move	$16,$4
 	sd	$31,56($sp)
-.L1984:
+.L1982:
 	daddiu	$14,$16,16
 	move	$12,$18
 	move	$11,$16
-.L1983:
+.L1981:
 	move	$6,$12
 	move	$4,$11
 	move	$7,$15
@@ -19184,12 +19185,12 @@ _ZN12_GLOBAL__N_15satd4ILi16ELi12EEEiPKhlS2_l:
 	addu	$2,$2,$13
 	daddiu	$11,$11,4
 	daddiu	$12,$12,4
-	bne	$11,$14,.L1983
+	bne	$11,$14,.L1981
 	move	$13,$2
 
 	addiu	$17,$17,-1
 	daddu	$16,$16,$20
-	bne	$17,$0,.L1984
+	bne	$17,$0,.L1982
 	daddu	$18,$18,$19
 
 	ld	$31,56($sp)
@@ -19236,7 +19237,7 @@ _ZN12_GLOBAL__N_15satd4ILi4ELi16EEEiPKhlS2_l:
 	move	$14,$0
 	sd	$31,24($sp)
 	daddiu	$25,$25,%got_ofst(_ZN12_GLOBAL__N_1L8satd_4x4EPKhlS1_l)
-.L1989:
+.L1987:
 	move	$6,$12
 	move	$4,$13
 	move	$7,$15
@@ -19248,7 +19249,7 @@ _ZN12_GLOBAL__N_15satd4ILi4ELi16EEEiPKhlS2_l:
 	addiu	$11,$11,-1
 	daddu	$13,$13,$17
 	move	$14,$2
-	bne	$11,$0,.L1989
+	bne	$11,$0,.L1987
 	daddu	$12,$12,$16
 
 	ld	$31,24($sp)
@@ -19295,11 +19296,11 @@ _ZN12_GLOBAL__N_15satd4ILi12ELi16EEEiPKhlS2_l:
 	daddiu	$25,$25,%got_ofst(_ZN12_GLOBAL__N_1L8satd_4x4EPKhlS1_l)
 	move	$16,$5
 	sd	$31,56($sp)
-.L1994:
+.L1992:
 	daddiu	$15,$14,12
 	move	$12,$18
 	move	$11,$14
-.L1993:
+.L1991:
 	move	$6,$12
 	move	$4,$11
 	move	$7,$24
@@ -19310,12 +19311,12 @@ _ZN12_GLOBAL__N_15satd4ILi12ELi16EEEiPKhlS2_l:
 	addu	$2,$2,$13
 	daddiu	$11,$11,4
 	daddiu	$12,$12,4
-	bne	$11,$15,.L1993
+	bne	$11,$15,.L1991
 	move	$13,$2
 
 	addiu	$17,$17,-1
 	daddu	$14,$14,$20
-	bne	$17,$0,.L1994
+	bne	$17,$0,.L1992
 	daddu	$18,$18,$19
 
 	ld	$31,56($sp)
@@ -19989,7 +19990,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,4($10)
 	sw	$0,8($10)
 	sw	$0,12($10)
-.L2015:
+.L2013:
 	daddu	$25,$5,$9
 	daddu	$24,$6,$9
 	ld.b	$w3,128($4)
@@ -20074,7 +20075,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	daddu	$5,$5,$11
 	daddu	$6,$6,$11
 	daddu	$7,$7,$11
-	bne	$4,$16,.L2015
+	bne	$4,$16,.L2013
 	daddu	$8,$8,$11
 
 	copy_s.w	$6,$w9[0]
@@ -20147,7 +20148,7 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi16EEEvPKhS2_S2_S2_lPi:
 	move.v	$w9,$w8
 	sw	$0,4($9)
 	sw	$0,8($9)
-.L2019:
+.L2017:
 	daddu	$11,$5,$8
 	daddu	$13,$6,$8
 	ld.b	$w1,0($4)
@@ -20212,7 +20213,7 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi16EEEvPKhS2_S2_S2_lPi:
 	addv.d	$w9,$w0,$w2
 	daddu	$5,$5,$10
 	daddu	$6,$6,$10
-	bne	$4,$24,.L2019
+	bne	$4,$24,.L2017
 	daddu	$7,$7,$10
 
 	copy_s.w	$5,$w8[0]
@@ -20268,7 +20269,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi64ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L2023:
+.L2021:
 	ld.b	$w11,0($4)
 	ld.b	$w2,16($4)
 	ld.b	$w1,32($4)
@@ -20341,7 +20342,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi64ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$2,.L2023
+	bne	$4,$2,.L2021
 	daddu	$8,$8,$9
 
 	copy_s.w	$2,$w20[2]
@@ -20386,7 +20387,7 @@ _ZN12_GLOBAL__N_16sad_x3ILi64ELi64EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L2027:
+.L2025:
 	ld.b	$w0,0($4)
 	ld.b	$w5,16($4)
 	ld.b	$w4,32($4)
@@ -20442,7 +20443,7 @@ _ZN12_GLOBAL__N_16sad_x3ILi64ELi64EEEvPKhS2_S2_S2_lPi:
 	addv.d	$w16,$w0,$w3
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$4,$2,.L2027
+	bne	$4,$2,.L2025
 	daddu	$7,$7,$8
 
 	copy_s.w	$2,$w1[2]
@@ -20497,7 +20498,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L2031:
+.L2029:
 	ld.b	$w3,64($4)
 	ld.b	$w5,0($4)
 	ld.b	$w4,16($4)
@@ -20578,7 +20579,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	daddu	$5,$5,$3
 	daddu	$6,$6,$3
 	daddu	$7,$7,$3
-	bne	$4,$17,.L2031
+	bne	$4,$17,.L2029
 	daddu	$8,$8,$3
 
 	copy_s.w	$2,$w9[2]
@@ -20651,7 +20652,7 @@ _ZN12_GLOBAL__N_16sad_x3ILi32ELi32EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L2035:
+.L2033:
 	ld.b	$w1,0($4)
 	ld.b	$w5,16($4)
 	ld.b	$w0,64($4)
@@ -20713,7 +20714,7 @@ _ZN12_GLOBAL__N_16sad_x3ILi32ELi32EEEvPKhS2_S2_S2_lPi:
 	addv.d	$w9,$w0,$w2
 	daddu	$5,$5,$3
 	daddu	$6,$6,$3
-	bne	$4,$24,.L2035
+	bne	$4,$24,.L2033
 	daddu	$7,$7,$3
 
 	copy_s.w	$2,$w8[2]
@@ -20785,7 +20786,7 @@ _ZN12_GLOBAL__N_13sadILi32ELi32EEEiPKhlS2_l:
 	sd	$16,0($sp)
 	daddiu	$16,$13,16
 	.align	3
-.L2039:
+.L2037:
 	daddu	$12,$4,$5
 	daddu	$11,$4,$20
 	ld.d	$w3,0($4)
@@ -20840,7 +20841,7 @@ _ZN12_GLOBAL__N_13sadILi32ELi32EEEiPKhlS2_l:
 	addv.d	$w10,$w1,$w5
 	addv.d	$w9,$w0,$w4
 	daddu	$4,$4,$22
-	bne	$2,$0,.L2039
+	bne	$2,$0,.L2037
 	daddu	$6,$6,$21
 
 	copy_s.w	$3,$w8[0]
@@ -20905,7 +20906,7 @@ _ZN12_GLOBAL__N_13sadILi16ELi16EEEiPKhlS2_l:
 	daddu	$14,$8,$10
 	daddu	$13,$3,$9
 	li	$19,1			# 0x1
-.L2043:
+.L2041:
 	daddu	$12,$8,$5
 	daddu	$2,$7,$3
 	ld.d	$w2,0($5)
@@ -20961,7 +20962,7 @@ _ZN12_GLOBAL__N_13sadILi16ELi16EEEiPKhlS2_l:
 	daddu	$4,$4,$18
 	daddu	$6,$6,$17
 	daddu	$5,$10,$11
-	bne	$15,$19,.L2044
+	bne	$15,$19,.L2042
 	daddu	$7,$9,$2
 
 	copy_s.w	$2,$w4[2]
@@ -20987,8 +20988,8 @@ _ZN12_GLOBAL__N_13sadILi16ELi16EEEiPKhlS2_l:
 	addu	$2,$2,$4
 
 	.align	3
-.L2044:
-	b	.L2043
+.L2042:
+	b	.L2041
 	li	$15,1			# 0x1
 
 	.set	macro
@@ -21027,7 +21028,7 @@ _ZN12_GLOBAL__N_13sadILi64ELi64EEEiPKhlS2_l:
 	sd	$16,0($sp)
 	daddiu	$16,$5,48
 	.align	3
-.L2047:
+.L2045:
 	daddu	$14,$4,$5
 	daddu	$13,$4,$18
 	ld.d	$w3,0($4)
@@ -21078,7 +21079,7 @@ _ZN12_GLOBAL__N_13sadILi64ELi64EEEiPKhlS2_l:
 	addv.d	$w10,$w1,$w5
 	addv.d	$w9,$w0,$w4
 	daddu	$4,$4,$20
-	bne	$2,$0,.L2047
+	bne	$2,$0,.L2045
 	daddu	$6,$6,$19
 
 	copy_s.w	$4,$w8[0]
@@ -21157,7 +21158,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l:
 	sd	$3,208($sp)
 	sd	$0,160($sp)
 	.align	3
-.L2056:
+.L2054:
 	ld	$2,192($sp)
 	ld	$13,232($sp)
 	daddiu	$2,$2,-64
@@ -21169,7 +21170,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l:
 	sd	$2,152($sp)
 	ld	$2,144($sp)
 	.align	3
-.L2064:
+.L2062:
 	move	$25,$sp
 	move	$15,$sp
 	sd	$25,184($sp)
@@ -21184,7 +21185,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l:
 	lbu	$31,7($16)
 	ld	$25,168($sp)
 	.align	3
-.L2051:
+.L2049:
 	lbu	$2,0($14)
 	daddiu	$15,$15,16
 	lbu	$4,1($14)
@@ -21230,12 +21231,183 @@ _ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l:
 	sw	$7,-8($15)
 	daddu	$14,$14,$25
 	sw	$4,-12($15)
-	bne	$17,$15,.L2051
+	bne	$17,$15,.L2049
 	sw	$2,-4($15)
 
 	ld	$25,184($sp)
 	move	$12,$0
 	daddiu	$20,$25,16
+.L2050:
+	lw	$9,0($25)
+	daddiu	$25,$25,4
+	lw	$4,12($25)
+	lw	$2,44($25)
+	lw	$8,28($25)
+	addu	$15,$9,$4
+	lw	$6,76($25)
+	subu	$9,$9,$4
+	lw	$3,108($25)
+	lw	$18,60($25)
+	addu	$5,$8,$2
+	subu	$8,$8,$2
+	lw	$4,92($25)
+	addu	$10,$15,$5
+	subu	$15,$15,$5
+	addu	$2,$9,$8
+	subu	$31,$9,$8
+	addu	$19,$18,$6
+	subu	$18,$18,$6
+	addu	$5,$4,$3
+	subu	$4,$4,$3
+	addu	$7,$19,$5
+	addu	$6,$18,$4
+	addu	$3,$10,$7
+	subu	$7,$10,$7
+	addu	$9,$2,$6
+	srl	$14,$3,15
+	srl	$11,$7,15
+	subu	$6,$2,$6
+	subu	$5,$19,$5
+	and	$14,$14,$24
+	srl	$22,$9,15
+	and	$11,$11,$24
+	addu	$10,$15,$5
+	and	$8,$22,$24
+	srl	$19,$6,15
+	sll	$23,$14,16
+	sll	$2,$11,16
+	subu	$4,$18,$4
+	subu	$23,$23,$14
+	subu	$11,$2,$11
+	and	$18,$19,$24
+	subu	$5,$15,$5
+	sll	$22,$8,16
+	srl	$15,$10,15
+	subu	$22,$22,$8
+	srl	$14,$5,15
+	addu	$8,$31,$4
+	and	$15,$15,$24
+	sll	$19,$18,16
+	addu	$7,$7,$11
+	addu	$3,$3,$23
+	subu	$19,$19,$18
+	xor	$11,$7,$11
+	and	$21,$14,$24
+	subu	$4,$31,$4
+	sll	$2,$15,16
+	srl	$18,$8,15
+	xor	$3,$3,$23
+	addu	$9,$9,$22
+	subu	$15,$2,$15
+	and	$18,$18,$24
+	srl	$31,$4,15
+	addu	$3,$3,$11
+	xor	$9,$9,$22
+	addu	$7,$6,$19
+	sll	$14,$21,16
+	addu	$3,$3,$9
+	subu	$14,$14,$21
+	and	$31,$31,$24
+	xor	$7,$7,$19
+	addu	$6,$10,$15
+	sll	$11,$18,16
+	addu	$2,$3,$7
+	subu	$10,$11,$18
+	sll	$9,$31,16
+	xor	$6,$6,$15
+	addu	$5,$5,$14
+	subu	$7,$9,$31
+	addu	$2,$2,$6
+	xor	$5,$5,$14
+	addu	$3,$8,$10
+	addu	$2,$2,$5
+	xor	$3,$3,$10
+	addu	$4,$4,$7
+	addu	$2,$2,$3
+	xor	$4,$4,$7
+	addu	$2,$2,$4
+	andi	$3,$2,0xffff
+	srl	$2,$2,16
+	addu	$2,$3,$2
+	bne	$20,$25,.L2050
+	addu	$12,$2,$12
+
+	ld	$25,176($sp)
+	move	$7,$0
+	ld	$6,152($sp)
+	ld	$5,168($sp)
+	jalr	$25
+	ld	$4,128($sp)
+
+	ld	$3,144($sp)
+	move	$25,$sp
+	addiu	$12,$12,2
+	lbu	$23,1($16)
+	sra	$2,$2,2
+	lbu	$22,2($16)
+	sra	$12,$12,2
+	move	$15,$sp
+	lbu	$fp,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_lE7zeroBuf)($3)
+	subu	$2,$12,$2
+	lbu	$21,3($16)
+	lbu	$20,4($16)
+	ld	$14,136($sp)
+	lbu	$19,5($16)
+	lbu	$18,6($16)
+	lbu	$31,7($16)
+	sd	$2,184($sp)
+	.align	3
+.L2051:
+	lbu	$9,0($14)
+	daddiu	$15,$15,16
+	lbu	$5,1($14)
+	lbu	$12,2($14)
+	lbu	$8,3($14)
+	subu	$9,$9,$fp
+	lbu	$11,4($14)
+	subu	$5,$5,$23
+	lbu	$7,5($14)
+	subu	$12,$12,$22
+	subu	$2,$9,$5
+	lbu	$4,6($14)
+	subu	$8,$8,$21
+	addu	$9,$9,$5
+	lbu	$10,7($14)
+	subu	$11,$11,$20
+	subu	$6,$12,$8
+	subu	$7,$7,$19
+	sll	$2,$2,16
+	subu	$4,$4,$18
+	subu	$3,$11,$7
+	subu	$10,$10,$31
+	addu	$7,$11,$7
+	subu	$5,$4,$10
+	sll	$6,$6,16
+	sll	$5,$5,16
+	addu	$8,$12,$8
+	sll	$3,$3,16
+	addu	$4,$4,$10
+	addu	$4,$5,$4
+	addu	$6,$6,$8
+	addu	$3,$3,$7
+	addu	$2,$2,$9
+	addu	$5,$2,$6
+	subu	$2,$2,$6
+	addu	$6,$3,$4
+	subu	$3,$3,$4
+	addu	$7,$5,$6
+	addu	$4,$2,$3
+	subu	$5,$5,$6
+	subu	$2,$2,$3
+	sw	$7,-16($15)
+	sw	$5,-8($15)
+	daddu	$14,$14,$13
+	sw	$4,-12($15)
+	bne	$17,$15,.L2051
+	sw	$2,-4($15)
+
+	daddiu	$20,$25,16
+	move	$12,$0
 .L2052:
 	lw	$9,0($25)
 	daddiu	$25,$25,4
@@ -21331,83 +21503,194 @@ _ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l:
 	bne	$20,$25,.L2052
 	addu	$12,$2,$12
 
-	ld	$25,176($sp)
+	ld	$11,136($sp)
 	move	$7,$0
+	move	$5,$13
 	ld	$6,152($sp)
-	ld	$5,168($sp)
+	ld	$25,176($sp)
 	jalr	$25
-	ld	$4,128($sp)
+	move	$4,$11
 
-	ld	$3,144($sp)
-	move	$25,$sp
 	addiu	$12,$12,2
-	lbu	$23,1($16)
 	sra	$2,$2,2
-	lbu	$22,2($16)
 	sra	$12,$12,2
+	daddiu	$3,$11,8
+	subu	$12,$12,$2
+	ld	$2,184($sp)
+	sd	$3,136($sp)
+	subu	$12,$2,$12
+	ld	$2,128($sp)
+	daddiu	$2,$2,8
+	sd	$2,128($sp)
+	sra	$2,$12,31
+	xor	$12,$2,$12
+	subu	$12,$12,$2
+	ld	$2,160($sp)
+	addu	$2,$12,$2
+	sd	$2,160($sp)
+	ld	$2,192($sp)
+	bne	$2,$3,.L2062
+	ld	$2,144($sp)
+
+	ld	$3,192($sp)
+	ld	$4,224($sp)
+	ld	$2,208($sp)
+	daddu	$3,$3,$4
+	ld	$4,216($sp)
+	sd	$3,192($sp)
+	addiu	$2,$2,-1
+	ld	$3,200($sp)
+	sd	$2,208($sp)
+	daddu	$3,$3,$4
+	bne	$2,$0,.L2054
+	sd	$3,200($sp)
+
+	ld	$31,328($sp)
+	ld	$2,160($sp)
+	ld	$fp,320($sp)
+	ld	$28,312($sp)
+	ld	$23,304($sp)
+	ld	$22,296($sp)
+	ld	$21,288($sp)
+	ld	$20,280($sp)
+	ld	$19,272($sp)
+	ld	$18,264($sp)
+	ld	$17,256($sp)
+	ld	$16,248($sp)
+	jr	$31
+	daddiu	$sp,$sp,336
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l
+	.size	_ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l
+	.type	_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l, @function
+_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l:
+	.frame	$sp,336,$31		# vars= 240, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-336
+	dsll	$3,$7,3
+	sd	$28,312($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l)))
+	daddu	$28,$28,$25
+	sd	$16,248($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l)))
+	sd	$3,224($sp)
+	daddiu	$3,$6,32
+	ld	$2,%got_page(_ZZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_lE7zeroBuf)($28)
+	sd	$3,192($sp)
+	dsll	$3,$5,3
+	sd	$17,256($sp)
+	daddiu	$17,$sp,128
+	sd	$2,144($sp)
+	daddiu	$16,$2,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_lE7zeroBuf)
+	ld	$2,%got_page(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)($28)
+	sd	$3,216($sp)
+	li	$3,4			# 0x4
+	sd	$31,328($sp)
+	daddiu	$2,$2,%got_ofst(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)
+	sd	$fp,320($sp)
+	sd	$2,176($sp)
+	li	$2,65536			# 0x10000
+	addiu	$24,$2,1
+	sd	$23,304($sp)
+	sd	$22,296($sp)
+	sd	$21,288($sp)
+	sd	$20,280($sp)
+	sd	$19,272($sp)
+	sd	$18,264($sp)
+	sd	$5,168($sp)
+	sd	$7,232($sp)
+	sd	$4,200($sp)
+	sd	$3,208($sp)
+	sd	$0,160($sp)
+.L2069:
+	ld	$2,192($sp)
+	ld	$13,232($sp)
+	daddiu	$2,$2,-32
+	sd	$2,136($sp)
+	ld	$2,200($sp)
+	sd	$2,128($sp)
+	ld	$2,144($sp)
+	daddiu	$2,$2,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_lE7zeroBuf)
+	sd	$2,152($sp)
+	ld	$2,144($sp)
+.L2077:
+	move	$25,$sp
 	move	$15,$sp
-	lbu	$fp,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_lE7zeroBuf)($3)
-	subu	$2,$12,$2
+	sd	$25,184($sp)
+	lbu	$23,1($16)
+	lbu	$fp,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_lE7zeroBuf)($2)
+	ld	$14,128($sp)
+	lbu	$22,2($16)
 	lbu	$21,3($16)
 	lbu	$20,4($16)
-	ld	$14,136($sp)
 	lbu	$19,5($16)
 	lbu	$18,6($16)
 	lbu	$31,7($16)
-	sd	$2,184($sp)
+	ld	$25,168($sp)
 	.align	3
-.L2053:
-	lbu	$9,0($14)
+.L2064:
+	lbu	$2,0($14)
 	daddiu	$15,$15,16
-	lbu	$5,1($14)
-	lbu	$12,2($14)
+	lbu	$4,1($14)
+	lbu	$11,2($14)
 	lbu	$8,3($14)
-	subu	$9,$9,$fp
-	lbu	$11,4($14)
-	subu	$5,$5,$23
+	subu	$3,$2,$fp
+	lbu	$10,4($14)
+	subu	$4,$4,$23
 	lbu	$7,5($14)
-	subu	$12,$12,$22
-	subu	$2,$9,$5
-	lbu	$4,6($14)
+	subu	$11,$11,$22
+	subu	$12,$3,$4
+	lbu	$9,6($14)
 	subu	$8,$8,$21
-	addu	$9,$9,$5
-	lbu	$10,7($14)
-	subu	$11,$11,$20
-	subu	$6,$12,$8
+	addu	$2,$3,$4
+	lbu	$6,7($14)
+	subu	$10,$10,$20
+	subu	$5,$11,$8
 	subu	$7,$7,$19
-	sll	$2,$2,16
-	subu	$4,$4,$18
-	subu	$3,$11,$7
-	subu	$10,$10,$31
-	addu	$7,$11,$7
-	subu	$5,$4,$10
-	sll	$6,$6,16
 	sll	$5,$5,16
-	addu	$8,$12,$8
+	subu	$9,$9,$18
+	subu	$3,$10,$7
+	subu	$6,$6,$31
+	addu	$7,$10,$7
+	subu	$4,$9,$6
+	sll	$12,$12,16
+	addu	$6,$9,$6
+	addu	$8,$11,$8
 	sll	$3,$3,16
-	addu	$4,$4,$10
-	addu	$4,$5,$4
-	addu	$6,$6,$8
+	sll	$4,$4,16
+	addu	$4,$4,$6
+	addu	$8,$5,$8
 	addu	$3,$3,$7
-	addu	$2,$2,$9
-	addu	$5,$2,$6
-	subu	$2,$2,$6
-	addu	$6,$3,$4
+	addu	$2,$12,$2
+	addu	$5,$3,$4
+	addu	$7,$2,$8
 	subu	$3,$3,$4
-	addu	$7,$5,$6
+	subu	$2,$2,$8
+	addu	$6,$7,$5
 	addu	$4,$2,$3
-	subu	$5,$5,$6
+	subu	$7,$7,$5
 	subu	$2,$2,$3
-	sw	$7,-16($15)
-	sw	$5,-8($15)
-	daddu	$14,$14,$13
+	sw	$6,-16($15)
+	sw	$7,-8($15)
+	daddu	$14,$14,$25
 	sw	$4,-12($15)
-	bne	$17,$15,.L2053
+	bne	$17,$15,.L2064
 	sw	$2,-4($15)
 
-	daddiu	$20,$25,16
+	ld	$25,184($sp)
 	move	$12,$0
-.L2054:
+	daddiu	$20,$25,16
+.L2065:
 	lw	$9,0($25)
 	daddiu	$25,$25,4
 	lw	$4,12($25)
@@ -21499,196 +21782,85 @@ _ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l:
 	andi	$3,$2,0xffff
 	srl	$2,$2,16
 	addu	$2,$3,$2
-	bne	$20,$25,.L2054
+	bne	$20,$25,.L2065
 	addu	$12,$2,$12
 
-	ld	$11,136($sp)
-	move	$7,$0
-	move	$5,$13
-	ld	$6,152($sp)
 	ld	$25,176($sp)
+	move	$7,$0
+	ld	$6,152($sp)
+	ld	$5,168($sp)
 	jalr	$25
-	move	$4,$11
+	ld	$4,128($sp)
 
-	addiu	$12,$12,2
-	sra	$2,$2,2
-	sra	$12,$12,2
-	daddiu	$3,$11,8
-	subu	$12,$12,$2
-	ld	$2,184($sp)
-	sd	$3,136($sp)
-	subu	$12,$2,$12
-	ld	$2,128($sp)
-	daddiu	$2,$2,8
-	sd	$2,128($sp)
-	sra	$2,$12,31
-	xor	$12,$2,$12
-	subu	$12,$12,$2
-	ld	$2,160($sp)
-	addu	$2,$12,$2
-	sd	$2,160($sp)
-	ld	$2,192($sp)
-	bne	$2,$3,.L2064
-	ld	$2,144($sp)
-
-	ld	$3,192($sp)
-	ld	$4,224($sp)
-	ld	$2,208($sp)
-	daddu	$3,$3,$4
-	ld	$4,216($sp)
-	sd	$3,192($sp)
-	addiu	$2,$2,-1
-	ld	$3,200($sp)
-	sd	$2,208($sp)
-	daddu	$3,$3,$4
-	bne	$2,$0,.L2056
-	sd	$3,200($sp)
-
-	ld	$31,328($sp)
-	ld	$2,160($sp)
-	ld	$fp,320($sp)
-	ld	$28,312($sp)
-	ld	$23,304($sp)
-	ld	$22,296($sp)
-	ld	$21,288($sp)
-	ld	$20,280($sp)
-	ld	$19,272($sp)
-	ld	$18,264($sp)
-	ld	$17,256($sp)
-	ld	$16,248($sp)
-	jr	$31
-	daddiu	$sp,$sp,336
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l
-	.size	_ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l
-	.type	_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l, @function
-_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l:
-	.frame	$sp,336,$31		# vars= 240, regs= 11/0, args= 0, gp= 0
-	.mask	0xd0ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-336
-	dsll	$3,$7,3
-	sd	$28,312($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l)))
-	daddu	$28,$28,$25
-	sd	$16,248($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l)))
-	sd	$3,224($sp)
-	daddiu	$3,$6,32
-	ld	$2,%got_page(_ZZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_lE7zeroBuf)($28)
-	sd	$3,192($sp)
-	dsll	$3,$5,3
-	sd	$17,256($sp)
-	daddiu	$17,$sp,128
-	sd	$2,144($sp)
-	daddiu	$16,$2,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_lE7zeroBuf)
-	ld	$2,%got_page(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)($28)
-	sd	$3,216($sp)
-	li	$3,4			# 0x4
-	sd	$31,328($sp)
-	daddiu	$2,$2,%got_ofst(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)
-	sd	$fp,320($sp)
-	sd	$2,176($sp)
-	li	$2,65536			# 0x10000
-	addiu	$24,$2,1
-	sd	$23,304($sp)
-	sd	$22,296($sp)
-	sd	$21,288($sp)
-	sd	$20,280($sp)
-	sd	$19,272($sp)
-	sd	$18,264($sp)
-	sd	$5,168($sp)
-	sd	$7,232($sp)
-	sd	$4,200($sp)
-	sd	$3,208($sp)
-	sd	$0,160($sp)
-.L2071:
-	ld	$2,192($sp)
-	ld	$13,232($sp)
-	daddiu	$2,$2,-32
-	sd	$2,136($sp)
-	ld	$2,200($sp)
-	sd	$2,128($sp)
-	ld	$2,144($sp)
-	daddiu	$2,$2,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_lE7zeroBuf)
-	sd	$2,152($sp)
-	ld	$2,144($sp)
-.L2079:
+	ld	$3,144($sp)
 	move	$25,$sp
-	move	$15,$sp
-	sd	$25,184($sp)
+	addiu	$12,$12,2
 	lbu	$23,1($16)
-	lbu	$fp,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_lE7zeroBuf)($2)
-	ld	$14,128($sp)
+	sra	$2,$2,2
 	lbu	$22,2($16)
+	sra	$12,$12,2
+	move	$15,$sp
+	lbu	$fp,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_lE7zeroBuf)($3)
+	subu	$2,$12,$2
 	lbu	$21,3($16)
 	lbu	$20,4($16)
+	ld	$14,136($sp)
 	lbu	$19,5($16)
 	lbu	$18,6($16)
 	lbu	$31,7($16)
-	ld	$25,168($sp)
+	sd	$2,184($sp)
 	.align	3
 .L2066:
-	lbu	$2,0($14)
+	lbu	$9,0($14)
 	daddiu	$15,$15,16
-	lbu	$4,1($14)
-	lbu	$11,2($14)
+	lbu	$5,1($14)
+	lbu	$12,2($14)
 	lbu	$8,3($14)
-	subu	$3,$2,$fp
-	lbu	$10,4($14)
-	subu	$4,$4,$23
+	subu	$9,$9,$fp
+	lbu	$11,4($14)
+	subu	$5,$5,$23
 	lbu	$7,5($14)
-	subu	$11,$11,$22
-	subu	$12,$3,$4
-	lbu	$9,6($14)
+	subu	$12,$12,$22
+	subu	$2,$9,$5
+	lbu	$4,6($14)
 	subu	$8,$8,$21
-	addu	$2,$3,$4
-	lbu	$6,7($14)
-	subu	$10,$10,$20
-	subu	$5,$11,$8
+	addu	$9,$9,$5
+	lbu	$10,7($14)
+	subu	$11,$11,$20
+	subu	$6,$12,$8
 	subu	$7,$7,$19
+	sll	$2,$2,16
+	subu	$4,$4,$18
+	subu	$3,$11,$7
+	subu	$10,$10,$31
+	addu	$7,$11,$7
+	subu	$5,$4,$10
+	sll	$6,$6,16
 	sll	$5,$5,16
-	subu	$9,$9,$18
-	subu	$3,$10,$7
-	subu	$6,$6,$31
-	addu	$7,$10,$7
-	subu	$4,$9,$6
-	sll	$12,$12,16
-	addu	$6,$9,$6
-	addu	$8,$11,$8
+	addu	$8,$12,$8
 	sll	$3,$3,16
-	sll	$4,$4,16
-	addu	$4,$4,$6
-	addu	$8,$5,$8
+	addu	$4,$4,$10
+	addu	$4,$5,$4
+	addu	$6,$6,$8
 	addu	$3,$3,$7
-	addu	$2,$12,$2
-	addu	$5,$3,$4
-	addu	$7,$2,$8
+	addu	$2,$2,$9
+	addu	$5,$2,$6
+	subu	$2,$2,$6
+	addu	$6,$3,$4
 	subu	$3,$3,$4
-	subu	$2,$2,$8
-	addu	$6,$7,$5
+	addu	$7,$5,$6
 	addu	$4,$2,$3
-	subu	$7,$7,$5
+	subu	$5,$5,$6
 	subu	$2,$2,$3
-	sw	$6,-16($15)
-	sw	$7,-8($15)
-	daddu	$14,$14,$25
+	sw	$7,-16($15)
+	sw	$5,-8($15)
+	daddu	$14,$14,$13
 	sw	$4,-12($15)
 	bne	$17,$15,.L2066
 	sw	$2,-4($15)
 
-	ld	$25,184($sp)
-	move	$12,$0
 	daddiu	$20,$25,16
+	move	$12,$0
 .L2067:
 	lw	$9,0($25)
 	daddiu	$25,$25,4
@@ -21784,83 +21956,194 @@ _ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l:
 	bne	$20,$25,.L2067
 	addu	$12,$2,$12
 
-	ld	$25,176($sp)
+	ld	$11,136($sp)
 	move	$7,$0
+	move	$5,$13
 	ld	$6,152($sp)
-	ld	$5,168($sp)
+	ld	$25,176($sp)
 	jalr	$25
-	ld	$4,128($sp)
+	move	$4,$11
 
-	ld	$3,144($sp)
-	move	$25,$sp
 	addiu	$12,$12,2
-	lbu	$23,1($16)
 	sra	$2,$2,2
-	lbu	$22,2($16)
 	sra	$12,$12,2
+	daddiu	$3,$11,8
+	subu	$12,$12,$2
+	ld	$2,184($sp)
+	sd	$3,136($sp)
+	subu	$12,$2,$12
+	ld	$2,128($sp)
+	daddiu	$2,$2,8
+	sd	$2,128($sp)
+	sra	$2,$12,31
+	xor	$12,$2,$12
+	subu	$12,$12,$2
+	ld	$2,160($sp)
+	addu	$2,$12,$2
+	sd	$2,160($sp)
+	ld	$2,192($sp)
+	bne	$2,$3,.L2077
+	ld	$2,144($sp)
+
+	ld	$3,192($sp)
+	ld	$4,224($sp)
+	ld	$2,208($sp)
+	daddu	$3,$3,$4
+	ld	$4,216($sp)
+	sd	$3,192($sp)
+	addiu	$2,$2,-1
+	ld	$3,200($sp)
+	sd	$2,208($sp)
+	daddu	$3,$3,$4
+	bne	$2,$0,.L2069
+	sd	$3,200($sp)
+
+	ld	$31,328($sp)
+	ld	$2,160($sp)
+	ld	$fp,320($sp)
+	ld	$28,312($sp)
+	ld	$23,304($sp)
+	ld	$22,296($sp)
+	ld	$21,288($sp)
+	ld	$20,280($sp)
+	ld	$19,272($sp)
+	ld	$18,264($sp)
+	ld	$17,256($sp)
+	ld	$16,248($sp)
+	jr	$31
+	daddiu	$sp,$sp,336
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l
+	.size	_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l
+	.type	_ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l, @function
+_ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l:
+	.frame	$sp,336,$31		# vars= 240, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-336
+	dsll	$3,$7,3
+	sd	$28,312($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l)))
+	daddu	$28,$28,$25
+	sd	$16,248($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l)))
+	sd	$3,224($sp)
+	daddiu	$3,$6,16
+	ld	$2,%got_page(_ZZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_lE7zeroBuf)($28)
+	sd	$3,184($sp)
+	dsll	$3,$5,3
+	sd	$17,256($sp)
+	daddiu	$17,$sp,128
+	sd	$2,144($sp)
+	daddiu	$16,$2,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_lE7zeroBuf)
+	ld	$2,%got_page(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)($28)
+	sd	$3,216($sp)
+	li	$3,2			# 0x2
+	sd	$31,328($sp)
+	daddiu	$2,$2,%got_ofst(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)
+	sd	$fp,320($sp)
+	sd	$2,176($sp)
+	li	$2,65536			# 0x10000
+	addiu	$24,$2,1
+	sd	$23,304($sp)
+	sd	$22,296($sp)
+	sd	$21,288($sp)
+	sd	$20,280($sp)
+	sd	$19,272($sp)
+	sd	$18,264($sp)
+	sd	$5,168($sp)
+	sd	$7,232($sp)
+	sd	$4,200($sp)
+	sd	$3,208($sp)
+	sd	$0,160($sp)
+.L2084:
+	ld	$2,184($sp)
+	ld	$13,232($sp)
+	daddiu	$2,$2,-16
+	sd	$2,136($sp)
+	ld	$2,200($sp)
+	sd	$2,128($sp)
+	ld	$2,144($sp)
+	daddiu	$2,$2,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_lE7zeroBuf)
+	sd	$2,152($sp)
+.L2083:
+	ld	$2,144($sp)
+	move	$25,$sp
 	move	$15,$sp
-	lbu	$fp,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_lE7zeroBuf)($3)
-	subu	$2,$12,$2
+	sd	$25,192($sp)
+	lbu	$23,1($16)
+	lbu	$fp,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_lE7zeroBuf)($2)
+	ld	$14,128($sp)
+	lbu	$22,2($16)
 	lbu	$21,3($16)
 	lbu	$20,4($16)
-	ld	$14,136($sp)
 	lbu	$19,5($16)
 	lbu	$18,6($16)
 	lbu	$31,7($16)
-	sd	$2,184($sp)
+	ld	$25,168($sp)
 	.align	3
-.L2068:
-	lbu	$9,0($14)
+.L2079:
+	lbu	$2,0($14)
 	daddiu	$15,$15,16
-	lbu	$5,1($14)
-	lbu	$12,2($14)
+	lbu	$4,1($14)
+	lbu	$11,2($14)
 	lbu	$8,3($14)
-	subu	$9,$9,$fp
-	lbu	$11,4($14)
-	subu	$5,$5,$23
+	subu	$3,$2,$fp
+	lbu	$10,4($14)
+	subu	$4,$4,$23
 	lbu	$7,5($14)
-	subu	$12,$12,$22
-	subu	$2,$9,$5
-	lbu	$4,6($14)
+	subu	$11,$11,$22
+	subu	$12,$3,$4
+	lbu	$9,6($14)
 	subu	$8,$8,$21
-	addu	$9,$9,$5
-	lbu	$10,7($14)
-	subu	$11,$11,$20
-	subu	$6,$12,$8
+	addu	$2,$3,$4
+	lbu	$6,7($14)
+	subu	$10,$10,$20
+	subu	$5,$11,$8
 	subu	$7,$7,$19
-	sll	$2,$2,16
-	subu	$4,$4,$18
-	subu	$3,$11,$7
-	subu	$10,$10,$31
-	addu	$7,$11,$7
-	subu	$5,$4,$10
-	sll	$6,$6,16
 	sll	$5,$5,16
-	addu	$8,$12,$8
+	subu	$9,$9,$18
+	subu	$3,$10,$7
+	subu	$6,$6,$31
+	addu	$7,$10,$7
+	subu	$4,$9,$6
+	sll	$12,$12,16
+	addu	$6,$9,$6
+	addu	$8,$11,$8
 	sll	$3,$3,16
-	addu	$4,$4,$10
-	addu	$4,$5,$4
-	addu	$6,$6,$8
+	sll	$4,$4,16
+	addu	$4,$4,$6
+	addu	$8,$5,$8
 	addu	$3,$3,$7
-	addu	$2,$2,$9
-	addu	$5,$2,$6
-	subu	$2,$2,$6
-	addu	$6,$3,$4
+	addu	$2,$12,$2
+	addu	$5,$3,$4
+	addu	$7,$2,$8
 	subu	$3,$3,$4
-	addu	$7,$5,$6
+	subu	$2,$2,$8
+	addu	$6,$7,$5
 	addu	$4,$2,$3
-	subu	$5,$5,$6
+	subu	$7,$7,$5
 	subu	$2,$2,$3
-	sw	$7,-16($15)
-	sw	$5,-8($15)
-	daddu	$14,$14,$13
+	sw	$6,-16($15)
+	sw	$7,-8($15)
+	daddu	$14,$14,$25
 	sw	$4,-12($15)
-	bne	$17,$15,.L2068
+	bne	$17,$15,.L2079
 	sw	$2,-4($15)
 
-	daddiu	$20,$25,16
+	ld	$25,192($sp)
 	move	$12,$0
-.L2069:
+	daddiu	$20,$25,16
+.L2080:
 	lw	$9,0($25)
 	daddiu	$25,$25,4
 	lw	$4,12($25)
@@ -21952,196 +22235,85 @@ _ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l:
 	andi	$3,$2,0xffff
 	srl	$2,$2,16
 	addu	$2,$3,$2
-	bne	$20,$25,.L2069
+	bne	$20,$25,.L2080
 	addu	$12,$2,$12
 
-	ld	$11,136($sp)
-	move	$7,$0
-	move	$5,$13
-	ld	$6,152($sp)
 	ld	$25,176($sp)
+	move	$7,$0
+	ld	$6,152($sp)
+	ld	$5,168($sp)
 	jalr	$25
-	move	$4,$11
+	ld	$4,128($sp)
 
-	addiu	$12,$12,2
-	sra	$2,$2,2
-	sra	$12,$12,2
-	daddiu	$3,$11,8
-	subu	$12,$12,$2
-	ld	$2,184($sp)
-	sd	$3,136($sp)
-	subu	$12,$2,$12
-	ld	$2,128($sp)
-	daddiu	$2,$2,8
-	sd	$2,128($sp)
-	sra	$2,$12,31
-	xor	$12,$2,$12
-	subu	$12,$12,$2
-	ld	$2,160($sp)
-	addu	$2,$12,$2
-	sd	$2,160($sp)
-	ld	$2,192($sp)
-	bne	$2,$3,.L2079
-	ld	$2,144($sp)
-
-	ld	$3,192($sp)
-	ld	$4,224($sp)
-	ld	$2,208($sp)
-	daddu	$3,$3,$4
-	ld	$4,216($sp)
-	sd	$3,192($sp)
-	addiu	$2,$2,-1
-	ld	$3,200($sp)
-	sd	$2,208($sp)
-	daddu	$3,$3,$4
-	bne	$2,$0,.L2071
-	sd	$3,200($sp)
-
-	ld	$31,328($sp)
-	ld	$2,160($sp)
-	ld	$fp,320($sp)
-	ld	$28,312($sp)
-	ld	$23,304($sp)
-	ld	$22,296($sp)
-	ld	$21,288($sp)
-	ld	$20,280($sp)
-	ld	$19,272($sp)
-	ld	$18,264($sp)
-	ld	$17,256($sp)
-	ld	$16,248($sp)
-	jr	$31
-	daddiu	$sp,$sp,336
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l
-	.size	_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_110psyCost_ppILi3EEEiPKhlS2_l
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l
-	.type	_ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l, @function
-_ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l:
-	.frame	$sp,336,$31		# vars= 240, regs= 11/0, args= 0, gp= 0
-	.mask	0xd0ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-336
-	dsll	$3,$7,3
-	sd	$28,312($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l)))
-	daddu	$28,$28,$25
-	sd	$16,248($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l)))
-	sd	$3,224($sp)
-	daddiu	$3,$6,16
-	ld	$2,%got_page(_ZZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_lE7zeroBuf)($28)
-	sd	$3,184($sp)
-	dsll	$3,$5,3
-	sd	$17,256($sp)
-	daddiu	$17,$sp,128
-	sd	$2,144($sp)
-	daddiu	$16,$2,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_lE7zeroBuf)
-	ld	$2,%got_page(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)($28)
-	sd	$3,216($sp)
-	li	$3,2			# 0x2
-	sd	$31,328($sp)
-	daddiu	$2,$2,%got_ofst(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)
-	sd	$fp,320($sp)
-	sd	$2,176($sp)
-	li	$2,65536			# 0x10000
-	addiu	$24,$2,1
-	sd	$23,304($sp)
-	sd	$22,296($sp)
-	sd	$21,288($sp)
-	sd	$20,280($sp)
-	sd	$19,272($sp)
-	sd	$18,264($sp)
-	sd	$5,168($sp)
-	sd	$7,232($sp)
-	sd	$4,200($sp)
-	sd	$3,208($sp)
-	sd	$0,160($sp)
-.L2086:
-	ld	$2,184($sp)
-	ld	$13,232($sp)
-	daddiu	$2,$2,-16
-	sd	$2,136($sp)
-	ld	$2,200($sp)
-	sd	$2,128($sp)
-	ld	$2,144($sp)
-	daddiu	$2,$2,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_lE7zeroBuf)
-	sd	$2,152($sp)
-.L2085:
-	ld	$2,144($sp)
+	ld	$3,144($sp)
 	move	$25,$sp
-	move	$15,$sp
-	sd	$25,192($sp)
+	addiu	$12,$12,2
 	lbu	$23,1($16)
-	lbu	$fp,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_lE7zeroBuf)($2)
-	ld	$14,128($sp)
+	sra	$2,$2,2
 	lbu	$22,2($16)
+	sra	$12,$12,2
+	move	$15,$sp
+	lbu	$fp,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_lE7zeroBuf)($3)
+	subu	$2,$12,$2
 	lbu	$21,3($16)
 	lbu	$20,4($16)
+	ld	$14,136($sp)
 	lbu	$19,5($16)
 	lbu	$18,6($16)
 	lbu	$31,7($16)
-	ld	$25,168($sp)
+	sd	$2,192($sp)
 	.align	3
 .L2081:
-	lbu	$2,0($14)
+	lbu	$9,0($14)
 	daddiu	$15,$15,16
-	lbu	$4,1($14)
-	lbu	$11,2($14)
+	lbu	$5,1($14)
+	lbu	$12,2($14)
 	lbu	$8,3($14)
-	subu	$3,$2,$fp
-	lbu	$10,4($14)
-	subu	$4,$4,$23
+	subu	$9,$9,$fp
+	lbu	$11,4($14)
+	subu	$5,$5,$23
 	lbu	$7,5($14)
-	subu	$11,$11,$22
-	subu	$12,$3,$4
-	lbu	$9,6($14)
+	subu	$12,$12,$22
+	subu	$2,$9,$5
+	lbu	$4,6($14)
 	subu	$8,$8,$21
-	addu	$2,$3,$4
-	lbu	$6,7($14)
-	subu	$10,$10,$20
-	subu	$5,$11,$8
+	addu	$9,$9,$5
+	lbu	$10,7($14)
+	subu	$11,$11,$20
+	subu	$6,$12,$8
 	subu	$7,$7,$19
+	sll	$2,$2,16
+	subu	$4,$4,$18
+	subu	$3,$11,$7
+	subu	$10,$10,$31
+	addu	$7,$11,$7
+	subu	$5,$4,$10
+	sll	$6,$6,16
 	sll	$5,$5,16
-	subu	$9,$9,$18
-	subu	$3,$10,$7
-	subu	$6,$6,$31
-	addu	$7,$10,$7
-	subu	$4,$9,$6
-	sll	$12,$12,16
-	addu	$6,$9,$6
-	addu	$8,$11,$8
+	addu	$8,$12,$8
 	sll	$3,$3,16
-	sll	$4,$4,16
-	addu	$4,$4,$6
-	addu	$8,$5,$8
+	addu	$4,$4,$10
+	addu	$4,$5,$4
+	addu	$6,$6,$8
 	addu	$3,$3,$7
-	addu	$2,$12,$2
-	addu	$5,$3,$4
-	addu	$7,$2,$8
+	addu	$2,$2,$9
+	addu	$5,$2,$6
+	subu	$2,$2,$6
+	addu	$6,$3,$4
 	subu	$3,$3,$4
-	subu	$2,$2,$8
-	addu	$6,$7,$5
+	addu	$7,$5,$6
 	addu	$4,$2,$3
-	subu	$7,$7,$5
+	subu	$5,$5,$6
 	subu	$2,$2,$3
-	sw	$6,-16($15)
-	sw	$7,-8($15)
-	daddu	$14,$14,$25
+	sw	$7,-16($15)
+	sw	$5,-8($15)
+	daddu	$14,$14,$13
 	sw	$4,-12($15)
 	bne	$17,$15,.L2081
 	sw	$2,-4($15)
 
-	ld	$25,192($sp)
-	move	$12,$0
 	daddiu	$20,$25,16
+	move	$12,$0
 .L2082:
 	lw	$9,0($25)
 	daddiu	$25,$25,4
@@ -22237,177 +22409,6 @@ _ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l:
 	bne	$20,$25,.L2082
 	addu	$12,$2,$12
 
-	ld	$25,176($sp)
-	move	$7,$0
-	ld	$6,152($sp)
-	ld	$5,168($sp)
-	jalr	$25
-	ld	$4,128($sp)
-
-	ld	$3,144($sp)
-	move	$25,$sp
-	addiu	$12,$12,2
-	lbu	$23,1($16)
-	sra	$2,$2,2
-	lbu	$22,2($16)
-	sra	$12,$12,2
-	move	$15,$sp
-	lbu	$fp,%got_ofst(_ZZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_lE7zeroBuf)($3)
-	subu	$2,$12,$2
-	lbu	$21,3($16)
-	lbu	$20,4($16)
-	ld	$14,136($sp)
-	lbu	$19,5($16)
-	lbu	$18,6($16)
-	lbu	$31,7($16)
-	sd	$2,192($sp)
-	.align	3
-.L2083:
-	lbu	$9,0($14)
-	daddiu	$15,$15,16
-	lbu	$5,1($14)
-	lbu	$12,2($14)
-	lbu	$8,3($14)
-	subu	$9,$9,$fp
-	lbu	$11,4($14)
-	subu	$5,$5,$23
-	lbu	$7,5($14)
-	subu	$12,$12,$22
-	subu	$2,$9,$5
-	lbu	$4,6($14)
-	subu	$8,$8,$21
-	addu	$9,$9,$5
-	lbu	$10,7($14)
-	subu	$11,$11,$20
-	subu	$6,$12,$8
-	subu	$7,$7,$19
-	sll	$2,$2,16
-	subu	$4,$4,$18
-	subu	$3,$11,$7
-	subu	$10,$10,$31
-	addu	$7,$11,$7
-	subu	$5,$4,$10
-	sll	$6,$6,16
-	sll	$5,$5,16
-	addu	$8,$12,$8
-	sll	$3,$3,16
-	addu	$4,$4,$10
-	addu	$4,$5,$4
-	addu	$6,$6,$8
-	addu	$3,$3,$7
-	addu	$2,$2,$9
-	addu	$5,$2,$6
-	subu	$2,$2,$6
-	addu	$6,$3,$4
-	subu	$3,$3,$4
-	addu	$7,$5,$6
-	addu	$4,$2,$3
-	subu	$5,$5,$6
-	subu	$2,$2,$3
-	sw	$7,-16($15)
-	sw	$5,-8($15)
-	daddu	$14,$14,$13
-	sw	$4,-12($15)
-	bne	$17,$15,.L2083
-	sw	$2,-4($15)
-
-	daddiu	$20,$25,16
-	move	$12,$0
-.L2084:
-	lw	$9,0($25)
-	daddiu	$25,$25,4
-	lw	$4,12($25)
-	lw	$2,44($25)
-	lw	$8,28($25)
-	addu	$15,$9,$4
-	lw	$6,76($25)
-	subu	$9,$9,$4
-	lw	$3,108($25)
-	lw	$18,60($25)
-	addu	$5,$8,$2
-	subu	$8,$8,$2
-	lw	$4,92($25)
-	addu	$10,$15,$5
-	subu	$15,$15,$5
-	addu	$2,$9,$8
-	subu	$31,$9,$8
-	addu	$19,$18,$6
-	subu	$18,$18,$6
-	addu	$5,$4,$3
-	subu	$4,$4,$3
-	addu	$7,$19,$5
-	addu	$6,$18,$4
-	addu	$3,$10,$7
-	subu	$7,$10,$7
-	addu	$9,$2,$6
-	srl	$14,$3,15
-	srl	$11,$7,15
-	subu	$6,$2,$6
-	subu	$5,$19,$5
-	and	$14,$14,$24
-	srl	$22,$9,15
-	and	$11,$11,$24
-	addu	$10,$15,$5
-	and	$8,$22,$24
-	srl	$19,$6,15
-	sll	$23,$14,16
-	sll	$2,$11,16
-	subu	$4,$18,$4
-	subu	$23,$23,$14
-	subu	$11,$2,$11
-	and	$18,$19,$24
-	subu	$5,$15,$5
-	sll	$22,$8,16
-	srl	$15,$10,15
-	subu	$22,$22,$8
-	srl	$14,$5,15
-	addu	$8,$31,$4
-	and	$15,$15,$24
-	sll	$19,$18,16
-	addu	$7,$7,$11
-	addu	$3,$3,$23
-	subu	$19,$19,$18
-	xor	$11,$7,$11
-	and	$21,$14,$24
-	subu	$4,$31,$4
-	sll	$2,$15,16
-	srl	$18,$8,15
-	xor	$3,$3,$23
-	addu	$9,$9,$22
-	subu	$15,$2,$15
-	and	$18,$18,$24
-	srl	$31,$4,15
-	addu	$3,$3,$11
-	xor	$9,$9,$22
-	addu	$7,$6,$19
-	sll	$14,$21,16
-	addu	$3,$3,$9
-	subu	$14,$14,$21
-	and	$31,$31,$24
-	xor	$7,$7,$19
-	addu	$6,$10,$15
-	sll	$11,$18,16
-	addu	$2,$3,$7
-	subu	$10,$11,$18
-	sll	$9,$31,16
-	xor	$6,$6,$15
-	addu	$5,$5,$14
-	subu	$7,$9,$31
-	addu	$2,$2,$6
-	xor	$5,$5,$14
-	addu	$3,$8,$10
-	addu	$2,$2,$5
-	xor	$3,$3,$10
-	addu	$4,$4,$7
-	addu	$2,$2,$3
-	xor	$4,$4,$7
-	addu	$2,$2,$4
-	andi	$3,$2,0xffff
-	srl	$2,$2,16
-	addu	$2,$3,$2
-	bne	$20,$25,.L2084
-	addu	$12,$2,$12
-
 	ld	$11,136($sp)
 	move	$5,$13
 	move	$7,$0
@@ -22433,7 +22434,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l:
 	subu	$12,$12,$2
 	ld	$2,160($sp)
 	addu	$5,$12,$2
-	bne	$4,$3,.L2085
+	bne	$4,$3,.L2083
 	sd	$5,160($sp)
 
 	ld	$3,224($sp)
@@ -22445,7 +22446,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l:
 	daddu	$3,$3,$4
 	sd	$3,200($sp)
 	ld	$3,208($sp)
-	bne	$3,$2,.L2087
+	bne	$3,$2,.L2085
 	ld	$31,328($sp)
 
 	move	$2,$5
@@ -22463,9 +22464,9 @@ _ZN12_GLOBAL__N_110psyCost_ppILi2EEEiPKhlS2_l:
 	daddiu	$sp,$sp,336
 
 	.align	3
-.L2087:
+.L2085:
 	li	$2,1			# 0x1
-	b	.L2086
+	b	.L2084
 	sd	$2,208($sp)
 
 	.set	macro
@@ -22518,7 +22519,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi1EEEiPKhlS2_l:
 	sd	$4,144($sp)
 	sd	$6,128($sp)
 	.align	3
-.L2095:
+.L2093:
 	lbu	$10,0($14)
 	daddiu	$15,$15,16
 	lbu	$6,1($14)
@@ -22564,14 +22565,14 @@ _ZN12_GLOBAL__N_110psyCost_ppILi1EEEiPKhlS2_l:
 	sw	$6,-8($15)
 	daddu	$14,$14,$5
 	sw	$4,-12($15)
-	bne	$fp,$15,.L2095
+	bne	$fp,$15,.L2093
 	sw	$2,-4($15)
 
 	li	$15,65536			# 0x10000
 	daddiu	$25,$24,16
 	move	$fp,$0
 	addiu	$15,$15,1
-.L2096:
+.L2094:
 	lw	$10,0($24)
 	daddiu	$24,$24,4
 	lw	$4,12($24)
@@ -22663,7 +22664,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi1EEEiPKhlS2_l:
 	andi	$3,$2,0xffff
 	srl	$2,$2,16
 	addu	$2,$3,$2
-	bne	$25,$24,.L2096
+	bne	$25,$24,.L2094
 	addu	$fp,$2,$fp
 
 	ld	$11,136($sp)
@@ -22693,7 +22694,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi1EEEiPKhlS2_l:
 	lbu	$24,7($16)
 	move	$16,$2
 	.align	3
-.L2097:
+.L2095:
 	lbu	$9,0($13)
 	daddiu	$14,$14,16
 	lbu	$5,1($13)
@@ -22739,14 +22740,14 @@ _ZN12_GLOBAL__N_110psyCost_ppILi1EEEiPKhlS2_l:
 	sw	$5,-8($14)
 	daddu	$13,$13,$18
 	sw	$4,-12($14)
-	bne	$22,$14,.L2097
+	bne	$22,$14,.L2095
 	sw	$2,-4($14)
 
 	li	$13,65536			# 0x10000
 	daddiu	$14,$15,16
 	move	$12,$0
 	addiu	$13,$13,1
-.L2098:
+.L2096:
 	lw	$9,0($15)
 	daddiu	$15,$15,4
 	lw	$4,12($15)
@@ -22838,7 +22839,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi1EEEiPKhlS2_l:
 	andi	$3,$2,0xffff
 	srl	$2,$2,16
 	addu	$2,$3,$2
-	bne	$14,$15,.L2098
+	bne	$14,$15,.L2096
 	addu	$12,$2,$12
 
 	ld	$2,136($sp)
@@ -22907,13 +22908,13 @@ _ZN12_GLOBAL__N_15sa8d8ILi8ELi16EEEiPKhlS2_l:
 	sd	$16,160($sp)
 	sd	$2,136($sp)
 	sd	$0,128($sp)
-.L2107:
+.L2105:
 	move	$13,$4
 	move	$12,$6
 	move	$19,$sp
 	move	$14,$sp
 	.align	3
-.L2105:
+.L2103:
 	lbu	$10,0($12)
 	daddiu	$14,$14,16
 	lbu	$3,0($13)
@@ -22968,12 +22969,12 @@ _ZN12_GLOBAL__N_15sa8d8ILi8ELi16EEEiPKhlS2_l:
 	sw	$10,-16($14)
 	sw	$11,-8($14)
 	sw	$8,-12($14)
-	bne	$22,$14,.L2105
+	bne	$22,$14,.L2103
 	sw	$2,-4($14)
 
 	daddiu	$23,$19,16
 	move	$21,$0
-.L2106:
+.L2104:
 	lw	$24,0($19)
 	daddiu	$19,$19,4
 	lw	$8,12($19)
@@ -23065,7 +23066,7 @@ _ZN12_GLOBAL__N_15sa8d8ILi8ELi16EEEiPKhlS2_l:
 	andi	$3,$2,0xffff
 	srl	$2,$2,16
 	addu	$2,$3,$2
-	bne	$23,$19,.L2106
+	bne	$23,$19,.L2104
 	addu	$21,$2,$21
 
 	ld	$3,152($sp)
@@ -23080,7 +23081,7 @@ _ZN12_GLOBAL__N_15sa8d8ILi8ELi16EEEiPKhlS2_l:
 	move	$3,$2
 	sd	$3,128($sp)
 	ld	$3,136($sp)
-	bne	$3,$8,.L2108
+	bne	$3,$8,.L2106
 	ld	$fp,232($sp)
 
 	ld	$23,216($sp)
@@ -23095,9 +23096,9 @@ _ZN12_GLOBAL__N_15sa8d8ILi8ELi16EEEiPKhlS2_l:
 	daddiu	$sp,$sp,240
 
 	.align	3
-.L2108:
+.L2106:
 	li	$2,1			# 0x1
-	b	.L2107
+	b	.L2105
 	sd	$2,136($sp)
 
 	.set	macro
@@ -23126,7 +23127,7 @@ _ZN12_GLOBAL__N_18sa8d_8x8EPKhlS1_l:
 	sd	$17,136($sp)
 	sd	$16,128($sp)
 	.align	3
-.L2113:
+.L2111:
 	lbu	$8,0($4)
 	daddiu	$9,$9,16
 	lbu	$3,1($4)
@@ -23181,14 +23182,14 @@ _ZN12_GLOBAL__N_18sa8d_8x8EPKhlS1_l:
 	sw	$12,-16($9)
 	sw	$14,-8($9)
 	sw	$3,-12($9)
-	bne	$13,$9,.L2113
+	bne	$13,$9,.L2111
 	sw	$2,-4($9)
 
 	li	$9,65536			# 0x10000
 	daddiu	$11,$10,16
 	move	$2,$0
 	addiu	$9,$9,1
-.L2114:
+.L2112:
 	lw	$13,0($10)
 	daddiu	$10,$10,4
 	lw	$5,12($10)
@@ -23280,7 +23281,7 @@ _ZN12_GLOBAL__N_18sa8d_8x8EPKhlS1_l:
 	andi	$4,$3,0xffff
 	srl	$3,$3,16
 	addu	$3,$4,$3
-	bne	$11,$10,.L2114
+	bne	$11,$10,.L2112
 	addu	$2,$3,$2
 
 	addiu	$2,$2,2
@@ -23319,7 +23320,7 @@ _ZN12_GLOBAL__N_15sa8d8ILi8ELi8EEEiPKhlS2_l:
 	sd	$17,136($sp)
 	sd	$16,128($sp)
 	.align	3
-.L2119:
+.L2117:
 	lbu	$8,0($4)
 	daddiu	$9,$9,16
 	lbu	$3,1($4)
@@ -23374,14 +23375,14 @@ _ZN12_GLOBAL__N_15sa8d8ILi8ELi8EEEiPKhlS2_l:
 	sw	$12,-16($9)
 	sw	$14,-8($9)
 	sw	$3,-12($9)
-	bne	$13,$9,.L2119
+	bne	$13,$9,.L2117
 	sw	$2,-4($9)
 
 	li	$9,65536			# 0x10000
 	daddiu	$11,$10,16
 	move	$2,$0
 	addiu	$9,$9,1
-.L2120:
+.L2118:
 	lw	$13,0($10)
 	daddiu	$10,$10,4
 	lw	$5,12($10)
@@ -23473,7 +23474,7 @@ _ZN12_GLOBAL__N_15sa8d8ILi8ELi8EEEiPKhlS2_l:
 	andi	$4,$3,0xffff
 	srl	$3,$3,16
 	addu	$3,$4,$3
-	bne	$11,$10,.L2120
+	bne	$11,$10,.L2118
 	addu	$2,$3,$2
 
 	addiu	$2,$2,2
@@ -23518,7 +23519,7 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	sd	$17,152($sp)
 	sd	$16,144($sp)
 	.align	3
-.L2125:
+.L2123:
 	lbu	$15,0($10)
 	daddiu	$11,$11,16
 	lbu	$3,1($10)
@@ -23573,14 +23574,14 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	sw	$24,-16($11)
 	sw	$15,-8($11)
 	sw	$3,-12($11)
-	bne	$14,$11,.L2125
+	bne	$14,$11,.L2123
 	sw	$2,-4($11)
 
 	li	$10,65536			# 0x10000
 	daddiu	$13,$12,16
 	move	$22,$0
 	addiu	$10,$10,1
-.L2126:
+.L2124:
 	lw	$24,0($12)
 	daddiu	$12,$12,4
 	lw	$15,12($12)
@@ -23672,7 +23673,7 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	andi	$3,$2,0xffff
 	srl	$2,$2,16
 	addu	$2,$3,$2
-	bne	$13,$12,.L2126
+	bne	$13,$12,.L2124
 	addu	$22,$2,$22
 
 	daddiu	$12,$4,8
@@ -23681,7 +23682,7 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	daddiu	$14,$sp,128
 	move	$13,$sp
 	.align	3
-.L2127:
+.L2125:
 	lbu	$15,0($11)
 	daddiu	$13,$13,16
 	lbu	$8,1($11)
@@ -23736,14 +23737,14 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	sw	$24,-16($13)
 	sw	$15,-8($13)
 	sw	$3,-12($13)
-	bne	$14,$13,.L2127
+	bne	$14,$13,.L2125
 	sw	$2,-4($13)
 
 	li	$12,65536			# 0x10000
 	daddiu	$13,$10,16
 	move	$11,$0
 	addiu	$12,$12,1
-.L2128:
+.L2126:
 	lw	$15,0($10)
 	daddiu	$10,$10,4
 	lw	$9,12($10)
@@ -23835,7 +23836,7 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	andi	$3,$2,0xffff
 	srl	$2,$2,16
 	addu	$2,$3,$2
-	bne	$13,$10,.L2128
+	bne	$13,$10,.L2126
 	addu	$11,$2,$11
 
 	dsll	$2,$7,3
@@ -23849,7 +23850,7 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	daddiu	$14,$sp,128
 	move	$13,$sp
 	.align	3
-.L2129:
+.L2127:
 	lbu	$15,0($10)
 	daddiu	$13,$13,16
 	lbu	$9,0($12)
@@ -23904,14 +23905,14 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	sw	$24,-16($13)
 	sw	$9,-8($13)
 	sw	$15,-12($13)
-	bne	$14,$13,.L2129
+	bne	$14,$13,.L2127
 	sw	$8,-4($13)
 
 	li	$14,65536			# 0x10000
 	daddiu	$23,$11,16
 	move	$22,$0
 	addiu	$14,$14,1
-.L2130:
+.L2128:
 	lw	$9,0($11)
 	daddiu	$11,$11,4
 	lw	$10,44($11)
@@ -24003,7 +24004,7 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	andi	$2,$8,0xffff
 	srl	$8,$8,16
 	addu	$8,$2,$8
-	bne	$23,$11,.L2130
+	bne	$23,$11,.L2128
 	addu	$22,$8,$22
 
 	ld	$2,136($sp)
@@ -24017,7 +24018,7 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	addu	$22,$22,$8
 	daddu	$6,$6,$2
 	.align	3
-.L2131:
+.L2129:
 	lbu	$9,0($4)
 	daddiu	$3,$3,16
 	lbu	$8,1($4)
@@ -24072,14 +24073,14 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	sw	$12,-16($3)
 	sw	$14,-8($3)
 	sw	$8,-12($3)
-	bne	$13,$3,.L2131
+	bne	$13,$3,.L2129
 	sw	$2,-4($3)
 
 	li	$7,65536			# 0x10000
 	daddiu	$9,$10,16
 	move	$8,$0
 	addiu	$7,$7,1
-.L2132:
+.L2130:
 	lw	$12,0($10)
 	daddiu	$10,$10,4
 	lw	$3,12($10)
@@ -24171,7 +24172,7 @@ _ZN12_GLOBAL__N_1L10sa8d_16x16EPKhlS1_l:
 	andi	$3,$2,0xffff
 	srl	$2,$2,16
 	addu	$2,$3,$2
-	bne	$9,$10,.L2132
+	bne	$9,$10,.L2130
 	addu	$8,$2,$8
 
 	addu	$22,$8,$22
@@ -24230,7 +24231,7 @@ _ZN12_GLOBAL__N_16sa8d16ILi32ELi32EEEiPKhlS2_l:
 	sd	$16,8($sp)
 	move	$16,$0
 	sd	$31,88($sp)
-.L2143:
+.L2141:
 	move	$6,$fp
 	move	$4,$21
 	move	$7,$18
@@ -24252,7 +24253,7 @@ _ZN12_GLOBAL__N_16sa8d16ILi32ELi32EEEiPKhlS2_l:
 	li	$3,1			# 0x1
 	addu	$2,$2,$16
 	daddu	$fp,$fp,$22
-	bne	$20,$3,.L2144
+	bne	$20,$3,.L2142
 	move	$16,$2
 
 	ld	$31,88($sp)
@@ -24270,8 +24271,8 @@ _ZN12_GLOBAL__N_16sa8d16ILi32ELi32EEEiPKhlS2_l:
 	daddiu	$sp,$sp,96
 
 	.align	3
-.L2144:
-	b	.L2143
+.L2142:
+	b	.L2141
 	li	$20,1			# 0x1
 
 	.set	macro
@@ -24318,11 +24319,11 @@ _ZN12_GLOBAL__N_16sa8d16ILi64ELi64EEEiPKhlS2_l:
 	sd	$fp,112($sp)
 	sd	$16,40($sp)
 	sd	$2,0($sp)
-.L2148:
+.L2146:
 	daddiu	$16,$20,64
 	move	$17,$22
 	move	$fp,$20
-.L2147:
+.L2145:
 	ld	$25,0($sp)
 	move	$6,$17
 	move	$4,$fp
@@ -24333,14 +24334,14 @@ _ZN12_GLOBAL__N_16sa8d16ILi64ELi64EEEiPKhlS2_l:
 	daddiu	$17,$17,16
 
 	addu	$2,$2,$23
-	bne	$fp,$16,.L2147
+	bne	$fp,$16,.L2145
 	move	$23,$2
 
 	ld	$3,16($sp)
 	addiu	$21,$21,-1
 	daddu	$20,$20,$3
 	ld	$3,8($sp)
-	bne	$21,$0,.L2148
+	bne	$21,$0,.L2146
 	daddu	$22,$22,$3
 
 	ld	$31,120($sp)
@@ -24480,7 +24481,7 @@ _ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l:
 	sd	$16,8($sp)
 	move	$16,$0
 	sd	$31,88($sp)
-.L2157:
+.L2155:
 	move	$6,$17
 	move	$4,$18
 	move	$7,$20
@@ -24502,7 +24503,7 @@ _ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l:
 
 	daddu	$17,$17,$22
 	addu	$2,$2,$16
-	bne	$fp,$0,.L2157
+	bne	$fp,$0,.L2155
 	move	$16,$2
 
 	ld	$31,88($sp)
@@ -25337,13 +25338,13 @@ _ZN4x26515extendPicBorderEPhliiii:
 	jalr	$25
 	sd	$17,8($sp)
 
-	blez	$19,.L2214
+	blez	$19,.L2212
 	dsubu	$18,$21,$16
 
 	move	$17,$0
 	ld	$25,%call16(memcpy)($28)
 	.align	3
-.L2221:
+.L2219:
 	move	$4,$18
 	move	$6,$16
 	move	$5,$21
@@ -25352,7 +25353,7 @@ _ZN4x26515extendPicBorderEPhliiii:
 1:	jalr	$25
 	dsubu	$18,$18,$16
 
-	bne	$17,$19,.L2221
+	bne	$17,$19,.L2219
 	ld	$25,%call16(memcpy)($28)
 
 	addiu	$23,$23,-1
@@ -25362,7 +25363,7 @@ _ZN4x26515extendPicBorderEPhliiii:
 	daddu	$20,$20,$22
 	daddu	$18,$20,$16
 	.align	3
-.L2222:
+.L2220:
 	move	$4,$18
 	move	$6,$16
 	move	$5,$20
@@ -25371,10 +25372,10 @@ _ZN4x26515extendPicBorderEPhliiii:
 1:	jalr	$25
 	daddu	$18,$18,$16
 
-	bne	$17,$19,.L2222
+	bne	$17,$19,.L2220
 	ld	$25,%call16(memcpy)($28)
 
-.L2214:
+.L2212:
 	ld	$31,72($sp)
 	ld	$28,64($sp)
 	ld	$23,56($sp)
