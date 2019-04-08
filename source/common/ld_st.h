@@ -43,6 +43,13 @@ void LD4_BtoH(const pixel *psrc, intptr_t stride, v8u16 *out0, v8u16 *out1, v8u1
 	LD2_BtoH(psrc + 2 * stride, stride, out2, out3);	
 }
 
+void LD_H_BtoH(const pixel *psrc, v8u16 *out)
+{
+	v2i64 tmp;
+	tmp = LD(psrc);
+	*out = __builtin_lsx_vextb_u_h((v16i8)tmp);
+}
+
 void LD2_H_BtoH(const pixel *psrc, v8u16 *out0, v8u16 *out1)
 {
 	v2i64 tmp0, tmp1;
@@ -275,7 +282,39 @@ void S_4x4_H(v8i16 val0,v8i16 val1,int16_t *pdst,intptr_t stride)
 
 #define SH(val, pdst) __builtin_lsx_vsh(val, 0, 0, pdst)
 #define SW(val, pdst) __builtin_lsx_vsw(val, 0, 0, pdst)
-#define SD(val, pdst) __builtin_lsx_vsd(val, 0, 0, pdst)
+void SD(v2i64 val, pixel *pdst)
+{
+	__builtin_lsx_vsd(val, 0, 0, pdst);
+}
+
+void SD2(v2i64 in0, v2i64 in1, pixel *pdst, intptr_t stride)
+{
+	SD(in0, pdst);
+	SD(in1, pdst + stride);
+}
+
+void SD4(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t stride)
+{
+	SD2(in0, in1, pdst, stride);
+	SD2(in2, in3, pdst + 2 * stride, stride);
+}
+
+void SD_1(v2i64 val, pixel *pdst)
+{
+	__builtin_lsx_vsd(val, 1, 0, pdst);
+}
+
+void SD2_1(v2i64 in0, v2i64 in1, pixel *pdst, intptr_t stride)
+{
+	SD_1(in0, pdst);
+	SD_1(in1, pdst + stride);
+}
+
+void SD4_1(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t stride)
+{
+	SD2_1(in0, in1, pdst, stride);
+	SD2_1(in2, in3, pdst + 2 * stride, stride);
+}
 
 #define SW4(in0, in1, in2, in3, pdst, stride)  \
 {	\
@@ -283,14 +322,6 @@ void S_4x4_H(v8i16 val0,v8i16 val1,int16_t *pdst,intptr_t stride)
 	SW(in1, (pdst) + stride);	\
 	SW(in2, (pdst) + 2 * stride);	\
 	SW(in3, (pdst) + 3 * stride);	\
-}
-
-#define SD4(in0, in1, in2, in3, pdst, stride)  \
-{	\
-	SD(in0, (pdst));	\
-	SD(in1, (pdst) + stride);                  \
-	SD(in2, (pdst) + 2 * stride);              \
-	SD(in3, (pdst) + 3 * stride);              \
 }
 
 void ST_V(v2i64 in, pixel *pdst)	
