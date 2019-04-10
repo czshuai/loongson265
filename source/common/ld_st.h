@@ -135,14 +135,15 @@ void LD_V2_H(const pixel *psrc, v2i64 *out0, v2i64 *out1)
 #define LD_SH2(...) LD_V2(v8i16, __VA_ARGS__)
 #define LD_SW2(...) LD_V2(v4i32, __VA_ARGS__)
 
-#define LD_V3(RTYPE, psrc, stride, out0, out1, out2)	\
-{	\
-	LD_V2(RTYPE, (psrc), stride, out0, out1);	\
-	out2 = LD_V(RTYPE, (psrc) + 2 * stride);	\
-}
-
 #define LD_UB3(...) LD_V3(v16u8, __VA_ARGS__)
 #define LD_SB3(...) LD_V3(v16i8, __VA_ARGS__)
+
+void LD_V3(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2)
+{
+	*out0 = LD_V(psrc);
+	*out1 = LD_V(psrc + stride);
+	*out2 = LD_V(psrc + 2 * stride);
+}
 
 void LD_V4(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3)   
 {	

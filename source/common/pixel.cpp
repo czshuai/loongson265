@@ -4277,7 +4277,7 @@ static void scale2D_64to32(pixel* dst, const pixel* src, intptr_t stride)
 }
 
 static
-void frame_init_lowres_core(const pixel* src0, pixel* dst0, pixel* dsth, pixel* dstv, pixel* dstc,
+void frame_init_lowres_core_c(const pixel* src0, pixel* dst0, pixel* dsth, pixel* dstv, pixel* dstc,
                             intptr_t src_stride, intptr_t dst_stride, int width, int height)
 {
     for (int y = 0; y < height; y++)
@@ -4300,6 +4300,149 @@ void frame_init_lowres_core(const pixel* src0, pixel* dst0, pixel* dsth, pixel* 
         dstv += dst_stride;
         dstc += dst_stride;
     }
+}
+
+static
+void frame_init_lowres_core(const pixel* src0, pixel* dst0, pixel* dsth, pixel* dstv, pixel* dstc,
+                            intptr_t src_stride, intptr_t dst_stride, int width, int height)
+{
+	#ifdef DEBUG
+	const pixel *t_src0;
+	pixel *t_dst0, *t_dsth, *t_dstv, *t_dstc;
+	int t_width, t_height;
+	t_src0 = src0;
+	t_dst0 = dst0;
+	t_dsth = dsth;
+	t_dstv = dstv;
+	t_dstc = dstc;
+	t_width = width;
+	t_height = height;
+	#endif
+
+	width = (width + 15) & (~15); //multiple of 16
+
+	src0 += 2 * ((height - 1) * src_stride + width);
+
+	int con0 = (height - 1) * dst_stride + width;
+	dst0 += con0;
+	dsth += con0;
+	dstv += con0;
+	dstc += con0;
+
+	int con1 = dst_stride - width;
+	int con2 = (src_stride - width) * 2;
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8;
+	v16u8 mid0, mid1, mid2, mid3, mid4, mid5;
+	v16i8 cen0, cen1, cen2, cen3;
+	v16u8 res0, res1, res2, res3;
+	v16i8 out0, out1, out2, out3;
+
+	for (int j = 0; j < height; j++)
+	{
+		LD_V3(src0, src_stride, &tmp0, &tmp1, &tmp2);	
+		
+		mid0 = __builtin_msa_aver_u_b((v16u8)tmp0, (v16u8)tmp1);
+		mid1 = __builtin_msa_aver_u_b((v16u8)tmp1, (v16u8)tmp2);
+		
+		for (int i = 0; i < (width / 16); i++)
+		{
+			src0 -= 32;
+			dst0 -= 16;
+			dsth -= 16;
+			dstv -= 16;
+			dstc -= 16;
+
+			LD_V3(src0 + 16, src_stride, &tmp3, &tmp4, &tmp5);
+			LD_V3(src0, src_stride, &tmp6, &tmp7, &tmp8);
+
+			mid2 = __builtin_msa_aver_u_b((v16u8)tmp3, (v16u8)tmp4);
+			mid3 = __builtin_msa_aver_u_b((v16u8)tmp4, (v16u8)tmp5);
+			mid4 = __builtin_msa_aver_u_b((v16u8)tmp6, (v16u8)tmp7);
+			mid5 = __builtin_msa_aver_u_b((v16u8)tmp7, (v16u8)tmp8);
+
+			cen0 = __builtin_lsx_vextr_v((v16i8)mid0, (v16i8)mid2, 1);
+			cen1 = __builtin_lsx_vextr_v((v16i8)mid1, (v16i8)mid3, 1);
+			cen2 = __builtin_lsx_vextr_v((v16i8)mid2, (v16i8)mid4, 1);
+			cen3 = __builtin_lsx_vextr_v((v16i8)mid3, (v16i8)mid5, 1);
+
+			res0 = __builtin_msa_aver_u_b((v16u8)cen0, mid2);//even row
+			res1 = __builtin_msa_aver_u_b((v16u8)cen1, mid3);//odd row
+			res2 = __builtin_msa_aver_u_b((v16u8)cen2, mid4);//even
+			res3 = __builtin_msa_aver_u_b((v16u8)cen3, mid5);//odd
+
+			out0 = __builtin_msa_pckev_b((v16i8)res0, (v16i8)res2);//even row even column	
+			out1 = __builtin_msa_pckod_b((v16i8)res0, (v16i8)res2);//even row odd column
+			out2 = __builtin_msa_pckev_b((v16i8)res1, (v16i8)res3);//odd row even column	
+			out3 = __builtin_msa_pckod_b((v16i8)res1, (v16i8)res3);//odd row odd column
+					
+			ST_V((v2i64)out0, dst0);
+			ST_V((v2i64)out1, dsth);
+			ST_V((v2i64)out2, dstv);
+			ST_V((v2i64)out3, dstc);
+
+			mid0 = (v16u8)__builtin_msa_move_v((v16i8)mid4);
+			mid1 = (v16u8)__builtin_msa_move_v((v16i8)mid5);
+		}
+		
+		src0 -= con2; 
+		dst0 -= con1;
+		dsth -= con1;
+		dstv -= con1;
+		dstc -= con1;
+	} 
+
+	#ifdef DEBUG
+	for (int y = 0; y < t_height; y++)
+    	{
+        	const pixel* t_src1 = t_src0 + src_stride;
+        	const pixel* t_src2 = t_src1 + src_stride;
+        	for (int x = 0; x < t_width; x++)
+        	{
+            		// slower than naive bilinear, but matches asm
+	#define FILTER(a, b, c, d) ((((a + b + 1) >> 1) + ((c + d + 1) >> 1) + 1) >> 1)
+            		if (t_dst0[x] != FILTER(t_src0[2 * x], t_src1[2 * x], t_src0[2 * x + 1], t_src1[2 * x + 1]))
+			{
+				printf("frame_init_lowres_core test fail\n");
+				printf("fail at dst0\nright value %d\nwrong value %d\n", FILTER(t_src0[2 * x], t_src1[2 * x], t_src0[2 * x + 1], t_src1[2 * x + 1]), t_dst0[x]);
+				printf("width is %d\nheight is %d\n", x, y);
+				return;
+			}
+            		
+			if (t_dsth[x] != FILTER(t_src0[2 * x + 1], t_src1[2 * x + 1], t_src0[2 * x + 2], t_src1[2 * x + 2]))
+			{
+				printf("frame_init_lowres_core test fail\n");
+				printf("fail at dsth\nright value %d\nwrong value %d\n", FILTER(t_src0[2 * x + 1], t_src1[2 * x + 1], t_src0[2 * x + 2], t_src1[2 * x + 2]), t_dsth[x]);
+				printf("width is %d\nheight is %d\n", x, y);
+				return;
+			}
+
+            		if (t_dstv[x] != FILTER(t_src1[2 * x], t_src2[2 * x], t_src1[2 * x + 1], t_src2[2 * x + 1]))
+			{
+				printf("frame_init_lowres_core test fail\n");
+				printf("fail at dstv\nright value %d\nwrong value %d\n", FILTER(t_src1[2 * x], t_src2[2 * x], t_src1[2 * x + 1], t_src2[2 * x + 1]), t_dsth[x]);
+				printf("width is %d\nheight is %d\n", x, y);
+				return;
+			}
+
+            		if (t_dstc[x] != FILTER(t_src1[2 * x + 1], t_src2[2 * x + 1], t_src1[2 * x + 2], t_src2[2 * x + 2]))
+			{
+				printf("frame_init_lowres_core test fail\n");
+				printf("fail at dstc\nright value %d\nwrong value %d\n", FILTER(t_src1[2 * x + 1], t_src2[2 * x + 1], t_src1[2 * x + 2], t_src2[2 * x + 2]), t_dsth[x]);
+				printf("width is %d\nheight is %d\n", x, y);
+				return;
+			}
+	#undef FILTER
+        	}
+        	t_src0 += src_stride * 2;
+        	t_dst0 += dst_stride;
+        	t_dsth += dst_stride;
+        	t_dstv += dst_stride;
+        	t_dstc += dst_stride;
+    	}
+
+	printf("frame_init_lowres_core test success\n");
+	#endif
 }
 
 /* structural similarity metric */
