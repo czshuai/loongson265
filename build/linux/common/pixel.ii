@@ -20876,10 +20876,10 @@ namespace {
 int sad_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 
-
-
-
-
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ int t_sum = 0;
 
 
  int sum = 0;
@@ -20891,17 +20891,33 @@ int sad_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t
  rest0 = __builtin_msa_asub_u_b((v16u8)tmp0, (v16u8)tmp1);
  rest1 = __builtin_lsx_vacc8b_u_d(rest0);
  sum = ((v4u32)rest1)[0] + ((v4u32)rest1)[2];
-# 76 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+ for (int y = 0; y < 4; y++)
+     {
+         for (int x = 0; x < 4; x++)
+              t_sum += abs(t_pix1[x] - t_pix2[x]);
+
+         t_pix1 += stride_pix1;
+          t_pix2 += stride_pix2;
+     }
+ if (t_sum == sum)
+  printf("sad_4x4 test success\n");
+ else
+  printf("sad_4x4 test fail\n");
+
+
  return sum;
 }
 
 int sad_8x8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 
-
-
-
-
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ int t_sum = 0;
 
 
  int sum = 0;
@@ -20939,17 +20955,33 @@ int sad_8x8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t
  mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
  mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
  sum = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
-# 140 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+ for (int y = 0; y < 8; y++)
+     {
+         for (int x = 0; x < 8; x++)
+              t_sum += abs(t_pix1[x] - t_pix2[x]);
+
+         t_pix1 += stride_pix1;
+          t_pix2 += stride_pix2;
+     }
+ if (t_sum == sum)
+  printf("sad_8x8 test success\n");
+ else
+  printf("sad_8x8 test fail\n");
+
+
  return sum;
 }
 
 int sad_16x16(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 
-
-
-
-
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ int t_sum = 0;
 
 
  int sum = 0;
@@ -21043,17 +21075,33 @@ int sad_16x16(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr
 
  sum += ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
  sum += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
-# 260 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+ for (int y = 0; y < 16; y++)
+     {
+         for (int x = 0; x < 16; x++)
+              t_sum += abs(t_pix1[x] - t_pix2[x]);
+
+         t_pix1 += stride_pix1;
+          t_pix2 += stride_pix2;
+     }
+ if (t_sum == sum)
+  printf("sad_16x16 test success\n");
+ else
+  printf("sad_16x16 test fail\n");
+
+
  return sum;
 }
 
 int sad_32x32(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 
-
-
-
-
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ int t_sum = 0;
 
 
  int sum = 0;
@@ -21119,17 +21167,34 @@ int sad_32x32(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr
  sum += ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
  sum += ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
  sum += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
-# 353 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+
+ for (int y = 0; y < 32; y++)
+     {
+         for (int x = 0; x < 32; x++)
+              t_sum += abs(t_pix1[x] - t_pix2[x]);
+
+         t_pix1 += stride_pix1;
+          t_pix2 += stride_pix2;
+     }
+ if (t_sum == sum)
+  printf("sad_32x32 test success\n");
+ else
+  printf("sad_32x32 test fail\n");
+
+
  return sum;
 }
 
 int sad_64x64(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 
-
-
-
-
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ int t_sum = 0;
 
 
  int sum = 0;
@@ -21191,7 +21256,24 @@ int sad_64x64(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr
  sum += ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
  sum += ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
  sum += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
-# 442 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+
+ for (int y = 0; y < 64; y++)
+     {
+         for (int x = 0; x < 64; x++)
+              t_sum += abs(t_pix1[x] - t_pix2[x]);
+
+         t_pix1 += stride_pix1;
+          t_pix2 += stride_pix2;
+     }
+ if (t_sum == sum)
+  printf("sad_64x64 test success\n");
+ else
+  printf("sad_64x64 test fail\n");
+
+
  return sum;
 }
 
@@ -21263,7 +21345,15 @@ int sad(const int16_t* pix1, intptr_t stride_pix1, const int16_t* pix2, intptr_t
 
 void sad_x3_8x8(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
-# 522 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4;
+ int32_t t_res[3] = {0, 0, 0};
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ t_pix3 = pix3;
+ t_pix4 = pix4;
+
+
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
  v2i64 mid4, mid5, mid6, mid7;
  v16u8 rest0, rest1, rest2, rest3;
@@ -21341,12 +21431,43 @@ void sad_x3_8x8(const pixel* pix1, const pixel* pix2, const pixel* pix3, const p
  mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
  mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
  res[2] = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
-# 623 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+
+ for (int y = 0; y < 8; y++)
+     {
+         for (int x = 0; x < 8; x++)
+         {
+              t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+              t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+              t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+         }
+
+         t_pix1 += 64;
+         t_pix2 += frefstride;
+         t_pix3 += frefstride;
+         t_pix4 += frefstride;
+     }
+
+ if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2])
+  printf("sad_x3_8x8 test success\n");
+ else
+  printf("sad_x3_8x8 test fail\n");
+
 }
 
 void sad_x3_16x16(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
-# 636 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4;
+ int32_t t_res[3] = {0, 0, 0};
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ t_pix3 = pix3;
+ t_pix4 = pix4;
+
+
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
  v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7, rest8, rest9, rest10, rest11;
  v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7, mid8, mid9, mid10, mid11;
@@ -21427,12 +21548,43 @@ void sad_x3_16x16(const pixel* pix1, const pixel* pix2, const pixel* pix3, const
  res[0] += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
  res[1] += ((v4u32)sum4)[0] + ((v4u32)sum4)[2];
  res[2] += ((v4u32)sum5)[0] + ((v4u32)sum5)[2];
-# 740 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+
+ for (int y = 0; y < 16; y++)
+     {
+         for (int x = 0; x < 16; x++)
+         {
+              t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+              t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+              t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+         }
+
+         t_pix1 += 64;
+         t_pix2 += frefstride;
+         t_pix3 += frefstride;
+         t_pix4 += frefstride;
+     }
+
+ if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2])
+  printf("sad_x3_16x16 test success\n");
+ else
+  printf("sad_x3_16x16 test fail\n");
+
 }
 
 void sad_x3_32x32(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
-# 753 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4;
+ int32_t t_res[3] = {0, 0, 0};
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ t_pix3 = pix3;
+ t_pix4 = pix4;
+
+
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
  v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7, rest8, rest9, rest10, rest11;
  v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7, mid8, mid9, mid10, mid11;
@@ -21513,12 +21665,42 @@ void sad_x3_32x32(const pixel* pix1, const pixel* pix2, const pixel* pix3, const
  res[0] += ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
  res[1] += ((v4u32)sum4)[0] + ((v4u32)sum4)[2];
  res[2] += ((v4u32)sum5)[0] + ((v4u32)sum5)[2];
-# 856 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+ for (int y = 0; y < 32; y++)
+     {
+         for (int x = 0; x < 32; x++)
+         {
+              t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+              t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+              t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+         }
+
+         t_pix1 += 64;
+         t_pix2 += frefstride;
+         t_pix3 += frefstride;
+         t_pix4 += frefstride;
+     }
+
+ if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2])
+  printf("sad_x3_32x32 test success\n");
+ else
+  printf("sad_x3_32x32 test fail\n");
+
 }
 
 void sad_x3_64x64(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, intptr_t frefstride, int32_t* res)
 {
-# 869 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4;
+ int32_t t_res[3] = {0, 0, 0};
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ t_pix3 = pix3;
+ t_pix4 = pix4;
+
+
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v16u8 rest0, rest1, rest2, rest3, rest4, rest5;
  v2u64 mid0, mid1, mid2, mid3, mid4, mid5;
@@ -21591,7 +21773,30 @@ void sad_x3_64x64(const pixel* pix1, const pixel* pix2, const pixel* pix3, const
  res[0] = ((v4u32)sum0)[0] + ((v4u32)sum0)[2];
  res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
  res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
-# 965 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+
+ for (int y = 0; y < 64; y++)
+     {
+         for (int x = 0; x < 64; x++)
+         {
+              t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+              t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+              t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+         }
+
+         t_pix1 += 64;
+         t_pix2 += frefstride;
+         t_pix3 += frefstride;
+         t_pix4 += frefstride;
+     }
+
+ if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2])
+  printf("sad_x3_64x64 test success\n");
+ else
+  printf("sad_x3_64x64 test fail\n");
+
 }
 
 template<int lx, int ly>
@@ -21629,7 +21834,16 @@ void sad_x3(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel
 
 void sad_x4_8x8(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
-# 1012 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4, *t_pix5;
+ int32_t t_res[4] = {0, 0, 0, 0};
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ t_pix3 = pix3;
+ t_pix4 = pix4;
+ t_pix5 = pix5;
+
+
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
  v2i64 mid4, mid5, mid6, mid7;
  v16u8 rest0, rest1, rest2, rest3;
@@ -21727,12 +21941,46 @@ void sad_x4_8x8(const pixel* pix1, const pixel* pix2, const pixel* pix3, const p
  mid2 = (v2u64)__builtin_msa_addv_d((v2i64)mid2, (v2i64)mid3);
  mid0 = (v2u64)__builtin_msa_addv_d((v2i64)mid0, (v2i64)mid2);
  res[3] = ((v4u32)mid0)[0] + ((v4u32)mid0)[2];
-# 1135 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+
+ for (int y = 0; y < 8; y++)
+     {
+         for (int x = 0; x < 8; x++)
+         {
+              t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+              t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+              t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+              t_res[3] += abs(t_pix1[x] - t_pix5[x]);
+         }
+
+          t_pix1 += 64;
+          t_pix2 += frefstride;
+          t_pix3 += frefstride;
+          t_pix4 += frefstride;
+          t_pix5 += frefstride;
+     }
+
+ if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2] && t_res[3] == res[3])
+  printf("sad_x4_8x8 test success\n");
+ else
+  printf("sad_x4_8x8 test fail\n");
+
 }
 
 void sad_x4_16x16(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
-# 1149 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4, *t_pix5;
+ int32_t t_res[4] = {0, 0, 0, 0};
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ t_pix3 = pix3;
+ t_pix4 = pix4;
+ t_pix5 = pix5;
+
+
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
  v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7, rest8, rest9, rest10, rest11, cen4, cen5, cen6, cen7;
  v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7, mid8, mid9, mid10, mid11, cen8, cen9, cen10, cen11;
@@ -21836,12 +22084,46 @@ void sad_x4_16x16(const pixel* pix1, const pixel* pix2, const pixel* pix3, const
 
  res[3] = ((v4u32)sum6)[0] + ((v4u32)sum6)[2];
  res[3] += ((v4u32)sum7)[0] + ((v4u32)sum7)[2];
-# 1278 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+
+ for (int y = 0; y < 16; y++)
+     {
+         for (int x = 0; x < 16; x++)
+         {
+              t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+              t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+              t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+              t_res[3] += abs(t_pix1[x] - t_pix5[x]);
+         }
+
+          t_pix1 += 64;
+          t_pix2 += frefstride;
+          t_pix3 += frefstride;
+          t_pix4 += frefstride;
+          t_pix5 += frefstride;
+     }
+
+ if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2] && t_res[3] == res[3])
+  printf("sad_x4_16x16 test success\n");
+ else
+  printf("sad_x4_16x16 test fail\n");
+
 }
 
 void sad_x4_32x32(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
-# 1292 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4, *t_pix5;
+ int32_t t_res[4] = {0, 0, 0, 0};
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ t_pix3 = pix3;
+ t_pix4 = pix4;
+ t_pix5 = pix5;
+
+
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7, tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
  v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7, rest8, rest9, rest10, rest11, cen4, cen5, cen6, cen7;
  v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7, mid8, mid9, mid10, mid11, cen8, cen9, cen10, cen11;
@@ -21945,12 +22227,46 @@ void sad_x4_32x32(const pixel* pix1, const pixel* pix2, const pixel* pix3, const
 
  res[3] = ((v4u32)sum6)[0] + ((v4u32)sum6)[2];
  res[3] += ((v4u32)sum7)[0] + ((v4u32)sum7)[2];
-# 1421 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+
+ for (int y = 0; y < 32; y++)
+     {
+         for (int x = 0; x < 32; x++)
+         {
+              t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+              t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+              t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+              t_res[3] += abs(t_pix1[x] - t_pix5[x]);
+         }
+
+          t_pix1 += 64;
+          t_pix2 += frefstride;
+          t_pix3 += frefstride;
+          t_pix4 += frefstride;
+          t_pix5 += frefstride;
+     }
+
+ if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2] && t_res[3] == res[3])
+  printf("sad_x4_32x32 test success\n");
+ else
+  printf("sad_x4_32x32 test fail\n");
+
 }
 
 void sad_x4_64x64(const pixel* pix1, const pixel* pix2, const pixel* pix3, const pixel* pix4, const pixel* pix5, intptr_t frefstride, int32_t* res)
 {
-# 1435 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2, *t_pix3, *t_pix4, *t_pix5;
+ int32_t t_res[4] = {0, 0, 0, 0};
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+ t_pix3 = pix3;
+ t_pix4 = pix4;
+ t_pix5 = pix5;
+
+
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v16u8 rest0, rest1, rest2, rest3, rest4, rest5, rest6, rest7;
  v2u64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
@@ -22041,7 +22357,32 @@ void sad_x4_64x64(const pixel* pix1, const pixel* pix2, const pixel* pix3, const
  res[1] = ((v4u32)sum1)[0] + ((v4u32)sum1)[2];
  res[2] = ((v4u32)sum2)[0] + ((v4u32)sum2)[2];
  res[3] = ((v4u32)sum3)[0] + ((v4u32)sum3)[2];
-# 1551 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+
+
+ for (int y = 0; y < 64; y++)
+     {
+         for (int x = 0; x < 64; x++)
+         {
+              t_res[0] += abs(t_pix1[x] - t_pix2[x]);
+              t_res[1] += abs(t_pix1[x] - t_pix3[x]);
+              t_res[2] += abs(t_pix1[x] - t_pix4[x]);
+              t_res[3] += abs(t_pix1[x] - t_pix5[x]);
+         }
+
+          t_pix1 += 64;
+          t_pix2 += frefstride;
+          t_pix3 += frefstride;
+          t_pix4 += frefstride;
+          t_pix5 += frefstride;
+     }
+
+ if(t_res[0] == res[0] && t_res[1] == res[1] && t_res[2] == res[2] && t_res[3] == res[3])
+  printf("sad_x4_64x64 test success\n");
+ else
+  printf("sad_x4_64x64 test fail\n");
+
 }
 
 template<int lx, int ly>
@@ -22137,7 +22478,14 @@ int ads_x1(int encDC[1], uint32_t *sums, int, uint16_t *costMvX, int16_t *mvs, i
 
 uint32_t sse_pp_a_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
-# 1654 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2;
+ uint32_t t_sum = 0;
+ int tmp;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+
+
  uint32_t sum = 0;
  v8u16 tmp0, tmp1, tmp2, tmp3;
  v8i16 mid0, mid1;
@@ -22153,13 +22501,38 @@ uint32_t sse_pp_a_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2
  res0 = __builtin_msa_dpadd_s_w(res0, mid1, mid1);
 
  sum = res0[0] + res0[1] + res0[2] + res0[3];
-# 1688 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 4; y++)
+ {
+  for (int x = 0; x < 4; x++)
+  {
+   tmp = t_pix1[x] - t_pix2[x];
+   t_sum += (tmp * tmp);
+  }
+  t_pix1 += stride_pix1;
+  t_pix2 += stride_pix2;
+ }
+
+ if (sum == t_sum)
+  printf("sse_pp_a_4x4 test success\n");
+ else
+  printf("sse_pp_a_4x4 test fail\n");
+
+
  return sum;
 }
 
 uint32_t sse_pp_a_8x8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
-# 1701 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2;
+ uint32_t t_sum = 0;
+ int tmp;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+
+
  uint32_t sum = 0;
  v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v8u16 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
@@ -22195,13 +22568,38 @@ uint32_t sse_pp_a_8x8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2
  res0 = __builtin_msa_addv_w(res0, res2);
 
  sum = res0[0] + res0[1] + res0[2] + res0[3];
-# 1755 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 8; y++)
+ {
+  for (int x = 0; x < 8; x++)
+  {
+   tmp = t_pix1[x] - t_pix2[x];
+   t_sum += (tmp * tmp);
+  }
+  t_pix1 += stride_pix1;
+  t_pix2 += stride_pix2;
+ }
+
+ if (sum == t_sum)
+  printf("sse_pp_a_8x8 test success\n");
+ else
+  printf("sse_pp_a_8x8 test fail\n");
+
+
  return sum;
 }
 
 uint32_t sse_pp_a_16x16(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
-# 1768 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2;
+ uint32_t t_sum = 0;
+ int tmp;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+
+
  uint32_t sum = 0;
  v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v8u16 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
@@ -22251,13 +22649,38 @@ uint32_t sse_pp_a_16x16(const pixel* pix1, intptr_t stride_pix1, const pixel* pi
  res0 = __builtin_msa_addv_w(res0, res2);
 
  sum = res0[0] + res0[1] + res0[2] + res0[3];
-# 1836 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 16; y++)
+ {
+  for (int x = 0; x < 16; x++)
+  {
+   tmp = t_pix1[x] - t_pix2[x];
+   t_sum += (tmp * tmp);
+  }
+  t_pix1 += stride_pix1;
+  t_pix2 += stride_pix2;
+ }
+
+ if (sum == t_sum)
+  printf("sse_pp_a_16x16 test success\n");
+ else
+  printf("sse_pp_a_16x16 test fail\n");
+
+
  return sum;
 }
 
 uint32_t sse_pp_a_32x32(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
-# 1849 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2;
+ uint32_t t_sum = 0;
+ int tmp;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+
+
  uint32_t sum = 0;
  v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v8u16 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
@@ -22303,13 +22726,38 @@ uint32_t sse_pp_a_32x32(const pixel* pix1, intptr_t stride_pix1, const pixel* pi
  res0 = __builtin_msa_addv_w(res0, res2);
 
  sum = res0[0] + res0[1] + res0[2] + res0[3];
-# 1913 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 32; y++)
+ {
+  for (int x = 0; x < 32; x++)
+  {
+   tmp = t_pix1[x] - t_pix2[x];
+   t_sum += (tmp * tmp);
+  }
+  t_pix1 += stride_pix1;
+  t_pix2 += stride_pix2;
+ }
+
+ if (sum == t_sum)
+  printf("sse_pp_a_32x32 test success\n");
+ else
+  printf("sse_pp_a_32x32 test fail\n");
+
+
  return sum;
 }
 
 uint32_t sse_pp_a_64x64(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
-# 1926 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_pix1, *t_pix2;
+ uint32_t t_sum = 0;
+ int tmp;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+
+
  uint32_t sum = 0;
  v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v8u16 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
@@ -22355,7 +22803,25 @@ uint32_t sse_pp_a_64x64(const pixel* pix1, intptr_t stride_pix1, const pixel* pi
  res0 = __builtin_msa_addv_w(res0, res2);
 
  sum = res0[0] + res0[1] + res0[2] + res0[3];
-# 1990 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 64; y++)
+ {
+  for (int x = 0; x < 64; x++)
+  {
+   tmp = t_pix1[x] - t_pix2[x];
+   t_sum += (tmp * tmp);
+  }
+  t_pix1 += stride_pix1;
+  t_pix2 += stride_pix2;
+ }
+
+ if (sum == t_sum)
+  printf("sse_pp_a_64x64 test success\n");
+ else
+  printf("sse_pp_a_64x64 test fail\n");
+
+
  return sum;
 }
 
@@ -22434,7 +22900,15 @@ inline sum2_t abs2(sum2_t a)
 
 static int satd_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
-# 2092 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+     sum2_t tmp[4][2];
+     sum2_t a0, a1, a2, a3, b0, b1;
+     sum2_t t_sum = 0;
+     const pixel *t_pix1, *t_pix2;
+     t_pix1 = pix1;
+     t_pix2 = pix2;
+
+
  int sum;
  v4i32 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
 
@@ -22495,7 +22969,33 @@ static int satd_4x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, 
  res0 = __builtin_msa_hadd_s_w(cen2, cen2);
 
  sum = res0[0] + res0[1] + res0[2] + res0[3];
-# 2190 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int i = 0; i < 4; i++, t_pix1 += stride_pix1, t_pix2 += stride_pix2)
+     {
+         a0 = t_pix1[0] - t_pix2[0];
+         a1 = t_pix1[1] - t_pix2[1];
+         b0 = (a0 + a1) + ((a0 - a1) << (8 * sizeof(sum_t)));
+         a2 = t_pix1[2] - t_pix2[2];
+         a3 = t_pix1[3] - t_pix2[3];
+         b1 = (a2 + a3) + ((a2 - a3) << (8 * sizeof(sum_t)));
+         tmp[i][0] = b0 + b1;
+         tmp[i][1] = b0 - b1;
+     }
+
+     for (int i = 0; i < 2; i++)
+     {
+         { sum2_t t0 = tmp[0][i] + tmp[1][i]; sum2_t t1 = tmp[0][i] - tmp[1][i]; sum2_t t2 = tmp[2][i] + tmp[3][i]; sum2_t t3 = tmp[2][i] - tmp[3][i]; a0 = t0 + t2; a2 = t0 - t2; a1 = t1 + t3; a3 = t1 - t3; };
+         a0 = abs2(a0) + abs2(a1) + abs2(a2) + abs2(a3);
+         t_sum += ((sum_t)a0) + (a0 >> (8 * sizeof(sum_t)));
+     }
+
+ if (sum == (t_sum >> 1))
+  printf("satd_4x4 test success\n");
+ else
+  printf("satd_4x4 test fail\n");
+
+
  return sum;
 }
 
@@ -22526,7 +23026,15 @@ static int satd_c_8x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2
 
 inline static int satd_8x4(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
-# 2229 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ sum2_t tmp[4][4];
+     sum2_t a0, a1, a2, a3;
+     sum2_t t_sum = 0;
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
+
+
  int sum;
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
@@ -22597,17 +23105,41 @@ inline static int satd_8x4(const pixel* pix1, intptr_t stride_pix1, const pixel*
  out0 = __builtin_msa_addv_w(out0, out1);
 
  sum = out0[0] + out0[1] + out0[2] + out0[3];
-# 2324 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int i = 0; i < 4; i++, t_pix1 += stride_pix1, t_pix2 += stride_pix2)
+     {
+         a0 = (t_pix1[0] - t_pix2[0]) + ((sum2_t)(t_pix1[4] - t_pix2[4]) << (8 * sizeof(sum_t)));
+         a1 = (t_pix1[1] - t_pix2[1]) + ((sum2_t)(t_pix1[5] - t_pix2[5]) << (8 * sizeof(sum_t)));
+         a2 = (t_pix1[2] - t_pix2[2]) + ((sum2_t)(t_pix1[6] - t_pix2[6]) << (8 * sizeof(sum_t)));
+         a3 = (t_pix1[3] - t_pix2[3]) + ((sum2_t)(t_pix1[7] - t_pix2[7]) << (8 * sizeof(sum_t)));
+         { sum2_t t0 = a0 + a1; sum2_t t1 = a0 - a1; sum2_t t2 = a2 + a3; sum2_t t3 = a2 - a3; tmp[i][0] = t0 + t2; tmp[i][2] = t0 - t2; tmp[i][1] = t1 + t3; tmp[i][3] = t1 - t3; };
+     }
+
+    for (int i = 0; i < 4; i++)
+    {
+         { sum2_t t0 = tmp[0][i] + tmp[1][i]; sum2_t t1 = tmp[0][i] - tmp[1][i]; sum2_t t2 = tmp[2][i] + tmp[3][i]; sum2_t t3 = tmp[2][i] - tmp[3][i]; a0 = t0 + t2; a2 = t0 - t2; a1 = t1 + t3; a3 = t1 - t3; };
+         t_sum += abs2(a0) + abs2(a1) + abs2(a2) + abs2(a3);
+     }
+
+     t_sum = (((sum_t)t_sum) + (t_sum >> (8 * sizeof(sum_t)))) >> 1;
+
+ if (sum == t_sum)
+  printf("satd_8x4 test success\n");
+ else
+  printf("satd_8x4 test fail\n");
+
+
  return sum;
 }
 
 int satd8_8x8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 
-
-
-
-
+ int t_satd = 0;
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
 
 
  int satd;
@@ -22749,7 +23281,22 @@ int satd8_8x8(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr
  output0 = __builtin_msa_addv_w(output0, output1);
 
  satd = output0[0] + output0[1] + output0[2] + output0[3];
-# 2499 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 2484 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+ for (int row = 0; row < 8; row += 4)
+         for (int col = 0; col < 8; col += 8)
+              t_satd += satd_c_8x4(t_pix1 + row * stride_pix1 + col, stride_pix1,
+                                t_pix2 + row * stride_pix2 + col, stride_pix2);
+
+ if (satd == t_satd)
+  printf("satd8_8x8 test success\n");
+ else
+  {
+   printf("satd8_8x8 test fail\n");
+   printf("right value %d\n", t_satd);
+   printf("wrong value %d\n", satd);
+  }
+
+
  return satd;
 }
 
@@ -22901,10 +23448,10 @@ inline static int satd_16x4(const pixel* pix1, intptr_t stride_pix1, const pixel
 int satd8_16x16(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 
-
-
-
-
+ int t_satd = 0;
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
 
 
  int satd = 0;
@@ -22916,17 +23463,28 @@ int satd8_16x16(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intp
   pix1 += 4 * stride_pix1;
   pix2 += 4 * stride_pix2;
  }
-# 2697 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 2686 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+ for (int row = 0; row < 16; row += 4)
+         for (int col = 0; col < 16; col += 8)
+              t_satd += satd_c_8x4(t_pix1 + row * stride_pix1 + col, stride_pix1,
+                                t_pix2 + row * stride_pix2 + col, stride_pix2);
+
+ if (satd == t_satd)
+  printf("satd8_16x16 test success\n");
+ else
+  printf("satd8_16x16 test fail\n");
+
+
  return satd;
 }
 
 int satd8_32x32(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 
-
-
-
-
+ int t_satd = 0;
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
 
 
  int satd = 0;
@@ -22941,17 +23499,29 @@ int satd8_32x32(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intp
   pix1 += 4 * stride_pix1;
   pix2 += 4 * stride_pix2;
  }
-# 2734 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int row = 0; row < 32; row += 4)
+         for (int col = 0; col < 32; col += 8)
+              t_satd += satd_c_8x4(t_pix1 + row * stride_pix1 + col, stride_pix1,
+                                t_pix2 + row * stride_pix2 + col, stride_pix2);
+
+ if (satd == t_satd)
+  printf("satd8_32x32 test success\n");
+ else
+  printf("satd8_32x32 test fail\n");
+
+
  return satd;
 }
 
 int satd8_64x64(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {
 
-
-
-
-
+ int t_satd = 0;
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
 
 
  int satd = 0;
@@ -22966,7 +23536,19 @@ int satd8_64x64(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intp
   pix1 += 4 * stride_pix1;
   pix2 += 4 * stride_pix2;
  }
-# 2771 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int row = 0; row < 64; row += 4)
+         for (int col = 0; col < 64; col += 8)
+              t_satd += satd_c_8x4(t_pix1 + row * stride_pix1 + col, stride_pix1,
+                                t_pix2 + row * stride_pix2 + col, stride_pix2);
+
+ if (satd == t_satd)
+  printf("satd8_64x64 test success\n");
+ else
+  printf("satd8_64x64 test fail\n");
+
+
  return satd;
 }
 
@@ -23054,10 +23636,10 @@ inline int sa8d_c_8x8(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, int
 inline int sa8d_8x8_internal(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
 
-
-
-
-
+ int t_sum;
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
 
 
  int sum;
@@ -23254,17 +23836,25 @@ inline int sa8d_8x8_internal(const pixel* pix1, intptr_t i_pix1, const pixel* pi
  sum = out0[0] + out0[1] + out0[2] + out0[3];
 
  sum = (sum + 1) >> 1;
-# 3067 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ t_sum = (int)((_sa8d_8x8(t_pix1, i_pix1, t_pix2, i_pix2) + 2) >> 2);
+ if (sum == t_sum)
+  printf("sa8d_8x8_internal test success\n");
+ else
+  printf("sa8d_8x8_internal test fail\n");
+
+
  return sum;
 }
 
 int sa8d_8x8(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
 
-
-
-
-
+ int t_sum;
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
 
 
  int sum;
@@ -23428,7 +24018,19 @@ int sa8d_8x8(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_p
  sum = out0[0] + out0[1] + out0[2] + out0[3];
 
  sum = (sum + 1) >> 1;
-# 3253 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ t_sum = (int)((_sa8d_8x8(t_pix1, i_pix1, t_pix2, i_pix2) + 2) >> 2);
+ if (sum == t_sum)
+  printf("sa8d_8x8 test success\n");
+ else
+  {
+   printf("sa8d_8x8 test fail\n");
+   printf("right value %d\n", t_sum);
+   printf("wrong value %d\n", sum);
+  }
+
+
  return sum;
 }
 
@@ -23447,10 +24049,10 @@ static int sa8d_c_16x16(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, i
 int sa8d_16x16(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
 
-
-
-
-
+ int t_sum;
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
 
 
  int sum = 0;
@@ -23465,17 +24067,34 @@ int sa8d_16x16(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i
   pix1 += 8 * i_pix1;
   pix2 += 8 * i_pix2;
  }
-# 3307 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ t_sum = ((_sa8d_8x8(t_pix1, i_pix1, t_pix2, i_pix2) + 2) >> 2)
+        + ((_sa8d_8x8(t_pix1 + 8, i_pix1, t_pix2 + 8, i_pix2) + 2) >> 2)
+        + ((_sa8d_8x8(t_pix1 + 8 * i_pix1, i_pix1, t_pix2 + 8 * i_pix2, i_pix2) + 2) >> 2)
+        + ((_sa8d_8x8(t_pix1 + 8 + 8 * i_pix1, i_pix1, t_pix2 + 8 + 8 * i_pix2, i_pix2) + 2) >> 2);
+
+ if (sum == t_sum)
+  printf("sa8d_16x16 test success\n");
+ else
+ {
+  printf("sa8d_16x16 test fail\n");
+  printf("right value %d\n", t_sum);
+  printf("wrong value %d\n", sum);
+ }
+
+
+
  return sum;
 }
 
 int sa8d_32x32(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
 
-
-
-
-
+ int t_sum = 0;
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
 
 
  int sum = 0;
@@ -23490,17 +24109,28 @@ int sa8d_32x32(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i
   pix1 += 8 * i_pix1;
   pix2 += 8 * i_pix2;
  }
-# 3343 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 32; y += 8)
+         for (int x = 0; x < 32; x += 8)
+              t_sum += sa8d_c_8x8(t_pix1 + i_pix1 * y + x, i_pix1, t_pix2 + i_pix2 * y + x, i_pix2);
+
+ if (sum == t_sum)
+  printf("sa8d_32x32 test success\n");
+ else
+  printf("sa8d_32x32 test fail\n");
+
+
  return sum;
 }
 
 int sa8d_64x64(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
 
-
-
-
-
+ int t_sum = 0;
+ const pixel *t_pix1, *t_pix2;
+ t_pix1 = pix1;
+ t_pix2 = pix2;
 
 
  int sum = 0;
@@ -23515,7 +24145,18 @@ int sa8d_64x64(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i
   pix1 += 8 * i_pix1;
   pix2 += 8 * i_pix2;
  }
-# 3379 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 64; y += 8)
+         for (int x = 0; x < 64; x += 8)
+              t_sum += sa8d_c_8x8(t_pix1 + i_pix1 * y + x, i_pix1, t_pix2 + i_pix2 * y + x, i_pix2);
+
+ if (sum == t_sum)
+  printf("sa8d_64x64 test success\n");
+ else
+  printf("sa8d_64x64 test fail\n");
+
+
  return sum;
 }
 
@@ -23562,8 +24203,8 @@ sse_t pixel_ssd_s_c(const int16_t* a, intptr_t dstride)
 void blockfill_s_4x4(int16_t* dst, intptr_t dstride, int16_t val)
 {
 
-
-
+ int16_t *t_dst;
+ t_dst = dst;
 
 
  v2i64 tmp;
@@ -23573,14 +24214,26 @@ void blockfill_s_4x4(int16_t* dst, intptr_t dstride, int16_t val)
  tmp = (v2i64)__builtin_msa_shf_h((v8i16)tmp, 0);
 
  SD4(tmp, tmp, tmp, tmp, (pixel *)dst, 2 * dstride);
-# 3449 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 4; y++)
+         for (int x = 0; x < 4; x++)
+  {
+              if (t_dst[y * dstride + x] != val)
+   {
+    printf("blockfill_s_4x4 test fail\n");
+    return;
+   }
+  }
+ printf("blockfill_s_4x4 test success\n");
+
 }
 
 void blockfill_s_8x8(int16_t* dst, intptr_t dstride, int16_t val)
 {
 
-
-
+ int16_t *t_dst;
+ t_dst = dst;
 
 
  v2i64 tmp;
@@ -23591,15 +24244,26 @@ void blockfill_s_8x8(int16_t* dst, intptr_t dstride, int16_t val)
 
  ST_V4(tmp, tmp, tmp, tmp, (pixel *)dst, 2 * dstride);
  ST_V4(tmp, tmp, tmp, tmp, (pixel *)(dst + 4 * dstride), 2 * dstride);
-# 3478 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ for (int y = 0; y < 8; y++)
+         for (int x = 0; x < 8; x++)
+  {
+              if (t_dst[y * dstride + x] != val)
+   {
+    printf("blockfill_s_8x8 test fail\n");
+    return;
+   }
+  }
+ printf("blockfill_s_8x8 test success\n");
+
 }
 
 
 void blockfill_s_16x16(int16_t* dst, intptr_t dstride, int16_t val)
 {
 
-
-
+ int16_t *t_dst;
+ t_dst = dst;
 
 
  v2i64 tmp;
@@ -23633,14 +24297,26 @@ void blockfill_s_16x16(int16_t* dst, intptr_t dstride, int16_t val)
  ST_V2_H(tmp, tmp, (pixel *)(dst + dstride));
  ST_V2_H(tmp, tmp, (pixel *)(dst + 2 * dstride));
  ST_V2_H(tmp, tmp, (pixel *)(dst + 3 * dstride));
-# 3532 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 16; y++)
+         for (int x = 0; x < 16; x++)
+  {
+              if (t_dst[y * dstride + x] != val)
+   {
+    printf("blockfill_s_16x16 test fail\n");
+    return;
+   }
+  }
+ printf("blockfill_s_16x16 test success\n");
+
 }
 
 void blockfill_s_32x32(int16_t* dst, intptr_t dstride, int16_t val)
 {
 
-
-
+ int16_t *t_dst;
+ t_dst = dst;
 
 
  v2i64 tmp;
@@ -23702,7 +24378,19 @@ void blockfill_s_32x32(int16_t* dst, intptr_t dstride, int16_t val)
  ST_V4_H(tmp, tmp, tmp, tmp, (pixel *)(dst + dstride));
  ST_V4_H(tmp, tmp, tmp, tmp, (pixel *)(dst + 2 * dstride));
  ST_V4_H(tmp, tmp, tmp, tmp, (pixel *)(dst + 3 * dstride));
-# 3613 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 32; y++)
+         for (int x = 0; x < 32; x++)
+  {
+              if (t_dst[y * dstride + x] != val)
+   {
+    printf("blockfill_s_32x32 test fail\n");
+    return;
+   }
+  }
+ printf("blockfill_s_32x32 test success\n");
+
 }
 template<int size>
 void blockfill_s_c(int16_t* dst, intptr_t dstride, int16_t val)
@@ -23803,7 +24491,14 @@ void cpy1Dto2D_shr(int16_t* dst, const int16_t* src, intptr_t dstStride, int shi
 
 void getResidual_4x4(const pixel* fenc, const pixel* pred, int16_t* residual, intptr_t stride)
 {
-# 3721 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_fenc, *t_pred;
+ int16_t *t_residual;
+ t_fenc = fenc;
+ t_pred = pred;
+ t_residual = residual;
+
+
  v8u16 tmp0, tmp1, tmp2, tmp3;
  v8i16 res0, res1;
 
@@ -23812,12 +24507,38 @@ void getResidual_4x4(const pixel* fenc, const pixel* pred, int16_t* residual, in
  res0 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp2);
  res1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp3);
  S_4x4_H(res0, res1, residual, stride);
-# 3749 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 4; y++)
+     {
+         for (int x = 0; x < 4; x++)
+  {
+   if (t_residual[x] != (static_cast<int16_t>(t_fenc[x]) - static_cast<int16_t>(t_pred[x])))
+   {
+    printf("getResidual_4x4 test fail\n");
+    return;
+   }
+  }
+
+         t_fenc += stride;
+         t_residual += stride;
+         t_pred += stride;
+     }
+
+ printf("getResidual_4x4 test success\n");
+
 }
 
 void getResidual_8x8(const pixel* fenc, const pixel* pred, int16_t* residual, intptr_t stride)
 {
-# 3761 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_fenc, *t_pred;
+ int16_t *t_residual;
+ t_fenc = fenc;
+ t_pred = pred;
+ t_residual = residual;
+
+
  v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
  v8i16 res0, res1, res2, res3, res4, res5, res6, res7;
@@ -23849,12 +24570,38 @@ void getResidual_8x8(const pixel* fenc, const pixel* pred, int16_t* residual, in
  residual += 4 * stride;
 
  ST_V4((v2i64)res4, (v2i64)res5, (v2i64)res6, (v2i64)res7, (pixel *)residual, 2 * stride);
-# 3812 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 8; y++)
+     {
+         for (int x = 0; x < 8; x++)
+  {
+   if (t_residual[x] != (static_cast<int16_t>(t_fenc[x]) - static_cast<int16_t>(t_pred[x])))
+   {
+    printf("getResidual_8x8 test fail\n");
+    return;
+   }
+  }
+
+         t_fenc += stride;
+         t_residual += stride;
+         t_pred += stride;
+     }
+
+ printf("getResidual_8x8 test success\n");
+
 }
 
 void getResidual_16x16(const pixel* fenc, const pixel* pred, int16_t* residual, intptr_t stride)
 {
-# 3824 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_fenc, *t_pred;
+ int16_t *t_residual;
+ t_fenc = fenc;
+ t_pred = pred;
+ t_residual = residual;
+
+
  v8u16 tmp0, tmp1, tmp2, tmp3, mid0, mid1, mid2, mid3;
  v8u16 tmp8, tmp9, tmp10, tmp11, mid8, mid9, mid10, mid11;
  v8i16 tmp12, tmp13, tmp14, tmp15, mid12, mid13, mid14, mid15;
@@ -23899,12 +24646,38 @@ void getResidual_16x16(const pixel* fenc, const pixel* pred, int16_t* residual, 
   pred += 2 * stride;
   residual += 2 * stride;
  }
-# 3888 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 16; y++)
+     {
+         for (int x = 0; x < 16; x++)
+  {
+   if (t_residual[x] != (static_cast<int16_t>(t_fenc[x]) - static_cast<int16_t>(t_pred[x])))
+   {
+    printf("getResidual_16x16 test fail\n");
+    return;
+   }
+  }
+
+         t_fenc += stride;
+         t_residual += stride;
+         t_pred += stride;
+     }
+
+ printf("getResidual_16x16 test success\n");
+
 }
 
 void getResidual_32x32(const pixel* fenc, const pixel* pred, int16_t* residual, intptr_t stride)
 {
-# 3900 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_fenc, *t_pred;
+ int16_t *t_residual;
+ t_fenc = fenc;
+ t_pred = pred;
+ t_residual = residual;
+
+
  v8u16 tmp0, tmp1, tmp2, tmp3, mid0, mid1, mid2, mid3;
  v8u16 tmp8, tmp9, tmp10, tmp11, mid8, mid9, mid10, mid11;
  v8i16 tmp12, tmp13, tmp14, tmp15, mid12, mid13, mid14, mid15;
@@ -23934,7 +24707,26 @@ void getResidual_32x32(const pixel* fenc, const pixel* pred, int16_t* residual, 
   pred += 2 * stride;
   residual += 2 * stride;
  }
-# 3949 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 32; y++)
+     {
+         for (int x = 0; x < 32; x++)
+  {
+   if (t_residual[x] != (static_cast<int16_t>(t_fenc[x]) - static_cast<int16_t>(t_pred[x])))
+   {
+    printf("getResidual_32x32 test fail\n");
+    return;
+   }
+  }
+
+         t_fenc += stride;
+         t_residual += stride;
+         t_pred += stride;
+     }
+
+ printf("getResidual_32x32 test success\n");
+
 }
 
 template<int blockSize>
@@ -24025,7 +24817,22 @@ static void weight_pp_c(const pixel* src, pixel* dst, intptr_t stride, int width
 
 static void weight_pp(const pixel* src, pixel* dst, intptr_t stride, int width, int height, int w0, int round, int shift, int offset)
 {
-# 4062 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ int x, y;
+ const int correction = (14 - 8);
+ const pixel *t_src;
+ pixel *t_dst;
+ int t_width, t_height, t_w0, t_round, t_shift, t_offset;
+ t_src = src;
+ t_dst = dst;
+ t_width = width;
+ t_height = height;
+ t_w0 = w0;
+ t_round = round;
+ t_shift = shift;
+ t_offset = offset;
+
+
  int constant;
  w0 = w0 << 6;
  round = round << 16;
@@ -24096,7 +24903,33 @@ static void weight_pp(const pixel* src, pixel* dst, intptr_t stride, int width, 
   src += stride;
   dst += stride;
  }
-# 4159 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (y = 0; y <= t_height - 1; y++)
+     {
+         for (x = 0; x <= t_width - 1; )
+         {
+
+              int16_t val = t_src[x] << correction;
+              if (t_dst[x] != x265_clip(((t_w0 * (val) + t_round) >> t_shift) + t_offset))
+   {
+    printf("weight_pp test fail\n");
+    printf("fail at %d %d\n", y, x);
+    printf("source is %d w0 is %d round is %d shift is %d offset is %d\n", t_src[x], t_w0, t_round, t_shift, t_offset);
+    printf("right value %d\n", x265_clip(((t_w0 * (val) + t_round) >> t_shift) + t_offset));
+    printf("wrong value %d\n", t_dst[x]);
+    return;
+   }
+              x++;
+         }
+
+         t_src += stride;
+         t_dst += stride;
+     }
+
+ printf("weight_pp test success\n");
+
+
 }
 
 template<int lx, int ly>
@@ -24115,7 +24948,14 @@ void pixelavg_pp(pixel* dst, intptr_t dstride, const pixel* src0, intptr_t sstri
 
 void pixelavg_pp_8x8(pixel* dst, intptr_t dstride, const pixel* src0, intptr_t sstride0, const pixel* src1, intptr_t sstride1, int)
 {
-# 4185 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ pixel *t_dst;
+ const pixel *t_src0, *t_src1;
+ t_dst = dst;
+ t_src0 = src0;
+ t_src1 = src1;
+
+
  v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v2i64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
  v16u8 res0, res1, res2, res3;
@@ -24143,7 +24983,26 @@ void pixelavg_pp_8x8(pixel* dst, intptr_t dstride, const pixel* src0, intptr_t s
 
  SD4((v2i64)res0, (v2i64)res1, (v2i64)res2, (v2i64)res3, dst, dstride);
  SD4_1((v2i64)res0, (v2i64)res1, (v2i64)res2, (v2i64)res3, dst + 4 * dstride, dstride);
-# 4232 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < 8; y++)
+     {
+         for (int x = 0; x < 8; x++)
+             {
+   if (t_dst[x] != (t_src0[x] + t_src1[x] + 1) >> 1)
+   {
+    printf("pixelavg_pp_8x8 test fail\n");
+    return;
+   }
+  }
+
+         t_src0 += sstride0;
+         t_src1 += sstride1;
+         t_dst += dstride;
+     }
+
+ printf("pixelavg_pp_8x8 test success\n");
+
 }
 
 static void scale1D_128to64(pixel *dst, const pixel *src)
@@ -24221,7 +25080,19 @@ static
 void frame_init_lowres_core(const pixel* src0, pixel* dst0, pixel* dsth, pixel* dstv, pixel* dstc,
                             intptr_t src_stride, intptr_t dst_stride, int width, int height)
 {
-# 4322 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ const pixel *t_src0;
+ pixel *t_dst0, *t_dsth, *t_dstv, *t_dstc;
+ int t_width, t_height;
+ t_src0 = src0;
+ t_dst0 = dst0;
+ t_dsth = dsth;
+ t_dstv = dstv;
+ t_dstc = dstc;
+ t_width = width;
+ t_height = height;
+
+
  width = (width + 15) & (~15);
 
  src0 += 2 * ((height - 1) * src_stride + width);
@@ -24294,7 +25165,58 @@ void frame_init_lowres_core(const pixel* src0, pixel* dst0, pixel* dsth, pixel* 
   dstv -= con1;
   dstc -= con1;
  }
-# 4446 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+
+ for (int y = 0; y < t_height; y++)
+     {
+         const pixel* t_src1 = t_src0 + src_stride;
+         const pixel* t_src2 = t_src1 + src_stride;
+         for (int x = 0; x < t_width; x++)
+         {
+
+
+              if (t_dst0[x] != ((((t_src0[2 * x] + t_src1[2 * x] + 1) >> 1) + ((t_src0[2 * x + 1] + t_src1[2 * x + 1] + 1) >> 1) + 1) >> 1))
+   {
+    printf("frame_init_lowres_core test fail\n");
+    printf("fail at dst0\nright value %d\nwrong value %d\n", ((((t_src0[2 * x] + t_src1[2 * x] + 1) >> 1) + ((t_src0[2 * x + 1] + t_src1[2 * x + 1] + 1) >> 1) + 1) >> 1), t_dst0[x]);
+    printf("width is %d\nheight is %d\n", x, y);
+    return;
+   }
+
+   if (t_dsth[x] != ((((t_src0[2 * x + 1] + t_src1[2 * x + 1] + 1) >> 1) + ((t_src0[2 * x + 2] + t_src1[2 * x + 2] + 1) >> 1) + 1) >> 1))
+   {
+    printf("frame_init_lowres_core test fail\n");
+    printf("fail at dsth\nright value %d\nwrong value %d\n", ((((t_src0[2 * x + 1] + t_src1[2 * x + 1] + 1) >> 1) + ((t_src0[2 * x + 2] + t_src1[2 * x + 2] + 1) >> 1) + 1) >> 1), t_dsth[x]);
+    printf("width is %d\nheight is %d\n", x, y);
+    return;
+   }
+
+              if (t_dstv[x] != ((((t_src1[2 * x] + t_src2[2 * x] + 1) >> 1) + ((t_src1[2 * x + 1] + t_src2[2 * x + 1] + 1) >> 1) + 1) >> 1))
+   {
+    printf("frame_init_lowres_core test fail\n");
+    printf("fail at dstv\nright value %d\nwrong value %d\n", ((((t_src1[2 * x] + t_src2[2 * x] + 1) >> 1) + ((t_src1[2 * x + 1] + t_src2[2 * x + 1] + 1) >> 1) + 1) >> 1), t_dsth[x]);
+    printf("width is %d\nheight is %d\n", x, y);
+    return;
+   }
+
+              if (t_dstc[x] != ((((t_src1[2 * x + 1] + t_src2[2 * x + 1] + 1) >> 1) + ((t_src1[2 * x + 2] + t_src2[2 * x + 2] + 1) >> 1) + 1) >> 1))
+   {
+    printf("frame_init_lowres_core test fail\n");
+    printf("fail at dstc\nright value %d\nwrong value %d\n", ((((t_src1[2 * x + 1] + t_src2[2 * x + 1] + 1) >> 1) + ((t_src1[2 * x + 2] + t_src2[2 * x + 2] + 1) >> 1) + 1) >> 1), t_dsth[x]);
+    printf("width is %d\nheight is %d\n", x, y);
+    return;
+   }
+
+         }
+         t_src0 += src_stride * 2;
+         t_dst0 += dst_stride;
+         t_dsth += dst_stride;
+         t_dstv += dst_stride;
+         t_dstc += dst_stride;
+     }
+
+ printf("frame_init_lowres_core test success\n");
+
 }
 
 
@@ -24359,6 +25281,286 @@ static float ssim_end_4(int sum0[5][4], int sum1[5][4], int width)
     }
 
     return ssim;
+}
+
+uint64_t pixel_var_8x8(const pixel* pix, intptr_t i_stride)
+{
+
+ const pixel *t_pix;
+ uint32_t sum = 0, sqr = 0;
+ t_pix = pix;
+
+
+ uint32_t output0, output1;
+ uint64_t output;
+ v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+ v8i16 mid0, mid1, mid2, mid3;
+ v4u32 res0, res1, res2, res3, res4, res5, res6, res7;
+ v4u32 out0, out1, out2, out3;
+ v4i32 cen0, cen1, cen2, cen3, cen4, cen5;
+
+ LD4_BtoH(pix, i_stride, &tmp0, &tmp1, &tmp2, &tmp3);
+ LD4_BtoH(pix + 4 * i_stride, i_stride, &tmp4, &tmp5, &tmp6, &tmp7);
+
+ mid0 = __builtin_msa_addv_h((v8i16)tmp0, (v8i16)tmp4);
+ mid1 = __builtin_msa_addv_h((v8i16)tmp1, (v8i16)tmp5);
+ mid2 = __builtin_msa_addv_h((v8i16)tmp2, (v8i16)tmp6);
+ mid3 = __builtin_msa_addv_h((v8i16)tmp3, (v8i16)tmp7);
+
+ res0 = __builtin_msa_dotp_u_w(tmp0, tmp0);
+ res1 = __builtin_msa_dotp_u_w(tmp1, tmp1);
+ res2 = __builtin_msa_dotp_u_w(tmp2, tmp2);
+ res3 = __builtin_msa_dotp_u_w(tmp3, tmp3);
+ res4 = __builtin_msa_dotp_u_w(tmp4, tmp4);
+ res5 = __builtin_msa_dotp_u_w(tmp5, tmp5);
+ res6 = __builtin_msa_dotp_u_w(tmp6, tmp6);
+ res7 = __builtin_msa_dotp_u_w(tmp7, tmp7);
+
+ out0 = __builtin_msa_hadd_u_w((v8u16)mid0, (v8u16)mid0);
+ out1 = __builtin_msa_hadd_u_w((v8u16)mid1, (v8u16)mid1);
+ out2 = __builtin_msa_hadd_u_w((v8u16)mid2, (v8u16)mid2);
+ out3 = __builtin_msa_hadd_u_w((v8u16)mid3, (v8u16)mid3);
+
+ cen0 = __builtin_msa_addv_w((v4i32)res0, (v4i32)res1);
+ cen1 = __builtin_msa_addv_w((v4i32)res2, (v4i32)res3);
+ cen2 = __builtin_msa_addv_w((v4i32)res4, (v4i32)res5);
+ cen3 = __builtin_msa_addv_w((v4i32)res6, (v4i32)res7);
+
+ cen4 = __builtin_msa_addv_w((v4i32)out0, (v4i32)out1);
+ cen5 = __builtin_msa_addv_w((v4i32)out2, (v4i32)out3);
+
+ cen0 = __builtin_msa_addv_w(cen0, cen1);
+ cen2 = __builtin_msa_addv_w(cen2, cen3);
+
+ cen4 = __builtin_msa_addv_w(cen4, cen5);
+
+ cen0 = __builtin_msa_addv_w(cen0, cen2);
+
+ output0 = (uint32_t)(cen4[0] + cen4[1] + cen4[2] + cen4[3]);
+ output1 = (uint32_t)(cen0[0] + cen0[1] + cen0[2] + cen0[3]);
+
+ output = ((uint64_t)output1 << 32) + output0;
+
+
+ for (int y = 0; y < 8; y++)
+     {
+         for (int x = 0; x < 8; x++)
+         {
+              sum += t_pix[x];
+              sqr += t_pix[x] * t_pix[x];
+         }
+
+         t_pix += i_stride;
+     }
+
+ if (output == (sum + ((uint64_t)sqr << 32)))
+  printf("pixel_var_8x8 test success\n");
+ else
+  printf("pixel_var_8x8 test fail\n");
+
+
+ return output;
+}
+
+uint64_t pixel_var_16x16(const pixel* pix, intptr_t i_stride)
+{
+
+ const pixel *t_pix;
+ uint32_t sum = 0, sqr = 0;
+ t_pix = pix;
+
+
+ uint32_t output0, output1;
+ uint64_t output;
+ v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+ v8u16 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
+ v8i16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+ v4u32 res0, res1, res2, res3, res4, res5, res6, res7;
+ v4u32 res8, res9, res10, res11, res12, res13, res14, res15;
+ v4u32 out0, out1, out2, out3, out4, out5, out6, out7;
+ v4i32 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+ v4i32 cen8, cen9, cen10, cen11;
+ v4i32 sum0, sum1, sum2, sum3, sum4, sum5;
+
+ LD2_H_BtoH(pix, &tmp0, &tmp1);
+ LD2_H_BtoH(pix + i_stride, &tmp2, &tmp3);
+ LD2_H_BtoH(pix + 2 * i_stride, &tmp4, &tmp5);
+ LD2_H_BtoH(pix + 3 * i_stride, &tmp6, &tmp7);
+
+ pix += 4 * i_stride;
+
+ LD2_H_BtoH(pix, &tmp8, &tmp9);
+ LD2_H_BtoH(pix + i_stride, &tmp10, &tmp11);
+ LD2_H_BtoH(pix + 2 * i_stride, &tmp12, &tmp13);
+ LD2_H_BtoH(pix + 3 * i_stride, &tmp14, &tmp15);
+
+ pix += 4 * i_stride;
+
+ mid0 = __builtin_msa_addv_h((v8i16)tmp0, (v8i16)tmp4);
+ mid1 = __builtin_msa_addv_h((v8i16)tmp1, (v8i16)tmp5);
+ mid2 = __builtin_msa_addv_h((v8i16)tmp2, (v8i16)tmp6);
+ mid3 = __builtin_msa_addv_h((v8i16)tmp3, (v8i16)tmp7);
+ mid4 = __builtin_msa_addv_h((v8i16)tmp8, (v8i16)tmp12);
+ mid5 = __builtin_msa_addv_h((v8i16)tmp9, (v8i16)tmp13);
+ mid6 = __builtin_msa_addv_h((v8i16)tmp10, (v8i16)tmp14);
+ mid7 = __builtin_msa_addv_h((v8i16)tmp11, (v8i16)tmp15);
+
+ res0 = __builtin_msa_dotp_u_w(tmp0, tmp0);
+ res1 = __builtin_msa_dotp_u_w(tmp1, tmp1);
+ res2 = __builtin_msa_dotp_u_w(tmp2, tmp2);
+ res3 = __builtin_msa_dotp_u_w(tmp3, tmp3);
+ res4 = __builtin_msa_dotp_u_w(tmp4, tmp4);
+ res5 = __builtin_msa_dotp_u_w(tmp5, tmp5);
+ res6 = __builtin_msa_dotp_u_w(tmp6, tmp6);
+ res7 = __builtin_msa_dotp_u_w(tmp7, tmp7);
+ res8 = __builtin_msa_dotp_u_w(tmp8, tmp8);
+ res9 = __builtin_msa_dotp_u_w(tmp9, tmp9);
+ res10 = __builtin_msa_dotp_u_w(tmp10, tmp10);
+ res11 = __builtin_msa_dotp_u_w(tmp11, tmp11);
+ res12 = __builtin_msa_dotp_u_w(tmp12, tmp12);
+ res13 = __builtin_msa_dotp_u_w(tmp13, tmp13);
+ res14 = __builtin_msa_dotp_u_w(tmp14, tmp14);
+ res15 = __builtin_msa_dotp_u_w(tmp15, tmp15);
+
+ out0 = __builtin_msa_hadd_u_w((v8u16)mid0, (v8u16)mid0);
+ out1 = __builtin_msa_hadd_u_w((v8u16)mid1, (v8u16)mid1);
+ out2 = __builtin_msa_hadd_u_w((v8u16)mid2, (v8u16)mid2);
+ out3 = __builtin_msa_hadd_u_w((v8u16)mid3, (v8u16)mid3);
+ out4 = __builtin_msa_hadd_u_w((v8u16)mid4, (v8u16)mid4);
+ out5 = __builtin_msa_hadd_u_w((v8u16)mid5, (v8u16)mid5);
+ out6 = __builtin_msa_hadd_u_w((v8u16)mid6, (v8u16)mid6);
+ out7 = __builtin_msa_hadd_u_w((v8u16)mid7, (v8u16)mid7);
+
+ cen0 = __builtin_msa_addv_w((v4i32)res0, (v4i32)res1);
+ cen1 = __builtin_msa_addv_w((v4i32)res2, (v4i32)res3);
+ cen2 = __builtin_msa_addv_w((v4i32)res4, (v4i32)res5);
+ cen3 = __builtin_msa_addv_w((v4i32)res6, (v4i32)res7);
+ cen4 = __builtin_msa_addv_w((v4i32)res8, (v4i32)res9);
+ cen5 = __builtin_msa_addv_w((v4i32)res10, (v4i32)res11);
+ cen6 = __builtin_msa_addv_w((v4i32)res12, (v4i32)res13);
+ cen7 = __builtin_msa_addv_w((v4i32)res14, (v4i32)res15);
+
+ cen8 = __builtin_msa_addv_w((v4i32)out0, (v4i32)out1);
+ cen9 = __builtin_msa_addv_w((v4i32)out2, (v4i32)out3);
+ cen10 = __builtin_msa_addv_w((v4i32)out4, (v4i32)out5);
+ cen11 = __builtin_msa_addv_w((v4i32)out6, (v4i32)out7);
+
+ sum0 = __builtin_msa_addv_w(cen0, cen1);
+ sum1 = __builtin_msa_addv_w(cen2, cen3);
+ sum2 = __builtin_msa_addv_w(cen4, cen5);
+ sum3 = __builtin_msa_addv_w(cen6, cen7);
+
+ sum4 = __builtin_msa_addv_w(cen8, cen9);
+ sum5 = __builtin_msa_addv_w(cen10, cen11);
+
+ LD2_H_BtoH(pix, &tmp0, &tmp1);
+ LD2_H_BtoH(pix + i_stride, &tmp2, &tmp3);
+ LD2_H_BtoH(pix + 2 * i_stride, &tmp4, &tmp5);
+ LD2_H_BtoH(pix + 3 * i_stride, &tmp6, &tmp7);
+
+ pix += 4 * i_stride;
+
+ LD2_H_BtoH(pix, &tmp8, &tmp9);
+ LD2_H_BtoH(pix + i_stride, &tmp10, &tmp11);
+ LD2_H_BtoH(pix + 2 * i_stride, &tmp12, &tmp13);
+ LD2_H_BtoH(pix + 3 * i_stride, &tmp14, &tmp15);
+
+ mid0 = __builtin_msa_addv_h((v8i16)tmp0, (v8i16)tmp4);
+ mid1 = __builtin_msa_addv_h((v8i16)tmp1, (v8i16)tmp5);
+ mid2 = __builtin_msa_addv_h((v8i16)tmp2, (v8i16)tmp6);
+ mid3 = __builtin_msa_addv_h((v8i16)tmp3, (v8i16)tmp7);
+ mid4 = __builtin_msa_addv_h((v8i16)tmp8, (v8i16)tmp12);
+ mid5 = __builtin_msa_addv_h((v8i16)tmp9, (v8i16)tmp13);
+ mid6 = __builtin_msa_addv_h((v8i16)tmp10, (v8i16)tmp14);
+ mid7 = __builtin_msa_addv_h((v8i16)tmp11, (v8i16)tmp15);
+
+ res0 = __builtin_msa_dotp_u_w(tmp0, tmp0);
+ res1 = __builtin_msa_dotp_u_w(tmp1, tmp1);
+ res2 = __builtin_msa_dotp_u_w(tmp2, tmp2);
+ res3 = __builtin_msa_dotp_u_w(tmp3, tmp3);
+ res4 = __builtin_msa_dotp_u_w(tmp4, tmp4);
+ res5 = __builtin_msa_dotp_u_w(tmp5, tmp5);
+ res6 = __builtin_msa_dotp_u_w(tmp6, tmp6);
+ res7 = __builtin_msa_dotp_u_w(tmp7, tmp7);
+ res8 = __builtin_msa_dotp_u_w(tmp8, tmp8);
+ res9 = __builtin_msa_dotp_u_w(tmp9, tmp9);
+ res10 = __builtin_msa_dotp_u_w(tmp10, tmp10);
+ res11 = __builtin_msa_dotp_u_w(tmp11, tmp11);
+ res12 = __builtin_msa_dotp_u_w(tmp12, tmp12);
+ res13 = __builtin_msa_dotp_u_w(tmp13, tmp13);
+ res14 = __builtin_msa_dotp_u_w(tmp14, tmp14);
+ res15 = __builtin_msa_dotp_u_w(tmp15, tmp15);
+
+ out0 = __builtin_msa_hadd_u_w((v8u16)mid0, (v8u16)mid0);
+ out1 = __builtin_msa_hadd_u_w((v8u16)mid1, (v8u16)mid1);
+ out2 = __builtin_msa_hadd_u_w((v8u16)mid2, (v8u16)mid2);
+ out3 = __builtin_msa_hadd_u_w((v8u16)mid3, (v8u16)mid3);
+ out4 = __builtin_msa_hadd_u_w((v8u16)mid4, (v8u16)mid4);
+ out5 = __builtin_msa_hadd_u_w((v8u16)mid5, (v8u16)mid5);
+ out6 = __builtin_msa_hadd_u_w((v8u16)mid6, (v8u16)mid6);
+ out7 = __builtin_msa_hadd_u_w((v8u16)mid7, (v8u16)mid7);
+
+ cen0 = __builtin_msa_addv_w((v4i32)res0, (v4i32)res1);
+ cen1 = __builtin_msa_addv_w((v4i32)res2, (v4i32)res3);
+ cen2 = __builtin_msa_addv_w((v4i32)res4, (v4i32)res5);
+ cen3 = __builtin_msa_addv_w((v4i32)res6, (v4i32)res7);
+ cen4 = __builtin_msa_addv_w((v4i32)res8, (v4i32)res9);
+ cen5 = __builtin_msa_addv_w((v4i32)res10, (v4i32)res11);
+ cen6 = __builtin_msa_addv_w((v4i32)res12, (v4i32)res13);
+ cen7 = __builtin_msa_addv_w((v4i32)res14, (v4i32)res15);
+
+ cen8 = __builtin_msa_addv_w((v4i32)out0, (v4i32)out1);
+ cen9 = __builtin_msa_addv_w((v4i32)out2, (v4i32)out3);
+ cen10 = __builtin_msa_addv_w((v4i32)out4, (v4i32)out5);
+ cen11 = __builtin_msa_addv_w((v4i32)out6, (v4i32)out7);
+
+ cen0 = __builtin_msa_addv_w(cen0, cen1);
+ cen2 = __builtin_msa_addv_w(cen2, cen3);
+ cen4 = __builtin_msa_addv_w(cen4, cen5);
+ cen6 = __builtin_msa_addv_w(cen6, cen7);
+
+ cen8 = __builtin_msa_addv_w(cen8, cen9);
+ cen10 = __builtin_msa_addv_w(cen10, cen11);
+
+ sum0 = __builtin_msa_addv_w(sum0, cen0);
+ sum1 = __builtin_msa_addv_w(sum1, cen2);
+ sum2 = __builtin_msa_addv_w(sum2, cen4);
+ sum3 = __builtin_msa_addv_w(sum3, cen6);
+
+ sum4 = __builtin_msa_addv_w(sum4, cen8);
+ sum5 = __builtin_msa_addv_w(sum5, cen10);
+
+ sum0 = __builtin_msa_addv_w(sum0, sum1);
+ sum2 = __builtin_msa_addv_w(sum2, sum3);
+
+ sum4 = __builtin_msa_addv_w(sum4, sum5);
+
+ sum0 = __builtin_msa_addv_w(sum0, sum2);
+
+ output0 = (uint32_t)(sum4[0] + sum4[1] + sum4[2] + sum4[3]);
+ output1 = (uint32_t)(sum0[0] + sum0[1] + sum0[2] + sum0[3]);
+
+ output = ((uint64_t)output1 << 32) + output0;
+
+
+ for (int y = 0; y < 16; y++)
+     {
+         for (int x = 0; x < 16; x++)
+         {
+              sum += t_pix[x];
+              sqr += t_pix[x] * t_pix[x];
+         }
+
+         t_pix += i_stride;
+     }
+
+ if (output == (sum + ((uint64_t)sqr << 32)))
+  printf("pixel_var_16x16 test success\n");
+ else
+  printf("pixel_var_16x16 test fail\n");
+
+
+ return output;
 }
 
 template<int size>
@@ -24475,7 +25677,14 @@ void blockcopy_ps_c(int16_t* a, intptr_t stridea, const pixel* b, intptr_t strid
 
 void sub_ps_8x8(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-# 4643 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ int16_t* t_a;
+ const pixel *t_b0, *t_b1;
+ t_a = a;
+ t_b0 = b0;
+ t_b1 = b1;
+
+
  v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
  v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
  v8i16 res0, res1, res2, res3, res4, res5, res6, res7;
@@ -24504,12 +25713,35 @@ void sub_ps_8x8(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, 
  a += 4 * dstride;
 
  ST_V4((v2i64)res4, (v2i64)res5, (v2i64)res6, (v2i64)res7, (pixel *)a, 2 * dstride);
-# 4766 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5030 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+ for (int y = 0; y < 8; y++)
+     {
+         for (int x = 0; x < 8; x++)
+  {
+              if (t_a[x] != (int16_t)(t_b0[x] - t_b1[x]))
+   {
+    printf("sub_ps_8x8 test fail\n");
+    return;
+   }
+  }
+         t_b0 += sstride0;
+         t_b1 += sstride1;
+         t_a += dstride;
+     }
+ printf("sub_ps_8x8 test success\n");
+
 }
 
 void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-# 4788 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5061 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+ int16_t* t_a;
+ const pixel *t_b0, *t_b1;
+ t_a = a;
+ t_b0 = b0;
+ t_b1 = b1;
+
+
  v8u16 tmp0, tmp1, tmp2, tmp3;
  v8i16 rest0, rest1;
 
@@ -24519,19 +25751,42 @@ void sub_ps_4x4(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, 
  rest0 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp2);
  rest1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp3);
  S_4x4_H(rest0, rest1, a, dstride);
-# 4824 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5088 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+ for (int y = 0; y < 4; y++)
+     {
+         for (int x = 0; x < 4; x++)
+  {
+              if (t_a[x] != (int16_t)(t_b0[x] - t_b1[x]))
+   {
+    printf("sub_ps_4x4 test fail\n");
+    return;
+   }
+  }
+         t_b0 += sstride0;
+         t_b1 += sstride1;
+         t_a += dstride;
+     }
+ printf("sub_ps_4x4 test success\n");
+
 }
 
 void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-# 4845 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5118 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+ int16_t* t_a;
+ const pixel *t_b0, *t_b1;
+ t_a = a;
+ t_b0 = b0;
+ t_b1 = b1;
+
+
  v8u16 tmp0, tmp1, tmp2, tmp3, mid0, mid1, mid2, mid3;
  v8u16 tmp8, tmp9, tmp10, tmp11, mid8, mid9, mid10, mid11;
  v8i16 tmp12, tmp13, tmp14, tmp15, mid12, mid13, mid14, mid15;
 
  for (int i = 4; i > 0; i--)
  {
-# 4870 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5150 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
   LD_H_BtoH(b0, &tmp0);
   LD_H_BtoH(b0 + 8, &tmp1);
 
@@ -24567,7 +25822,7 @@ void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
 
   LD_H_BtoH(b1, &mid10);
   LD_H_BtoH(b1 + 8, &mid11);
-# 4941 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5221 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
   tmp12 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp8);
   tmp13 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp9);
   tmp14 = __builtin_msa_subv_h((v8i16)tmp2, (v8i16)tmp10);
@@ -24577,7 +25832,7 @@ void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
   mid13 = __builtin_msa_subv_h((v8i16)mid1, (v8i16)mid9);
   mid14 = __builtin_msa_subv_h((v8i16)mid2, (v8i16)mid10);
   mid15 = __builtin_msa_subv_h((v8i16)mid3, (v8i16)mid11);
-# 4971 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5251 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
   ST_V2_H((v2i64)tmp12, (v2i64)tmp13, (pixel *)a);
   ST_V2_H((v2i64)tmp14, (v2i64)tmp15, (pixel *)(a + dstride));
 
@@ -24595,12 +25850,35 @@ void sub_ps_16x16(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
   b1 += sstride1;
   a += 2 * dstride;
  }
-# 5016 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5280 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+ for (int y = 0; y < 16; y++)
+     {
+         for (int x = 0; x < 16; x++)
+  {
+              if (t_a[x] != (int16_t)(t_b0[x] - t_b1[x]))
+   {
+    printf("sub_ps_16x16 test fail\n");
+    return;
+   }
+  }
+         t_b0 += sstride0;
+         t_b1 += sstride1;
+         t_a += dstride;
+     }
+ printf("sub_ps_16x16 test success\n");
+
 }
 
 void sub_ps_32x32(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-# 5028 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ int16_t* t_a;
+ const pixel *t_b0, *t_b1;
+ t_a = a;
+ t_b0 = b0;
+ t_b1 = b1;
+
+
  v8u16 tmp0, tmp1, tmp2, tmp3, mid0, mid1, mid2, mid3;
  v8u16 tmp8, tmp9, tmp10, tmp11, mid8, mid9, mid10, mid11;
  v8i16 tmp12, tmp13, tmp14, tmp15, mid12, mid13, mid14, mid15;
@@ -24629,14 +25907,38 @@ void sub_ps_32x32(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
   b0 += 2 * sstride0;
   b1 += 2 * sstride1;
   a += 2 * dstride;
-# 5099 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5379 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
  }
-# 5129 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5392 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+ for (int y = 0; y < 32; y++)
+     {
+         for (int x = 0; x < 32; x++)
+  {
+              if (t_a[x] != (int16_t)(t_b0[x] - t_b1[x]))
+   {
+    printf("sub_ps_32x32 test fail\n");
+    return;
+   }
+  }
+         t_b0 += sstride0;
+         t_b1 += sstride1;
+         t_a += dstride;
+     }
+ printf("sub_ps_32x32 test success\n");
+
+
 }
 
 void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1, intptr_t sstride0, intptr_t sstride1)
 {
-# 5141 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+
+ int16_t* t_a;
+ const pixel *t_b0, *t_b1;
+ t_a = a;
+ t_b0 = b0;
+ t_b1 = b1;
+
+
  v8u16 tmp0, tmp1, tmp2, tmp3, mid0, mid1, mid2, mid3;
  v8u16 tmp8, tmp9, tmp10, tmp11, mid8, mid9, mid10, mid11;
  v8i16 tmp12, tmp13, tmp14, tmp15, mid12, mid13, mid14, mid15;
@@ -24666,9 +25968,25 @@ void sub_ps_64x64(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* b1
   b0 += sstride0;
   b1 += sstride1;
   a += dstride;
-# 5221 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5501 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
  }
-# 5249 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5513 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+ for (int y = 0; y < 64; y++)
+     {
+         for (int x = 0; x < 64; x++)
+  {
+              if (t_a[x] != (int16_t)(t_b0[x] - t_b1[x]))
+   {
+    printf("sub_ps_64x64 test fail\n");
+    return;
+   }
+  }
+         t_b0 += sstride0;
+         t_b1 += sstride1;
+         t_a += dstride;
+     }
+ printf("sub_ps_64x64 test success\n");
+
 }
 
 
@@ -24713,7 +26031,7 @@ void pixel_sub_ps_c(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* 
  }
     else
     {
-# 5307 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5587 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
      for (int y = 0; y < by; y++)
      {
          for (int x = 0; x < bx; x++)
@@ -24811,7 +26129,7 @@ static void estimateCUPropagateCost(int* dst, const uint16_t* propagateIn, const
         double propagateIntra = intraCost * invQscales[i];
         double propagateAmount = (double)propagateIn[i] + propagateIntra * fps;
         double propagateNum = (double)(intraCost - interCost);
-# 5414 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5694 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
         double propagateDenom = (double)intraCost;
         dst[i] = (int)(propagateAmount * propagateNum / propagateDenom + 0.5);
 
@@ -24834,7 +26152,7 @@ static void cuTreeFix8Unpack(double *dst, uint16_t *src, int count)
         dst[i] = (double)(qpFix8) / 256.0;
     }
 }
-# 5460 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5740 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
 }
 
 namespace x265 {
@@ -24862,7 +26180,7 @@ void extendPicBorder(pixel* pic, intptr_t stride, int width, int height, int mar
 
 void setupPixelPrimitives_c(EncoderPrimitives &p)
 {
-# 5516 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 5796 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
     p.pu[LUMA_4x4].copy_pp = blockcopy_pp_c<4, 4>; p.pu[LUMA_4x4].addAvg = addAvg<4, 4>; p.pu[LUMA_4x4].pixelavg_pp = pixelavg_pp<4, 4>;;
     p.pu[LUMA_8x8].copy_pp = blockcopy_pp_c<8, 8>; p.pu[LUMA_8x8].addAvg = addAvg<8, 8>; p.pu[LUMA_8x8].pixelavg_pp = pixelavg_pp<8, 8>;;
     p.pu[LUMA_16x16].copy_pp = blockcopy_pp_c<16, 16>; p.pu[LUMA_16x16].addAvg = addAvg<16, 16>; p.pu[LUMA_16x16].pixelavg_pp = pixelavg_pp<16, 16>;;
@@ -25059,6 +26377,8 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.cu[BLOCK_32x32].calcresidual = getResidual_32x32;
     p.cu[BLOCK_64x64].calcresidual = getResidual<64>;
 
+    p.cu[BLOCK_8x8].var = pixel_var_8x8;
+    p.cu[BLOCK_16x16].var = pixel_var_16x16;
 
     p.cu[BLOCK_4x4].sa8d = satd_4x4;
     p.cu[BLOCK_8x8].sa8d = sa8d_8x8;
@@ -25099,9 +26419,9 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[1].pu[CHROMA_420_8x32].addAvg = addAvg<8, 32>; p.chroma[1].pu[CHROMA_420_8x32].copy_pp = blockcopy_pp_c<8, 32>;;
 
     p.chroma[1].pu[CHROMA_420_2x2].satd = 
-# 5751 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6033 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5751 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6033 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_4x4].satd = satd_4x4;
 
@@ -25112,14 +26432,14 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[1].pu[CHROMA_420_32x32].satd = satd8_32x32;
 
     p.chroma[1].pu[CHROMA_420_4x2].satd = 
-# 5760 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6042 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5760 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6042 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_2x4].satd = 
-# 5761 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6043 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5761 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6043 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_8x4].satd = satd_8x4;
     p.chroma[1].pu[CHROMA_420_4x8].satd = satd4<4, 8>;
@@ -25129,24 +26449,24 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[1].pu[CHROMA_420_16x32].satd = satd8<16, 32>;
 
     p.chroma[1].pu[CHROMA_420_8x6].satd = 
-# 5769 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6051 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5769 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6051 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_6x8].satd = 
-# 5770 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6052 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5770 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6052 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_8x2].satd = 
-# 5771 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6053 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5771 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6053 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_2x8].satd = 
-# 5772 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6054 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5772 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6054 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[1].pu[CHROMA_420_16x12].satd = satd4<16, 12>;
     p.chroma[1].pu[CHROMA_420_12x16].satd = satd4<12, 16>;
@@ -25156,7 +26476,7 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[1].pu[CHROMA_420_24x32].satd = satd8<24, 32>;
     p.chroma[1].pu[CHROMA_420_32x8].satd = satd8<32, 8>;
     p.chroma[1].pu[CHROMA_420_8x32].satd = satd8<8, 32>;
-# 5791 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6073 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
     p.chroma[1].cu[BLOCK_420_2x2].copy_sp = blockcopy_sp_c<2, 2>; p.chroma[1].cu[BLOCK_420_2x2].copy_ps = blockcopy_ps_c<2, 2>; p.chroma[1].cu[BLOCK_420_2x2].copy_ss = blockcopy_ss_c<2, 2>; p.chroma[1].cu[BLOCK_420_2x2].add_ps = pixel_add_ps_c<2, 2>;
     p.chroma[1].cu[BLOCK_420_4x4].copy_sp = blockcopy_sp_c<4, 4>; p.chroma[1].cu[BLOCK_420_4x4].copy_ps = blockcopy_ps_c<4, 4>; p.chroma[1].cu[BLOCK_420_4x4].copy_ss = blockcopy_ss_c<4, 4>; p.chroma[1].cu[BLOCK_420_4x4].add_ps = pixel_add_ps_c<4, 4>;
     p.chroma[1].cu[BLOCK_420_8x8].copy_sp = blockcopy_sp_c<8, 8>; p.chroma[1].cu[BLOCK_420_8x8].copy_ps = blockcopy_ps_c<8, 8>; p.chroma[1].cu[BLOCK_420_8x8].copy_ss = blockcopy_ss_c<8, 8>; p.chroma[1].cu[BLOCK_420_8x8].add_ps = pixel_add_ps_c<8, 8>;
@@ -25215,9 +26535,9 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[2].pu[CHROMA_422_8x64].addAvg = addAvg<8, 64>; p.chroma[2].pu[CHROMA_422_8x64].copy_pp = blockcopy_pp_c<8, 64>;;
 
     p.chroma[2].pu[CHROMA_422_2x4].satd = 
-# 5848 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6130 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5848 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6130 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[2].pu[CHROMA_422_4x8].satd = satd4<4, 8>;
     p.chroma[2].pu[CHROMA_422_8x16].satd = satd8<8, 16>;
@@ -25226,9 +26546,9 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
 
     p.chroma[2].pu[CHROMA_422_4x4].satd = satd_4x4;
     p.chroma[2].pu[CHROMA_422_2x8].satd = 
-# 5855 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6137 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5855 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6137 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
 
     p.chroma[2].pu[CHROMA_422_8x8].satd = satd8_8x8;
@@ -25242,15 +26562,15 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
 
     p.chroma[2].pu[CHROMA_422_8x12].satd = satd4<8, 12>;
     p.chroma[2].pu[CHROMA_422_6x16].satd = 
-# 5867 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6149 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5867 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6149 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[2].pu[CHROMA_422_8x4].satd = satd4<8, 4>;
     p.chroma[2].pu[CHROMA_422_2x16].satd = 
-# 5869 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
+# 6151 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp" 3 4
                                                        __null
-# 5869 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6151 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
                                                            ;
     p.chroma[2].pu[CHROMA_422_16x24].satd = satd8<16, 24>;
     p.chroma[2].pu[CHROMA_422_12x32].satd = satd4<12, 32>;
@@ -25260,7 +26580,7 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[2].pu[CHROMA_422_24x64].satd = satd8<24, 64>;
     p.chroma[2].pu[CHROMA_422_32x16].satd = satd8<32, 16>;
     p.chroma[2].pu[CHROMA_422_8x64].satd = satd8<8, 64>;
-# 5887 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
+# 6169 "/home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp"
     p.chroma[2].cu[BLOCK_422_2x4].sse_pp = sse_pp_a<2, 4>; p.chroma[2].cu[BLOCK_422_2x4].copy_sp = blockcopy_sp_c<2, 4>; p.chroma[2].cu[BLOCK_422_2x4].copy_ps = blockcopy_ps_c<2, 4>; p.chroma[2].cu[BLOCK_422_2x4].copy_ss = blockcopy_ss_c<2, 4>; p.chroma[2].cu[BLOCK_422_2x4].sub_ps = pixel_sub_ps_c<2, 4>; p.chroma[2].cu[BLOCK_422_2x4].add_ps = pixel_add_ps_c<2, 4>;
     p.chroma[2].cu[BLOCK_422_4x8].sse_pp = sse_pp_a<4, 8>; p.chroma[2].cu[BLOCK_422_4x8].copy_sp = blockcopy_sp_c<4, 8>; p.chroma[2].cu[BLOCK_422_4x8].copy_ps = blockcopy_ps_c<4, 8>; p.chroma[2].cu[BLOCK_422_4x8].copy_ss = blockcopy_ss_c<4, 8>; p.chroma[2].cu[BLOCK_422_4x8].sub_ps = pixel_sub_ps_c<4, 8>; p.chroma[2].cu[BLOCK_422_4x8].add_ps = pixel_add_ps_c<4, 8>;
     p.chroma[2].cu[BLOCK_422_8x16].sse_pp = sse_pp_a<8, 16>; p.chroma[2].cu[BLOCK_422_8x16].copy_sp = blockcopy_sp_c<8, 16>; p.chroma[2].cu[BLOCK_422_8x16].copy_ps = blockcopy_ps_c<8, 16>; p.chroma[2].cu[BLOCK_422_8x16].copy_ss = blockcopy_ss_c<8, 16>; p.chroma[2].cu[BLOCK_422_8x16].sub_ps = pixel_sub_ps_c<8, 16>; p.chroma[2].cu[BLOCK_422_8x16].add_ps = pixel_add_ps_c<8, 16>;
