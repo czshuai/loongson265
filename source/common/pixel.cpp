@@ -3163,11 +3163,11 @@ int sa8d_8x8(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_p
 
 	res0 = __builtin_msa_addv_h(sub1, sub0);
 	res1 = __builtin_msa_subv_h(sub1, sub0);
-	res2 = __builtin_msa_addv_h(sub3, sub2);	
+	res2 = __builtin_msa_addv_h(sub3, sub2);
 	res3 = __builtin_msa_subv_h(sub3, sub2);
 	res4 = __builtin_msa_addv_h(sub5, sub4);
 	res5 = __builtin_msa_subv_h(sub5, sub4);
-	res6 = __builtin_msa_addv_h(sub7, sub6);	
+	res6 = __builtin_msa_addv_h(sub7, sub6);
 	res7 = __builtin_msa_subv_h(sub7, sub6);
 
 	bet0 = __builtin_msa_addv_h(res2, res0);
@@ -4526,14 +4526,15 @@ uint64_t pixel_var_8x8(const pixel* pix, intptr_t i_stride)
 	t_pix = pix;
 	#endif
 	
-	uint32_t output0, output1;
+	//uint32_t output0, output1;
 	uint64_t output;
 	v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
 	v8i16 mid0, mid1, mid2, mid3;
 	v4u32 res0, res1, res2, res3, res4, res5, res6, res7;
 	v4u32 out0, out1, out2, out3;
 	v4i32 cen0, cen1, cen2, cen3, cen4, cen5;
-	
+	v2i64 las0, las1;	
+
 	LD4_BtoH(pix, i_stride, &tmp0, &tmp1, &tmp2, &tmp3);
 	LD4_BtoH(pix + 4 * i_stride, i_stride, &tmp4, &tmp5, &tmp6, &tmp7);
 
@@ -4570,11 +4571,21 @@ uint64_t pixel_var_8x8(const pixel* pix, intptr_t i_stride)
 	cen4 = __builtin_msa_addv_w(cen4, cen5); //add
 
 	cen0 = __builtin_msa_addv_w(cen0, cen2); //m add
-		
-	output0 = (uint32_t)(cen4[0] + cen4[1] + cen4[2] + cen4[3]);
-	output1 = (uint32_t)(cen0[0] + cen0[1] + cen0[2] + cen0[3]); 	
 
-	output = ((uint64_t)output1 << 32) + output0;	
+	las0 = __builtin_msa_hadd_s_d(cen4, cen4); // add
+ 
+	las1 = __builtin_msa_hadd_s_d(cen0, cen0); //m add
+		
+	las1 = __builtin_msa_slli_d(las1, 32);
+
+	las0 = __builtin_msa_addv_d(las0, las1);
+	
+	//output0 = (uint32_t)(cen4[0] + cen4[1] + cen4[2] + cen4[3]);
+	//output1 = (uint32_t)(cen0[0] + cen0[1] + cen0[2] + cen0[3]); 	
+
+	//output = ((uint64_t)output1 << 32) + output0;	
+	
+	output = (uint64_t)(las0[0] + las0[1]);
 
 	#ifdef DEBUG
 	for (int y = 0; y < 8; y++)
@@ -4605,7 +4616,7 @@ uint64_t pixel_var_16x16(const pixel* pix, intptr_t i_stride)
 	t_pix = pix;
 	#endif
 		
-	uint32_t output0, output1;
+	//uint32_t output0, output1;
 	uint64_t output;
 	v8u16 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
 	v8u16 tmp8, tmp9, tmp10, tmp11, tmp12, tmp13, tmp14, tmp15;
@@ -4616,6 +4627,7 @@ uint64_t pixel_var_16x16(const pixel* pix, intptr_t i_stride)
 	v4i32 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
 	v4i32 cen8, cen9, cen10, cen11;
 	v4i32 sum0, sum1, sum2, sum3, sum4, sum5;
+	v2i64 las0, las1;
 
 	LD2_H_BtoH(pix, &tmp0, &tmp1);
 	LD2_H_BtoH(pix + i_stride, &tmp2, &tmp3);
@@ -4772,11 +4784,21 @@ uint64_t pixel_var_16x16(const pixel* pix, intptr_t i_stride)
 
 	sum0 = __builtin_msa_addv_w(sum0, sum2);//m add
 
-	output0 = (uint32_t)(sum4[0] + sum4[1] + sum4[2] + sum4[3]);
-	output1 = (uint32_t)(sum0[0] + sum0[1] + sum0[2] + sum0[3]); 	
+	las0 = __builtin_msa_hadd_s_d(sum4, sum4); // add
+ 
+	las1 = __builtin_msa_hadd_s_d(sum0, sum0); //m add
+		
+	las1 = __builtin_msa_slli_d(las1, 32);
 
-	output = ((uint64_t)output1 << 32) + output0;	
+	las0 = __builtin_msa_addv_d(las0, las1);
+
+	//output0 = (uint32_t)(sum4[0] + sum4[1] + sum4[2] + sum4[3]);
+	//output1 = (uint32_t)(sum0[0] + sum0[1] + sum0[2] + sum0[3]); 	
+
+	//output = ((uint64_t)output1 << 32) + output0;	
 	
+	output = (uint64_t)(las0[0] + las0[1]);
+
 	#ifdef DEBUG
 	for (int y = 0; y < 16; y++)
     	{
@@ -4820,6 +4842,906 @@ uint64_t pixel_var(const pixel* pix, intptr_t i_stride)
 #if defined(_MSC_VER)
 #pragma warning(disable: 4127) // conditional expression is constant
 #endif
+
+int psyCost_pp_4x4(const pixel* source, intptr_t sstride, const pixel* recon, intptr_t rstride)
+{
+	#ifdef DEBUG
+	const pixel *t_source, *t_recon;
+	int t_sourceEnergy, t_reconEnergy;
+    	static pixel zeroBuf[8] /* = { 0 } */;
+	t_source = source;
+	t_recon = recon;
+	#endif 	
+
+	//int sourceEnergy, reconEnergy;
+	int output;
+	v4i32 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v8i16 mid0, mid1, mid2, mid3, mid4, mid5;
+	v8i16 mid6, mid7, mid8, mid9, mid10, mid11;
+	v8i16 cen0, cen1, cen2, cen3, cen4, cen5;
+	v8u16 bet0, bet1, bet4, bet5;
+	v8i16 bet2, bet3, bet6, bet7;
+	v8i16 out0, out1;
+	v4i32 res0, res1, res2, res3;
+	
+	LW4(source, sstride, &tmp0, &tmp1, &tmp2, &tmp3);
+	LW4(recon, rstride, &tmp4, &tmp5, &tmp6, &tmp7);
+
+	tmp0 = __builtin_msa_insve_w(tmp0, 1, tmp1);
+	tmp2 = __builtin_msa_insve_w(tmp2, 1, tmp3);
+	tmp4 = __builtin_msa_insve_w(tmp4, 1, tmp5);
+	tmp6 = __builtin_msa_insve_w(tmp6, 1, tmp7);
+
+	bet0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
+	bet1 = __builtin_msa_hadd_u_h((v16u8)tmp2, (v16u8)tmp2);
+	bet4 = __builtin_msa_hadd_u_h((v16u8)tmp4, (v16u8)tmp4);
+	bet5 = __builtin_msa_hadd_u_h((v16u8)tmp6, (v16u8)tmp6);
+
+	bet2 = __builtin_msa_hsub_u_h((v16u8)tmp0, (v16u8)tmp0);
+	bet3 = __builtin_msa_hsub_u_h((v16u8)tmp2, (v16u8)tmp2);
+	bet6 = __builtin_msa_hsub_u_h((v16u8)tmp4, (v16u8)tmp4);
+	bet7 = __builtin_msa_hsub_u_h((v16u8)tmp6, (v16u8)tmp6);
+
+	out0 = __builtin_msa_addv_h((v8i16)bet0, (v8i16)bet1);
+	out1 = __builtin_msa_addv_h((v8i16)bet4, (v8i16)bet5);
+	
+	res0 = __builtin_msa_hadd_s_w(out0, out0);
+	res2 = __builtin_msa_hadd_s_w(out1, out1);
+
+	res0 = (v4i32)__builtin_msa_hadd_s_d(res0, res0);
+	res2 = (v4i32)__builtin_msa_hadd_s_d(res2, res2);
+
+	res1 = __builtin_msa_srli_w(res0, 2);
+	res3 = __builtin_msa_srli_w(res2, 2);
+
+	//sourceEnergy_DC = (res0[0] + res0[1]) >> 2;
+
+	tmp0 = __builtin_msa_ilvr_w((v4i32)bet2, (v4i32)bet0);
+	tmp1 = __builtin_msa_ilvr_w((v4i32)bet3, (v4i32)bet1);
+	tmp2 = __builtin_msa_ilvr_w((v4i32)bet6, (v4i32)bet4);
+	tmp3 = __builtin_msa_ilvr_w((v4i32)bet7, (v4i32)bet5);
+
+	mid0 = __builtin_msa_addv_h((v8i16)tmp0, (v8i16)tmp1);
+	mid1 = __builtin_msa_subv_h((v8i16)tmp1, (v8i16)tmp0);
+	mid6 = __builtin_msa_addv_h((v8i16)tmp2, (v8i16)tmp3);
+	mid7 = __builtin_msa_subv_h((v8i16)tmp3, (v8i16)tmp2);
+
+	mid2 = (v8i16)__builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)mid1);
+	mid3 = (v8i16)__builtin_msa_ilvl_d((v2i64)mid1, (v2i64)mid0);
+	mid8 = (v8i16)__builtin_msa_insve_d((v2i64)mid6, 1, (v2i64)mid7);
+	mid9 = (v8i16)__builtin_msa_ilvl_d((v2i64)mid7, (v2i64)mid6);
+
+	mid4 = __builtin_msa_addv_h(mid2, mid3);
+	mid5 = __builtin_msa_subv_h(mid3, mid2);	
+	mid10 = __builtin_msa_addv_h(mid8, mid9);
+	mid11 = __builtin_msa_subv_h(mid9, mid8);	
+
+	cen0 = __builtin_msa_ilvod_h(mid5, mid4);
+	cen1 = __builtin_msa_ilvev_h(mid5, mid4);
+	cen3 = __builtin_msa_ilvod_h(mid11, mid10);
+	cen4 = __builtin_msa_ilvev_h(mid11, mid10);
+
+	cen0 = __builtin_lsx_vabs_h(cen0);
+	cen1 = __builtin_lsx_vabs_h(cen1);
+	cen3 = __builtin_lsx_vabs_h(cen3);
+	cen4 = __builtin_lsx_vabs_h(cen4);
+
+	cen2 = __builtin_msa_max_s_h(cen0, cen1);	
+	cen5 = __builtin_msa_max_s_h(cen3, cen4);	
+	
+	res0 = __builtin_msa_hadd_s_w(cen2, cen2);
+	res2 = __builtin_msa_hadd_s_w(cen5, cen5);
+
+	res1 = __builtin_msa_subv_w(res0, res1); 
+	res3 = __builtin_msa_subv_w(res2, res3); 
+
+	res1 = __builtin_msa_subv_w(res1, res3);
+	res0 = __builtin_msa_subv_w(res0, res2);
+	
+	//sourceEnergy = res1[0] + res1[1] + res0[2] + res0[3];
+	//reconEnergy = res3[0] + res3[1] + res2[2] + res2[2];
+	
+	output = res1[0] + res0[1] + res0[2] + res0[3];
+	
+	output = abs(output);
+
+	#ifdef DEBUG
+	t_sourceEnergy = satd_4x4(t_source, sstride, zeroBuf, 0) - (sad<4, 4>(t_source, sstride, zeroBuf, 0) >> 2);
+        t_reconEnergy = satd_4x4(t_recon, rstride, zeroBuf, 0) - (sad<4, 4>(t_recon, rstride, zeroBuf, 0) >> 2);
+	
+	if (output == abs(t_sourceEnergy - t_reconEnergy))
+		printf("psyCost_pp_4x4 test success\n");
+	else
+	{
+		printf("psyCost_pp_4x4 test fail\n");
+		printf("right value %d\n", abs(t_sourceEnergy - t_reconEnergy));
+		printf("wrong value %d\n", output);
+	}
+	#endif
+
+	return output;
+}
+
+int psyCost_pp_8x8(const pixel* source, intptr_t sstride, const pixel* recon, intptr_t rstride)
+{
+	#ifdef DEBUG
+	const pixel *t_source, *t_recon;
+	int t_sourceEnergy, t_reconEnergy;
+    	static pixel zeroBuf[8];
+	t_source = source;
+	t_recon = recon;
+	#endif 	
+
+	int output;
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v8i16 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+	v8i16 cen8, cen9, cen10, cen11, cen12, cen13, cen14, cen15;
+	v8i16 bet0, bet1, bet2, bet3, bet4, bet5, bet6, bet7; 
+	v8i16 bet8, bet9, bet10, bet11, bet12, bet13, bet14, bet15;
+	v8i16 val0, val1, val2, val3, val4, val5, val6, val7; 
+	v8i16 val8, val9, val10, val11, val12, val13, val14, val15;
+	v8i16 out0, out1, out2, out3;
+	v4i32 res0, res1, res2, res3, res4, res5;
+	v4i32 res6, res7, res8, res9, res10, res11;
+	
+	LD4(source, sstride, &tmp0, &tmp1, &tmp2, &tmp3);
+	
+	source += 4 * sstride;
+	
+	LD4(source, sstride, &tmp4, &tmp5, &tmp6, &tmp7);
+
+	mid0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
+	mid1 = __builtin_msa_hadd_u_h((v16u8)tmp1, (v16u8)tmp1);
+	mid2 = __builtin_msa_hadd_u_h((v16u8)tmp2, (v16u8)tmp2);
+	mid3 = __builtin_msa_hadd_u_h((v16u8)tmp3, (v16u8)tmp3);
+	mid4 = __builtin_msa_hadd_u_h((v16u8)tmp4, (v16u8)tmp4);
+	mid5 = __builtin_msa_hadd_u_h((v16u8)tmp5, (v16u8)tmp5);
+	mid6 = __builtin_msa_hadd_u_h((v16u8)tmp6, (v16u8)tmp6);
+	mid7 = __builtin_msa_hadd_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	cen0 = __builtin_msa_hsub_u_h((v16u8)tmp0, (v16u8)tmp0);
+	cen1 = __builtin_msa_hsub_u_h((v16u8)tmp1, (v16u8)tmp1);
+	cen2 = __builtin_msa_hsub_u_h((v16u8)tmp2, (v16u8)tmp2);
+	cen3 = __builtin_msa_hsub_u_h((v16u8)tmp3, (v16u8)tmp3);
+	cen4 = __builtin_msa_hsub_u_h((v16u8)tmp4, (v16u8)tmp4);
+	cen5 = __builtin_msa_hsub_u_h((v16u8)tmp5, (v16u8)tmp5);
+	cen6 = __builtin_msa_hsub_u_h((v16u8)tmp6, (v16u8)tmp6);
+	cen7 = __builtin_msa_hsub_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	out0 = __builtin_msa_addv_h((v8i16)mid0, (v8i16)mid1);
+	out1 = __builtin_msa_addv_h((v8i16)mid2, (v8i16)mid3);
+	out2 = __builtin_msa_addv_h((v8i16)mid4, (v8i16)mid5);
+	out3 = __builtin_msa_addv_h((v8i16)mid6, (v8i16)mid7);
+
+	out0 = __builtin_msa_addv_h(out0, out1);
+	out2 = __builtin_msa_addv_h(out2, out3);
+	
+	out0 = __builtin_msa_addv_h(out0, out2);
+
+	res0 = __builtin_msa_hadd_s_w(out0, out0);
+	
+	res0 = (v4i32)__builtin_msa_hadd_s_d(res0, res0);
+
+	res1 = __builtin_msa_srli_w(res0, 2);
+
+	cen0 = (v8i16)__builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)cen0);
+	cen1 = (v8i16)__builtin_msa_insve_d((v2i64)mid1, 1, (v2i64)cen1);
+	cen2 = (v8i16)__builtin_msa_insve_d((v2i64)mid2, 1, (v2i64)cen2);
+	cen3 = (v8i16)__builtin_msa_insve_d((v2i64)mid3, 1, (v2i64)cen3);
+	cen4 = (v8i16)__builtin_msa_insve_d((v2i64)mid4, 1, (v2i64)cen4);
+	cen5 = (v8i16)__builtin_msa_insve_d((v2i64)mid5, 1, (v2i64)cen5);
+	cen6 = (v8i16)__builtin_msa_insve_d((v2i64)mid6, 1, (v2i64)cen6);
+	cen7 = (v8i16)__builtin_msa_insve_d((v2i64)mid7, 1, (v2i64)cen7);
+
+	LD4(recon, rstride, &tmp0, &tmp1, &tmp2, &tmp3);
+	
+	recon += 4 * rstride;
+	
+	LD4(recon, rstride, &tmp4, &tmp5, &tmp6, &tmp7);
+
+	mid0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
+	mid1 = __builtin_msa_hadd_u_h((v16u8)tmp1, (v16u8)tmp1);
+	mid2 = __builtin_msa_hadd_u_h((v16u8)tmp2, (v16u8)tmp2);
+	mid3 = __builtin_msa_hadd_u_h((v16u8)tmp3, (v16u8)tmp3);
+	mid4 = __builtin_msa_hadd_u_h((v16u8)tmp4, (v16u8)tmp4);
+	mid5 = __builtin_msa_hadd_u_h((v16u8)tmp5, (v16u8)tmp5);
+	mid6 = __builtin_msa_hadd_u_h((v16u8)tmp6, (v16u8)tmp6);
+	mid7 = __builtin_msa_hadd_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	cen8 = __builtin_msa_hsub_u_h((v16u8)tmp0, (v16u8)tmp0);
+	cen9 = __builtin_msa_hsub_u_h((v16u8)tmp1, (v16u8)tmp1);
+	cen10 = __builtin_msa_hsub_u_h((v16u8)tmp2, (v16u8)tmp2);
+	cen11 = __builtin_msa_hsub_u_h((v16u8)tmp3, (v16u8)tmp3);
+	cen12 = __builtin_msa_hsub_u_h((v16u8)tmp4, (v16u8)tmp4);
+	cen13 = __builtin_msa_hsub_u_h((v16u8)tmp5, (v16u8)tmp5);
+	cen14 = __builtin_msa_hsub_u_h((v16u8)tmp6, (v16u8)tmp6);
+	cen15 = __builtin_msa_hsub_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	out0 = __builtin_msa_addv_h((v8i16)mid0, (v8i16)mid1);
+	out1 = __builtin_msa_addv_h((v8i16)mid2, (v8i16)mid3);
+	out2 = __builtin_msa_addv_h((v8i16)mid4, (v8i16)mid5);
+	out3 = __builtin_msa_addv_h((v8i16)mid6, (v8i16)mid7);
+
+	out0 = __builtin_msa_addv_h(out0, out1);
+	out2 = __builtin_msa_addv_h(out2, out3);
+	
+	out0 = __builtin_msa_addv_h(out0, out2);
+
+	res6 = __builtin_msa_hadd_s_w(out0, out0);
+	
+	res6 = (v4i32)__builtin_msa_hadd_s_d(res6, res6);
+
+	res7 = __builtin_msa_srli_w(res6, 2);
+
+	res1 = __builtin_msa_subv_w(res1, res7);// sad source - recon
+	
+	cen8 = (v8i16)__builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)cen8);
+	cen9 = (v8i16)__builtin_msa_insve_d((v2i64)mid1, 1, (v2i64)cen9);
+	cen10 = (v8i16)__builtin_msa_insve_d((v2i64)mid2, 1, (v2i64)cen10);
+	cen11 = (v8i16)__builtin_msa_insve_d((v2i64)mid3, 1, (v2i64)cen11);
+	cen12 = (v8i16)__builtin_msa_insve_d((v2i64)mid4, 1, (v2i64)cen12);
+	cen13 = (v8i16)__builtin_msa_insve_d((v2i64)mid5, 1, (v2i64)cen13);
+	cen14 = (v8i16)__builtin_msa_insve_d((v2i64)mid6, 1, (v2i64)cen14);
+	cen15 = (v8i16)__builtin_msa_insve_d((v2i64)mid7, 1, (v2i64)cen15);
+	
+	bet0 = __builtin_msa_addv_h(cen1, cen0);
+	bet1 = __builtin_msa_subv_h(cen1, cen0);
+	bet2 = __builtin_msa_addv_h(cen3, cen2);
+	bet3 = __builtin_msa_subv_h(cen3, cen2);
+	bet4 = __builtin_msa_addv_h(cen5, cen4);
+	bet5 = __builtin_msa_subv_h(cen5, cen4);
+	bet6 = __builtin_msa_addv_h(cen7, cen6);
+	bet7 = __builtin_msa_subv_h(cen7, cen6);
+
+	bet8 = __builtin_msa_addv_h(cen9, cen8);
+	bet9 = __builtin_msa_subv_h(cen9, cen8);
+	bet10 = __builtin_msa_addv_h(cen11, cen10);
+	bet11 = __builtin_msa_subv_h(cen11, cen10);
+	bet12 = __builtin_msa_addv_h(cen13, cen12);
+	bet13 = __builtin_msa_subv_h(cen13, cen12);
+	bet14 = __builtin_msa_addv_h(cen15, cen14);
+	bet15 = __builtin_msa_subv_h(cen15, cen14);
+
+	val0 = __builtin_msa_addv_h(bet2, bet0);
+	val1 = __builtin_msa_subv_h(bet2, bet0);
+	val2 = __builtin_msa_addv_h(bet3, bet1);
+	val3 = __builtin_msa_subv_h(bet3, bet1);
+	val4 = __builtin_msa_addv_h(bet6, bet4);
+	val5 = __builtin_msa_subv_h(bet6, bet4);
+	val6 = __builtin_msa_addv_h(bet7, bet5);
+	val7 = __builtin_msa_subv_h(bet7, bet5);
+
+	val8 = __builtin_msa_addv_h(bet10, bet8);
+	val9 = __builtin_msa_subv_h(bet10, bet8);
+	val10 = __builtin_msa_addv_h(bet11, bet9);
+	val11 = __builtin_msa_subv_h(bet11, bet9);
+	val12 = __builtin_msa_addv_h(bet14, bet12);
+	val13 = __builtin_msa_subv_h(bet14, bet12);
+	val14 = __builtin_msa_addv_h(bet15, bet13);
+	val15 = __builtin_msa_subv_h(bet15, bet13);
+
+	cen0 = __builtin_msa_addv_h(val4, val0);
+	cen1 = __builtin_msa_subv_h(val4, val0);
+	cen2 = __builtin_msa_addv_h(val6, val2);
+	cen3 = __builtin_msa_subv_h(val6, val2);
+	cen4 = __builtin_msa_addv_h(val5, val1);
+	cen5 = __builtin_msa_subv_h(val5, val1);
+	cen6 = __builtin_msa_addv_h(val7, val3);
+	cen7 = __builtin_msa_subv_h(val7, val3);
+
+	cen8 = __builtin_msa_addv_h(val12, val8);
+	cen9 = __builtin_msa_subv_h(val12, val8);
+	cen10 = __builtin_msa_addv_h(val14, val10);
+	cen11 = __builtin_msa_subv_h(val14, val10);
+	cen12 = __builtin_msa_addv_h(val13, val9);
+	cen13 = __builtin_msa_subv_h(val13, val9);
+	cen14 = __builtin_msa_addv_h(val15, val11);
+	cen15 = __builtin_msa_subv_h(val15, val11);
+
+	bet0 = __builtin_msa_pckod_h(cen1, cen0);
+	bet1 = __builtin_msa_pckev_h(cen1, cen0);
+	bet2 = __builtin_msa_pckod_h(cen3, cen2);
+	bet3 = __builtin_msa_pckev_h(cen3, cen2);
+	bet4 = __builtin_msa_pckod_h(cen5, cen4);
+	bet5 = __builtin_msa_pckev_h(cen5, cen4);
+	bet6 = __builtin_msa_pckod_h(cen7, cen6);
+	bet7 = __builtin_msa_pckev_h(cen7, cen6);
+
+	bet8 = __builtin_msa_pckod_h(cen9, cen8);
+	bet9 = __builtin_msa_pckev_h(cen9, cen8);
+	bet10 = __builtin_msa_pckod_h(cen11, cen10);
+	bet11 = __builtin_msa_pckev_h(cen11, cen10);
+	bet12 = __builtin_msa_pckod_h(cen13, cen12);
+	bet13 = __builtin_msa_pckev_h(cen13, cen12);
+	bet14 = __builtin_msa_pckod_h(cen15, cen14);
+	bet15 = __builtin_msa_pckev_h(cen15, cen14);
+
+	val0 = __builtin_msa_addv_h(bet0, bet1);
+	val1 = __builtin_msa_asub_s_h(bet0, bet1);
+	val2 = __builtin_msa_addv_h(bet2, bet3);
+	val3 = __builtin_msa_asub_s_h(bet2, bet3);
+	val4 = __builtin_msa_addv_h(bet4, bet5);
+	val5 = __builtin_msa_asub_s_h(bet4, bet5);
+	val6 = __builtin_msa_addv_h(bet6, bet7);
+	val7 = __builtin_msa_asub_s_h(bet6, bet7);
+
+	val8 = __builtin_msa_addv_h(bet8, bet9);
+	val9 = __builtin_msa_asub_s_h(bet8, bet9);
+	val10 = __builtin_msa_addv_h(bet10, bet11);
+	val11 = __builtin_msa_asub_s_h(bet10, bet11);
+	val12 = __builtin_msa_addv_h(bet12, bet13);
+	val13 = __builtin_msa_asub_s_h(bet12, bet13);
+	val14 = __builtin_msa_addv_h(bet14, bet15);
+	val15 = __builtin_msa_asub_s_h(bet14, bet15);
+
+	val0 = __builtin_lsx_vabs_h(val0);
+	val2 = __builtin_lsx_vabs_h(val2);
+	val4 = __builtin_lsx_vabs_h(val4);
+	val6 = __builtin_lsx_vabs_h(val6);
+
+	val8 = __builtin_lsx_vabs_h(val8);
+	val10 = __builtin_lsx_vabs_h(val10);
+	val12 = __builtin_lsx_vabs_h(val12);
+	val14 = __builtin_lsx_vabs_h(val14);
+
+	cen0 = __builtin_msa_ilvod_h(val0, val1);
+	cen1 = __builtin_msa_ilvev_h(val0, val1);
+	cen2 = __builtin_msa_ilvod_h(val2, val3);
+	cen3 = __builtin_msa_ilvev_h(val2, val3);
+	cen4 = __builtin_msa_ilvod_h(val4, val5);
+	cen5 = __builtin_msa_ilvev_h(val4, val5);
+	cen6 = __builtin_msa_ilvod_h(val6, val7);
+	cen7 = __builtin_msa_ilvev_h(val6, val7);
+
+	cen8 = __builtin_msa_ilvod_h(val8, val9);
+	cen9 = __builtin_msa_ilvev_h(val8, val9);
+	cen10 = __builtin_msa_ilvod_h(val10, val11);
+	cen11 = __builtin_msa_ilvev_h(val10, val11);
+	cen12 = __builtin_msa_ilvod_h(val12, val13);
+	cen13 = __builtin_msa_ilvev_h(val12, val13);
+	cen14 = __builtin_msa_ilvod_h(val14, val15);
+	cen15 = __builtin_msa_ilvev_h(val14, val15);
+
+	bet0 = __builtin_msa_max_s_h(cen0, cen1);
+	bet1 = __builtin_msa_max_s_h(cen2, cen3);
+	bet2 = __builtin_msa_max_s_h(cen4, cen5);
+	bet3 = __builtin_msa_max_s_h(cen6, cen7);
+
+	bet8 = __builtin_msa_max_s_h(cen8, cen9);
+	bet9 = __builtin_msa_max_s_h(cen10, cen11);
+	bet10 = __builtin_msa_max_s_h(cen12, cen13);
+	bet11 = __builtin_msa_max_s_h(cen14, cen15);
+
+	res2 = __builtin_msa_hadd_s_w(bet0, bet0);
+	res3 = __builtin_msa_hadd_s_w(bet1, bet1);
+	res4 = __builtin_msa_hadd_s_w(bet2, bet2);
+	res5 = __builtin_msa_hadd_s_w(bet3, bet3);
+
+	res8 = __builtin_msa_hadd_s_w(bet8, bet8);
+	res9 = __builtin_msa_hadd_s_w(bet9, bet9);
+	res10 = __builtin_msa_hadd_s_w(bet10, bet10);
+	res11 = __builtin_msa_hadd_s_w(bet11, bet11);
+
+	res2 = __builtin_msa_addv_w(res2, res3);
+	res4 = __builtin_msa_addv_w(res4, res5);
+	
+	res8 = __builtin_msa_addv_w(res8, res9);
+	res10 = __builtin_msa_addv_w(res10, res11);
+
+	res2 = __builtin_msa_addv_w(res2, res4);//1 2 3 source
+	res8 = __builtin_msa_addv_w(res8, res10);//1 2 3 recon
+
+	res2 = (v4i32)__builtin_msa_hadd_s_d(res2, res2);
+	res8 = (v4i32)__builtin_msa_hadd_s_d(res8, res8);
+
+	int sa8d = ((res2[0] + res2[2] + 1) >> 1) - ((res8[0] + res8[2] + 1) >> 1);	
+	int sad = res1[0];
+
+	output = abs(sa8d - sad);
+
+	//printf("wrong source sa8d %d\n", ((res2[0] + res2[2] + 1) >> 1));
+	//printf("wrong recon sa8d %d\n", ((res8[0] + res8[2] + 1) >> 1));
+
+	//printf("wrong source sad %d\n", res1[0] + res7[0]);
+	//printf("wrong recon sad %d\n", res7[0]);
+	
+	//res1 = __builtin_msa_subv_w(res2, res1);//0 source
+	//res7 = __builtin_msa_subv_w(res8, res7);//0 recon
+	
+	//res2 = __builtin_msa_subv_w(res2, res8);//1 2 3 total
+	//res1 = __builtin_msa_subv_w(res1, res7);//0 total
+
+	//output = res1[0] + res2[1] + res2[2] + res2[3];
+	
+	#ifdef DEBUG
+	uint32_t totEnergy = 0;
+        for (int i = 0; i < 8; i += 8)
+        {
+            for (int j = 0; j < 8; j += 8)
+            {
+                /* AC energy, measured by sa8d (AC + DC) minus SAD (DC) */
+                t_sourceEnergy = sa8d_8x8(t_source + i * sstride + j, sstride, zeroBuf, 0) - 
+                                   (sad_8x8(t_source + i * sstride + j, sstride, zeroBuf, 0) >> 2);
+                t_reconEnergy =  sa8d_8x8(t_recon + i * rstride + j, rstride, zeroBuf, 0) - 
+                                   (sad_8x8(t_recon + i * rstride + j, rstride, zeroBuf, 0) >> 2);
+
+                totEnergy += abs(t_sourceEnergy - t_reconEnergy);
+            }
+        }
+
+	if (output == totEnergy)
+		printf("psyCost_pp_8x8 test success\n");
+	else
+	{
+		printf("psyCost_pp_8x8 test fail\n");	
+		printf("right value %d\n", totEnergy);
+		printf("wrong value %d\n", output);
+		printf("right source sa8d_8x8 %d\n", sa8d_8x8(t_source, sstride, zeroBuf, 0));
+		printf("right source sad %d\n", (sad_8x8(t_source, sstride, zeroBuf, 0) >> 2));
+		printf("right recon sa8d_8x8 %d\n", sa8d_8x8(t_recon, rstride, zeroBuf, 0));
+		printf("right recon sad %d\n", (sad_8x8(t_recon, rstride, zeroBuf, 0) >> 2));
+	}
+	#endif
+
+	return output;
+}
+
+inline int psyCost_pp_8x8_internal(const pixel* source, intptr_t sstride, const pixel* recon, intptr_t rstride)
+{
+	#ifdef DEBUG
+	const pixel *t_source, *t_recon;
+	int t_sourceEnergy, t_reconEnergy;
+    	static pixel zeroBuf[8];
+	t_source = source;
+	t_recon = recon;
+	#endif 	
+
+	int output;
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v8i16 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+	v8i16 bet0, bet1, bet2, bet3, bet4, bet5, bet6, bet7; 
+	v8i16 val0, val1, val2, val3, val4, val5, val6, val7; 
+	v8i16 out0, out1, out2, out3;
+	v4i32 res0, res1, res2, res3, res4, res5;
+	v4i32 res6, res7, res8, res10;
+	
+	tmp0 = LD(source);
+	
+	source += sstride;
+
+	tmp1 = LD(source);
+	
+	source += sstride;
+	
+	tmp2 = LD(source);
+	
+	source += sstride;
+
+	tmp3 = LD(source);
+	
+	source += sstride;
+
+	tmp4 = LD(source);
+	
+	source += sstride;
+
+	tmp5 = LD(source);
+	
+	source += sstride;
+
+	tmp6 = LD(source);
+	
+	source += sstride;
+
+	tmp7 = LD(source);
+
+	mid0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
+	mid1 = __builtin_msa_hadd_u_h((v16u8)tmp1, (v16u8)tmp1);
+	mid2 = __builtin_msa_hadd_u_h((v16u8)tmp2, (v16u8)tmp2);
+	mid3 = __builtin_msa_hadd_u_h((v16u8)tmp3, (v16u8)tmp3);
+	mid4 = __builtin_msa_hadd_u_h((v16u8)tmp4, (v16u8)tmp4);
+	mid5 = __builtin_msa_hadd_u_h((v16u8)tmp5, (v16u8)tmp5);
+	mid6 = __builtin_msa_hadd_u_h((v16u8)tmp6, (v16u8)tmp6);
+	mid7 = __builtin_msa_hadd_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	cen0 = __builtin_msa_hsub_u_h((v16u8)tmp0, (v16u8)tmp0);
+	cen1 = __builtin_msa_hsub_u_h((v16u8)tmp1, (v16u8)tmp1);
+	cen2 = __builtin_msa_hsub_u_h((v16u8)tmp2, (v16u8)tmp2);
+	cen3 = __builtin_msa_hsub_u_h((v16u8)tmp3, (v16u8)tmp3);
+	cen4 = __builtin_msa_hsub_u_h((v16u8)tmp4, (v16u8)tmp4);
+	cen5 = __builtin_msa_hsub_u_h((v16u8)tmp5, (v16u8)tmp5);
+	cen6 = __builtin_msa_hsub_u_h((v16u8)tmp6, (v16u8)tmp6);
+	cen7 = __builtin_msa_hsub_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	out0 = __builtin_msa_addv_h((v8i16)mid0, (v8i16)mid1);
+	out1 = __builtin_msa_addv_h((v8i16)mid2, (v8i16)mid3);
+	out2 = __builtin_msa_addv_h((v8i16)mid4, (v8i16)mid5);
+	out3 = __builtin_msa_addv_h((v8i16)mid6, (v8i16)mid7);
+
+	out0 = __builtin_msa_addv_h(out0, out1);
+	out2 = __builtin_msa_addv_h(out2, out3);
+	
+	out0 = __builtin_msa_addv_h(out0, out2);
+
+	res0 = __builtin_msa_hadd_s_w(out0, out0);
+	
+	res0 = (v4i32)__builtin_msa_hadd_s_d(res0, res0);
+
+	res1 = __builtin_msa_srli_w(res0, 2);
+
+	cen0 = (v8i16)__builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)cen0);
+	cen1 = (v8i16)__builtin_msa_insve_d((v2i64)mid1, 1, (v2i64)cen1);
+	cen2 = (v8i16)__builtin_msa_insve_d((v2i64)mid2, 1, (v2i64)cen2);
+	cen3 = (v8i16)__builtin_msa_insve_d((v2i64)mid3, 1, (v2i64)cen3);
+	cen4 = (v8i16)__builtin_msa_insve_d((v2i64)mid4, 1, (v2i64)cen4);
+	cen5 = (v8i16)__builtin_msa_insve_d((v2i64)mid5, 1, (v2i64)cen5);
+	cen6 = (v8i16)__builtin_msa_insve_d((v2i64)mid6, 1, (v2i64)cen6);
+	cen7 = (v8i16)__builtin_msa_insve_d((v2i64)mid7, 1, (v2i64)cen7);
+
+	bet0 = __builtin_msa_addv_h(cen1, cen0);
+	bet1 = __builtin_msa_subv_h(cen1, cen0);
+	bet2 = __builtin_msa_addv_h(cen3, cen2);
+	bet3 = __builtin_msa_subv_h(cen3, cen2);
+	bet4 = __builtin_msa_addv_h(cen5, cen4);
+	bet5 = __builtin_msa_subv_h(cen5, cen4);
+	bet6 = __builtin_msa_addv_h(cen7, cen6);
+	bet7 = __builtin_msa_subv_h(cen7, cen6);
+
+	val0 = __builtin_msa_addv_h(bet2, bet0);
+	val1 = __builtin_msa_subv_h(bet2, bet0);
+	val2 = __builtin_msa_addv_h(bet3, bet1);
+	val3 = __builtin_msa_subv_h(bet3, bet1);
+	val4 = __builtin_msa_addv_h(bet6, bet4);
+	val5 = __builtin_msa_subv_h(bet6, bet4);
+	val6 = __builtin_msa_addv_h(bet7, bet5);
+	val7 = __builtin_msa_subv_h(bet7, bet5);
+
+	cen0 = __builtin_msa_addv_h(val4, val0);
+	cen1 = __builtin_msa_subv_h(val4, val0);
+	cen2 = __builtin_msa_addv_h(val6, val2);
+	cen3 = __builtin_msa_subv_h(val6, val2);
+	cen4 = __builtin_msa_addv_h(val5, val1);
+	cen5 = __builtin_msa_subv_h(val5, val1);
+	cen6 = __builtin_msa_addv_h(val7, val3);
+	cen7 = __builtin_msa_subv_h(val7, val3);
+
+	bet0 = __builtin_msa_pckod_h(cen1, cen0);
+	bet1 = __builtin_msa_pckev_h(cen1, cen0);
+	bet2 = __builtin_msa_pckod_h(cen3, cen2);
+	bet3 = __builtin_msa_pckev_h(cen3, cen2);
+	bet4 = __builtin_msa_pckod_h(cen5, cen4);
+	bet5 = __builtin_msa_pckev_h(cen5, cen4);
+	bet6 = __builtin_msa_pckod_h(cen7, cen6);
+	bet7 = __builtin_msa_pckev_h(cen7, cen6);
+
+	val0 = __builtin_msa_addv_h(bet0, bet1);
+	val1 = __builtin_msa_asub_s_h(bet0, bet1);
+	val2 = __builtin_msa_addv_h(bet2, bet3);
+	val3 = __builtin_msa_asub_s_h(bet2, bet3);
+	val4 = __builtin_msa_addv_h(bet4, bet5);
+	val5 = __builtin_msa_asub_s_h(bet4, bet5);
+	val6 = __builtin_msa_addv_h(bet6, bet7);
+	val7 = __builtin_msa_asub_s_h(bet6, bet7);
+	
+	val0 = __builtin_lsx_vabs_h(val0);
+	val2 = __builtin_lsx_vabs_h(val2);
+	val4 = __builtin_lsx_vabs_h(val4);
+	val6 = __builtin_lsx_vabs_h(val6);
+	
+	cen0 = __builtin_msa_ilvod_h(val0, val1);
+	cen1 = __builtin_msa_ilvev_h(val0, val1);
+	cen2 = __builtin_msa_ilvod_h(val2, val3);
+	cen3 = __builtin_msa_ilvev_h(val2, val3);
+	cen4 = __builtin_msa_ilvod_h(val4, val5);
+	cen5 = __builtin_msa_ilvev_h(val4, val5);
+	cen6 = __builtin_msa_ilvod_h(val6, val7);
+	cen7 = __builtin_msa_ilvev_h(val6, val7);
+
+	bet0 = __builtin_msa_max_s_h(cen0, cen1);
+	bet1 = __builtin_msa_max_s_h(cen2, cen3);
+	bet2 = __builtin_msa_max_s_h(cen4, cen5);
+	bet3 = __builtin_msa_max_s_h(cen6, cen7);
+
+	res2 = __builtin_msa_hadd_s_w(bet0, bet0);
+	res3 = __builtin_msa_hadd_s_w(bet1, bet1);
+	res4 = __builtin_msa_hadd_s_w(bet2, bet2);
+	res5 = __builtin_msa_hadd_s_w(bet3, bet3);
+	
+	res8 = __builtin_msa_addv_w(res2, res3);
+	res10 = __builtin_msa_addv_w(res4, res5);
+
+	tmp0 = LD(recon);
+	
+	recon += rstride;
+
+	tmp1 = LD(recon);
+	
+	recon += rstride;
+	
+	tmp2 = LD(recon);
+	
+	recon += rstride;
+
+	tmp3 = LD(recon);
+	
+	recon += rstride;
+
+	tmp4 = LD(recon);
+	
+	recon += rstride;
+
+	tmp5 = LD(recon);
+	
+	recon += rstride;
+
+	tmp6 = LD(recon);
+	
+	recon += rstride;
+
+	tmp7 = LD(recon);
+
+	mid0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
+	mid1 = __builtin_msa_hadd_u_h((v16u8)tmp1, (v16u8)tmp1);
+	mid2 = __builtin_msa_hadd_u_h((v16u8)tmp2, (v16u8)tmp2);
+	mid3 = __builtin_msa_hadd_u_h((v16u8)tmp3, (v16u8)tmp3);
+	mid4 = __builtin_msa_hadd_u_h((v16u8)tmp4, (v16u8)tmp4);
+	mid5 = __builtin_msa_hadd_u_h((v16u8)tmp5, (v16u8)tmp5);
+	mid6 = __builtin_msa_hadd_u_h((v16u8)tmp6, (v16u8)tmp6);
+	mid7 = __builtin_msa_hadd_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	cen0 = __builtin_msa_hsub_u_h((v16u8)tmp0, (v16u8)tmp0);
+	cen1 = __builtin_msa_hsub_u_h((v16u8)tmp1, (v16u8)tmp1);
+	cen2 = __builtin_msa_hsub_u_h((v16u8)tmp2, (v16u8)tmp2);
+	cen3 = __builtin_msa_hsub_u_h((v16u8)tmp3, (v16u8)tmp3);
+	cen4 = __builtin_msa_hsub_u_h((v16u8)tmp4, (v16u8)tmp4);
+	cen5 = __builtin_msa_hsub_u_h((v16u8)tmp5, (v16u8)tmp5);
+	cen6 = __builtin_msa_hsub_u_h((v16u8)tmp6, (v16u8)tmp6);
+	cen7 = __builtin_msa_hsub_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	out0 = __builtin_msa_addv_h((v8i16)mid0, (v8i16)mid1);
+	out1 = __builtin_msa_addv_h((v8i16)mid2, (v8i16)mid3);
+	out2 = __builtin_msa_addv_h((v8i16)mid4, (v8i16)mid5);
+	out3 = __builtin_msa_addv_h((v8i16)mid6, (v8i16)mid7);
+
+	out0 = __builtin_msa_addv_h(out0, out1);
+	out2 = __builtin_msa_addv_h(out2, out3);
+	
+	out0 = __builtin_msa_addv_h(out0, out2);
+
+	res6 = __builtin_msa_hadd_s_w(out0, out0);
+	
+	res6 = (v4i32)__builtin_msa_hadd_s_d(res6, res6);
+
+	res7 = __builtin_msa_srli_w(res6, 2);
+
+	res1 = __builtin_msa_subv_w(res1, res7);// sad source - recon
+	
+	cen0 = (v8i16)__builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)cen0);
+	cen1 = (v8i16)__builtin_msa_insve_d((v2i64)mid1, 1, (v2i64)cen1);
+	cen2 = (v8i16)__builtin_msa_insve_d((v2i64)mid2, 1, (v2i64)cen2);
+	cen3 = (v8i16)__builtin_msa_insve_d((v2i64)mid3, 1, (v2i64)cen3);
+	cen4 = (v8i16)__builtin_msa_insve_d((v2i64)mid4, 1, (v2i64)cen4);
+	cen5 = (v8i16)__builtin_msa_insve_d((v2i64)mid5, 1, (v2i64)cen5);
+	cen6 = (v8i16)__builtin_msa_insve_d((v2i64)mid6, 1, (v2i64)cen6);
+	cen7 = (v8i16)__builtin_msa_insve_d((v2i64)mid7, 1, (v2i64)cen7);
+		
+	bet0 = __builtin_msa_addv_h(cen1, cen0);
+	bet1 = __builtin_msa_subv_h(cen1, cen0);
+	bet2 = __builtin_msa_addv_h(cen3, cen2);
+	bet3 = __builtin_msa_subv_h(cen3, cen2);
+	bet4 = __builtin_msa_addv_h(cen5, cen4);
+	bet5 = __builtin_msa_subv_h(cen5, cen4);
+	bet6 = __builtin_msa_addv_h(cen7, cen6);
+	bet7 = __builtin_msa_subv_h(cen7, cen6);
+	
+	val0 = __builtin_msa_addv_h(bet2, bet0);
+	val1 = __builtin_msa_subv_h(bet2, bet0);
+	val2 = __builtin_msa_addv_h(bet3, bet1);
+	val3 = __builtin_msa_subv_h(bet3, bet1);
+	val4 = __builtin_msa_addv_h(bet6, bet4);
+	val5 = __builtin_msa_subv_h(bet6, bet4);
+	val6 = __builtin_msa_addv_h(bet7, bet5);
+	val7 = __builtin_msa_subv_h(bet7, bet5);
+
+	cen0 = __builtin_msa_addv_h(val4, val0);
+	cen1 = __builtin_msa_subv_h(val4, val0);
+	cen2 = __builtin_msa_addv_h(val6, val2);
+	cen3 = __builtin_msa_subv_h(val6, val2);
+	cen4 = __builtin_msa_addv_h(val5, val1);
+	cen5 = __builtin_msa_subv_h(val5, val1);
+	cen6 = __builtin_msa_addv_h(val7, val3);
+	cen7 = __builtin_msa_subv_h(val7, val3);
+
+	bet0 = __builtin_msa_pckod_h(cen1, cen0);
+	bet1 = __builtin_msa_pckev_h(cen1, cen0);
+	bet2 = __builtin_msa_pckod_h(cen3, cen2);
+	bet3 = __builtin_msa_pckev_h(cen3, cen2);
+	bet4 = __builtin_msa_pckod_h(cen5, cen4);
+	bet5 = __builtin_msa_pckev_h(cen5, cen4);
+	bet6 = __builtin_msa_pckod_h(cen7, cen6);
+	bet7 = __builtin_msa_pckev_h(cen7, cen6);
+
+	val0 = __builtin_msa_addv_h(bet0, bet1);
+	val1 = __builtin_msa_asub_s_h(bet0, bet1);
+	val2 = __builtin_msa_addv_h(bet2, bet3);
+	val3 = __builtin_msa_asub_s_h(bet2, bet3);
+	val4 = __builtin_msa_addv_h(bet4, bet5);
+	val5 = __builtin_msa_asub_s_h(bet4, bet5);
+	val6 = __builtin_msa_addv_h(bet6, bet7);
+	val7 = __builtin_msa_asub_s_h(bet6, bet7);
+
+	val0 = __builtin_lsx_vabs_h(val0);
+	val2 = __builtin_lsx_vabs_h(val2);
+	val4 = __builtin_lsx_vabs_h(val4);
+	val6 = __builtin_lsx_vabs_h(val6);
+
+	cen0 = __builtin_msa_ilvod_h(val0, val1);
+	cen1 = __builtin_msa_ilvev_h(val0, val1);
+	cen2 = __builtin_msa_ilvod_h(val2, val3);
+	cen3 = __builtin_msa_ilvev_h(val2, val3);
+	cen4 = __builtin_msa_ilvod_h(val4, val5);
+	cen5 = __builtin_msa_ilvev_h(val4, val5);
+	cen6 = __builtin_msa_ilvod_h(val6, val7);
+	cen7 = __builtin_msa_ilvev_h(val6, val7);
+
+	bet0 = __builtin_msa_max_s_h(cen0, cen1);
+	bet1 = __builtin_msa_max_s_h(cen2, cen3);
+	bet2 = __builtin_msa_max_s_h(cen4, cen5);
+	bet3 = __builtin_msa_max_s_h(cen6, cen7);
+
+	res2 = __builtin_msa_hadd_s_w(bet0, bet0);
+	res3 = __builtin_msa_hadd_s_w(bet1, bet1);
+	res4 = __builtin_msa_hadd_s_w(bet2, bet2);
+	res5 = __builtin_msa_hadd_s_w(bet3, bet3);
+
+	res2 = __builtin_msa_addv_w(res2, res3);
+	res4 = __builtin_msa_addv_w(res4, res5);
+	
+	res2 = __builtin_msa_addv_w(res2, res4);//1 2 3 recon
+	res8 = __builtin_msa_addv_w(res8, res10);//1 2 3 source
+
+	res2 = (v4i32)__builtin_msa_hadd_s_d(res2, res2);
+	res8 = (v4i32)__builtin_msa_hadd_s_d(res8, res8);
+
+	int sa8d = ((res8[0] + res8[2] + 1) >> 1) - ((res2[0] + res2[2] + 1) >> 1);	
+	int sad = res1[0];
+
+	output = abs(sa8d - sad);
+
+	#ifdef DEBUG
+	uint32_t totEnergy = 0;
+        for (int i = 0; i < 8; i += 8)
+        {
+            for (int j = 0; j < 8; j += 8)
+            {
+                /* AC energy, measured by sa8d (AC + DC) minus SAD (DC) */
+                t_sourceEnergy = sa8d_8x8(t_source + i * sstride + j, sstride, zeroBuf, 0) - 
+                                   (sad_8x8(t_source + i * sstride + j, sstride, zeroBuf, 0) >> 2);
+                t_reconEnergy =  sa8d_8x8(t_recon + i * rstride + j, rstride, zeroBuf, 0) - 
+                                   (sad_8x8(t_recon + i * rstride + j, rstride, zeroBuf, 0) >> 2);
+
+                totEnergy += abs(t_sourceEnergy - t_reconEnergy);
+            }
+        }
+
+	if (output == totEnergy)
+		printf("psyCost_pp_8x8_internal test success\n");
+	else
+	{
+		printf("psyCost_pp_8x8_internal test fail\n");	
+		printf("right value %d\n", totEnergy);
+		printf("wrong value %d\n", output);
+		printf("right source sa8d_8x8 %d\n", sa8d_8x8(t_source, sstride, zeroBuf, 0));
+		printf("right source sad %d\n", (sad_8x8(t_source, sstride, zeroBuf, 0) >> 2));
+		printf("right recon sa8d_8x8 %d\n", sa8d_8x8(t_recon, rstride, zeroBuf, 0));
+		printf("right recon sad %d\n", (sad_8x8(t_recon, rstride, zeroBuf, 0) >> 2));
+	}
+	#endif
+
+	return output;
+}
+
+int psyCost_pp_16x16(const pixel* source, intptr_t sstride, const pixel* recon, intptr_t rstride)
+{
+	#ifdef DEBUG
+	const pixel *t_source, *t_recon;
+	int t_sourceEnergy, t_reconEnergy;
+    	static pixel zeroBuf[8];
+	t_source = source;
+	t_recon = recon;
+	#endif 	
+
+	uint32_t totEnergy = 0;
+	
+	for (int j = 0; j < 2; j++)
+	{
+		for (int i = 0; i < 2; i++)
+		{
+			totEnergy += psyCost_pp_8x8_internal(source + i * 8, sstride, recon + i * 8, rstride);	
+		}
+		
+		source += 8 * sstride;
+		recon += 8 * rstride;
+	}
+	
+	#ifdef DEBUG
+	uint32_t t_totEnergy = 0;
+        for (int i = 0; i < 16; i += 8)
+        {
+            for (int j = 0; j < 16; j += 8)
+            {
+                /* AC energy, measured by sa8d (AC + DC) minus SAD (DC) */
+                t_sourceEnergy = sa8d_8x8(t_source + i * sstride + j, sstride, zeroBuf, 0) - 
+                                   (sad_8x8(t_source + i * sstride + j, sstride, zeroBuf, 0) >> 2);
+                t_reconEnergy =  sa8d_8x8(t_recon + i * rstride + j, rstride, zeroBuf, 0) - 
+                                   (sad_8x8(t_recon + i * rstride + j, rstride, zeroBuf, 0) >> 2);
+
+                t_totEnergy += abs(t_sourceEnergy - t_reconEnergy);
+            }
+        }
+
+	if (t_totEnergy == totEnergy)
+		printf("psyCost_pp_16x16 test success\n");
+	else
+	{
+		printf("psyCost_pp_16x16 test fail\n");	
+	}
+	#endif
+
+	return totEnergy;
+}
+
+int psyCost_pp_32x32(const pixel* source, intptr_t sstride, const pixel* recon, intptr_t rstride)
+{
+	#ifdef DEBUG
+	const pixel *t_source, *t_recon;
+	int t_sourceEnergy, t_reconEnergy;
+    	static pixel zeroBuf[8];
+	t_source = source;
+	t_recon = recon;
+	#endif 	
+
+	uint32_t totEnergy = 0;
+	
+	for (int j = 0; j < 4; j++)
+	{
+		for (int i = 0; i < 4; i++)
+		{
+			totEnergy += psyCost_pp_8x8_internal(source + i * 8, sstride, recon + i * 8, rstride);	
+		}
+	
+		source += 8 * sstride;
+		recon += 8 * rstride;
+	}
+
+	#ifdef DEBUG
+	uint32_t t_totEnergy = 0;
+        for (int i = 0; i < 32; i += 8)
+        {
+            for (int j = 0; j < 32; j += 8)
+            {
+                /* AC energy, measured by sa8d (AC + DC) minus SAD (DC) */
+                t_sourceEnergy = sa8d_8x8(t_source + i * sstride + j, sstride, zeroBuf, 0) - 
+                                   (sad_8x8(t_source + i * sstride + j, sstride, zeroBuf, 0) >> 2);
+                t_reconEnergy =  sa8d_8x8(t_recon + i * rstride + j, rstride, zeroBuf, 0) - 
+                                   (sad_8x8(t_recon + i * rstride + j, rstride, zeroBuf, 0) >> 2);
+
+                t_totEnergy += abs(t_sourceEnergy - t_reconEnergy);
+            }
+        }
+
+	if (t_totEnergy == totEnergy)
+		printf("psyCost_pp_32x32 test success\n");
+	else
+	{
+		printf("psyCost_pp_32x32 test fail\n");	
+	}
+	#endif
+
+	return totEnergy;
+}
 
 template<int size>
 int psyCost_pp(const pixel* source, intptr_t sstride, const pixel* recon, intptr_t rstride)
@@ -5782,7 +6704,6 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.cu[BLOCK_ ## W ## x ## H].cpy2Dto1D_shr = cpy2Dto1D_shr<W>; \
     p.cu[BLOCK_ ## W ## x ## H].cpy1Dto2D_shl = cpy1Dto2D_shl<W>; \
     p.cu[BLOCK_ ## W ## x ## H].cpy1Dto2D_shr = cpy1Dto2D_shr<W>; \
-    p.cu[BLOCK_ ## W ## x ## H].psy_cost_pp   = psyCost_pp<BLOCK_ ## W ## x ## H>; \
     p.cu[BLOCK_ ## W ## x ## H].transpose     = transpose<W>; \
     p.cu[BLOCK_ ## W ## x ## H].ssd_s         = pixel_ssd_s_c<W>; \
     p.cu[BLOCK_ ## W ## x ## H].var           = pixel_var<W>; \
@@ -5991,6 +6912,12 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
 
     p.cu[BLOCK_8x8].var = pixel_var_8x8;
     p.cu[BLOCK_16x16].var = pixel_var_16x16;
+
+    p.cu[BLOCK_4x4].psy_cost_pp = psyCost_pp_4x4;
+    p.cu[BLOCK_8x8].psy_cost_pp = psyCost_pp_8x8;
+    p.cu[BLOCK_16x16].psy_cost_pp = psyCost_pp_16x16;
+    p.cu[BLOCK_32x32].psy_cost_pp = psyCost_pp_32x32;
+    p.cu[BLOCK_64x64].psy_cost_pp = psyCost_pp<BLOCK_64x64>;
 
     p.cu[BLOCK_4x4].sa8d   = satd_4x4;
     p.cu[BLOCK_8x8].sa8d   = sa8d_8x8;
