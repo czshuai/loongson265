@@ -24,10 +24,9 @@
  * For more information, contact us at license @ x265.com.
  *****************************************************************************/
 
-#include "common.h"
 #include "slicetype.h"      // LOWRES_COST_MASK
 #include "primitives.h"
-#include "x265.h"
+#include "contexts.h"   // costCoeffNxN_c
 #include "ld_st.h"
 
 #include <cstdlib> // abs()
@@ -2870,26 +2869,36 @@ inline int sa8d_8x8_internal(const pixel* pix1, intptr_t i_pix1, const pixel* pi
 	v8i16 bet0, bet1, bet2, bet3, bet4, bet5, bet6, bet7;
 	v4i32 out0, out1, out2, out3;
 	
-	tmp0 = LD(pix1);
-	tmp4 = LD(pix2);
+	const pixel *pix10, *pix11, *pix12, *pix13, *pix14, *pix15, *pix16, *pix17;
 
-	pix1 += i_pix1;
-	pix2 += i_pix2;
+	pix10 = pix1;
+	pix11 = pix1 + i_pix1;
+	pix12 = pix1 + 2 * i_pix1;
+	pix13 = pix1 + 3 * i_pix1;
+	pix14 = pix1 + 4 * i_pix1;
+	pix15 = pix1 + 5 * i_pix1;
+	pix16 = pix1 + 6 * i_pix1;
+	pix17 = pix1 + 7 * i_pix1;
 
-	tmp1 = LD(pix1);
-	tmp5 = LD(pix2);
+	const pixel *pix20, *pix21, *pix22, *pix23, *pix24, *pix25, *pix26, *pix27;
 
-	pix1 += i_pix1;
-	pix2 += i_pix2;
+	pix20 = pix2;
+	pix21 = pix2 + i_pix2;
+	pix22 = pix2 + 2 * i_pix2;
+	pix23 = pix2 + 3 * i_pix2;
+	pix24 = pix2 + 4 * i_pix2;
+	pix25 = pix2 + 5 * i_pix2;
+	pix26 = pix2 + 6 * i_pix2;
+	pix27 = pix2 + 7 * i_pix2;
 
-	tmp2 = LD(pix1);
-	tmp6 = LD(pix2);
-
-	pix1 += i_pix1;
-	pix2 += i_pix2;
-
-	tmp3 = LD(pix1);
-	tmp7 = LD(pix2);
+	tmp0 = LD(pix10);
+	tmp1 = LD(pix11);
+	tmp2 = LD(pix12);
+	tmp3 = LD(pix13);
+	tmp4 = LD(pix20);
+	tmp5 = LD(pix21);
+	tmp6 = LD(pix22);
+	tmp7 = LD(pix23);
 	
 	mid0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
 	mid1 = __builtin_msa_hadd_u_h((v16u8)tmp1, (v16u8)tmp1);
@@ -2923,29 +2932,14 @@ inline int sa8d_8x8_internal(const pixel* pix1, intptr_t i_pix1, const pixel* pi
 	sub2 = __builtin_msa_subv_h(cen2, cen6); 	
 	sub3 = __builtin_msa_subv_h(cen3, cen7); 
 	
-	pix1 += i_pix1;
-	pix2 += i_pix2;
-
-	tmp0 = LD(pix1);
-	tmp4 = LD(pix2);
-
-	pix1 += i_pix1;
-	pix2 += i_pix2;
-
-	tmp1 = LD(pix1);
-	tmp5 = LD(pix2);
-
-	pix1 += i_pix1;
-	pix2 += i_pix2;
-
-	tmp2 = LD(pix1);
-	tmp6 = LD(pix2);
-
-	pix1 += i_pix1;
-	pix2 += i_pix2;
-
-	tmp3 = LD(pix1);
-	tmp7 = LD(pix2);
+	tmp0 = LD(pix14);
+	tmp1 = LD(pix15);
+	tmp2 = LD(pix16);
+	tmp3 = LD(pix17);
+	tmp4 = LD(pix24);
+	tmp5 = LD(pix25);
+	tmp6 = LD(pix26);
+	tmp7 = LD(pix27);
 
 	mid0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
 	mid1 = __builtin_msa_hadd_u_h((v16u8)tmp1, (v16u8)tmp1);
@@ -3066,6 +3060,211 @@ inline int sa8d_8x8_internal(const pixel* pix1, intptr_t i_pix1, const pixel* pi
 
 	return sum;
 }
+
+inline int sa8d_8x8_internal_64(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
+{
+	#ifdef DEBUG
+	int t_sum;
+	const pixel *t_pix1, *t_pix2;
+	t_pix1 = pix1;
+	t_pix2 = pix2;
+	#endif
+
+	int sum;
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v8i16 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+	v8i16 sub0, sub1, sub2, sub3, sub4, sub5, sub6, sub7;
+	v8i16 res0, res1, res2, res3, res4, res5, res6, res7;
+	v8i16 bet0, bet1, bet2, bet3, bet4, bet5, bet6, bet7;
+	v4i32 out0, out1, out2, out3;
+	
+	tmp0 = LD(pix1);
+	pix1 += i_pix1;
+	tmp1 = LD(pix1);
+	pix1 += i_pix1;
+	tmp2 = LD(pix1);
+	pix1 += i_pix1;
+	tmp3 = LD(pix1);
+	pix1 += i_pix1;
+	
+	tmp4 = LD(pix2);
+	pix2 += i_pix2;
+	tmp5 = LD(pix2);
+	pix2 += i_pix2;
+	tmp6 = LD(pix2);
+	pix2 += i_pix2;
+	tmp7 = LD(pix2);
+	pix2 += i_pix2;
+	
+	mid0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
+	mid1 = __builtin_msa_hadd_u_h((v16u8)tmp1, (v16u8)tmp1);
+	mid2 = __builtin_msa_hadd_u_h((v16u8)tmp2, (v16u8)tmp2);
+	mid3 = __builtin_msa_hadd_u_h((v16u8)tmp3, (v16u8)tmp3);
+	mid4 = __builtin_msa_hadd_u_h((v16u8)tmp4, (v16u8)tmp4);
+	mid5 = __builtin_msa_hadd_u_h((v16u8)tmp5, (v16u8)tmp5);
+	mid6 = __builtin_msa_hadd_u_h((v16u8)tmp6, (v16u8)tmp6);
+	mid7 = __builtin_msa_hadd_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	cen0 = __builtin_msa_hsub_u_h((v16u8)tmp0, (v16u8)tmp0);
+	cen1 = __builtin_msa_hsub_u_h((v16u8)tmp1, (v16u8)tmp1);
+	cen2 = __builtin_msa_hsub_u_h((v16u8)tmp2, (v16u8)tmp2);
+	cen3 = __builtin_msa_hsub_u_h((v16u8)tmp3, (v16u8)tmp3);
+	cen4 = __builtin_msa_hsub_u_h((v16u8)tmp4, (v16u8)tmp4);
+	cen5 = __builtin_msa_hsub_u_h((v16u8)tmp5, (v16u8)tmp5);
+	cen6 = __builtin_msa_hsub_u_h((v16u8)tmp6, (v16u8)tmp6);
+	cen7 = __builtin_msa_hsub_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	cen0 = (v8i16)__builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)cen0);
+	cen1 = (v8i16)__builtin_msa_insve_d((v2i64)mid1, 1, (v2i64)cen1);
+	cen2 = (v8i16)__builtin_msa_insve_d((v2i64)mid2, 1, (v2i64)cen2);
+	cen3 = (v8i16)__builtin_msa_insve_d((v2i64)mid3, 1, (v2i64)cen3);
+	cen4 = (v8i16)__builtin_msa_insve_d((v2i64)mid4, 1, (v2i64)cen4);
+	cen5 = (v8i16)__builtin_msa_insve_d((v2i64)mid5, 1, (v2i64)cen5);
+	cen6 = (v8i16)__builtin_msa_insve_d((v2i64)mid6, 1, (v2i64)cen6);
+	cen7 = (v8i16)__builtin_msa_insve_d((v2i64)mid7, 1, (v2i64)cen7);
+
+	sub0 = __builtin_msa_subv_h(cen0, cen4); 	
+	sub1 = __builtin_msa_subv_h(cen1, cen5); 	
+	sub2 = __builtin_msa_subv_h(cen2, cen6); 	
+	sub3 = __builtin_msa_subv_h(cen3, cen7); 
+	
+	tmp0 = LD(pix1);
+	pix1 += i_pix1;
+	tmp1 = LD(pix1);
+	pix1 += i_pix1;
+	tmp2 = LD(pix1);
+	pix1 += i_pix1;
+	tmp3 = LD(pix1);
+
+	tmp4 = LD(pix2);
+	pix2 += i_pix2;
+	tmp5 = LD(pix2);
+	pix2 += i_pix2;
+	tmp6 = LD(pix2);
+	pix2 += i_pix2;
+	tmp7 = LD(pix2);
+
+	mid0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
+	mid1 = __builtin_msa_hadd_u_h((v16u8)tmp1, (v16u8)tmp1);
+	mid2 = __builtin_msa_hadd_u_h((v16u8)tmp2, (v16u8)tmp2);
+	mid3 = __builtin_msa_hadd_u_h((v16u8)tmp3, (v16u8)tmp3);
+	mid4 = __builtin_msa_hadd_u_h((v16u8)tmp4, (v16u8)tmp4);
+	mid5 = __builtin_msa_hadd_u_h((v16u8)tmp5, (v16u8)tmp5);
+	mid6 = __builtin_msa_hadd_u_h((v16u8)tmp6, (v16u8)tmp6);
+	mid7 = __builtin_msa_hadd_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	cen0 = __builtin_msa_hsub_u_h((v16u8)tmp0, (v16u8)tmp0);
+	cen1 = __builtin_msa_hsub_u_h((v16u8)tmp1, (v16u8)tmp1);
+	cen2 = __builtin_msa_hsub_u_h((v16u8)tmp2, (v16u8)tmp2);
+	cen3 = __builtin_msa_hsub_u_h((v16u8)tmp3, (v16u8)tmp3);
+	cen4 = __builtin_msa_hsub_u_h((v16u8)tmp4, (v16u8)tmp4);
+	cen5 = __builtin_msa_hsub_u_h((v16u8)tmp5, (v16u8)tmp5);
+	cen6 = __builtin_msa_hsub_u_h((v16u8)tmp6, (v16u8)tmp6);
+	cen7 = __builtin_msa_hsub_u_h((v16u8)tmp7, (v16u8)tmp7);
+
+	cen0 = (v8i16)__builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)cen0);
+	cen1 = (v8i16)__builtin_msa_insve_d((v2i64)mid1, 1, (v2i64)cen1);
+	cen2 = (v8i16)__builtin_msa_insve_d((v2i64)mid2, 1, (v2i64)cen2);
+	cen3 = (v8i16)__builtin_msa_insve_d((v2i64)mid3, 1, (v2i64)cen3);
+	cen4 = (v8i16)__builtin_msa_insve_d((v2i64)mid4, 1, (v2i64)cen4);
+	cen5 = (v8i16)__builtin_msa_insve_d((v2i64)mid5, 1, (v2i64)cen5);
+	cen6 = (v8i16)__builtin_msa_insve_d((v2i64)mid6, 1, (v2i64)cen6);
+	cen7 = (v8i16)__builtin_msa_insve_d((v2i64)mid7, 1, (v2i64)cen7);
+
+	sub4 = __builtin_msa_subv_h(cen0, cen4); 	
+	sub5 = __builtin_msa_subv_h(cen1, cen5); 	
+	sub6 = __builtin_msa_subv_h(cen2, cen6); 	
+	sub7 = __builtin_msa_subv_h(cen3, cen7); 
+
+	res0 = __builtin_msa_addv_h(sub1, sub0);
+	res1 = __builtin_msa_subv_h(sub1, sub0);
+	res2 = __builtin_msa_addv_h(sub3, sub2);	
+	res3 = __builtin_msa_subv_h(sub3, sub2);
+	res4 = __builtin_msa_addv_h(sub5, sub4);
+	res5 = __builtin_msa_subv_h(sub5, sub4);
+	res6 = __builtin_msa_addv_h(sub7, sub6);	
+	res7 = __builtin_msa_subv_h(sub7, sub6);
+
+	bet0 = __builtin_msa_addv_h(res2, res0);
+	bet1 = __builtin_msa_subv_h(res2, res0);
+	bet2 = __builtin_msa_addv_h(res3, res1);
+	bet3 = __builtin_msa_subv_h(res3, res1);
+	bet4 = __builtin_msa_addv_h(res6, res4);
+	bet5 = __builtin_msa_subv_h(res6, res4);
+	bet6 = __builtin_msa_addv_h(res7, res5);
+	bet7 = __builtin_msa_subv_h(res7, res5);
+
+	cen0 = __builtin_msa_addv_h(bet4, bet0);
+	cen1 = __builtin_msa_subv_h(bet4, bet0);
+	cen2 = __builtin_msa_addv_h(bet6, bet2);
+	cen3 = __builtin_msa_subv_h(bet6, bet2);
+	cen4 = __builtin_msa_addv_h(bet5, bet1);
+	cen5 = __builtin_msa_subv_h(bet5, bet1);
+	cen6 = __builtin_msa_addv_h(bet7, bet3);
+	cen7 = __builtin_msa_subv_h(bet7, bet3);
+
+	res0 = __builtin_msa_pckod_h(cen1, cen0);
+	res1 = __builtin_msa_pckev_h(cen1, cen0);
+	res2 = __builtin_msa_pckod_h(cen3, cen2);
+	res3 = __builtin_msa_pckev_h(cen3, cen2);
+	res4 = __builtin_msa_pckod_h(cen5, cen4);
+	res5 = __builtin_msa_pckev_h(cen5, cen4);
+	res6 = __builtin_msa_pckod_h(cen7, cen6);
+	res7 = __builtin_msa_pckev_h(cen7, cen6);
+
+	bet0 = __builtin_msa_addv_h(res0, res1);
+	bet1 = __builtin_msa_asub_s_h(res0, res1);
+	bet2 = __builtin_msa_addv_h(res2, res3);
+	bet3 = __builtin_msa_asub_s_h(res2, res3);
+	bet4 = __builtin_msa_addv_h(res4, res5);
+	bet5 = __builtin_msa_asub_s_h(res4, res5);
+	bet6 = __builtin_msa_addv_h(res6, res7);
+	bet7 = __builtin_msa_asub_s_h(res6, res7);
+
+	bet0 = __builtin_lsx_vabs_h(bet0);
+	bet2 = __builtin_lsx_vabs_h(bet2);
+	bet4 = __builtin_lsx_vabs_h(bet4);
+	bet6 = __builtin_lsx_vabs_h(bet6);
+
+	cen0 = __builtin_msa_ilvod_h(bet0, bet1);
+	cen1 = __builtin_msa_ilvev_h(bet0, bet1);
+	cen2 = __builtin_msa_ilvod_h(bet2, bet3);
+	cen3 = __builtin_msa_ilvev_h(bet2, bet3);
+	cen4 = __builtin_msa_ilvod_h(bet4, bet5);
+	cen5 = __builtin_msa_ilvev_h(bet4, bet5);
+	cen6 = __builtin_msa_ilvod_h(bet6, bet7);
+	cen7 = __builtin_msa_ilvev_h(bet6, bet7);
+
+	res0 = __builtin_msa_max_s_h(cen0, cen1);
+	res1 = __builtin_msa_max_s_h(cen2, cen3);
+	res2 = __builtin_msa_max_s_h(cen4, cen5);
+	res3 = __builtin_msa_max_s_h(cen6, cen7);
+
+	out0 = __builtin_msa_hadd_s_w(res0, res0);
+	out1 = __builtin_msa_hadd_s_w(res1, res1);
+	out2 = __builtin_msa_hadd_s_w(res2, res2);
+	out3 = __builtin_msa_hadd_s_w(res3, res3);
+
+	out0 = __builtin_msa_addv_w(out0, out1);
+	out2 = __builtin_msa_addv_w(out2, out3);
+	out0 = __builtin_msa_addv_w(out0, out2);
+
+	sum = out0[0] + out0[1] + out0[2] + out0[3];
+
+	sum = (sum + 1) >> 1;
+	
+	#ifdef DEBUG
+	t_sum = (int)((_sa8d_8x8(t_pix1, i_pix1, t_pix2, i_pix2) + 2) >> 2);
+	if (sum == t_sum)
+		printf("sa8d_8x8_internal_64 test success\n");
+	else 
+		printf("sa8d_8x8_internal_64 test fail\n");
+	#endif
+
+	return sum;
+}
+
 
 int sa8d_8x8(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i_pix2)
 {
@@ -3358,7 +3557,7 @@ int sa8d_64x64(const pixel* pix1, intptr_t i_pix1, const pixel* pix2, intptr_t i
 	{
 		for (int i = 0; i < 8; i++)
 		{
-			sum += sa8d_8x8_internal(pix1 + i * 8, i_pix1, pix2 + i * 8, i_pix2);
+			sum += sa8d_8x8_internal_64(pix1 + i * 8, i_pix1, pix2 + i * 8, i_pix2);
 		}
 		
 		pix1 += 8 * i_pix1;
@@ -3611,6 +3810,7 @@ void blockfill_s_32x32(int16_t* dst, intptr_t dstride, int16_t val)
 	printf("blockfill_s_32x32 test success\n");
 	#endif
 }
+
 template<int size>
 void blockfill_s_c(int16_t* dst, intptr_t dstride, int16_t val)
 {	
@@ -5307,35 +5507,37 @@ inline int psyCost_pp_8x8_internal(const pixel* source, intptr_t sstride, const 
 	v4i32 res0, res1, res2, res3, res4, res5;
 	v4i32 res6, res7, res8, res10;
 	
-	tmp0 = LD(source);
-	
-	source += sstride;
+	const pixel *source0, *source1, *source2, *source3, *source4, *source5, *source6, *source7;
 
-	tmp1 = LD(source);
+	source0 = source;
+	source1 = source + sstride;
+	source2 = source + 2 * sstride;
+	source3 = source + 3 * sstride;
+	source4 = source + 4 * sstride;
+	source5 = source + 5 * sstride;
+	source6 = source + 6 * sstride;
+	source7 = source + 7 * sstride;
 	
-	source += sstride;
-	
-	tmp2 = LD(source);
-	
-	source += sstride;
+	const pixel *recon0, *recon1, *recon2, *recon3, *recon4, *recon5, *recon6, *recon7;
 
-	tmp3 = LD(source);
-	
-	source += sstride;
+	recon0 = recon;
+	recon1 = recon + rstride;
+	recon2 = recon + 2 * rstride;
+	recon3 = recon + 3 * rstride;
+	recon4 = recon + 4 * rstride;
+	recon5 = recon + 5 * rstride;
+	recon6 = recon + 6 * rstride;
+	recon7 = recon + 7 * rstride;
 
-	tmp4 = LD(source);
+	tmp0 = LD(source0);
+	tmp1 = LD(source1);
+	tmp2 = LD(source2);
+	tmp3 = LD(source3);
 	
-	source += sstride;
-
-	tmp5 = LD(source);
-	
-	source += sstride;
-
-	tmp6 = LD(source);
-	
-	source += sstride;
-
-	tmp7 = LD(source);
+	tmp4 = LD(source4);
+	tmp5 = LD(source5);
+	tmp6 = LD(source6);
+	tmp7 = LD(source7);
 
 	mid0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
 	mid1 = __builtin_msa_hadd_u_h((v16u8)tmp1, (v16u8)tmp1);
@@ -5452,35 +5654,15 @@ inline int psyCost_pp_8x8_internal(const pixel* source, intptr_t sstride, const 
 	res8 = __builtin_msa_addv_w(res2, res3);
 	res10 = __builtin_msa_addv_w(res4, res5);
 
-	tmp0 = LD(recon);
+	tmp0 = LD(recon0);
+	tmp1 = LD(recon1);
+	tmp2 = LD(recon2);
+	tmp3 = LD(recon3);
 	
-	recon += rstride;
-
-	tmp1 = LD(recon);
-	
-	recon += rstride;
-	
-	tmp2 = LD(recon);
-	
-	recon += rstride;
-
-	tmp3 = LD(recon);
-	
-	recon += rstride;
-
-	tmp4 = LD(recon);
-	
-	recon += rstride;
-
-	tmp5 = LD(recon);
-	
-	recon += rstride;
-
-	tmp6 = LD(recon);
-	
-	recon += rstride;
-
-	tmp7 = LD(recon);
+	tmp4 = LD(recon4);
+	tmp5 = LD(recon5);
+	tmp6 = LD(recon6);
+	tmp7 = LD(recon7);
 
 	mid0 = __builtin_msa_hadd_u_h((v16u8)tmp0, (v16u8)tmp0);
 	mid1 = __builtin_msa_hadd_u_h((v16u8)tmp1, (v16u8)tmp1);
@@ -5776,6 +5958,348 @@ int psyCost_pp(const pixel* source, intptr_t sstride, const pixel* recon, intptr
     }
 }
 
+void blockcopy_pp_4x4(pixel* a, intptr_t stridea, const pixel* b, intptr_t strideb)
+{
+	#ifdef DEBUG
+	const pixel *t_b;
+	pixel *t_a;
+	t_b = b;
+	t_a = a;
+	#endif
+	
+	v4i32 tmp0, tmp1, tmp2, tmp3;
+
+	LW4(b, strideb, &tmp0, &tmp1, &tmp2, &tmp3);	
+
+	SW4(tmp0, tmp1, tmp2, tmp3, a, stridea);
+
+	#ifdef DEBUG
+	for (int y = 0; y < 4; y++)
+	{
+		for (int x = 0; x < 4; x++)
+		{
+			if (t_a[x] != t_b[x])
+			{
+				printf("blockcopy_pp_4x4 test fail\n");
+				return;
+			}
+		}
+		
+		t_a += stridea;
+		t_b += strideb;
+	}
+
+	printf("blockcopy_pp_4x4 test success\n");
+	#endif
+}
+
+void blockcopy_pp_8x8(pixel* a, intptr_t stridea, const pixel* b, intptr_t strideb)
+{
+	#ifdef DEBUG
+	const pixel *t_b;
+	pixel *t_a;
+	t_b = b;
+	t_a = a;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+
+	LD4(b, strideb, &tmp0, &tmp1, &tmp2, &tmp3);
+	LD4(b + 4 * strideb, strideb, &tmp4, &tmp5, &tmp6, &tmp7);
+
+	SD4(tmp0, tmp1, tmp2, tmp3, a, stridea);
+	SD4(tmp4, tmp5, tmp6, tmp7, a + 4 * stridea, stridea);
+
+	#ifdef DEBUG
+	for (int y = 0; y < 8; y++)
+	{
+		for (int x = 0; x < 8; x++)
+		{
+			if (t_a[x] != t_b[x])
+			{	
+				printf("blockcopy_pp_8x8 test fail\n");
+				return;
+			}
+		}
+		
+		t_a += stridea;
+		t_b += strideb;
+	}
+
+	printf("blockcopy_pp_8x8 test success\n");
+	#endif
+}
+
+void blockcopy_pp_16x16(pixel* a, intptr_t stridea, const pixel* b, intptr_t strideb)
+{
+	#ifdef DEBUG
+	const pixel *t_b;
+	pixel *t_a;
+	t_b = b;
+	t_a = a;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;	
+	v2i64 val0, val1, val2, val3, val4, val5, val6, val7;
+
+	LD_V4(b, strideb, &tmp0, &tmp1, &tmp2, &tmp3);
+	LD_V4(b + 4 * strideb, strideb, &tmp4, &tmp5, &tmp6, &tmp7);
+
+	b += 8 * strideb;
+
+	LD_V4(b, strideb, &val0, &val1, &val2, &val3);
+	LD_V4(b + 4 * strideb, strideb, &val4, &val5, &val6, &val7);
+
+	ST_V4(tmp0, tmp1, tmp2, tmp3, a, stridea);
+	ST_V4(tmp4, tmp5, tmp6, tmp7, a + 4 * stridea, stridea);
+
+	a += 8 * stridea;
+
+	ST_V4(val0, val1, val2, val3, a, stridea);
+	ST_V4(val4, val5, val6, val7, a + 4 * stridea, stridea);
+	
+	#ifdef DEBUG
+	for (int y = 0; y < 16; y++)
+	{
+		for (int x = 0; x < 16; x++)
+		{
+			if (t_a[x] != t_b[x])
+			{	
+				printf("blockcopy_pp_16x16 test fail\n");
+				return;
+			}
+		}
+		
+		t_a += stridea;
+		t_b += strideb;
+	}
+
+	printf("blockcopy_pp_16x16 test success\n");
+	#endif
+}
+
+void blockcopy_pp_32x32(pixel* a, intptr_t stridea, const pixel* b, intptr_t strideb)
+{
+	#ifdef DEBUG
+	const pixel *t_b;
+	pixel *t_a;
+	t_b = b;
+	t_a = a;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v2i64 val0, val1, val2, val3, val4, val5, val6, val7;
+	v2i64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v2i64 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+	
+	for (int i = 0; i < 2; i++)
+	{
+		LD_V2_H(b, &tmp0, &tmp1);
+		b += strideb;
+		LD_V2_H(b, &tmp2, &tmp3);
+		b += strideb;	
+		LD_V2_H(b, &tmp4, &tmp5);
+		b += strideb;
+		LD_V2_H(b, &tmp6, &tmp7);
+		b += strideb;
+		LD_V2_H(b, &val0, &val1);
+		b += strideb;
+		LD_V2_H(b, &val2, &val3);
+		b += strideb;
+		LD_V2_H(b, &val4, &val5);
+		b += strideb;
+		LD_V2_H(b, &val6, &val7);
+		b += strideb;
+		LD_V2_H(b, &mid0, &mid1);
+		b += strideb;
+		LD_V2_H(b, &mid2, &mid3);
+		b += strideb;	
+		LD_V2_H(b, &mid4, &mid5);
+		b += strideb;
+		LD_V2_H(b, &mid6, &mid7);
+		b += strideb;
+		LD_V2_H(b, &cen0, &cen1);
+		b += strideb;
+		LD_V2_H(b, &cen2, &cen3);
+		b += strideb;
+		LD_V2_H(b, &cen4, &cen5);
+		b += strideb;
+		LD_V2_H(b, &cen6, &cen7);
+
+
+		ST_V2_H(tmp0, tmp1, a);	
+		a += stridea;
+		ST_V2_H(tmp2, tmp3, a);
+		a += stridea;
+		ST_V2_H(tmp4, tmp5, a);
+		a += stridea;
+		ST_V2_H(tmp6, tmp7, a);
+		a += stridea;
+		ST_V2_H(val0, val1, a);	
+		a += stridea;
+		ST_V2_H(val2, val3, a);
+		a += stridea;
+		ST_V2_H(val4, val5, a);
+		a += stridea;
+		ST_V2_H(val6, val7, a);
+		a += stridea;
+		ST_V2_H(mid0, mid1, a);	
+		a += stridea;
+		ST_V2_H(mid2, mid3, a);
+		a += stridea;
+		ST_V2_H(mid4, mid5, a);
+		a += stridea;
+		ST_V2_H(mid6, mid7, a);
+		a += stridea;
+		ST_V2_H(cen0, cen1, a);	
+		a += stridea;
+		ST_V2_H(cen2, cen3, a);
+		a += stridea;
+		ST_V2_H(cen4, cen5, a);
+		a += stridea;
+		ST_V2_H(cen6, cen7, a);
+
+		b += strideb;
+		a += stridea;
+	}	
+
+	#ifdef DEBUG
+	for (int y = 0; y < 32; y++)
+	{
+		for (int x = 0; x < 32; x++)
+		{
+			if (t_a[x] != t_b[x])
+			{	
+				printf("blockcopy_pp_32x32 test fail\n");
+				return;
+			}
+		}
+		
+		t_a += stridea;
+		t_b += strideb;
+	}
+
+	printf("blockcopy_pp_32x32 test success\n");
+	#endif
+}
+
+void blockcopy_pp_64x64(pixel* a, intptr_t stridea, const pixel* b, intptr_t strideb)
+{
+	#ifdef DEBUG
+	const pixel *t_b;
+	pixel *t_a;
+	t_b = b;
+	t_a = a;
+	#endif
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v2i64 val0, val1, val2, val3, val4, val5, val6, val7;
+	v2i64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v2i64 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+
+	const pixel *b0, *b1, *b2, *b3, *b4, *b5, *b6, *b7;
+	pixel *a0, *a1, *a2, *a3, *a4, *a5, *a6, *a7;
+	
+	b0 = b;
+	b1 = b + strideb;
+	b2 = b + 2 * strideb;
+	b3 = b + 3 * strideb;
+	b4 = b + 4 * strideb;
+	b5 = b + 5 * strideb;
+	b6 = b + 6 * strideb;
+	b7 = b + 7 * strideb;
+
+	a0 = a;
+	a1 = a + stridea;
+	a2 = a + 2 * stridea;
+	a3 = a + 3 * stridea;
+	a4 = a + 4 * stridea;
+	a5 = a + 5 * stridea;
+	a6 = a + 6 * stridea;
+	a7 = a + 7 * stridea;
+
+	for (int i = 0; i < 8; i++)
+	{
+		LD_V4_H(b0, &tmp0, &tmp1, &tmp2, &tmp3);
+		LD_V4_H(b1, &tmp4, &tmp5, &tmp6, &tmp7);
+		LD_V4_H(b2, &val0, &val1, &val2, &val3);
+		LD_V4_H(b3, &val4, &val5, &val6, &val7);
+	
+		LD_V4_H(b4, &mid0, &mid1, &mid2, &mid3);
+		LD_V4_H(b5, &mid4, &mid5, &mid6, &mid7);
+		LD_V4_H(b6, &cen0, &cen1, &cen2, &cen3);
+		LD_V4_H(b7, &cen4, &cen5, &cen6, &cen7);
+	
+		b0 += 8 * strideb;
+		b1 += 8 * strideb;
+		b2 += 8 * strideb;
+		b3 += 8 * strideb;
+		b4 += 8 * strideb;
+		b5 += 8 * strideb;
+		b6 += 8 * strideb;
+		b7 += 8 * strideb;
+
+	/*
+		LD_V4_H(b, &mid0, &mid1, &mid2, &mid3);
+		b += strideb;
+		LD_V4_H(b, &mid4, &mid5, &mid6, &mid7);
+		b += strideb;
+		LD_V4_H(b, &cen0, &cen1, &cen2, &cen3);
+		b += strideb;
+		LD_V4_H(b, &cen4, &cen5, &cen6, &cen7);
+	*/
+		ST_V4_H(tmp0, tmp1, tmp2, tmp3, a0);
+		ST_V4_H(tmp4, tmp5, tmp6, tmp7, a1);	
+		ST_V4_H(val0, val1, val2, val3, a2);
+		ST_V4_H(val4, val5, val6, val7, a3);	
+	
+		ST_V4_H(mid0, mid1, mid2, mid3, a4);
+		ST_V4_H(mid4, mid5, mid6, mid7, a5);	
+		ST_V4_H(cen0, cen1, cen2, cen3, a6);
+		ST_V4_H(cen4, cen5, cen6, cen7, a7);	
+	
+		a0 += 8 * stridea;
+		a1 += 8 * stridea;
+		a2 += 8 * stridea;
+		a3 += 8 * stridea;
+		a4 += 8 * stridea;
+		a5 += 8 * stridea;
+		a6 += 8 * stridea;
+		a7 += 8 * stridea;
+
+	/*
+		ST_V4_H(mid0, mid1, mid2, mid3, a);
+		a += stridea;
+		ST_V4_H(mid4, mid5, mid6, mid7, a);	
+		a += stridea;
+		ST_V4_H(cen0, cen1, cen2, cen3, a);
+		a += stridea;
+		ST_V4_H(cen4, cen5, cen6, cen7, a);	
+	*/
+		//b += strideb;
+		//a += stridea;
+	}
+
+	#ifdef DEBUG
+	for (int y = 0; y < 64; y++)
+	{
+		for (int x = 0; x < 64; x++)
+		{
+			if (t_a[x] != t_b[x])
+			{
+				printf("blockcopy_pp_64x64 test fail\n");
+				return;
+			}
+		}
+		
+		t_a += stridea;
+		t_b += strideb;
+	}
+
+	printf("blockcopy_pp_64x64 test success\n");
+	#endif
+}
+
 template<int bx, int by>
 void blockcopy_pp_c(pixel* a, intptr_t stridea, const pixel* b, intptr_t strideb)
 {
@@ -5787,6 +6311,272 @@ void blockcopy_pp_c(pixel* a, intptr_t stridea, const pixel* b, intptr_t strideb
         a += stridea;
         b += strideb;
     }
+}
+
+void blockcopy_ss_4x4(int16_t* a, intptr_t stridea, const int16_t* b, intptr_t strideb)
+{
+	#ifdef DEBUG
+	const int16_t *t_b;
+	int16_t *t_a;
+	t_b = b;
+	t_a = a;
+	#endif	
+
+	v2i64 tmp0, tmp1, tmp2, tmp3;
+
+	LD4((const pixel*)b, 2 * strideb, &tmp0, &tmp1, &tmp2, &tmp3);
+
+	SD4(tmp0, tmp1, tmp2, tmp3, (pixel*)a, 2 * stridea);
+
+	#ifdef DEBUG
+	for (int y = 0; y < 4; y++)
+    	{
+        	for (int x = 0; x < 4; x++)
+		{
+            		if (t_a[x] != t_b[x])
+			{
+				printf("blockcopy_ss_4x4 test fail\n");
+				return;
+			}
+		}
+		
+        	t_a += stridea;
+        	t_b += strideb;
+    	}
+
+	printf("blockcopy_ss_4x4 test success\n");
+	#endif
+}
+
+void blockcopy_ss_8x8(int16_t* a, intptr_t stridea, const int16_t* b, intptr_t strideb)
+{
+	#ifdef DEBUG
+	const int16_t *t_b;
+	int16_t *t_a;
+	t_b = b;
+	t_a = a;
+	#endif	
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+
+	LD_V4((const pixel*)b, 2 * strideb, &tmp0, &tmp1, &tmp2, &tmp3);
+	LD_V4((const pixel*)(b + 4 * strideb), 2 * strideb, &tmp4, &tmp5, &tmp6, &tmp7);
+
+	ST_V4(tmp0, tmp1, tmp2, tmp3, (pixel*)a, 2 * stridea);
+	ST_V4(tmp4, tmp5, tmp6, tmp7, (pixel*)(a + 4 * stridea), 2 * stridea);
+
+	#ifdef DEBUG
+	for (int y = 0; y < 8; y++)
+    	{
+        	for (int x = 0; x < 8; x++)
+		{
+            		if (t_a[x] != t_b[x])
+			{
+				printf("blockcopy_ss_8x8 test fail\n");
+				return;
+			}
+		}
+		
+        	t_a += stridea;
+        	t_b += strideb;
+    	}
+
+	printf("blockcopy_ss_8x8 test success\n");
+	#endif
+}
+
+void blockcopy_ss_16x16(int16_t* a, intptr_t stridea, const int16_t* b, intptr_t strideb)
+{
+	#ifdef DEBUG
+	const int16_t *t_b;
+	int16_t *t_a;
+	t_b = b;
+	t_a = a;
+	#endif	
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v2i64 val0, val1, val2, val3, val4, val5, val6, val7;
+	v2i64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v2i64 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+
+	LD_V2_H((const pixel*)b, &tmp0, &tmp1);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &tmp2, &tmp3);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &tmp4, &tmp5);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &tmp6, &tmp7);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &val0, &val1);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &val2, &val3);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &val4, &val5);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &val6, &val7);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &mid0, &mid1);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &mid2, &mid3);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &mid4, &mid5);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &mid6, &mid7);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &cen0, &cen1);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &cen2, &cen3);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &cen4, &cen5);
+	b += strideb;
+	LD_V2_H((const pixel*)b, &cen6, &cen7);
+
+	ST_V2_H(tmp0, tmp1, (pixel*)a);
+	a += stridea;
+	ST_V2_H(tmp2, tmp3, (pixel*)a);
+	a += stridea;
+	ST_V2_H(tmp4, tmp5, (pixel*)a);
+	a += stridea;
+	ST_V2_H(tmp6, tmp7, (pixel*)a);
+	a += stridea;
+	ST_V2_H(val0, val1, (pixel*)a);
+	a += stridea;
+	ST_V2_H(val2, val3, (pixel*)a);
+	a += stridea;
+	ST_V2_H(val4, val5, (pixel*)a);
+	a += stridea;
+	ST_V2_H(val6, val7, (pixel*)a);
+	a += stridea;
+	ST_V2_H(mid0, mid1, (pixel*)a);
+	a += stridea;
+	ST_V2_H(mid2, mid3, (pixel*)a);
+	a += stridea;
+	ST_V2_H(mid4, mid5, (pixel*)a);
+	a += stridea;
+	ST_V2_H(mid6, mid7, (pixel*)a);
+	a += stridea;
+	ST_V2_H(cen0, cen1, (pixel*)a);
+	a += stridea;
+	ST_V2_H(cen2, cen3, (pixel*)a);
+	a += stridea;
+	ST_V2_H(cen4, cen5, (pixel*)a);
+	a += stridea;
+	ST_V2_H(cen6, cen7, (pixel*)a);
+
+	#ifdef DEBUG
+	for (int y = 0; y < 16; y++)
+    	{
+        	for (int x = 0; x < 16; x++)
+		{
+            		if (t_a[x] != t_b[x])
+			{
+				printf("blockcopy_ss_16x16 test fail\n");
+				return;
+			}
+		}
+		
+        	t_a += stridea;
+        	t_b += strideb;
+    	}
+
+	printf("blockcopy_ss_16x16 test success\n");
+	#endif
+}
+
+void blockcopy_ss_32x32(int16_t* a, intptr_t stridea, const int16_t* b, intptr_t strideb)
+{
+	#ifdef DEBUG
+	const int16_t *t_b;
+	int16_t *t_a;
+	t_b = b;
+	t_a = a;
+	#endif	
+
+	v2i64 tmp0, tmp1, tmp2, tmp3, tmp4, tmp5, tmp6, tmp7;
+	v2i64 val0, val1, val2, val3, val4, val5, val6, val7;
+	v2i64 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v2i64 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+
+	const int16_t *b0, *b1, *b2, *b3, *b4, *b5, *b6, *b7;
+	int16_t *a0, *a1, *a2, *a3, *a4, *a5, *a6, *a7;
+	
+	b0 = b;
+	b1 = b + strideb;
+	b2 = b + 2 * strideb;
+	b3 = b + 3 * strideb;
+	b4 = b + 4 * strideb;
+	b5 = b + 5 * strideb;
+	b6 = b + 6 * strideb;
+	b7 = b + 7 * strideb;
+
+	a0 = a;
+	a1 = a + stridea;
+	a2 = a + 2 * stridea;
+	a3 = a + 3 * stridea;
+	a4 = a + 4 * stridea;
+	a5 = a + 5 * stridea;
+	a6 = a + 6 * stridea;
+	a7 = a + 7 * stridea;
+
+	for (int i = 0; i < 4; i++)
+	{
+		LD_V4_H((const pixel*)b0, &tmp0, &tmp1, &tmp2, &tmp3);
+		LD_V4_H((const pixel*)b1, &tmp4, &tmp5, &tmp6, &tmp7);
+		LD_V4_H((const pixel*)b2, &val0, &val1, &val2, &val3);
+		LD_V4_H((const pixel*)b3, &val4, &val5, &val6, &val7);
+	
+		LD_V4_H((const pixel*)b4, &mid0, &mid1, &mid2, &mid3);
+		LD_V4_H((const pixel*)b5, &mid4, &mid5, &mid6, &mid7);
+		LD_V4_H((const pixel*)b6, &cen0, &cen1, &cen2, &cen3);
+		LD_V4_H((const pixel*)b7, &cen4, &cen5, &cen6, &cen7);
+	
+		b0 += 8 * strideb;
+		b1 += 8 * strideb;
+		b2 += 8 * strideb;
+		b3 += 8 * strideb;
+		b4 += 8 * strideb;
+		b5 += 8 * strideb;
+		b6 += 8 * strideb;
+		b7 += 8 * strideb;
+
+		ST_V4_H(tmp0, tmp1, tmp2, tmp3, (pixel*)a0);
+		ST_V4_H(tmp4, tmp5, tmp6, tmp7, (pixel*)a1);	
+		ST_V4_H(val0, val1, val2, val3, (pixel*)a2);
+		ST_V4_H(val4, val5, val6, val7, (pixel*)a3);	
+	
+		ST_V4_H(mid0, mid1, mid2, mid3, (pixel*)a4);
+		ST_V4_H(mid4, mid5, mid6, mid7, (pixel*)a5);	
+		ST_V4_H(cen0, cen1, cen2, cen3, (pixel*)a6);
+		ST_V4_H(cen4, cen5, cen6, cen7, (pixel*)a7);	
+	
+		a0 += 8 * stridea;
+		a1 += 8 * stridea;
+		a2 += 8 * stridea;
+		a3 += 8 * stridea;
+		a4 += 8 * stridea;
+		a5 += 8 * stridea;
+		a6 += 8 * stridea;
+		a7 += 8 * stridea;
+	}
+
+	#ifdef DEBUG
+	for (int y = 0; y < 32; y++)
+    	{
+        	for (int x = 0; x < 32; x++)
+		{
+            		if (t_a[x] != t_b[x])
+			{
+				printf("blockcopy_ss_32x32 test fail\n");
+				return;
+			}
+		}
+		
+        	t_a += stridea;
+        	t_b += strideb;
+    	}
+
+	printf("blockcopy_ss_32x32 test success\n");
+	#endif
 }
 
 template<int bx, int by>
@@ -6518,6 +7308,463 @@ void pixel_sub_ps_c(int16_t* a, intptr_t dstride, const pixel* b0, const pixel* 
    }
 }
 
+void pixel_add_ps_4x4(pixel* a, intptr_t dstride, const pixel* b0, const int16_t* b1, intptr_t sstride0, intptr_t sstride1)
+{
+	#ifdef DEBUG
+	pixel *t_a;
+	const pixel *t_b0;
+	const int16_t *t_b1;
+	t_a = a;
+	t_b0 = b0;
+	t_b1 = b1;
+	#endif
+	
+	v4i32 tmp0, tmp1, tmp2, tmp3;
+	v8u16 mid0, mid1;
+	v2i64 val0, val1, val2, val3;
+	v8i16 cen0, cen1;
+	v16u8 res0, res1;	
+
+	LW4(b0, sstride0, &tmp0, &tmp1, &tmp2, &tmp3);	
+	
+	tmp0 = __builtin_msa_insve_w(tmp0, 1, tmp2);
+	tmp1 = __builtin_msa_insve_w(tmp1, 1, tmp3);
+
+	mid0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+	mid1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
+
+	LD4((const pixel*)b1, 2 * sstride1, &val0, &val1, &val2, &val3);	
+
+	val0 = __builtin_msa_insve_d(val0, 1, val2);	
+	val1 = __builtin_msa_insve_d(val1, 1, val3);
+
+	cen0 = __builtin_msa_addv_h((v8i16)mid0, (v8i16)val0);
+	cen1 = __builtin_msa_addv_h((v8i16)mid1, (v8i16)val1);
+	
+	res0 = __builtin_lsx_vsrains_u_b((v8u16)cen0, 0);
+	res1 = __builtin_lsx_vsrains_u_b((v8u16)cen1, 0);
+
+	SW2((v4i32)res0, (v4i32)res1, a, dstride);
+	SW2_1((v4i32)res0, (v4i32)res1, a + 2 * dstride, dstride);
+
+	#ifdef DEBUG
+	for (int y = 0; y < 4; y++)
+    	{
+        	for (int x = 0; x < 4; x++)
+		{
+            		if (t_a[x] != x265_clip(t_b0[x] + t_b1[x]))
+			{
+				printf("pixel_add_ps_4x4 test fail\n");
+				return;
+			}
+		}
+	
+        	t_b0 += sstride0;
+        	t_b1 += sstride1;
+        	t_a += dstride;
+    	}
+
+	printf("pixel_add_ps_4x4 test success\n");
+	#endif
+}
+
+void pixel_add_ps_8x8(pixel* a, intptr_t dstride, const pixel* b0, const int16_t* b1, intptr_t sstride0, intptr_t sstride1)
+{
+	#ifdef DEBUG
+	pixel *t_a;
+	const pixel *t_b0;
+	const int16_t *t_b1;
+	t_a = a;
+	t_b0 = b0;
+	t_b1 = b1;
+	#endif
+	
+	v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v2i64 val0, val1, val2, val3, val4, val5, val6, val7;	
+	v8i16 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+	v16u8 res0, res1, res2, res3, res4, res5, res6, res7;
+	
+	LD4_BtoH(b0, sstride0, &mid0, &mid1, &mid2, &mid3);
+	b0 += 4 * sstride0;
+	LD4_BtoH(b0, sstride0, &mid4, &mid5, &mid6, &mid7);
+	
+	LD_V4((const pixel*)b1, 2 * sstride1, &val0, &val1, &val2, &val3);
+	b1 += 4 * sstride1;
+	LD_V4((const pixel*)b1, 2 * sstride1, &val4, &val5, &val6, &val7);
+
+	cen0 = __builtin_msa_addv_h((v8i16)mid0, (v8i16)val0);
+	cen1 = __builtin_msa_addv_h((v8i16)mid1, (v8i16)val1);
+	cen2 = __builtin_msa_addv_h((v8i16)mid2, (v8i16)val2);
+	cen3 = __builtin_msa_addv_h((v8i16)mid3, (v8i16)val3);
+	cen4 = __builtin_msa_addv_h((v8i16)mid4, (v8i16)val4);
+	cen5 = __builtin_msa_addv_h((v8i16)mid5, (v8i16)val5);
+	cen6 = __builtin_msa_addv_h((v8i16)mid6, (v8i16)val6);
+	cen7 = __builtin_msa_addv_h((v8i16)mid7, (v8i16)val7);
+
+	res0 = __builtin_lsx_vsrains_u_b((v8u16)cen0, 0);
+	res1 = __builtin_lsx_vsrains_u_b((v8u16)cen1, 0);
+	res2 = __builtin_lsx_vsrains_u_b((v8u16)cen2, 0);
+	res3 = __builtin_lsx_vsrains_u_b((v8u16)cen3, 0);
+	res4 = __builtin_lsx_vsrains_u_b((v8u16)cen4, 0);
+	res5 = __builtin_lsx_vsrains_u_b((v8u16)cen5, 0);
+	res6 = __builtin_lsx_vsrains_u_b((v8u16)cen6, 0);
+	res7 = __builtin_lsx_vsrains_u_b((v8u16)cen7, 0);
+
+	SD4((v2i64)res0, (v2i64)res1, (v2i64)res2, (v2i64)res3, a, dstride);
+	a += 4 * dstride;
+	SD4((v2i64)res4, (v2i64)res5, (v2i64)res6, (v2i64)res7, a, dstride);
+
+	#ifdef DEBUG
+	for (int y = 0; y < 8; y++)
+    	{
+        	for (int x = 0; x < 8; x++)
+		{
+            		if (t_a[x] != x265_clip(t_b0[x] + t_b1[x]))
+			{
+				printf("pixel_add_ps_8x8 test fail\n");
+				return;
+			}
+		}
+	
+        	t_b0 += sstride0;
+        	t_b1 += sstride1;
+        	t_a += dstride;
+    	}
+
+	printf("pixel_add_ps_8x8 test success\n");
+	#endif
+}
+
+void pixel_add_ps_16x16(pixel* a, intptr_t dstride, const pixel* b0, const int16_t* b1, intptr_t sstride0, intptr_t sstride1)
+{
+	#ifdef DEBUG
+	pixel *t_a;
+	const pixel *t_b0;
+	const int16_t *t_b1;
+	t_a = a;
+	t_b0 = b0;
+	t_b1 = b1;
+	#endif
+
+	v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	//v8u16 mid8, mid9, mid10, mid11, mid12, mid13, mid14, mid15;
+	v2i64 val0, val1, val2, val3, val4, val5, val6, val7;
+	//v2i64 val8, val9, val10, val11, val12, val13, val14, val15;
+	v8i16 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+	v8i16 cen8, cen9, cen10, cen11, cen12, cen13, cen14, cen15;
+	v16u8 res0, res1, res2, res3, res4, res5, res6, res7;
+	//v16u8 res8, res9, res10, res11, res12, res13, res14, res15;
+
+	const pixel *b0_0, *b0_1, *b0_2, *b0_3;//*b0_4, *b0_5, *b0_6, *b0_7;
+
+	b0_0 = b0;
+	b0_1 = b0 + sstride0;
+	b0_2 = b0 + 2 * sstride0;
+	b0_3 = b0 + 3 * sstride0;
+	//b0_4 = b0 + 4 * sstride0;
+	//b0_5 = b0 + 5 * sstride0;
+	//b0_6 = b0 + 6 * sstride0;
+	//b0_7 = b0 + 7 * sstride0;
+
+	const int16_t *b1_0, *b1_1, *b1_2, *b1_3;// *b1_4, *b1_5, *b1_6, *b1_7;
+
+	b1_0 = b1;
+	b1_1 = b1 + sstride1;
+	b1_2 = b1 + 2 * sstride1;
+	b1_3 = b1 + 3 * sstride1;
+	//b1_4 = b1 + 4 * sstride1;
+	//b1_5 = b1 + 5 * sstride1;
+	//b1_6 = b1 + 6 * sstride1;
+	//b1_7 = b1 + 7 * sstride1;
+	
+	pixel *a_0, *a_1, *a_2, *a_3;// *a_4, *a_5, *a_6, *a_7;
+	
+	a_0 = a;
+	a_1 = a + dstride;
+	a_2 = a + 2 * dstride;
+	a_3 = a + 3 * dstride;
+	//a_4 = a + 4 * dstride;
+	//a_5 = a + 5 * dstride;
+	//a_6 = a + 6 * dstride;
+	//a_7 = a + 7 * dstride;
+	
+	for (int i = 0; i < 2; i++)
+	{
+		LD2_H_BtoH(b0_0, &mid0, &mid1);
+		LD2_H_BtoH(b0_1, &mid2, &mid3);
+		LD2_H_BtoH(b0_2, &mid4, &mid5);
+		LD2_H_BtoH(b0_3, &mid6, &mid7);
+/*
+	LD2_H_BtoH(b0_4, &mid8, &mid9);
+	LD2_H_BtoH(b0_5, &mid10, &mid11);
+	LD2_H_BtoH(b0_6, &mid12, &mid13);
+	LD2_H_BtoH(b0_7, &mid14, &mid15);
+*/
+		LD_V2_H((const pixel*)b1_0, &val0, &val1);
+		LD_V2_H((const pixel*)b1_1, &val2, &val3);
+		LD_V2_H((const pixel*)b1_2, &val4, &val5);
+		LD_V2_H((const pixel*)b1_3, &val6, &val7);
+/*
+	LD_V2_H((const pixel*)b1_4, &val8, &val9);
+	LD_V2_H((const pixel*)b1_5, &val10, &val11);
+	LD_V2_H((const pixel*)b1_6, &val12, &val13);
+	LD_V2_H((const pixel*)b1_7, &val14, &val15);
+*/
+		cen0 = __builtin_msa_addv_h((v8i16)mid0, (v8i16)val0);
+		cen1 = __builtin_msa_addv_h((v8i16)mid1, (v8i16)val1);
+		cen2 = __builtin_msa_addv_h((v8i16)mid2, (v8i16)val2);
+		cen3 = __builtin_msa_addv_h((v8i16)mid3, (v8i16)val3);
+		cen4 = __builtin_msa_addv_h((v8i16)mid4, (v8i16)val4);
+		cen5 = __builtin_msa_addv_h((v8i16)mid5, (v8i16)val5);
+		cen6 = __builtin_msa_addv_h((v8i16)mid6, (v8i16)val6);
+		cen7 = __builtin_msa_addv_h((v8i16)mid7, (v8i16)val7);
+/*	
+	cen8 = __builtin_msa_addv_h((v8i16)mid8, (v8i16)val8);
+	cen9 = __builtin_msa_addv_h((v8i16)mid9, (v8i16)val9);
+	cen10 = __builtin_msa_addv_h((v8i16)mid10, (v8i16)val10);
+	cen11 = __builtin_msa_addv_h((v8i16)mid11, (v8i16)val11);
+	cen12 = __builtin_msa_addv_h((v8i16)mid12, (v8i16)val12);
+	cen13 = __builtin_msa_addv_h((v8i16)mid13, (v8i16)val13);
+	cen14 = __builtin_msa_addv_h((v8i16)mid14, (v8i16)val14);
+	cen15 = __builtin_msa_addv_h((v8i16)mid15, (v8i16)val15);
+*/
+
+		b0_0 += 4 * sstride0;	
+		b0_1 += 4 * sstride0;	
+		b0_2 += 4 * sstride0;	
+		b0_3 += 4 * sstride0;	
+
+		b1_0 += 4 * sstride1;
+		b1_1 += 4 * sstride1;
+		b1_2 += 4 * sstride1;
+		b1_3 += 4 * sstride1;
+	
+		LD2_H_BtoH(b0_0, &mid0, &mid1);
+		LD2_H_BtoH(b0_1, &mid2, &mid3);
+		LD2_H_BtoH(b0_2, &mid4, &mid5);
+		LD2_H_BtoH(b0_3, &mid6, &mid7);
+
+		LD_V2_H((const pixel*)b1_0, &val0, &val1);
+		LD_V2_H((const pixel*)b1_1, &val2, &val3);
+		LD_V2_H((const pixel*)b1_2, &val4, &val5);
+		LD_V2_H((const pixel*)b1_3, &val6, &val7);
+
+		cen8 = __builtin_msa_addv_h((v8i16)mid0, (v8i16)val0);
+		cen9 = __builtin_msa_addv_h((v8i16)mid1, (v8i16)val1);
+		cen10 = __builtin_msa_addv_h((v8i16)mid2, (v8i16)val2);
+		cen11 = __builtin_msa_addv_h((v8i16)mid3, (v8i16)val3);
+		cen12 = __builtin_msa_addv_h((v8i16)mid4, (v8i16)val4);
+		cen13 = __builtin_msa_addv_h((v8i16)mid5, (v8i16)val5);
+		cen14 = __builtin_msa_addv_h((v8i16)mid6, (v8i16)val6);
+		cen15 = __builtin_msa_addv_h((v8i16)mid7, (v8i16)val7);
+
+		res0 = __builtin_lsx_vsrains_u_b((v8u16)cen0, 0);
+		res1 = __builtin_lsx_vsrains_u_b((v8u16)cen1, 0);
+		res2 = __builtin_lsx_vsrains_u_b((v8u16)cen2, 0);
+		res3 = __builtin_lsx_vsrains_u_b((v8u16)cen3, 0);
+		res4 = __builtin_lsx_vsrains_u_b((v8u16)cen4, 0);
+		res5 = __builtin_lsx_vsrains_u_b((v8u16)cen5, 0);
+		res6 = __builtin_lsx_vsrains_u_b((v8u16)cen6, 0);
+		res7 = __builtin_lsx_vsrains_u_b((v8u16)cen7, 0);
+
+		SD2_H((v2i64)res0, (v2i64)res1, a_0);
+		SD2_H((v2i64)res2, (v2i64)res3, a_1);
+		SD2_H((v2i64)res4, (v2i64)res5, a_2);
+		SD2_H((v2i64)res6, (v2i64)res7, a_3);
+		
+		res0 = __builtin_lsx_vsrains_u_b((v8u16)cen8, 0);
+		res1 = __builtin_lsx_vsrains_u_b((v8u16)cen9, 0);
+		res2 = __builtin_lsx_vsrains_u_b((v8u16)cen10, 0);
+		res3 = __builtin_lsx_vsrains_u_b((v8u16)cen11, 0);
+		res4 = __builtin_lsx_vsrains_u_b((v8u16)cen12, 0);
+		res5 = __builtin_lsx_vsrains_u_b((v8u16)cen13, 0);
+		res6 = __builtin_lsx_vsrains_u_b((v8u16)cen14, 0);
+		res7 = __builtin_lsx_vsrains_u_b((v8u16)cen15, 0);
+	
+		a_0 += 4 * dstride;
+		a_1 += 4 * dstride;
+		a_2 += 4 * dstride;
+		a_3 += 4 * dstride;
+
+		SD2_H((v2i64)res0, (v2i64)res1, a_0);
+		SD2_H((v2i64)res2, (v2i64)res3, a_1);
+		SD2_H((v2i64)res4, (v2i64)res5, a_2);
+		SD2_H((v2i64)res6, (v2i64)res7, a_3);
+
+/*
+	SD2_H((v2i64)res8, (v2i64)res9, a_0);
+	SD2_H((v2i64)res10, (v2i64)res11, a_1);
+	SD2_H((v2i64)res12, (v2i64)res13, a_2);
+	SD2_H((v2i64)res14, (v2i64)res15, a_3);
+*/	
+		b0_0 += 4 * sstride0;
+		b0_1 += 4 * sstride0;
+		b0_2 += 4 * sstride0;
+		b0_3 += 4 * sstride0;
+
+		b1_0 += 4 * sstride1;
+		b1_1 += 4 * sstride1;
+		b1_2 += 4 * sstride1;
+		b1_3 += 4 * sstride1;
+
+		a_0 += 4 * dstride;
+		a_1 += 4 * dstride;
+		a_2 += 4 * dstride;
+		a_3 += 4 * dstride;
+	}
+
+	#ifdef DEBUG
+	for (int y = 0; y < 16; y++)
+    	{
+        	for (int x = 0; x < 16; x++)
+		{
+            		if (t_a[x] != x265_clip(t_b0[x] + t_b1[x]))
+			{
+				printf("pixel_add_ps_16x16 test fail\n");
+				return;
+			}
+		}
+	
+        	t_b0 += sstride0;
+        	t_b1 += sstride1;
+        	t_a += dstride;
+    	}
+
+	printf("pixel_add_ps_16x16 test success\n");
+	#endif
+}
+
+void pixel_add_ps_32x32(pixel* a, intptr_t dstride, const pixel* b0, const int16_t* b1, intptr_t sstride0, intptr_t sstride1)
+{
+	#ifdef DEBUG
+	pixel *t_a;
+	const pixel *t_b0;
+	const int16_t *t_b1;
+	t_a = a;
+	t_b0 = b0;
+	t_b1 = b1;
+	#endif
+
+	v8u16 mid0, mid1, mid2, mid3, mid4, mid5, mid6, mid7;
+	v8u16 mid8, mid9, mid10, mid11, mid12, mid13, mid14, mid15;
+	v2i64 val0, val1, val2, val3, val4, val5, val6, val7;
+	v2i64 val8, val9, val10, val11, val12, val13, val14, val15;
+	v8i16 cen0, cen1, cen2, cen3, cen4, cen5, cen6, cen7;
+	v8i16 cen8, cen9, cen10, cen11, cen12, cen13, cen14, cen15;
+	v16u8 res0, res1, res2, res3, res4, res5, res6, res7;
+	v16u8 res8, res9, res10, res11, res12, res13, res14, res15;
+
+	const pixel *b0_0, *b0_1, *b0_2, *b0_3;
+
+	b0_0 = b0;
+	b0_1 = b0 + sstride0;
+	b0_2 = b0 + 2 * sstride0;
+	b0_3 = b0 + 3 * sstride0;
+
+	const int16_t *b1_0, *b1_1, *b1_2, *b1_3;
+	
+	b1_0 = b1;
+	b1_1 = b1 + sstride1;
+	b1_2 = b1 + 2 * sstride1;
+	b1_3 = b1 + 3 * sstride1;
+	
+	pixel *a_0, *a_1, *a_2, *a_3;	
+	
+	a_0 = a;
+	a_1 = a + dstride;
+	a_2 = a + 2 * dstride;
+	a_3 = a + 3 * dstride;
+
+	for (int i = 0; i < 8; i++)
+	{
+		LD4_H_BtoH(b0_0, &mid0, &mid1, &mid2, &mid3);	
+		LD4_H_BtoH(b0_1, &mid4, &mid5, &mid6, &mid7);	
+		LD4_H_BtoH(b0_2, &mid8, &mid9, &mid10, &mid11);	
+		LD4_H_BtoH(b0_3, &mid12, &mid13, &mid14, &mid15);
+
+		LD_V4_H((const pixel*)b1_0, &val0, &val1, &val2, &val3);
+		LD_V4_H((const pixel*)b1_1, &val4, &val5, &val6, &val7);
+		LD_V4_H((const pixel*)b1_2, &val8, &val9, &val10, &val11);
+		LD_V4_H((const pixel*)b1_3, &val12, &val13, &val14, &val15);
+
+		cen0 = __builtin_msa_addv_h((v8i16)mid0, (v8i16)val0);
+		cen1 = __builtin_msa_addv_h((v8i16)mid1, (v8i16)val1);
+		cen2 = __builtin_msa_addv_h((v8i16)mid2, (v8i16)val2);
+		cen3 = __builtin_msa_addv_h((v8i16)mid3, (v8i16)val3);
+		cen4 = __builtin_msa_addv_h((v8i16)mid4, (v8i16)val4);
+		cen5 = __builtin_msa_addv_h((v8i16)mid5, (v8i16)val5);
+		cen6 = __builtin_msa_addv_h((v8i16)mid6, (v8i16)val6);
+		cen7 = __builtin_msa_addv_h((v8i16)mid7, (v8i16)val7);
+
+		cen8 = __builtin_msa_addv_h((v8i16)mid8, (v8i16)val8);
+		cen9 = __builtin_msa_addv_h((v8i16)mid9, (v8i16)val9);
+		cen10 = __builtin_msa_addv_h((v8i16)mid10, (v8i16)val10);
+		cen11 = __builtin_msa_addv_h((v8i16)mid11, (v8i16)val11);
+		cen12 = __builtin_msa_addv_h((v8i16)mid12, (v8i16)val12);
+		cen13 = __builtin_msa_addv_h((v8i16)mid13, (v8i16)val13);
+		cen14 = __builtin_msa_addv_h((v8i16)mid14, (v8i16)val14);
+		cen15 = __builtin_msa_addv_h((v8i16)mid15, (v8i16)val15);
+
+		res0 = __builtin_lsx_vsrains_u_b((v8u16)cen0, 0);
+		res1 = __builtin_lsx_vsrains_u_b((v8u16)cen1, 0);
+		res2 = __builtin_lsx_vsrains_u_b((v8u16)cen2, 0);
+		res3 = __builtin_lsx_vsrains_u_b((v8u16)cen3, 0);
+		res4 = __builtin_lsx_vsrains_u_b((v8u16)cen4, 0);
+		res5 = __builtin_lsx_vsrains_u_b((v8u16)cen5, 0);
+		res6 = __builtin_lsx_vsrains_u_b((v8u16)cen6, 0);
+		res7 = __builtin_lsx_vsrains_u_b((v8u16)cen7, 0);
+
+		res8 = __builtin_lsx_vsrains_u_b((v8u16)cen8, 0);
+		res9 = __builtin_lsx_vsrains_u_b((v8u16)cen9, 0);
+		res10 = __builtin_lsx_vsrains_u_b((v8u16)cen10, 0);
+		res11 = __builtin_lsx_vsrains_u_b((v8u16)cen11, 0);
+		res12 = __builtin_lsx_vsrains_u_b((v8u16)cen12, 0);
+		res13 = __builtin_lsx_vsrains_u_b((v8u16)cen13, 0);
+		res14 = __builtin_lsx_vsrains_u_b((v8u16)cen14, 0);
+		res15 = __builtin_lsx_vsrains_u_b((v8u16)cen15, 0);
+
+		SD4_H((v2i64)res0, (v2i64)res1, (v2i64)res2, (v2i64)res3, a_0);
+		SD4_H((v2i64)res4, (v2i64)res5, (v2i64)res6, (v2i64)res7, a_1);
+		SD4_H((v2i64)res8, (v2i64)res9, (v2i64)res10, (v2i64)res11, a_2);
+		SD4_H((v2i64)res12, (v2i64)res13, (v2i64)res14, (v2i64)res15, a_3);
+
+		b0_0 += 4 * sstride0;	
+		b0_1 += 4 * sstride0;	
+		b0_2 += 4 * sstride0;	
+		b0_3 += 4 * sstride0;	
+
+		b1_0 += 4 * sstride1;
+		b1_1 += 4 * sstride1;
+		b1_2 += 4 * sstride1;
+		b1_3 += 4 * sstride1;
+
+		a_0 += 4 * dstride;
+		a_1 += 4 * dstride;
+		a_2 += 4 * dstride;
+		a_3 += 4 * dstride;
+	}
+
+	#ifdef DEBUG
+	for (int y = 0; y < 32; y++)
+    	{
+        	for (int x = 0; x < 32; x++)
+		{
+            		if (t_a[x] != x265_clip(t_b0[x] + t_b1[x]))
+			{
+				printf("pixel_add_ps_32x32 test fail\n");
+				return;
+			}
+		}
+	
+        	t_b0 += sstride0;
+        	t_b1 += sstride1;
+        	t_a += dstride;
+    	}
+
+	printf("pixel_add_ps_32x32 test success\n");
+	#endif
+}
+
 template<int bx, int by>
 void pixel_add_ps_c(pixel* a, intptr_t dstride, const pixel* b0, const int16_t* b1, intptr_t sstride0, intptr_t sstride1)
 {
@@ -6661,6 +7908,239 @@ static pixel planeClipAndMax_c(pixel *src, intptr_t stride, int width, int heigh
 #endif
 }  // end anonymous namespace
 
+static void partialButterfly4(const int16_t* src, int16_t* dst, int shift, int line)
+{
+    int j;
+    int E[2], O[2];
+    int add = 1 << (shift - 1);
+
+    for (j = 0; j < line; j++)
+    {
+        /* E and O */
+        E[0] = src[0] + src[3];
+        O[0] = src[0] - src[3];
+        E[1] = src[1] + src[2];
+        O[1] = src[1] - src[2];
+
+        dst[0] = (int16_t)((g_t4[0][0] * E[0] + g_t4[0][1] * E[1] + add) >> shift);
+        dst[2 * line] = (int16_t)((g_t4[2][0] * E[0] + g_t4[2][1] * E[1] + add) >> shift);
+        dst[line] = (int16_t)((g_t4[1][0] * O[0] + g_t4[1][1] * O[1] + add) >> shift);
+        dst[3 * line] = (int16_t)((g_t4[3][0] * O[0] + g_t4[3][1] * O[1] + add) >> shift);
+
+        src += 4;
+        dst++;
+    }
+}
+
+static void dct4_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
+{
+    const int shift_1st = 1 + X265_DEPTH - 8;
+    const int shift_2nd = 8;
+
+    ALIGN_VAR_32(int16_t, coef[4 * 4]);
+    ALIGN_VAR_32(int16_t, block[4 * 4]);
+
+    for (int i = 0; i < 4; i++)
+    {
+        memcpy(&block[i * 4], &src[i * srcStride], 4 * sizeof(int16_t));
+    }
+
+    partialButterfly4(block, coef, shift_1st, 4);
+    partialButterfly4(coef, dst, shift_2nd, 4);
+}
+
+static void dct4(const int16_t* src, int16_t* dst, intptr_t srcStride)
+{
+	#ifdef DEBUG
+	const int16_t *t_src;
+	const int shift_1st = 1 + X265_DEPTH - 8;
+    	const int shift_2nd = 8;
+	int16_t nw[16];
+	int16_t *t_dst;
+	t_dst = nw;
+	t_src = src;
+
+	ALIGN_VAR_32(int16_t, coef[4 * 4]);
+    	ALIGN_VAR_32(int16_t, block[4 * 4]);
+	
+	for (int i = 0; i < 4; i++)
+    	{
+        	memcpy(&block[i * 4], &t_src[i * srcStride], 4 * sizeof(int16_t));
+    	}
+	
+	partialButterfly4(block, coef, shift_1st, 4);
+	
+	/*
+	printf("coef %d %d %d %d\n", coef[0], coef[1], coef[2], coef[3]);
+	printf("coef %d %d %d %d\n", coef[4], coef[5], coef[6], coef[7]);
+	printf("coef %d %d %d %d\n", coef[8], coef[9], coef[10], coef[11]);
+	printf("coef %d %d %d %d\n", coef[12], coef[13], coef[14], coef[15]);
+	*/
+
+    	partialButterfly4(coef, t_dst, shift_2nd, 4);
+	#endif
+	
+	v2i64 tmp0, tmp1, tmp2, tmp3;
+	v4i32 mid0, mid1;
+	v2i64 val0, val1;	
+	v8i16 cen0, cen1;
+	v4i32 col0, col1, col2, col3;
+	v8i16 coll0, coll1, coll2, coll3;
+	v2i64 col10, col32;
+	v4i32 row0, row1, row2, row3;	
+	v8i16 rowl0, rowl1, rowl2, rowl3;
+	v2i64 res0, res1;
+
+	v8i16 con0 = {64, 64, 64, 64, 64, 64, 64, 64};
+	v8i16 con1 = {83, 36, 83, 36, 83, 36, 83, 36};
+	v8i16 con2 = {64, -64, 64, -64, 64, -64, 64, -64};
+	v8i16 con3 = {36, -83, 36, -83, 36, -83, 36, -83};
+
+	LD4((const pixel*)src, 2 * srcStride, &tmp0, &tmp1, &tmp2, &tmp3);
+
+	tmp0 = __builtin_msa_insve_d(tmp0, 1, tmp1);
+	tmp2 = __builtin_msa_insve_d(tmp2, 1, tmp3);
+
+	mid0 = __builtin_msa_shf_w((v4i32)tmp0, 216);
+	mid1 = __builtin_msa_shf_w((v4i32)tmp2, 216);
+
+	val0 = __builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)mid1);
+	//val1 = __builtin_msa_insve_d((v2i64)mid1, 0, (v2i64)mid0);
+	val1 = __builtin_msa_pckod_d((v2i64)mid1, (v2i64)mid0);
+
+	val1 = (v2i64)__builtin_msa_shf_h((v8i16)val1, 177);
+
+	cen0 = __builtin_msa_addv_h((v8i16)val0, (v8i16)val1);
+	cen1 = __builtin_msa_subv_h((v8i16)val0, (v8i16)val1);
+
+	col0 = __builtin_msa_dotp_s_w(cen0, con0);
+	col1 = __builtin_msa_dotp_s_w(cen1, con1);
+	col2 = __builtin_msa_dotp_s_w(cen0, con2);
+	col3 = __builtin_msa_dotp_s_w(cen1, con3);
+
+	coll0 = __builtin_lsx_vsrarin_h(col0, 1);
+	coll1 = __builtin_lsx_vsrarin_h(col1, 1);
+	coll2 = __builtin_lsx_vsrarin_h(col2, 1);
+	coll3 = __builtin_lsx_vsrarin_h(col3, 1);
+
+	col10 = __builtin_msa_insve_d((v2i64)coll0, 1, (v2i64)coll1);
+	col32 = __builtin_msa_insve_d((v2i64)coll2, 1, (v2i64)coll3);
+	
+	/*
+	printf("col0 %d %d %d %d\n", ((v8i16)col10)[0], ((v8i16)col10)[1], ((v8i16)col10)[2], ((v8i16)col10)[3]);
+	printf("col1 %d %d %d %d\n", ((v8i16)col10)[4], ((v8i16)col10)[5], ((v8i16)col10)[6], ((v8i16)col10)[7]);
+	printf("col2 %d %d %d %d\n", ((v8i16)col32)[0], ((v8i16)col32)[1], ((v8i16)col32)[2], ((v8i16)col32)[3]);
+	printf("col3 %d %d %d %d\n", ((v8i16)col32)[4], ((v8i16)col32)[5], ((v8i16)col32)[6], ((v8i16)col32)[7]);
+	*/
+
+	mid0 = __builtin_msa_shf_w((v4i32)col10, 216);
+	mid1 = __builtin_msa_shf_w((v4i32)col32, 216);
+
+	val0 = __builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)mid1);
+	//val1 = __builtin_msa_insve_d((v2i64)mid1, 0, (v2i64)mid0);
+	val1 = __builtin_msa_pckod_d((v2i64)mid1, (v2i64)mid0);
+
+	val1 = (v2i64)__builtin_msa_shf_h((v8i16)val1, 177);
+
+	cen0 = __builtin_msa_addv_h((v8i16)val0, (v8i16)val1);
+	cen1 = __builtin_msa_subv_h((v8i16)val0, (v8i16)val1);
+
+	row0 = __builtin_msa_dotp_s_w(cen0, con0);
+	row1 = __builtin_msa_dotp_s_w(cen1, con1);
+	row2 = __builtin_msa_dotp_s_w(cen0, con2);
+	row3 = __builtin_msa_dotp_s_w(cen1, con3);
+
+	rowl0 = __builtin_lsx_vsrarin_h(row0, 8);
+	rowl1 = __builtin_lsx_vsrarin_h(row1, 8);
+	rowl2 = __builtin_lsx_vsrarin_h(row2, 8);
+	rowl3 = __builtin_lsx_vsrarin_h(row3, 8);
+
+	res0 = __builtin_msa_insve_d((v2i64)rowl0, 1, (v2i64)rowl1);
+	res1 = __builtin_msa_insve_d((v2i64)rowl2, 1, (v2i64)rowl3);
+
+	ST_V2_H(res0, res1, (pixel*)dst);
+
+	#ifdef DEBUG
+	for (int j = 0; j < 16; j++)
+	{		
+		if (dst[j] != t_dst[j])
+		{
+			printf("dct4 test fail\n");
+			printf("right value %d\n", t_dst[j]);
+			printf("wrong value %d\n", dst[j]);
+			printf("wrong at %d\n", j);
+			return;
+		}	
+
+		//printf("right value %d\n", t_dst[j]);
+		//printf("wrong value %d\n", dst[j]);
+	}
+
+	printf("dct4 test success\n");
+	#endif
+}	
+
+static void partialButterfly8(const int16_t* src, int16_t* dst, int shift, int line)
+{
+    int j, k;
+    int E[4], O[4];
+    int EE[2], EO[2];
+    int add = 1 << (shift - 1);
+
+    for (j = 0; j < line; j++)
+    {
+        /* E and O*/
+        for (k = 0; k < 4; k++)
+        {
+            E[k] = src[k] + src[7 - k];
+            O[k] = src[k] - src[7 - k];
+        }
+
+        /* EE and EO */
+        EE[0] = E[0] + E[3];
+        EO[0] = E[0] - E[3];
+        EE[1] = E[1] + E[2];
+        EO[1] = E[1] - E[2];
+
+        dst[0] = (int16_t)((g_t8[0][0] * EE[0] + g_t8[0][1] * EE[1] + add) >> shift);
+        dst[4 * line] = (int16_t)((g_t8[4][0] * EE[0] + g_t8[4][1] * EE[1] + add) >> shift);
+        dst[2 * line] = (int16_t)((g_t8[2][0] * EO[0] + g_t8[2][1] * EO[1] + add) >> shift);
+        dst[6 * line] = (int16_t)((g_t8[6][0] * EO[0] + g_t8[6][1] * EO[1] + add) >> shift);
+
+        dst[line] = (int16_t)((g_t8[1][0] * O[0] + g_t8[1][1] * O[1] + g_t8[1][2] * O[2] + g_t8[1][3] * O[3] + add) >> shift);
+        dst[3 * line] = (int16_t)((g_t8[3][0] * O[0] + g_t8[3][1] * O[1] + g_t8[3][2] * O[2] + g_t8[3][3] * O[3] + add) >> shift);
+        dst[5 * line] = (int16_t)((g_t8[5][0] * O[0] + g_t8[5][1] * O[1] + g_t8[5][2] * O[2] + g_t8[5][3] * O[3] + add) >> shift);
+        dst[7 * line] = (int16_t)((g_t8[7][0] * O[0] + g_t8[7][1] * O[1] + g_t8[7][2] * O[2] + g_t8[7][3] * O[3] + add) >> shift);
+
+        src += 8;
+        dst++;
+    }
+}
+
+static void dct8_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
+{
+    const int shift_1st = 2 + X265_DEPTH - 8;
+    const int shift_2nd = 9;
+
+    ALIGN_VAR_32(int16_t, coef[8 * 8]);
+    ALIGN_VAR_32(int16_t, block[8 * 8]);
+
+    for (int i = 0; i < 8; i++)
+    {
+        memcpy(&block[i * 8], &src[i * srcStride], 8 * sizeof(int16_t));
+    }
+
+    partialButterfly8(block, coef, shift_1st, 8);
+    partialButterfly8(coef, dst, shift_2nd, 8);
+}
+
+/*
+static void dct8(const int16_t* src, int16_t* dst, intptr_t srcStride)
+{
+	
+}
+*/
+
 namespace X265_NS {
 // x265 private namespace
 
@@ -6696,10 +8176,8 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     //p.pu[LUMA_ ## W ## x ## H].sad_x3 = sad_x3<W, H>; 
 
 #define LUMA_CU(W, H) \
-    p.cu[BLOCK_ ## W ## x ## H].add_ps        = pixel_add_ps_c<W, H>; \
     p.cu[BLOCK_ ## W ## x ## H].copy_sp       = blockcopy_sp_c<W, H>; \
     p.cu[BLOCK_ ## W ## x ## H].copy_ps       = blockcopy_ps_c<W, H>; \
-    p.cu[BLOCK_ ## W ## x ## H].copy_ss       = blockcopy_ss_c<W, H>; \
     p.cu[BLOCK_ ## W ## x ## H].cpy2Dto1D_shl = cpy2Dto1D_shl<W>; \
     p.cu[BLOCK_ ## W ## x ## H].cpy2Dto1D_shr = cpy2Dto1D_shr<W>; \
     p.cu[BLOCK_ ## W ## x ## H].cpy1Dto2D_shl = cpy1Dto2D_shl<W>; \
@@ -6709,10 +8187,12 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.cu[BLOCK_ ## W ## x ## H].var           = pixel_var<W>; \
     p.cu[BLOCK_ ## W ## x ## H].sse_ss        = sse<W, H, int16_t, int16_t>;
 
+    //p.cu[BLOCK_ ## W ## x ## H].add_ps	= pixel_add_ps_c<W, H>;
     //p.cu[BLOCK_ ## W ## x ## H].calcresidual  = getResidual<W>; 
     //p.cu[BLOCK_ ## W ## x ## H].sub_ps        = pixel_sub_ps_c<W, H>; 
     //p.cu[BLOCK_ ## W ## x ## H].blockfill_s   = blockfill_s_c<W>;  
     //p.cu[BLOCK_ ## W ## x ## H].sse_pp        = sse_pp_a<W, H>; 
+    //p.cu[BLOCK_ ## W ## x ## H].copy_ss       = blockcopy_ss_c<W, H>; 
 
     LUMA_PU(4, 4);
     LUMA_PU(8, 8); 
@@ -6820,9 +8300,13 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.pu[LUMA_64x16].sad_x4 = sad_x4<64, 16>;
     p.pu[LUMA_16x64].sad_x4 = sad_x4<16, 64>;
 
-    //p.pu[LUMA_ ## W ## x ## H].pixelavg_pp = pixelavg_pp<W, H>;
     p.pu[LUMA_8x8].pixelavg_pp = pixelavg_pp_8x8;
 
+    p.pu[LUMA_4x4].copy_pp = blockcopy_pp_4x4;
+    p.pu[LUMA_8x8].copy_pp = blockcopy_pp_8x8;
+    p.pu[LUMA_16x16].copy_pp = blockcopy_pp_16x16;
+    p.pu[LUMA_32x32].copy_pp = blockcopy_pp_32x32;
+    p.pu[LUMA_64x64].copy_pp = blockcopy_pp_64x64;
 
     p.pu[LUMA_4x4].ads = ads_x1<4, 4>;
     p.pu[LUMA_8x8].ads = ads_x1<8, 8>;
@@ -6903,7 +8387,13 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.cu[BLOCK_16x16].sub_ps = sub_ps_16x16;
     p.cu[BLOCK_32x32].sub_ps = sub_ps_32x32;
     p.cu[BLOCK_64x64].sub_ps = sub_ps_64x64;
-	 
+
+    p.cu[BLOCK_4x4].add_ps = pixel_add_ps_4x4;
+    p.cu[BLOCK_8x8].add_ps = pixel_add_ps_8x8;
+    p.cu[BLOCK_16x16].add_ps = pixel_add_ps_16x16;
+    p.cu[BLOCK_32x32].add_ps = pixel_add_ps_32x32;
+    p.cu[BLOCK_64x64].add_ps = pixel_add_ps_c<64, 64>;
+ 
     p.cu[BLOCK_4x4].calcresidual = getResidual_4x4;
     p.cu[BLOCK_8x8].calcresidual = getResidual_8x8;
     p.cu[BLOCK_16x16].calcresidual = getResidual_16x16;
@@ -6919,6 +8409,13 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.cu[BLOCK_32x32].psy_cost_pp = psyCost_pp_32x32;
     p.cu[BLOCK_64x64].psy_cost_pp = psyCost_pp<BLOCK_64x64>;
 
+    p.cu[BLOCK_4x4].copy_ss = blockcopy_ss_4x4;
+    p.cu[BLOCK_8x8].copy_ss = blockcopy_ss_8x8;
+    p.cu[BLOCK_16x16].copy_ss = blockcopy_ss_16x16;
+    p.cu[BLOCK_32x32].copy_ss = blockcopy_ss_32x32;
+    p.cu[BLOCK_64x64].copy_ss = blockcopy_ss_c<64, 64>;
+
+	
     p.cu[BLOCK_4x4].sa8d   = satd_4x4;
     p.cu[BLOCK_8x8].sa8d   = sa8d_8x8;
     p.cu[BLOCK_16x16].sa8d = sa8d_16x16;
@@ -6957,6 +8454,11 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     CHROMA_PU_420(32, 8);
     CHROMA_PU_420(8,  32);
 
+    p.chroma[X265_CSP_I420].pu[CHROMA_420_4x4].copy_pp = blockcopy_pp_4x4;
+    p.chroma[X265_CSP_I420].pu[CHROMA_420_8x8].copy_pp = blockcopy_pp_8x8;
+    p.chroma[X265_CSP_I420].pu[CHROMA_420_16x16].copy_pp = blockcopy_pp_16x16;
+    p.chroma[X265_CSP_I420].pu[CHROMA_420_32x32].copy_pp = blockcopy_pp_32x32;
+
     p.chroma[X265_CSP_I420].pu[CHROMA_420_2x2].satd   = NULL;
     p.chroma[X265_CSP_I420].pu[CHROMA_420_4x4].satd   = satd_4x4;
     //p.chroma[X265_CSP_I420].pu[CHROMA_420_8x8].satd   = satd8<8, 8>;
@@ -6991,9 +8493,9 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
 #define CHROMA_CU_420(W, H) \
     p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].copy_sp = blockcopy_sp_c<W, H>; \
     p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].copy_ps = blockcopy_ps_c<W, H>; \
-    p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].copy_ss = blockcopy_ss_c<W, H>; \
-    p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].add_ps = pixel_add_ps_c<W, H>;
 
+    //p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].add_ps = pixel_add_ps_c<W, H>;
+    //p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].copy_ss = blockcopy_ss_c<W, H>;
     //p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].sub_ps = pixel_sub_ps_c<W, H>;  
     //p.chroma[X265_CSP_I420].cu[BLOCK_420_ ## W ## x ## H].sse_pp  = sse_pp_a<W, H>; 
 
@@ -7014,6 +8516,19 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.chroma[X265_CSP_I420].cu[BLOCK_420_8x8].sub_ps = sub_ps_8x8;
     p.chroma[X265_CSP_I420].cu[BLOCK_420_16x16].sub_ps = sub_ps_16x16;
     p.chroma[X265_CSP_I420].cu[BLOCK_420_32x32].sub_ps = sub_ps_32x32;
+	
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_2x2].add_ps = pixel_add_ps_c<2, 2>;
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_4x4].add_ps = pixel_add_ps_4x4;
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_8x8].add_ps = pixel_add_ps_8x8;
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_16x16].add_ps = pixel_add_ps_16x16;
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_32x32].add_ps = pixel_add_ps_32x32;
+
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_2x2].copy_ss = blockcopy_ss_c<2, 2>;
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_4x4].copy_ss = blockcopy_ss_4x4;
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_8x8].copy_ss = blockcopy_ss_8x8;
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_16x16].copy_ss = blockcopy_ss_16x16;
+    p.chroma[X265_CSP_I420].cu[BLOCK_420_32x32].copy_ss = blockcopy_ss_32x32;
+ 
 
 
     p.chroma[X265_CSP_I420].cu[BLOCK_8x8].sa8d   = p.chroma[X265_CSP_I420].pu[CHROMA_420_4x4].satd;
@@ -7053,6 +8568,11 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     CHROMA_PU_422(24, 64);
     CHROMA_PU_422(32, 16);
     CHROMA_PU_422(8,  64);
+
+    p.chroma[X265_CSP_I422].pu[CHROMA_422_4x4].copy_pp = blockcopy_pp_4x4;
+    p.chroma[X265_CSP_I422].pu[CHROMA_422_8x8].copy_pp = blockcopy_pp_8x8;
+    p.chroma[X265_CSP_I422].pu[CHROMA_422_16x16].copy_pp = blockcopy_pp_16x16;
+    p.chroma[X265_CSP_I422].pu[CHROMA_422_32x32].copy_pp = blockcopy_pp_32x32;
 
     p.chroma[X265_CSP_I422].pu[CHROMA_422_2x4].satd   = NULL;
     p.chroma[X265_CSP_I422].pu[CHROMA_422_4x8].satd   = satd4<4, 8>;
@@ -7122,5 +8642,10 @@ void setupPixelPrimitives_c(EncoderPrimitives &p)
     p.propagateCost = estimateCUPropagateCost;
     p.fix8Unpack = cuTreeFix8Unpack;
     p.fix8Pack = cuTreeFix8Pack;
+
+//*****************this content is DCT function***********************
+
+    p.cu[BLOCK_4x4].dct   = dct4;
+    p.cu[BLOCK_8x8].dct   = dct8_c;
 }
 }

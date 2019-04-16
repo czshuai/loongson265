@@ -279,6 +279,7 @@ common/CMakeFiles/common.dir/pixel.cpp.o
  /home/loongson/chenzeshuai/x265_v2.6/source/./x265.h
  /home/loongson/chenzeshuai/x265_v2.6/source/common/common.h
  /home/loongson/chenzeshuai/x265_v2.6/source/common/constants.h
+ /home/loongson/chenzeshuai/x265_v2.6/source/common/contexts.h
  /home/loongson/chenzeshuai/x265_v2.6/source/common/cpu.h
  /home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.h
  /home/loongson/chenzeshuai/x265_v2.6/source/common/lowres.h

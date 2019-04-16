@@ -1,10 +1,10 @@
-# 1 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.c"
 # 1 "<built-in>"
 # 1 "<command-line>"
 # 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/stdc-predef.h" 1 3 4
 # 1 "<command-line>" 2
-# 1 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-# 30 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.c"
+# 1 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.h" 1
 # 1 "/home/loongson/chenzeshuai/x265_v2.6/source/common/common.h" 1
 # 28 "/home/loongson/chenzeshuai/x265_v2.6/source/common/common.h"
 # 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/include/c++/7.3.0/algorithm" 1 3
@@ -15584,4442 +15584,476 @@ extern const double g_ST2084_PQTable[940 - 64 + 1];
 
 }
 # 445 "/home/loongson/chenzeshuai/x265_v2.6/source/common/common.h" 2
-# 31 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 2
-# 1 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.h" 1
-# 34 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.h"
-# 1 "/home/loongson/chenzeshuai/x265_v2.6/source/common/cpu.h" 1
-# 36 "/home/loongson/chenzeshuai/x265_v2.6/source/common/cpu.h"
-extern "C" void x265_cpu_emms(void);
-extern "C" void x265_safe_intel_cpu_indicator_init(void);
-# 52 "/home/loongson/chenzeshuai/x265_v2.6/source/common/cpu.h"
-namespace x265 {
-uint32_t cpu_detect(void);
-
-struct cpu_name_t
-{
-    char name[16];
-    uint32_t flags;
-};
-
-extern const cpu_name_t cpu_names[];
-}
-# 35 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.h" 2
-
-namespace x265 {
-
-
-enum LumaPU
-{
-
-    LUMA_4x4, LUMA_8x8, LUMA_16x16, LUMA_32x32, LUMA_64x64,
-
-    LUMA_8x4, LUMA_4x8,
-    LUMA_16x8, LUMA_8x16,
-    LUMA_32x16, LUMA_16x32,
-    LUMA_64x32, LUMA_32x64,
-
-    LUMA_16x12, LUMA_12x16, LUMA_16x4, LUMA_4x16,
-    LUMA_32x24, LUMA_24x32, LUMA_32x8, LUMA_8x32,
-    LUMA_64x48, LUMA_48x64, LUMA_64x16, LUMA_16x64,
-    NUM_PU_SIZES
-};
-
-enum LumaCU
-{
-    BLOCK_4x4,
-    BLOCK_8x8,
-    BLOCK_16x16,
-    BLOCK_32x32,
-    BLOCK_64x64,
-    NUM_CU_SIZES
-};
-
-enum { NUM_TR_SIZE = 4 };
-
-
-
-
-
-enum ChromaPU420
-{
-    CHROMA_420_2x2, CHROMA_420_4x4, CHROMA_420_8x8, CHROMA_420_16x16, CHROMA_420_32x32,
-    CHROMA_420_4x2, CHROMA_420_2x4,
-    CHROMA_420_8x4, CHROMA_420_4x8,
-    CHROMA_420_16x8, CHROMA_420_8x16,
-    CHROMA_420_32x16, CHROMA_420_16x32,
-    CHROMA_420_8x6, CHROMA_420_6x8, CHROMA_420_8x2, CHROMA_420_2x8,
-    CHROMA_420_16x12, CHROMA_420_12x16, CHROMA_420_16x4, CHROMA_420_4x16,
-    CHROMA_420_32x24, CHROMA_420_24x32, CHROMA_420_32x8, CHROMA_420_8x32,
-};
-
-enum ChromaCU420
-{
-    BLOCK_420_2x2,
-    BLOCK_420_4x4,
-    BLOCK_420_8x8,
-    BLOCK_420_16x16,
-    BLOCK_420_32x32
-};
-
-enum ChromaPU422
-{
-    CHROMA_422_2x4, CHROMA_422_4x8, CHROMA_422_8x16, CHROMA_422_16x32, CHROMA_422_32x64,
-    CHROMA_422_4x4, CHROMA_422_2x8,
-    CHROMA_422_8x8, CHROMA_422_4x16,
-    CHROMA_422_16x16, CHROMA_422_8x32,
-    CHROMA_422_32x32, CHROMA_422_16x64,
-    CHROMA_422_8x12, CHROMA_422_6x16, CHROMA_422_8x4, CHROMA_422_2x16,
-    CHROMA_422_16x24, CHROMA_422_12x32, CHROMA_422_16x8, CHROMA_422_4x32,
-    CHROMA_422_32x48, CHROMA_422_24x64, CHROMA_422_32x16, CHROMA_422_8x64,
-};
-
-enum ChromaCU422
-{
-    BLOCK_422_2x4,
-    BLOCK_422_4x8,
-    BLOCK_422_8x16,
-    BLOCK_422_16x32,
-    BLOCK_422_32x64
-};
-
-enum IntegralSize
-{
-    INTEGRAL_4,
-    INTEGRAL_8,
-    INTEGRAL_12,
-    INTEGRAL_16,
-    INTEGRAL_24,
-    INTEGRAL_32,
-    NUM_INTEGRAL_SIZE
-};
-
-typedef int (*pixelcmp_t)(const pixel* fenc, intptr_t fencstride, const pixel* fref, intptr_t frefstride);
-typedef int (*pixelcmp_ss_t)(const int16_t* fenc, intptr_t fencstride, const int16_t* fref, intptr_t frefstride);
-typedef sse_t (*pixel_sse_t)(const pixel* fenc, intptr_t fencstride, const pixel* fref, intptr_t frefstride);
-typedef sse_t (*pixel_sse_ss_t)(const int16_t* fenc, intptr_t fencstride, const int16_t* fref, intptr_t frefstride);
-typedef sse_t (*pixel_ssd_s_t)(const int16_t* fenc, intptr_t fencstride);
-typedef int(*pixelcmp_ads_t)(int encDC[], uint32_t *sums, int delta, uint16_t *costMvX, int16_t *mvs, int width, int thresh);
-typedef void (*pixelcmp_x4_t)(const pixel* fenc, const pixel* fref0, const pixel* fref1, const pixel* fref2, const pixel* fref3, intptr_t frefstride, int32_t* res);
-typedef void (*pixelcmp_x3_t)(const pixel* fenc, const pixel* fref0, const pixel* fref1, const pixel* fref2, intptr_t frefstride, int32_t* res);
-typedef void (*blockfill_s_t)(int16_t* dst, intptr_t dstride, int16_t val);
-
-typedef void (*intra_pred_t)(pixel* dst, intptr_t dstStride, const pixel *srcPix, int dirMode, int bFilter);
-typedef void (*intra_allangs_t)(pixel *dst, pixel *refPix, pixel *filtPix, int bLuma);
-typedef void (*intra_filter_t)(const pixel* references, pixel* filtered);
-
-typedef void (*cpy2Dto1D_shl_t)(int16_t* dst, const int16_t* src, intptr_t srcStride, int shift);
-typedef void (*cpy2Dto1D_shr_t)(int16_t* dst, const int16_t* src, intptr_t srcStride, int shift);
-typedef void (*cpy1Dto2D_shl_t)(int16_t* dst, const int16_t* src, intptr_t dstStride, int shift);
-typedef void (*cpy1Dto2D_shr_t)(int16_t* dst, const int16_t* src, intptr_t dstStride, int shift);
-typedef uint32_t (*copy_cnt_t)(int16_t* coeff, const int16_t* residual, intptr_t resiStride);
-
-typedef void (*dct_t)(const int16_t* src, int16_t* dst, intptr_t srcStride);
-typedef void (*idct_t)(const int16_t* src, int16_t* dst, intptr_t dstStride);
-typedef void (*denoiseDct_t)(int16_t* dctCoef, uint32_t* resSum, const uint16_t* offset, int numCoeff);
-
-typedef void (*calcresidual_t)(const pixel* fenc, const pixel* pred, int16_t* residual, intptr_t stride);
-typedef void (*transpose_t)(pixel* dst, const pixel* src, intptr_t stride);
-typedef uint32_t (*quant_t)(const int16_t* coef, const int32_t* quantCoeff, int32_t* deltaU, int16_t* qCoef, int qBits, int add, int numCoeff);
-typedef uint32_t (*nquant_t)(const int16_t* coef, const int32_t* quantCoeff, int16_t* qCoef, int qBits, int add, int numCoeff);
-typedef void (*dequant_scaling_t)(const int16_t* src, const int32_t* dequantCoef, int16_t* dst, int num, int mcqp_miper, int shift);
-typedef void (*dequant_normal_t)(const int16_t* quantCoef, int16_t* coef, int num, int scale, int shift);
-typedef int(*count_nonzero_t)(const int16_t* quantCoeff);
-typedef void (*weightp_pp_t)(const pixel* src, pixel* dst, intptr_t stride, int width, int height, int w0, int round, int shift, int offset);
-typedef void (*weightp_sp_t)(const int16_t* src, pixel* dst, intptr_t srcStride, intptr_t dstStride, int width, int height, int w0, int round, int shift, int offset);
-typedef void (*scale1D_t)(pixel* dst, const pixel* src);
-typedef void (*scale2D_t)(pixel* dst, const pixel* src, intptr_t stride);
-typedef void (*downscale_t)(const pixel* src0, pixel* dstf, pixel* dsth, pixel* dstv, pixel* dstc,
-                            intptr_t src_stride, intptr_t dst_stride, int width, int height);
-typedef void (*extendCURowBorder_t)(pixel* txt, intptr_t stride, int width, int height, int marginX);
-typedef void (*ssim_4x4x2_core_t)(const pixel* pix1, intptr_t stride1, const pixel* pix2, intptr_t stride2, int sums[2][4]);
-typedef float (*ssim_end4_t)(int sum0[5][4], int sum1[5][4], int width);
-typedef uint64_t (*var_t)(const pixel* pix, intptr_t stride);
-typedef void (*plane_copy_deinterleave_t)(pixel* dstu, intptr_t dstuStride, pixel* dstv, intptr_t dstvStride, const pixel* src, intptr_t srcStride, int w, int h);
-
-typedef void (*filter_pp_t) (const pixel* src, intptr_t srcStride, pixel* dst, intptr_t dstStride, int coeffIdx);
-typedef void (*filter_hps_t) (const pixel* src, intptr_t srcStride, int16_t* dst, intptr_t dstStride, int coeffIdx, int isRowExt);
-typedef void (*filter_ps_t) (const pixel* src, intptr_t srcStride, int16_t* dst, intptr_t dstStride, int coeffIdx);
-typedef void (*filter_sp_t) (const int16_t* src, intptr_t srcStride, pixel* dst, intptr_t dstStride, int coeffIdx);
-typedef void (*filter_ss_t) (const int16_t* src, intptr_t srcStride, int16_t* dst, intptr_t dstStride, int coeffIdx);
-typedef void (*filter_hv_pp_t) (const pixel* src, intptr_t srcStride, pixel* dst, intptr_t dstStride, int idxX, int idxY);
-typedef void (*filter_p2s_t)(const pixel* src, intptr_t srcStride, int16_t* dst, intptr_t dstStride);
-
-typedef void (*copy_pp_t)(pixel* dst, intptr_t dstStride, const pixel* src, intptr_t srcStride);
-typedef void (*copy_sp_t)(pixel* dst, intptr_t dstStride, const int16_t* src, intptr_t srcStride);
-typedef void (*copy_ps_t)(int16_t* dst, intptr_t dstStride, const pixel* src, intptr_t srcStride);
-typedef void (*copy_ss_t)(int16_t* dst, intptr_t dstStride, const int16_t* src, intptr_t srcStride);
-
-typedef void (*pixel_sub_ps_t)(int16_t* dst, intptr_t dstride, const pixel* src0, const pixel* src1, intptr_t sstride0, intptr_t sstride1);
-typedef void (*pixel_add_ps_t)(pixel* a, intptr_t dstride, const pixel* b0, const int16_t* b1, intptr_t sstride0, intptr_t sstride1);
-typedef void (*pixelavg_pp_t)(pixel* dst, intptr_t dstride, const pixel* src0, intptr_t sstride0, const pixel* src1, intptr_t sstride1, int weight);
-typedef void (*addAvg_t)(const int16_t* src0, const int16_t* src1, pixel* dst, intptr_t src0Stride, intptr_t src1Stride, intptr_t dstStride);
-
-typedef void (*saoCuOrgE0_t)(pixel* rec, int8_t* offsetEo, int width, int8_t* signLeft, intptr_t stride);
-typedef void (*saoCuOrgE1_t)(pixel* rec, int8_t* upBuff1, int8_t* offsetEo, intptr_t stride, int width);
-typedef void (*saoCuOrgE2_t)(pixel* rec, int8_t* pBufft, int8_t* pBuff1, int8_t* offsetEo, int lcuWidth, intptr_t stride);
-typedef void (*saoCuOrgE3_t)(pixel* rec, int8_t* upBuff1, int8_t* m_offsetEo, intptr_t stride, int startX, int endX);
-typedef void (*saoCuOrgB0_t)(pixel* rec, const int8_t* offsetBo, int ctuWidth, int ctuHeight, intptr_t stride);
-
-typedef void (*saoCuStatsBO_t)(const int16_t *diff, const pixel *rec, intptr_t stride, int endX, int endY, int32_t *stats, int32_t *count);
-typedef void (*saoCuStatsE0_t)(const int16_t *diff, const pixel *rec, intptr_t stride, int endX, int endY, int32_t *stats, int32_t *count);
-typedef void (*saoCuStatsE1_t)(const int16_t *diff, const pixel *rec, intptr_t stride, int8_t *upBuff1, int endX, int endY, int32_t *stats, int32_t *count);
-typedef void (*saoCuStatsE2_t)(const int16_t *diff, const pixel *rec, intptr_t stride, int8_t *upBuff1, int8_t *upBuff, int endX, int endY, int32_t *stats, int32_t *count);
-typedef void (*saoCuStatsE3_t)(const int16_t *diff, const pixel *rec, intptr_t stride, int8_t *upBuff1, int endX, int endY, int32_t *stats, int32_t *count);
-
-typedef void (*sign_t)(int8_t *dst, const pixel *src1, const pixel *src2, const int endX);
-typedef void (*planecopy_cp_t) (const uint8_t* src, intptr_t srcStride, pixel* dst, intptr_t dstStride, int width, int height, int shift);
-typedef void (*planecopy_sp_t) (const uint16_t* src, intptr_t srcStride, pixel* dst, intptr_t dstStride, int width, int height, int shift, uint16_t mask);
-typedef pixel (*planeClipAndMax_t)(pixel *src, intptr_t stride, int width, int height, uint64_t *outsum, const pixel minPix, const pixel maxPix);
-
-typedef void (*cutree_propagate_cost) (int* dst, const uint16_t* propagateIn, const int32_t* intraCosts, const uint16_t* interCosts, const int32_t* invQscales, const double* fpsFactor, int len);
-
-typedef void (*cutree_fix8_unpack)(double *dst, uint16_t *src, int count);
-typedef void (*cutree_fix8_pack)(uint16_t *dst, double *src, int count);
-
-typedef int (*scanPosLast_t)(const uint16_t *scan, const coeff_t *coeff, uint16_t *coeffSign, uint16_t *coeffFlag, uint8_t *coeffNum, int numSig, const uint16_t* scanCG4x4, const int trSize);
-typedef uint32_t (*findPosFirstLast_t)(const int16_t *dstCoeff, const intptr_t trSize, const uint16_t scanTbl[16]);
-
-typedef uint32_t (*costCoeffNxN_t)(const uint16_t *scan, const coeff_t *coeff, intptr_t trSize, uint16_t *absCoeff, const uint8_t *tabSigCtx, uint32_t scanFlagMask, uint8_t *baseCtx, int offset, int scanPosSigOff, int subPosBase);
-typedef uint32_t (*costCoeffRemain_t)(uint16_t *absCoeff, int numNonZero, int idx);
-typedef uint32_t (*costC1C2Flag_t)(uint16_t *absCoeff, intptr_t numC1Flag, uint8_t *baseCtxMod, intptr_t ctxOffset);
-
-typedef void (*pelFilterLumaStrong_t)(pixel* src, intptr_t srcStep, intptr_t offset, int32_t tcP, int32_t tcQ);
-typedef void (*pelFilterChroma_t)(pixel* src, intptr_t srcStep, intptr_t offset, int32_t tc, int32_t maskP, int32_t maskQ);
-
-typedef void (*integralv_t)(uint32_t *sum, intptr_t stride);
-typedef void (*integralh_t)(uint32_t *sum, pixel *pix, intptr_t stride);
-
-
-
-struct EncoderPrimitives
-{
-
-
-
-
-
-
-    struct PU
-    {
-        pixelcmp_t sad;
-        pixelcmp_x3_t sad_x3;
-        pixelcmp_x4_t sad_x4;
-        pixelcmp_ads_t ads;
-        pixelcmp_t satd;
-
-        filter_pp_t luma_hpp;
-        filter_hps_t luma_hps;
-        filter_pp_t luma_vpp;
-        filter_ps_t luma_vps;
-        filter_sp_t luma_vsp;
-        filter_ss_t luma_vss;
-        filter_hv_pp_t luma_hvpp;
-
-        pixelavg_pp_t pixelavg_pp;
-        addAvg_t addAvg;
-
-        copy_pp_t copy_pp;
-        filter_p2s_t convert_p2s;
-    }
-    pu[NUM_PU_SIZES];
-
-
-
-
-
-
-
-    struct CU
-    {
-        dct_t dct;
-        idct_t idct;
-
-        dct_t standard_dct;
-        dct_t lowpass_dct;
-
-        calcresidual_t calcresidual;
-        pixel_sub_ps_t sub_ps;
-        pixel_add_ps_t add_ps;
-        blockfill_s_t blockfill_s;
-        copy_cnt_t copy_cnt;
-        count_nonzero_t count_nonzero;
-        cpy2Dto1D_shl_t cpy2Dto1D_shl;
-        cpy2Dto1D_shr_t cpy2Dto1D_shr;
-        cpy1Dto2D_shl_t cpy1Dto2D_shl;
-        cpy1Dto2D_shr_t cpy1Dto2D_shr;
-
-        copy_sp_t copy_sp;
-        copy_ps_t copy_ps;
-        copy_ss_t copy_ss;
-        copy_pp_t copy_pp;
-
-        var_t var;
-
-        pixel_sse_t sse_pp;
-        pixel_sse_ss_t sse_ss;
-        pixelcmp_t psy_cost_pp;
-        pixel_ssd_s_t ssd_s;
-        pixelcmp_t sa8d;
-
-        transpose_t transpose;
-        intra_allangs_t intra_pred_allangs;
-        intra_filter_t intra_filter;
-        intra_pred_t intra_pred[35];
-    }
-    cu[NUM_CU_SIZES];
-
-
-
-
-    dct_t dst4x4;
-    idct_t idst4x4;
-
-    quant_t quant;
-    nquant_t nquant;
-    dequant_scaling_t dequant_scaling;
-    dequant_normal_t dequant_normal;
-    denoiseDct_t denoiseDct;
-    scale1D_t scale1D_128to64;
-    scale2D_t scale2D_64to32;
-
-    ssim_4x4x2_core_t ssim_4x4x2_core;
-    ssim_end4_t ssim_end_4;
-
-    sign_t sign;
-    saoCuOrgE0_t saoCuOrgE0;
-
-
-
-    saoCuOrgE1_t saoCuOrgE1, saoCuOrgE1_2Rows;
-
-
-    saoCuOrgE2_t saoCuOrgE2[2];
-
-
-
-
-    saoCuOrgE3_t saoCuOrgE3[2];
-    saoCuOrgB0_t saoCuOrgB0;
-
-    saoCuStatsBO_t saoCuStatsBO;
-    saoCuStatsE0_t saoCuStatsE0;
-    saoCuStatsE1_t saoCuStatsE1;
-    saoCuStatsE2_t saoCuStatsE2;
-    saoCuStatsE3_t saoCuStatsE3;
-
-    downscale_t frameInitLowres;
-    cutree_propagate_cost propagateCost;
-    cutree_fix8_unpack fix8Unpack;
-    cutree_fix8_pack fix8Pack;
-
-    extendCURowBorder_t extendRowBorder;
-    planecopy_cp_t planecopy_cp;
-    planecopy_sp_t planecopy_sp;
-    planecopy_sp_t planecopy_sp_shl;
-    planeClipAndMax_t planeClipAndMax;
-
-    weightp_sp_t weight_sp;
-    weightp_pp_t weight_pp;
-
-
-    scanPosLast_t scanPosLast;
-    findPosFirstLast_t findPosFirstLast;
-
-    costCoeffNxN_t costCoeffNxN;
-    costCoeffRemain_t costCoeffRemain;
-    costC1C2Flag_t costC1C2Flag;
-
-    pelFilterLumaStrong_t pelFilterLumaStrong[2];
-    pelFilterChroma_t pelFilterChroma[2];
-
-    integralv_t integral_initv[NUM_INTEGRAL_SIZE];
-    integralh_t integral_inith[NUM_INTEGRAL_SIZE];
-# 375 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.h"
-    struct Chroma
-    {
-
-        struct PUChroma
-        {
-            pixelcmp_t satd;
-            filter_pp_t filter_vpp;
-            filter_ps_t filter_vps;
-            filter_sp_t filter_vsp;
-            filter_ss_t filter_vss;
-            filter_pp_t filter_hpp;
-            filter_hps_t filter_hps;
-            addAvg_t addAvg;
-            copy_pp_t copy_pp;
-            filter_p2s_t p2s;
-
-        }
-        pu[NUM_PU_SIZES];
-
-
-        struct CUChroma
-        {
-            pixelcmp_t sa8d;
-            pixel_sse_t sse_pp;
-            pixel_sub_ps_t sub_ps;
-            pixel_add_ps_t add_ps;
-
-            copy_ps_t copy_ps;
-            copy_sp_t copy_sp;
-            copy_ss_t copy_ss;
-            copy_pp_t copy_pp;
-        }
-        cu[NUM_CU_SIZES];
-
-    }
-    chroma[4];
-};
-
-
-extern EncoderPrimitives primitives;
-
-
-inline int partitionFromSizes(int width, int height)
-{
-    ;
-    extern const uint8_t lumaPartitionMapTable[];
-    int w = (width >> 2) - 1;
-    int h = (height >> 2) - 1;
-    int part = (int)lumaPartitionMapTable[(w << 4) + h];
-    ;
-    return part;
-}
-
-
-inline void sizesFromPartition(int part, int *width, int *height)
-{
-    ;
-    extern const uint8_t lumaPartitionMapTable[];
-    int index = 0;
-    for (int i = 0; i < 256;i++)
-        if (part == lumaPartitionMapTable[i])
-        {
-            index = i;
-            break;
-        }
-    *width = 4 * ((index >> 4) + 1);
-    *height = 4 * ((index % 16) + 1);
-}
-
-inline int partitionFromLog2Size(int log2Size)
-{
-    ;
-    return log2Size - 2;
-}
-
-void setupCPrimitives(EncoderPrimitives &p);
-void setupInstrinsicPrimitives(EncoderPrimitives &p, int cpuMask);
-void setupAssemblyPrimitives(EncoderPrimitives &p, int cpuMask);
-void setupAliasPrimitives(EncoderPrimitives &p);
-
-
-
-
-
-
-}
-# 32 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 2
-# 1 "/home/loongson/chenzeshuai/x265_v2.6/source/common/contexts.h" 1
-# 106 "/home/loongson/chenzeshuai/x265_v2.6/source/common/contexts.h"
-extern "C" const uint32_t x265_entropyStateBits[128];
-
-namespace x265 {
-
-
-extern const uint32_t g_entropyBits[128];
-extern const uint8_t g_nextState[128][2];
-
-
-
-
-
-
-
-static const uint32_t ctxCbf[3][5] = { { 1, 0, 0, 0, 0 }, { 2, 3, 4, 5, 6 }, { 2, 3, 4, 5, 6 } };
-
-}
-# 33 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 2
-# 1 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 1
-# 35 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 1 3 4
-# 23 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sched.h" 1 3 4
-# 29 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sched.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0/include/stddef.h" 1 3 4
-# 30 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sched.h" 2 3 4
-# 43 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sched.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/sched.h" 1 3 4
-# 75 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/sched.h" 3 4
-
-# 75 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/sched.h" 3 4
-struct sched_param
-{
-  int sched_priority;
-};
-
-extern "C" {
-
-
-
-extern int clone (int (*__fn) (void *__arg), void *__child_stack,
-    int __flags, void *__arg, ...) throw ();
-
-
-extern int unshare (int __flags) throw ();
-
-
-extern int sched_getcpu (void) throw ();
-
-
-extern int setns (int __fd, int __nstype) throw ();
-
-
-}
-# 44 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sched.h" 2 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/cpu-set.h" 1 3 4
-# 32 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/cpu-set.h" 3 4
-typedef unsigned long int __cpu_mask;
-
-
-
-
-
-
-typedef struct
-{
-  __cpu_mask __bits[1024 / (8 * sizeof (__cpu_mask))];
-} cpu_set_t;
-# 115 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/cpu-set.h" 3 4
-extern "C" {
-
-extern int __sched_cpucount (size_t __setsize, const cpu_set_t *__setp)
-     throw ();
-extern cpu_set_t *__sched_cpualloc (size_t __count) throw () ;
-extern void __sched_cpufree (cpu_set_t *__set) throw ();
-
-}
-# 45 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sched.h" 2 3 4
-
-
-
-
-
-
-extern "C" {
-
-
-extern int sched_setparam (__pid_t __pid, const struct sched_param *__param)
-     throw ();
-
-
-extern int sched_getparam (__pid_t __pid, struct sched_param *__param) throw ();
-
-
-extern int sched_setscheduler (__pid_t __pid, int __policy,
-          const struct sched_param *__param) throw ();
-
-
-extern int sched_getscheduler (__pid_t __pid) throw ();
-
-
-extern int sched_yield (void) throw ();
-
-
-extern int sched_get_priority_max (int __algorithm) throw ();
-
-
-extern int sched_get_priority_min (int __algorithm) throw ();
-
-
-extern int sched_rr_get_interval (__pid_t __pid, struct timespec *__t) throw ();
-# 121 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sched.h" 3 4
-extern int sched_setaffinity (__pid_t __pid, size_t __cpusetsize,
-         const cpu_set_t *__cpuset) throw ();
-
-
-extern int sched_getaffinity (__pid_t __pid, size_t __cpusetsize,
-         cpu_set_t *__cpuset) throw ();
-
-
-}
-# 24 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 2 3 4
-
-
-
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/setjmp.h" 1 3 4
-# 28 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/setjmp.h" 3 4
-typedef struct __jmp_buf_internal_tag
-  {
-# 47 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/setjmp.h" 3 4
-    __extension__ long long __pc;
-
-
-    __extension__ long long __sp;
-
-
-    __extension__ long long __regs[8];
-
-
-    __extension__ long long __fp;
-
-
-    __extension__ long long __gp;
-
-
-
-    int __glibc_reserved1;
-
-
-
-    double __fpregs[8];
-
-
-
-  } __jmp_buf[1];
-# 28 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 2 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/wordsize.h" 1 3 4
-# 29 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 2 3 4
-
-
-
-
-enum
-{
-  PTHREAD_CREATE_JOINABLE,
-
-  PTHREAD_CREATE_DETACHED
-
-};
-
-
-
-enum
-{
-  PTHREAD_MUTEX_TIMED_NP,
-  PTHREAD_MUTEX_RECURSIVE_NP,
-  PTHREAD_MUTEX_ERRORCHECK_NP,
-  PTHREAD_MUTEX_ADAPTIVE_NP
-
-  ,
-  PTHREAD_MUTEX_NORMAL = PTHREAD_MUTEX_TIMED_NP,
-  PTHREAD_MUTEX_RECURSIVE = PTHREAD_MUTEX_RECURSIVE_NP,
-  PTHREAD_MUTEX_ERRORCHECK = PTHREAD_MUTEX_ERRORCHECK_NP,
-  PTHREAD_MUTEX_DEFAULT = PTHREAD_MUTEX_NORMAL
-
-
-
-  , PTHREAD_MUTEX_FAST_NP = PTHREAD_MUTEX_TIMED_NP
-
-};
-
-
-
-
-enum
-{
-  PTHREAD_MUTEX_STALLED,
-  PTHREAD_MUTEX_STALLED_NP = PTHREAD_MUTEX_STALLED,
-  PTHREAD_MUTEX_ROBUST,
-  PTHREAD_MUTEX_ROBUST_NP = PTHREAD_MUTEX_ROBUST
-};
-
-
-
-
-
-enum
-{
-  PTHREAD_PRIO_NONE,
-  PTHREAD_PRIO_INHERIT,
-  PTHREAD_PRIO_PROTECT
-};
-# 115 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-enum
-{
-  PTHREAD_RWLOCK_PREFER_READER_NP,
-  PTHREAD_RWLOCK_PREFER_WRITER_NP,
-  PTHREAD_RWLOCK_PREFER_WRITER_NONRECURSIVE_NP,
-  PTHREAD_RWLOCK_DEFAULT_NP = PTHREAD_RWLOCK_PREFER_READER_NP
-};
-# 156 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-enum
-{
-  PTHREAD_INHERIT_SCHED,
-
-  PTHREAD_EXPLICIT_SCHED
-
-};
-
-
-
-enum
-{
-  PTHREAD_SCOPE_SYSTEM,
-
-  PTHREAD_SCOPE_PROCESS
-
-};
-
-
-
-enum
-{
-  PTHREAD_PROCESS_PRIVATE,
-
-  PTHREAD_PROCESS_SHARED
-
-};
-# 191 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-struct _pthread_cleanup_buffer
-{
-  void (*__routine) (void *);
-  void *__arg;
-  int __canceltype;
-  struct _pthread_cleanup_buffer *__prev;
-};
-
-
-enum
-{
-  PTHREAD_CANCEL_ENABLE,
-
-  PTHREAD_CANCEL_DISABLE
-
-};
-enum
-{
-  PTHREAD_CANCEL_DEFERRED,
-
-  PTHREAD_CANCEL_ASYNCHRONOUS
-
-};
-# 229 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern "C" {
-
-
-
-
-extern int pthread_create (pthread_t *__restrict __newthread,
-      const pthread_attr_t *__restrict __attr,
-      void *(*__start_routine) (void *),
-      void *__restrict __arg) throw () __attribute__ ((__nonnull__ (1, 3)));
-
-
-
-
-
-extern void pthread_exit (void *__retval) __attribute__ ((__noreturn__));
-
-
-
-
-
-
-
-extern int pthread_join (pthread_t __th, void **__thread_return);
-
-
-
-
-extern int pthread_tryjoin_np (pthread_t __th, void **__thread_return) throw ();
-
-
-
-
-
-
-
-extern int pthread_timedjoin_np (pthread_t __th, void **__thread_return,
-     const struct timespec *__abstime);
-
-
-
-
-
-
-extern int pthread_detach (pthread_t __th) throw ();
-
-
-
-extern pthread_t pthread_self (void) throw () __attribute__ ((__const__));
-
-
-extern int pthread_equal (pthread_t __thread1, pthread_t __thread2)
-  throw () __attribute__ ((__const__));
-
-
-
-
-
-
-
-extern int pthread_attr_init (pthread_attr_t *__attr) throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_attr_destroy (pthread_attr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_attr_getdetachstate (const pthread_attr_t *__attr,
-     int *__detachstate)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_attr_setdetachstate (pthread_attr_t *__attr,
-     int __detachstate)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_attr_getguardsize (const pthread_attr_t *__attr,
-          size_t *__guardsize)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_attr_setguardsize (pthread_attr_t *__attr,
-          size_t __guardsize)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_attr_getschedparam (const pthread_attr_t *__restrict __attr,
-           struct sched_param *__restrict __param)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_attr_setschedparam (pthread_attr_t *__restrict __attr,
-           const struct sched_param *__restrict
-           __param) throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_attr_getschedpolicy (const pthread_attr_t *__restrict
-     __attr, int *__restrict __policy)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_attr_setschedpolicy (pthread_attr_t *__attr, int __policy)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_attr_getinheritsched (const pthread_attr_t *__restrict
-      __attr, int *__restrict __inherit)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_attr_setinheritsched (pthread_attr_t *__attr,
-      int __inherit)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_attr_getscope (const pthread_attr_t *__restrict __attr,
-      int *__restrict __scope)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_attr_setscope (pthread_attr_t *__attr, int __scope)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_attr_getstackaddr (const pthread_attr_t *__restrict
-          __attr, void **__restrict __stackaddr)
-     throw () __attribute__ ((__nonnull__ (1, 2))) __attribute__ ((__deprecated__));
-
-
-
-
-
-extern int pthread_attr_setstackaddr (pthread_attr_t *__attr,
-          void *__stackaddr)
-     throw () __attribute__ ((__nonnull__ (1))) __attribute__ ((__deprecated__));
-
-
-extern int pthread_attr_getstacksize (const pthread_attr_t *__restrict
-          __attr, size_t *__restrict __stacksize)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-
-extern int pthread_attr_setstacksize (pthread_attr_t *__attr,
-          size_t __stacksize)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_attr_getstack (const pthread_attr_t *__restrict __attr,
-      void **__restrict __stackaddr,
-      size_t *__restrict __stacksize)
-     throw () __attribute__ ((__nonnull__ (1, 2, 3)));
-
-
-
-
-extern int pthread_attr_setstack (pthread_attr_t *__attr, void *__stackaddr,
-      size_t __stacksize) throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-extern int pthread_attr_setaffinity_np (pthread_attr_t *__attr,
-     size_t __cpusetsize,
-     const cpu_set_t *__cpuset)
-     throw () __attribute__ ((__nonnull__ (1, 3)));
-
-
-
-extern int pthread_attr_getaffinity_np (const pthread_attr_t *__attr,
-     size_t __cpusetsize,
-     cpu_set_t *__cpuset)
-     throw () __attribute__ ((__nonnull__ (1, 3)));
-
-
-extern int pthread_getattr_default_np (pthread_attr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_setattr_default_np (const pthread_attr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-extern int pthread_getattr_np (pthread_t __th, pthread_attr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (2)));
-
-
-
-
-
-
-
-extern int pthread_setschedparam (pthread_t __target_thread, int __policy,
-      const struct sched_param *__param)
-     throw () __attribute__ ((__nonnull__ (3)));
-
-
-extern int pthread_getschedparam (pthread_t __target_thread,
-      int *__restrict __policy,
-      struct sched_param *__restrict __param)
-     throw () __attribute__ ((__nonnull__ (2, 3)));
-
-
-extern int pthread_setschedprio (pthread_t __target_thread, int __prio)
-     throw ();
-
-
-
-
-extern int pthread_getname_np (pthread_t __target_thread, char *__buf,
-          size_t __buflen)
-     throw () __attribute__ ((__nonnull__ (2)));
-
-
-extern int pthread_setname_np (pthread_t __target_thread, const char *__name)
-     throw () __attribute__ ((__nonnull__ (2)));
-
-
-
-
-
-extern int pthread_getconcurrency (void) throw ();
-
-
-extern int pthread_setconcurrency (int __level) throw ();
-
-
-
-
-
-
-
-extern int pthread_yield (void) throw ();
-
-
-
-
-extern int pthread_setaffinity_np (pthread_t __th, size_t __cpusetsize,
-       const cpu_set_t *__cpuset)
-     throw () __attribute__ ((__nonnull__ (3)));
-
-
-extern int pthread_getaffinity_np (pthread_t __th, size_t __cpusetsize,
-       cpu_set_t *__cpuset)
-     throw () __attribute__ ((__nonnull__ (3)));
-# 495 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern int pthread_once (pthread_once_t *__once_control,
-    void (*__init_routine) (void)) __attribute__ ((__nonnull__ (1, 2)));
-# 507 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern int pthread_setcancelstate (int __state, int *__oldstate);
-
-
-
-extern int pthread_setcanceltype (int __type, int *__oldtype);
-
-
-extern int pthread_cancel (pthread_t __th);
-
-
-
-
-extern void pthread_testcancel (void);
-
-
-
-
-typedef struct
-{
-  struct
-  {
-    __jmp_buf __cancel_jmp_buf;
-    int __mask_was_saved;
-  } __cancel_jmp_buf[1];
-  void *__pad[4];
-} __pthread_unwind_buf_t __attribute__ ((__aligned__));
-# 541 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-struct __pthread_cleanup_frame
-{
-  void (*__cancel_routine) (void *);
-  void *__cancel_arg;
-  int __do_it;
-  int __cancel_type;
-};
-# 681 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern void __pthread_register_cancel (__pthread_unwind_buf_t *__buf)
-     ;
-# 693 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern void __pthread_unregister_cancel (__pthread_unwind_buf_t *__buf)
-  ;
-# 716 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern void __pthread_register_cancel_defer (__pthread_unwind_buf_t *__buf)
-     ;
-# 729 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern void __pthread_unregister_cancel_restore (__pthread_unwind_buf_t *__buf)
-  ;
-
-
-
-extern void __pthread_unwind_next (__pthread_unwind_buf_t *__buf)
-     __attribute__ ((__noreturn__))
-
-     __attribute__ ((__weak__))
-
-     ;
-
-
-
-struct __jmp_buf_tag;
-extern int __sigsetjmp (struct __jmp_buf_tag *__env, int __savemask) throw ();
-
-
-
-
-
-extern int pthread_mutex_init (pthread_mutex_t *__mutex,
-          const pthread_mutexattr_t *__mutexattr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_mutex_destroy (pthread_mutex_t *__mutex)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_mutex_trylock (pthread_mutex_t *__mutex)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_mutex_lock (pthread_mutex_t *__mutex)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_mutex_timedlock (pthread_mutex_t *__restrict __mutex,
-        const struct timespec *__restrict
-        __abstime) throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-extern int pthread_mutex_unlock (pthread_mutex_t *__mutex)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_mutex_getprioceiling (const pthread_mutex_t *
-      __restrict __mutex,
-      int *__restrict __prioceiling)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-extern int pthread_mutex_setprioceiling (pthread_mutex_t *__restrict __mutex,
-      int __prioceiling,
-      int *__restrict __old_ceiling)
-     throw () __attribute__ ((__nonnull__ (1, 3)));
-
-
-
-
-extern int pthread_mutex_consistent (pthread_mutex_t *__mutex)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-extern int pthread_mutex_consistent_np (pthread_mutex_t *__mutex)
-     throw () __attribute__ ((__nonnull__ (1)));
-# 807 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern int pthread_mutexattr_init (pthread_mutexattr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_mutexattr_destroy (pthread_mutexattr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_mutexattr_getpshared (const pthread_mutexattr_t *
-      __restrict __attr,
-      int *__restrict __pshared)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_mutexattr_setpshared (pthread_mutexattr_t *__attr,
-      int __pshared)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_mutexattr_gettype (const pthread_mutexattr_t *__restrict
-          __attr, int *__restrict __kind)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-
-extern int pthread_mutexattr_settype (pthread_mutexattr_t *__attr, int __kind)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_mutexattr_getprotocol (const pthread_mutexattr_t *
-       __restrict __attr,
-       int *__restrict __protocol)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-extern int pthread_mutexattr_setprotocol (pthread_mutexattr_t *__attr,
-       int __protocol)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_mutexattr_getprioceiling (const pthread_mutexattr_t *
-          __restrict __attr,
-          int *__restrict __prioceiling)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_mutexattr_setprioceiling (pthread_mutexattr_t *__attr,
-          int __prioceiling)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_mutexattr_getrobust (const pthread_mutexattr_t *__attr,
-     int *__robustness)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-extern int pthread_mutexattr_getrobust_np (const pthread_mutexattr_t *__attr,
-        int *__robustness)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-extern int pthread_mutexattr_setrobust (pthread_mutexattr_t *__attr,
-     int __robustness)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-extern int pthread_mutexattr_setrobust_np (pthread_mutexattr_t *__attr,
-        int __robustness)
-     throw () __attribute__ ((__nonnull__ (1)));
-# 889 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern int pthread_rwlock_init (pthread_rwlock_t *__restrict __rwlock,
-    const pthread_rwlockattr_t *__restrict
-    __attr) throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_rwlock_destroy (pthread_rwlock_t *__rwlock)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_rwlock_rdlock (pthread_rwlock_t *__rwlock)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_rwlock_tryrdlock (pthread_rwlock_t *__rwlock)
-  throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_rwlock_timedrdlock (pthread_rwlock_t *__restrict __rwlock,
-           const struct timespec *__restrict
-           __abstime) throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-extern int pthread_rwlock_wrlock (pthread_rwlock_t *__rwlock)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_rwlock_trywrlock (pthread_rwlock_t *__rwlock)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_rwlock_timedwrlock (pthread_rwlock_t *__restrict __rwlock,
-           const struct timespec *__restrict
-           __abstime) throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-extern int pthread_rwlock_unlock (pthread_rwlock_t *__rwlock)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-extern int pthread_rwlockattr_init (pthread_rwlockattr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_rwlockattr_destroy (pthread_rwlockattr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_rwlockattr_getpshared (const pthread_rwlockattr_t *
-       __restrict __attr,
-       int *__restrict __pshared)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_rwlockattr_setpshared (pthread_rwlockattr_t *__attr,
-       int __pshared)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_rwlockattr_getkind_np (const pthread_rwlockattr_t *
-       __restrict __attr,
-       int *__restrict __pref)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_rwlockattr_setkind_np (pthread_rwlockattr_t *__attr,
-       int __pref) throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-
-
-extern int pthread_cond_init (pthread_cond_t *__restrict __cond,
-         const pthread_condattr_t *__restrict __cond_attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_cond_destroy (pthread_cond_t *__cond)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_cond_signal (pthread_cond_t *__cond)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_cond_broadcast (pthread_cond_t *__cond)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-
-extern int pthread_cond_wait (pthread_cond_t *__restrict __cond,
-         pthread_mutex_t *__restrict __mutex)
-     __attribute__ ((__nonnull__ (1, 2)));
-# 1001 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern int pthread_cond_timedwait (pthread_cond_t *__restrict __cond,
-       pthread_mutex_t *__restrict __mutex,
-       const struct timespec *__restrict __abstime)
-     __attribute__ ((__nonnull__ (1, 2, 3)));
-
-
-
-
-extern int pthread_condattr_init (pthread_condattr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_condattr_destroy (pthread_condattr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_condattr_getpshared (const pthread_condattr_t *
-     __restrict __attr,
-     int *__restrict __pshared)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_condattr_setpshared (pthread_condattr_t *__attr,
-     int __pshared) throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_condattr_getclock (const pthread_condattr_t *
-          __restrict __attr,
-          __clockid_t *__restrict __clock_id)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_condattr_setclock (pthread_condattr_t *__attr,
-          __clockid_t __clock_id)
-     throw () __attribute__ ((__nonnull__ (1)));
-# 1045 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern int pthread_spin_init (pthread_spinlock_t *__lock, int __pshared)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_spin_destroy (pthread_spinlock_t *__lock)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_spin_lock (pthread_spinlock_t *__lock)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_spin_trylock (pthread_spinlock_t *__lock)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_spin_unlock (pthread_spinlock_t *__lock)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-
-extern int pthread_barrier_init (pthread_barrier_t *__restrict __barrier,
-     const pthread_barrierattr_t *__restrict
-     __attr, unsigned int __count)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_barrier_destroy (pthread_barrier_t *__barrier)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_barrier_wait (pthread_barrier_t *__barrier)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int pthread_barrierattr_init (pthread_barrierattr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_barrierattr_destroy (pthread_barrierattr_t *__attr)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_barrierattr_getpshared (const pthread_barrierattr_t *
-        __restrict __attr,
-        int *__restrict __pshared)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-extern int pthread_barrierattr_setpshared (pthread_barrierattr_t *__attr,
-        int __pshared)
-     throw () __attribute__ ((__nonnull__ (1)));
-# 1112 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern int pthread_key_create (pthread_key_t *__key,
-          void (*__destr_function) (void *))
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int pthread_key_delete (pthread_key_t __key) throw ();
-
-
-extern void *pthread_getspecific (pthread_key_t __key) throw ();
-
-
-extern int pthread_setspecific (pthread_key_t __key,
-    const void *__pointer) throw () ;
-
-
-
-
-extern int pthread_getcpuclockid (pthread_t __thread_id,
-      __clockid_t *__clock_id)
-     throw () __attribute__ ((__nonnull__ (2)));
-# 1146 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/pthread.h" 3 4
-extern int pthread_atfork (void (*__prepare) (void),
-      void (*__parent) (void),
-      void (*__child) (void)) throw ();
-
-
-
-
-extern __inline __attribute__ ((__gnu_inline__)) int
-__attribute__ ((__leaf__)) pthread_equal (pthread_t __thread1, pthread_t __thread2) throw ()
-{
-  return __thread1 == __thread2;
-}
-
-
-}
-# 36 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 2
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/semaphore.h" 1 3 4
-# 28 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/semaphore.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/semaphore.h" 1 3 4
-# 32 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/semaphore.h" 3 4
-typedef union
-{
-  char __size[32];
-  long int __align;
-} sem_t;
-# 29 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/semaphore.h" 2 3 4
-
-
-extern "C" {
-
-
-
-extern int sem_init (sem_t *__sem, int __pshared, unsigned int __value)
-     throw ();
-
-extern int sem_destroy (sem_t *__sem) throw ();
-
-
-extern sem_t *sem_open (const char *__name, int __oflag, ...) throw ();
-
-
-extern int sem_close (sem_t *__sem) throw ();
-
-
-extern int sem_unlink (const char *__name) throw ();
-
-
-
-
-
-extern int sem_wait (sem_t *__sem);
-
-
-
-
-
-
-extern int sem_timedwait (sem_t *__restrict __sem,
-     const struct timespec *__restrict __abstime);
-
-
-
-extern int sem_trywait (sem_t *__sem) throw ();
-
-
-extern int sem_post (sem_t *__sem) throw ();
-
-
-extern int sem_getvalue (sem_t *__restrict __sem, int *__restrict __sval)
-     throw ();
-
-
-}
-# 37 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 2
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/errno.h" 1 3 4
-# 28 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/errno.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/errno.h" 1 3 4
-# 25 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/errno.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/linux/errno.h" 1 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/asm/errno.h" 1 3 4
-# 15 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/asm/errno.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/asm-generic/errno-base.h" 1 3 4
-# 16 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/asm/errno.h" 2 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/linux/errno.h" 2 3 4
-# 26 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/errno.h" 2 3 4
-# 29 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/errno.h" 2 3 4
-
-
-
-
-
-extern "C" {
-
-
-extern int *__errno_location (void) throw () __attribute__ ((__const__));
-
-
-
-
-
-
-
-extern char *program_invocation_name;
-extern char *program_invocation_short_name;
-
-
-
-
-
-typedef int error_t;
-
-
-
-
-}
-# 38 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 2
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 1 3 4
-# 28 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern "C" {
-
-
-
-
-
-
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl.h" 1 3 4
-# 67 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl.h" 3 4
-struct flock
-  {
-    short int l_type;
-    short int l_whence;
-
-    __off_t l_start;
-    __off_t l_len;
-# 83 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl.h" 3 4
-    __pid_t l_pid;
-
-
-
-
-
-  };
-typedef struct flock flock_t;
-
-
-struct flock64
-  {
-    short int l_type;
-    short int l_whence;
-    __off64_t l_start;
-    __off64_t l_len;
-    __pid_t l_pid;
-  };
-
-
-
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl-linux.h" 1 3 4
-# 38 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl-linux.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/types/struct_iovec.h" 1 3 4
-# 23 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/types/struct_iovec.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0/include/stddef.h" 1 3 4
-# 24 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/types/struct_iovec.h" 2 3 4
-
-
-struct iovec
-  {
-    void *iov_base;
-    size_t iov_len;
-  };
-# 39 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl-linux.h" 2 3 4
-# 258 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl-linux.h" 3 4
-enum __pid_type
-  {
-    F_OWNER_TID = 0,
-    F_OWNER_PID,
-    F_OWNER_PGRP,
-    F_OWNER_GID = F_OWNER_PGRP
-  };
-
-
-struct f_owner_ex
-  {
-    enum __pid_type type;
-    __pid_t pid;
-  };
-# 321 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl-linux.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/linux/falloc.h" 1 3 4
-# 322 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl-linux.h" 2 3 4
-
-
-
-struct file_handle
-{
-  unsigned int handle_bytes;
-  int handle_type;
-
-  unsigned char f_handle[0];
-};
-
-
-
-
-
-extern "C" {
-
-
-
-
-extern __ssize_t readahead (int __fd, __off64_t __offset, size_t __count)
-    throw ();
-
-
-
-
-
-
-extern int sync_file_range (int __fd, __off64_t __offset, __off64_t __count,
-       unsigned int __flags);
-
-
-
-
-
-
-extern __ssize_t vmsplice (int __fdout, const struct iovec *__iov,
-      size_t __count, unsigned int __flags);
-
-
-
-
-
-extern __ssize_t splice (int __fdin, __off64_t *__offin, int __fdout,
-    __off64_t *__offout, size_t __len,
-    unsigned int __flags);
-
-
-
-
-
-extern __ssize_t tee (int __fdin, int __fdout, size_t __len,
-        unsigned int __flags);
-
-
-
-
-
-
-extern int fallocate (int __fd, int __mode, __off_t __offset, __off_t __len);
-# 392 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl-linux.h" 3 4
-extern int fallocate64 (int __fd, int __mode, __off64_t __offset,
-   __off64_t __len);
-
-
-
-
-extern int name_to_handle_at (int __dfd, const char *__name,
-         struct file_handle *__handle, int *__mnt_id,
-         int __flags) throw ();
-
-
-
-
-
-extern int open_by_handle_at (int __mountdirfd, struct file_handle *__handle,
-         int __flags);
-
-
-
-}
-# 104 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/fcntl.h" 2 3 4
-# 36 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 2 3 4
-# 78 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/stat.h" 1 3 4
-# 134 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/stat.h" 3 4
-struct stat
-  {
-    __dev_t st_dev;
-    int st_pad1[3];
-
-    __ino_t st_ino;
-
-
-
-    __mode_t st_mode;
-    __nlink_t st_nlink;
-    __uid_t st_uid;
-    __gid_t st_gid;
-    __dev_t st_rdev;
-
-    unsigned int st_pad2[2];
-    __off_t st_size;
-    int st_pad3;
-# 163 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/stat.h" 3 4
-    struct timespec st_atim;
-    struct timespec st_mtim;
-    struct timespec st_ctim;
-# 177 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/stat.h" 3 4
-    __blksize_t st_blksize;
-    unsigned int st_pad4;
-
-    __blkcnt_t st_blocks;
-
-
-
-    int st_pad5[14];
-  };
-
-
-struct stat64
-  {
-    __dev_t st_dev;
-    unsigned int st_pad1[3];
-    __ino64_t st_ino;
-    __mode_t st_mode;
-    __nlink_t st_nlink;
-    __uid_t st_uid;
-    __gid_t st_gid;
-    __dev_t st_rdev;
-    unsigned int st_pad2[3];
-    __off64_t st_size;
-
-
-
-
-
-
-
-    struct timespec st_atim;
-    struct timespec st_mtim;
-    struct timespec st_ctim;
-# 218 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/stat.h" 3 4
-    __blksize_t st_blksize;
-    unsigned int st_pad3;
-    __blkcnt64_t st_blocks;
-    int st_pad4[14];
-};
-# 79 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 2 3 4
-# 170 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int fcntl (int __fd, int __cmd, ...);
-# 180 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int open (const char *__file, int __oflag, ...) __attribute__ ((__nonnull__ (1)));
-# 190 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int open64 (const char *__file, int __oflag, ...) __attribute__ ((__nonnull__ (1)));
-# 204 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int openat (int __fd, const char *__file, int __oflag, ...)
-     __attribute__ ((__nonnull__ (2)));
-# 215 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int openat64 (int __fd, const char *__file, int __oflag, ...)
-     __attribute__ ((__nonnull__ (2)));
-# 226 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int creat (const char *__file, mode_t __mode) __attribute__ ((__nonnull__ (1)));
-# 236 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int creat64 (const char *__file, mode_t __mode) __attribute__ ((__nonnull__ (1)));
-# 255 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int lockf (int __fd, int __cmd, off_t __len);
-# 264 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int lockf64 (int __fd, int __cmd, off64_t __len);
-
-
-
-
-
-
-
-extern int posix_fadvise (int __fd, off_t __offset, off_t __len,
-     int __advise) throw ();
-# 284 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int posix_fadvise64 (int __fd, off64_t __offset, off64_t __len,
-       int __advise) throw ();
-# 294 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int posix_fallocate (int __fd, off_t __offset, off_t __len);
-# 305 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-extern int posix_fallocate64 (int __fd, off64_t __offset, off64_t __len);
-# 316 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/fcntl.h" 3 4
-}
-# 39 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 2
-# 71 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sys/time.h" 1 3 4
-# 34 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sys/time.h" 3 4
-extern "C" {
-# 52 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sys/time.h" 3 4
-struct timezone
-  {
-    int tz_minuteswest;
-    int tz_dsttime;
-  };
-
-typedef struct timezone *__restrict __timezone_ptr_t;
-# 68 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sys/time.h" 3 4
-extern int gettimeofday (struct timeval *__restrict __tv,
-    __timezone_ptr_t __tz) throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-extern int settimeofday (const struct timeval *__tv,
-    const struct timezone *__tz)
-     throw ();
-
-
-
-
-
-extern int adjtime (const struct timeval *__delta,
-      struct timeval *__olddelta) throw ();
-
-
-
-
-enum __itimer_which
-  {
-
-    ITIMER_REAL = 0,
-
-
-    ITIMER_VIRTUAL = 1,
-
-
-
-    ITIMER_PROF = 2
-
-  };
-
-
-
-struct itimerval
-  {
-
-    struct timeval it_interval;
-
-    struct timeval it_value;
-  };
-
-
-
-
-
-
-typedef int __itimer_which_t;
-
-
-
-
-extern int getitimer (__itimer_which_t __which,
-        struct itimerval *__value) throw ();
-
-
-
-
-extern int setitimer (__itimer_which_t __which,
-        const struct itimerval *__restrict __new,
-        struct itimerval *__restrict __old) throw ();
-
-
-
-
-extern int utimes (const char *__file, const struct timeval __tvp[2])
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int lutimes (const char *__file, const struct timeval __tvp[2])
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int futimes (int __fd, const struct timeval __tvp[2]) throw ();
-
-
-
-
-
-
-extern int futimesat (int __fd, const char *__file,
-        const struct timeval __tvp[2]) throw ();
-# 186 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/sys/time.h" 3 4
-}
-# 72 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 2
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 1 3 4
-# 27 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern "C" {
-# 205 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/posix_opt.h" 1 3 4
-# 206 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 2 3 4
-
-
-
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/environments.h" 1 3 4
-# 22 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/environments.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/wordsize.h" 1 3 4
-# 23 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/environments.h" 2 3 4
-# 210 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 2 3 4
-# 229 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0/include/stddef.h" 1 3 4
-# 230 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 2 3 4
-# 277 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-typedef __socklen_t socklen_t;
-# 290 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern int access (const char *__name, int __type) throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-extern int euidaccess (const char *__name, int __type)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern int eaccess (const char *__name, int __type)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-
-extern int faccessat (int __fd, const char *__file, int __type, int __flag)
-     throw () __attribute__ ((__nonnull__ (2))) ;
-# 337 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern __off_t lseek (int __fd, __off_t __offset, int __whence) throw ();
-# 348 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern __off64_t lseek64 (int __fd, __off64_t __offset, int __whence)
-     throw ();
-
-
-
-
-
-
-extern int close (int __fd);
-
-
-
-
-
-
-extern ssize_t read (int __fd, void *__buf, size_t __nbytes) ;
-
-
-
-
-
-extern ssize_t write (int __fd, const void *__buf, size_t __n) ;
-# 379 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern ssize_t pread (int __fd, void *__buf, size_t __nbytes,
-        __off_t __offset) ;
-
-
-
-
-
-
-extern ssize_t pwrite (int __fd, const void *__buf, size_t __n,
-         __off_t __offset) ;
-# 407 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern ssize_t pread64 (int __fd, void *__buf, size_t __nbytes,
-   __off64_t __offset) ;
-
-
-extern ssize_t pwrite64 (int __fd, const void *__buf, size_t __n,
-    __off64_t __offset) ;
-
-
-
-
-
-
-
-extern int pipe (int __pipedes[2]) throw () ;
-
-
-
-
-extern int pipe2 (int __pipedes[2], int __flags) throw () ;
-# 435 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern unsigned int alarm (unsigned int __seconds) throw ();
-# 447 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern unsigned int sleep (unsigned int __seconds);
-
-
-
-
-
-
-
-extern __useconds_t ualarm (__useconds_t __value, __useconds_t __interval)
-     throw ();
-
-
-
-
-
-
-extern int usleep (__useconds_t __useconds);
-# 472 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern int pause (void);
-
-
-
-extern int chown (const char *__file, __uid_t __owner, __gid_t __group)
-     throw () __attribute__ ((__nonnull__ (1))) ;
-
-
-
-extern int fchown (int __fd, __uid_t __owner, __gid_t __group) throw () ;
-
-
-
-
-extern int lchown (const char *__file, __uid_t __owner, __gid_t __group)
-     throw () __attribute__ ((__nonnull__ (1))) ;
-
-
-
-
-
-
-extern int fchownat (int __fd, const char *__file, __uid_t __owner,
-       __gid_t __group, int __flag)
-     throw () __attribute__ ((__nonnull__ (2))) ;
-
-
-
-extern int chdir (const char *__path) throw () __attribute__ ((__nonnull__ (1))) ;
-
-
-
-extern int fchdir (int __fd) throw () ;
-# 514 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern char *getcwd (char *__buf, size_t __size) throw () ;
-
-
-
-
-
-extern char *get_current_dir_name (void) throw ();
-
-
-
-
-
-
-
-extern char *getwd (char *__buf)
-     throw () __attribute__ ((__nonnull__ (1))) __attribute__ ((__deprecated__)) ;
-
-
-
-
-extern int dup (int __fd) throw () ;
-
-
-extern int dup2 (int __fd, int __fd2) throw ();
-
-
-
-
-extern int dup3 (int __fd, int __fd2, int __flags) throw ();
-
-
-
-extern char **__environ;
-
-extern char **environ;
-
-
-
-
-
-extern int execve (const char *__path, char *const __argv[],
-     char *const __envp[]) throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-
-extern int fexecve (int __fd, char *const __argv[], char *const __envp[])
-     throw () __attribute__ ((__nonnull__ (2)));
-
-
-
-
-extern int execv (const char *__path, char *const __argv[])
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-extern int execle (const char *__path, const char *__arg, ...)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-extern int execl (const char *__path, const char *__arg, ...)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-extern int execvp (const char *__file, char *const __argv[])
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-
-extern int execlp (const char *__file, const char *__arg, ...)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-
-extern int execvpe (const char *__file, char *const __argv[],
-      char *const __envp[])
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-
-
-extern int nice (int __inc) throw () ;
-
-
-
-
-extern void _exit (int __status) __attribute__ ((__noreturn__));
-
-
-
-
-
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/confname.h" 1 3 4
-# 24 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/confname.h" 3 4
-enum
-  {
-    _PC_LINK_MAX,
-
-    _PC_MAX_CANON,
-
-    _PC_MAX_INPUT,
-
-    _PC_NAME_MAX,
-
-    _PC_PATH_MAX,
-
-    _PC_PIPE_BUF,
-
-    _PC_CHOWN_RESTRICTED,
-
-    _PC_NO_TRUNC,
-
-    _PC_VDISABLE,
-
-    _PC_SYNC_IO,
-
-    _PC_ASYNC_IO,
-
-    _PC_PRIO_IO,
-
-    _PC_SOCK_MAXBUF,
-
-    _PC_FILESIZEBITS,
-
-    _PC_REC_INCR_XFER_SIZE,
-
-    _PC_REC_MAX_XFER_SIZE,
-
-    _PC_REC_MIN_XFER_SIZE,
-
-    _PC_REC_XFER_ALIGN,
-
-    _PC_ALLOC_SIZE_MIN,
-
-    _PC_SYMLINK_MAX,
-
-    _PC_2_SYMLINKS
-
-  };
-
-
-enum
-  {
-    _SC_ARG_MAX,
-
-    _SC_CHILD_MAX,
-
-    _SC_CLK_TCK,
-
-    _SC_NGROUPS_MAX,
-
-    _SC_OPEN_MAX,
-
-    _SC_STREAM_MAX,
-
-    _SC_TZNAME_MAX,
-
-    _SC_JOB_CONTROL,
-
-    _SC_SAVED_IDS,
-
-    _SC_REALTIME_SIGNALS,
-
-    _SC_PRIORITY_SCHEDULING,
-
-    _SC_TIMERS,
-
-    _SC_ASYNCHRONOUS_IO,
-
-    _SC_PRIORITIZED_IO,
-
-    _SC_SYNCHRONIZED_IO,
-
-    _SC_FSYNC,
-
-    _SC_MAPPED_FILES,
-
-    _SC_MEMLOCK,
-
-    _SC_MEMLOCK_RANGE,
-
-    _SC_MEMORY_PROTECTION,
-
-    _SC_MESSAGE_PASSING,
-
-    _SC_SEMAPHORES,
-
-    _SC_SHARED_MEMORY_OBJECTS,
-
-    _SC_AIO_LISTIO_MAX,
-
-    _SC_AIO_MAX,
-
-    _SC_AIO_PRIO_DELTA_MAX,
-
-    _SC_DELAYTIMER_MAX,
-
-    _SC_MQ_OPEN_MAX,
-
-    _SC_MQ_PRIO_MAX,
-
-    _SC_VERSION,
-
-    _SC_PAGESIZE,
-
-
-    _SC_RTSIG_MAX,
-
-    _SC_SEM_NSEMS_MAX,
-
-    _SC_SEM_VALUE_MAX,
-
-    _SC_SIGQUEUE_MAX,
-
-    _SC_TIMER_MAX,
-
-
-
-
-    _SC_BC_BASE_MAX,
-
-    _SC_BC_DIM_MAX,
-
-    _SC_BC_SCALE_MAX,
-
-    _SC_BC_STRING_MAX,
-
-    _SC_COLL_WEIGHTS_MAX,
-
-    _SC_EQUIV_CLASS_MAX,
-
-    _SC_EXPR_NEST_MAX,
-
-    _SC_LINE_MAX,
-
-    _SC_RE_DUP_MAX,
-
-    _SC_CHARCLASS_NAME_MAX,
-
-
-    _SC_2_VERSION,
-
-    _SC_2_C_BIND,
-
-    _SC_2_C_DEV,
-
-    _SC_2_FORT_DEV,
-
-    _SC_2_FORT_RUN,
-
-    _SC_2_SW_DEV,
-
-    _SC_2_LOCALEDEF,
-
-
-    _SC_PII,
-
-    _SC_PII_XTI,
-
-    _SC_PII_SOCKET,
-
-    _SC_PII_INTERNET,
-
-    _SC_PII_OSI,
-
-    _SC_POLL,
-
-    _SC_SELECT,
-
-    _SC_UIO_MAXIOV,
-
-    _SC_IOV_MAX = _SC_UIO_MAXIOV,
-
-    _SC_PII_INTERNET_STREAM,
-
-    _SC_PII_INTERNET_DGRAM,
-
-    _SC_PII_OSI_COTS,
-
-    _SC_PII_OSI_CLTS,
-
-    _SC_PII_OSI_M,
-
-    _SC_T_IOV_MAX,
-
-
-
-    _SC_THREADS,
-
-    _SC_THREAD_SAFE_FUNCTIONS,
-
-    _SC_GETGR_R_SIZE_MAX,
-
-    _SC_GETPW_R_SIZE_MAX,
-
-    _SC_LOGIN_NAME_MAX,
-
-    _SC_TTY_NAME_MAX,
-
-    _SC_THREAD_DESTRUCTOR_ITERATIONS,
-
-    _SC_THREAD_KEYS_MAX,
-
-    _SC_THREAD_STACK_MIN,
-
-    _SC_THREAD_THREADS_MAX,
-
-    _SC_THREAD_ATTR_STACKADDR,
-
-    _SC_THREAD_ATTR_STACKSIZE,
-
-    _SC_THREAD_PRIORITY_SCHEDULING,
-
-    _SC_THREAD_PRIO_INHERIT,
-
-    _SC_THREAD_PRIO_PROTECT,
-
-    _SC_THREAD_PROCESS_SHARED,
-
-
-    _SC_NPROCESSORS_CONF,
-
-    _SC_NPROCESSORS_ONLN,
-
-    _SC_PHYS_PAGES,
-
-    _SC_AVPHYS_PAGES,
-
-    _SC_ATEXIT_MAX,
-
-    _SC_PASS_MAX,
-
-
-    _SC_XOPEN_VERSION,
-
-    _SC_XOPEN_XCU_VERSION,
-
-    _SC_XOPEN_UNIX,
-
-    _SC_XOPEN_CRYPT,
-
-    _SC_XOPEN_ENH_I18N,
-
-    _SC_XOPEN_SHM,
-
-
-    _SC_2_CHAR_TERM,
-
-    _SC_2_C_VERSION,
-
-    _SC_2_UPE,
-
-
-    _SC_XOPEN_XPG2,
-
-    _SC_XOPEN_XPG3,
-
-    _SC_XOPEN_XPG4,
-
-
-    _SC_CHAR_BIT,
-
-    _SC_CHAR_MAX,
-
-    _SC_CHAR_MIN,
-
-    _SC_INT_MAX,
-
-    _SC_INT_MIN,
-
-    _SC_LONG_BIT,
-
-    _SC_WORD_BIT,
-
-    _SC_MB_LEN_MAX,
-
-    _SC_NZERO,
-
-    _SC_SSIZE_MAX,
-
-    _SC_SCHAR_MAX,
-
-    _SC_SCHAR_MIN,
-
-    _SC_SHRT_MAX,
-
-    _SC_SHRT_MIN,
-
-    _SC_UCHAR_MAX,
-
-    _SC_UINT_MAX,
-
-    _SC_ULONG_MAX,
-
-    _SC_USHRT_MAX,
-
-
-    _SC_NL_ARGMAX,
-
-    _SC_NL_LANGMAX,
-
-    _SC_NL_MSGMAX,
-
-    _SC_NL_NMAX,
-
-    _SC_NL_SETMAX,
-
-    _SC_NL_TEXTMAX,
-
-
-    _SC_XBS5_ILP32_OFF32,
-
-    _SC_XBS5_ILP32_OFFBIG,
-
-    _SC_XBS5_LP64_OFF64,
-
-    _SC_XBS5_LPBIG_OFFBIG,
-
-
-    _SC_XOPEN_LEGACY,
-
-    _SC_XOPEN_REALTIME,
-
-    _SC_XOPEN_REALTIME_THREADS,
-
-
-    _SC_ADVISORY_INFO,
-
-    _SC_BARRIERS,
-
-    _SC_BASE,
-
-    _SC_C_LANG_SUPPORT,
-
-    _SC_C_LANG_SUPPORT_R,
-
-    _SC_CLOCK_SELECTION,
-
-    _SC_CPUTIME,
-
-    _SC_THREAD_CPUTIME,
-
-    _SC_DEVICE_IO,
-
-    _SC_DEVICE_SPECIFIC,
-
-    _SC_DEVICE_SPECIFIC_R,
-
-    _SC_FD_MGMT,
-
-    _SC_FIFO,
-
-    _SC_PIPE,
-
-    _SC_FILE_ATTRIBUTES,
-
-    _SC_FILE_LOCKING,
-
-    _SC_FILE_SYSTEM,
-
-    _SC_MONOTONIC_CLOCK,
-
-    _SC_MULTI_PROCESS,
-
-    _SC_SINGLE_PROCESS,
-
-    _SC_NETWORKING,
-
-    _SC_READER_WRITER_LOCKS,
-
-    _SC_SPIN_LOCKS,
-
-    _SC_REGEXP,
-
-    _SC_REGEX_VERSION,
-
-    _SC_SHELL,
-
-    _SC_SIGNALS,
-
-    _SC_SPAWN,
-
-    _SC_SPORADIC_SERVER,
-
-    _SC_THREAD_SPORADIC_SERVER,
-
-    _SC_SYSTEM_DATABASE,
-
-    _SC_SYSTEM_DATABASE_R,
-
-    _SC_TIMEOUTS,
-
-    _SC_TYPED_MEMORY_OBJECTS,
-
-    _SC_USER_GROUPS,
-
-    _SC_USER_GROUPS_R,
-
-    _SC_2_PBS,
-
-    _SC_2_PBS_ACCOUNTING,
-
-    _SC_2_PBS_LOCATE,
-
-    _SC_2_PBS_MESSAGE,
-
-    _SC_2_PBS_TRACK,
-
-    _SC_SYMLOOP_MAX,
-
-    _SC_STREAMS,
-
-    _SC_2_PBS_CHECKPOINT,
-
-
-    _SC_V6_ILP32_OFF32,
-
-    _SC_V6_ILP32_OFFBIG,
-
-    _SC_V6_LP64_OFF64,
-
-    _SC_V6_LPBIG_OFFBIG,
-
-
-    _SC_HOST_NAME_MAX,
-
-    _SC_TRACE,
-
-    _SC_TRACE_EVENT_FILTER,
-
-    _SC_TRACE_INHERIT,
-
-    _SC_TRACE_LOG,
-
-
-    _SC_LEVEL1_ICACHE_SIZE,
-
-    _SC_LEVEL1_ICACHE_ASSOC,
-
-    _SC_LEVEL1_ICACHE_LINESIZE,
-
-    _SC_LEVEL1_DCACHE_SIZE,
-
-    _SC_LEVEL1_DCACHE_ASSOC,
-
-    _SC_LEVEL1_DCACHE_LINESIZE,
-
-    _SC_LEVEL2_CACHE_SIZE,
-
-    _SC_LEVEL2_CACHE_ASSOC,
-
-    _SC_LEVEL2_CACHE_LINESIZE,
-
-    _SC_LEVEL3_CACHE_SIZE,
-
-    _SC_LEVEL3_CACHE_ASSOC,
-
-    _SC_LEVEL3_CACHE_LINESIZE,
-
-    _SC_LEVEL4_CACHE_SIZE,
-
-    _SC_LEVEL4_CACHE_ASSOC,
-
-    _SC_LEVEL4_CACHE_LINESIZE,
-
-
-
-    _SC_IPV6 = _SC_LEVEL1_ICACHE_SIZE + 50,
-
-    _SC_RAW_SOCKETS,
-
-
-    _SC_V7_ILP32_OFF32,
-
-    _SC_V7_ILP32_OFFBIG,
-
-    _SC_V7_LP64_OFF64,
-
-    _SC_V7_LPBIG_OFFBIG,
-
-
-    _SC_SS_REPL_MAX,
-
-
-    _SC_TRACE_EVENT_NAME_MAX,
-
-    _SC_TRACE_NAME_MAX,
-
-    _SC_TRACE_SYS_MAX,
-
-    _SC_TRACE_USER_EVENT_MAX,
-
-
-    _SC_XOPEN_STREAMS,
-
-
-    _SC_THREAD_ROBUST_PRIO_INHERIT,
-
-    _SC_THREAD_ROBUST_PRIO_PROTECT
-
-  };
-
-
-enum
-  {
-    _CS_PATH,
-
-
-    _CS_V6_WIDTH_RESTRICTED_ENVS,
-
-
-
-    _CS_GNU_LIBC_VERSION,
-
-    _CS_GNU_LIBPTHREAD_VERSION,
-
-
-    _CS_V5_WIDTH_RESTRICTED_ENVS,
-
-
-
-    _CS_V7_WIDTH_RESTRICTED_ENVS,
-
-
-
-    _CS_LFS_CFLAGS = 1000,
-
-    _CS_LFS_LDFLAGS,
-
-    _CS_LFS_LIBS,
-
-    _CS_LFS_LINTFLAGS,
-
-    _CS_LFS64_CFLAGS,
-
-    _CS_LFS64_LDFLAGS,
-
-    _CS_LFS64_LIBS,
-
-    _CS_LFS64_LINTFLAGS,
-
-
-    _CS_XBS5_ILP32_OFF32_CFLAGS = 1100,
-
-    _CS_XBS5_ILP32_OFF32_LDFLAGS,
-
-    _CS_XBS5_ILP32_OFF32_LIBS,
-
-    _CS_XBS5_ILP32_OFF32_LINTFLAGS,
-
-    _CS_XBS5_ILP32_OFFBIG_CFLAGS,
-
-    _CS_XBS5_ILP32_OFFBIG_LDFLAGS,
-
-    _CS_XBS5_ILP32_OFFBIG_LIBS,
-
-    _CS_XBS5_ILP32_OFFBIG_LINTFLAGS,
-
-    _CS_XBS5_LP64_OFF64_CFLAGS,
-
-    _CS_XBS5_LP64_OFF64_LDFLAGS,
-
-    _CS_XBS5_LP64_OFF64_LIBS,
-
-    _CS_XBS5_LP64_OFF64_LINTFLAGS,
-
-    _CS_XBS5_LPBIG_OFFBIG_CFLAGS,
-
-    _CS_XBS5_LPBIG_OFFBIG_LDFLAGS,
-
-    _CS_XBS5_LPBIG_OFFBIG_LIBS,
-
-    _CS_XBS5_LPBIG_OFFBIG_LINTFLAGS,
-
-
-    _CS_POSIX_V6_ILP32_OFF32_CFLAGS,
-
-    _CS_POSIX_V6_ILP32_OFF32_LDFLAGS,
-
-    _CS_POSIX_V6_ILP32_OFF32_LIBS,
-
-    _CS_POSIX_V6_ILP32_OFF32_LINTFLAGS,
-
-    _CS_POSIX_V6_ILP32_OFFBIG_CFLAGS,
-
-    _CS_POSIX_V6_ILP32_OFFBIG_LDFLAGS,
-
-    _CS_POSIX_V6_ILP32_OFFBIG_LIBS,
-
-    _CS_POSIX_V6_ILP32_OFFBIG_LINTFLAGS,
-
-    _CS_POSIX_V6_LP64_OFF64_CFLAGS,
-
-    _CS_POSIX_V6_LP64_OFF64_LDFLAGS,
-
-    _CS_POSIX_V6_LP64_OFF64_LIBS,
-
-    _CS_POSIX_V6_LP64_OFF64_LINTFLAGS,
-
-    _CS_POSIX_V6_LPBIG_OFFBIG_CFLAGS,
-
-    _CS_POSIX_V6_LPBIG_OFFBIG_LDFLAGS,
-
-    _CS_POSIX_V6_LPBIG_OFFBIG_LIBS,
-
-    _CS_POSIX_V6_LPBIG_OFFBIG_LINTFLAGS,
-
-
-    _CS_POSIX_V7_ILP32_OFF32_CFLAGS,
-
-    _CS_POSIX_V7_ILP32_OFF32_LDFLAGS,
-
-    _CS_POSIX_V7_ILP32_OFF32_LIBS,
-
-    _CS_POSIX_V7_ILP32_OFF32_LINTFLAGS,
-
-    _CS_POSIX_V7_ILP32_OFFBIG_CFLAGS,
-
-    _CS_POSIX_V7_ILP32_OFFBIG_LDFLAGS,
-
-    _CS_POSIX_V7_ILP32_OFFBIG_LIBS,
-
-    _CS_POSIX_V7_ILP32_OFFBIG_LINTFLAGS,
-
-    _CS_POSIX_V7_LP64_OFF64_CFLAGS,
-
-    _CS_POSIX_V7_LP64_OFF64_LDFLAGS,
-
-    _CS_POSIX_V7_LP64_OFF64_LIBS,
-
-    _CS_POSIX_V7_LP64_OFF64_LINTFLAGS,
-
-    _CS_POSIX_V7_LPBIG_OFFBIG_CFLAGS,
-
-    _CS_POSIX_V7_LPBIG_OFFBIG_LDFLAGS,
-
-    _CS_POSIX_V7_LPBIG_OFFBIG_LIBS,
-
-    _CS_POSIX_V7_LPBIG_OFFBIG_LINTFLAGS,
-
-
-    _CS_V6_ENV,
-
-    _CS_V7_ENV
-
-  };
-# 613 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 2 3 4
-
-
-extern long int pathconf (const char *__path, int __name)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-extern long int fpathconf (int __fd, int __name) throw ();
-
-
-extern long int sysconf (int __name) throw ();
-
-
-
-extern size_t confstr (int __name, char *__buf, size_t __len) throw ();
-
-
-
-
-extern __pid_t getpid (void) throw ();
-
-
-extern __pid_t getppid (void) throw ();
-
-
-extern __pid_t getpgrp (void) throw ();
-
-
-extern __pid_t __getpgid (__pid_t __pid) throw ();
-
-extern __pid_t getpgid (__pid_t __pid) throw ();
-
-
-
-
-
-
-extern int setpgid (__pid_t __pid, __pid_t __pgid) throw ();
-# 663 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern int setpgrp (void) throw ();
-
-
-
-
-
-
-extern __pid_t setsid (void) throw ();
-
-
-
-extern __pid_t getsid (__pid_t __pid) throw ();
-
-
-
-extern __uid_t getuid (void) throw ();
-
-
-extern __uid_t geteuid (void) throw ();
-
-
-extern __gid_t getgid (void) throw ();
-
-
-extern __gid_t getegid (void) throw ();
-
-
-
-
-extern int getgroups (int __size, __gid_t __list[]) throw () ;
-
-
-
-extern int group_member (__gid_t __gid) throw ();
-
-
-
-
-
-
-extern int setuid (__uid_t __uid) throw () ;
-
-
-
-
-extern int setreuid (__uid_t __ruid, __uid_t __euid) throw () ;
-
-
-
-
-extern int seteuid (__uid_t __uid) throw () ;
-
-
-
-
-
-
-extern int setgid (__gid_t __gid) throw () ;
-
-
-
-
-extern int setregid (__gid_t __rgid, __gid_t __egid) throw () ;
-
-
-
-
-extern int setegid (__gid_t __gid) throw () ;
-
-
-
-
-
-extern int getresuid (__uid_t *__ruid, __uid_t *__euid, __uid_t *__suid)
-     throw ();
-
-
-
-extern int getresgid (__gid_t *__rgid, __gid_t *__egid, __gid_t *__sgid)
-     throw ();
-
-
-
-extern int setresuid (__uid_t __ruid, __uid_t __euid, __uid_t __suid)
-     throw () ;
-
-
-
-extern int setresgid (__gid_t __rgid, __gid_t __egid, __gid_t __sgid)
-     throw () ;
-
-
-
-
-
-
-extern __pid_t fork (void) throw ();
-
-
-
-
-
-
-
-extern __pid_t vfork (void) throw ();
-
-
-
-
-
-extern char *ttyname (int __fd) throw ();
-
-
-
-extern int ttyname_r (int __fd, char *__buf, size_t __buflen)
-     throw () __attribute__ ((__nonnull__ (2))) ;
-
-
-
-extern int isatty (int __fd) throw ();
-
-
-
-
-extern int ttyslot (void) throw ();
-
-
-
-
-extern int link (const char *__from, const char *__to)
-     throw () __attribute__ ((__nonnull__ (1, 2))) ;
-
-
-
-
-extern int linkat (int __fromfd, const char *__from, int __tofd,
-     const char *__to, int __flags)
-     throw () __attribute__ ((__nonnull__ (2, 4))) ;
-
-
-
-
-extern int symlink (const char *__from, const char *__to)
-     throw () __attribute__ ((__nonnull__ (1, 2))) ;
-
-
-
-
-extern ssize_t readlink (const char *__restrict __path,
-    char *__restrict __buf, size_t __len)
-     throw () __attribute__ ((__nonnull__ (1, 2))) ;
-
-
-
-
-extern int symlinkat (const char *__from, int __tofd,
-        const char *__to) throw () __attribute__ ((__nonnull__ (1, 3))) ;
-
-
-extern ssize_t readlinkat (int __fd, const char *__restrict __path,
-      char *__restrict __buf, size_t __len)
-     throw () __attribute__ ((__nonnull__ (2, 3))) ;
-
-
-
-extern int unlink (const char *__name) throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern int unlinkat (int __fd, const char *__name, int __flag)
-     throw () __attribute__ ((__nonnull__ (2)));
-
-
-
-extern int rmdir (const char *__path) throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-extern __pid_t tcgetpgrp (int __fd) throw ();
-
-
-extern int tcsetpgrp (int __fd, __pid_t __pgrp_id) throw ();
-
-
-
-
-
-
-extern char *getlogin (void);
-
-
-
-
-
-
-
-extern int getlogin_r (char *__name, size_t __name_len) __attribute__ ((__nonnull__ (1)));
-
-
-
-
-extern int setlogin (const char *__name) throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-
-
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/getopt_posix.h" 1 3 4
-# 27 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/getopt_posix.h" 3 4
-# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/getopt_core.h" 1 3 4
-# 28 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/getopt_core.h" 3 4
-extern "C" {
-
-
-
-
-
-
-
-extern char *optarg;
-# 50 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/getopt_core.h" 3 4
-extern int optind;
-
-
-
-
-extern int opterr;
-
-
-
-extern int optopt;
-# 91 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/getopt_core.h" 3 4
-extern int getopt (int ___argc, char *const *___argv, const char *__shortopts)
-       throw () __attribute__ ((__nonnull__ (2, 3)));
-
-}
-# 28 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/getopt_posix.h" 2 3 4
-
-extern "C" {
-# 49 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/bits/getopt_posix.h" 3 4
-}
-# 873 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 2 3 4
-
-
-
-
-
-
-
-extern int gethostname (char *__name, size_t __len) throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-
-extern int sethostname (const char *__name, size_t __len)
-     throw () __attribute__ ((__nonnull__ (1))) ;
-
-
-
-extern int sethostid (long int __id) throw () ;
-
-
-
-
-
-extern int getdomainname (char *__name, size_t __len)
-     throw () __attribute__ ((__nonnull__ (1))) ;
-extern int setdomainname (const char *__name, size_t __len)
-     throw () __attribute__ ((__nonnull__ (1))) ;
-
-
-
-
-
-extern int vhangup (void) throw ();
-
-
-extern int revoke (const char *__file) throw () __attribute__ ((__nonnull__ (1))) ;
-
-
-
-
-
-
-
-extern int profil (unsigned short int *__sample_buffer, size_t __size,
-     size_t __offset, unsigned int __scale)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-extern int acct (const char *__name) throw ();
-
-
-
-extern char *getusershell (void) throw ();
-extern void endusershell (void) throw ();
-extern void setusershell (void) throw ();
-
-
-
-
-
-extern int daemon (int __nochdir, int __noclose) throw () ;
-
-
-
-
-
-
-extern int chroot (const char *__path) throw () __attribute__ ((__nonnull__ (1))) ;
-
-
-
-extern char *getpass (const char *__prompt) __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-
-
-extern int fsync (int __fd);
-
-
-
-
-
-extern int syncfs (int __fd) throw ();
-
-
-
-
-
-
-extern long int gethostid (void);
-
-
-extern void sync (void) throw ();
-
-
-
-
-
-extern int getpagesize (void) throw () __attribute__ ((__const__));
-
-
-
-
-extern int getdtablesize (void) throw ();
-# 994 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern int truncate (const char *__file, __off_t __length)
-     throw () __attribute__ ((__nonnull__ (1))) ;
-# 1006 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern int truncate64 (const char *__file, __off64_t __length)
-     throw () __attribute__ ((__nonnull__ (1))) ;
-# 1017 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern int ftruncate (int __fd, __off_t __length) throw () ;
-# 1027 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern int ftruncate64 (int __fd, __off64_t __length) throw () ;
-# 1038 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern int brk (void *__addr) throw () ;
-
-
-
-
-
-extern void *sbrk (intptr_t __delta) throw ();
-# 1059 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern long int syscall (long int __sysno, ...) throw ();
-# 1113 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-extern int fdatasync (int __fildes);
-
-
-
-
-
-
-
-extern char *crypt (const char *__key, const char *__salt)
-     throw () __attribute__ ((__nonnull__ (1, 2)));
-
-
-
-extern void encrypt (char *__glibc_block, int __edflag)
-     throw () __attribute__ ((__nonnull__ (1)));
-
-
-
-
-
-
-extern void swab (const void *__restrict __from, void *__restrict __to,
-    ssize_t __n) throw () __attribute__ ((__nonnull__ (1, 2)));
-# 1162 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/sysroot/usr/include/unistd.h" 3 4
-int getentropy (void *__buffer, size_t __length) ;
-
-
-
-
-
-
-
-}
-# 73 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 2
-# 98 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-
-# 98 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-namespace x265 {
-# 250 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-typedef pthread_t ThreadHandle;
-
-class Lock
-{
-public:
-
-    Lock()
-    {
-        pthread_mutex_init(&this->handle, 
-# 258 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 3 4
-                                         __null
-# 258 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-                                             );
-    }
-
-    ~Lock()
-    {
-        pthread_mutex_destroy(&this->handle);
-    }
-
-    void acquire()
-    {
-        pthread_mutex_lock(&this->handle);
-    }
-
-    void release()
-    {
-        pthread_mutex_unlock(&this->handle);
-    }
-
-protected:
-
-    pthread_mutex_t handle;
-};
-
-class Event
-{
-public:
-
-    Event()
-    {
-        m_counter = 0;
-        if (pthread_mutex_init(&m_mutex, 
-# 288 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 3 4
-                                        __null
-# 288 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-                                            ) ||
-            pthread_cond_init(&m_cond, 
-# 289 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 3 4
-                                      __null
-# 289 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-                                          ))
-        {
-            general_log(
-# 291 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 3 4
-           __null
-# 291 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-           , "x265", 0, "fatal: unable to initialize conditional variable\n");
-        }
-    }
-
-    ~Event()
-    {
-        pthread_cond_destroy(&m_cond);
-        pthread_mutex_destroy(&m_mutex);
-    }
-
-    void wait()
-    {
-        pthread_mutex_lock(&m_mutex);
-
-
-
-        while (!m_counter)
-            pthread_cond_wait(&m_cond, &m_mutex);
-
-        m_counter--;
-        pthread_mutex_unlock(&m_mutex);
-    }
-
-    bool timedWait(uint32_t waitms)
-    {
-        bool bTimedOut = false;
-
-        pthread_mutex_lock(&m_mutex);
-        if (!m_counter)
-        {
-            struct timeval tv;
-            struct timespec ts;
-            gettimeofday(&tv, 
-# 323 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 3 4
-                             __null
-# 323 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-                                 );
-
-            ts.tv_sec = tv.tv_sec;
-            ts.tv_nsec = tv.tv_usec * 1000;
-
-            ts.tv_nsec += 1000 * 1000 * (waitms % 1000);
-            ts.tv_sec += ts.tv_nsec / (1000 * 1000 * 1000);
-            ts.tv_nsec %= (1000 * 1000 * 1000);
-            ts.tv_sec += waitms / 1000;
-
-
-
-
-            bTimedOut = pthread_cond_timedwait(&m_cond, &m_mutex, &ts) == 
-# 336 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 3 4
-                                                                         145
-# 336 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-                                                                                  ;
-        }
-        if (m_counter > 0)
-        {
-            m_counter--;
-            bTimedOut = false;
-        }
-        pthread_mutex_unlock(&m_mutex);
-        return bTimedOut;
-    }
-
-    void trigger()
-    {
-        pthread_mutex_lock(&m_mutex);
-        if (m_counter < 
-# 350 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 3 4
-                       (0x7fffffff * 2U + 1U)
-# 350 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-                               )
-            m_counter++;
-
-        pthread_cond_signal(&m_cond);
-        pthread_mutex_unlock(&m_mutex);
-    }
-
-protected:
-
-    pthread_mutex_t m_mutex;
-    pthread_cond_t m_cond;
-    uint32_t m_counter;
-};
-
-
-
-
-
-
-class ThreadSafeInteger
-{
-public:
-
-    ThreadSafeInteger()
-    {
-        m_val = 0;
-        if (pthread_mutex_init(&m_mutex, 
-# 376 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 3 4
-                                        __null
-# 376 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-                                            ) ||
-            pthread_cond_init(&m_cond, 
-# 377 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 3 4
-                                      __null
-# 377 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-                                          ))
-        {
-            general_log(
-# 379 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h" 3 4
-           __null
-# 379 "/home/loongson/chenzeshuai/x265_v2.6/source/common/threading.h"
-           , "x265", 0, "fatal: unable to initialize conditional variable\n");
-        }
-    }
-
-    ~ThreadSafeInteger()
-    {
-        pthread_cond_destroy(&m_cond);
-        pthread_mutex_destroy(&m_mutex);
-    }
-
-    int waitForChange(int prev)
-    {
-        pthread_mutex_lock(&m_mutex);
-        if (m_val == prev)
-            pthread_cond_wait(&m_cond, &m_mutex);
-        pthread_mutex_unlock(&m_mutex);
-        return m_val;
-    }
-
-    int get()
-    {
-        pthread_mutex_lock(&m_mutex);
-        int ret = m_val;
-        pthread_mutex_unlock(&m_mutex);
-        return ret;
-    }
-
-    int getIncr(int n = 1)
-    {
-        pthread_mutex_lock(&m_mutex);
-        int ret = m_val;
-        m_val += n;
-        pthread_mutex_unlock(&m_mutex);
-        return ret;
-    }
-
-    void set(int newval)
-    {
-        pthread_mutex_lock(&m_mutex);
-        m_val = newval;
-        pthread_cond_broadcast(&m_cond);
-        pthread_mutex_unlock(&m_mutex);
-    }
-
-    void poke(void)
-    {
-
-        pthread_mutex_lock(&m_mutex);
-        pthread_cond_broadcast(&m_cond);
-        pthread_mutex_unlock(&m_mutex);
-    }
-
-    void incr()
-    {
-        pthread_mutex_lock(&m_mutex);
-        m_val++;
-        pthread_cond_broadcast(&m_cond);
-        pthread_mutex_unlock(&m_mutex);
-    }
-
-protected:
-
-    pthread_mutex_t m_mutex;
-    pthread_cond_t m_cond;
-    int m_val;
-};
-
-
-
-class ScopedLock
-{
-public:
-
-    ScopedLock(Lock &instance) : inst(instance)
-    {
-        this->inst.acquire();
-    }
-
-    ~ScopedLock()
-    {
-        this->inst.release();
-    }
-
-protected:
-
-
-    ScopedLock &operator =(const ScopedLock &);
-
-    Lock &inst;
-};
-
-
-
-struct ScopedElapsedTime
-{
-    ScopedElapsedTime(int64_t& accum) : accumlatedTime(accum) { startTime = x265_mdate(); }
-
-    ~ScopedElapsedTime() { accumlatedTime += x265_mdate() - startTime; }
-
-protected:
-
-    int64_t startTime;
-    int64_t& accumlatedTime;
-
-
-    ScopedElapsedTime &operator =(const ScopedElapsedTime &);
-};
-
-
-class Thread
-{
-private:
-
-    ThreadHandle thread;
-
-public:
-
-    Thread();
-
-    virtual ~Thread();
-
-
-    virtual void threadMain() = 0;
-
-
-    bool start();
-
-    void stop();
-};
-}
-# 34 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 2
-
+# 2 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.h" 2
+
+# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0/include/msa.h" 1 3 4
+# 31 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0/include/msa.h" 3 4
+
+# 31 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0/include/msa.h" 3 4
+typedef signed char v16i8 __attribute__ ((vector_size(16), aligned(16)));
+typedef signed char v16i8_b __attribute__ ((vector_size(16), aligned(1)));
+typedef unsigned char v16u8 __attribute__ ((vector_size(16), aligned(16)));
+typedef unsigned char v16u8_b __attribute__ ((vector_size(16), aligned(1)));
+typedef short v8i16 __attribute__ ((vector_size(16), aligned(16)));
+typedef short v8i16_h __attribute__ ((vector_size(16), aligned(2)));
+typedef unsigned short v8u16 __attribute__ ((vector_size(16), aligned(16)));
+typedef unsigned short v8u16_h __attribute__ ((vector_size(16), aligned(2)));
+typedef int v4i32 __attribute__ ((vector_size(16), aligned(16)));
+typedef int v4i32_w __attribute__ ((vector_size(16), aligned(4)));
+typedef unsigned int v4u32 __attribute__ ((vector_size(16), aligned(16)));
+typedef unsigned int v4u32_w __attribute__ ((vector_size(16), aligned(4)));
+typedef long long v2i64 __attribute__ ((vector_size(16), aligned(16)));
+typedef long long v2i64_d __attribute__ ((vector_size(16), aligned(8)));
+typedef unsigned long long v2u64 __attribute__ ((vector_size(16), aligned(16)));
+typedef unsigned long long v2u64_d __attribute__ ((vector_size(16), aligned(8)));
+typedef float v4f32 __attribute__ ((vector_size(16), aligned(16)));
+typedef float v4f32_w __attribute__ ((vector_size(16), aligned(4)));
+typedef double v2f64 __attribute__ ((vector_size(16), aligned(16)));
+typedef double v2f64_d __attribute__ ((vector_size(16), aligned(8)));
+# 4 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.h" 2
+# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/include/c++/7.3.0/stdlib.h" 1 3
+# 36 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/include/c++/7.3.0/stdlib.h" 3
 # 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/include/c++/7.3.0/cstdlib" 1 3
 # 39 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/include/c++/7.3.0/cstdlib" 3
        
 # 40 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/include/c++/7.3.0/cstdlib" 3
-# 36 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 2
+# 37 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/include/c++/7.3.0/stdlib.h" 2 3
 
-using namespace x265;
+using std::abort;
+using std::atexit;
+using std::exit;
+# 51 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/mips64el-loongson-linux/include/c++/7.3.0/stdlib.h" 3
+using std::div_t;
+using std::ldiv_t;
+
+using std::abs;
+using std::atof;
+using std::atoi;
+using std::atol;
+using std::bsearch;
+using std::calloc;
+using std::div;
+using std::free;
+using std::getenv;
+using std::labs;
+using std::ldiv;
+using std::malloc;
+
+using std::mblen;
+using std::mbstowcs;
+using std::mbtowc;
+
+using std::qsort;
+using std::rand;
+using std::realloc;
+using std::srand;
+using std::strtod;
+using std::strtol;
+using std::strtoul;
+using std::system;
+
+using std::wcstombs;
+using std::wctomb;
+# 5 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.h" 2
+# 1 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0/include/loongson-sx.h" 1 3 4
+# 30 "/opt/gcc-7.3.0-loongson-asx-rc3.1/usr/lib/gcc/mips64el-loongson-linux/7.3.0/include/loongson-sx.h" 3 4
+typedef signed char v16i8 __attribute__ ((vector_size(16), aligned(16)));
+typedef signed char v16i8_b __attribute__ ((vector_size(16), aligned(1)));
+typedef unsigned char v16u8 __attribute__ ((vector_size(16), aligned(16)));
+typedef unsigned char v16u8_b __attribute__ ((vector_size(16), aligned(1)));
+typedef short v8i16 __attribute__ ((vector_size(16), aligned(16)));
+typedef short v8i16_h __attribute__ ((vector_size(16), aligned(2)));
+typedef unsigned short v8u16 __attribute__ ((vector_size(16), aligned(16)));
+typedef unsigned short v8u16_h __attribute__ ((vector_size(16), aligned(2)));
+typedef int v4i32 __attribute__ ((vector_size(16), aligned(16)));
+typedef int v4i32_w __attribute__ ((vector_size(16), aligned(4)));
+typedef unsigned int v4u32 __attribute__ ((vector_size(16), aligned(16)));
+typedef unsigned int v4u32_w __attribute__ ((vector_size(16), aligned(4)));
+typedef long long v2i64 __attribute__ ((vector_size(16), aligned(16)));
+typedef long long v2i64_d __attribute__ ((vector_size(16), aligned(8)));
+typedef unsigned long long v2u64 __attribute__ ((vector_size(16), aligned(16)));
+typedef unsigned long long v2u64_d __attribute__ ((vector_size(16), aligned(8)));
+typedef float v4f32 __attribute__ ((vector_size(16), aligned(16)));
+typedef float v4f32_w __attribute__ ((vector_size(16), aligned(4)));
+typedef double v2f64 __attribute__ ((vector_size(16), aligned(16)));
+typedef double v2f64_d __attribute__ ((vector_size(16), aligned(8)));
+# 6 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.h" 2
 
 
 
+# 8 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.h"
+v2i64 LD(const pixel *psrc);
+
+void LD2(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1);
+
+void LD4(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3);
+
+void LD2_BtoH(const pixel *psrc, intptr_t stride, v8u16 *out0, v8u16 *out1);
+
+void LD4_BtoH(const pixel *psrc, intptr_t stride, v8u16 *out0, v8u16 *out1, v8u16 *out2, v8u16 *out3);
+
+void LD_H_BtoH(const pixel *psrc, v8u16 *out);
+
+void LD2_H_BtoH(const pixel *psrc, v8u16 *out0, v8u16 *out1);
+
+void LD4_H_BtoH(const pixel *psrc, v8u16 *out0, v8u16 *out1, v8u16 *out2, v8u16 *out3);
+
+void LD2_H(const pixel *psrc, v2i64 *out0, v2i64 *out1);
+
+void LD4_H(const pixel *psrc, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3);
+
+v4i32 LW(const pixel *psrc);
+
+void LW4(const pixel *psrc, intptr_t stride, v4i32 *out0, v4i32 *out1, v4i32 *out2, v4i32 *out3);
+
+v2i64 LD_V(const pixel *psrc);
+
+void LD_V2(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1);
+
+void LD_V2_H(const pixel *psrc, v2i64 *out0, v2i64 *out1);
+
+void LD_V3(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2);
+
+void LD_V4(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3);
+
+void LD_V4_H(const pixel *psrc, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3);
+
+void LD_V8(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3, v2i64 *out4, v2i64 *out5, v2i64 *out6, v2i64 *out7);
+
+v4i32 L_4x4_B(const pixel *psrc,intptr_t stride);
+
+void L_8x8_B(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3);
 
 
+void L_4x4_B_H(const pixel *psrc,intptr_t stride, v8u16 *out0, v8u16 *out1);
 
+void S_4x4_B(v16u8 val,pixel *pdst,intptr_t stride);
 
-static void fastForwardDst(const int16_t* block, int16_t* coeff, int shift)
+void S_4x4_H(v8i16 val0,v8i16 val1,int16_t *pdst,intptr_t stride);
+
+void SW(v4i32 val, pixel *pdst);
+
+void SW2(v4i32 in0, v4i32 in1, pixel *pdst, intptr_t stride);
+
+void SW4(v4i32 in0, v4i32 in1, v4i32 in2, v4i32 in3, pixel *pdst, intptr_t stride);
+
+void SW_1(v4i32 val, pixel *pdst);
+
+void SW2_1(v4i32 in0, v4i32 in1, pixel *pdst, intptr_t stride);
+
+void SD(v2i64 val, pixel *pdst);
+
+void SD2(v2i64 in0, v2i64 in1, pixel *pdst, intptr_t stride);
+
+void SD4(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t stride);
+
+void SD_1(v2i64 val, pixel *pdst);
+
+void SD2_1(v2i64 in0, v2i64 in1, pixel *pdst, intptr_t stride);
+
+void SD4_1(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t stride);
+
+void SD2_H(v2i64 in0, v2i64 in1, pixel *pdst);
+
+void SD4_H(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst);
+
+void ST_V(v2i64 in, pixel *pdst);
+
+void ST_V2(v2i64 in0, v2i64 in1, pixel *pdst, intptr_t stride);
+
+void ST_V4(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t stride);
+
+void ST_V2_H(v2i64 in0, v2i64 in1, pixel *pdst);
+
+void ST_V4_H(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst);
+# 2 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.c" 2
+
+v2i64 LD(const pixel *psrc)
 {
-    int c[4];
-    int rnd_factor = 1 << (shift - 1);
-
-    for (int i = 0; i < 4; i++)
-    {
-
-        c[0] = block[4 * i + 0] + block[4 * i + 3];
-        c[1] = block[4 * i + 1] + block[4 * i + 3];
-        c[2] = block[4 * i + 0] - block[4 * i + 1];
-        c[3] = 74 * block[4 * i + 2];
-
-        coeff[i] = (int16_t)((29 * c[0] + 55 * c[1] + c[3] + rnd_factor) >> shift);
-        coeff[4 + i] = (int16_t)((74 * (block[4 * i + 0] + block[4 * i + 1] - block[4 * i + 3]) + rnd_factor) >> shift);
-        coeff[8 + i] = (int16_t)((29 * c[2] + 55 * c[0] - c[3] + rnd_factor) >> shift);
-        coeff[12 + i] = (int16_t)((55 * c[2] - 29 * c[1] + c[3] + rnd_factor) >> shift);
-    }
+ v2i64 tmpp;
+ tmpp = __builtin_lsx_vbld(0, psrc);
+ return tmpp;
 }
 
-static void inversedst(const int16_t* tmp, int16_t* block, int shift)
+void LD2(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1)
 {
-    int i, c[4];
-    int rnd_factor = 1 << (shift - 1);
 
-    for (i = 0; i < 4; i++)
-    {
+ *out0 = LD(psrc);
+ *out1 = LD(psrc + stride);
 
-        c[0] = tmp[i] + tmp[8 + i];
-        c[1] = tmp[8 + i] + tmp[12 + i];
-        c[2] = tmp[i] - tmp[12 + i];
-        c[3] = 74 * tmp[4 + i];
-
-        block[4 * i + 0] = (int16_t)x265_clip3(-32768, 32767, (29 * c[0] + 55 * c[1] + c[3] + rnd_factor) >> shift);
-        block[4 * i + 1] = (int16_t)x265_clip3(-32768, 32767, (55 * c[2] - 29 * c[1] + c[3] + rnd_factor) >> shift);
-        block[4 * i + 2] = (int16_t)x265_clip3(-32768, 32767, (74 * (tmp[i] - tmp[8 + i] + tmp[12 + i]) + rnd_factor) >> shift);
-        block[4 * i + 3] = (int16_t)x265_clip3(-32768, 32767, (55 * c[0] + 29 * c[2] - c[3] + rnd_factor) >> shift);
-    }
 }
 
-static void partialButterfly16(const int16_t* src, int16_t* dst, int shift, int line)
+void LD4(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3)
 {
-    int j, k;
-    int E[8], O[8];
-    int EE[4], EO[4];
-    int EEE[2], EEO[2];
-    int add = 1 << (shift - 1);
 
-    for (j = 0; j < line; j++)
-    {
+ LD2(psrc, stride, out0, out1);
+ LD2(psrc + 2 * stride, stride, out2, out3);
 
-        for (k = 0; k < 8; k++)
-        {
-            E[k] = src[k] + src[15 - k];
-            O[k] = src[k] - src[15 - k];
-        }
-
-
-        for (k = 0; k < 4; k++)
-        {
-            EE[k] = E[k] + E[7 - k];
-            EO[k] = E[k] - E[7 - k];
-        }
-
-
-        EEE[0] = EE[0] + EE[3];
-        EEO[0] = EE[0] - EE[3];
-        EEE[1] = EE[1] + EE[2];
-        EEO[1] = EE[1] - EE[2];
-
-        dst[0] = (int16_t)((g_t16[0][0] * EEE[0] + g_t16[0][1] * EEE[1] + add) >> shift);
-        dst[8 * line] = (int16_t)((g_t16[8][0] * EEE[0] + g_t16[8][1] * EEE[1] + add) >> shift);
-        dst[4 * line] = (int16_t)((g_t16[4][0] * EEO[0] + g_t16[4][1] * EEO[1] + add) >> shift);
-        dst[12 * line] = (int16_t)((g_t16[12][0] * EEO[0] + g_t16[12][1] * EEO[1] + add) >> shift);
-
-        for (k = 2; k < 16; k += 4)
-        {
-            dst[k * line] = (int16_t)((g_t16[k][0] * EO[0] + g_t16[k][1] * EO[1] + g_t16[k][2] * EO[2] +
-                                       g_t16[k][3] * EO[3] + add) >> shift);
-        }
-
-        for (k = 1; k < 16; k += 2)
-        {
-            dst[k * line] = (int16_t)((g_t16[k][0] * O[0] + g_t16[k][1] * O[1] + g_t16[k][2] * O[2] + g_t16[k][3] * O[3] +
-                                        g_t16[k][4] * O[4] + g_t16[k][5] * O[5] + g_t16[k][6] * O[6] + g_t16[k][7] * O[7] +
-                                        add) >> shift);
-        }
-
-        src += 16;
-        dst++;
-    }
 }
 
-static void partialButterfly32(const int16_t* src, int16_t* dst, int shift, int line)
+void LD2_BtoH(const pixel *psrc, intptr_t stride, v8u16 *out0, v8u16 *out1)
 {
-    int j, k;
-    int E[16], O[16];
-    int EE[8], EO[8];
-    int EEE[4], EEO[4];
-    int EEEE[2], EEEO[2];
-    int add = 1 << (shift - 1);
-
-    for (j = 0; j < line; j++)
-    {
-
-        for (k = 0; k < 16; k++)
-        {
-            E[k] = src[k] + src[31 - k];
-            O[k] = src[k] - src[31 - k];
-        }
-
-
-        for (k = 0; k < 8; k++)
-        {
-            EE[k] = E[k] + E[15 - k];
-            EO[k] = E[k] - E[15 - k];
-        }
-
-
-        for (k = 0; k < 4; k++)
-        {
-            EEE[k] = EE[k] + EE[7 - k];
-            EEO[k] = EE[k] - EE[7 - k];
-        }
-
-
-        EEEE[0] = EEE[0] + EEE[3];
-        EEEO[0] = EEE[0] - EEE[3];
-        EEEE[1] = EEE[1] + EEE[2];
-        EEEO[1] = EEE[1] - EEE[2];
-
-        dst[0] = (int16_t)((g_t32[0][0] * EEEE[0] + g_t32[0][1] * EEEE[1] + add) >> shift);
-        dst[16 * line] = (int16_t)((g_t32[16][0] * EEEE[0] + g_t32[16][1] * EEEE[1] + add) >> shift);
-        dst[8 * line] = (int16_t)((g_t32[8][0] * EEEO[0] + g_t32[8][1] * EEEO[1] + add) >> shift);
-        dst[24 * line] = (int16_t)((g_t32[24][0] * EEEO[0] + g_t32[24][1] * EEEO[1] + add) >> shift);
-        for (k = 4; k < 32; k += 8)
-        {
-            dst[k * line] = (int16_t)((g_t32[k][0] * EEO[0] + g_t32[k][1] * EEO[1] + g_t32[k][2] * EEO[2] +
-                                       g_t32[k][3] * EEO[3] + add) >> shift);
-        }
-
-        for (k = 2; k < 32; k += 4)
-        {
-            dst[k * line] = (int16_t)((g_t32[k][0] * EO[0] + g_t32[k][1] * EO[1] + g_t32[k][2] * EO[2] +
-                                       g_t32[k][3] * EO[3] + g_t32[k][4] * EO[4] + g_t32[k][5] * EO[5] +
-                                       g_t32[k][6] * EO[6] + g_t32[k][7] * EO[7] + add) >> shift);
-        }
-
-        for (k = 1; k < 32; k += 2)
-        {
-            dst[k * line] = (int16_t)((g_t32[k][0] * O[0] + g_t32[k][1] * O[1] + g_t32[k][2] * O[2] + g_t32[k][3] * O[3] +
-                                       g_t32[k][4] * O[4] + g_t32[k][5] * O[5] + g_t32[k][6] * O[6] + g_t32[k][7] * O[7] +
-                                       g_t32[k][8] * O[8] + g_t32[k][9] * O[9] + g_t32[k][10] * O[10] + g_t32[k][11] *
-                                       O[11] + g_t32[k][12] * O[12] + g_t32[k][13] * O[13] + g_t32[k][14] * O[14] +
-                                       g_t32[k][15] * O[15] + add) >> shift);
-        }
-
-        src += 32;
-        dst++;
-    }
-}
-# 246 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-static void partialButterflyInverse4(const int16_t* src, int16_t* dst, int shift, int line)
-{
-    int j;
-    int E[2], O[2];
-    int add = 1 << (shift - 1);
-
-    for (j = 0; j < line; j++)
-    {
-
-        O[0] = g_t4[1][0] * src[line] + g_t4[3][0] * src[3 * line];
-        O[1] = g_t4[1][1] * src[line] + g_t4[3][1] * src[3 * line];
-        E[0] = g_t4[0][0] * src[0] + g_t4[2][0] * src[2 * line];
-        E[1] = g_t4[0][1] * src[0] + g_t4[2][1] * src[2 * line];
-
-
-        dst[0] = (int16_t)(x265_clip3(-32768, 32767, (E[0] + O[0] + add) >> shift));
-        dst[1] = (int16_t)(x265_clip3(-32768, 32767, (E[1] + O[1] + add) >> shift));
-        dst[2] = (int16_t)(x265_clip3(-32768, 32767, (E[1] - O[1] + add) >> shift));
-        dst[3] = (int16_t)(x265_clip3(-32768, 32767, (E[0] - O[0] + add) >> shift));
-
-        src++;
-        dst += 4;
-    }
+ v2i64 tmp0, tmp1;
+ tmp0 = LD(psrc);
+ tmp1 = LD(psrc + stride);
+ *out0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+ *out1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
 }
 
-static void partialButterflyInverse8(const int16_t* src, int16_t* dst, int shift, int line)
+void LD4_BtoH(const pixel *psrc, intptr_t stride, v8u16 *out0, v8u16 *out1, v8u16 *out2, v8u16 *out3)
 {
-    int j, k;
-    int E[4], O[4];
-    int EE[2], EO[2];
-    int add = 1 << (shift - 1);
-
-    for (j = 0; j < line; j++)
-    {
-
-        for (k = 0; k < 4; k++)
-        {
-            O[k] = g_t8[1][k] * src[line] + g_t8[3][k] * src[3 * line] + g_t8[5][k] * src[5 * line] + g_t8[7][k] * src[7 * line];
-        }
-
-        EO[0] = g_t8[2][0] * src[2 * line] + g_t8[6][0] * src[6 * line];
-        EO[1] = g_t8[2][1] * src[2 * line] + g_t8[6][1] * src[6 * line];
-        EE[0] = g_t8[0][0] * src[0] + g_t8[4][0] * src[4 * line];
-        EE[1] = g_t8[0][1] * src[0] + g_t8[4][1] * src[4 * line];
-
-
-        E[0] = EE[0] + EO[0];
-        E[3] = EE[0] - EO[0];
-        E[1] = EE[1] + EO[1];
-        E[2] = EE[1] - EO[1];
-        for (k = 0; k < 4; k++)
-        {
-            dst[k] = (int16_t)x265_clip3(-32768, 32767, (E[k] + O[k] + add) >> shift);
-            dst[k + 4] = (int16_t)x265_clip3(-32768, 32767, (E[3 - k] - O[3 - k] + add) >> shift);
-        }
-
-        src++;
-        dst += 8;
-    }
+ LD2_BtoH(psrc, stride, out0, out1);
+ LD2_BtoH(psrc + 2 * stride, stride, out2, out3);
 }
 
-static void partialButterflyInverse16(const int16_t* src, int16_t* dst, int shift, int line)
+void LD_H_BtoH(const pixel *psrc, v8u16 *out)
 {
-    int j, k;
-    int E[8], O[8];
-    int EE[4], EO[4];
-    int EEE[2], EEO[2];
-    int add = 1 << (shift - 1);
-
-    for (j = 0; j < line; j++)
-    {
-
-        for (k = 0; k < 8; k++)
-        {
-            O[k] = g_t16[1][k] * src[line] + g_t16[3][k] * src[3 * line] + g_t16[5][k] * src[5 * line] + g_t16[7][k] * src[7 * line] +
-                g_t16[9][k] * src[9 * line] + g_t16[11][k] * src[11 * line] + g_t16[13][k] * src[13 * line] + g_t16[15][k] * src[15 * line];
-        }
-
-        for (k = 0; k < 4; k++)
-        {
-            EO[k] = g_t16[2][k] * src[2 * line] + g_t16[6][k] * src[6 * line] + g_t16[10][k] * src[10 * line] + g_t16[14][k] * src[14 * line];
-        }
-
-        EEO[0] = g_t16[4][0] * src[4 * line] + g_t16[12][0] * src[12 * line];
-        EEE[0] = g_t16[0][0] * src[0] + g_t16[8][0] * src[8 * line];
-        EEO[1] = g_t16[4][1] * src[4 * line] + g_t16[12][1] * src[12 * line];
-        EEE[1] = g_t16[0][1] * src[0] + g_t16[8][1] * src[8 * line];
-
-
-        for (k = 0; k < 2; k++)
-        {
-            EE[k] = EEE[k] + EEO[k];
-            EE[k + 2] = EEE[1 - k] - EEO[1 - k];
-        }
-
-        for (k = 0; k < 4; k++)
-        {
-            E[k] = EE[k] + EO[k];
-            E[k + 4] = EE[3 - k] - EO[3 - k];
-        }
-
-        for (k = 0; k < 8; k++)
-        {
-            dst[k] = (int16_t)x265_clip3(-32768, 32767, (E[k] + O[k] + add) >> shift);
-            dst[k + 8] = (int16_t)x265_clip3(-32768, 32767, (E[7 - k] - O[7 - k] + add) >> shift);
-        }
-
-        src++;
-        dst += 16;
-    }
+ v2i64 tmp;
+ tmp = LD(psrc);
+ *out = __builtin_lsx_vextb_u_h((v16i8)tmp);
 }
 
-static void partialButterflyInverse32(const int16_t* src, int16_t* dst, int shift, int line)
+void LD2_H_BtoH(const pixel *psrc, v8u16 *out0, v8u16 *out1)
 {
-    int j, k;
-    int E[16], O[16];
-    int EE[8], EO[8];
-    int EEE[4], EEO[4];
-    int EEEE[2], EEEO[2];
-    int add = 1 << (shift - 1);
-
-    for (j = 0; j < line; j++)
-    {
-
-        for (k = 0; k < 16; k++)
-        {
-            O[k] = g_t32[1][k] * src[line] + g_t32[3][k] * src[3 * line] + g_t32[5][k] * src[5 * line] + g_t32[7][k] * src[7 * line] +
-                g_t32[9][k] * src[9 * line] + g_t32[11][k] * src[11 * line] + g_t32[13][k] * src[13 * line] + g_t32[15][k] * src[15 * line] +
-                g_t32[17][k] * src[17 * line] + g_t32[19][k] * src[19 * line] + g_t32[21][k] * src[21 * line] + g_t32[23][k] * src[23 * line] +
-                g_t32[25][k] * src[25 * line] + g_t32[27][k] * src[27 * line] + g_t32[29][k] * src[29 * line] + g_t32[31][k] * src[31 * line];
-        }
-
-        for (k = 0; k < 8; k++)
-        {
-            EO[k] = g_t32[2][k] * src[2 * line] + g_t32[6][k] * src[6 * line] + g_t32[10][k] * src[10 * line] + g_t32[14][k] * src[14 * line] +
-                g_t32[18][k] * src[18 * line] + g_t32[22][k] * src[22 * line] + g_t32[26][k] * src[26 * line] + g_t32[30][k] * src[30 * line];
-        }
-
-        for (k = 0; k < 4; k++)
-        {
-            EEO[k] = g_t32[4][k] * src[4 * line] + g_t32[12][k] * src[12 * line] + g_t32[20][k] * src[20 * line] + g_t32[28][k] * src[28 * line];
-        }
-
-        EEEO[0] = g_t32[8][0] * src[8 * line] + g_t32[24][0] * src[24 * line];
-        EEEO[1] = g_t32[8][1] * src[8 * line] + g_t32[24][1] * src[24 * line];
-        EEEE[0] = g_t32[0][0] * src[0] + g_t32[16][0] * src[16 * line];
-        EEEE[1] = g_t32[0][1] * src[0] + g_t32[16][1] * src[16 * line];
-
-
-        EEE[0] = EEEE[0] + EEEO[0];
-        EEE[3] = EEEE[0] - EEEO[0];
-        EEE[1] = EEEE[1] + EEEO[1];
-        EEE[2] = EEEE[1] - EEEO[1];
-        for (k = 0; k < 4; k++)
-        {
-            EE[k] = EEE[k] + EEO[k];
-            EE[k + 4] = EEE[3 - k] - EEO[3 - k];
-        }
-
-        for (k = 0; k < 8; k++)
-        {
-            E[k] = EE[k] + EO[k];
-            E[k + 8] = EE[7 - k] - EO[7 - k];
-        }
-
-        for (k = 0; k < 16; k++)
-        {
-            dst[k] = (int16_t)x265_clip3(-32768, 32767, (E[k] + O[k] + add) >> shift);
-            dst[k + 16] = (int16_t)x265_clip3(-32768, 32767, (E[15 - k] - O[15 - k] + add) >> shift);
-        }
-
-        src++;
-        dst += 32;
-    }
-}
-# 449 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-static void dst4_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
-{
-    const int shift_1st = 1 + 8 - 8;
-    const int shift_2nd = 8;
-
-    int16_t coef[4 * 4] __attribute__((aligned(32)));
-    int16_t block[4 * 4] __attribute__((aligned(32)));
-
-    for (int i = 0; i < 4; i++)
-    {
-        memcpy(&block[i * 4], &src[i * srcStride], 4 * sizeof(int16_t));
-    }
-
-    fastForwardDst(block, coef, shift_1st);
-    fastForwardDst(coef, dst, shift_2nd);
-}
-# 614 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-static void dct16_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
-{
-    const int shift_1st = 3 + 8 - 8;
-    const int shift_2nd = 10;
-
-    int16_t coef[16 * 16] __attribute__((aligned(32)));
-    int16_t block[16 * 16] __attribute__((aligned(32)));
-
-    for (int i = 0; i < 16; i++)
-    {
-        memcpy(&block[i * 16], &src[i * srcStride], 16 * sizeof(int16_t));
-    }
-
-    partialButterfly16(block, coef, shift_1st, 16);
-    partialButterfly16(coef, dst, shift_2nd, 16);
+ v2i64 tmp0, tmp1;
+ tmp0 = LD(psrc);
+ tmp1 = LD(psrc + 8);
+ *out0 = __builtin_lsx_vextb_u_h((v16i8)tmp0);
+ *out1 = __builtin_lsx_vextb_u_h((v16i8)tmp1);
 }
 
-static void dct32_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
+void LD4_H_BtoH(const pixel *psrc, v8u16 *out0, v8u16 *out1, v8u16 *out2, v8u16 *out3)
 {
-    const int shift_1st = 4 + 8 - 8;
-    const int shift_2nd = 11;
-
-    int16_t coef[32 * 32] __attribute__((aligned(32)));
-    int16_t block[32 * 32] __attribute__((aligned(32)));
-
-    for (int i = 0; i < 32; i++)
-    {
-        memcpy(&block[i * 32], &src[i * srcStride], 32 * sizeof(int16_t));
-    }
-
-    partialButterfly32(block, coef, shift_1st, 32);
-    partialButterfly32(coef, dst, shift_2nd, 32);
+ LD2_H_BtoH(psrc, out0, out1);
+ LD2_H_BtoH(psrc + 16, out2, out3);
 }
 
-static void idst4_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
+void LD2_H(const pixel *psrc, v2i64 *out0, v2i64 *out1)
 {
-    const int shift_1st = 7;
-    const int shift_2nd = 12 - (8 - 8);
-
-    int16_t coef[4 * 4] __attribute__((aligned(32)));
-    int16_t block[4 * 4] __attribute__((aligned(32)));
-
-    inversedst(src, coef, shift_1st);
-    inversedst(coef, block, shift_2nd);
-
-    for (int i = 0; i < 4; i++)
-    {
-        memcpy(&dst[i * dstStride], &block[i * 4], 4 * sizeof(int16_t));
-    }
+ *out0 = LD(psrc);
+ *out1 = LD(psrc + 8);
 }
 
-static void idct4_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
+void LD4_H(const pixel *psrc, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3)
 {
-    const int shift_1st = 7;
-    const int shift_2nd = 12 - (8 - 8);
-
-    int16_t coef[4 * 4] __attribute__((aligned(32)));
-    int16_t block[4 * 4] __attribute__((aligned(32)));
-
-    partialButterflyInverse4(src, coef, shift_1st, 4);
-    partialButterflyInverse4(coef, block, shift_2nd, 4);
-
-    for (int i = 0; i < 4; i++)
-    {
-        memcpy(&dst[i * dstStride], &block[i * 4], 4 * sizeof(int16_t));
-    }
+ LD2_H(psrc, out0, out1);
+ LD2_H(psrc + 16, out2, out3);
+}
+# 82 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.c"
+v4i32 LW(const pixel *psrc)
+{
+ v4i32 tmpp;
+ tmpp = __builtin_lsx_vblw(0, psrc);
+ return tmpp;
 }
 
-static void idct8_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
+void LW4(const pixel *psrc, intptr_t stride, v4i32 *out0, v4i32 *out1, v4i32 *out2, v4i32 *out3)
 {
-    const int shift_1st = 7;
-    const int shift_2nd = 12 - (8 - 8);
-
-    int16_t coef[8 * 8] __attribute__((aligned(32)));
-    int16_t block[8 * 8] __attribute__((aligned(32)));
-
-    partialButterflyInverse8(src, coef, shift_1st, 8);
-    partialButterflyInverse8(coef, block, shift_2nd, 8);
-
-    for (int i = 0; i < 8; i++)
-    {
-        memcpy(&dst[i * dstStride], &block[i * 8], 8 * sizeof(int16_t));
-    }
-}
-
-static void idct16_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
-{
-    const int shift_1st = 7;
-    const int shift_2nd = 12 - (8 - 8);
-
-    int16_t coef[16 * 16] __attribute__((aligned(32)));
-    int16_t block[16 * 16] __attribute__((aligned(32)));
-
-    partialButterflyInverse16(src, coef, shift_1st, 16);
-    partialButterflyInverse16(coef, block, shift_2nd, 16);
-
-    for (int i = 0; i < 16; i++)
-    {
-        memcpy(&dst[i * dstStride], &block[i * 16], 16 * sizeof(int16_t));
-    }
-}
-
-static void idct32_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
-{
-    const int shift_1st = 7;
-    const int shift_2nd = 12 - (8 - 8);
-
-    int16_t coef[32 * 32] __attribute__((aligned(32)));
-    int16_t block[32 * 32] __attribute__((aligned(32)));
-
-    partialButterflyInverse32(src, coef, shift_1st, 32);
-    partialButterflyInverse32(coef, block, shift_2nd, 32);
-
-    for (int i = 0; i < 32; i++)
-    {
-        memcpy(&dst[i * dstStride], &block[i * 32], 32 * sizeof(int16_t));
-    }
-}
-
-static void dequant_normal_c(const int16_t* quantCoef, int16_t* coef, int num, int scale, int shift)
-{
-
-
-
-
-    ;
-
-    ;
-    ;
-    ;
-    ;
-
-    int add, coeffQ;
-
-    add = 1 << (shift - 1);
-
-    for (int n = 0; n < num; n++)
-    {
-        coeffQ = (quantCoef[n] * scale + add) >> shift;
-        coef[n] = (int16_t)x265_clip3(-32768, 32767, coeffQ);
-    }
-}
-
-static void dequant_scaling_c(const int16_t* quantCoef, const int32_t* deQuantCoef, int16_t* coef, int num, int per, int shift)
-{
-    ;
-
-    int add, coeffQ;
-
-    shift += 4;
-
-    if (shift > per)
-    {
-        add = 1 << (shift - per - 1);
-
-        for (int n = 0; n < num; n++)
-        {
-            coeffQ = ((quantCoef[n] * deQuantCoef[n]) + add) >> (shift - per);
-            coef[n] = (int16_t)x265_clip3(-32768, 32767, coeffQ);
-        }
-    }
-    else
-    {
-        for (int n = 0; n < num; n++)
-        {
-            coeffQ = x265_clip3(-32768, 32767, quantCoef[n] * deQuantCoef[n]);
-            coef[n] = (int16_t)x265_clip3(-32768, 32767, coeffQ << (per - shift));
-        }
-    }
-}
-
-static uint32_t quant_c(const int16_t* coef, const int32_t* quantCoeff, int32_t* deltaU, int16_t* qCoef, int qBits, int add, int numCoeff)
-{
-    ;
-    ;
-    int qBits8 = qBits - 8;
-    uint32_t numSig = 0;
-
-    for (int blockpos = 0; blockpos < numCoeff; blockpos++)
-    {
-        int level = coef[blockpos];
-        int sign = (level < 0 ? -1 : 1);
-
-        int tmplevel = abs(level) * quantCoeff[blockpos];
-        level = ((tmplevel + add) >> qBits);
-        deltaU[blockpos] = ((tmplevel - (level << qBits)) >> qBits8);
-        if (level)
-            ++numSig;
-        level *= sign;
-        qCoef[blockpos] = (int16_t)x265_clip3(-32768, 32767, level);
-    }
-
-    return numSig;
-}
-
-static uint32_t nquant_c(const int16_t* coef, const int32_t* quantCoeff, int16_t* qCoef, int qBits, int add, int numCoeff)
-{
-    ;
-    ;
-    ;
-
-    uint32_t numSig = 0;
-
-    for (int blockpos = 0; blockpos < numCoeff; blockpos++)
-    {
-        int level = coef[blockpos];
-        int sign = (level < 0 ? -1 : 1);
-
-        int tmplevel = abs(level) * quantCoeff[blockpos];
-        level = ((tmplevel + add) >> qBits);
-        if (level)
-            ++numSig;
-        level *= sign;
-
-
-
-        qCoef[blockpos] = (int16_t)abs(x265_clip3(-32768, 32767, level));
-    }
-
-    return numSig;
-}
-template<int trSize>
-int count_nonzero_c(const int16_t* quantCoeff)
-{
-    ;
-    int count = 0;
-    int numCoeff = trSize * trSize;
-    for (int i = 0; i < numCoeff; i++)
-    {
-        count += quantCoeff[i] != 0;
-    }
-
-    return count;
-}
-
-template<int trSize>
-uint32_t copy_count(int16_t* coeff, const int16_t* residual, intptr_t resiStride)
-{
-    uint32_t numSig = 0;
-    for (int k = 0; k < trSize; k++)
-    {
-        for (int j = 0; j < trSize; j++)
-        {
-            coeff[k * trSize + j] = residual[k * resiStride + j];
-            numSig += (residual[k * resiStride + j] != 0);
-        }
-    }
-
-    return numSig;
-}
-
-static void denoiseDct_c(int16_t* dctCoef, uint32_t* resSum, const uint16_t* offset, int numCoeff)
-{
-    for (int i = 0; i < numCoeff; i++)
-    {
-        int level = dctCoef[i];
-        int sign = level >> 31;
-        level = (level + sign) ^ sign;
-        resSum[i] += level;
-        level -= offset[i];
-        dctCoef[i] = (int16_t)(level < 0 ? 0 : (level ^ sign) - sign);
-    }
-}
-
-static int scanPosLast_c(const uint16_t *scan, const coeff_t *coeff, uint16_t *coeffSign, uint16_t *coeffFlag, uint8_t *coeffNum, int numSig, const uint16_t* , const int )
-{
-    memset(coeffNum, 0, 64 * sizeof(*coeffNum));
-    memset(coeffFlag, 0, 64 * sizeof(*coeffFlag));
-    memset(coeffSign, 0, 64 * sizeof(*coeffSign));
-
-    int scanPosLast = 0;
-    do
-    {
-        const uint32_t cgIdx = (uint32_t)scanPosLast >> 4;
-
-        const uint32_t posLast = scan[scanPosLast++];
-
-        const int curCoeff = coeff[posLast];
-        const uint32_t isNZCoeff = (curCoeff != 0);
-
-
-
-
-
-
-
-        numSig -= isNZCoeff;
-
-
-        coeffSign[cgIdx] += (uint16_t)(((uint32_t)curCoeff >> 31) << coeffNum[cgIdx]);
-        coeffFlag[cgIdx] = (coeffFlag[cgIdx] << 1) + (uint16_t)isNZCoeff;
-        coeffNum[cgIdx] += (uint8_t)isNZCoeff;
-    }
-    while (numSig > 0);
-    return scanPosLast - 1;
+ *out0 = LW((psrc));
+ *out1 = LW((psrc) + stride);
+ *out2 = LW((psrc) + 2 * stride);
+ *out3 = LW((psrc) + 3 * stride);
 }
 
 
-static uint32_t findPosFirstLast_c(const int16_t *dstCoeff, const intptr_t trSize, const uint16_t scanTbl[16])
+
+
+
+
+v2i64 LD_V(const pixel *psrc)
 {
-    int n;
+ v2i64 tmpp;
+ tmpp = __builtin_msa_ld_d(psrc, 0);
+ return tmpp;
+}
+# 116 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.c"
+void LD_V2(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1)
+{
+ *out0 = LD_V(psrc);
+ *out1 = LD_V(psrc + stride);
+}
 
-    for (n = 16 - 1; n >= 0; n--)
-    {
-        const uint32_t idx = scanTbl[n];
-        const uint32_t idxY = idx / 4;
-        const uint32_t idxX = idx % 4;
-        if (dstCoeff[idxY * trSize + idxX])
-            break;
-    }
+void LD_V2_H(const pixel *psrc, v2i64 *out0, v2i64 *out1)
+{
+ *out0 = LD_V(psrc);
+ *out1 = LD_V(psrc + 16);
+}
+# 136 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.c"
+void LD_V3(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2)
+{
+ *out0 = LD_V(psrc);
+ *out1 = LD_V(psrc + stride);
+ *out2 = LD_V(psrc + 2 * stride);
+}
 
-    ;
+void LD_V4(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3)
+{
+ LD_V2(psrc, stride, out0, out1);
+ LD_V2(psrc + 2 * stride , stride, out2, out3);
+}
 
-    uint32_t lastNZPosInCG = (uint32_t)n;
+void LD_V4_H(const pixel *psrc, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3)
+{
+ LD_V2_H(psrc, out0, out1);
+ LD_V2_H(psrc + 32, out2, out3);
+}
+# 190 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.c"
+void LD_V8(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3, v2i64 *out4, v2i64 *out5, v2i64 *out6, v2i64 *out7)
+{
+ LD_V4(psrc, stride, out0, out1, out2, out3);
+ LD_V4(psrc + 4 * stride, stride, out4, out5, out6, out7);
+}
+# 213 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.c"
+v4i32 L_4x4_B(const pixel *psrc,intptr_t stride)
+{
+ v4i32 tmpp0, tmpp1, tmpp2, tmpp3;
+ LW4(psrc, stride, &tmpp0, &tmpp1, &tmpp2, &tmpp3);
+ tmpp0 = __builtin_msa_insve_w(tmpp0, 1, tmpp1);
+ tmpp0 = __builtin_msa_insve_w(tmpp0, 2, tmpp2);
+ tmpp0 = __builtin_msa_insve_w(tmpp0, 3, tmpp3);
+ return tmpp0;
+}
 
-    for (n = 0; n < 16; n++)
-    {
-        const uint32_t idx = scanTbl[n];
-        const uint32_t idxY = idx / 4;
-        const uint32_t idxX = idx % 4;
-        if (dstCoeff[idxY * trSize + idxX])
-            break;
-    }
+void L_8x8_B(const pixel *psrc, intptr_t stride, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3)
+{
+ v2i64 tmp0, tmp1, tmp2, tmp3;
+# 243 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.c"
+ LD4(psrc, stride, out0, out1, out2, out3);
+ LD4(psrc + 4 * stride, stride, &tmp0, &tmp1, &tmp2, &tmp3);
+ *out0 = __builtin_msa_insve_d(*out0, 1, tmp0);
+ *out1 = __builtin_msa_insve_d(*out1, 1, tmp1);
+ *out2 = __builtin_msa_insve_d(*out2, 1, tmp2);
+ *out3 = __builtin_msa_insve_d(*out3, 1, tmp3);
 
-    uint32_t firstNZPosInCG = (uint32_t)n;
-
-    uint32_t absSumSign = 0;
-    for (n = firstNZPosInCG; n <= (int)lastNZPosInCG; n++)
-    {
-        const uint32_t idx = scanTbl[n];
-        const uint32_t idxY = idx / 4;
-        const uint32_t idxX = idx % 4;
-        absSumSign += dstCoeff[idxY * trSize + idxX];
-    }
-
-
-    return ((absSumSign << 31) | (lastNZPosInCG << 8) | firstNZPosInCG);
 }
 
 
-static uint32_t costCoeffNxN_c(const uint16_t *scan, const coeff_t *coeff, intptr_t trSize, uint16_t *absCoeff, const uint8_t *tabSigCtx, uint32_t scanFlagMask, uint8_t *baseCtx, int offset, int scanPosSigOff, int subPosBase)
+void L_4x4_B_H(const pixel *psrc,intptr_t stride, v8u16 *out0, v8u16 *out1)
 {
-    uint16_t tmpCoeff[16] __attribute__((aligned(32)));
-    uint32_t numNonZero = (scanPosSigOff < (16 - 1) ? 1 : 0);
-    uint32_t sum = 0;
-
-
-    absCoeff -= numNonZero;
-
-    for (int i = 0; i < 4; i++)
-    {
-        tmpCoeff[i * 4 + 0] = (uint16_t)abs(coeff[i * trSize + 0]);
-        tmpCoeff[i * 4 + 1] = (uint16_t)abs(coeff[i * trSize + 1]);
-        tmpCoeff[i * 4 + 2] = (uint16_t)abs(coeff[i * trSize + 2]);
-        tmpCoeff[i * 4 + 3] = (uint16_t)abs(coeff[i * trSize + 3]);
-    }
-
-    do
-    {
-        uint32_t blkPos, sig, ctxSig;
-        blkPos = scan[scanPosSigOff];
-        const uint32_t posZeroMask = (subPosBase + scanPosSigOff) ? ~0 : 0;
-        sig = scanFlagMask & 1;
-        scanFlagMask >>= 1;
-        ;
-        if ((scanPosSigOff != 0) || (subPosBase == 0) || numNonZero)
-        {
-            const uint32_t cnt = tabSigCtx[blkPos] + offset;
-            ctxSig = cnt & posZeroMask;
-
-
-
-            const uint32_t mstate = baseCtx[ctxSig];
-            const uint32_t mps = mstate & 1;
-            const uint32_t stateBits = x265_entropyStateBits[mstate ^ sig];
-            uint32_t nextState = (stateBits >> 24) + mps;
-            if ((mstate ^ sig) == 1)
-                nextState = sig;
-            ;
-            ;
-            baseCtx[ctxSig] = (uint8_t)nextState;
-            sum += stateBits;
-        }
-        
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
-       ({ if (
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-       numNonZero <= 15
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
-       ) ; else __assert_fail (
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-       "numNonZero <= 15"
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
-       , "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp", 997, __PRETTY_FUNCTION__); })
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-                               ;
-        
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
-       ({ if (
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-       blkPos <= 15
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
-       ) ; else __assert_fail (
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-       "blkPos <= 15"
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
-       , "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp", 998, __PRETTY_FUNCTION__); })
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-                           ;
-        absCoeff[numNonZero] = tmpCoeff[blkPos];
-        numNonZero += sig;
-        scanPosSigOff--;
-    }
-    while(scanPosSigOff >= 0);
-
-    return (sum & 0xFFFFFF);
+ v4i32 tmpp0, tmpp1, tmpp2, tmpp3;
+ LW4(psrc, stride, &tmpp0, &tmpp1, &tmpp2, &tmpp3);
+ tmpp0 = __builtin_msa_insve_w(tmpp0, 1, tmpp1);
+ *out0 = __builtin_lsx_vextb_u_h((v16i8)tmpp0);
+ tmpp2 = __builtin_msa_insve_w(tmpp2, 1, tmpp3);
+ *out1 = __builtin_lsx_vextb_u_h((v16i8)tmpp2);
 }
 
-static uint32_t costCoeffRemain_c(uint16_t *absCoeff, int numNonZero, int idx)
+void S_4x4_B(v16u8 val,pixel *pdst,intptr_t stride)
 {
-    uint32_t goRiceParam = 0;
+ __builtin_lsx_vsw((v4i32)val, 0, 0, pdst);
+ __builtin_lsx_vsw((v4i32)val, 1, 0, pdst + stride);
+ __builtin_lsx_vsw((v4i32)val, 2, 0, pdst + 2 * stride);
+ __builtin_lsx_vsw((v4i32)val, 3, 0, pdst + 3 * stride);
+}
 
-    uint32_t sum = 0;
-    int baseLevel = 3;
-    do
-    {
-        if (idx >= 8)
-            baseLevel = 1;
-
-
-
-        int codeNumber = absCoeff[idx] - baseLevel;
-
-        if (codeNumber >= 0)
-        {
-
-            uint32_t length = 0;
-
-            codeNumber = ((uint32_t)codeNumber >> goRiceParam) - 3;
-            if (codeNumber >= 0)
-            {
-                {
-                    unsigned long cidx;
-                    cidx = (unsigned long)__builtin_clz(codeNumber + 1) ^ 31;
-                    length = cidx;
-                }
-                ;
-
-                codeNumber = (length + length);
-            }
-            sum += (3 + 1 + goRiceParam + codeNumber);
-
-            if (absCoeff[idx] > (3 << goRiceParam))
-                goRiceParam = (goRiceParam + 1) - (goRiceParam >> 2);
-            ;
-        }
-        baseLevel = 2;
-        idx++;
-    }
-    while(idx < numNonZero);
-
-    return sum;
+void S_4x4_H(v8i16 val0,v8i16 val1,int16_t *pdst,intptr_t stride)
+{
+ __builtin_lsx_vsd((v2i64)val0, 0, 0, pdst);
+ __builtin_lsx_vsd((v2i64)val0, 1, 0, pdst + stride);
+ __builtin_lsx_vsd((v2i64)val1, 0, 0, pdst + 2 * stride);
+ __builtin_lsx_vsd((v2i64)val1, 1, 0, pdst + 3 * stride);
 }
 
 
-static uint32_t costC1C2Flag_c(uint16_t *absCoeff, intptr_t numC1Flag, uint8_t *baseCtxMod, intptr_t ctxOffset)
+void SW(v4i32 val, pixel *pdst)
 {
-    uint32_t sum = 0;
-    uint32_t c1 = 1;
-    uint32_t firstC2Idx = 8;
-    uint32_t firstC2Flag = 2;
-    uint32_t c1Next = 0xFFFFFFFE;
-
-    int idx = 0;
-    do
-    {
-        uint32_t symbol1 = absCoeff[idx] > 1;
-        uint32_t symbol2 = absCoeff[idx] > 2;
-
-        {
-            const uint32_t mstate = baseCtxMod[c1];
-            baseCtxMod[c1] = (g_nextState[(mstate)][(symbol1)]);
-            sum += (g_entropyBits[(mstate) ^ (symbol1)]);
-        }
-
-        if (symbol1)
-            c1Next = 0;
-
-        if (symbol1 + firstC2Flag == 3)
-            firstC2Flag = symbol2;
-
-        if (symbol1 + firstC2Idx == 9)
-            firstC2Idx = idx;
-
-        c1 = (c1Next & 3);
-        c1Next >>= 2;
-        ;
-        idx++;
-    }
-    while(idx < numC1Flag);
-
-    if (!c1)
-    {
-        ;
-
-        baseCtxMod += ctxOffset;
-
-
-        {
-            const uint32_t mstate = baseCtxMod[0];
-            baseCtxMod[0] = (g_nextState[(mstate)][(firstC2Flag)]);
-            sum += (g_entropyBits[(mstate) ^ (firstC2Flag)]);
-        }
-    }
-
-    return (sum & 0x00FFFFFF) + (c1 << 26) + (firstC2Idx << 28);
+ __builtin_lsx_vsw(val, 0, 0, pdst);
 }
 
-namespace x265 {
-
-
-void setupDCTPrimitives_c(EncoderPrimitives& p)
+void SW2(v4i32 in0, v4i32 in1, pixel *pdst, intptr_t stride)
 {
-    p.dequant_scaling = dequant_scaling_c;
-    p.dequant_normal = dequant_normal_c;
-    p.quant = quant_c;
-    p.nquant = nquant_c;
-    p.dst4x4 = dst4_c;
-
-
-    p.cu[BLOCK_16x16].dct = dct16_c;
-    p.cu[BLOCK_32x32].dct = dct32_c;
-    p.idst4x4 = idst4_c;
-    p.cu[BLOCK_4x4].idct = idct4_c;
-    p.cu[BLOCK_8x8].idct = idct8_c;
-    p.cu[BLOCK_16x16].idct = idct16_c;
-    p.cu[BLOCK_32x32].idct = idct32_c;
-    p.denoiseDct = denoiseDct_c;
-    p.cu[BLOCK_4x4].count_nonzero = count_nonzero_c<4>;
-    p.cu[BLOCK_8x8].count_nonzero = count_nonzero_c<8>;
-    p.cu[BLOCK_16x16].count_nonzero = count_nonzero_c<16>;
-    p.cu[BLOCK_32x32].count_nonzero = count_nonzero_c<32>;
-
-    p.cu[BLOCK_4x4].copy_cnt = copy_count<4>;
-    p.cu[BLOCK_8x8].copy_cnt = copy_count<8>;
-    p.cu[BLOCK_16x16].copy_cnt = copy_count<16>;
-    p.cu[BLOCK_32x32].copy_cnt = copy_count<32>;
-
-    p.scanPosLast = scanPosLast_c;
-    p.findPosFirstLast = findPosFirstLast_c;
-    p.costCoeffNxN = costCoeffNxN_c;
-    p.costCoeffRemain = costCoeffRemain_c;
-    p.costC1C2Flag = costC1C2Flag_c;
+ SW(in0, pdst);
+ SW(in1, pdst + stride);
 }
+
+void SW4(v4i32 in0, v4i32 in1, v4i32 in2, v4i32 in3, pixel *pdst, intptr_t stride)
+{
+ SW2(in0, in1, pdst, stride);
+ SW2(in2, in3, pdst + 2 * stride, stride);
+}
+
+void SW_1(v4i32 val, pixel *pdst)
+{
+ __builtin_lsx_vsw(val, 1, 0, pdst);
+}
+
+void SW2_1(v4i32 in0, v4i32 in1, pixel *pdst, intptr_t stride)
+{
+ SW_1(in0, pdst);
+ SW_1(in1, pdst + stride);
+}
+
+void SD(v2i64 val, pixel *pdst)
+{
+ __builtin_lsx_vsd(val, 0, 0, pdst);
+}
+
+void SD2(v2i64 in0, v2i64 in1, pixel *pdst, intptr_t stride)
+{
+ SD(in0, pdst);
+ SD(in1, pdst + stride);
+}
+
+void SD4(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t stride)
+{
+ SD2(in0, in1, pdst, stride);
+ SD2(in2, in3, pdst + 2 * stride, stride);
+}
+
+void SD_1(v2i64 val, pixel *pdst)
+{
+ __builtin_lsx_vsd(val, 1, 0, pdst);
+}
+
+void SD2_1(v2i64 in0, v2i64 in1, pixel *pdst, intptr_t stride)
+{
+ SD_1(in0, pdst);
+ SD_1(in1, pdst + stride);
+}
+
+void SD4_1(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t stride)
+{
+ SD2_1(in0, in1, pdst, stride);
+ SD2_1(in2, in3, pdst + 2 * stride, stride);
+}
+
+void SD2_H(v2i64 in0, v2i64 in1, pixel *pdst)
+{
+ SD(in0, pdst);
+ SD(in1, pdst + 8);
+}
+
+void SD4_H(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst)
+{
+ SD2_H(in0, in1, pdst);
+ SD2_H(in2, in3, pdst + 16);
+}
+# 362 "/home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.c"
+void ST_V(v2i64 in, pixel *pdst)
+{
+ __builtin_msa_st_d(in, pdst, 0);
+}
+
+void ST_V2(v2i64 in0, v2i64 in1, pixel *pdst, intptr_t stride)
+{
+ ST_V(in0, pdst);
+ ST_V(in1, pdst + stride);
+}
+
+void ST_V4(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t stride)
+{
+ ST_V2(in0, in1, pdst, stride);
+ ST_V2(in2, in3, pdst + 2 * stride, stride);
+}
+
+void ST_V2_H(v2i64 in0, v2i64 in1, pixel *pdst)
+{
+ ST_V(in0, pdst);
+ ST_V(in1, pdst + 16);
+}
+
+void ST_V4_H(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst)
+{
+ ST_V2_H(in0, in1, pdst);
+ ST_V2_H(in2, in3, pdst + 32);
 }

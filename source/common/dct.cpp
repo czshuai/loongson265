@@ -32,6 +32,8 @@
 #include "contexts.h"   // costCoeffNxN_c
 #include "threading.h"  // CLZ
 
+#include <cstdlib>
+
 using namespace X265_NS;
 
 #if _MSC_VER
@@ -202,6 +204,7 @@ static void partialButterfly32(const int16_t* src, int16_t* dst, int shift, int 
     }
 }
 
+/*
 static void partialButterfly8(const int16_t* src, int16_t* dst, int shift, int line)
 {
     int j, k;
@@ -211,14 +214,14 @@ static void partialButterfly8(const int16_t* src, int16_t* dst, int shift, int l
 
     for (j = 0; j < line; j++)
     {
-        /* E and O*/
+        // E and O
         for (k = 0; k < 4; k++)
         {
             E[k] = src[k] + src[7 - k];
             O[k] = src[k] - src[7 - k];
         }
 
-        /* EE and EO */
+        // EE and EO 
         EE[0] = E[0] + E[3];
         EO[0] = E[0] - E[3];
         EE[1] = E[1] + E[2];
@@ -238,6 +241,7 @@ static void partialButterfly8(const int16_t* src, int16_t* dst, int shift, int l
         dst++;
     }
 }
+*/
 
 static void partialButterflyInverse4(const int16_t* src, int16_t* dst, int shift, int line)
 {
@@ -415,6 +419,8 @@ static void partialButterflyInverse32(const int16_t* src, int16_t* dst, int shif
     }
 }
 
+// move to the pixel.cpp file
+/*
 static void partialButterfly4(const int16_t* src, int16_t* dst, int shift, int line)
 {
     int j;
@@ -423,7 +429,7 @@ static void partialButterfly4(const int16_t* src, int16_t* dst, int shift, int l
 
     for (j = 0; j < line; j++)
     {
-        /* E and O */
+        // E and O 
         E[0] = src[0] + src[3];
         O[0] = src[0] - src[3];
         E[1] = src[1] + src[2];
@@ -438,6 +444,7 @@ static void partialButterfly4(const int16_t* src, int16_t* dst, int shift, int l
         dst++;
     }
 }
+*/
 
 static void dst4_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
 {
@@ -456,6 +463,117 @@ static void dst4_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
     fastForwardDst(coef, dst, shift_2nd);
 }
 
+/*
+static void dct4(const int16_t* src, int16_t* dst, intptr_t srcStride)
+{
+	#ifdef DEBUG
+	const int16_t *t_src;
+	const int shift_1st = 1 + X265_DEPTH - 8;
+    	const int shift_2nd = 8;
+	int16_t nw[16];
+	int16_t *t_dst;
+	t_dst = nw;
+	t_src = src;
+
+	ALIGN_VAR_32(int16_t, coef[4 * 4]);
+    	ALIGN_VAR_32(int16_t, block[4 * 4]);
+	
+	for (int i = 0; i < 4; i++)
+    	{
+        	memcpy(&block[i * 4], &t_src[i * srcStride], 4 * sizeof(int16_t));
+    	}
+	
+	partialButterfly4(block, coef, shift_1st, 4);
+    	partialButterfly4(coef, t_dst, shift_2nd, 4);
+	#endif
+	
+	v2i64 tmp0, tmp1, tmp2, tmp3;
+	v4i32 mid0, mid1;
+	v2i64 val0, val1;	
+	v8i16 cen0, cen1;
+	v4i32 col0, col1, col2, col3;
+	v8i16 coll0, coll1, coll2, coll3;
+	v2i64 col10, col32;
+	v4i32 row0, row1, row2, row3;	
+	v8i16 rowl0, rowl1, rowl2, rowl3;
+	v2i64 res0, res1;
+
+	v8i16 con0 = {64, 64, 64, 64, 64, 64, 64, 64};
+	v8i16 con1 = {36, 83, 36, 83, 36, 83, 36, 83};
+	v8i16 con2 = {-64, 64, -64, 64, -64, 64, -64, 64};
+	v8i16 con3 = {-83, 36, -83, 36, -83, 36, -83, 36};
+
+	LD4((const pixel*)src, 2 * srcStride, &tmp0, &tmp1, &tmp2, &tmp3);
+
+	tmp0 = __builtin_msa_insve_d(tmp0, 1, tmp1);
+	tmp2 = __builtin_msa_insve_d(tmp2, 1, tmp3);
+
+	mid0 = __builtin_msa_shf_w((v4i32)tmp0, 216);
+	mid1 = __builtin_msa_shf_w((v4i32)tmp2, 216);
+
+	val0 = __builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)mid1);
+	val1 = __builtin_msa_insve_d((v2i64)mid1, 0, (v2i64)mid0);
+
+	val1 = (v2i64)__builtin_msa_shf_h((v8i16)val1, 177);
+
+	cen0 = __builtin_msa_addv_h((v8i16)val0, (v8i16)val1);
+	cen1 = __builtin_msa_subv_h((v8i16)val0, (v8i16)val1);
+
+	col0 = __builtin_msa_dotp_s_w(cen0, con0);
+	col1 = __builtin_msa_dotp_s_w(cen1, con1);
+	col2 = __builtin_msa_dotp_s_w(cen0, con2);
+	col3 = __builtin_msa_dotp_s_w(cen1, con3);
+
+	coll0 = __builtin_lsx_vsrarin_h(col0, 1);
+	coll1 = __builtin_lsx_vsrarin_h(col1, 1);
+	coll2 = __builtin_lsx_vsrarin_h(col2, 1);
+	coll3 = __builtin_lsx_vsrarin_h(col3, 1);
+
+	col10 = __builtin_msa_insve_d((v2i64)coll0, 1, (v2i64)coll1);
+	col32 = __builtin_msa_insve_d((v2i64)coll2, 1, (v2i64)coll3);
+
+	mid0 = __builtin_msa_shf_w((v4i32)col10, 216);
+	mid1 = __builtin_msa_shf_w((v4i32)col32, 216);
+
+	val0 = __builtin_msa_insve_d((v2i64)mid0, 1, (v2i64)mid1);
+	val1 = __builtin_msa_insve_d((v2i64)mid1, 0, (v2i64)mid0);
+
+	val1 = (v2i64)__builtin_msa_shf_h((v8i16)val1, 177);
+
+	cen0 = __builtin_msa_addv_h((v8i16)val0, (v8i16)val1);
+	cen1 = __builtin_msa_subv_h((v8i16)val0, (v8i16)val1);
+
+	row0 = __builtin_msa_dotp_s_w(cen0, con0);
+	row1 = __builtin_msa_dotp_s_w(cen1, con1);
+	row2 = __builtin_msa_dotp_s_w(cen0, con2);
+	row3 = __builtin_msa_dotp_s_w(cen1, con3);
+
+	rowl0 = __builtin_lsx_vsrarin_h(row0, 8);
+	rowl1 = __builtin_lsx_vsrarin_h(row1, 8);
+	rowl2 = __builtin_lsx_vsrarin_h(row2, 8);
+	rowl3 = __builtin_lsx_vsrarin_h(row3, 8);
+
+	res0 = __builtin_msa_insve_d((v2i64)rowl0, 1, (v2i64)rowl1);
+	res1 = __builtin_msa_insve_d((v2i64)rowl2, 1, (v2i64)rowl3);
+
+	ST_V2_H(res0, res1, (pixel*)dst);
+
+	#ifdef DEBUG
+	for (int j = 0; j < 16; j++)
+	{
+		if (dst[j] != t_dst[j])
+		{
+			printf("dct4 test fail\n");
+			return;
+		}
+	}
+
+	printf("dct4 test success\n");
+	#endif
+}	
+*/
+
+/*
 static void dct4_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
 {
     const int shift_1st = 1 + X265_DEPTH - 8;
@@ -472,7 +590,9 @@ static void dct4_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
     partialButterfly4(block, coef, shift_1st, 4);
     partialButterfly4(coef, dst, shift_2nd, 4);
 }
+*/
 
+/*
 static void dct8_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
 {
     const int shift_1st = 2 + X265_DEPTH - 8;
@@ -489,6 +609,7 @@ static void dct8_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
     partialButterfly8(block, coef, shift_1st, 8);
     partialButterfly8(coef, dst, shift_2nd, 8);
 }
+*/
 
 static void dct16_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
 {
@@ -994,8 +1115,8 @@ void setupDCTPrimitives_c(EncoderPrimitives& p)
     p.quant = quant_c;
     p.nquant = nquant_c;
     p.dst4x4 = dst4_c;
-    p.cu[BLOCK_4x4].dct   = dct4_c;
-    p.cu[BLOCK_8x8].dct   = dct8_c;
+    //p.cu[BLOCK_4x4].dct   = dct4;
+    //p.cu[BLOCK_8x8].dct   = dct8_c;
     p.cu[BLOCK_16x16].dct = dct16_c;
     p.cu[BLOCK_32x32].dct = dct32_c;
     p.idst4x4 = idst4_c;

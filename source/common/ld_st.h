@@ -282,7 +282,34 @@ void S_4x4_H(v8i16 val0,v8i16 val1,int16_t *pdst,intptr_t stride)
 }
 
 #define SH(val, pdst) __builtin_lsx_vsh(val, 0, 0, pdst)
-#define SW(val, pdst) __builtin_lsx_vsw(val, 0, 0, pdst)
+void SW(v4i32 val, pixel *pdst) 
+{
+	__builtin_lsx_vsw(val, 0, 0, pdst);
+}
+
+void SW2(v4i32 in0, v4i32 in1, pixel *pdst, intptr_t stride)
+{
+	SW(in0, pdst);	
+	SW(in1, pdst + stride);	
+}
+
+void SW4(v4i32 in0, v4i32 in1, v4i32 in2, v4i32 in3, pixel *pdst, intptr_t stride)
+{
+	SW2(in0, in1, pdst, stride);
+	SW2(in2, in3, pdst + 2 * stride, stride);
+}
+	
+void SW_1(v4i32 val, pixel *pdst)
+{
+	__builtin_lsx_vsw(val, 1, 0, pdst);
+}
+
+void SW2_1(v4i32 in0, v4i32 in1, pixel *pdst, intptr_t stride)
+{
+	SW_1(in0, pdst);	
+	SW_1(in1, pdst + stride);	
+}
+
 void SD(v2i64 val, pixel *pdst)
 {
 	__builtin_lsx_vsd(val, 0, 0, pdst);
@@ -317,6 +344,18 @@ void SD4_1(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t str
 	SD2_1(in2, in3, pdst + 2 * stride, stride);
 }
 
+void SD2_H(v2i64 in0, v2i64 in1, pixel *pdst)
+{
+	SD(in0, pdst);
+	SD(in1, pdst + 8);
+}
+
+void SD4_H(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst)
+{
+	SD2_H(in0, in1, pdst);
+	SD2_H(in2, in3, pdst + 16);
+}
+
 #define SW4(in0, in1, in2, in3, pdst, stride)  \
 {	\
 	SW(in0, (pdst));	\
@@ -329,13 +368,14 @@ void ST_V(v2i64 in, pixel *pdst)
 {	
 	__builtin_msa_st_d(in, pdst, 0);		
 }
+
 void ST_V2(v2i64 in0, v2i64 in1, pixel *pdst, intptr_t stride)	
 {	
 	ST_V(in0, pdst);	
 	ST_V(in1, pdst + stride);	
 }
 
-void ST_V4(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t stride)		
+void ST_V4(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst, intptr_t stride)
 {	
 	ST_V2(in0, in1, pdst, stride);	
 	ST_V2(in2, in3, pdst + 2 * stride, stride);	
@@ -364,5 +404,4 @@ void ST_V4_H(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst)
 	ST_V4(in0, in1, in2, in3, (pdst), stride);	\
 	ST_V4(in4, in5, in6, in7, (pdst) + 4 * stride, stride);		\
 }
-
 
