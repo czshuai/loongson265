@@ -62,6 +62,7 @@ static void fastForwardDst(const int16_t* block, int16_t* coeff, int shift)  // 
     }
 }
 
+/*
 static void inversedst(const int16_t* tmp, int16_t* block, int shift)  // input tmp, output block
 {
     int i, c[4];
@@ -81,6 +82,7 @@ static void inversedst(const int16_t* tmp, int16_t* block, int shift)  // input 
         block[4 * i + 3] = (int16_t)x265_clip3(-32768, 32767, (55 * c[0] + 29 * c[2]     - c[3]               + rnd_factor) >> shift);
     }
 }
+*/
 
 static void partialButterfly16(const int16_t* src, int16_t* dst, int shift, int line)
 {
@@ -243,6 +245,7 @@ static void partialButterfly8(const int16_t* src, int16_t* dst, int shift, int l
 }
 */
 
+/*
 static void partialButterflyInverse4(const int16_t* src, int16_t* dst, int shift, int line)
 {
     int j;
@@ -251,13 +254,13 @@ static void partialButterflyInverse4(const int16_t* src, int16_t* dst, int shift
 
     for (j = 0; j < line; j++)
     {
-        /* Utilizing symmetry properties to the maximum to minimize the number of multiplications */
+        // Utilizing symmetry properties to the maximum to minimize the number of multiplications 
         O[0] = g_t4[1][0] * src[line] + g_t4[3][0] * src[3 * line];
         O[1] = g_t4[1][1] * src[line] + g_t4[3][1] * src[3 * line];
         E[0] = g_t4[0][0] * src[0] + g_t4[2][0] * src[2 * line];
         E[1] = g_t4[0][1] * src[0] + g_t4[2][1] * src[2 * line];
 
-        /* Combining even and odd terms at each hierarchy levels to calculate the final spatial domain vector */
+        // Combining even and odd terms at each hierarchy levels to calculate the final spatial domain vector 
         dst[0] = (int16_t)(x265_clip3(-32768, 32767, (E[0] + O[0] + add) >> shift));
         dst[1] = (int16_t)(x265_clip3(-32768, 32767, (E[1] + O[1] + add) >> shift));
         dst[2] = (int16_t)(x265_clip3(-32768, 32767, (E[1] - O[1] + add) >> shift));
@@ -267,6 +270,7 @@ static void partialButterflyInverse4(const int16_t* src, int16_t* dst, int shift
         dst += 4;
     }
 }
+*/
 
 static void partialButterflyInverse8(const int16_t* src, int16_t* dst, int shift, int line)
 {
@@ -446,6 +450,7 @@ static void partialButterfly4(const int16_t* src, int16_t* dst, int shift, int l
 }
 */
 
+/*
 static void dst4_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
 {
     const int shift_1st = 1 + X265_DEPTH - 8;
@@ -462,6 +467,7 @@ static void dst4_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
     fastForwardDst(block, coef, shift_1st);
     fastForwardDst(coef, dst, shift_2nd);
 }
+*/
 
 /*
 static void dct4(const int16_t* src, int16_t* dst, intptr_t srcStride)
@@ -645,6 +651,7 @@ static void dct32_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
     partialButterfly32(coef, dst, shift_2nd, 32);
 }
 
+/*
 static void idst4_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
 {
     const int shift_1st = 7;
@@ -661,7 +668,9 @@ static void idst4_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
         memcpy(&dst[i * dstStride], &block[i * 4], 4 * sizeof(int16_t));
     }
 }
+*/
 
+/*
 static void idct4_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
 {
     const int shift_1st = 7;
@@ -678,6 +687,7 @@ static void idct4_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
         memcpy(&dst[i * dstStride], &block[i * 4], 4 * sizeof(int16_t));
     }
 }
+*/
 
 static void idct8_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
 {
@@ -1114,13 +1124,13 @@ void setupDCTPrimitives_c(EncoderPrimitives& p)
     p.dequant_normal = dequant_normal_c;
     p.quant = quant_c;
     p.nquant = nquant_c;
-    p.dst4x4 = dst4_c;
+    //p.dst4x4 = dst4_c;
     //p.cu[BLOCK_4x4].dct   = dct4;
     //p.cu[BLOCK_8x8].dct   = dct8_c;
     p.cu[BLOCK_16x16].dct = dct16_c;
     p.cu[BLOCK_32x32].dct = dct32_c;
-    p.idst4x4 = idst4_c;
-    p.cu[BLOCK_4x4].idct   = idct4_c;
+    //p.idst4x4 = idst4_c;
+    //p.cu[BLOCK_4x4].idct   = idct4_c;
     p.cu[BLOCK_8x8].idct   = idct8_c;
     p.cu[BLOCK_16x16].idct = idct16_c;
     p.cu[BLOCK_32x32].idct = idct32_c;

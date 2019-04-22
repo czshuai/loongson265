@@ -974,6 +974,214 @@ _ZN12_GLOBAL__N_1L16cuTreeFix8UnpackEPdPti:
 	.align	3
 	.set	nomips16
 	.set	nomicromips
+	.ent	_ZL14fastForwardDstPKsPsi
+	.type	_ZL14fastForwardDstPKsPsi, @function
+_ZL14fastForwardDstPKsPsi:
+	.frame	$sp,16,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
+	.mask	0x10000000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	addiu	$2,$6,-1
+	li	$9,1			# 0x1
+	daddiu	$sp,$sp,-16
+	sll	$9,$9,$2
+	daddiu	$10,$4,32
+.L94:
+	lh	$3,0($4)
+	daddiu	$4,$4,8
+	daddiu	$5,$5,2
+	lh	$11,-2($4)
+	lh	$12,-6($4)
+	lh	$13,-4($4)
+	addu	$15,$3,$11
+	addu	$11,$11,$12
+	sll	$8,$15,3
+	lsa	$7,$11,$11,2
+	lsa	$2,$13,$13,3
+	subu	$8,$8,$15
+	lsa	$7,$7,$11,1
+	lsa	$2,$2,$13,2
+	lsa	$8,$8,$15,2
+	lsa	$7,$7,$7,2
+	sll	$13,$2,1
+	addu	$8,$8,$7
+	subu	$12,$3,$12
+	addu	$8,$8,$13
+	sll	$7,$12,3
+	addu	$8,$8,$9
+	lsa	$3,$12,$12,2
+	sra	$8,$8,$6
+	subu	$7,$7,$12
+	sh	$8,-2($5)
+	lsa	$2,$3,$12,1
+	lsa	$3,$7,$12,2
+	lh	$8,-8($4)
+	lsa	$14,$15,$15,2
+	sll	$24,$11,4
+	lh	$25,-6($4)
+	lsa	$14,$14,$15,1
+	subu	$15,$11,$24
+	lh	$12,-2($4)
+	lsa	$14,$14,$14,2
+	lsa	$2,$2,$2,2
+	lsa	$11,$15,$11,1
+	addu	$3,$3,$14
+	addu	$7,$8,$25
+	addu	$2,$2,$11
+	subu	$8,$7,$12
+	subu	$3,$3,$13
+	lsa	$7,$8,$8,3
+	addu	$2,$2,$13
+	lsa	$7,$7,$8,2
+	addu	$3,$3,$9
+	lsa	$7,$7,$9,1
+	addu	$2,$2,$9
+	sra	$7,$7,$6
+	sra	$3,$3,$6
+	sra	$2,$2,$6
+	sh	$7,6($5)
+	sh	$3,14($5)
+	bne	$10,$4,.L94
+	sh	$2,22($5)
+
+	jr	$31
+	daddiu	$sp,$sp,16
+
+	.set	macro
+	.set	reorder
+	.end	_ZL14fastForwardDstPKsPsi
+	.size	_ZL14fastForwardDstPKsPsi, .-_ZL14fastForwardDstPKsPsi
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZL10inversedstPKsPsi
+	.type	_ZL10inversedstPKsPsi, @function
+_ZL10inversedstPKsPsi:
+	.frame	$sp,48,$31		# vars= 0, regs= 5/0, args= 0, gp= 0
+	.mask	0x100f0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	addiu	$2,$6,-1
+	li	$7,1			# 0x1
+	daddiu	$sp,$sp,-48
+	sll	$7,$7,$2
+	daddiu	$13,$4,8
+	li	$12,32767			# 0x7fff
+	sd	$19,32($sp)
+	sd	$18,24($sp)
+	sd	$17,16($sp)
+	sd	$16,8($sp)
+.L102:
+	lh	$15,0($4)
+	li	$11,-32768			# 0xffffffffffff8000
+	li	$10,-32768			# 0xffffffffffff8000
+	lh	$24,16($4)
+	li	$9,-32768			# 0xffffffffffff8000
+	li	$8,-32768			# 0xffffffffffff8000
+	lh	$19,24($4)
+	lh	$25,8($4)
+	addu	$17,$15,$24
+	addu	$24,$24,$19
+	sll	$3,$17,3
+	lsa	$16,$24,$24,2
+	sll	$2,$24,4
+	subu	$3,$3,$17
+	lsa	$16,$16,$24,1
+	subu	$15,$15,$19
+	subu	$2,$24,$2
+	lsa	$3,$3,$17,2
+	lsa	$16,$16,$16,2
+	lsa	$24,$2,$24,1
+	lsa	$18,$17,$17,2
+	lsa	$14,$25,$25,3
+	addu	$3,$3,$16
+	lsa	$2,$15,$15,2
+	sll	$16,$15,3
+	lsa	$18,$18,$17,1
+	lsa	$14,$14,$25,2
+	lsa	$2,$2,$15,1
+	subu	$16,$16,$15
+	sll	$25,$14,1
+	lsa	$15,$16,$15,2
+	lsa	$18,$18,$18,2
+	lsa	$2,$2,$2,2
+	addu	$14,$18,$15
+	addu	$2,$2,$24
+	addu	$3,$3,$25
+	addu	$2,$2,$25
+	subu	$14,$14,$25
+	addu	$3,$3,$7
+	sra	$3,$3,$6
+	addu	$2,$2,$7
+	addu	$14,$14,$7
+	sra	$2,$2,$6
+	sra	$14,$14,$6
+	slt	$16,$3,-32768
+	slt	$25,$2,-32768
+	slt	$15,$14,-32768
+	slt	$18,$3,32767
+	slt	$17,$2,32767
+	slt	$24,$14,32767
+	seh	$3,$3
+	seh	$2,$2
+	bne	$16,$0,.L98
+	seh	$14,$14
+
+	movz	$3,$12,$18
+	move	$11,$3
+.L98:
+	bne	$25,$0,.L99
+	sh	$11,0($5)
+
+	movz	$2,$12,$17
+	move	$10,$2
+.L99:
+	sh	$10,2($5)
+	daddiu	$4,$4,2
+	lh	$10,14($4)
+	lh	$2,-2($4)
+	lh	$3,22($4)
+	subu	$2,$2,$10
+	addu	$3,$2,$3
+	lsa	$2,$3,$3,3
+	lsa	$2,$2,$3,2
+	lsa	$2,$2,$7,1
+	sra	$2,$2,$6
+	slt	$3,$2,-32768
+	bne	$3,$0,.L100
+	slt	$10,$2,32767
+
+	seh	$9,$2
+	movz	$9,$12,$10
+.L100:
+	bne	$15,$0,.L101
+	sh	$9,4($5)
+
+	move	$8,$14
+	movz	$8,$12,$24
+.L101:
+	sh	$8,6($5)
+	bne	$4,$13,.L102
+	daddiu	$5,$5,8
+
+	ld	$19,32($sp)
+	ld	$18,24($sp)
+	ld	$17,16($sp)
+	ld	$16,8($sp)
+	jr	$31
+	daddiu	$sp,$sp,48
+
+	.set	macro
+	.set	reorder
+	.end	_ZL10inversedstPKsPsi
+	.size	_ZL10inversedstPKsPsi, .-_ZL10inversedstPKsPsi
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
 	.ent	_ZN12_GLOBAL__N_114blockcopy_pp_cILi4ELi4EEEvPhlPKhl
 	.type	_ZN12_GLOBAL__N_114blockcopy_pp_cILi4ELi4EEEvPhlPKhl, @function
 _ZN12_GLOBAL__N_114blockcopy_pp_cILi4ELi4EEEvPhlPKhl:
@@ -983,20 +1191,20 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi4ELi4EEEvPhlPKhl:
 	.set	noreorder
 	.set	nomacro
 	li	$10,4			# 0x4
-.L95:
+.L115:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,4
-.L94:
+.L114:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L94
+	bne	$2,$9,.L114
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L95
+	bne	$10,$0,.L115
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -1022,7 +1230,7 @@ _ZN12_GLOBAL__N_16addAvgILi4ELi4EEEvPKsS2_Phlll:
 	dsll	$8,$8,1
 	li	$10,4			# 0x4
 	li	$3,255			# 0xff
-.L100:
+.L120:
 	lh	$11,0($4)
 	addiu	$10,$10,-1
 	lh	$2,0($5)
@@ -1066,7 +1274,7 @@ _ZN12_GLOBAL__N_16addAvgILi4ELi4EEEvPKsS2_Phlll:
 	slt	$11,$2,0
 	movn	$2,$0,$11
 	sb	$2,3($6)
-	bne	$10,$0,.L100
+	bne	$10,$0,.L120
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -1089,12 +1297,12 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi4ELi4EEEvPhlPKhlS3_li:
 	.set	noreorder
 	.set	nomacro
 	li	$14,4			# 0x4
-.L105:
+.L125:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,4
-.L104:
+.L124:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -1103,13 +1311,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi4ELi4EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L104
+	bne	$13,$3,.L124
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L105
+	bne	$14,$0,.L125
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -1133,21 +1341,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi8ELi8EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,8			# 0x8
 	.align	3
-.L111:
+.L131:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,8
 	.align	3
-.L110:
+.L130:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L110
+	bne	$2,$9,.L130
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L111
+	bne	$10,$0,.L131
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -1174,12 +1382,12 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi8EEEvPKsS2_Phlll:
 	li	$15,8			# 0x8
 	li	$12,255			# 0xff
 	.align	3
-.L117:
+.L137:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,16
-.L116:
+.L136:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -1202,13 +1410,13 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi8EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L116
+	bne	$14,$3,.L136
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L117
+	bne	$15,$0,.L137
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -1232,13 +1440,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi8ELi8EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,8			# 0x8
 	.align	3
-.L123:
+.L143:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,8
 	.align	3
-.L122:
+.L142:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -1247,13 +1455,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi8ELi8EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L122
+	bne	$13,$3,.L142
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L123
+	bne	$14,$0,.L143
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -1277,21 +1485,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi16ELi16EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,16			# 0x10
 	.align	3
-.L129:
+.L149:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,16
 	.align	3
-.L128:
+.L148:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L128
+	bne	$2,$9,.L148
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L129
+	bne	$10,$0,.L149
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -1318,13 +1526,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi16EEEvPKsS2_Phlll:
 	li	$15,16			# 0x10
 	li	$12,255			# 0xff
 	.align	3
-.L135:
+.L155:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,32
 	.align	3
-.L134:
+.L154:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -1347,13 +1555,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi16EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L134
+	bne	$14,$3,.L154
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L135
+	bne	$15,$0,.L155
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -1377,13 +1585,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi16EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,16			# 0x10
 	.align	3
-.L141:
+.L161:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,16
 	.align	3
-.L140:
+.L160:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -1392,13 +1600,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi16EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L140
+	bne	$13,$3,.L160
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L141
+	bne	$14,$0,.L161
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -1422,21 +1630,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi32ELi32EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,32			# 0x20
 	.align	3
-.L147:
+.L167:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,32
 	.align	3
-.L146:
+.L166:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L146
+	bne	$2,$9,.L166
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L147
+	bne	$10,$0,.L167
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -1463,13 +1671,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi32EEEvPKsS2_Phlll:
 	li	$15,32			# 0x20
 	li	$12,255			# 0xff
 	.align	3
-.L153:
+.L173:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,64
 	.align	3
-.L152:
+.L172:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -1492,13 +1700,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi32EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L152
+	bne	$14,$3,.L172
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L153
+	bne	$15,$0,.L173
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -1522,13 +1730,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi32ELi32EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,32			# 0x20
 	.align	3
-.L159:
+.L179:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,32
 	.align	3
-.L158:
+.L178:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -1537,13 +1745,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi32ELi32EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L158
+	bne	$13,$3,.L178
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L159
+	bne	$14,$0,.L179
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -1567,21 +1775,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi64ELi64EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,64			# 0x40
 	.align	3
-.L165:
+.L185:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,64
 	.align	3
-.L164:
+.L184:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L164
+	bne	$2,$9,.L184
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L165
+	bne	$10,$0,.L185
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -1608,13 +1816,13 @@ _ZN12_GLOBAL__N_16addAvgILi64ELi64EEEvPKsS2_Phlll:
 	li	$15,64			# 0x40
 	li	$12,255			# 0xff
 	.align	3
-.L171:
+.L191:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,128
 	.align	3
-.L170:
+.L190:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -1637,13 +1845,13 @@ _ZN12_GLOBAL__N_16addAvgILi64ELi64EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L170
+	bne	$14,$3,.L190
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L171
+	bne	$15,$0,.L191
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -1667,13 +1875,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi64ELi64EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,64			# 0x40
 	.align	3
-.L177:
+.L197:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,64
 	.align	3
-.L176:
+.L196:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -1682,13 +1890,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi64ELi64EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L176
+	bne	$13,$3,.L196
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L177
+	bne	$14,$0,.L197
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -1712,20 +1920,20 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi4ELi8EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,8			# 0x8
 	.align	3
-.L183:
+.L203:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,4
-.L182:
+.L202:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L182
+	bne	$2,$9,.L202
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L183
+	bne	$10,$0,.L203
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -1752,7 +1960,7 @@ _ZN12_GLOBAL__N_16addAvgILi4ELi8EEEvPKsS2_Phlll:
 	li	$10,8			# 0x8
 	li	$3,255			# 0xff
 	.align	3
-.L188:
+.L208:
 	lh	$11,0($4)
 	addiu	$10,$10,-1
 	lh	$2,0($5)
@@ -1796,7 +2004,7 @@ _ZN12_GLOBAL__N_16addAvgILi4ELi8EEEvPKsS2_Phlll:
 	slt	$11,$2,0
 	movn	$2,$0,$11
 	sb	$2,3($6)
-	bne	$10,$0,.L188
+	bne	$10,$0,.L208
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -1820,12 +2028,12 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi4ELi8EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,8			# 0x8
 	.align	3
-.L193:
+.L213:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,4
-.L192:
+.L212:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -1834,13 +2042,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi4ELi8EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L192
+	bne	$13,$3,.L212
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L193
+	bne	$14,$0,.L213
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -1863,21 +2071,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi8ELi4EEEvPhlPKhl:
 	.set	noreorder
 	.set	nomacro
 	li	$10,4			# 0x4
-.L199:
+.L219:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,8
 	.align	3
-.L198:
+.L218:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L198
+	bne	$2,$9,.L218
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L199
+	bne	$10,$0,.L219
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -1903,12 +2111,12 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi4EEEvPKsS2_Phlll:
 	dsll	$8,$8,1
 	li	$15,4			# 0x4
 	li	$12,255			# 0xff
-.L205:
+.L225:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,16
-.L204:
+.L224:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -1931,13 +2139,13 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi4EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L204
+	bne	$14,$3,.L224
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L205
+	bne	$15,$0,.L225
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -1960,13 +2168,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi8ELi4EEEvPhlPKhlS3_li:
 	.set	noreorder
 	.set	nomacro
 	li	$14,4			# 0x4
-.L211:
+.L231:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,8
 	.align	3
-.L210:
+.L230:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -1975,13 +2183,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi8ELi4EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L210
+	bne	$13,$3,.L230
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L211
+	bne	$14,$0,.L231
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -2005,21 +2213,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi16ELi8EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,8			# 0x8
 	.align	3
-.L217:
+.L237:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,16
 	.align	3
-.L216:
+.L236:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L216
+	bne	$2,$9,.L236
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L217
+	bne	$10,$0,.L237
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -2046,13 +2254,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi8EEEvPKsS2_Phlll:
 	li	$15,8			# 0x8
 	li	$12,255			# 0xff
 	.align	3
-.L223:
+.L243:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,32
 	.align	3
-.L222:
+.L242:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -2075,13 +2283,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi8EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L222
+	bne	$14,$3,.L242
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L223
+	bne	$15,$0,.L243
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -2105,13 +2313,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi8EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,8			# 0x8
 	.align	3
-.L229:
+.L249:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,16
 	.align	3
-.L228:
+.L248:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -2120,13 +2328,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi8EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L228
+	bne	$13,$3,.L248
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L229
+	bne	$14,$0,.L249
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -2150,21 +2358,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi8ELi16EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,16			# 0x10
 	.align	3
-.L235:
+.L255:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,8
 	.align	3
-.L234:
+.L254:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L234
+	bne	$2,$9,.L254
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L235
+	bne	$10,$0,.L255
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -2191,12 +2399,12 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi16EEEvPKsS2_Phlll:
 	li	$15,16			# 0x10
 	li	$12,255			# 0xff
 	.align	3
-.L241:
+.L261:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,16
-.L240:
+.L260:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -2219,13 +2427,13 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi16EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L240
+	bne	$14,$3,.L260
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L241
+	bne	$15,$0,.L261
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -2249,13 +2457,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi8ELi16EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,16			# 0x10
 	.align	3
-.L247:
+.L267:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,8
 	.align	3
-.L246:
+.L266:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -2264,13 +2472,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi8ELi16EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L246
+	bne	$13,$3,.L266
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L247
+	bne	$14,$0,.L267
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -2294,21 +2502,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi16ELi12EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,12			# 0xc
 	.align	3
-.L253:
+.L273:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,16
 	.align	3
-.L252:
+.L272:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L252
+	bne	$2,$9,.L272
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L253
+	bne	$10,$0,.L273
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -2335,13 +2543,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi12EEEvPKsS2_Phlll:
 	li	$15,12			# 0xc
 	li	$12,255			# 0xff
 	.align	3
-.L259:
+.L279:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,32
 	.align	3
-.L258:
+.L278:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -2364,13 +2572,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi12EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L258
+	bne	$14,$3,.L278
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L259
+	bne	$15,$0,.L279
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -2394,13 +2602,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi12EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,12			# 0xc
 	.align	3
-.L265:
+.L285:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,16
 	.align	3
-.L264:
+.L284:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -2409,13 +2617,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi12EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L264
+	bne	$13,$3,.L284
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L265
+	bne	$14,$0,.L285
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -2439,21 +2647,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi12ELi16EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,16			# 0x10
 	.align	3
-.L271:
+.L291:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,12
 	.align	3
-.L270:
+.L290:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L270
+	bne	$2,$9,.L290
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L271
+	bne	$10,$0,.L291
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -2480,13 +2688,13 @@ _ZN12_GLOBAL__N_16addAvgILi12ELi16EEEvPKsS2_Phlll:
 	li	$15,16			# 0x10
 	li	$12,255			# 0xff
 	.align	3
-.L277:
+.L297:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,24
 	.align	3
-.L276:
+.L296:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -2509,13 +2717,13 @@ _ZN12_GLOBAL__N_16addAvgILi12ELi16EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L276
+	bne	$14,$3,.L296
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L277
+	bne	$15,$0,.L297
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -2539,13 +2747,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi12ELi16EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,16			# 0x10
 	.align	3
-.L283:
+.L303:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,12
 	.align	3
-.L282:
+.L302:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -2554,13 +2762,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi12ELi16EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L282
+	bne	$13,$3,.L302
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L283
+	bne	$14,$0,.L303
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -2583,21 +2791,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi16ELi4EEEvPhlPKhl:
 	.set	noreorder
 	.set	nomacro
 	li	$10,4			# 0x4
-.L289:
+.L309:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,16
 	.align	3
-.L288:
+.L308:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L288
+	bne	$2,$9,.L308
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L289
+	bne	$10,$0,.L309
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -2623,13 +2831,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi4EEEvPKsS2_Phlll:
 	dsll	$8,$8,1
 	li	$15,4			# 0x4
 	li	$12,255			# 0xff
-.L295:
+.L315:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,32
 	.align	3
-.L294:
+.L314:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -2652,13 +2860,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi4EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L294
+	bne	$14,$3,.L314
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L295
+	bne	$15,$0,.L315
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -2681,13 +2889,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi4EEEvPhlPKhlS3_li:
 	.set	noreorder
 	.set	nomacro
 	li	$14,4			# 0x4
-.L301:
+.L321:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,16
 	.align	3
-.L300:
+.L320:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -2696,13 +2904,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi4EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L300
+	bne	$13,$3,.L320
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L301
+	bne	$14,$0,.L321
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -2726,20 +2934,20 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi4ELi16EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,16			# 0x10
 	.align	3
-.L307:
+.L327:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,4
-.L306:
+.L326:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L306
+	bne	$2,$9,.L326
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L307
+	bne	$10,$0,.L327
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -2766,7 +2974,7 @@ _ZN12_GLOBAL__N_16addAvgILi4ELi16EEEvPKsS2_Phlll:
 	li	$10,16			# 0x10
 	li	$3,255			# 0xff
 	.align	3
-.L312:
+.L332:
 	lh	$11,0($4)
 	addiu	$10,$10,-1
 	lh	$2,0($5)
@@ -2810,7 +3018,7 @@ _ZN12_GLOBAL__N_16addAvgILi4ELi16EEEvPKsS2_Phlll:
 	slt	$11,$2,0
 	movn	$2,$0,$11
 	sb	$2,3($6)
-	bne	$10,$0,.L312
+	bne	$10,$0,.L332
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -2834,12 +3042,12 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi4ELi16EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,16			# 0x10
 	.align	3
-.L317:
+.L337:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,4
-.L316:
+.L336:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -2848,13 +3056,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi4ELi16EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L316
+	bne	$13,$3,.L336
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L317
+	bne	$14,$0,.L337
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -2878,21 +3086,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi32ELi16EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,16			# 0x10
 	.align	3
-.L323:
+.L343:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,32
 	.align	3
-.L322:
+.L342:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L322
+	bne	$2,$9,.L342
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L323
+	bne	$10,$0,.L343
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -2919,13 +3127,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi16EEEvPKsS2_Phlll:
 	li	$15,16			# 0x10
 	li	$12,255			# 0xff
 	.align	3
-.L329:
+.L349:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,64
 	.align	3
-.L328:
+.L348:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -2948,13 +3156,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi16EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L328
+	bne	$14,$3,.L348
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L329
+	bne	$15,$0,.L349
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -2978,13 +3186,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi32ELi16EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,16			# 0x10
 	.align	3
-.L335:
+.L355:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,32
 	.align	3
-.L334:
+.L354:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -2993,13 +3201,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi32ELi16EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L334
+	bne	$13,$3,.L354
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L335
+	bne	$14,$0,.L355
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -3023,21 +3231,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi16ELi32EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,32			# 0x20
 	.align	3
-.L341:
+.L361:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,16
 	.align	3
-.L340:
+.L360:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L340
+	bne	$2,$9,.L360
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L341
+	bne	$10,$0,.L361
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -3064,13 +3272,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi32EEEvPKsS2_Phlll:
 	li	$15,32			# 0x20
 	li	$12,255			# 0xff
 	.align	3
-.L347:
+.L367:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,32
 	.align	3
-.L346:
+.L366:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -3093,13 +3301,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi32EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L346
+	bne	$14,$3,.L366
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L347
+	bne	$15,$0,.L367
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -3123,13 +3331,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi32EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,32			# 0x20
 	.align	3
-.L353:
+.L373:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,16
 	.align	3
-.L352:
+.L372:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -3138,13 +3346,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi32EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L352
+	bne	$13,$3,.L372
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L353
+	bne	$14,$0,.L373
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -3168,21 +3376,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi32ELi24EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,24			# 0x18
 	.align	3
-.L359:
+.L379:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,32
 	.align	3
-.L358:
+.L378:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L358
+	bne	$2,$9,.L378
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L359
+	bne	$10,$0,.L379
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -3209,13 +3417,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi24EEEvPKsS2_Phlll:
 	li	$15,24			# 0x18
 	li	$12,255			# 0xff
 	.align	3
-.L365:
+.L385:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,64
 	.align	3
-.L364:
+.L384:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -3238,13 +3446,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi24EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L364
+	bne	$14,$3,.L384
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L365
+	bne	$15,$0,.L385
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -3268,13 +3476,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi32ELi24EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,24			# 0x18
 	.align	3
-.L371:
+.L391:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,32
 	.align	3
-.L370:
+.L390:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -3283,13 +3491,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi32ELi24EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L370
+	bne	$13,$3,.L390
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L371
+	bne	$14,$0,.L391
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -3313,21 +3521,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi24ELi32EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,32			# 0x20
 	.align	3
-.L377:
+.L397:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,24
 	.align	3
-.L376:
+.L396:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L376
+	bne	$2,$9,.L396
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L377
+	bne	$10,$0,.L397
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -3354,13 +3562,13 @@ _ZN12_GLOBAL__N_16addAvgILi24ELi32EEEvPKsS2_Phlll:
 	li	$15,32			# 0x20
 	li	$12,255			# 0xff
 	.align	3
-.L383:
+.L403:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,48
 	.align	3
-.L382:
+.L402:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -3383,13 +3591,13 @@ _ZN12_GLOBAL__N_16addAvgILi24ELi32EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L382
+	bne	$14,$3,.L402
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L383
+	bne	$15,$0,.L403
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -3413,13 +3621,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi24ELi32EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,32			# 0x20
 	.align	3
-.L389:
+.L409:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,24
 	.align	3
-.L388:
+.L408:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -3428,13 +3636,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi24ELi32EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L388
+	bne	$13,$3,.L408
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L389
+	bne	$14,$0,.L409
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -3458,21 +3666,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi32ELi8EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,8			# 0x8
 	.align	3
-.L395:
+.L415:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,32
 	.align	3
-.L394:
+.L414:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L394
+	bne	$2,$9,.L414
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L395
+	bne	$10,$0,.L415
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -3499,13 +3707,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi8EEEvPKsS2_Phlll:
 	li	$15,8			# 0x8
 	li	$12,255			# 0xff
 	.align	3
-.L401:
+.L421:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,64
 	.align	3
-.L400:
+.L420:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -3528,13 +3736,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi8EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L400
+	bne	$14,$3,.L420
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L401
+	bne	$15,$0,.L421
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -3558,13 +3766,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi32ELi8EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,8			# 0x8
 	.align	3
-.L407:
+.L427:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,32
 	.align	3
-.L406:
+.L426:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -3573,13 +3781,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi32ELi8EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L406
+	bne	$13,$3,.L426
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L407
+	bne	$14,$0,.L427
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -3603,21 +3811,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi8ELi32EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,32			# 0x20
 	.align	3
-.L413:
+.L433:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,8
 	.align	3
-.L412:
+.L432:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L412
+	bne	$2,$9,.L432
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L413
+	bne	$10,$0,.L433
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -3644,12 +3852,12 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi32EEEvPKsS2_Phlll:
 	li	$15,32			# 0x20
 	li	$12,255			# 0xff
 	.align	3
-.L419:
+.L439:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,16
-.L418:
+.L438:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -3672,13 +3880,13 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi32EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L418
+	bne	$14,$3,.L438
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L419
+	bne	$15,$0,.L439
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -3702,13 +3910,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi8ELi32EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,32			# 0x20
 	.align	3
-.L425:
+.L445:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,8
 	.align	3
-.L424:
+.L444:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -3717,13 +3925,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi8ELi32EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L424
+	bne	$13,$3,.L444
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L425
+	bne	$14,$0,.L445
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -3747,21 +3955,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi64ELi32EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,32			# 0x20
 	.align	3
-.L431:
+.L451:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,64
 	.align	3
-.L430:
+.L450:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L430
+	bne	$2,$9,.L450
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L431
+	bne	$10,$0,.L451
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -3788,13 +3996,13 @@ _ZN12_GLOBAL__N_16addAvgILi64ELi32EEEvPKsS2_Phlll:
 	li	$15,32			# 0x20
 	li	$12,255			# 0xff
 	.align	3
-.L437:
+.L457:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,128
 	.align	3
-.L436:
+.L456:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -3817,13 +4025,13 @@ _ZN12_GLOBAL__N_16addAvgILi64ELi32EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L436
+	bne	$14,$3,.L456
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L437
+	bne	$15,$0,.L457
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -3847,13 +4055,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi64ELi32EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,32			# 0x20
 	.align	3
-.L443:
+.L463:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,64
 	.align	3
-.L442:
+.L462:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -3862,13 +4070,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi64ELi32EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L442
+	bne	$13,$3,.L462
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L443
+	bne	$14,$0,.L463
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -3892,21 +4100,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi32ELi64EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,64			# 0x40
 	.align	3
-.L449:
+.L469:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,32
 	.align	3
-.L448:
+.L468:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L448
+	bne	$2,$9,.L468
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L449
+	bne	$10,$0,.L469
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -3933,13 +4141,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi64EEEvPKsS2_Phlll:
 	li	$15,64			# 0x40
 	li	$12,255			# 0xff
 	.align	3
-.L455:
+.L475:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,64
 	.align	3
-.L454:
+.L474:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -3962,13 +4170,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi64EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L454
+	bne	$14,$3,.L474
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L455
+	bne	$15,$0,.L475
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -3992,13 +4200,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi32ELi64EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,64			# 0x40
 	.align	3
-.L461:
+.L481:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,32
 	.align	3
-.L460:
+.L480:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -4007,13 +4215,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi32ELi64EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L460
+	bne	$13,$3,.L480
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L461
+	bne	$14,$0,.L481
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -4037,21 +4245,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi64ELi48EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,48			# 0x30
 	.align	3
-.L467:
+.L487:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,64
 	.align	3
-.L466:
+.L486:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L466
+	bne	$2,$9,.L486
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L467
+	bne	$10,$0,.L487
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4078,13 +4286,13 @@ _ZN12_GLOBAL__N_16addAvgILi64ELi48EEEvPKsS2_Phlll:
 	li	$15,48			# 0x30
 	li	$12,255			# 0xff
 	.align	3
-.L473:
+.L493:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,128
 	.align	3
-.L472:
+.L492:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -4107,13 +4315,13 @@ _ZN12_GLOBAL__N_16addAvgILi64ELi48EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L472
+	bne	$14,$3,.L492
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L473
+	bne	$15,$0,.L493
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -4137,13 +4345,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi64ELi48EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,48			# 0x30
 	.align	3
-.L479:
+.L499:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,64
 	.align	3
-.L478:
+.L498:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -4152,13 +4360,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi64ELi48EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L478
+	bne	$13,$3,.L498
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L479
+	bne	$14,$0,.L499
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -4182,21 +4390,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi48ELi64EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,64			# 0x40
 	.align	3
-.L485:
+.L505:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,48
 	.align	3
-.L484:
+.L504:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L484
+	bne	$2,$9,.L504
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L485
+	bne	$10,$0,.L505
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4223,13 +4431,13 @@ _ZN12_GLOBAL__N_16addAvgILi48ELi64EEEvPKsS2_Phlll:
 	li	$15,64			# 0x40
 	li	$12,255			# 0xff
 	.align	3
-.L491:
+.L511:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,96
 	.align	3
-.L490:
+.L510:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -4252,13 +4460,13 @@ _ZN12_GLOBAL__N_16addAvgILi48ELi64EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L490
+	bne	$14,$3,.L510
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L491
+	bne	$15,$0,.L511
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -4282,13 +4490,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi48ELi64EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,64			# 0x40
 	.align	3
-.L497:
+.L517:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,48
 	.align	3
-.L496:
+.L516:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -4297,13 +4505,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi48ELi64EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L496
+	bne	$13,$3,.L516
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L497
+	bne	$14,$0,.L517
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -4327,21 +4535,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi64ELi16EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,16			# 0x10
 	.align	3
-.L503:
+.L523:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,64
 	.align	3
-.L502:
+.L522:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L502
+	bne	$2,$9,.L522
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L503
+	bne	$10,$0,.L523
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4368,13 +4576,13 @@ _ZN12_GLOBAL__N_16addAvgILi64ELi16EEEvPKsS2_Phlll:
 	li	$15,16			# 0x10
 	li	$12,255			# 0xff
 	.align	3
-.L509:
+.L529:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,128
 	.align	3
-.L508:
+.L528:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -4397,13 +4605,13 @@ _ZN12_GLOBAL__N_16addAvgILi64ELi16EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L508
+	bne	$14,$3,.L528
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L509
+	bne	$15,$0,.L529
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -4427,13 +4635,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi64ELi16EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,16			# 0x10
 	.align	3
-.L515:
+.L535:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,64
 	.align	3
-.L514:
+.L534:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -4442,13 +4650,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi64ELi16EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L514
+	bne	$13,$3,.L534
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L515
+	bne	$14,$0,.L535
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -4472,21 +4680,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi16ELi64EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,64			# 0x40
 	.align	3
-.L521:
+.L541:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,16
 	.align	3
-.L520:
+.L540:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L520
+	bne	$2,$9,.L540
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L521
+	bne	$10,$0,.L541
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4513,13 +4721,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi64EEEvPKsS2_Phlll:
 	li	$15,64			# 0x40
 	li	$12,255			# 0xff
 	.align	3
-.L527:
+.L547:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,32
 	.align	3
-.L526:
+.L546:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -4542,13 +4750,13 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi64EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L526
+	bne	$14,$3,.L546
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L527
+	bne	$15,$0,.L547
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -4572,13 +4780,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi64EEEvPhlPKhlS3_li:
 	.set	nomacro
 	li	$14,64			# 0x40
 	.align	3
-.L533:
+.L553:
 	move	$3,$6
 	move	$11,$8
 	move	$10,$4
 	daddiu	$13,$6,16
 	.align	3
-.L532:
+.L552:
 	daddiu	$11,$11,1
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -4587,13 +4795,13 @@ _ZN12_GLOBAL__N_111pixelavg_ppILi16ELi64EEEvPhlPKhlS3_li:
 	addu	$2,$2,$12
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$3,.L532
+	bne	$13,$3,.L552
 	sb	$2,-1($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$14,$0,.L533
+	bne	$14,$0,.L553
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -4618,11 +4826,11 @@ _ZN12_GLOBAL__N_13sadILi4ELi8EEEiPKhlS2_l:
 	li	$12,8			# 0x8
 	move	$10,$0
 	.align	3
-.L539:
+.L559:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,4
-.L538:
+.L558:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -4632,12 +4840,12 @@ _ZN12_GLOBAL__N_13sadILi4ELi8EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L538
+	bne	$11,$3,.L558
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L539
+	bne	$12,$0,.L559
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4661,12 +4869,12 @@ _ZN12_GLOBAL__N_13sadILi8ELi4EEEiPKhlS2_l:
 	.set	nomacro
 	li	$12,4			# 0x4
 	move	$10,$0
-.L545:
+.L565:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,8
 	.align	3
-.L544:
+.L564:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -4676,12 +4884,12 @@ _ZN12_GLOBAL__N_13sadILi8ELi4EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L544
+	bne	$11,$3,.L564
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L545
+	bne	$12,$0,.L565
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4706,12 +4914,12 @@ _ZN12_GLOBAL__N_13sadILi16ELi8EEEiPKhlS2_l:
 	li	$12,8			# 0x8
 	move	$10,$0
 	.align	3
-.L551:
+.L571:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,16
 	.align	3
-.L550:
+.L570:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -4721,12 +4929,12 @@ _ZN12_GLOBAL__N_13sadILi16ELi8EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L550
+	bne	$11,$3,.L570
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L551
+	bne	$12,$0,.L571
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4751,12 +4959,12 @@ _ZN12_GLOBAL__N_13sadILi8ELi16EEEiPKhlS2_l:
 	li	$12,16			# 0x10
 	move	$10,$0
 	.align	3
-.L557:
+.L577:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,8
 	.align	3
-.L556:
+.L576:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -4766,12 +4974,12 @@ _ZN12_GLOBAL__N_13sadILi8ELi16EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L556
+	bne	$11,$3,.L576
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L557
+	bne	$12,$0,.L577
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4796,12 +5004,12 @@ _ZN12_GLOBAL__N_13sadILi16ELi12EEEiPKhlS2_l:
 	li	$12,12			# 0xc
 	move	$10,$0
 	.align	3
-.L563:
+.L583:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,16
 	.align	3
-.L562:
+.L582:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -4811,12 +5019,12 @@ _ZN12_GLOBAL__N_13sadILi16ELi12EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L562
+	bne	$11,$3,.L582
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L563
+	bne	$12,$0,.L583
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4841,12 +5049,12 @@ _ZN12_GLOBAL__N_13sadILi12ELi16EEEiPKhlS2_l:
 	li	$12,16			# 0x10
 	move	$10,$0
 	.align	3
-.L569:
+.L589:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,12
 	.align	3
-.L568:
+.L588:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -4856,12 +5064,12 @@ _ZN12_GLOBAL__N_13sadILi12ELi16EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L568
+	bne	$11,$3,.L588
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L569
+	bne	$12,$0,.L589
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4885,12 +5093,12 @@ _ZN12_GLOBAL__N_13sadILi16ELi4EEEiPKhlS2_l:
 	.set	nomacro
 	li	$12,4			# 0x4
 	move	$10,$0
-.L575:
+.L595:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,16
 	.align	3
-.L574:
+.L594:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -4900,12 +5108,12 @@ _ZN12_GLOBAL__N_13sadILi16ELi4EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L574
+	bne	$11,$3,.L594
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L575
+	bne	$12,$0,.L595
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4930,11 +5138,11 @@ _ZN12_GLOBAL__N_13sadILi4ELi16EEEiPKhlS2_l:
 	li	$12,16			# 0x10
 	move	$10,$0
 	.align	3
-.L581:
+.L601:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,4
-.L580:
+.L600:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -4944,12 +5152,12 @@ _ZN12_GLOBAL__N_13sadILi4ELi16EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L580
+	bne	$11,$3,.L600
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L581
+	bne	$12,$0,.L601
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -4974,12 +5182,12 @@ _ZN12_GLOBAL__N_13sadILi32ELi16EEEiPKhlS2_l:
 	li	$12,16			# 0x10
 	move	$10,$0
 	.align	3
-.L587:
+.L607:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,32
 	.align	3
-.L586:
+.L606:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -4989,12 +5197,12 @@ _ZN12_GLOBAL__N_13sadILi32ELi16EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L586
+	bne	$11,$3,.L606
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L587
+	bne	$12,$0,.L607
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5019,12 +5227,12 @@ _ZN12_GLOBAL__N_13sadILi16ELi32EEEiPKhlS2_l:
 	li	$12,32			# 0x20
 	move	$10,$0
 	.align	3
-.L593:
+.L613:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,16
 	.align	3
-.L592:
+.L612:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5034,12 +5242,12 @@ _ZN12_GLOBAL__N_13sadILi16ELi32EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L592
+	bne	$11,$3,.L612
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L593
+	bne	$12,$0,.L613
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5064,12 +5272,12 @@ _ZN12_GLOBAL__N_13sadILi32ELi24EEEiPKhlS2_l:
 	li	$12,24			# 0x18
 	move	$10,$0
 	.align	3
-.L599:
+.L619:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,32
 	.align	3
-.L598:
+.L618:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5079,12 +5287,12 @@ _ZN12_GLOBAL__N_13sadILi32ELi24EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L598
+	bne	$11,$3,.L618
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L599
+	bne	$12,$0,.L619
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5109,12 +5317,12 @@ _ZN12_GLOBAL__N_13sadILi24ELi32EEEiPKhlS2_l:
 	li	$12,32			# 0x20
 	move	$10,$0
 	.align	3
-.L605:
+.L625:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,24
 	.align	3
-.L604:
+.L624:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5124,12 +5332,12 @@ _ZN12_GLOBAL__N_13sadILi24ELi32EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L604
+	bne	$11,$3,.L624
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L605
+	bne	$12,$0,.L625
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5154,12 +5362,12 @@ _ZN12_GLOBAL__N_13sadILi32ELi8EEEiPKhlS2_l:
 	li	$12,8			# 0x8
 	move	$10,$0
 	.align	3
-.L611:
+.L631:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,32
 	.align	3
-.L610:
+.L630:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5169,12 +5377,12 @@ _ZN12_GLOBAL__N_13sadILi32ELi8EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L610
+	bne	$11,$3,.L630
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L611
+	bne	$12,$0,.L631
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5199,12 +5407,12 @@ _ZN12_GLOBAL__N_13sadILi8ELi32EEEiPKhlS2_l:
 	li	$12,32			# 0x20
 	move	$10,$0
 	.align	3
-.L617:
+.L637:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,8
 	.align	3
-.L616:
+.L636:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5214,12 +5422,12 @@ _ZN12_GLOBAL__N_13sadILi8ELi32EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L616
+	bne	$11,$3,.L636
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L617
+	bne	$12,$0,.L637
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5244,12 +5452,12 @@ _ZN12_GLOBAL__N_13sadILi64ELi32EEEiPKhlS2_l:
 	li	$12,32			# 0x20
 	move	$10,$0
 	.align	3
-.L623:
+.L643:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,64
 	.align	3
-.L622:
+.L642:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5259,12 +5467,12 @@ _ZN12_GLOBAL__N_13sadILi64ELi32EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L622
+	bne	$11,$3,.L642
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L623
+	bne	$12,$0,.L643
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5289,12 +5497,12 @@ _ZN12_GLOBAL__N_13sadILi32ELi64EEEiPKhlS2_l:
 	li	$12,64			# 0x40
 	move	$10,$0
 	.align	3
-.L629:
+.L649:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,32
 	.align	3
-.L628:
+.L648:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5304,12 +5512,12 @@ _ZN12_GLOBAL__N_13sadILi32ELi64EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L628
+	bne	$11,$3,.L648
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L629
+	bne	$12,$0,.L649
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5334,12 +5542,12 @@ _ZN12_GLOBAL__N_13sadILi64ELi48EEEiPKhlS2_l:
 	li	$12,48			# 0x30
 	move	$10,$0
 	.align	3
-.L635:
+.L655:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,64
 	.align	3
-.L634:
+.L654:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5349,12 +5557,12 @@ _ZN12_GLOBAL__N_13sadILi64ELi48EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L634
+	bne	$11,$3,.L654
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L635
+	bne	$12,$0,.L655
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5379,12 +5587,12 @@ _ZN12_GLOBAL__N_13sadILi48ELi64EEEiPKhlS2_l:
 	li	$12,64			# 0x40
 	move	$10,$0
 	.align	3
-.L641:
+.L661:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,48
 	.align	3
-.L640:
+.L660:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5394,12 +5602,12 @@ _ZN12_GLOBAL__N_13sadILi48ELi64EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L640
+	bne	$11,$3,.L660
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L641
+	bne	$12,$0,.L661
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5424,12 +5632,12 @@ _ZN12_GLOBAL__N_13sadILi64ELi16EEEiPKhlS2_l:
 	li	$12,16			# 0x10
 	move	$10,$0
 	.align	3
-.L647:
+.L667:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,64
 	.align	3
-.L646:
+.L666:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5439,12 +5647,12 @@ _ZN12_GLOBAL__N_13sadILi64ELi16EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L646
+	bne	$11,$3,.L666
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L647
+	bne	$12,$0,.L667
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5469,12 +5677,12 @@ _ZN12_GLOBAL__N_13sadILi16ELi64EEEiPKhlS2_l:
 	li	$12,64			# 0x40
 	move	$10,$0
 	.align	3
-.L653:
+.L673:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,16
 	.align	3
-.L652:
+.L672:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -5484,12 +5692,12 @@ _ZN12_GLOBAL__N_13sadILi16ELi64EEEiPKhlS2_l:
 	xor	$2,$9,$2
 	subu	$2,$2,$9
 	addu	$2,$2,$10
-	bne	$11,$3,.L652
+	bne	$11,$3,.L672
 	move	$10,$2
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L653
+	bne	$12,$0,.L673
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -5520,13 +5728,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi4ELi4EEEvPKhS2_S2_S2_lPi:
 	daddiu	$25,$4,256
 	sw	$0,4($9)
 	sw	$0,8($9)
-.L659:
+.L679:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,4
-.L658:
+.L678:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -5554,13 +5762,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi4ELi4EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L658
+	bne	$24,$3,.L678
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L659
+	bne	$25,$4,.L679
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -5593,13 +5801,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi4ELi8EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L665:
+.L685:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,4
-.L664:
+.L684:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -5627,13 +5835,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi4ELi8EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L664
+	bne	$24,$3,.L684
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L665
+	bne	$25,$4,.L685
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -5665,14 +5873,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi8ELi4EEEvPKhS2_S2_S2_lPi:
 	daddiu	$25,$4,256
 	sw	$0,4($9)
 	sw	$0,8($9)
-.L671:
+.L691:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,8
 	.align	3
-.L670:
+.L690:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -5700,13 +5908,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi8ELi4EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L670
+	bne	$24,$3,.L690
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L671
+	bne	$25,$4,.L691
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -5739,14 +5947,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi8EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L677:
+.L697:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,16
 	.align	3
-.L676:
+.L696:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -5774,13 +5982,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi8EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L676
+	bne	$24,$3,.L696
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L677
+	bne	$25,$4,.L697
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -5813,14 +6021,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi8ELi16EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L683:
+.L703:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,8
 	.align	3
-.L682:
+.L702:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -5848,13 +6056,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi8ELi16EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L682
+	bne	$24,$3,.L702
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L683
+	bne	$25,$4,.L703
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -5887,14 +6095,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi12EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L689:
+.L709:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,16
 	.align	3
-.L688:
+.L708:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -5922,13 +6130,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi12EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L688
+	bne	$24,$3,.L708
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L689
+	bne	$25,$4,.L709
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -5961,14 +6169,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi12ELi16EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L695:
+.L715:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,12
 	.align	3
-.L694:
+.L714:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -5996,13 +6204,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi12ELi16EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L694
+	bne	$24,$3,.L714
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L695
+	bne	$25,$4,.L715
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6034,14 +6242,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi4EEEvPKhS2_S2_S2_lPi:
 	daddiu	$25,$4,256
 	sw	$0,4($9)
 	sw	$0,8($9)
-.L701:
+.L721:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,16
 	.align	3
-.L700:
+.L720:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -6069,13 +6277,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi4EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L700
+	bne	$24,$3,.L720
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L701
+	bne	$25,$4,.L721
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6108,13 +6316,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi4ELi16EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L707:
+.L727:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,4
-.L706:
+.L726:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -6142,13 +6350,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi4ELi16EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L706
+	bne	$24,$3,.L726
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L707
+	bne	$25,$4,.L727
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6181,14 +6389,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi32ELi16EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L713:
+.L733:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,32
 	.align	3
-.L712:
+.L732:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -6216,13 +6424,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi32ELi16EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L712
+	bne	$24,$3,.L732
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L713
+	bne	$25,$4,.L733
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6255,14 +6463,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi32EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L719:
+.L739:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,16
 	.align	3
-.L718:
+.L738:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -6290,13 +6498,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi32EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L718
+	bne	$24,$3,.L738
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L719
+	bne	$25,$4,.L739
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6329,14 +6537,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi32ELi24EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L725:
+.L745:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,32
 	.align	3
-.L724:
+.L744:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -6364,13 +6572,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi32ELi24EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L724
+	bne	$24,$3,.L744
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L725
+	bne	$25,$4,.L745
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6403,14 +6611,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi24ELi32EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L731:
+.L751:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,24
 	.align	3
-.L730:
+.L750:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -6438,13 +6646,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi24ELi32EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L730
+	bne	$24,$3,.L750
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L731
+	bne	$25,$4,.L751
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6477,14 +6685,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi32ELi8EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L737:
+.L757:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,32
 	.align	3
-.L736:
+.L756:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -6512,13 +6720,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi32ELi8EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L736
+	bne	$24,$3,.L756
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L737
+	bne	$25,$4,.L757
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6551,14 +6759,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi8ELi32EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L743:
+.L763:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,8
 	.align	3
-.L742:
+.L762:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -6586,13 +6794,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi8ELi32EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L742
+	bne	$24,$3,.L762
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L743
+	bne	$25,$4,.L763
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6624,13 +6832,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi64ELi32EEEvPKhS2_S2_S2_lPi:
 	move	$12,$0
 	sw	$0,8($9)
 	.align	3
-.L749:
+.L769:
 	move	$11,$5
 	move	$10,$6
 	move	$3,$7
 	daddiu	$15,$4,64
 	.align	3
-.L748:
+.L768:
 	daddiu	$11,$11,1
 	lbu	$2,0($4)
 	daddiu	$10,$10,1
@@ -6658,13 +6866,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi64ELi32EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$25,$2
 	subu	$2,$2,$25
 	addu	$14,$2,$14
-	bne	$15,$4,.L748
+	bne	$15,$4,.L768
 	sw	$14,8($9)
 
 	move	$4,$15
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$24,$15,.L749
+	bne	$24,$15,.L769
 	daddu	$7,$7,$8
 
 	jr	$31
@@ -6696,14 +6904,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi32ELi64EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L755:
+.L775:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,32
 	.align	3
-.L754:
+.L774:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -6731,13 +6939,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi32ELi64EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L754
+	bne	$24,$3,.L774
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L755
+	bne	$25,$4,.L775
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6769,13 +6977,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi64ELi48EEEvPKhS2_S2_S2_lPi:
 	move	$12,$0
 	sw	$0,8($9)
 	.align	3
-.L761:
+.L781:
 	move	$11,$5
 	move	$10,$6
 	move	$3,$7
 	daddiu	$15,$4,64
 	.align	3
-.L760:
+.L780:
 	daddiu	$11,$11,1
 	lbu	$2,0($4)
 	daddiu	$10,$10,1
@@ -6803,13 +7011,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi64ELi48EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$25,$2
 	subu	$2,$2,$25
 	addu	$14,$2,$14
-	bne	$15,$4,.L760
+	bne	$15,$4,.L780
 	sw	$14,8($9)
 
 	move	$4,$15
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$24,$15,.L761
+	bne	$24,$15,.L781
 	daddu	$7,$7,$8
 
 	jr	$31
@@ -6841,14 +7049,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi48ELi64EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L767:
+.L787:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,48
 	.align	3
-.L766:
+.L786:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -6876,13 +7084,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi48ELi64EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L766
+	bne	$24,$3,.L786
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L767
+	bne	$25,$4,.L787
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -6914,13 +7122,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi64ELi16EEEvPKhS2_S2_S2_lPi:
 	move	$12,$0
 	sw	$0,8($9)
 	.align	3
-.L773:
+.L793:
 	move	$11,$5
 	move	$10,$6
 	move	$3,$7
 	daddiu	$15,$4,64
 	.align	3
-.L772:
+.L792:
 	daddiu	$11,$11,1
 	lbu	$2,0($4)
 	daddiu	$10,$10,1
@@ -6948,13 +7156,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi64ELi16EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$25,$2
 	subu	$2,$2,$25
 	addu	$14,$2,$14
-	bne	$15,$4,.L772
+	bne	$15,$4,.L792
 	sw	$14,8($9)
 
 	move	$4,$15
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$24,$15,.L773
+	bne	$24,$15,.L793
 	daddu	$7,$7,$8
 
 	jr	$31
@@ -6986,14 +7194,14 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi64EEEvPKhS2_S2_S2_lPi:
 	sw	$0,4($9)
 	sw	$0,8($9)
 	.align	3
-.L779:
+.L799:
 	move	$3,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,16
 	.align	3
-.L778:
+.L798:
 	daddiu	$12,$12,1
 	lbu	$2,0($3)
 	daddiu	$11,$11,1
@@ -7021,13 +7229,13 @@ _ZN12_GLOBAL__N_16sad_x3ILi16ELi64EEEvPKhS2_S2_S2_lPi:
 	xor	$2,$16,$2
 	subu	$2,$2,$16
 	addu	$15,$2,$15
-	bne	$24,$3,.L778
+	bne	$24,$3,.L798
 	sw	$15,8($9)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L779
+	bne	$25,$4,.L799
 	daddu	$7,$7,$8
 
 	ld	$16,0($sp)
@@ -7064,14 +7272,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi4ELi4EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,4($10)
 	sw	$0,8($10)
 	sw	$0,12($10)
-.L785:
+.L805:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
 	move	$12,$7
 	move	$11,$8
 	daddiu	$17,$4,4
-.L784:
+.L804:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -7108,14 +7316,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi4ELi4EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L784
+	bne	$3,$17,.L804
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L785
+	bne	$4,$18,.L805
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -7156,14 +7364,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi4ELi8EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L791:
+.L811:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
 	move	$12,$7
 	move	$11,$8
 	daddiu	$17,$4,4
-.L790:
+.L810:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -7200,14 +7408,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi4ELi8EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L790
+	bne	$3,$17,.L810
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L791
+	bne	$4,$18,.L811
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -7247,7 +7455,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi8ELi4EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,4($10)
 	sw	$0,8($10)
 	sw	$0,12($10)
-.L797:
+.L817:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
@@ -7255,7 +7463,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi8ELi4EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$17,$4,8
 	.align	3
-.L796:
+.L816:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -7292,14 +7500,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi8ELi4EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L796
+	bne	$3,$17,.L816
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L797
+	bne	$4,$18,.L817
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -7340,7 +7548,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi8EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L803:
+.L823:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
@@ -7348,7 +7556,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi8EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$17,$4,16
 	.align	3
-.L802:
+.L822:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -7385,14 +7593,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi8EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L802
+	bne	$3,$17,.L822
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L803
+	bne	$4,$18,.L823
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -7433,7 +7641,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi8ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L809:
+.L829:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
@@ -7441,7 +7649,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi8ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$17,$4,8
 	.align	3
-.L808:
+.L828:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -7478,14 +7686,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi8ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L808
+	bne	$3,$17,.L828
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L809
+	bne	$4,$18,.L829
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -7526,7 +7734,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi12EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L815:
+.L835:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
@@ -7534,7 +7742,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi12EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$17,$4,16
 	.align	3
-.L814:
+.L834:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -7571,14 +7779,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi12EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L814
+	bne	$3,$17,.L834
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L815
+	bne	$4,$18,.L835
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -7619,7 +7827,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi12ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L821:
+.L841:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
@@ -7627,7 +7835,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi12ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$17,$4,12
 	.align	3
-.L820:
+.L840:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -7664,14 +7872,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi12ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L820
+	bne	$3,$17,.L840
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L821
+	bne	$4,$18,.L841
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -7711,7 +7919,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi4EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,4($10)
 	sw	$0,8($10)
 	sw	$0,12($10)
-.L827:
+.L847:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
@@ -7719,7 +7927,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi4EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$17,$4,16
 	.align	3
-.L826:
+.L846:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -7756,14 +7964,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi4EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L826
+	bne	$3,$17,.L846
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L827
+	bne	$4,$18,.L847
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -7804,14 +8012,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi4ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L833:
+.L853:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
 	move	$12,$7
 	move	$11,$8
 	daddiu	$17,$4,4
-.L832:
+.L852:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -7848,14 +8056,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi4ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L832
+	bne	$3,$17,.L852
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L833
+	bne	$4,$18,.L853
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -7898,7 +8106,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L839:
+.L859:
 	move	$3,$16
 	move	$14,$17
 	move	$13,$6
@@ -7906,7 +8114,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$5,$16,32
 	.align	3
-.L838:
+.L858:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -7943,14 +8151,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$4,$2,$4
-	bne	$3,$5,.L838
+	bne	$3,$5,.L858
 	sw	$4,12($10)
 
 	daddiu	$16,$16,64
 	daddu	$17,$17,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$16,$18,.L839
+	bne	$16,$18,.L859
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -7993,7 +8201,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L845:
+.L865:
 	move	$3,$16
 	move	$14,$17
 	move	$13,$6
@@ -8001,7 +8209,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$5,$16,16
 	.align	3
-.L844:
+.L864:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -8038,14 +8246,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$4,$2,$4
-	bne	$3,$5,.L844
+	bne	$3,$5,.L864
 	sw	$4,12($10)
 
 	daddiu	$16,$16,64
 	daddu	$17,$17,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$16,$18,.L845
+	bne	$16,$18,.L865
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -8088,7 +8296,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi24EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L851:
+.L871:
 	move	$3,$16
 	move	$14,$17
 	move	$13,$6
@@ -8096,7 +8304,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi24EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$5,$16,32
 	.align	3
-.L850:
+.L870:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -8133,14 +8341,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi24EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$4,$2,$4
-	bne	$3,$5,.L850
+	bne	$3,$5,.L870
 	sw	$4,12($10)
 
 	daddiu	$16,$16,64
 	daddu	$17,$17,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$16,$18,.L851
+	bne	$16,$18,.L871
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -8183,7 +8391,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi24ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L857:
+.L877:
 	move	$3,$16
 	move	$14,$17
 	move	$13,$6
@@ -8191,7 +8399,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi24ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$5,$16,24
 	.align	3
-.L856:
+.L876:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -8228,14 +8436,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi24ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$4,$2,$4
-	bne	$3,$5,.L856
+	bne	$3,$5,.L876
 	sw	$4,12($10)
 
 	daddiu	$16,$16,64
 	daddu	$17,$17,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$16,$18,.L857
+	bne	$16,$18,.L877
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -8276,7 +8484,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi8EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L863:
+.L883:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
@@ -8284,7 +8492,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi8EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$17,$4,32
 	.align	3
-.L862:
+.L882:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -8321,14 +8529,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi8EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L862
+	bne	$3,$17,.L882
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L863
+	bne	$4,$18,.L883
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -8369,7 +8577,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi8ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L869:
+.L889:
 	move	$3,$4
 	move	$14,$5
 	move	$13,$6
@@ -8377,7 +8585,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi8ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$17,$4,8
 	.align	3
-.L868:
+.L888:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -8414,14 +8622,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi8ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$16,$2,$16
-	bne	$3,$17,.L868
+	bne	$3,$17,.L888
 	sw	$16,12($10)
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$4,$18,.L869
+	bne	$4,$18,.L889
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -8462,14 +8670,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi64ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L875:
+.L895:
 	move	$13,$16
 	move	$12,$6
 	move	$11,$7
 	move	$3,$8
 	daddiu	$5,$4,64
 	.align	3
-.L874:
+.L894:
 	daddiu	$13,$13,1
 	lbu	$2,0($4)
 	daddiu	$12,$12,1
@@ -8506,14 +8714,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi64ELi32EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$18,$2
 	subu	$2,$2,$18
 	addu	$25,$2,$25
-	bne	$5,$4,.L874
+	bne	$5,$4,.L894
 	sw	$25,12($10)
 
 	move	$4,$5
 	daddu	$16,$16,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$5,$17,.L875
+	bne	$5,$17,.L895
 	daddu	$8,$8,$9
 
 	ld	$18,16($sp)
@@ -8555,7 +8763,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L881:
+.L901:
 	move	$3,$16
 	move	$14,$17
 	move	$13,$6
@@ -8563,7 +8771,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$5,$16,32
 	.align	3
-.L880:
+.L900:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -8600,14 +8808,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi32ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$4,$2,$4
-	bne	$3,$5,.L880
+	bne	$3,$5,.L900
 	sw	$4,12($10)
 
 	daddiu	$16,$16,64
 	daddu	$17,$17,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$16,$18,.L881
+	bne	$16,$18,.L901
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -8648,14 +8856,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi64ELi48EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L887:
+.L907:
 	move	$13,$16
 	move	$12,$6
 	move	$11,$7
 	move	$3,$8
 	daddiu	$5,$4,64
 	.align	3
-.L886:
+.L906:
 	daddiu	$13,$13,1
 	lbu	$2,0($4)
 	daddiu	$12,$12,1
@@ -8692,14 +8900,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi64ELi48EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$18,$2
 	subu	$2,$2,$18
 	addu	$25,$2,$25
-	bne	$5,$4,.L886
+	bne	$5,$4,.L906
 	sw	$25,12($10)
 
 	move	$4,$5
 	daddu	$16,$16,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$5,$17,.L887
+	bne	$5,$17,.L907
 	daddu	$8,$8,$9
 
 	ld	$18,16($sp)
@@ -8741,7 +8949,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi48ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L893:
+.L913:
 	move	$3,$16
 	move	$14,$17
 	move	$13,$6
@@ -8749,7 +8957,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi48ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$5,$16,48
 	.align	3
-.L892:
+.L912:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -8786,14 +8994,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi48ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$4,$2,$4
-	bne	$3,$5,.L892
+	bne	$3,$5,.L912
 	sw	$4,12($10)
 
 	daddiu	$16,$16,64
 	daddu	$17,$17,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$16,$18,.L893
+	bne	$16,$18,.L913
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -8834,14 +9042,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi64ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L899:
+.L919:
 	move	$13,$16
 	move	$12,$6
 	move	$11,$7
 	move	$3,$8
 	daddiu	$5,$4,64
 	.align	3
-.L898:
+.L918:
 	daddiu	$13,$13,1
 	lbu	$2,0($4)
 	daddiu	$12,$12,1
@@ -8878,14 +9086,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi64ELi16EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$18,$2
 	subu	$2,$2,$18
 	addu	$25,$2,$25
-	bne	$5,$4,.L898
+	bne	$5,$4,.L918
 	sw	$25,12($10)
 
 	move	$4,$5
 	daddu	$16,$16,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$5,$17,.L899
+	bne	$5,$17,.L919
 	daddu	$8,$8,$9
 
 	ld	$18,16($sp)
@@ -8927,7 +9135,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	sw	$0,8($10)
 	sw	$0,12($10)
 	.align	3
-.L905:
+.L925:
 	move	$3,$16
 	move	$14,$17
 	move	$13,$6
@@ -8935,7 +9143,7 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	move	$11,$8
 	daddiu	$5,$16,16
 	.align	3
-.L904:
+.L924:
 	daddiu	$14,$14,1
 	lbu	$2,0($3)
 	daddiu	$13,$13,1
@@ -8972,14 +9180,14 @@ _ZN12_GLOBAL__N_16sad_x4ILi16ELi64EEEvPKhS2_S2_S2_S2_lPi:
 	xor	$2,$19,$2
 	subu	$2,$2,$19
 	addu	$4,$2,$4
-	bne	$3,$5,.L904
+	bne	$3,$5,.L924
 	sw	$4,12($10)
 
 	daddiu	$16,$16,64
 	daddu	$17,$17,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$16,$18,.L905
+	bne	$16,$18,.L925
 	daddu	$8,$8,$9
 
 	ld	$19,32($sp)
@@ -9005,14 +9213,14 @@ _ZN12_GLOBAL__N_16ads_x1ILi4ELi4EEEiPiPjiPtPsii:
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	blez	$9,.L913
+	blez	$9,.L933
 	move	$6,$0
 
 	lw	$14,0($4)
 	move	$2,$0
 	move	$4,$0
 	.align	3
-.L912:
+.L932:
 	lwu	$3,0($5)
 	dlsa	$4,$4,$7,1
 	addiu	$11,$6,1
@@ -9025,22 +9233,22 @@ _ZN12_GLOBAL__N_16ads_x1ILi4ELi4EEEiPiPjiPtPsii:
 	sll	$3,$3,0
 	addu	$3,$3,$12
 	slt	$3,$3,$10
-	beq	$3,$0,.L911
+	beq	$3,$0,.L931
 	dlsa	$13,$2,$8,1
 
 	addiu	$2,$2,1
 	sh	$6,0($13)
-.L911:
+.L931:
 	seh	$6,$11
 	slt	$3,$6,$9
-	bne	$3,$0,.L912
+	bne	$3,$0,.L932
 	move	$4,$6
 
 	jr	$31
 	nop
 
 	.align	3
-.L913:
+.L933:
 	jr	$31
 	move	$2,$0
 
@@ -9085,7 +9293,7 @@ _ZN12_GLOBAL__N_16ads_x2ILi8ELi4EEEiPiPjiPtPsii:
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	blez	$9,.L922
+	blez	$9,.L942
 	dlsa	$6,$6,$5,2
 
 	daddiu	$sp,$sp,-16
@@ -9096,7 +9304,7 @@ _ZN12_GLOBAL__N_16ads_x2ILi8ELi4EEEiPiPjiPtPsii:
 	move	$4,$0
 	sd	$16,0($sp)
 	.align	3
-.L921:
+.L941:
 	dlsa	$11,$4,$7,1
 	lwu	$3,0($5)
 	addiu	$15,$12,1
@@ -9116,15 +9324,15 @@ _ZN12_GLOBAL__N_16ads_x2ILi8ELi4EEEiPiPjiPtPsii:
 	sll	$3,$3,0
 	addu	$3,$3,$16
 	slt	$3,$3,$10
-	beq	$3,$0,.L920
+	beq	$3,$0,.L940
 	dlsa	$24,$2,$8,1
 
 	addiu	$2,$2,1
 	sh	$12,0($24)
-.L920:
+.L940:
 	seh	$12,$15
 	slt	$3,$12,$9
-	bne	$3,$0,.L921
+	bne	$3,$0,.L941
 	move	$4,$12
 
 	ld	$16,0($sp)
@@ -9132,7 +9340,7 @@ _ZN12_GLOBAL__N_16ads_x2ILi8ELi4EEEiPiPjiPtPsii:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L922:
+.L942:
 	jr	$31
 	move	$2,$0
 
@@ -9177,7 +9385,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi16ELi16EEEiPiPjiPtPsii:
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	blez	$9,.L934
+	blez	$9,.L954
 	dsll	$11,$6,2
 
 	daddiu	$sp,$sp,-80
@@ -9201,7 +9409,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi16ELi16EEEiPiPjiPtPsii:
 	sd	$19,24($sp)
 	sd	$18,16($sp)
 	.align	3
-.L933:
+.L953:
 	lwu	$3,0($5)
 	dlsa	$4,$4,$7,1
 	addiu	$14,$12,1
@@ -9234,15 +9442,15 @@ _ZN12_GLOBAL__N_16ads_x4ILi16ELi16EEEiPiPjiPtPsii:
 	sll	$3,$3,0
 	addu	$3,$3,$19
 	slt	$3,$3,$10
-	beq	$3,$0,.L932
+	beq	$3,$0,.L952
 	daddiu	$11,$11,4
 
 	addiu	$2,$2,1
 	sh	$12,0($15)
-.L932:
+.L952:
 	seh	$12,$14
 	slt	$3,$12,$9
-	bne	$3,$0,.L933
+	bne	$3,$0,.L953
 	move	$4,$12
 
 	ld	$fp,72($sp)
@@ -9258,7 +9466,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi16ELi16EEEiPiPjiPtPsii:
 	daddiu	$sp,$sp,80
 
 	.align	3
-.L934:
+.L954:
 	jr	$31
 	move	$2,$0
 
@@ -9428,7 +9636,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi32ELi32EEEiPiPjiPtPsii:
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	blez	$9,.L956
+	blez	$9,.L976
 	dsll	$11,$6,2
 
 	daddiu	$sp,$sp,-80
@@ -9452,7 +9660,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi32ELi32EEEiPiPjiPtPsii:
 	sd	$19,24($sp)
 	sd	$18,16($sp)
 	.align	3
-.L955:
+.L975:
 	lwu	$3,0($5)
 	dlsa	$4,$4,$7,1
 	addiu	$14,$12,1
@@ -9485,15 +9693,15 @@ _ZN12_GLOBAL__N_16ads_x4ILi32ELi32EEEiPiPjiPtPsii:
 	sll	$3,$3,0
 	addu	$3,$3,$19
 	slt	$3,$3,$10
-	beq	$3,$0,.L954
+	beq	$3,$0,.L974
 	daddiu	$11,$11,4
 
 	addiu	$2,$2,1
 	sh	$12,0($15)
-.L954:
+.L974:
 	seh	$12,$14
 	slt	$3,$12,$9
-	bne	$3,$0,.L955
+	bne	$3,$0,.L975
 	move	$4,$12
 
 	ld	$fp,72($sp)
@@ -9509,7 +9717,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi32ELi32EEEiPiPjiPtPsii:
 	daddiu	$sp,$sp,80
 
 	.align	3
-.L956:
+.L976:
 	jr	$31
 	move	$2,$0
 
@@ -9604,7 +9812,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi24ELi32EEEiPiPjiPtPsii:
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	blez	$9,.L972
+	blez	$9,.L992
 	dsll	$11,$6,2
 
 	daddiu	$sp,$sp,-80
@@ -9628,7 +9836,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi24ELi32EEEiPiPjiPtPsii:
 	sd	$19,24($sp)
 	sd	$18,16($sp)
 	.align	3
-.L971:
+.L991:
 	lwu	$3,0($5)
 	dlsa	$4,$4,$7,1
 	addiu	$14,$12,1
@@ -9661,15 +9869,15 @@ _ZN12_GLOBAL__N_16ads_x4ILi24ELi32EEEiPiPjiPtPsii:
 	sll	$3,$3,0
 	addu	$3,$3,$19
 	slt	$3,$3,$10
-	beq	$3,$0,.L970
+	beq	$3,$0,.L990
 	daddiu	$11,$11,4
 
 	addiu	$2,$2,1
 	sh	$12,0($15)
-.L970:
+.L990:
 	seh	$12,$14
 	slt	$3,$12,$9
-	bne	$3,$0,.L971
+	bne	$3,$0,.L991
 	move	$4,$12
 
 	ld	$fp,72($sp)
@@ -9685,7 +9893,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi24ELi32EEEiPiPjiPtPsii:
 	daddiu	$sp,$sp,80
 
 	.align	3
-.L972:
+.L992:
 	jr	$31
 	move	$2,$0
 
@@ -9730,7 +9938,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi8ELi32EEEiPiPjiPtPsii:
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	blez	$9,.L984
+	blez	$9,.L1004
 	dsll	$11,$6,2
 
 	daddiu	$sp,$sp,-80
@@ -9754,7 +9962,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi8ELi32EEEiPiPjiPtPsii:
 	sd	$19,24($sp)
 	sd	$18,16($sp)
 	.align	3
-.L983:
+.L1003:
 	lwu	$3,0($5)
 	dlsa	$4,$4,$7,1
 	addiu	$14,$12,1
@@ -9787,15 +9995,15 @@ _ZN12_GLOBAL__N_16ads_x4ILi8ELi32EEEiPiPjiPtPsii:
 	sll	$3,$3,0
 	addu	$3,$3,$19
 	slt	$3,$3,$10
-	beq	$3,$0,.L982
+	beq	$3,$0,.L1002
 	daddiu	$11,$11,4
 
 	addiu	$2,$2,1
 	sh	$12,0($15)
-.L982:
+.L1002:
 	seh	$12,$14
 	slt	$3,$12,$9
-	bne	$3,$0,.L983
+	bne	$3,$0,.L1003
 	move	$4,$12
 
 	ld	$fp,72($sp)
@@ -9811,7 +10019,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi8ELi32EEEiPiPjiPtPsii:
 	daddiu	$sp,$sp,80
 
 	.align	3
-.L984:
+.L1004:
 	jr	$31
 	move	$2,$0
 
@@ -9831,7 +10039,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi64ELi64EEEiPiPjiPtPsii:
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	blez	$9,.L994
+	blez	$9,.L1014
 	dsll	$11,$6,2
 
 	daddiu	$sp,$sp,-80
@@ -9855,7 +10063,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi64ELi64EEEiPiPjiPtPsii:
 	sd	$19,24($sp)
 	sd	$18,16($sp)
 	.align	3
-.L993:
+.L1013:
 	lwu	$3,0($5)
 	dlsa	$4,$4,$7,1
 	addiu	$14,$12,1
@@ -9888,15 +10096,15 @@ _ZN12_GLOBAL__N_16ads_x4ILi64ELi64EEEiPiPjiPtPsii:
 	sll	$3,$3,0
 	addu	$3,$3,$19
 	slt	$3,$3,$10
-	beq	$3,$0,.L992
+	beq	$3,$0,.L1012
 	daddiu	$11,$11,4
 
 	addiu	$2,$2,1
 	sh	$12,0($15)
-.L992:
+.L1012:
 	seh	$12,$14
 	slt	$3,$12,$9
-	bne	$3,$0,.L993
+	bne	$3,$0,.L1013
 	move	$4,$12
 
 	ld	$fp,72($sp)
@@ -9912,7 +10120,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi64ELi64EEEiPiPjiPtPsii:
 	daddiu	$sp,$sp,80
 
 	.align	3
-.L994:
+.L1014:
 	jr	$31
 	move	$2,$0
 
@@ -10007,7 +10215,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi48ELi64EEEiPiPjiPtPsii:
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	blez	$9,.L1010
+	blez	$9,.L1030
 	dsll	$11,$6,2
 
 	daddiu	$sp,$sp,-80
@@ -10031,7 +10239,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi48ELi64EEEiPiPjiPtPsii:
 	sd	$19,24($sp)
 	sd	$18,16($sp)
 	.align	3
-.L1009:
+.L1029:
 	lwu	$3,0($5)
 	dlsa	$4,$4,$7,1
 	addiu	$14,$12,1
@@ -10064,15 +10272,15 @@ _ZN12_GLOBAL__N_16ads_x4ILi48ELi64EEEiPiPjiPtPsii:
 	sll	$3,$3,0
 	addu	$3,$3,$19
 	slt	$3,$3,$10
-	beq	$3,$0,.L1008
+	beq	$3,$0,.L1028
 	daddiu	$11,$11,4
 
 	addiu	$2,$2,1
 	sh	$12,0($15)
-.L1008:
+.L1028:
 	seh	$12,$14
 	slt	$3,$12,$9
-	bne	$3,$0,.L1009
+	bne	$3,$0,.L1029
 	move	$4,$12
 
 	ld	$fp,72($sp)
@@ -10088,7 +10296,7 @@ _ZN12_GLOBAL__N_16ads_x4ILi48ELi64EEEiPiPjiPtPsii:
 	daddiu	$sp,$sp,80
 
 	.align	3
-.L1010:
+.L1030:
 	jr	$31
 	move	$2,$0
 
@@ -10160,20 +10368,20 @@ _ZN12_GLOBAL__N_114blockcopy_sp_cILi4ELi4EEEvPhlPKsl:
 	.set	nomacro
 	dsll	$7,$7,1
 	li	$10,4			# 0x4
-.L1022:
+.L1042:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,8
-.L1021:
+.L1041:
 	lhu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1021
+	bne	$2,$9,.L1041
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1022
+	bne	$10,$0,.L1042
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -10197,20 +10405,20 @@ _ZN12_GLOBAL__N_114blockcopy_ps_cILi4ELi4EEEvPslPKhl:
 	.set	nomacro
 	dsll	$5,$5,1
 	li	$10,4			# 0x4
-.L1028:
+.L1048:
 	move	$3,$6
 	move	$2,$4
 	daddiu	$9,$4,8
-.L1027:
+.L1047:
 	lbu	$8,0($3)
 	daddiu	$2,$2,2
 	daddiu	$3,$3,1
-	bne	$2,$9,.L1027
+	bne	$2,$9,.L1047
 	sh	$8,-2($2)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1028
+	bne	$10,$0,.L1048
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -10234,20 +10442,20 @@ _ZN12_GLOBAL__N_113cpy2Dto1D_shlILi4EEEvPsPKsli:
 	.set	nomacro
 	dsll	$6,$6,1
 	daddiu	$10,$4,32
-.L1034:
+.L1054:
 	move	$2,$5
 	move	$8,$4
 	daddiu	$9,$5,8
-.L1033:
+.L1053:
 	lh	$3,0($2)
 	daddiu	$8,$8,2
 	daddiu	$2,$2,2
 	sll	$3,$3,$7
-	bne	$2,$9,.L1033
+	bne	$2,$9,.L1053
 	sh	$3,-2($8)
 
 	daddiu	$4,$4,8
-	bne	$10,$4,.L1034
+	bne	$10,$4,.L1054
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -10275,21 +10483,21 @@ _ZN12_GLOBAL__N_113cpy2Dto1D_shrILi4EEEvPsPKsli:
 	dsll	$6,$6,1
 	seh	$9,$9
 	daddiu	$11,$4,32
-.L1040:
+.L1060:
 	move	$3,$5
 	move	$8,$4
 	daddiu	$10,$5,8
-.L1039:
+.L1059:
 	lh	$2,0($3)
 	daddiu	$8,$8,2
 	daddiu	$3,$3,2
 	addu	$2,$2,$9
 	sra	$2,$2,$7
-	bne	$10,$3,.L1039
+	bne	$10,$3,.L1059
 	sh	$2,-2($8)
 
 	daddiu	$4,$4,8
-	bne	$11,$4,.L1040
+	bne	$11,$4,.L1060
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -10313,19 +10521,19 @@ _ZN12_GLOBAL__N_113cpy1Dto2D_shlILi4EEEvPsPKsli:
 	.set	nomacro
 	dsll	$6,$6,1
 	daddiu	$9,$5,32
-.L1046:
+.L1066:
 	move	$3,$4
 	daddiu	$8,$5,8
-.L1045:
+.L1065:
 	lh	$2,0($5)
 	daddiu	$3,$3,2
 	daddiu	$5,$5,2
 	sll	$2,$2,$7
-	bne	$8,$5,.L1045
+	bne	$8,$5,.L1065
 	sh	$2,-2($3)
 
 	move	$5,$8
-	bne	$9,$8,.L1046
+	bne	$9,$8,.L1066
 	daddu	$4,$4,$6
 
 	jr	$31
@@ -10353,20 +10561,20 @@ _ZN12_GLOBAL__N_113cpy1Dto2D_shrILi4EEEvPsPKsli:
 	dsll	$6,$6,1
 	seh	$9,$9
 	daddiu	$10,$5,32
-.L1052:
+.L1072:
 	move	$3,$4
 	daddiu	$8,$5,8
-.L1051:
+.L1071:
 	lh	$2,0($5)
 	daddiu	$3,$3,2
 	daddiu	$5,$5,2
 	addu	$2,$2,$9
 	sra	$2,$2,$7
-	bne	$8,$5,.L1051
+	bne	$8,$5,.L1071
 	sh	$2,-2($3)
 
 	move	$5,$8
-	bne	$10,$8,.L1052
+	bne	$10,$8,.L1072
 	daddu	$4,$4,$6
 
 	jr	$31
@@ -10389,17 +10597,17 @@ _ZN12_GLOBAL__N_19transposeILi4EEEvPhPKhl:
 	.set	noreorder
 	.set	nomacro
 	daddiu	$8,$4,16
-.L1058:
+.L1078:
 	daddiu	$7,$4,4
 	move	$2,$5
-.L1057:
+.L1077:
 	lbu	$3,0($2)
 	daddiu	$4,$4,1
 	daddu	$2,$2,$6
-	bne	$4,$7,.L1057
+	bne	$4,$7,.L1077
 	sb	$3,-1($4)
 
-	bne	$4,$8,.L1058
+	bne	$4,$8,.L1078
 	daddiu	$5,$5,1
 
 	jr	$31
@@ -10424,20 +10632,20 @@ _ZN12_GLOBAL__N_113pixel_ssd_s_cILi4EEEjPKsl:
 	dsll	$5,$5,1
 	li	$8,4			# 0x4
 	move	$6,$0
-.L1064:
+.L1084:
 	move	$3,$4
 	daddiu	$7,$4,8
-.L1063:
+.L1083:
 	lh	$2,0($3)
 	mtlo	$6
 	daddiu	$3,$3,2
 	madd	$2,$2
 	mflo	$2
-	bne	$7,$3,.L1063
+	bne	$7,$3,.L1083
 	mflo	$6
 
 	addiu	$8,$8,-1
-	bne	$8,$0,.L1064
+	bne	$8,$0,.L1084
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -10462,18 +10670,18 @@ _ZN12_GLOBAL__N_19pixel_varILi4EEEmPKhl:
 	li	$8,4			# 0x4
 	mtlo	$0
 	move	$6,$0
-.L1070:
+.L1090:
 	move	$2,$4
 	daddiu	$7,$4,4
-.L1069:
+.L1089:
 	lbu	$3,0($2)
 	daddiu	$2,$2,1
 	madd	$3,$3
-	bne	$7,$2,.L1069
+	bne	$7,$2,.L1089
 	addu	$6,$3,$6
 
 	addiu	$8,$8,-1
-	bne	$8,$0,.L1070
+	bne	$8,$0,.L1090
 	daddu	$4,$4,$5
 
 	dext	$6,$6,0,32
@@ -10502,11 +10710,11 @@ _ZN12_GLOBAL__N_13sseILi4ELi4EssEEjPKT1_lPKT2_l:
 	dsll	$7,$7,1
 	li	$12,4			# 0x4
 	move	$9,$0
-.L1076:
+.L1096:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,8
-.L1075:
+.L1095:
 	daddiu	$8,$8,2
 	lh	$2,0($3)
 	mtlo	$9
@@ -10515,12 +10723,12 @@ _ZN12_GLOBAL__N_13sseILi4ELi4EssEEjPKT1_lPKT2_l:
 	subu	$2,$2,$10
 	madd	$2,$2
 	mflo	$2
-	bne	$11,$3,.L1075
+	bne	$11,$3,.L1095
 	mflo	$9
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L1076
+	bne	$12,$0,.L1096
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -10545,21 +10753,21 @@ _ZN12_GLOBAL__N_114blockcopy_sp_cILi8ELi8EEEvPhlPKsl:
 	dsll	$7,$7,1
 	li	$10,8			# 0x8
 	.align	3
-.L1082:
+.L1102:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,16
 	.align	3
-.L1081:
+.L1101:
 	lhu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1081
+	bne	$2,$9,.L1101
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1082
+	bne	$10,$0,.L1102
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -10584,21 +10792,21 @@ _ZN12_GLOBAL__N_114blockcopy_ps_cILi8ELi8EEEvPslPKhl:
 	dsll	$5,$5,1
 	li	$10,8			# 0x8
 	.align	3
-.L1088:
+.L1108:
 	move	$3,$6
 	move	$2,$4
 	daddiu	$9,$4,16
 	.align	3
-.L1087:
+.L1107:
 	lbu	$8,0($3)
 	daddiu	$2,$2,2
 	daddiu	$3,$3,1
-	bne	$2,$9,.L1087
+	bne	$2,$9,.L1107
 	sh	$8,-2($2)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1088
+	bne	$10,$0,.L1108
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -10623,21 +10831,21 @@ _ZN12_GLOBAL__N_113cpy2Dto1D_shlILi8EEEvPsPKsli:
 	dsll	$6,$6,1
 	daddiu	$10,$4,128
 	.align	3
-.L1094:
+.L1114:
 	move	$2,$5
 	move	$8,$4
 	daddiu	$9,$5,16
 	.align	3
-.L1093:
+.L1113:
 	lh	$3,0($2)
 	daddiu	$8,$8,2
 	daddiu	$2,$2,2
 	sll	$3,$3,$7
-	bne	$2,$9,.L1093
+	bne	$2,$9,.L1113
 	sh	$3,-2($8)
 
 	daddiu	$4,$4,16
-	bne	$10,$4,.L1094
+	bne	$10,$4,.L1114
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -10666,22 +10874,22 @@ _ZN12_GLOBAL__N_113cpy2Dto1D_shrILi8EEEvPsPKsli:
 	seh	$10,$10
 	daddiu	$11,$4,128
 	.align	3
-.L1100:
+.L1120:
 	move	$3,$5
 	move	$8,$4
 	daddiu	$9,$5,16
 	.align	3
-.L1099:
+.L1119:
 	lh	$2,0($3)
 	daddiu	$8,$8,2
 	daddiu	$3,$3,2
 	addu	$2,$2,$10
 	sra	$2,$2,$7
-	bne	$9,$3,.L1099
+	bne	$9,$3,.L1119
 	sh	$2,-2($8)
 
 	daddiu	$4,$4,16
-	bne	$11,$4,.L1100
+	bne	$11,$4,.L1120
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -10706,20 +10914,20 @@ _ZN12_GLOBAL__N_113cpy1Dto2D_shlILi8EEEvPsPKsli:
 	dsll	$6,$6,1
 	daddiu	$9,$5,128
 	.align	3
-.L1106:
+.L1126:
 	move	$3,$4
 	daddiu	$8,$5,16
 	.align	3
-.L1105:
+.L1125:
 	lh	$2,0($5)
 	daddiu	$3,$3,2
 	daddiu	$5,$5,2
 	sll	$2,$2,$7
-	bne	$8,$5,.L1105
+	bne	$8,$5,.L1125
 	sh	$2,-2($3)
 
 	move	$5,$8
-	bne	$9,$8,.L1106
+	bne	$9,$8,.L1126
 	daddu	$4,$4,$6
 
 	jr	$31
@@ -10748,21 +10956,21 @@ _ZN12_GLOBAL__N_113cpy1Dto2D_shrILi8EEEvPsPKsli:
 	seh	$9,$9
 	daddiu	$10,$5,128
 	.align	3
-.L1112:
+.L1132:
 	move	$3,$4
 	daddiu	$8,$5,16
 	.align	3
-.L1111:
+.L1131:
 	lh	$2,0($5)
 	daddiu	$3,$3,2
 	daddiu	$5,$5,2
 	addu	$2,$2,$9
 	sra	$2,$2,$7
-	bne	$8,$5,.L1111
+	bne	$8,$5,.L1131
 	sh	$2,-2($3)
 
 	move	$5,$8
-	bne	$10,$8,.L1112
+	bne	$10,$8,.L1132
 	daddu	$4,$4,$6
 
 	jr	$31
@@ -10786,18 +10994,18 @@ _ZN12_GLOBAL__N_19transposeILi8EEEvPhPKhl:
 	.set	nomacro
 	daddiu	$8,$4,64
 	.align	3
-.L1118:
+.L1138:
 	daddiu	$7,$4,8
 	move	$2,$5
 	.align	3
-.L1117:
+.L1137:
 	lbu	$3,0($2)
 	daddiu	$4,$4,1
 	daddu	$2,$2,$6
-	bne	$4,$7,.L1117
+	bne	$4,$7,.L1137
 	sb	$3,-1($4)
 
-	bne	$4,$8,.L1118
+	bne	$4,$8,.L1138
 	daddiu	$5,$5,1
 
 	jr	$31
@@ -10823,21 +11031,21 @@ _ZN12_GLOBAL__N_113pixel_ssd_s_cILi8EEEjPKsl:
 	li	$8,8			# 0x8
 	move	$6,$0
 	.align	3
-.L1124:
+.L1144:
 	move	$3,$4
 	daddiu	$7,$4,16
 	.align	3
-.L1123:
+.L1143:
 	lh	$2,0($3)
 	mtlo	$6
 	daddiu	$3,$3,2
 	madd	$2,$2
 	mflo	$2
-	bne	$7,$3,.L1123
+	bne	$7,$3,.L1143
 	mflo	$6
 
 	addiu	$8,$8,-1
-	bne	$8,$0,.L1124
+	bne	$8,$0,.L1144
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -10864,12 +11072,12 @@ _ZN12_GLOBAL__N_13sseILi8ELi8EssEEjPKT1_lPKT2_l:
 	li	$12,8			# 0x8
 	move	$9,$0
 	.align	3
-.L1130:
+.L1150:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,16
 	.align	3
-.L1129:
+.L1149:
 	daddiu	$8,$8,2
 	lh	$2,0($3)
 	mtlo	$9
@@ -10878,12 +11086,12 @@ _ZN12_GLOBAL__N_13sseILi8ELi8EssEEjPKT1_lPKT2_l:
 	subu	$2,$2,$10
 	madd	$2,$2
 	mflo	$2
-	bne	$11,$3,.L1129
+	bne	$11,$3,.L1149
 	mflo	$9
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L1130
+	bne	$12,$0,.L1150
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -10908,21 +11116,21 @@ _ZN12_GLOBAL__N_114blockcopy_sp_cILi16ELi16EEEvPhlPKsl:
 	dsll	$7,$7,1
 	li	$10,16			# 0x10
 	.align	3
-.L1136:
+.L1156:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,32
 	.align	3
-.L1135:
+.L1155:
 	lhu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1135
+	bne	$2,$9,.L1155
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1136
+	bne	$10,$0,.L1156
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -10947,21 +11155,21 @@ _ZN12_GLOBAL__N_114blockcopy_ps_cILi16ELi16EEEvPslPKhl:
 	dsll	$5,$5,1
 	li	$10,16			# 0x10
 	.align	3
-.L1142:
+.L1162:
 	move	$3,$6
 	move	$2,$4
 	daddiu	$9,$4,32
 	.align	3
-.L1141:
+.L1161:
 	lbu	$8,0($3)
 	daddiu	$2,$2,2
 	daddiu	$3,$3,1
-	bne	$2,$9,.L1141
+	bne	$2,$9,.L1161
 	sh	$8,-2($2)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1142
+	bne	$10,$0,.L1162
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -10986,21 +11194,21 @@ _ZN12_GLOBAL__N_113cpy2Dto1D_shlILi16EEEvPsPKsli:
 	dsll	$6,$6,1
 	daddiu	$10,$4,512
 	.align	3
-.L1148:
+.L1168:
 	move	$2,$5
 	move	$8,$4
 	daddiu	$9,$5,32
 	.align	3
-.L1147:
+.L1167:
 	lh	$3,0($2)
 	daddiu	$8,$8,2
 	daddiu	$2,$2,2
 	sll	$3,$3,$7
-	bne	$2,$9,.L1147
+	bne	$2,$9,.L1167
 	sh	$3,-2($8)
 
 	daddiu	$4,$4,32
-	bne	$10,$4,.L1148
+	bne	$10,$4,.L1168
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -11029,22 +11237,22 @@ _ZN12_GLOBAL__N_113cpy2Dto1D_shrILi16EEEvPsPKsli:
 	seh	$10,$10
 	daddiu	$11,$4,512
 	.align	3
-.L1154:
+.L1174:
 	move	$3,$5
 	move	$8,$4
 	daddiu	$9,$5,32
 	.align	3
-.L1153:
+.L1173:
 	lh	$2,0($3)
 	daddiu	$8,$8,2
 	daddiu	$3,$3,2
 	addu	$2,$2,$10
 	sra	$2,$2,$7
-	bne	$9,$3,.L1153
+	bne	$9,$3,.L1173
 	sh	$2,-2($8)
 
 	daddiu	$4,$4,32
-	bne	$11,$4,.L1154
+	bne	$11,$4,.L1174
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -11069,20 +11277,20 @@ _ZN12_GLOBAL__N_113cpy1Dto2D_shlILi16EEEvPsPKsli:
 	dsll	$6,$6,1
 	daddiu	$9,$5,512
 	.align	3
-.L1160:
+.L1180:
 	move	$3,$4
 	daddiu	$8,$5,32
 	.align	3
-.L1159:
+.L1179:
 	lh	$2,0($5)
 	daddiu	$3,$3,2
 	daddiu	$5,$5,2
 	sll	$2,$2,$7
-	bne	$8,$5,.L1159
+	bne	$8,$5,.L1179
 	sh	$2,-2($3)
 
 	move	$5,$8
-	bne	$9,$8,.L1160
+	bne	$9,$8,.L1180
 	daddu	$4,$4,$6
 
 	jr	$31
@@ -11111,21 +11319,21 @@ _ZN12_GLOBAL__N_113cpy1Dto2D_shrILi16EEEvPsPKsli:
 	seh	$9,$9
 	daddiu	$10,$5,512
 	.align	3
-.L1166:
+.L1186:
 	move	$3,$4
 	daddiu	$8,$5,32
 	.align	3
-.L1165:
+.L1185:
 	lh	$2,0($5)
 	daddiu	$3,$3,2
 	daddiu	$5,$5,2
 	addu	$2,$2,$9
 	sra	$2,$2,$7
-	bne	$8,$5,.L1165
+	bne	$8,$5,.L1185
 	sh	$2,-2($3)
 
 	move	$5,$8
-	bne	$10,$8,.L1166
+	bne	$10,$8,.L1186
 	daddu	$4,$4,$6
 
 	jr	$31
@@ -11149,18 +11357,18 @@ _ZN12_GLOBAL__N_19transposeILi16EEEvPhPKhl:
 	.set	nomacro
 	daddiu	$8,$4,256
 	.align	3
-.L1172:
+.L1192:
 	daddiu	$7,$4,16
 	move	$2,$5
 	.align	3
-.L1171:
+.L1191:
 	lbu	$3,0($2)
 	daddiu	$4,$4,1
 	daddu	$2,$2,$6
-	bne	$4,$7,.L1171
+	bne	$4,$7,.L1191
 	sb	$3,-1($4)
 
-	bne	$4,$8,.L1172
+	bne	$4,$8,.L1192
 	daddiu	$5,$5,1
 
 	jr	$31
@@ -11186,21 +11394,21 @@ _ZN12_GLOBAL__N_113pixel_ssd_s_cILi16EEEjPKsl:
 	li	$8,16			# 0x10
 	move	$6,$0
 	.align	3
-.L1178:
+.L1198:
 	move	$3,$4
 	daddiu	$7,$4,32
 	.align	3
-.L1177:
+.L1197:
 	lh	$2,0($3)
 	mtlo	$6
 	daddiu	$3,$3,2
 	madd	$2,$2
 	mflo	$2
-	bne	$7,$3,.L1177
+	bne	$7,$3,.L1197
 	mflo	$6
 
 	addiu	$8,$8,-1
-	bne	$8,$0,.L1178
+	bne	$8,$0,.L1198
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -11227,12 +11435,12 @@ _ZN12_GLOBAL__N_13sseILi16ELi16EssEEjPKT1_lPKT2_l:
 	li	$12,16			# 0x10
 	move	$9,$0
 	.align	3
-.L1184:
+.L1204:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,32
 	.align	3
-.L1183:
+.L1203:
 	daddiu	$8,$8,2
 	lh	$2,0($3)
 	mtlo	$9
@@ -11241,12 +11449,12 @@ _ZN12_GLOBAL__N_13sseILi16ELi16EssEEjPKT1_lPKT2_l:
 	subu	$2,$2,$10
 	madd	$2,$2
 	mflo	$2
-	bne	$11,$3,.L1183
+	bne	$11,$3,.L1203
 	mflo	$9
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L1184
+	bne	$12,$0,.L1204
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -11271,21 +11479,21 @@ _ZN12_GLOBAL__N_114blockcopy_sp_cILi32ELi32EEEvPhlPKsl:
 	dsll	$7,$7,1
 	li	$10,32			# 0x20
 	.align	3
-.L1190:
+.L1210:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,64
 	.align	3
-.L1189:
+.L1209:
 	lhu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1189
+	bne	$2,$9,.L1209
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1190
+	bne	$10,$0,.L1210
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -11310,21 +11518,21 @@ _ZN12_GLOBAL__N_114blockcopy_ps_cILi32ELi32EEEvPslPKhl:
 	dsll	$5,$5,1
 	li	$10,32			# 0x20
 	.align	3
-.L1196:
+.L1216:
 	move	$3,$6
 	move	$2,$4
 	daddiu	$9,$4,64
 	.align	3
-.L1195:
+.L1215:
 	lbu	$8,0($3)
 	daddiu	$2,$2,2
 	daddiu	$3,$3,1
-	bne	$2,$9,.L1195
+	bne	$2,$9,.L1215
 	sh	$8,-2($2)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1196
+	bne	$10,$0,.L1216
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -11349,21 +11557,21 @@ _ZN12_GLOBAL__N_113cpy2Dto1D_shlILi32EEEvPsPKsli:
 	dsll	$6,$6,1
 	daddiu	$10,$4,2048
 	.align	3
-.L1202:
+.L1222:
 	move	$2,$5
 	move	$8,$4
 	daddiu	$9,$5,64
 	.align	3
-.L1201:
+.L1221:
 	lh	$3,0($2)
 	daddiu	$8,$8,2
 	daddiu	$2,$2,2
 	sll	$3,$3,$7
-	bne	$2,$9,.L1201
+	bne	$2,$9,.L1221
 	sh	$3,-2($8)
 
 	daddiu	$4,$4,64
-	bne	$10,$4,.L1202
+	bne	$10,$4,.L1222
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -11392,22 +11600,22 @@ _ZN12_GLOBAL__N_113cpy2Dto1D_shrILi32EEEvPsPKsli:
 	seh	$10,$10
 	daddiu	$11,$4,2048
 	.align	3
-.L1208:
+.L1228:
 	move	$3,$5
 	move	$8,$4
 	daddiu	$9,$5,64
 	.align	3
-.L1207:
+.L1227:
 	lh	$2,0($3)
 	daddiu	$8,$8,2
 	daddiu	$3,$3,2
 	addu	$2,$2,$10
 	sra	$2,$2,$7
-	bne	$9,$3,.L1207
+	bne	$9,$3,.L1227
 	sh	$2,-2($8)
 
 	daddiu	$4,$4,64
-	bne	$11,$4,.L1208
+	bne	$11,$4,.L1228
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -11432,20 +11640,20 @@ _ZN12_GLOBAL__N_113cpy1Dto2D_shlILi32EEEvPsPKsli:
 	dsll	$6,$6,1
 	daddiu	$9,$5,2048
 	.align	3
-.L1214:
+.L1234:
 	move	$3,$4
 	daddiu	$8,$5,64
 	.align	3
-.L1213:
+.L1233:
 	lh	$2,0($5)
 	daddiu	$3,$3,2
 	daddiu	$5,$5,2
 	sll	$2,$2,$7
-	bne	$8,$5,.L1213
+	bne	$8,$5,.L1233
 	sh	$2,-2($3)
 
 	move	$5,$8
-	bne	$9,$8,.L1214
+	bne	$9,$8,.L1234
 	daddu	$4,$4,$6
 
 	jr	$31
@@ -11474,21 +11682,21 @@ _ZN12_GLOBAL__N_113cpy1Dto2D_shrILi32EEEvPsPKsli:
 	seh	$9,$9
 	daddiu	$10,$5,2048
 	.align	3
-.L1220:
+.L1240:
 	move	$3,$4
 	daddiu	$8,$5,64
 	.align	3
-.L1219:
+.L1239:
 	lh	$2,0($5)
 	daddiu	$3,$3,2
 	daddiu	$5,$5,2
 	addu	$2,$2,$9
 	sra	$2,$2,$7
-	bne	$8,$5,.L1219
+	bne	$8,$5,.L1239
 	sh	$2,-2($3)
 
 	move	$5,$8
-	bne	$10,$8,.L1220
+	bne	$10,$8,.L1240
 	daddu	$4,$4,$6
 
 	jr	$31
@@ -11512,18 +11720,18 @@ _ZN12_GLOBAL__N_19transposeILi32EEEvPhPKhl:
 	.set	nomacro
 	daddiu	$8,$4,1024
 	.align	3
-.L1226:
+.L1246:
 	daddiu	$7,$4,32
 	move	$2,$5
 	.align	3
-.L1225:
+.L1245:
 	lbu	$3,0($2)
 	daddiu	$4,$4,1
 	daddu	$2,$2,$6
-	bne	$4,$7,.L1225
+	bne	$4,$7,.L1245
 	sb	$3,-1($4)
 
-	bne	$4,$8,.L1226
+	bne	$4,$8,.L1246
 	daddiu	$5,$5,1
 
 	jr	$31
@@ -11549,21 +11757,21 @@ _ZN12_GLOBAL__N_113pixel_ssd_s_cILi32EEEjPKsl:
 	li	$8,32			# 0x20
 	move	$6,$0
 	.align	3
-.L1232:
+.L1252:
 	move	$3,$4
 	daddiu	$7,$4,64
 	.align	3
-.L1231:
+.L1251:
 	lh	$2,0($3)
 	mtlo	$6
 	daddiu	$3,$3,2
 	madd	$2,$2
 	mflo	$2
-	bne	$7,$3,.L1231
+	bne	$7,$3,.L1251
 	mflo	$6
 
 	addiu	$8,$8,-1
-	bne	$8,$0,.L1232
+	bne	$8,$0,.L1252
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -11589,19 +11797,19 @@ _ZN12_GLOBAL__N_19pixel_varILi32EEEmPKhl:
 	mtlo	$0
 	move	$6,$0
 	.align	3
-.L1238:
+.L1258:
 	move	$3,$4
 	daddiu	$7,$4,32
 	.align	3
-.L1237:
+.L1257:
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
 	madd	$2,$2
-	bne	$7,$3,.L1237
+	bne	$7,$3,.L1257
 	addu	$6,$2,$6
 
 	addiu	$8,$8,-1
-	bne	$8,$0,.L1238
+	bne	$8,$0,.L1258
 	daddu	$4,$4,$5
 
 	mflo	$2
@@ -11631,12 +11839,12 @@ _ZN12_GLOBAL__N_13sseILi32ELi32EssEEjPKT1_lPKT2_l:
 	li	$12,32			# 0x20
 	move	$9,$0
 	.align	3
-.L1244:
+.L1264:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,64
 	.align	3
-.L1243:
+.L1263:
 	daddiu	$8,$8,2
 	lh	$2,0($3)
 	mtlo	$9
@@ -11645,12 +11853,12 @@ _ZN12_GLOBAL__N_13sseILi32ELi32EssEEjPKT1_lPKT2_l:
 	subu	$2,$2,$10
 	madd	$2,$2
 	mflo	$2
-	bne	$11,$3,.L1243
+	bne	$11,$3,.L1263
 	mflo	$9
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L1244
+	bne	$12,$0,.L1264
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -11675,21 +11883,21 @@ _ZN12_GLOBAL__N_114blockcopy_sp_cILi64ELi64EEEvPhlPKsl:
 	dsll	$7,$7,1
 	li	$10,64			# 0x40
 	.align	3
-.L1250:
+.L1270:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,128
 	.align	3
-.L1249:
+.L1269:
 	lhu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1249
+	bne	$2,$9,.L1269
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1250
+	bne	$10,$0,.L1270
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -11714,21 +11922,21 @@ _ZN12_GLOBAL__N_114blockcopy_ps_cILi64ELi64EEEvPslPKhl:
 	dsll	$5,$5,1
 	li	$10,64			# 0x40
 	.align	3
-.L1256:
+.L1276:
 	move	$3,$6
 	move	$2,$4
 	daddiu	$9,$4,128
 	.align	3
-.L1255:
+.L1275:
 	lbu	$8,0($3)
 	daddiu	$2,$2,2
 	daddiu	$3,$3,1
-	bne	$2,$9,.L1255
+	bne	$2,$9,.L1275
 	sh	$8,-2($2)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1256
+	bne	$10,$0,.L1276
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -11753,21 +11961,21 @@ _ZN12_GLOBAL__N_113cpy2Dto1D_shlILi64EEEvPsPKsli:
 	dsll	$6,$6,1
 	daddiu	$10,$4,8192
 	.align	3
-.L1262:
+.L1282:
 	move	$2,$5
 	move	$8,$4
 	daddiu	$9,$5,128
 	.align	3
-.L1261:
+.L1281:
 	lh	$3,0($2)
 	daddiu	$8,$8,2
 	daddiu	$2,$2,2
 	sll	$3,$3,$7
-	bne	$2,$9,.L1261
+	bne	$2,$9,.L1281
 	sh	$3,-2($8)
 
 	daddiu	$4,$4,128
-	bne	$10,$4,.L1262
+	bne	$10,$4,.L1282
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -11796,22 +12004,22 @@ _ZN12_GLOBAL__N_113cpy2Dto1D_shrILi64EEEvPsPKsli:
 	seh	$10,$10
 	daddiu	$11,$4,8192
 	.align	3
-.L1268:
+.L1288:
 	move	$3,$5
 	move	$8,$4
 	daddiu	$9,$5,128
 	.align	3
-.L1267:
+.L1287:
 	lh	$2,0($3)
 	daddiu	$8,$8,2
 	daddiu	$3,$3,2
 	addu	$2,$2,$10
 	sra	$2,$2,$7
-	bne	$9,$3,.L1267
+	bne	$9,$3,.L1287
 	sh	$2,-2($8)
 
 	daddiu	$4,$4,128
-	bne	$11,$4,.L1268
+	bne	$11,$4,.L1288
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -11836,20 +12044,20 @@ _ZN12_GLOBAL__N_113cpy1Dto2D_shlILi64EEEvPsPKsli:
 	dsll	$6,$6,1
 	daddiu	$9,$5,8192
 	.align	3
-.L1274:
+.L1294:
 	move	$3,$4
 	daddiu	$8,$5,128
 	.align	3
-.L1273:
+.L1293:
 	lh	$2,0($5)
 	daddiu	$3,$3,2
 	daddiu	$5,$5,2
 	sll	$2,$2,$7
-	bne	$8,$5,.L1273
+	bne	$8,$5,.L1293
 	sh	$2,-2($3)
 
 	move	$5,$8
-	bne	$9,$8,.L1274
+	bne	$9,$8,.L1294
 	daddu	$4,$4,$6
 
 	jr	$31
@@ -11878,21 +12086,21 @@ _ZN12_GLOBAL__N_113cpy1Dto2D_shrILi64EEEvPsPKsli:
 	seh	$9,$9
 	daddiu	$10,$5,8192
 	.align	3
-.L1280:
+.L1300:
 	move	$3,$4
 	daddiu	$8,$5,128
 	.align	3
-.L1279:
+.L1299:
 	lh	$2,0($5)
 	daddiu	$3,$3,2
 	daddiu	$5,$5,2
 	addu	$2,$2,$9
 	sra	$2,$2,$7
-	bne	$8,$5,.L1279
+	bne	$8,$5,.L1299
 	sh	$2,-2($3)
 
 	move	$5,$8
-	bne	$10,$8,.L1280
+	bne	$10,$8,.L1300
 	daddu	$4,$4,$6
 
 	jr	$31
@@ -11916,18 +12124,18 @@ _ZN12_GLOBAL__N_19transposeILi64EEEvPhPKhl:
 	.set	nomacro
 	daddiu	$8,$4,4096
 	.align	3
-.L1286:
+.L1306:
 	daddiu	$7,$4,64
 	move	$2,$5
 	.align	3
-.L1285:
+.L1305:
 	lbu	$3,0($2)
 	daddiu	$4,$4,1
 	daddu	$2,$2,$6
-	bne	$4,$7,.L1285
+	bne	$4,$7,.L1305
 	sb	$3,-1($4)
 
-	bne	$4,$8,.L1286
+	bne	$4,$8,.L1306
 	daddiu	$5,$5,1
 
 	jr	$31
@@ -11953,21 +12161,21 @@ _ZN12_GLOBAL__N_113pixel_ssd_s_cILi64EEEjPKsl:
 	li	$8,64			# 0x40
 	move	$6,$0
 	.align	3
-.L1292:
+.L1312:
 	move	$3,$4
 	daddiu	$7,$4,128
 	.align	3
-.L1291:
+.L1311:
 	lh	$2,0($3)
 	mtlo	$6
 	daddiu	$3,$3,2
 	madd	$2,$2
 	mflo	$2
-	bne	$7,$3,.L1291
+	bne	$7,$3,.L1311
 	mflo	$6
 
 	addiu	$8,$8,-1
-	bne	$8,$0,.L1292
+	bne	$8,$0,.L1312
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -11993,19 +12201,19 @@ _ZN12_GLOBAL__N_19pixel_varILi64EEEmPKhl:
 	mtlo	$0
 	move	$6,$0
 	.align	3
-.L1298:
+.L1318:
 	move	$3,$4
 	daddiu	$7,$4,64
 	.align	3
-.L1297:
+.L1317:
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
 	madd	$2,$2
-	bne	$7,$3,.L1297
+	bne	$7,$3,.L1317
 	addu	$6,$2,$6
 
 	addiu	$8,$8,-1
-	bne	$8,$0,.L1298
+	bne	$8,$0,.L1318
 	daddu	$4,$4,$5
 
 	mflo	$2
@@ -12035,12 +12243,12 @@ _ZN12_GLOBAL__N_13sseILi64ELi64EssEEjPKT1_lPKT2_l:
 	li	$12,64			# 0x40
 	move	$9,$0
 	.align	3
-.L1304:
+.L1324:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,128
 	.align	3
-.L1303:
+.L1323:
 	daddiu	$8,$8,2
 	lh	$2,0($3)
 	mtlo	$9
@@ -12049,12 +12257,12 @@ _ZN12_GLOBAL__N_13sseILi64ELi64EssEEjPKT1_lPKT2_l:
 	subu	$2,$2,$10
 	madd	$2,$2
 	mflo	$2
-	bne	$11,$3,.L1303
+	bne	$11,$3,.L1323
 	mflo	$9
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L1304
+	bne	$12,$0,.L1324
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -12079,18 +12287,18 @@ _ZN12_GLOBAL__N_113blockfill_s_cILi64EEEvPsls:
 	dsll	$5,$5,1
 	li	$7,64			# 0x40
 	.align	3
-.L1310:
+.L1330:
 	daddiu	$3,$4,128
 	move	$2,$4
 	.align	3
-.L1309:
+.L1329:
 	sh	$6,0($2)
 	daddiu	$2,$2,2
-	bne	$2,$3,.L1309
+	bne	$2,$3,.L1329
 	nop
 
 	addiu	$7,$7,-1
-	bne	$7,$0,.L1310
+	bne	$7,$0,.L1330
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -12116,13 +12324,13 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi64ELi64EEEvPhlPKhPKsll:
 	li	$15,64			# 0x40
 	li	$14,255			# 0xff
 	.align	3
-.L1316:
+.L1336:
 	move	$3,$6
 	move	$11,$7
 	move	$10,$4
 	daddiu	$13,$6,64
 	.align	3
-.L1315:
+.L1335:
 	daddiu	$11,$11,2
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -12133,13 +12341,13 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi64ELi64EEEvPhlPKhPKsll:
 	movz	$2,$14,$12
 	slt	$12,$2,0
 	movn	$2,$0,$12
-	bne	$13,$3,.L1315
+	bne	$13,$3,.L1335
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$15,$0,.L1316
+	bne	$15,$0,.L1336
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -12164,26 +12372,26 @@ _ZN12_GLOBAL__N_111getResidualILi64EEEvPKhS2_Psl:
 	dsll	$13,$7,1
 	li	$12,64			# 0x40
 	.align	3
-.L1322:
+.L1342:
 	move	$2,$4
 	move	$9,$5
 	move	$8,$6
 	daddiu	$11,$4,64
 	.align	3
-.L1321:
+.L1341:
 	daddiu	$9,$9,1
 	lbu	$3,0($2)
 	daddiu	$8,$8,2
 	lbu	$10,-1($9)
 	daddiu	$2,$2,1
 	subu	$3,$3,$10
-	bne	$11,$2,.L1321
+	bne	$11,$2,.L1341
 	sh	$3,-2($8)
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$7
 	daddu	$6,$6,$13
-	bne	$12,$0,.L1322
+	bne	$12,$0,.L1342
 	daddu	$5,$5,$7
 
 	jr	$31
@@ -12209,21 +12417,21 @@ _ZN12_GLOBAL__N_114blockcopy_ss_cILi64ELi64EEEvPslPKsl:
 	dsll	$7,$7,1
 	li	$10,64			# 0x40
 	.align	3
-.L1328:
+.L1348:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,128
 	.align	3
-.L1327:
+.L1347:
 	lh	$8,0($2)
 	daddiu	$3,$3,2
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1327
+	bne	$2,$9,.L1347
 	sh	$8,-2($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1328
+	bne	$10,$0,.L1348
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -12250,7 +12458,7 @@ _ZN12_GLOBAL__N_16addAvgILi2ELi2EEEvPKsS2_Phlll:
 	li	$10,2			# 0x2
 	li	$3,255			# 0xff
 	li	$12,1			# 0x1
-.L1333:
+.L1353:
 	lh	$11,0($5)
 	lh	$2,0($4)
 	addu	$2,$2,$11
@@ -12273,15 +12481,15 @@ _ZN12_GLOBAL__N_16addAvgILi2ELi2EEEvPKsS2_Phlll:
 	slt	$11,$2,0
 	movn	$2,$0,$11
 	sb	$2,1($6)
-	bne	$10,$12,.L1334
+	bne	$10,$12,.L1354
 	daddu	$6,$6,$9
 
 	jr	$31
 	nop
 
 	.align	3
-.L1334:
-	b	.L1333
+.L1354:
+	b	.L1353
 	li	$10,1			# 0x1
 
 	.set	macro
@@ -12332,7 +12540,7 @@ _ZN12_GLOBAL__N_16addAvgILi2ELi4EEEvPKsS2_Phlll:
 	dsll	$8,$8,1
 	li	$3,4			# 0x4
 	li	$10,255			# 0xff
-.L1341:
+.L1361:
 	lh	$11,0($5)
 	addiu	$3,$3,-1
 	lh	$2,0($4)
@@ -12356,7 +12564,7 @@ _ZN12_GLOBAL__N_16addAvgILi2ELi4EEEvPKsS2_Phlll:
 	slt	$11,$2,0
 	movn	$2,$0,$11
 	sb	$2,1($6)
-	bne	$3,$0,.L1341
+	bne	$3,$0,.L1361
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -12379,14 +12587,14 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi4EEEvPhlPKhl:
 	.set	noreorder
 	.set	nomacro
 	li	$2,4			# 0x4
-.L1345:
+.L1365:
 	lbu	$3,0($6)
 	addiu	$2,$2,-1
 	sb	$3,0($4)
 	lbu	$3,1($6)
 	daddu	$6,$6,$7
 	sb	$3,1($4)
-	bne	$2,$0,.L1345
+	bne	$2,$0,.L1365
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -12413,7 +12621,7 @@ _ZN12_GLOBAL__N_16addAvgILi4ELi2EEEvPKsS2_Phlll:
 	li	$10,2			# 0x2
 	li	$3,255			# 0xff
 	li	$11,1			# 0x1
-.L1349:
+.L1369:
 	lh	$12,0($4)
 	lh	$2,0($5)
 	addu	$2,$2,$12
@@ -12456,15 +12664,15 @@ _ZN12_GLOBAL__N_16addAvgILi4ELi2EEEvPKsS2_Phlll:
 	slt	$12,$2,0
 	movn	$2,$0,$12
 	sb	$2,3($6)
-	bne	$10,$11,.L1350
+	bne	$10,$11,.L1370
 	daddu	$6,$6,$9
 
 	jr	$31
 	nop
 
 	.align	3
-.L1350:
-	b	.L1349
+.L1370:
+	b	.L1369
 	li	$10,1			# 0x1
 
 	.set	macro
@@ -12486,22 +12694,22 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi4ELi2EEEvPhlPKhl:
 	move	$3,$4
 	daddiu	$9,$6,4
 	move	$2,$6
-.L1355:
+.L1375:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$9,$2,.L1355
+	bne	$9,$2,.L1375
 	sb	$8,-1($3)
 
 	daddiu	$2,$7,4
 	daddu	$5,$4,$5
 	daddu	$7,$6,$7
 	daddu	$6,$6,$2
-.L1356:
+.L1376:
 	lbu	$2,0($7)
 	daddiu	$5,$5,1
 	daddiu	$7,$7,1
-	bne	$6,$7,.L1356
+	bne	$6,$7,.L1376
 	sb	$2,-1($5)
 
 	jr	$31
@@ -12528,12 +12736,12 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi6EEEvPKsS2_Phlll:
 	li	$15,6			# 0x6
 	li	$12,255			# 0xff
 	.align	3
-.L1362:
+.L1382:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,16
-.L1361:
+.L1381:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -12556,13 +12764,13 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi6EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L1361
+	bne	$14,$3,.L1381
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L1362
+	bne	$15,$0,.L1382
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -12586,21 +12794,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi8ELi6EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,6			# 0x6
 	.align	3
-.L1368:
+.L1388:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,8
 	.align	3
-.L1367:
+.L1387:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L1367
+	bne	$2,$9,.L1387
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1368
+	bne	$10,$0,.L1388
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -12627,12 +12835,12 @@ _ZN12_GLOBAL__N_16addAvgILi6ELi8EEEvPKsS2_Phlll:
 	li	$15,8			# 0x8
 	li	$12,255			# 0xff
 	.align	3
-.L1374:
+.L1394:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,12
-.L1373:
+.L1393:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -12655,13 +12863,13 @@ _ZN12_GLOBAL__N_16addAvgILi6ELi8EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L1373
+	bne	$14,$3,.L1393
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L1374
+	bne	$15,$0,.L1394
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -12685,21 +12893,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi8EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,8			# 0x8
 	.align	3
-.L1380:
+.L1400:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,6
 	.align	3
-.L1379:
+.L1399:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L1379
+	bne	$2,$9,.L1399
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1380
+	bne	$10,$0,.L1400
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -12727,12 +12935,12 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi2EEEvPKsS2_Phlll:
 	li	$15,2			# 0x2
 	li	$12,255			# 0xff
 	li	$24,1			# 0x1
-.L1386:
+.L1406:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,16
-.L1385:
+.L1405:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -12755,20 +12963,20 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi2EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L1385
+	bne	$14,$3,.L1405
 	sb	$2,-1($10)
 
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$24,.L1387
+	bne	$15,$24,.L1407
 	daddu	$6,$6,$9
 
 	jr	$31
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L1387:
-	b	.L1386
+.L1407:
+	b	.L1406
 	li	$15,1			# 0x1
 
 	.set	macro
@@ -12791,11 +12999,11 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi8ELi2EEEvPhlPKhl:
 	daddiu	$9,$6,8
 	move	$2,$6
 	.align	3
-.L1391:
+.L1411:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$9,$2,.L1391
+	bne	$9,$2,.L1411
 	sb	$8,-1($3)
 
 	daddiu	$2,$7,8
@@ -12803,11 +13011,11 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi8ELi2EEEvPhlPKhl:
 	daddu	$7,$6,$7
 	daddu	$6,$6,$2
 	.align	3
-.L1392:
+.L1412:
 	lbu	$2,0($7)
 	daddiu	$5,$5,1
 	daddiu	$7,$7,1
-	bne	$6,$7,.L1392
+	bne	$6,$7,.L1412
 	sb	$2,-1($5)
 
 	jr	$31
@@ -12834,7 +13042,7 @@ _ZN12_GLOBAL__N_16addAvgILi2ELi8EEEvPKsS2_Phlll:
 	li	$3,8			# 0x8
 	li	$10,255			# 0xff
 	.align	3
-.L1397:
+.L1417:
 	lh	$11,0($5)
 	addiu	$3,$3,-1
 	lh	$2,0($4)
@@ -12858,7 +13066,7 @@ _ZN12_GLOBAL__N_16addAvgILi2ELi8EEEvPKsS2_Phlll:
 	slt	$11,$2,0
 	movn	$2,$0,$11
 	sb	$2,1($6)
-	bne	$3,$0,.L1397
+	bne	$3,$0,.L1417
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -12882,14 +13090,14 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi8EEEvPhlPKhl:
 	.set	nomacro
 	li	$2,8			# 0x8
 	.align	3
-.L1401:
+.L1421:
 	lbu	$3,0($6)
 	addiu	$2,$2,-1
 	sb	$3,0($4)
 	lbu	$3,1($6)
 	daddu	$6,$6,$7
 	sb	$3,1($4)
-	bne	$2,$0,.L1401
+	bne	$2,$0,.L1421
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -13047,7 +13255,7 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi2ELi2EEEvPhlPKhPKsll:
 	li	$11,2			# 0x2
 	li	$3,255			# 0xff
 	li	$12,1			# 0x1
-.L1413:
+.L1433:
 	lh	$10,0($7)
 	lbu	$2,0($6)
 	addu	$2,$2,$10
@@ -13066,15 +13274,15 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi2ELi2EEEvPhlPKhPKsll:
 	slt	$10,$2,0
 	movn	$2,$0,$10
 	sb	$2,1($4)
-	bne	$11,$12,.L1414
+	bne	$11,$12,.L1434
 	daddu	$4,$4,$5
 
 	jr	$31
 	nop
 
 	.align	3
-.L1414:
-	b	.L1413
+.L1434:
+	b	.L1433
 	li	$11,1			# 0x1
 
 	.set	macro
@@ -13126,12 +13334,12 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi12EEEvPKsS2_Phlll:
 	li	$15,12			# 0xc
 	li	$12,255			# 0xff
 	.align	3
-.L1422:
+.L1442:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,16
-.L1421:
+.L1441:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -13154,13 +13362,13 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi12EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L1421
+	bne	$14,$3,.L1441
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L1422
+	bne	$15,$0,.L1442
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -13184,21 +13392,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi8ELi12EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,12			# 0xc
 	.align	3
-.L1428:
+.L1448:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,8
 	.align	3
-.L1427:
+.L1447:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L1427
+	bne	$2,$9,.L1447
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1428
+	bne	$10,$0,.L1448
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -13225,193 +13433,11 @@ _ZN12_GLOBAL__N_16addAvgILi6ELi16EEEvPKsS2_Phlll:
 	li	$15,16			# 0x10
 	li	$12,255			# 0xff
 	.align	3
-.L1434:
-	move	$3,$4
-	move	$11,$5
-	move	$10,$6
-	daddiu	$14,$4,12
-.L1433:
-	daddiu	$11,$11,4
-	lh	$2,0($3)
-	daddiu	$10,$10,2
-	lh	$13,-4($11)
-	daddiu	$3,$3,4
-	addu	$2,$2,$13
-	addiu	$2,$2,16448
-	sra	$2,$2,7
-	slt	$13,$2,256
-	movz	$2,$12,$13
-	slt	$13,$2,0
-	movn	$2,$0,$13
-	sb	$2,-2($10)
-	lh	$13,-2($11)
-	lh	$2,-2($3)
-	addu	$2,$2,$13
-	addiu	$2,$2,16448
-	sra	$2,$2,7
-	slt	$13,$2,256
-	movz	$2,$12,$13
-	slt	$13,$2,0
-	movn	$2,$0,$13
-	bne	$14,$3,.L1433
-	sb	$2,-1($10)
-
-	addiu	$15,$15,-1
-	daddu	$4,$4,$7
-	daddu	$5,$5,$8
-	bne	$15,$0,.L1434
-	daddu	$6,$6,$9
-
-	jr	$31
-	nop
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_16addAvgILi6ELi16EEEvPKsS2_Phlll
-	.size	_ZN12_GLOBAL__N_16addAvgILi6ELi16EEEvPKsS2_Phlll, .-_ZN12_GLOBAL__N_16addAvgILi6ELi16EEEvPKsS2_Phlll
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl
-	.type	_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl, @function
-_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl:
-	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, gp= 0
-	.mask	0x00000000,0
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	li	$10,16			# 0x10
-	.align	3
-.L1440:
-	move	$2,$6
-	move	$3,$4
-	daddiu	$9,$6,6
-	.align	3
-.L1439:
-	lbu	$8,0($2)
-	daddiu	$3,$3,1
-	daddiu	$2,$2,1
-	bne	$2,$9,.L1439
-	sb	$8,-1($3)
-
-	addiu	$10,$10,-1
-	daddu	$4,$4,$5
-	bne	$10,$0,.L1440
-	daddu	$6,$6,$7
-
-	jr	$31
-	nop
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl
-	.size	_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl, .-_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll
-	.type	_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll, @function
-_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll:
-	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, gp= 0
-	.mask	0x00000000,0
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	dsll	$7,$7,1
-	dsll	$8,$8,1
-	li	$3,16			# 0x10
-	li	$10,255			# 0xff
-	.align	3
-.L1445:
-	lh	$11,0($5)
-	addiu	$3,$3,-1
-	lh	$2,0($4)
-	addu	$2,$2,$11
-	addiu	$2,$2,16448
-	sra	$2,$2,7
-	slt	$11,$2,256
-	movz	$2,$10,$11
-	slt	$11,$2,0
-	movn	$2,$0,$11
-	sb	$2,0($6)
-	lh	$11,2($5)
-	daddu	$5,$5,$8
-	lh	$2,2($4)
-	daddu	$4,$4,$7
-	addu	$2,$2,$11
-	addiu	$2,$2,16448
-	sra	$2,$2,7
-	slt	$11,$2,256
-	movz	$2,$10,$11
-	slt	$11,$2,0
-	movn	$2,$0,$11
-	sb	$2,1($6)
-	bne	$3,$0,.L1445
-	daddu	$6,$6,$9
-
-	jr	$31
-	nop
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll
-	.size	_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll, .-_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl
-	.type	_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl, @function
-_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl:
-	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, gp= 0
-	.mask	0x00000000,0
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	li	$2,16			# 0x10
-	.align	3
-.L1449:
-	lbu	$3,0($6)
-	addiu	$2,$2,-1
-	sb	$3,0($4)
-	lbu	$3,1($6)
-	daddu	$6,$6,$7
-	sb	$3,1($4)
-	bne	$2,$0,.L1449
-	daddu	$4,$4,$5
-
-	jr	$31
-	nop
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl
-	.size	_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl, .-_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_16addAvgILi16ELi24EEEvPKsS2_Phlll
-	.type	_ZN12_GLOBAL__N_16addAvgILi16ELi24EEEvPKsS2_Phlll, @function
-_ZN12_GLOBAL__N_16addAvgILi16ELi24EEEvPKsS2_Phlll:
-	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, gp= 0
-	.mask	0x00000000,0
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	dsll	$7,$7,1
-	dsll	$8,$8,1
-	li	$15,24			# 0x18
-	li	$12,255			# 0xff
-	.align	3
 .L1454:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
-	daddiu	$14,$4,32
-	.align	3
+	daddiu	$14,$4,12
 .L1453:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
@@ -13449,6 +13475,188 @@ _ZN12_GLOBAL__N_16addAvgILi16ELi24EEEvPKsS2_Phlll:
 
 	.set	macro
 	.set	reorder
+	.end	_ZN12_GLOBAL__N_16addAvgILi6ELi16EEEvPKsS2_Phlll
+	.size	_ZN12_GLOBAL__N_16addAvgILi6ELi16EEEvPKsS2_Phlll, .-_ZN12_GLOBAL__N_16addAvgILi6ELi16EEEvPKsS2_Phlll
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl
+	.type	_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl, @function
+_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl:
+	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, gp= 0
+	.mask	0x00000000,0
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	li	$10,16			# 0x10
+	.align	3
+.L1460:
+	move	$2,$6
+	move	$3,$4
+	daddiu	$9,$6,6
+	.align	3
+.L1459:
+	lbu	$8,0($2)
+	daddiu	$3,$3,1
+	daddiu	$2,$2,1
+	bne	$2,$9,.L1459
+	sb	$8,-1($3)
+
+	addiu	$10,$10,-1
+	daddu	$4,$4,$5
+	bne	$10,$0,.L1460
+	daddu	$6,$6,$7
+
+	jr	$31
+	nop
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl
+	.size	_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl, .-_ZN12_GLOBAL__N_114blockcopy_pp_cILi6ELi16EEEvPhlPKhl
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll
+	.type	_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll, @function
+_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll:
+	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, gp= 0
+	.mask	0x00000000,0
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	dsll	$7,$7,1
+	dsll	$8,$8,1
+	li	$3,16			# 0x10
+	li	$10,255			# 0xff
+	.align	3
+.L1465:
+	lh	$11,0($5)
+	addiu	$3,$3,-1
+	lh	$2,0($4)
+	addu	$2,$2,$11
+	addiu	$2,$2,16448
+	sra	$2,$2,7
+	slt	$11,$2,256
+	movz	$2,$10,$11
+	slt	$11,$2,0
+	movn	$2,$0,$11
+	sb	$2,0($6)
+	lh	$11,2($5)
+	daddu	$5,$5,$8
+	lh	$2,2($4)
+	daddu	$4,$4,$7
+	addu	$2,$2,$11
+	addiu	$2,$2,16448
+	sra	$2,$2,7
+	slt	$11,$2,256
+	movz	$2,$10,$11
+	slt	$11,$2,0
+	movn	$2,$0,$11
+	sb	$2,1($6)
+	bne	$3,$0,.L1465
+	daddu	$6,$6,$9
+
+	jr	$31
+	nop
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll
+	.size	_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll, .-_ZN12_GLOBAL__N_16addAvgILi2ELi16EEEvPKsS2_Phlll
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl
+	.type	_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl, @function
+_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl:
+	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, gp= 0
+	.mask	0x00000000,0
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	li	$2,16			# 0x10
+	.align	3
+.L1469:
+	lbu	$3,0($6)
+	addiu	$2,$2,-1
+	sb	$3,0($4)
+	lbu	$3,1($6)
+	daddu	$6,$6,$7
+	sb	$3,1($4)
+	bne	$2,$0,.L1469
+	daddu	$4,$4,$5
+
+	jr	$31
+	nop
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl
+	.size	_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl, .-_ZN12_GLOBAL__N_114blockcopy_pp_cILi2ELi16EEEvPhlPKhl
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_16addAvgILi16ELi24EEEvPKsS2_Phlll
+	.type	_ZN12_GLOBAL__N_16addAvgILi16ELi24EEEvPKsS2_Phlll, @function
+_ZN12_GLOBAL__N_16addAvgILi16ELi24EEEvPKsS2_Phlll:
+	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, gp= 0
+	.mask	0x00000000,0
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	dsll	$7,$7,1
+	dsll	$8,$8,1
+	li	$15,24			# 0x18
+	li	$12,255			# 0xff
+	.align	3
+.L1474:
+	move	$3,$4
+	move	$11,$5
+	move	$10,$6
+	daddiu	$14,$4,32
+	.align	3
+.L1473:
+	daddiu	$11,$11,4
+	lh	$2,0($3)
+	daddiu	$10,$10,2
+	lh	$13,-4($11)
+	daddiu	$3,$3,4
+	addu	$2,$2,$13
+	addiu	$2,$2,16448
+	sra	$2,$2,7
+	slt	$13,$2,256
+	movz	$2,$12,$13
+	slt	$13,$2,0
+	movn	$2,$0,$13
+	sb	$2,-2($10)
+	lh	$13,-2($11)
+	lh	$2,-2($3)
+	addu	$2,$2,$13
+	addiu	$2,$2,16448
+	sra	$2,$2,7
+	slt	$13,$2,256
+	movz	$2,$12,$13
+	slt	$13,$2,0
+	movn	$2,$0,$13
+	bne	$14,$3,.L1473
+	sb	$2,-1($10)
+
+	addiu	$15,$15,-1
+	daddu	$4,$4,$7
+	daddu	$5,$5,$8
+	bne	$15,$0,.L1474
+	daddu	$6,$6,$9
+
+	jr	$31
+	nop
+
+	.set	macro
+	.set	reorder
 	.end	_ZN12_GLOBAL__N_16addAvgILi16ELi24EEEvPKsS2_Phlll
 	.size	_ZN12_GLOBAL__N_16addAvgILi16ELi24EEEvPKsS2_Phlll, .-_ZN12_GLOBAL__N_16addAvgILi16ELi24EEEvPKsS2_Phlll
 	.align	2
@@ -13465,21 +13673,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi16ELi24EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,24			# 0x18
 	.align	3
-.L1460:
+.L1480:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,16
 	.align	3
-.L1459:
+.L1479:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L1459
+	bne	$2,$9,.L1479
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1460
+	bne	$10,$0,.L1480
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -13506,13 +13714,13 @@ _ZN12_GLOBAL__N_16addAvgILi12ELi32EEEvPKsS2_Phlll:
 	li	$15,32			# 0x20
 	li	$12,255			# 0xff
 	.align	3
-.L1466:
+.L1486:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,24
 	.align	3
-.L1465:
+.L1485:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -13535,13 +13743,13 @@ _ZN12_GLOBAL__N_16addAvgILi12ELi32EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L1465
+	bne	$14,$3,.L1485
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L1466
+	bne	$15,$0,.L1486
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -13565,21 +13773,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi12ELi32EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,32			# 0x20
 	.align	3
-.L1472:
+.L1492:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,12
 	.align	3
-.L1471:
+.L1491:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L1471
+	bne	$2,$9,.L1491
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1472
+	bne	$10,$0,.L1492
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -13606,7 +13814,7 @@ _ZN12_GLOBAL__N_16addAvgILi4ELi32EEEvPKsS2_Phlll:
 	li	$10,32			# 0x20
 	li	$3,255			# 0xff
 	.align	3
-.L1477:
+.L1497:
 	lh	$11,0($4)
 	addiu	$10,$10,-1
 	lh	$2,0($5)
@@ -13650,7 +13858,7 @@ _ZN12_GLOBAL__N_16addAvgILi4ELi32EEEvPKsS2_Phlll:
 	slt	$11,$2,0
 	movn	$2,$0,$11
 	sb	$2,3($6)
-	bne	$10,$0,.L1477
+	bne	$10,$0,.L1497
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -13674,20 +13882,20 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi4ELi32EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,32			# 0x20
 	.align	3
-.L1482:
+.L1502:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,4
-.L1481:
+.L1501:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L1481
+	bne	$2,$9,.L1501
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1482
+	bne	$10,$0,.L1502
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -13714,13 +13922,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi48EEEvPKsS2_Phlll:
 	li	$15,48			# 0x30
 	li	$12,255			# 0xff
 	.align	3
-.L1488:
+.L1508:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,64
 	.align	3
-.L1487:
+.L1507:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -13743,13 +13951,13 @@ _ZN12_GLOBAL__N_16addAvgILi32ELi48EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L1487
+	bne	$14,$3,.L1507
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L1488
+	bne	$15,$0,.L1508
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -13773,21 +13981,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi32ELi48EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,48			# 0x30
 	.align	3
-.L1494:
+.L1514:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,32
 	.align	3
-.L1493:
+.L1513:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L1493
+	bne	$2,$9,.L1513
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1494
+	bne	$10,$0,.L1514
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -13814,13 +14022,13 @@ _ZN12_GLOBAL__N_16addAvgILi24ELi64EEEvPKsS2_Phlll:
 	li	$15,64			# 0x40
 	li	$12,255			# 0xff
 	.align	3
-.L1500:
+.L1520:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,48
 	.align	3
-.L1499:
+.L1519:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -13843,13 +14051,13 @@ _ZN12_GLOBAL__N_16addAvgILi24ELi64EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L1499
+	bne	$14,$3,.L1519
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L1500
+	bne	$15,$0,.L1520
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -13873,21 +14081,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi24ELi64EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,64			# 0x40
 	.align	3
-.L1506:
+.L1526:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,24
 	.align	3
-.L1505:
+.L1525:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L1505
+	bne	$2,$9,.L1525
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1506
+	bne	$10,$0,.L1526
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -13914,12 +14122,12 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi64EEEvPKsS2_Phlll:
 	li	$15,64			# 0x40
 	li	$12,255			# 0xff
 	.align	3
-.L1512:
+.L1532:
 	move	$3,$4
 	move	$11,$5
 	move	$10,$6
 	daddiu	$14,$4,16
-.L1511:
+.L1531:
 	daddiu	$11,$11,4
 	lh	$2,0($3)
 	daddiu	$10,$10,2
@@ -13942,13 +14150,13 @@ _ZN12_GLOBAL__N_16addAvgILi8ELi64EEEvPKsS2_Phlll:
 	movz	$2,$12,$13
 	slt	$13,$2,0
 	movn	$2,$0,$13
-	bne	$14,$3,.L1511
+	bne	$14,$3,.L1531
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$4,$4,$7
 	daddu	$5,$5,$8
-	bne	$15,$0,.L1512
+	bne	$15,$0,.L1532
 	daddu	$6,$6,$9
 
 	jr	$31
@@ -13972,21 +14180,21 @@ _ZN12_GLOBAL__N_114blockcopy_pp_cILi8ELi64EEEvPhlPKhl:
 	.set	nomacro
 	li	$10,64			# 0x40
 	.align	3
-.L1518:
+.L1538:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,8
 	.align	3
-.L1517:
+.L1537:
 	lbu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,1
-	bne	$2,$9,.L1517
+	bne	$2,$9,.L1537
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1518
+	bne	$10,$0,.L1538
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14010,7 +14218,7 @@ _ZN12_GLOBAL__N_18sse_pp_aILi2ELi4EEEjPKhlS2_l:
 	.set	nomacro
 	li	$9,4			# 0x4
 	move	$10,$0
-.L1523:
+.L1543:
 	lbu	$8,1($6)
 	addiu	$9,$9,-1
 	lbu	$2,1($4)
@@ -14024,7 +14232,7 @@ _ZN12_GLOBAL__N_18sse_pp_aILi2ELi4EEEjPKhlS2_l:
 	mul	$3,$2,$2
 	addu	$2,$3,$8
 	addu	$2,$2,$10
-	bne	$9,$0,.L1523
+	bne	$9,$0,.L1543
 	move	$10,$2
 
 	jr	$31
@@ -14048,14 +14256,14 @@ _ZN12_GLOBAL__N_114blockcopy_sp_cILi2ELi4EEEvPhlPKsl:
 	.set	nomacro
 	dsll	$7,$7,1
 	li	$2,4			# 0x4
-.L1527:
+.L1547:
 	lhu	$3,0($6)
 	addiu	$2,$2,-1
 	sb	$3,0($4)
 	lhu	$3,2($6)
 	daddu	$6,$6,$7
 	sb	$3,1($4)
-	bne	$2,$0,.L1527
+	bne	$2,$0,.L1547
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14079,14 +14287,14 @@ _ZN12_GLOBAL__N_114blockcopy_ps_cILi2ELi4EEEvPslPKhl:
 	.set	nomacro
 	dsll	$5,$5,1
 	li	$2,4			# 0x4
-.L1531:
+.L1551:
 	lbu	$3,0($6)
 	addiu	$2,$2,-1
 	sh	$3,0($4)
 	lbu	$3,1($6)
 	daddu	$6,$6,$7
 	sh	$3,2($4)
-	bne	$2,$0,.L1531
+	bne	$2,$0,.L1551
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14111,14 +14319,14 @@ _ZN12_GLOBAL__N_114blockcopy_ss_cILi2ELi4EEEvPslPKsl:
 	dsll	$5,$5,1
 	dsll	$7,$7,1
 	li	$2,4			# 0x4
-.L1535:
+.L1555:
 	lh	$3,0($6)
 	addiu	$2,$2,-1
 	sh	$3,0($4)
 	lh	$3,2($6)
 	daddu	$6,$6,$7
 	sh	$3,2($4)
-	bne	$2,$0,.L1535
+	bne	$2,$0,.L1555
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14142,7 +14350,7 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi2ELi4EEEvPslPKhS3_ll:
 	.set	nomacro
 	dsll	$5,$5,1
 	li	$3,4			# 0x4
-.L1539:
+.L1559:
 	lbu	$10,0($7)
 	addiu	$3,$3,-1
 	lbu	$2,0($6)
@@ -14154,7 +14362,7 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi2ELi4EEEvPslPKhS3_ll:
 	daddu	$7,$7,$9
 	subu	$2,$2,$10
 	sh	$2,2($4)
-	bne	$3,$0,.L1539
+	bne	$3,$0,.L1559
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14179,7 +14387,7 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi2ELi4EEEvPhlPKhPKsll:
 	dsll	$9,$9,1
 	li	$3,4			# 0x4
 	li	$10,255			# 0xff
-.L1543:
+.L1563:
 	lh	$11,0($7)
 	addiu	$3,$3,-1
 	lbu	$2,0($6)
@@ -14199,7 +14407,7 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi2ELi4EEEvPhlPKhPKsll:
 	slt	$11,$2,0
 	movn	$2,$0,$11
 	sb	$2,1($4)
-	bne	$3,$0,.L1543
+	bne	$3,$0,.L1563
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14224,11 +14432,11 @@ _ZN12_GLOBAL__N_18sse_pp_aILi4ELi8EEEjPKhlS2_l:
 	li	$12,8			# 0x8
 	move	$9,$0
 	.align	3
-.L1548:
+.L1568:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,4
-.L1547:
+.L1567:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	mtlo	$9
@@ -14237,12 +14445,12 @@ _ZN12_GLOBAL__N_18sse_pp_aILi4ELi8EEEjPKhlS2_l:
 	subu	$2,$2,$10
 	madd	$2,$2
 	mflo	$2
-	bne	$11,$3,.L1547
+	bne	$11,$3,.L1567
 	mflo	$9
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L1548
+	bne	$12,$0,.L1568
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14267,20 +14475,20 @@ _ZN12_GLOBAL__N_114blockcopy_sp_cILi4ELi8EEEvPhlPKsl:
 	dsll	$7,$7,1
 	li	$10,8			# 0x8
 	.align	3
-.L1554:
+.L1574:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,8
-.L1553:
+.L1573:
 	lhu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1553
+	bne	$2,$9,.L1573
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1554
+	bne	$10,$0,.L1574
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14305,20 +14513,20 @@ _ZN12_GLOBAL__N_114blockcopy_ps_cILi4ELi8EEEvPslPKhl:
 	dsll	$5,$5,1
 	li	$10,8			# 0x8
 	.align	3
-.L1560:
+.L1580:
 	move	$3,$6
 	move	$2,$4
 	daddiu	$9,$4,8
-.L1559:
+.L1579:
 	lbu	$8,0($3)
 	daddiu	$2,$2,2
 	daddiu	$3,$3,1
-	bne	$2,$9,.L1559
+	bne	$2,$9,.L1579
 	sh	$8,-2($2)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1560
+	bne	$10,$0,.L1580
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14344,20 +14552,20 @@ _ZN12_GLOBAL__N_114blockcopy_ss_cILi4ELi8EEEvPslPKsl:
 	dsll	$7,$7,1
 	li	$10,8			# 0x8
 	.align	3
-.L1566:
+.L1586:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,8
-.L1565:
+.L1585:
 	lh	$8,0($2)
 	daddiu	$3,$3,2
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1565
+	bne	$2,$9,.L1585
 	sh	$8,-2($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1566
+	bne	$10,$0,.L1586
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14382,25 +14590,25 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi4ELi8EEEvPslPKhS3_ll:
 	dsll	$5,$5,1
 	li	$14,8			# 0x8
 	.align	3
-.L1572:
+.L1592:
 	move	$2,$6
 	move	$11,$7
 	move	$10,$4
 	daddiu	$13,$6,4
-.L1571:
+.L1591:
 	daddiu	$11,$11,1
 	lbu	$3,0($2)
 	daddiu	$10,$10,2
 	lbu	$12,-1($11)
 	daddiu	$2,$2,1
 	subu	$3,$3,$12
-	bne	$13,$2,.L1571
+	bne	$13,$2,.L1591
 	sh	$3,-2($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$14,$0,.L1572
+	bne	$14,$0,.L1592
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14426,12 +14634,12 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi4ELi8EEEvPhlPKhPKsll:
 	li	$15,8			# 0x8
 	li	$14,255			# 0xff
 	.align	3
-.L1578:
+.L1598:
 	move	$3,$6
 	move	$11,$7
 	move	$10,$4
 	daddiu	$13,$6,4
-.L1577:
+.L1597:
 	daddiu	$11,$11,2
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -14442,13 +14650,13 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi4ELi8EEEvPhlPKhPKsll:
 	movz	$2,$14,$12
 	slt	$12,$2,0
 	movn	$2,$0,$12
-	bne	$13,$3,.L1577
+	bne	$13,$3,.L1597
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$15,$0,.L1578
+	bne	$15,$0,.L1598
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14473,12 +14681,12 @@ _ZN12_GLOBAL__N_18sse_pp_aILi8ELi16EEEjPKhlS2_l:
 	li	$12,16			# 0x10
 	move	$9,$0
 	.align	3
-.L1584:
+.L1604:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,8
 	.align	3
-.L1583:
+.L1603:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	mtlo	$9
@@ -14487,12 +14695,12 @@ _ZN12_GLOBAL__N_18sse_pp_aILi8ELi16EEEjPKhlS2_l:
 	subu	$2,$2,$10
 	madd	$2,$2
 	mflo	$2
-	bne	$11,$3,.L1583
+	bne	$11,$3,.L1603
 	mflo	$9
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L1584
+	bne	$12,$0,.L1604
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14517,21 +14725,21 @@ _ZN12_GLOBAL__N_114blockcopy_sp_cILi8ELi16EEEvPhlPKsl:
 	dsll	$7,$7,1
 	li	$10,16			# 0x10
 	.align	3
-.L1590:
+.L1610:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,16
 	.align	3
-.L1589:
+.L1609:
 	lhu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1589
+	bne	$2,$9,.L1609
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1590
+	bne	$10,$0,.L1610
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14556,21 +14764,21 @@ _ZN12_GLOBAL__N_114blockcopy_ps_cILi8ELi16EEEvPslPKhl:
 	dsll	$5,$5,1
 	li	$10,16			# 0x10
 	.align	3
-.L1596:
+.L1616:
 	move	$3,$6
 	move	$2,$4
 	daddiu	$9,$4,16
 	.align	3
-.L1595:
+.L1615:
 	lbu	$8,0($3)
 	daddiu	$2,$2,2
 	daddiu	$3,$3,1
-	bne	$2,$9,.L1595
+	bne	$2,$9,.L1615
 	sh	$8,-2($2)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1596
+	bne	$10,$0,.L1616
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14596,21 +14804,21 @@ _ZN12_GLOBAL__N_114blockcopy_ss_cILi8ELi16EEEvPslPKsl:
 	dsll	$7,$7,1
 	li	$10,16			# 0x10
 	.align	3
-.L1602:
+.L1622:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,16
 	.align	3
-.L1601:
+.L1621:
 	lh	$8,0($2)
 	daddiu	$3,$3,2
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1601
+	bne	$2,$9,.L1621
 	sh	$8,-2($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1602
+	bne	$10,$0,.L1622
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14635,26 +14843,26 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi8ELi16EEEvPslPKhS3_ll:
 	dsll	$5,$5,1
 	li	$14,16			# 0x10
 	.align	3
-.L1608:
+.L1628:
 	move	$2,$6
 	move	$11,$7
 	move	$10,$4
 	daddiu	$13,$6,8
 	.align	3
-.L1607:
+.L1627:
 	daddiu	$11,$11,1
 	lbu	$3,0($2)
 	daddiu	$10,$10,2
 	lbu	$12,-1($11)
 	daddiu	$2,$2,1
 	subu	$3,$3,$12
-	bne	$13,$2,.L1607
+	bne	$13,$2,.L1627
 	sh	$3,-2($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$14,$0,.L1608
+	bne	$14,$0,.L1628
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14680,13 +14888,13 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi8ELi16EEEvPhlPKhPKsll:
 	li	$15,16			# 0x10
 	li	$14,255			# 0xff
 	.align	3
-.L1614:
+.L1634:
 	move	$3,$6
 	move	$11,$7
 	move	$10,$4
 	daddiu	$13,$6,8
 	.align	3
-.L1613:
+.L1633:
 	daddiu	$11,$11,2
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -14697,13 +14905,13 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi8ELi16EEEvPhlPKhPKsll:
 	movz	$2,$14,$12
 	slt	$12,$2,0
 	movn	$2,$0,$12
-	bne	$13,$3,.L1613
+	bne	$13,$3,.L1633
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$15,$0,.L1614
+	bne	$15,$0,.L1634
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14728,12 +14936,12 @@ _ZN12_GLOBAL__N_18sse_pp_aILi16ELi32EEEjPKhlS2_l:
 	li	$12,32			# 0x20
 	move	$9,$0
 	.align	3
-.L1620:
+.L1640:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,16
 	.align	3
-.L1619:
+.L1639:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	mtlo	$9
@@ -14742,12 +14950,12 @@ _ZN12_GLOBAL__N_18sse_pp_aILi16ELi32EEEjPKhlS2_l:
 	subu	$2,$2,$10
 	madd	$2,$2
 	mflo	$2
-	bne	$11,$3,.L1619
+	bne	$11,$3,.L1639
 	mflo	$9
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L1620
+	bne	$12,$0,.L1640
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14772,21 +14980,21 @@ _ZN12_GLOBAL__N_114blockcopy_sp_cILi16ELi32EEEvPhlPKsl:
 	dsll	$7,$7,1
 	li	$10,32			# 0x20
 	.align	3
-.L1626:
+.L1646:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,32
 	.align	3
-.L1625:
+.L1645:
 	lhu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1625
+	bne	$2,$9,.L1645
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1626
+	bne	$10,$0,.L1646
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14811,21 +15019,21 @@ _ZN12_GLOBAL__N_114blockcopy_ps_cILi16ELi32EEEvPslPKhl:
 	dsll	$5,$5,1
 	li	$10,32			# 0x20
 	.align	3
-.L1632:
+.L1652:
 	move	$3,$6
 	move	$2,$4
 	daddiu	$9,$4,32
 	.align	3
-.L1631:
+.L1651:
 	lbu	$8,0($3)
 	daddiu	$2,$2,2
 	daddiu	$3,$3,1
-	bne	$2,$9,.L1631
+	bne	$2,$9,.L1651
 	sh	$8,-2($2)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1632
+	bne	$10,$0,.L1652
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14851,21 +15059,21 @@ _ZN12_GLOBAL__N_114blockcopy_ss_cILi16ELi32EEEvPslPKsl:
 	dsll	$7,$7,1
 	li	$10,32			# 0x20
 	.align	3
-.L1638:
+.L1658:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,32
 	.align	3
-.L1637:
+.L1657:
 	lh	$8,0($2)
 	daddiu	$3,$3,2
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1637
+	bne	$2,$9,.L1657
 	sh	$8,-2($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1638
+	bne	$10,$0,.L1658
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -14890,26 +15098,26 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi16ELi32EEEvPslPKhS3_ll:
 	dsll	$5,$5,1
 	li	$14,32			# 0x20
 	.align	3
-.L1644:
+.L1664:
 	move	$2,$6
 	move	$11,$7
 	move	$10,$4
 	daddiu	$13,$6,16
 	.align	3
-.L1643:
+.L1663:
 	daddiu	$11,$11,1
 	lbu	$3,0($2)
 	daddiu	$10,$10,2
 	lbu	$12,-1($11)
 	daddiu	$2,$2,1
 	subu	$3,$3,$12
-	bne	$13,$2,.L1643
+	bne	$13,$2,.L1663
 	sh	$3,-2($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$14,$0,.L1644
+	bne	$14,$0,.L1664
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14935,13 +15143,13 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi16ELi32EEEvPhlPKhPKsll:
 	li	$15,32			# 0x20
 	li	$14,255			# 0xff
 	.align	3
-.L1650:
+.L1670:
 	move	$3,$6
 	move	$11,$7
 	move	$10,$4
 	daddiu	$13,$6,16
 	.align	3
-.L1649:
+.L1669:
 	daddiu	$11,$11,2
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -14952,13 +15160,13 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi16ELi32EEEvPhlPKhPKsll:
 	movz	$2,$14,$12
 	slt	$12,$2,0
 	movn	$2,$0,$12
-	bne	$13,$3,.L1649
+	bne	$13,$3,.L1669
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$15,$0,.L1650
+	bne	$15,$0,.L1670
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -14983,12 +15191,12 @@ _ZN12_GLOBAL__N_18sse_pp_aILi32ELi64EEEjPKhlS2_l:
 	li	$12,64			# 0x40
 	move	$9,$0
 	.align	3
-.L1656:
+.L1676:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,32
 	.align	3
-.L1655:
+.L1675:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	mtlo	$9
@@ -14997,12 +15205,12 @@ _ZN12_GLOBAL__N_18sse_pp_aILi32ELi64EEEjPKhlS2_l:
 	subu	$2,$2,$10
 	madd	$2,$2
 	mflo	$2
-	bne	$11,$3,.L1655
+	bne	$11,$3,.L1675
 	mflo	$9
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L1656
+	bne	$12,$0,.L1676
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -15027,21 +15235,21 @@ _ZN12_GLOBAL__N_114blockcopy_sp_cILi32ELi64EEEvPhlPKsl:
 	dsll	$7,$7,1
 	li	$10,64			# 0x40
 	.align	3
-.L1662:
+.L1682:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,64
 	.align	3
-.L1661:
+.L1681:
 	lhu	$8,0($2)
 	daddiu	$3,$3,1
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1661
+	bne	$2,$9,.L1681
 	sb	$8,-1($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1662
+	bne	$10,$0,.L1682
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -15066,21 +15274,21 @@ _ZN12_GLOBAL__N_114blockcopy_ps_cILi32ELi64EEEvPslPKhl:
 	dsll	$5,$5,1
 	li	$10,64			# 0x40
 	.align	3
-.L1668:
+.L1688:
 	move	$3,$6
 	move	$2,$4
 	daddiu	$9,$4,64
 	.align	3
-.L1667:
+.L1687:
 	lbu	$8,0($3)
 	daddiu	$2,$2,2
 	daddiu	$3,$3,1
-	bne	$2,$9,.L1667
+	bne	$2,$9,.L1687
 	sh	$8,-2($2)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1668
+	bne	$10,$0,.L1688
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -15106,21 +15314,21 @@ _ZN12_GLOBAL__N_114blockcopy_ss_cILi32ELi64EEEvPslPKsl:
 	dsll	$7,$7,1
 	li	$10,64			# 0x40
 	.align	3
-.L1674:
+.L1694:
 	move	$2,$6
 	move	$3,$4
 	daddiu	$9,$6,64
 	.align	3
-.L1673:
+.L1693:
 	lh	$8,0($2)
 	daddiu	$3,$3,2
 	daddiu	$2,$2,2
-	bne	$2,$9,.L1673
+	bne	$2,$9,.L1693
 	sh	$8,-2($3)
 
 	addiu	$10,$10,-1
 	daddu	$4,$4,$5
-	bne	$10,$0,.L1674
+	bne	$10,$0,.L1694
 	daddu	$6,$6,$7
 
 	jr	$31
@@ -15145,26 +15353,26 @@ _ZN12_GLOBAL__N_114pixel_sub_ps_cILi32ELi64EEEvPslPKhS3_ll:
 	dsll	$5,$5,1
 	li	$14,64			# 0x40
 	.align	3
-.L1680:
+.L1700:
 	move	$2,$6
 	move	$11,$7
 	move	$10,$4
 	daddiu	$13,$6,32
 	.align	3
-.L1679:
+.L1699:
 	daddiu	$11,$11,1
 	lbu	$3,0($2)
 	daddiu	$10,$10,2
 	lbu	$12,-1($11)
 	daddiu	$2,$2,1
 	subu	$3,$3,$12
-	bne	$13,$2,.L1679
+	bne	$13,$2,.L1699
 	sh	$3,-2($10)
 
 	addiu	$14,$14,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$14,$0,.L1680
+	bne	$14,$0,.L1700
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -15190,13 +15398,13 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi32ELi64EEEvPhlPKhPKsll:
 	li	$15,64			# 0x40
 	li	$14,255			# 0xff
 	.align	3
-.L1686:
+.L1706:
 	move	$3,$6
 	move	$11,$7
 	move	$10,$4
 	daddiu	$13,$6,32
 	.align	3
-.L1685:
+.L1705:
 	daddiu	$11,$11,2
 	lbu	$2,0($3)
 	daddiu	$10,$10,1
@@ -15207,13 +15415,13 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi32ELi64EEEvPhlPKhPKsll:
 	movz	$2,$14,$12
 	slt	$12,$2,0
 	movn	$2,$0,$12
-	bne	$13,$3,.L1685
+	bne	$13,$3,.L1705
 	sb	$2,-1($10)
 
 	addiu	$15,$15,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$15,$0,.L1686
+	bne	$15,$0,.L1706
 	daddu	$4,$4,$5
 
 	jr	$31
@@ -15226,231 +15434,9 @@ _ZN12_GLOBAL__N_114pixel_add_ps_cILi32ELi64EEEvPhlPKhPKsll:
 	.section	.rodata.str1.8,"aMS",@progbits,1
 	.align	3
 .LC4:
-	.ascii	"getResidual_4x4 test fail\000"
-	.align	3
-.LC5:
-	.ascii	"getResidual_4x4 test success\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl
-	.type	_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl, @function
-_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl:
-	.frame	$sp,16,$31		# vars= 0, regs= 2/0, args= 0, gp= 0
-	.mask	0x90000000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-16
-	dsll	$14,$7,1
-	vblw	$w2,0($5)
-	sd	$28,0($sp)
-	daddu	$8,$5,$7
-	daddu	$2,$4,$7
-	daddu	$10,$6,$14
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl)))
-	sd	$31,8($sp)
-	vblw	$w0,0($2)
-	daddu	$3,$8,$7
-	daddu	$2,$2,$7
-	vblw	$w4,0($8)
-	vblw	$w3,0($4)
-	daddu	$9,$10,$14
-	daddu	$28,$28,$25
-	vblw	$w1,0($2)
-	insve.w	$w3[1],$w0[0]
-	daddu	$8,$2,$7
-	vblw	$w0,0($3)
-	daddu	$2,$9,$14
-	insve.w	$w2[1],$w4[0]
-	daddu	$3,$3,$7
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl)))
-	vblw	$w5,0($8)
-	vextb_u.h	$w3,$w3
-	li	$13,4			# 0x4
-	vblw	$w4,0($3)
-	insve.w	$w1[1],$w5[0]
-	vextb_u.h	$w2,$w2
-	vextb_u.h	$w1,$w1
-	subv.h	$w2,$w3,$w2
-	insve.w	$w0[1],$w4[0]
-	vsd	$w2,0,0($6)
-	vextb_u.h	$w0,$w0
-	vsd	$w2,1,0($10)
-	subv.h	$w0,$w1,$w0
-	vsd	$w0,0,0($9)
-	vsd	$w0,1,0($2)
-.L1694:
-	move	$2,$6
-	move	$9,$4
-	move	$8,$5
-	daddiu	$12,$6,8
-.L1693:
-	lbu	$3,0($9)
-	daddiu	$2,$2,2
-	daddiu	$9,$9,1
-	lbu	$11,0($8)
-	lh	$10,-2($2)
-	subu	$3,$3,$11
-	bne	$10,$3,.L1698
-	daddiu	$8,$8,1
-
-	bne	$12,$2,.L1693
-	nop
-
-	addiu	$13,$13,-1
-	daddu	$4,$4,$7
-	daddu	$6,$6,$14
-	bne	$13,$0,.L1694
-	daddu	$5,$5,$7
-
-	ld	$4,%got_page(.LC5)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC5)
-
-	ld	$31,8($sp)
-	ld	$28,0($sp)
-	jr	$31
-	daddiu	$sp,$sp,16
-
-	.align	3
-.L1698:
-	ld	$4,%got_page(.LC4)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC4)
-
-	ld	$31,8($sp)
-	ld	$28,0($sp)
-	jr	$31
-	daddiu	$sp,$sp,16
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl
-	.size	_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl, .-_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl
-	.section	.rodata.str1.8
-	.align	3
-.LC6:
-	.ascii	"sub_ps_4x4 test fail\000"
-	.align	3
-.LC7:
-	.ascii	"sub_ps_4x4 test success\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll
-	.type	_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll, @function
-_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll:
-	.frame	$sp,16,$31		# vars= 0, regs= 2/0, args= 0, gp= 0
-	.mask	0x90000000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-16
-	dsll	$5,$5,1
-	vblw	$w3,0($6)
-	vblw	$w2,0($7)
-	sd	$28,0($sp)
-	daddu	$10,$6,$8
-	daddu	$2,$7,$9
-	daddu	$12,$4,$5
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll)))
-	sd	$31,8($sp)
-	vblw	$w6,0($2)
-	daddu	$3,$10,$8
-	daddu	$2,$2,$9
-	vblw	$w0,0($10)
-	insve.w	$w3[1],$w0[0]
-	daddu	$11,$12,$5
-	daddu	$28,$28,$25
-	vblw	$w1,0($3)
-	vblw	$w0,0($2)
-	daddu	$10,$2,$9
-	daddu	$3,$3,$8
-	vextb_u.h	$w3,$w3
-	insve.w	$w2[1],$w6[0]
-	daddu	$2,$11,$5
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll)))
-	vblw	$w4,0($3)
-	vblw	$w5,0($10)
-	li	$15,4			# 0x4
-	insve.w	$w1[1],$w4[0]
-	vextb_u.h	$w2,$w2
-	vextb_u.h	$w1,$w1
-	subv.h	$w2,$w3,$w2
-	insve.w	$w0[1],$w5[0]
-	vsd	$w2,0,0($4)
-	vextb_u.h	$w0,$w0
-	vsd	$w2,1,0($12)
-	subv.h	$w0,$w1,$w0
-	vsd	$w0,0,0($11)
-	vsd	$w0,1,0($2)
-.L1703:
-	move	$2,$4
-	move	$11,$6
-	move	$10,$7
-	daddiu	$14,$4,8
-.L1702:
-	lbu	$3,0($11)
-	daddiu	$2,$2,2
-	daddiu	$11,$11,1
-	lbu	$13,0($10)
-	lh	$12,-2($2)
-	subu	$3,$3,$13
-	bne	$12,$3,.L1707
-	daddiu	$10,$10,1
-
-	bne	$14,$2,.L1702
-	nop
-
-	addiu	$15,$15,-1
-	daddu	$6,$6,$8
-	daddu	$7,$7,$9
-	bne	$15,$0,.L1703
-	daddu	$4,$4,$5
-
-	ld	$4,%got_page(.LC7)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC7)
-
-	ld	$31,8($sp)
-	ld	$28,0($sp)
-	jr	$31
-	daddiu	$sp,$sp,16
-
-	.align	3
-.L1707:
-	ld	$4,%got_page(.LC6)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC6)
-
-	ld	$31,8($sp)
-	ld	$28,0($sp)
-	jr	$31
-	daddiu	$sp,$sp,16
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll
-	.size	_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll, .-_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll
-	.section	.rodata.str1.8
-	.align	3
-.LC8:
 	.ascii	"blockcopy_pp_4x4 test fail\000"
 	.align	3
-.LC9:
+.LC5:
 	.ascii	"blockcopy_pp_4x4 test success\000"
 	.text
 	.align	2
@@ -15486,30 +15472,30 @@ _ZN12_GLOBAL__N_116blockcopy_pp_4x4EPhlPKhl:
 	vsw	$w1,0,0($9)
 	vsw	$w0,0,0($8)
 	vsw	$w2,0,0($10)
-.L1712:
+.L1714:
 	move	$2,$4
 	move	$3,$6
 	daddiu	$10,$4,4
 	daddiu	$3,$3,1
-.L1717:
+.L1719:
 	lbu	$9,0($2)
 	lbu	$8,-1($3)
-	bne	$9,$8,.L1716
+	bne	$9,$8,.L1718
 	daddiu	$2,$2,1
 
-	bne	$2,$10,.L1717
+	bne	$2,$10,.L1719
 	daddiu	$3,$3,1
 
 	addiu	$11,$11,-1
 	daddu	$4,$4,$5
-	bne	$11,$0,.L1712
+	bne	$11,$0,.L1714
 	daddu	$6,$6,$7
 
-	ld	$4,%got_page(.LC9)($28)
+	ld	$4,%got_page(.LC5)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC9)
+	daddiu	$4,$4,%got_ofst(.LC5)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -15517,12 +15503,12 @@ _ZN12_GLOBAL__N_116blockcopy_pp_4x4EPhlPKhl:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L1716:
-	ld	$4,%got_page(.LC8)($28)
+.L1718:
+	ld	$4,%got_page(.LC4)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC8)
+	daddiu	$4,$4,%got_ofst(.LC4)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -15535,10 +15521,10 @@ _ZN12_GLOBAL__N_116blockcopy_pp_4x4EPhlPKhl:
 	.size	_ZN12_GLOBAL__N_116blockcopy_pp_4x4EPhlPKhl, .-_ZN12_GLOBAL__N_116blockcopy_pp_4x4EPhlPKhl
 	.section	.rodata.str1.8
 	.align	3
-.LC10:
+.LC6:
 	.ascii	"blockcopy_ss_4x4 test fail\000"
 	.align	3
-.LC11:
+.LC7:
 	.ascii	"blockcopy_ss_4x4 test success\000"
 	.text
 	.align	2
@@ -15576,30 +15562,30 @@ _ZN12_GLOBAL__N_116blockcopy_ss_4x4EPslPKsl:
 	vsd	$w1,0,0($9)
 	vsd	$w0,0,0($8)
 	vsd	$w2,0,0($10)
-.L1722:
+.L1724:
 	move	$2,$4
 	move	$3,$6
 	daddiu	$10,$4,8
 	daddiu	$3,$3,2
-.L1727:
+.L1729:
 	lh	$9,0($2)
 	lh	$8,-2($3)
-	bne	$9,$8,.L1726
+	bne	$9,$8,.L1728
 	daddiu	$2,$2,2
 
-	bne	$2,$10,.L1727
+	bne	$2,$10,.L1729
 	daddiu	$3,$3,2
 
 	addiu	$11,$11,-1
 	daddu	$4,$4,$5
-	bne	$11,$0,.L1722
+	bne	$11,$0,.L1724
 	daddu	$6,$6,$7
 
-	ld	$4,%got_page(.LC11)($28)
+	ld	$4,%got_page(.LC7)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC11)
+	daddiu	$4,$4,%got_ofst(.LC7)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -15607,12 +15593,12 @@ _ZN12_GLOBAL__N_116blockcopy_ss_4x4EPslPKsl:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L1726:
-	ld	$4,%got_page(.LC10)($28)
+.L1728:
+	ld	$4,%got_page(.LC6)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC10)
+	daddiu	$4,$4,%got_ofst(.LC6)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -15625,10 +15611,10 @@ _ZN12_GLOBAL__N_116blockcopy_ss_4x4EPslPKsl:
 	.size	_ZN12_GLOBAL__N_116blockcopy_ss_4x4EPslPKsl, .-_ZN12_GLOBAL__N_116blockcopy_ss_4x4EPslPKsl
 	.section	.rodata.str1.8
 	.align	3
-.LC12:
+.LC8:
 	.ascii	"blockcopy_pp_8x8 test fail\000"
 	.align	3
-.LC13:
+.LC9:
 	.ascii	"blockcopy_pp_8x8 test success\000"
 	.text
 	.align	2
@@ -15680,30 +15666,30 @@ _ZN12_GLOBAL__N_116blockcopy_pp_8x8EPhlPKhl:
 	vsd	$w2,0,0($12)
 	vsd	$w1,0,0($10)
 	vsd	$w5,0,0($3)
-.L1732:
+.L1734:
 	move	$2,$4
 	move	$3,$6
 	daddiu	$10,$4,8
 	daddiu	$3,$3,1
-.L1737:
+.L1739:
 	lbu	$9,0($2)
 	lbu	$8,-1($3)
-	bne	$9,$8,.L1736
+	bne	$9,$8,.L1738
 	daddiu	$2,$2,1
 
-	bne	$2,$10,.L1737
+	bne	$2,$10,.L1739
 	daddiu	$3,$3,1
 
 	addiu	$11,$11,-1
 	daddu	$4,$4,$5
-	bne	$11,$0,.L1732
+	bne	$11,$0,.L1734
 	daddu	$6,$6,$7
 
-	ld	$4,%got_page(.LC13)($28)
+	ld	$4,%got_page(.LC9)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC13)
+	daddiu	$4,$4,%got_ofst(.LC9)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -15711,12 +15697,12 @@ _ZN12_GLOBAL__N_116blockcopy_pp_8x8EPhlPKhl:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L1736:
-	ld	$4,%got_page(.LC12)($28)
+.L1738:
+	ld	$4,%got_page(.LC8)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC12)
+	daddiu	$4,$4,%got_ofst(.LC8)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -15729,10 +15715,10 @@ _ZN12_GLOBAL__N_116blockcopy_pp_8x8EPhlPKhl:
 	.size	_ZN12_GLOBAL__N_116blockcopy_pp_8x8EPhlPKhl, .-_ZN12_GLOBAL__N_116blockcopy_pp_8x8EPhlPKhl
 	.section	.rodata.str1.8
 	.align	3
-.LC14:
+.LC10:
 	.ascii	"blockcopy_ss_8x8 test fail\000"
 	.align	3
-.LC15:
+.LC11:
 	.ascii	"blockcopy_ss_8x8 test success\000"
 	.text
 	.align	2
@@ -15786,30 +15772,30 @@ _ZN12_GLOBAL__N_116blockcopy_ss_8x8EPslPKsl:
 	st.d	$w2,0($8)
 	st.d	$w1,0($7)
 	st.d	$w0,0($13)
-.L1742:
+.L1744:
 	move	$2,$4
 	move	$3,$6
 	daddiu	$8,$4,16
 	daddiu	$3,$3,2
-.L1747:
+.L1749:
 	lh	$7,0($2)
 	lh	$5,-2($3)
-	bne	$7,$5,.L1746
+	bne	$7,$5,.L1748
 	daddiu	$2,$2,2
 
-	bne	$2,$8,.L1747
+	bne	$2,$8,.L1749
 	daddiu	$3,$3,2
 
 	addiu	$11,$11,-1
 	daddu	$4,$4,$9
-	bne	$11,$0,.L1742
+	bne	$11,$0,.L1744
 	daddu	$6,$6,$10
 
-	ld	$4,%got_page(.LC15)($28)
+	ld	$4,%got_page(.LC11)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC15)
+	daddiu	$4,$4,%got_ofst(.LC11)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -15817,12 +15803,12 @@ _ZN12_GLOBAL__N_116blockcopy_ss_8x8EPslPKsl:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L1746:
-	ld	$4,%got_page(.LC14)($28)
+.L1748:
+	ld	$4,%got_page(.LC10)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC14)
+	daddiu	$4,$4,%got_ofst(.LC10)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -15835,309 +15821,10 @@ _ZN12_GLOBAL__N_116blockcopy_ss_8x8EPslPKsl:
 	.size	_ZN12_GLOBAL__N_116blockcopy_ss_8x8EPslPKsl, .-_ZN12_GLOBAL__N_116blockcopy_ss_8x8EPslPKsl
 	.section	.rodata.str1.8
 	.align	3
-.LC16:
-	.ascii	"getResidual_8x8 test fail\000"
-	.align	3
-.LC17:
-	.ascii	"getResidual_8x8 test success\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl
-	.type	_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl, @function
-_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl:
-	.frame	$sp,16,$31		# vars= 0, regs= 2/0, args= 0, gp= 0
-	.mask	0x90000000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	dsll	$12,$7,1
-	dsll	$8,$7,2
-	vbld	$w0,0($5)
-	vextb_u.h	$w0,$w0
-	daddu	$15,$6,$12
-	daddiu	$sp,$sp,-16
-	daddu	$11,$15,$12
-	daddu	$2,$4,$8
-	sd	$28,0($sp)
-	sd	$31,8($sp)
-	daddu	$3,$5,$8
-	vbld	$w6,0($2)
-	daddu	$10,$11,$8
-	daddu	$2,$2,$7
-	daddu	$8,$4,$7
-	vbld	$w12,0($3)
-	vbld	$w9,0($4)
-	vbld	$w8,0($8)
-	vbld	$w5,0($2)
-	daddu	$9,$5,$7
-	daddu	$3,$3,$7
-	daddu	$24,$10,$12
-	daddu	$8,$8,$7
-	vbld	$w14,0($9)
-	vbld	$w11,0($3)
-	daddu	$2,$2,$7
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl)))
-	vbld	$w7,0($8)
-	vextb_u.h	$w9,$w9
-	vbld	$w4,0($2)
-	daddu	$9,$9,$7
-	daddu	$3,$3,$7
-	subv.h	$w9,$w9,$w0
-	daddu	$13,$24,$12
-	daddu	$8,$8,$7
-	vbld	$w13,0($9)
-	vbld	$w10,0($3)
-	daddu	$2,$2,$7
-	daddu	$28,$28,$25
-	vbld	$w2,0($8)
-	vextb_u.h	$w6,$w6
-	vbld	$w0,0($2)
-	daddu	$9,$9,$7
-	daddu	$3,$3,$7
-	vextb_u.h	$w8,$w8
-	daddu	$8,$11,$12
-	daddu	$2,$13,$12
-	vbld	$w3,0($9)
-	vbld	$w1,0($3)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl)))
-	li	$14,8			# 0x8
-	st.d	$w9,0($6)
-	vextb_u.h	$w3,$w3
-	vextb_u.h	$w7,$w7
-	vextb_u.h	$w2,$w2
-	vextb_u.h	$w5,$w5
-	subv.h	$w2,$w2,$w3
-	vextb_u.h	$w4,$w4
-	vextb_u.h	$w0,$w0
-	vextb_u.h	$w14,$w14
-	vextb_u.h	$w13,$w13
-	vextb_u.h	$w12,$w12
-	vextb_u.h	$w11,$w11
-	vextb_u.h	$w9,$w10
-	vextb_u.h	$w1,$w1
-	subv.h	$w8,$w8,$w14
-	subv.h	$w7,$w7,$w13
-	st.d	$w8,0($15)
-	subv.h	$w6,$w6,$w12
-	st.d	$w7,0($11)
-	subv.h	$w3,$w5,$w11
-	st.d	$w2,0($8)
-	subv.h	$w0,$w0,$w1
-	st.d	$w6,0($10)
-	subv.h	$w2,$w4,$w9
-	st.d	$w3,0($24)
-	st.d	$w2,0($13)
-	st.d	$w0,0($2)
-.L1752:
-	move	$2,$6
-	move	$9,$4
-	move	$8,$5
-	daddiu	$13,$6,16
-.L1751:
-	lbu	$3,0($9)
-	daddiu	$2,$2,2
-	daddiu	$9,$9,1
-	lbu	$11,0($8)
-	lh	$10,-2($2)
-	subu	$3,$3,$11
-	bne	$10,$3,.L1756
-	daddiu	$8,$8,1
-
-	bne	$13,$2,.L1751
-	nop
-
-	addiu	$14,$14,-1
-	daddu	$4,$4,$7
-	daddu	$6,$6,$12
-	bne	$14,$0,.L1752
-	daddu	$5,$5,$7
-
-	ld	$4,%got_page(.LC17)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC17)
-
-	ld	$31,8($sp)
-	ld	$28,0($sp)
-	jr	$31
-	daddiu	$sp,$sp,16
-
-	.align	3
-.L1756:
-	ld	$4,%got_page(.LC16)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC16)
-
-	ld	$31,8($sp)
-	ld	$28,0($sp)
-	jr	$31
-	daddiu	$sp,$sp,16
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl
-	.size	_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl, .-_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl
-	.section	.rodata.str1.8
-	.align	3
-.LC18:
-	.ascii	"sub_ps_8x8 test fail\000"
-	.align	3
-.LC19:
-	.ascii	"sub_ps_8x8 test success\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll
-	.type	_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll, @function
-_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll:
-	.frame	$sp,16,$31		# vars= 0, regs= 2/0, args= 0, gp= 0
-	.mask	0x90000000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	dsll	$14,$5,1
-	daddiu	$sp,$sp,-16
-	vbld	$w11,0($6)
-	vbld	$w15,0($7)
-	daddu	$3,$7,$9
-	daddu	$2,$6,$8
-	sd	$28,0($sp)
-	vextb_u.h	$w11,$w11
-	daddu	$24,$4,$14
-	sd	$31,8($sp)
-	daddu	$12,$3,$9
-	vbld	$w10,0($2)
-	daddu	$13,$24,$14
-	daddu	$2,$2,$8
-	vbld	$w6,0($3)
-	vbld	$w14,0($12)
-	dlsa	$11,$9,$12,1
-	dlsa	$10,$8,$2,1
-	vbld	$w9,0($2)
-	vextb_u.h	$w10,$w10
-	dlsa	$5,$5,$13,2
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll)))
-	vbld	$w8,0($10)
-	vbld	$w5,0($11)
-	daddu	$10,$10,$8
-	daddu	$3,$11,$9
-	vextb_u.h	$w9,$w9
-	vextb_u.h	$w15,$w15
-	daddu	$28,$28,$25
-	daddu	$25,$5,$14
-	vbld	$w2,0($10)
-	vbld	$w13,0($3)
-	daddu	$11,$10,$8
-	daddu	$3,$3,$9
-	vextb_u.h	$w2,$w2
-	vextb_u.h	$w6,$w6
-	daddu	$10,$25,$14
-	daddu	$2,$2,$8
-	vbld	$w7,0($11)
-	vbld	$w12,0($3)
-	daddu	$12,$12,$9
-	vbld	$w0,0($2)
-	daddu	$11,$11,$8
-	vextb_u.h	$w14,$w14
-	vbld	$w4,0($12)
-	daddu	$3,$3,$9
-	daddu	$12,$13,$14
-	vbld	$w3,0($11)
-	daddu	$2,$10,$14
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll)))
-	vbld	$w1,0($3)
-	vextb_u.h	$w0,$w0
-	li	$15,8			# 0x8
-	vextb_u.h	$w4,$w4
-	vextb_u.h	$w8,$w8
-	subv.h	$w0,$w0,$w4
-	vextb_u.h	$w7,$w7
-	vextb_u.h	$w3,$w3
-	vextb_u.h	$w5,$w5
-	vextb_u.h	$w13,$w13
-	vextb_u.h	$w12,$w12
-	vextb_u.h	$w1,$w1
-	subv.h	$w11,$w11,$w15
-	subv.h	$w6,$w10,$w6
-	st.d	$w11,0($4)
-	subv.h	$w9,$w9,$w14
-	st.d	$w6,0($24)
-	subv.h	$w5,$w8,$w5
-	st.d	$w9,0($13)
-	subv.h	$w1,$w3,$w1
-	st.d	$w0,0($12)
-	st.d	$w5,0($5)
-	subv.h	$w0,$w2,$w13
-	subv.h	$w2,$w7,$w12
-	st.d	$w0,0($25)
-	st.d	$w2,0($10)
-	st.d	$w1,0($2)
-.L1761:
-	move	$2,$4
-	move	$10,$6
-	move	$5,$7
-	daddiu	$13,$4,16
-.L1760:
-	lbu	$3,0($10)
-	daddiu	$2,$2,2
-	daddiu	$10,$10,1
-	lbu	$12,0($5)
-	lh	$11,-2($2)
-	subu	$3,$3,$12
-	bne	$11,$3,.L1765
-	daddiu	$5,$5,1
-
-	bne	$13,$2,.L1760
-	nop
-
-	addiu	$15,$15,-1
-	daddu	$6,$6,$8
-	daddu	$7,$7,$9
-	bne	$15,$0,.L1761
-	daddu	$4,$4,$14
-
-	ld	$4,%got_page(.LC19)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC19)
-
-	ld	$31,8($sp)
-	ld	$28,0($sp)
-	jr	$31
-	daddiu	$sp,$sp,16
-
-	.align	3
-.L1765:
-	ld	$4,%got_page(.LC18)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC18)
-
-	ld	$31,8($sp)
-	ld	$28,0($sp)
-	jr	$31
-	daddiu	$sp,$sp,16
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll
-	.size	_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll, .-_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll
-	.section	.rodata.str1.8
-	.align	3
-.LC20:
+.LC12:
 	.ascii	"blockcopy_pp_16x16 test fail\000"
 	.align	3
-.LC21:
+.LC13:
 	.ascii	"blockcopy_pp_16x16 test success\000"
 	.text
 	.align	2
@@ -16225,29 +15912,29 @@ _ZN12_GLOBAL__N_118blockcopy_pp_16x16EPhlPKhl:
 	st.d	$w2,0($24)
 	st.d	$w1,0($15)
 	st.d	$w0,0($2)
-.L1770:
+.L1754:
 	move	$2,$4
 	move	$3,$6
-	b	.L1769
+	b	.L1753
 	daddiu	$10,$4,16
 
 	.align	3
-.L1767:
-	beq	$2,$10,.L1774
+.L1751:
+	beq	$2,$10,.L1758
 	nop
 
-.L1769:
+.L1753:
 	daddiu	$3,$3,1
 	lbu	$9,0($2)
 	lbu	$8,-1($3)
-	beq	$9,$8,.L1767
+	beq	$9,$8,.L1751
 	daddiu	$2,$2,1
 
-	ld	$4,%got_page(.LC20)($28)
+	ld	$4,%got_page(.LC12)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC20)
+	daddiu	$4,$4,%got_ofst(.LC12)
 
 	ld	$31,24($sp)
 	ld	$28,16($sp)
@@ -16257,17 +15944,17 @@ _ZN12_GLOBAL__N_118blockcopy_pp_16x16EPhlPKhl:
 	daddiu	$sp,$sp,32
 
 	.align	3
-.L1774:
+.L1758:
 	addiu	$14,$14,-1
 	daddu	$4,$4,$5
-	bne	$14,$0,.L1770
+	bne	$14,$0,.L1754
 	daddu	$6,$6,$7
 
-	ld	$4,%got_page(.LC21)($28)
+	ld	$4,%got_page(.LC13)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC21)
+	daddiu	$4,$4,%got_ofst(.LC13)
 
 	ld	$31,24($sp)
 	ld	$28,16($sp)
@@ -16282,10 +15969,10 @@ _ZN12_GLOBAL__N_118blockcopy_pp_16x16EPhlPKhl:
 	.size	_ZN12_GLOBAL__N_118blockcopy_pp_16x16EPhlPKhl, .-_ZN12_GLOBAL__N_118blockcopy_pp_16x16EPhlPKhl
 	.section	.rodata.str1.8
 	.align	3
-.LC22:
+.LC14:
 	.ascii	"blockcopy_ss_16x16 test fail\000"
 	.align	3
-.LC23:
+.LC15:
 	.ascii	"blockcopy_ss_16x16 test success\000"
 	.text
 	.align	2
@@ -16415,32 +16102,32 @@ _ZN12_GLOBAL__N_118blockcopy_ss_16x16EPslPKsl:
 	st.d	$w2,16($2)
 	st.d	$w1,0($18)
 	st.d	$w0,16($18)
-.L1779:
+.L1763:
 	move	$2,$4
 	move	$3,$6
-	b	.L1778
+	b	.L1762
 	daddiu	$10,$4,32
 
 	.align	3
-.L1776:
-	beq	$2,$10,.L1783
+.L1760:
+	beq	$2,$10,.L1767
 	nop
 
-.L1778:
+.L1762:
 	daddiu	$3,$3,2
 	lh	$9,0($2)
 	lh	$8,-2($3)
-	beq	$9,$8,.L1776
+	beq	$9,$8,.L1760
 	daddiu	$2,$2,2
 
-	ld	$4,%got_page(.LC22)($28)
+	ld	$4,%got_page(.LC14)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC22)
+	daddiu	$4,$4,%got_ofst(.LC14)
 
 	ld	$31,40($sp)
-.L1784:
+.L1768:
 	ldc1	$f31,104($sp)
 	ld	$28,32($sp)
 	ldc1	$f30,96($sp)
@@ -16458,19 +16145,19 @@ _ZN12_GLOBAL__N_118blockcopy_ss_16x16EPslPKsl:
 	daddiu	$sp,$sp,112
 
 	.align	3
-.L1783:
+.L1767:
 	addiu	$17,$17,-1
 	daddu	$4,$4,$5
-	bne	$17,$0,.L1779
+	bne	$17,$0,.L1763
 	daddu	$6,$6,$7
 
-	ld	$4,%got_page(.LC23)($28)
+	ld	$4,%got_page(.LC15)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC23)
+	daddiu	$4,$4,%got_ofst(.LC15)
 
-	b	.L1784
+	b	.L1768
 	ld	$31,40($sp)
 
 	.set	macro
@@ -16479,405 +16166,10 @@ _ZN12_GLOBAL__N_118blockcopy_ss_16x16EPslPKsl:
 	.size	_ZN12_GLOBAL__N_118blockcopy_ss_16x16EPslPKsl, .-_ZN12_GLOBAL__N_118blockcopy_ss_16x16EPslPKsl
 	.section	.rodata.str1.8
 	.align	3
-.LC24:
-	.ascii	"getResidual_16x16 test fail\000"
-	.align	3
-.LC25:
-	.ascii	"getResidual_16x16 test success\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl
-	.type	_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl, @function
-_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl:
-	.frame	$sp,80,$31		# vars= 0, regs= 9/0, args= 0, gp= 0
-	.mask	0x907f0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-80
-	dsll	$24,$7,1
-	sd	$28,64($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl)))
-	move	$8,$6
-	daddu	$28,$28,$25
-	dsll	$25,$7,2
-	sd	$16,8($sp)
-	daddu	$15,$24,$25
-	daddiu	$16,$7,8
-	sd	$31,72($sp)
-	sd	$22,56($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl)))
-	daddu	$15,$6,$15
-	sd	$21,48($sp)
-	move	$3,$5
-	move	$2,$4
-	sd	$20,40($sp)
-	li	$31,4			# 0x4
-	dsll	$20,$7,3
-	sd	$19,32($sp)
-	daddiu	$22,$24,16
-	daddiu	$19,$24,8
-	sd	$18,24($sp)
-	daddiu	$21,$25,16
-	daddu	$18,$7,$24
-	sd	$17,16($sp)
-	daddu	$17,$24,$16
-.L1786:
-	daddu	$14,$7,$2
-	daddu	$13,$2,$16
-	vbld	$w13,0($2)
-	vbld	$w12,8($2)
-	daddu	$12,$24,$2
-	daddu	$11,$2,$19
-	vbld	$w5,0($14)
-	vbld	$w4,0($13)
-	vbld	$w3,0($12)
-	vbld	$w2,0($11)
-	daddu	$10,$2,$18
-	daddu	$9,$17,$2
-	daddu	$14,$7,$3
-	daddu	$13,$3,$16
-	vbld	$w1,0($10)
-	vbld	$w0,0($9)
-	daddu	$12,$24,$3
-	daddu	$11,$3,$19
-	vbld	$w11,0($14)
-	vbld	$w10,0($13)
-	vbld	$w9,0($12)
-	vbld	$w8,0($11)
-	daddu	$10,$3,$18
-	daddu	$9,$17,$3
-	daddu	$14,$24,$8
-	daddu	$13,$8,$22
-	vbld	$w15,0($3)
-	vbld	$w14,8($3)
-	daddu	$12,$25,$8
-	daddu	$11,$8,$21
-	vbld	$w7,0($10)
-	vbld	$w6,0($9)
-	addiu	$31,$31,-1
-	vextb_u.h	$w13,$w13
-	vextb_u.h	$w12,$w12
-	vextb_u.h	$w5,$w5
-	vextb_u.h	$w4,$w4
-	vextb_u.h	$w3,$w3
-	vextb_u.h	$w2,$w2
-	vextb_u.h	$w1,$w1
-	vextb_u.h	$w0,$w0
-	vextb_u.h	$w15,$w15
-	vextb_u.h	$w14,$w14
-	vextb_u.h	$w11,$w11
-	vextb_u.h	$w10,$w10
-	vextb_u.h	$w9,$w9
-	vextb_u.h	$w8,$w8
-	vextb_u.h	$w7,$w7
-	vextb_u.h	$w6,$w6
-	subv.h	$w13,$w13,$w15
-	subv.h	$w12,$w12,$w14
-	st.d	$w13,0($8)
-	st.d	$w12,16($8)
-	subv.h	$w5,$w5,$w11
-	subv.h	$w4,$w4,$w10
-	st.d	$w5,0($14)
-	subv.h	$w3,$w3,$w9
-	st.d	$w4,0($13)
-	subv.h	$w2,$w2,$w8
-	st.d	$w3,0($12)
-	subv.h	$w1,$w1,$w7
-	st.d	$w2,0($11)
-	subv.h	$w0,$w0,$w6
-	st.d	$w1,0($15)
-	st.d	$w0,16($15)
-	daddu	$2,$25,$2
-	daddu	$15,$15,$20
-	daddu	$3,$25,$3
-	bne	$31,$0,.L1786
-	daddu	$8,$20,$8
-
-	li	$13,16			# 0x10
-.L1790:
-	move	$2,$6
-	move	$9,$4
-	move	$8,$5
-	b	.L1789
-	daddiu	$12,$6,32
-
-	.align	3
-.L1787:
-	beq	$12,$2,.L1795
-	nop
-
-.L1789:
-	lbu	$3,0($9)
-	daddiu	$2,$2,2
-	daddiu	$9,$9,1
-	lbu	$11,0($8)
-	lh	$10,-2($2)
-	subu	$3,$3,$11
-	beq	$10,$3,.L1787
-	daddiu	$8,$8,1
-
-	ld	$4,%got_page(.LC24)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC24)
-
-	ld	$31,72($sp)
-	ld	$28,64($sp)
-	ld	$22,56($sp)
-	ld	$21,48($sp)
-	ld	$20,40($sp)
-	ld	$19,32($sp)
-	ld	$18,24($sp)
-	ld	$17,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,80
-
-	.align	3
-.L1795:
-	addiu	$13,$13,-1
-	daddu	$4,$4,$7
-	daddu	$6,$6,$24
-	bne	$13,$0,.L1790
-	daddu	$5,$5,$7
-
-	ld	$4,%got_page(.LC25)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC25)
-
-	ld	$31,72($sp)
-	ld	$28,64($sp)
-	ld	$22,56($sp)
-	ld	$21,48($sp)
-	ld	$20,40($sp)
-	ld	$19,32($sp)
-	ld	$18,24($sp)
-	ld	$17,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,80
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl
-	.size	_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl, .-_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl
-	.section	.rodata.str1.8
-	.align	3
-.LC26:
-	.ascii	"sub_ps_16x16 test fail\000"
-	.align	3
-.LC27:
-	.ascii	"sub_ps_16x16 test success\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll
-	.type	_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll, @function
-_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll:
-	.frame	$sp,112,$31		# vars= 16, regs= 11/0, args= 0, gp= 0
-	.mask	0xd0ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-112
-	move	$3,$7
-	sd	$28,88($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll)))
-	move	$2,$6
-	sd	$21,64($sp)
-	dsll	$21,$5,2
-	daddu	$28,$28,$25
-	sd	$20,56($sp)
-	dsll	$20,$5,1
-	daddiu	$10,$21,16
-	sd	$16,24($sp)
-	dsll	$16,$8,1
-	daddu	$24,$20,$21
-	sd	$31,104($sp)
-	daddu	$31,$16,$8
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll)))
-	sd	$fp,96($sp)
-	dsll	$5,$5,3
-	daddu	$24,$4,$24
-	sd	$23,80($sp)
-	dsll	$fp,$8,2
-	daddu	$23,$9,$31
-	sd	$22,72($sp)
-	li	$25,4			# 0x4
-	daddiu	$22,$20,16
-	sd	$19,48($sp)
-	daddiu	$19,$8,8
-	sd	$18,40($sp)
-	daddiu	$18,$16,8
-	sd	$17,32($sp)
-	daddiu	$17,$31,8
-	sd	$9,8($sp)
-	move	$9,$4
-	sd	$10,0($sp)
-.L1797:
-	daddu	$12,$2,$18
-	daddu	$15,$2,$8
-	vbld	$w13,0($2)
-	vbld	$w12,8($2)
-	vbld	$w2,0($12)
-	daddu	$12,$3,$18
-	daddu	$14,$2,$19
-	vbld	$w5,0($15)
-	vbld	$w8,0($12)
-	ld	$12,0($sp)
-	daddu	$13,$16,$2
-	vbld	$w4,0($14)
-	vbld	$w3,0($13)
-	daddu	$11,$2,$31
-	daddu	$10,$2,$17
-	vbld	$w15,0($3)
-	daddu	$15,$3,$8
-	daddu	$14,$3,$19
-	vbld	$w1,0($11)
-	vbld	$w0,0($10)
-	daddu	$13,$16,$3
-	vbld	$w11,0($15)
-	vbld	$w10,0($14)
-	daddu	$11,$31,$3
-	vbld	$w9,0($13)
-	daddu	$10,$3,$17
-	daddu	$15,$20,$9
-	vbld	$w14,8($3)
-	daddu	$14,$9,$22
-	daddu	$13,$21,$9
-	vbld	$w7,0($11)
-	vbld	$w6,0($10)
-	daddu	$12,$9,$12
-	addiu	$25,$25,-1
-	vextb_u.h	$w13,$w13
-	vextb_u.h	$w12,$w12
-	vextb_u.h	$w5,$w5
-	vextb_u.h	$w4,$w4
-	vextb_u.h	$w3,$w3
-	vextb_u.h	$w2,$w2
-	vextb_u.h	$w1,$w1
-	vextb_u.h	$w0,$w0
-	vextb_u.h	$w15,$w15
-	vextb_u.h	$w14,$w14
-	vextb_u.h	$w11,$w11
-	vextb_u.h	$w10,$w10
-	vextb_u.h	$w9,$w9
-	vextb_u.h	$w8,$w8
-	vextb_u.h	$w7,$w7
-	vextb_u.h	$w6,$w6
-	subv.h	$w13,$w13,$w15
-	subv.h	$w12,$w12,$w14
-	st.d	$w13,0($9)
-	st.d	$w12,16($9)
-	subv.h	$w5,$w5,$w11
-	subv.h	$w4,$w4,$w10
-	st.d	$w5,0($15)
-	subv.h	$w3,$w3,$w9
-	st.d	$w4,0($14)
-	subv.h	$w2,$w2,$w8
-	st.d	$w3,0($13)
-	subv.h	$w1,$w1,$w7
-	st.d	$w2,0($12)
-	subv.h	$w0,$w0,$w6
-	st.d	$w1,0($24)
-	st.d	$w0,16($24)
-	daddu	$9,$5,$9
-	daddu	$24,$24,$5
-	daddu	$2,$2,$fp
-	bne	$25,$0,.L1797
-	daddu	$3,$3,$23
-
-	li	$13,16			# 0x10
-.L1801:
-	move	$2,$4
-	move	$9,$6
-	move	$5,$7
-	b	.L1800
-	daddiu	$12,$4,32
-
-	.align	3
-.L1798:
-	beq	$12,$2,.L1806
-	nop
-
-.L1800:
-	lbu	$3,0($9)
-	daddiu	$2,$2,2
-	daddiu	$9,$9,1
-	lbu	$11,0($5)
-	lh	$10,-2($2)
-	subu	$3,$3,$11
-	beq	$10,$3,.L1798
-	daddiu	$5,$5,1
-
-	ld	$4,%got_page(.LC26)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC26)
-
-	ld	$31,104($sp)
-	ld	$fp,96($sp)
-	ld	$28,88($sp)
-	ld	$23,80($sp)
-	ld	$22,72($sp)
-	ld	$21,64($sp)
-	ld	$20,56($sp)
-	ld	$19,48($sp)
-	ld	$18,40($sp)
-	ld	$17,32($sp)
-	ld	$16,24($sp)
-	jr	$31
-	daddiu	$sp,$sp,112
-
-	.align	3
-.L1806:
-	ld	$2,8($sp)
-	addiu	$13,$13,-1
-	daddu	$6,$6,$8
-	daddu	$4,$4,$20
-	bne	$13,$0,.L1801
-	daddu	$7,$7,$2
-
-	ld	$4,%got_page(.LC27)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC27)
-
-	ld	$31,104($sp)
-	ld	$fp,96($sp)
-	ld	$28,88($sp)
-	ld	$23,80($sp)
-	ld	$22,72($sp)
-	ld	$21,64($sp)
-	ld	$20,56($sp)
-	ld	$19,48($sp)
-	ld	$18,40($sp)
-	ld	$17,32($sp)
-	ld	$16,24($sp)
-	jr	$31
-	daddiu	$sp,$sp,112
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll
-	.size	_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll, .-_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll
-	.section	.rodata.str1.8
-	.align	3
-.LC28:
+.LC16:
 	.ascii	"blockcopy_pp_32x32 test fail\000"
 	.align	3
-.LC29:
+.LC17:
 	.ascii	"blockcopy_pp_32x32 test success\000"
 	.text
 	.align	2
@@ -16918,7 +16210,7 @@ _ZN12_GLOBAL__N_118blockcopy_pp_32x32EPhlPKhl:
 	sdc1	$f26,96($sp)
 	sdc1	$f25,88($sp)
 	sdc1	$f24,80($sp)
-.L1808:
+.L1770:
 	daddu	$8,$3,$7
 	daddu	$19,$2,$5
 	ld.d	$w30,16($3)
@@ -17014,36 +16306,36 @@ _ZN12_GLOBAL__N_118blockcopy_pp_32x32EPhlPKhl:
 	st.d	$w3,0($9)
 	st.d	$w2,16($9)
 	st.d	$w1,0($8)
-	bne	$22,$23,.L1813
+	bne	$22,$23,.L1775
 	st.d	$w0,16($8)
 
 	li	$11,32			# 0x20
-.L1812:
+.L1774:
 	move	$2,$4
 	move	$3,$6
-	b	.L1811
+	b	.L1773
 	daddiu	$10,$4,32
 
 	.align	3
-.L1809:
-	beq	$10,$2,.L1817
+.L1771:
+	beq	$10,$2,.L1779
 	nop
 
-.L1811:
+.L1773:
 	daddiu	$3,$3,1
 	lbu	$9,0($2)
 	lbu	$8,-1($3)
-	beq	$9,$8,.L1809
+	beq	$9,$8,.L1771
 	daddiu	$2,$2,1
 
-	ld	$4,%got_page(.LC28)($28)
+	ld	$4,%got_page(.LC16)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC28)
+	daddiu	$4,$4,%got_ofst(.LC16)
 
 	ld	$31,72($sp)
-.L1818:
+.L1780:
 	ldc1	$f31,136($sp)
 	ld	$28,64($sp)
 	ldc1	$f30,128($sp)
@@ -17065,24 +16357,24 @@ _ZN12_GLOBAL__N_118blockcopy_pp_32x32EPhlPKhl:
 	daddiu	$sp,$sp,144
 
 	.align	3
-.L1813:
-	b	.L1808
+.L1775:
+	b	.L1770
 	li	$22,1			# 0x1
 
 	.align	3
-.L1817:
+.L1779:
 	addiu	$11,$11,-1
 	daddu	$4,$4,$5
-	bne	$11,$0,.L1812
+	bne	$11,$0,.L1774
 	daddu	$6,$6,$7
 
-	ld	$4,%got_page(.LC29)($28)
+	ld	$4,%got_page(.LC17)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC29)
+	daddiu	$4,$4,%got_ofst(.LC17)
 
-	b	.L1818
+	b	.L1780
 	ld	$31,72($sp)
 
 	.set	macro
@@ -17091,10 +16383,10 @@ _ZN12_GLOBAL__N_118blockcopy_pp_32x32EPhlPKhl:
 	.size	_ZN12_GLOBAL__N_118blockcopy_pp_32x32EPhlPKhl, .-_ZN12_GLOBAL__N_118blockcopy_pp_32x32EPhlPKhl
 	.section	.rodata.str1.8
 	.align	3
-.LC30:
+.LC18:
 	.ascii	"blockcopy_ss_32x32 test fail\000"
 	.align	3
-.LC31:
+.LC19:
 	.ascii	"blockcopy_ss_32x32 test success\000"
 	.text
 	.align	2
@@ -17150,7 +16442,7 @@ _ZN12_GLOBAL__N_118blockcopy_ss_32x32EPslPKsl:
 	sdc1	$f26,80($sp)
 	sdc1	$f25,72($sp)
 	sdc1	$f24,64($sp)
-.L1820:
+.L1782:
 	addiu	$21,$21,-1
 	ld.d	$w30,16($31)
 	ld.d	$w29,32($31)
@@ -17231,36 +16523,36 @@ _ZN12_GLOBAL__N_118blockcopy_ss_32x32EPslPKsl:
 	daddu	$10,$10,$5
 	daddu	$8,$8,$5
 	daddu	$2,$2,$5
-	bne	$21,$0,.L1820
+	bne	$21,$0,.L1782
 	daddu	$19,$19,$5
 
 	li	$9,32			# 0x20
-.L1824:
+.L1786:
 	move	$2,$4
 	move	$3,$6
-	b	.L1823
+	b	.L1785
 	daddiu	$8,$4,64
 
 	.align	3
-.L1821:
-	beq	$8,$2,.L1829
+.L1783:
+	beq	$8,$2,.L1791
 	nop
 
-.L1823:
+.L1785:
 	daddiu	$3,$3,2
 	lh	$7,0($2)
 	lh	$5,-2($3)
-	beq	$7,$5,.L1821
+	beq	$7,$5,.L1783
 	daddiu	$2,$2,2
 
-	ld	$4,%got_page(.LC30)($28)
+	ld	$4,%got_page(.LC18)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC30)
+	daddiu	$4,$4,%got_ofst(.LC18)
 
 	ld	$31,56($sp)
-.L1830:
+.L1792:
 	ldc1	$f31,120($sp)
 	ld	$28,48($sp)
 	ldc1	$f30,112($sp)
@@ -17280,19 +16572,19 @@ _ZN12_GLOBAL__N_118blockcopy_ss_32x32EPslPKsl:
 	daddiu	$sp,$sp,128
 
 	.align	3
-.L1829:
+.L1791:
 	addiu	$9,$9,-1
 	daddu	$4,$4,$18
-	bne	$9,$0,.L1824
+	bne	$9,$0,.L1786
 	daddu	$6,$6,$17
 
-	ld	$4,%got_page(.LC31)($28)
+	ld	$4,%got_page(.LC19)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC31)
+	daddiu	$4,$4,%got_ofst(.LC19)
 
-	b	.L1830
+	b	.L1792
 	ld	$31,56($sp)
 
 	.set	macro
@@ -17301,504 +16593,10 @@ _ZN12_GLOBAL__N_118blockcopy_ss_32x32EPslPKsl:
 	.size	_ZN12_GLOBAL__N_118blockcopy_ss_32x32EPslPKsl, .-_ZN12_GLOBAL__N_118blockcopy_ss_32x32EPslPKsl
 	.section	.rodata.str1.8
 	.align	3
-.LC32:
-	.ascii	"getResidual_32x32 test fail\000"
-	.align	3
-.LC33:
-	.ascii	"getResidual_32x32 test success\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl
-	.type	_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl, @function
-_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl:
-	.frame	$sp,64,$31		# vars= 0, regs= 7/0, args= 0, gp= 0
-	.mask	0x901f0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-64
-	move	$12,$6
-	sd	$28,48($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl)))
-	move	$3,$5
-	sd	$16,8($sp)
-	daddu	$28,$28,$25
-	dsll	$16,$7,1
-	sd	$31,56($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl)))
-	daddu	$13,$6,$16
-	sd	$20,40($sp)
-	move	$2,$4
-	dsll	$20,$7,2
-	sd	$19,32($sp)
-	li	$31,16			# 0x10
-	daddiu	$19,$7,8
-	sd	$18,24($sp)
-	daddiu	$18,$7,16
-	sd	$17,16($sp)
-	daddiu	$17,$7,24
-	.align	3
-.L1832:
-	daddu	$11,$7,$2
-	daddu	$10,$2,$19
-	vbld	$w11,0($2)
-	vbld	$w10,8($2)
-	daddu	$9,$2,$18
-	daddu	$8,$2,$17
-	vbld	$w9,16($2)
-	vbld	$w8,24($2)
-	daddu	$25,$7,$3
-	daddu	$24,$3,$19
-	vbld	$w15,0($3)
-	vbld	$w14,8($3)
-	daddu	$15,$3,$18
-	daddu	$14,$3,$17
-	vbld	$w13,16($3)
-	vbld	$w12,24($3)
-	addiu	$31,$31,-1
-	vbld	$w3,0($11)
-	vbld	$w2,0($10)
-	vbld	$w1,0($9)
-	vbld	$w0,0($8)
-	vbld	$w7,0($25)
-	vbld	$w6,0($24)
-	vbld	$w5,0($15)
-	vbld	$w4,0($14)
-	vextb_u.h	$w11,$w11
-	vextb_u.h	$w10,$w10
-	vextb_u.h	$w9,$w9
-	vextb_u.h	$w8,$w8
-	vextb_u.h	$w15,$w15
-	vextb_u.h	$w14,$w14
-	vextb_u.h	$w13,$w13
-	vextb_u.h	$w12,$w12
-	vextb_u.h	$w3,$w3
-	vextb_u.h	$w2,$w2
-	vextb_u.h	$w1,$w1
-	vextb_u.h	$w0,$w0
-	vextb_u.h	$w7,$w7
-	vextb_u.h	$w6,$w6
-	vextb_u.h	$w5,$w5
-	vextb_u.h	$w4,$w4
-	subv.h	$w11,$w11,$w15
-	subv.h	$w10,$w10,$w14
-	st.d	$w11,0($12)
-	st.d	$w10,16($12)
-	subv.h	$w9,$w9,$w13
-	subv.h	$w8,$w8,$w12
-	st.d	$w9,32($12)
-	st.d	$w8,48($12)
-	subv.h	$w3,$w3,$w7
-	subv.h	$w2,$w2,$w6
-	subv.h	$w1,$w1,$w5
-	subv.h	$w0,$w0,$w4
-	st.d	$w3,0($13)
-	st.d	$w2,16($13)
-	st.d	$w1,32($13)
-	st.d	$w0,48($13)
-	daddu	$2,$2,$16
-	daddu	$3,$3,$16
-	daddu	$12,$12,$20
-	bne	$31,$0,.L1832
-	daddu	$13,$13,$20
-
-	li	$13,32			# 0x20
-.L1836:
-	move	$2,$6
-	move	$9,$4
-	move	$8,$5
-	b	.L1835
-	daddiu	$12,$6,64
-
-	.align	3
-.L1833:
-	beq	$12,$2,.L1841
-	nop
-
-.L1835:
-	lbu	$3,0($9)
-	daddiu	$2,$2,2
-	daddiu	$9,$9,1
-	lbu	$11,0($8)
-	lh	$10,-2($2)
-	subu	$3,$3,$11
-	beq	$10,$3,.L1833
-	daddiu	$8,$8,1
-
-	ld	$4,%got_page(.LC32)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC32)
-
-	ld	$31,56($sp)
-.L1842:
-	ld	$28,48($sp)
-	ld	$20,40($sp)
-	ld	$19,32($sp)
-	ld	$18,24($sp)
-	ld	$17,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,64
-
-	.align	3
-.L1841:
-	addiu	$13,$13,-1
-	daddu	$4,$4,$7
-	daddu	$6,$6,$16
-	bne	$13,$0,.L1836
-	daddu	$5,$5,$7
-
-	ld	$4,%got_page(.LC33)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC33)
-
-	b	.L1842
-	ld	$31,56($sp)
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl
-	.size	_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl, .-_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl
-	.section	.rodata.str1.8
-	.align	3
-.LC34:
-	.ascii	"sub_ps_64x64 test fail\000"
-	.align	3
-.LC35:
-	.ascii	"sub_ps_64x64 test success\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll
-	.type	_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll, @function
-_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll:
-	.frame	$sp,16,$31		# vars= 0, regs= 2/0, args= 0, gp= 0
-	.mask	0x90000000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-16
-	dsll	$5,$5,1
-	sd	$28,0($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll)))
-	move	$10,$7
-	daddu	$28,$28,$25
-	move	$3,$6
-	sd	$31,8($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll)))
-	move	$2,$4
-	li	$11,64			# 0x40
-	.align	3
-.L1844:
-	addiu	$11,$11,-1
-	vbld	$w7,0($3)
-	vbld	$w6,8($3)
-	vbld	$w5,16($3)
-	vbld	$w4,24($3)
-	vbld	$w15,0($10)
-	vbld	$w14,8($10)
-	vbld	$w13,16($10)
-	vbld	$w12,24($10)
-	vbld	$w3,32($3)
-	vbld	$w2,40($3)
-	vbld	$w1,48($3)
-	vbld	$w0,56($3)
-	vbld	$w11,32($10)
-	vbld	$w10,40($10)
-	vbld	$w9,48($10)
-	vbld	$w8,56($10)
-	vextb_u.h	$w7,$w7
-	vextb_u.h	$w6,$w6
-	vextb_u.h	$w5,$w5
-	vextb_u.h	$w4,$w4
-	vextb_u.h	$w15,$w15
-	vextb_u.h	$w14,$w14
-	vextb_u.h	$w13,$w13
-	vextb_u.h	$w12,$w12
-	vextb_u.h	$w3,$w3
-	vextb_u.h	$w2,$w2
-	vextb_u.h	$w1,$w1
-	vextb_u.h	$w0,$w0
-	vextb_u.h	$w11,$w11
-	vextb_u.h	$w10,$w10
-	vextb_u.h	$w9,$w9
-	vextb_u.h	$w8,$w8
-	subv.h	$w7,$w7,$w15
-	subv.h	$w6,$w6,$w14
-	subv.h	$w5,$w5,$w13
-	subv.h	$w4,$w4,$w12
-	subv.h	$w3,$w3,$w11
-	subv.h	$w2,$w2,$w10
-	subv.h	$w1,$w1,$w9
-	subv.h	$w0,$w0,$w8
-	st.d	$w7,0($2)
-	st.d	$w6,16($2)
-	st.d	$w5,32($2)
-	st.d	$w4,48($2)
-	st.d	$w3,64($2)
-	st.d	$w2,80($2)
-	st.d	$w1,96($2)
-	st.d	$w0,112($2)
-	daddu	$3,$3,$8
-	daddu	$10,$10,$9
-	bne	$11,$0,.L1844
-	daddu	$2,$2,$5
-
-	li	$15,64			# 0x40
-.L1848:
-	move	$2,$4
-	move	$11,$6
-	move	$10,$7
-	b	.L1847
-	daddiu	$14,$4,128
-
-	.align	3
-.L1845:
-	beq	$14,$2,.L1853
-	nop
-
-.L1847:
-	lbu	$3,0($11)
-	daddiu	$2,$2,2
-	daddiu	$11,$11,1
-	lbu	$13,0($10)
-	lh	$12,-2($2)
-	subu	$3,$3,$13
-	beq	$12,$3,.L1845
-	daddiu	$10,$10,1
-
-	ld	$4,%got_page(.LC34)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC34)
-
-	ld	$31,8($sp)
-.L1854:
-	ld	$28,0($sp)
-	jr	$31
-	daddiu	$sp,$sp,16
-
-.L1853:
-	addiu	$15,$15,-1
-	daddu	$6,$6,$8
-	daddu	$7,$7,$9
-	bne	$15,$0,.L1848
-	daddu	$4,$4,$5
-
-	ld	$4,%got_page(.LC35)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC35)
-
-	b	.L1854
-	ld	$31,8($sp)
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll
-	.size	_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll, .-_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll
-	.section	.rodata.str1.8
-	.align	3
-.LC36:
-	.ascii	"sub_ps_32x32 test fail\000"
-	.align	3
-.LC37:
-	.ascii	"sub_ps_32x32 test success\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll
-	.type	_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll, @function
-_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll:
-	.frame	$sp,112,$31		# vars= 16, regs= 11/0, args= 0, gp= 0
-	.mask	0xd0ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-112
-	dsll	$3,$5,1
-	sd	$28,88($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll)))
-	daddu	$14,$4,$3
-	daddu	$28,$28,$25
-	sd	$31,104($sp)
-	move	$2,$6
-	sd	$fp,96($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll)))
-	dsll	$fp,$8,1
-	sd	$23,80($sp)
-	move	$13,$4
-	dsll	$23,$9,1
-	sd	$22,72($sp)
-	li	$31,16			# 0x10
-	daddiu	$22,$8,8
-	sd	$21,64($sp)
-	daddiu	$21,$8,16
-	sd	$20,56($sp)
-	daddiu	$20,$8,24
-	sd	$19,48($sp)
-	daddiu	$19,$9,8
-	sd	$18,40($sp)
-	daddiu	$18,$9,16
-	sd	$17,32($sp)
-	daddiu	$17,$9,24
-	sd	$16,24($sp)
-	dsll	$16,$5,2
-	sd	$3,8($sp)
-	move	$3,$7
-	sd	$6,0($sp)
-	.align	3
-.L1856:
-	daddu	$12,$2,$8
-	daddu	$11,$2,$22
-	vbld	$w11,0($2)
-	vbld	$w10,8($2)
-	daddu	$10,$2,$21
-	daddu	$6,$2,$20
-	vbld	$w9,16($2)
-	vbld	$w8,24($2)
-	daddu	$5,$3,$9
-	daddu	$25,$3,$19
-	vbld	$w15,0($3)
-	vbld	$w14,8($3)
-	daddu	$24,$3,$18
-	daddu	$15,$3,$17
-	vbld	$w13,16($3)
-	vbld	$w12,24($3)
-	addiu	$31,$31,-1
-	vbld	$w3,0($12)
-	vbld	$w2,0($11)
-	vbld	$w1,0($10)
-	vbld	$w0,0($6)
-	vbld	$w7,0($5)
-	vbld	$w6,0($25)
-	vbld	$w5,0($24)
-	vbld	$w4,0($15)
-	vextb_u.h	$w11,$w11
-	vextb_u.h	$w10,$w10
-	vextb_u.h	$w9,$w9
-	vextb_u.h	$w8,$w8
-	vextb_u.h	$w15,$w15
-	vextb_u.h	$w14,$w14
-	vextb_u.h	$w13,$w13
-	vextb_u.h	$w12,$w12
-	vextb_u.h	$w3,$w3
-	vextb_u.h	$w2,$w2
-	vextb_u.h	$w1,$w1
-	vextb_u.h	$w0,$w0
-	vextb_u.h	$w7,$w7
-	vextb_u.h	$w6,$w6
-	vextb_u.h	$w5,$w5
-	vextb_u.h	$w4,$w4
-	subv.h	$w11,$w11,$w15
-	subv.h	$w10,$w10,$w14
-	st.d	$w11,0($13)
-	st.d	$w10,16($13)
-	subv.h	$w9,$w9,$w13
-	subv.h	$w8,$w8,$w12
-	st.d	$w9,32($13)
-	st.d	$w8,48($13)
-	subv.h	$w3,$w3,$w7
-	subv.h	$w2,$w2,$w6
-	subv.h	$w1,$w1,$w5
-	subv.h	$w0,$w0,$w4
-	st.d	$w3,0($14)
-	st.d	$w2,16($14)
-	st.d	$w1,32($14)
-	st.d	$w0,48($14)
-	daddu	$2,$2,$fp
-	daddu	$3,$3,$23
-	daddu	$13,$13,$16
-	bne	$31,$0,.L1856
-	daddu	$14,$14,$16
-
-	li	$13,32			# 0x20
-.L1860:
-	move	$2,$4
-	ld	$6,0($sp)
-	move	$5,$7
-	b	.L1859
-	daddiu	$12,$4,64
-
-	.align	3
-.L1857:
-	beq	$12,$2,.L1865
-	nop
-
-.L1859:
-	lbu	$3,0($6)
-	daddiu	$2,$2,2
-	daddiu	$6,$6,1
-	lbu	$11,0($5)
-	lh	$10,-2($2)
-	subu	$3,$3,$11
-	beq	$10,$3,.L1857
-	daddiu	$5,$5,1
-
-	ld	$4,%got_page(.LC36)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC36)
-
-	ld	$31,104($sp)
-.L1866:
-	ld	$fp,96($sp)
-	ld	$28,88($sp)
-	ld	$23,80($sp)
-	ld	$22,72($sp)
-	ld	$21,64($sp)
-	ld	$20,56($sp)
-	ld	$19,48($sp)
-	ld	$18,40($sp)
-	ld	$17,32($sp)
-	ld	$16,24($sp)
-	jr	$31
-	daddiu	$sp,$sp,112
-
-	.align	3
-.L1865:
-	ld	$2,0($sp)
-	addiu	$13,$13,-1
-	daddu	$7,$7,$9
-	daddu	$2,$2,$8
-	sd	$2,0($sp)
-	ld	$2,8($sp)
-	bne	$13,$0,.L1860
-	daddu	$4,$4,$2
-
-	ld	$4,%got_page(.LC37)($28)
-	ld	$25,%call16(puts)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC37)
-
-	b	.L1866
-	ld	$31,104($sp)
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll
-	.size	_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll, .-_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll
-	.section	.rodata.str1.8
-	.align	3
-.LC38:
+.LC20:
 	.ascii	"blockcopy_pp_64x64 test fail\000"
 	.align	3
-.LC39:
+.LC21:
 	.ascii	"blockcopy_pp_64x64 test success\000"
 	.text
 	.align	2
@@ -17853,7 +16651,7 @@ _ZN12_GLOBAL__N_118blockcopy_pp_64x64EPhlPKhl:
 	sdc1	$f25,72($sp)
 	sdc1	$f24,64($sp)
 	.align	3
-.L1868:
+.L1794:
 	addiu	$21,$21,-1
 	ld.d	$w30,16($17)
 	ld.d	$w29,32($17)
@@ -17934,36 +16732,36 @@ _ZN12_GLOBAL__N_118blockcopy_pp_64x64EPhlPKhl:
 	daddu	$12,$12,$2
 	daddu	$10,$10,$2
 	daddu	$8,$8,$2
-	bne	$21,$0,.L1868
+	bne	$21,$0,.L1794
 	daddu	$19,$19,$2
 
 	li	$11,64			# 0x40
-.L1872:
+.L1798:
 	move	$2,$4
 	move	$3,$6
-	b	.L1871
+	b	.L1797
 	daddiu	$10,$4,64
 
 	.align	3
-.L1869:
-	beq	$10,$2,.L1877
+.L1795:
+	beq	$10,$2,.L1803
 	nop
 
-.L1871:
+.L1797:
 	daddiu	$3,$3,1
 	lbu	$9,0($2)
 	lbu	$8,-1($3)
-	beq	$9,$8,.L1869
+	beq	$9,$8,.L1795
 	daddiu	$2,$2,1
 
-	ld	$4,%got_page(.LC38)($28)
+	ld	$4,%got_page(.LC20)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC38)
+	daddiu	$4,$4,%got_ofst(.LC20)
 
 	ld	$31,56($sp)
-.L1878:
+.L1804:
 	ldc1	$f31,120($sp)
 	ld	$28,48($sp)
 	ldc1	$f30,112($sp)
@@ -17983,19 +16781,19 @@ _ZN12_GLOBAL__N_118blockcopy_pp_64x64EPhlPKhl:
 	daddiu	$sp,$sp,128
 
 	.align	3
-.L1877:
+.L1803:
 	addiu	$11,$11,-1
 	daddu	$4,$4,$5
-	bne	$11,$0,.L1872
+	bne	$11,$0,.L1798
 	daddu	$6,$6,$7
 
-	ld	$4,%got_page(.LC39)($28)
+	ld	$4,%got_page(.LC21)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC39)
+	daddiu	$4,$4,%got_ofst(.LC21)
 
-	b	.L1878
+	b	.L1804
 	ld	$31,56($sp)
 
 	.set	macro
@@ -18004,10 +16802,2169 @@ _ZN12_GLOBAL__N_118blockcopy_pp_64x64EPhlPKhl:
 	.size	_ZN12_GLOBAL__N_118blockcopy_pp_64x64EPhlPKhl, .-_ZN12_GLOBAL__N_118blockcopy_pp_64x64EPhlPKhl
 	.section	.rodata.str1.8
 	.align	3
+.LC30:
+	.ascii	"idst4 test fail\000"
+	.align	3
+.LC31:
+	.ascii	"right value %d\012\000"
+	.align	3
+.LC32:
+	.ascii	"wrong value %d\012\000"
+	.align	3
+.LC33:
+	.ascii	"wrong at %d %d\012\000"
+	.align	3
+.LC34:
+	.ascii	"idst4 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZL5idst4PKsPsl
+	.type	_ZL5idst4PKsPsl, @function
+_ZL5idst4PKsPsl:
+	.frame	$fp,192,$31		# vars= 96, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-192
+	dsll	$2,$6,3
+	sd	$28,168($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZL5idst4PKsPsl)))
+	daddiu	$2,$2,16
+	daddu	$28,$28,$25
+	sd	$fp,176($sp)
+	move	$fp,$sp
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL5idst4PKsPsl)))
+	sd	$19,128($sp)
+	dsrl	$2,$2,4
+	sd	$16,104($sp)
+	daddiu	$16,$fp,31
+	dsll	$2,$2,4
+	ld	$19,%got_page(_ZL10inversedstPKsPsi)($28)
+	dsrl	$16,$16,5
+	dsll	$16,$16,5
+	sd	$17,112($sp)
+	daddiu	$17,$16,32
+	sd	$31,184($sp)
+	daddiu	$19,$19,%got_ofst(_ZL10inversedstPKsPsi)
+	sd	$23,160($sp)
+	move	$23,$4
+	sd	$22,152($sp)
+	move	$25,$19
+	move	$22,$6
+	sd	$21,144($sp)
+	li	$6,7			# 0x7
+	sd	$20,136($sp)
+	move	$20,$5
+	move	$5,$17
+	sd	$18,120($sp)
+	move	$18,$sp
+	.reloc	1f,R_MIPS_JALR,_ZL10inversedstPKsPsi
+1:	jalr	$25
+	dsubu	$sp,$sp,$2
+
+	move	$21,$sp
+	li	$6,12			# 0xc
+	move	$5,$16
+	move	$25,$19
+	.reloc	1f,R_MIPS_JALR,_ZL10inversedstPKsPsi
+1:	jalr	$25
+	move	$4,$17
+
+	dsll	$6,$22,1
+	move	$2,$21
+	move	$5,$16
+.L1806:
+	ld	$3,0($5)
+	daddiu	$5,$5,8
+	sdl	$3,7($2)
+	sdr	$3,0($2)
+	bne	$17,$5,.L1806
+	daddu	$2,$2,$6
+
+	ld	$3,%got_page(.LC22)($28)
+	ld.h	$w0,16($23)
+	ld.h	$w6,0($23)
+	ilvr.h	$w1,$w0,$w6
+	ilvl.h	$w6,$w0,$w6
+	daddu	$2,$20,$6
+	move	$22,$0
+	daddu	$7,$2,$6
+	li	$4,4			# 0x4
+	daddiu	$3,$3,%got_ofst(.LC22)
+	daddu	$8,$7,$6
+	ld.h	$w2,0($3)
+	ld	$3,%got_page(.LC23)($28)
+	dotp_s.w	$w0,$w1,$w2
+	li	$5,4			# 0x4
+	daddiu	$3,$3,%got_ofst(.LC23)
+	ld.h	$w5,0($3)
+	ld	$3,%got_page(.LC24)($28)
+	dotp_s.w	$w9,$w1,$w5
+	daddiu	$3,$3,%got_ofst(.LC24)
+	ld.h	$w7,0($3)
+	ld	$3,%got_page(.LC25)($28)
+	dotp_s.w	$w8,$w1,$w7
+	daddiu	$3,$3,%got_ofst(.LC25)
+	ld.h	$w12,0($3)
+	ld	$3,%got_page(.LC26)($28)
+	dotp_s.w	$w4,$w1,$w12
+	move.v	$w1,$w9
+	daddiu	$3,$3,%got_ofst(.LC26)
+	ld.h	$w11,0($3)
+	ld	$3,%got_page(.LC27)($28)
+	dpadd_s.w	$w0,$w6,$w11
+	vsrarin.h	$w0,$w0,7
+	daddiu	$3,$3,%got_ofst(.LC27)
+	ld.h	$w10,0($3)
+	ld	$3,%got_page(.LC28)($28)
+	dpadd_s.w	$w1,$w6,$w10
+	vsrarin.h	$w1,$w1,7
+	insve.d	$w0[1],$w1[0]
+	move.v	$w1,$w0
+	move.v	$w0,$w8
+	daddiu	$3,$3,%got_ofst(.LC28)
+	ld.h	$w9,0($3)
+	ld	$3,%got_page(.LC29)($28)
+	dpadd_s.w	$w0,$w6,$w9
+	vsrarin.h	$w0,$w0,7
+	daddiu	$3,$3,%got_ofst(.LC29)
+	ld.h	$w8,0($3)
+	dpadd_s.w	$w4,$w6,$w8
+	vsrarin.h	$w4,$w4,7
+	insve.d	$w0[1],$w4[0]
+	pckev.h	$w3,$w0,$w1
+	pckod.h	$w0,$w0,$w1
+	dotp_s.w	$w2,$w3,$w2
+	dotp_s.w	$w5,$w3,$w5
+	dotp_s.w	$w7,$w3,$w7
+	dpadd_s.w	$w5,$w0,$w10
+	dpadd_s.w	$w7,$w0,$w9
+	dotp_s.w	$w3,$w3,$w12
+	dpadd_s.w	$w2,$w0,$w11
+	dpadd_s.w	$w3,$w0,$w8
+	vsrarin.h	$w5,$w5,12
+	vsrarin.h	$w0,$w2,12
+	vsrarin.h	$w7,$w7,12
+	vsrarin.h	$w3,$w3,12
+	ilvr.h	$w0,$w7,$w0
+	ilvr.h	$w3,$w3,$w5
+	ilvr.h	$w1,$w3,$w0
+	ilvl.h	$w0,$w3,$w0
+	vsd	$w1,0,0($20)
+	vsd	$w1,1,0($2)
+	vsd	$w0,0,0($7)
+	vsd	$w0,1,0($8)
+.L1810:
+	move	$16,$20
+	move	$2,$21
+	move	$17,$0
+.L1809:
+	lh	$19,0($2)
+	lh	$3,0($16)
+	bne	$3,$19,.L1815
+	daddiu	$2,$2,2
+
+	addiu	$17,$17,1
+	bne	$17,$4,.L1809
+	daddiu	$16,$16,2
+
+	addiu	$22,$22,1
+	daddu	$21,$21,$6
+	bne	$22,$5,.L1810
+	daddu	$20,$20,$6
+
+	ld	$4,%got_page(.LC34)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC34)
+
+	move	$sp,$18
+	move	$sp,$fp
+	ld	$31,184($sp)
+	ld	$fp,176($sp)
+	ld	$28,168($sp)
+	ld	$23,160($sp)
+	ld	$22,152($sp)
+	ld	$21,144($sp)
+	ld	$20,136($sp)
+	ld	$19,128($sp)
+	ld	$18,120($sp)
+	ld	$17,112($sp)
+	ld	$16,104($sp)
+	jr	$31
+	daddiu	$sp,$sp,192
+
+	.align	3
+.L1815:
+	ld	$4,%got_page(.LC30)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC30)
+
+	ld	$4,%got_page(.LC31)($28)
+	move	$5,$19
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC31)
+
+	ld	$4,%got_page(.LC32)($28)
+	lh	$5,0($16)
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC32)
+
+	ld	$4,%got_page(.LC33)($28)
+	move	$6,$17
+	ld	$25,%call16(printf)($28)
+	move	$5,$22
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC33)
+
+	move	$sp,$18
+	move	$sp,$fp
+	ld	$31,184($sp)
+	ld	$fp,176($sp)
+	ld	$28,168($sp)
+	ld	$23,160($sp)
+	ld	$22,152($sp)
+	ld	$21,144($sp)
+	ld	$20,136($sp)
+	ld	$19,128($sp)
+	ld	$18,120($sp)
+	ld	$17,112($sp)
+	ld	$16,104($sp)
+	jr	$31
+	daddiu	$sp,$sp,192
+
+	.set	macro
+	.set	reorder
+	.end	_ZL5idst4PKsPsl
+	.size	_ZL5idst4PKsPsl, .-_ZL5idst4PKsPsl
+	.section	.rodata.str1.8
+	.align	3
+.LC39:
+	.ascii	"dst4 test fail\000"
+	.align	3
 .LC40:
-	.ascii	"pixelavg_pp_8x8 test fail\000"
+	.ascii	"wrong at %d\012\000"
 	.align	3
 .LC41:
+	.ascii	"dst4 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZL4dst4PKsPsl
+	.type	_ZL4dst4PKsPsl, @function
+_ZL4dst4PKsPsl:
+	.frame	$sp,192,$31		# vars= 128, regs= 8/0, args= 0, gp= 0
+	.mask	0x903f0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-192
+	sd	$17,136($sp)
+	move	$17,$4
+	daddiu	$4,$sp,31
+	sd	$28,176($sp)
+	dsrl	$4,$4,5
+	lui	$28,%hi(%neg(%gp_rel(_ZL4dst4PKsPsl)))
+	dsll	$4,$4,5
+	daddu	$28,$28,$25
+	sd	$21,168($sp)
+	sd	$19,152($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL4dst4PKsPsl)))
+	move	$21,$5
+	sd	$18,144($sp)
+	move	$3,$4
+	dsll	$18,$6,1
+	move	$2,$17
+	daddiu	$19,$4,32
+	sd	$31,184($sp)
+	sd	$20,160($sp)
+	sd	$16,128($sp)
+.L1817:
+	ldl	$5,7($2)
+	daddiu	$3,$3,8
+	ldr	$5,0($2)
+	daddu	$2,$2,$18
+	bne	$19,$3,.L1817
+	sd	$5,-8($3)
+
+	ld	$20,%got_page(_ZL14fastForwardDstPKsPsi)($28)
+	move	$5,$19
+	li	$6,1			# 0x1
+	daddiu	$20,$20,%got_ofst(_ZL14fastForwardDstPKsPsi)
+	move	$25,$20
+	.reloc	1f,R_MIPS_JALR,_ZL14fastForwardDstPKsPsi
+1:	jalr	$25
+	daddiu	$16,$sp,96
+
+	move	$4,$19
+	li	$6,8			# 0x8
+	move	$25,$20
+	.reloc	1f,R_MIPS_JALR,_ZL14fastForwardDstPKsPsi
+1:	jalr	$25
+	move	$5,$16
+
+	daddu	$3,$17,$18
+	vbld	$w1,0($17)
+	daddu	$2,$3,$18
+	vbld	$w0,0($3)
+	move	$17,$21
+	insve.d	$w1[1],$w0[0]
+	vbld	$w3,0($2)
+	daddu	$3,$2,$18
+	ld	$2,%got_page(.LC35)($28)
+	move	$18,$0
+	vbld	$w0,0($3)
+	li	$4,16			# 0x10
+	insve.d	$w3[1],$w0[0]
+	daddiu	$2,$2,%got_ofst(.LC35)
+	ld.h	$w6,0($2)
+	ld	$2,%got_page(.LC36)($28)
+	dotp_s.w	$w0,$w1,$w6
+	dotp_s.w	$w11,$w3,$w6
+	hadd_s.d	$w0,$w0,$w0
+	hadd_s.d	$w11,$w11,$w11
+	pckev.w	$w0,$w11,$w0
+	vsrarin.h	$w0,$w0,1
+	daddiu	$2,$2,%got_ofst(.LC36)
+	ld.h	$w5,0($2)
+	ld	$2,%got_page(.LC37)($28)
+	dotp_s.w	$w7,$w1,$w5
+	dotp_s.w	$w10,$w3,$w5
+	hadd_s.d	$w7,$w7,$w7
+	hadd_s.d	$w10,$w10,$w10
+	pckev.w	$w7,$w10,$w7
+	vsrarin.h	$w7,$w7,1
+	insve.d	$w0[1],$w7[0]
+	dotp_s.w	$w7,$w0,$w5
+	hadd_s.d	$w7,$w7,$w7
+	daddiu	$2,$2,%got_ofst(.LC37)
+	ld.h	$w4,0($2)
+	ld	$2,%got_page(.LC38)($28)
+	dotp_s.w	$w2,$w1,$w4
+	dotp_s.w	$w9,$w3,$w4
+	hadd_s.d	$w2,$w2,$w2
+	hadd_s.d	$w9,$w9,$w9
+	pckev.w	$w2,$w9,$w2
+	vsrarin.h	$w2,$w2,1
+	daddiu	$2,$2,%got_ofst(.LC38)
+	ld.h	$w8,0($2)
+	dotp_s.w	$w1,$w1,$w8
+	dotp_s.w	$w3,$w3,$w8
+	hadd_s.d	$w1,$w1,$w1
+	hadd_s.d	$w3,$w3,$w3
+	pckev.w	$w1,$w3,$w1
+	dotp_s.w	$w3,$w0,$w6
+	vsrarin.h	$w1,$w1,1
+	hadd_s.d	$w3,$w3,$w3
+	insve.d	$w2[1],$w1[0]
+	move.v	$w1,$w2
+	dotp_s.w	$w6,$w2,$w6
+	dotp_s.w	$w5,$w2,$w5
+	hadd_s.d	$w6,$w6,$w6
+	dotp_s.w	$w2,$w0,$w4
+	hadd_s.d	$w5,$w5,$w5
+	dotp_s.w	$w4,$w1,$w4
+	dotp_s.w	$w0,$w0,$w8
+	dotp_s.w	$w1,$w1,$w8
+	hadd_s.d	$w2,$w2,$w2
+	hadd_s.d	$w4,$w4,$w4
+	hadd_s.d	$w0,$w0,$w0
+	hadd_s.d	$w1,$w1,$w1
+	pckev.w	$w6,$w6,$w3
+	pckev.w	$w5,$w5,$w7
+	pckev.w	$w4,$w4,$w2
+	pckev.w	$w0,$w1,$w0
+	vsrarin.h	$w6,$w6,8
+	vsrarin.h	$w5,$w5,8
+	vsrarin.h	$w4,$w4,8
+	vsrarin.h	$w0,$w0,8
+	insve.d	$w6[1],$w5[0]
+	insve.d	$w4[1],$w0[0]
+	st.d	$w6,0($21)
+	b	.L1820
+	st.d	$w4,16($21)
+
+	.align	3
+.L1818:
+	addiu	$18,$18,1
+	daddiu	$17,$17,2
+	beq	$18,$4,.L1824
+	daddiu	$16,$16,2
+
+.L1820:
+	lh	$3,0($17)
+	lh	$2,0($16)
+	beq	$3,$2,.L1818
+	ld	$25,%call16(puts)($28)
+
+	ld	$4,%got_page(.LC39)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC39)
+
+	ld	$4,%got_page(.LC31)($28)
+	lh	$5,0($16)
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC31)
+
+	ld	$4,%got_page(.LC32)($28)
+	lh	$5,0($17)
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC32)
+
+	ld	$4,%got_page(.LC40)($28)
+	move	$5,$18
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC40)
+
+	ld	$31,184($sp)
+	ld	$28,176($sp)
+	ld	$21,168($sp)
+	ld	$20,160($sp)
+	ld	$19,152($sp)
+	ld	$18,144($sp)
+	ld	$17,136($sp)
+	ld	$16,128($sp)
+	jr	$31
+	daddiu	$sp,$sp,192
+
+	.align	3
+.L1824:
+	ld	$4,%got_page(.LC41)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC41)
+
+	ld	$31,184($sp)
+	ld	$28,176($sp)
+	ld	$21,168($sp)
+	ld	$20,160($sp)
+	ld	$19,152($sp)
+	ld	$18,144($sp)
+	ld	$17,136($sp)
+	ld	$16,128($sp)
+	jr	$31
+	daddiu	$sp,$sp,192
+
+	.set	macro
+	.set	reorder
+	.end	_ZL4dst4PKsPsl
+	.size	_ZL4dst4PKsPsl, .-_ZL4dst4PKsPsl
+	.section	.rodata.str1.8
+	.align	3
+.LC42:
+	.ascii	"sse_pp_a_8x8 test success\000"
+	.align	3
+.LC43:
+	.ascii	"sse_pp_a_8x8 test fail\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l
+	.type	_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l, @function
+_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l:
+	.frame	$sp,32,$31		# vars= 0, regs= 3/0, args= 0, gp= 0
+	.mask	0x90010000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddu	$11,$4,$5
+	daddu	$10,$6,$7
+	daddu	$12,$10,$7
+	daddu	$2,$11,$5
+	dlsa	$9,$5,$2,1
+	dlsa	$15,$7,$12,1
+	daddu	$8,$9,$5
+	daddu	$14,$15,$7
+	daddiu	$sp,$sp,-32
+	daddu	$3,$8,$5
+	daddu	$13,$14,$7
+	sd	$28,16($sp)
+	daddu	$24,$12,$7
+	sd	$16,8($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l)))
+	mtlo	$0
+	sd	$31,24($sp)
+	vbld	$w2,0($2)
+	vbld	$w4,0($12)
+	daddu	$2,$2,$5
+	vbld	$w7,0($9)
+	daddu	$12,$13,$7
+	daddu	$9,$3,$5
+	vbld	$w1,0($2)
+	vextb_u.h	$w4,$w4
+	vbld	$w8,0($9)
+	vbld	$w0,0($4)
+	vbld	$w15,0($6)
+	vbld	$w3,0($11)
+	vextb_u.h	$w0,$w0
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w2,$w2
+	vbld	$w14,0($10)
+	subv.h	$w2,$w2,$w4
+	vextb_u.h	$w15,$w15
+	vextb_u.h	$w14,$w14
+	vbld	$w13,0($24)
+	subv.h	$w3,$w3,$w14
+	vextb_u.h	$w1,$w1
+	dotp_s.w	$w4,$w3,$w3
+	vextb_u.h	$w13,$w13
+	dotp_s.w	$w3,$w2,$w2
+	subv.h	$w1,$w1,$w13
+	vbld	$w6,0($8)
+	dotp_s.w	$w2,$w1,$w1
+	vextb_u.h	$w7,$w7
+	vextb_u.h	$w6,$w6
+	vbld	$w5,0($3)
+	vextb_u.h	$w8,$w8
+	vextb_u.h	$w5,$w5
+	vbld	$w11,0($15)
+	vbld	$w10,0($14)
+	vextb_u.h	$w11,$w11
+	vextb_u.h	$w10,$w10
+	vbld	$w9,0($13)
+	vbld	$w12,0($12)
+	vextb_u.h	$w9,$w9
+	vextb_u.h	$w12,$w12
+	subv.h	$w0,$w0,$w15
+	subv.h	$w7,$w7,$w11
+	subv.h	$w6,$w6,$w10
+	subv.h	$w5,$w5,$w9
+	subv.h	$w8,$w8,$w12
+	dotp_s.w	$w0,$w0,$w0
+	dpadd_s.w	$w3,$w5,$w5
+	dpadd_s.w	$w0,$w7,$w7
+	dpadd_s.w	$w2,$w8,$w8
+	move.v	$w1,$w0
+	addv.w	$w2,$w3,$w2
+	move.v	$w0,$w4
+	dpadd_s.w	$w0,$w6,$w6
+	addv.w	$w0,$w1,$w0
+	addv.w	$w0,$w0,$w2
+	copy_s.w	$2,$w0[1]
+	copy_s.w	$16,$w0[0]
+	addu	$16,$16,$2
+	daddu	$28,$28,$25
+	copy_s.w	$2,$w0[2]
+	addu	$16,$16,$2
+	copy_s.w	$2,$w0[3]
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l)))
+	li	$9,8			# 0x8
+	addu	$16,$16,$2
+	.align	3
+.L1827:
+	daddiu	$8,$4,8
+	.align	3
+.L1826:
+	daddiu	$6,$6,1
+	lbu	$3,0($4)
+	daddiu	$4,$4,1
+	lbu	$2,-1($6)
+	subu	$2,$3,$2
+	bne	$8,$4,.L1826
+	madd	$2,$2
+
+	addiu	$9,$9,-1
+	move	$4,$11
+	beq	$9,$0,.L1832
+	move	$6,$10
+
+	daddu	$11,$11,$5
+	b	.L1827
+	daddu	$10,$10,$7
+
+	.align	3
+.L1832:
+	mflo	$2
+	beq	$16,$2,.L1834
+	ld	$25,%call16(puts)($28)
+
+	ld	$4,%got_page(.LC43)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC43)
+
+	ld	$31,24($sp)
+	move	$2,$16
+	ld	$28,16($sp)
+	ld	$16,8($sp)
+	jr	$31
+	daddiu	$sp,$sp,32
+
+.L1834:
+	ld	$4,%got_page(.LC42)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC42)
+
+	ld	$31,24($sp)
+	move	$2,$16
+	ld	$28,16($sp)
+	ld	$16,8($sp)
+	jr	$31
+	daddiu	$sp,$sp,32
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l
+	.size	_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l, .-_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l
+	.section	.rodata.str1.8
+	.align	3
+.LC44:
+	.ascii	"sse_pp_a_4x4 test success\000"
+	.align	3
+.LC45:
+	.ascii	"sse_pp_a_4x4 test fail\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l
+	.type	_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l, @function
+_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l:
+	.frame	$sp,32,$31		# vars= 0, regs= 3/0, args= 0, gp= 0
+	.mask	0x90010000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddu	$11,$4,$5
+	daddu	$10,$6,$7
+	daddu	$2,$11,$5
+	daddu	$3,$10,$7
+	daddiu	$sp,$sp,-32
+	daddu	$9,$2,$5
+	daddu	$8,$3,$7
+	sd	$28,16($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l)))
+	sd	$16,8($sp)
+	daddu	$28,$28,$25
+	mtlo	$0
+	sd	$31,24($sp)
+	vblw	$w1,0($11)
+	vblw	$w2,0($2)
+	vblw	$w0,0($4)
+	vblw	$w3,0($6)
+	insve.w	$w0[1],$w1[0]
+	vblw	$w5,0($10)
+	vblw	$w1,0($9)
+	vextb_u.h	$w0,$w0
+	insve.w	$w2[1],$w1[0]
+	vblw	$w4,0($8)
+	vblw	$w1,0($3)
+	vextb_u.h	$w2,$w2
+	insve.w	$w3[1],$w5[0]
+	insve.w	$w1[1],$w4[0]
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w1,$w1
+	subv.h	$w0,$w0,$w3
+	subv.h	$w1,$w2,$w1
+	dotp_s.w	$w0,$w0,$w0
+	dpadd_s.w	$w0,$w1,$w1
+	copy_s.w	$2,$w0[1]
+	copy_s.w	$16,$w0[0]
+	addu	$16,$16,$2
+	copy_s.w	$3,$w0[2]
+	addu	$16,$16,$3
+	copy_s.w	$2,$w0[3]
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l)))
+	li	$9,4			# 0x4
+	addu	$16,$16,$2
+.L1837:
+	daddiu	$8,$4,4
+.L1836:
+	daddiu	$6,$6,1
+	lbu	$3,0($4)
+	daddiu	$4,$4,1
+	lbu	$2,-1($6)
+	subu	$2,$3,$2
+	bne	$8,$4,.L1836
+	madd	$2,$2
+
+	addiu	$9,$9,-1
+	move	$4,$11
+	beq	$9,$0,.L1842
+	move	$6,$10
+
+	daddu	$11,$11,$5
+	b	.L1837
+	daddu	$10,$10,$7
+
+	.align	3
+.L1842:
+	mflo	$2
+	beq	$16,$2,.L1844
+	ld	$25,%call16(puts)($28)
+
+	ld	$4,%got_page(.LC45)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC45)
+
+	ld	$31,24($sp)
+	move	$2,$16
+	ld	$28,16($sp)
+	ld	$16,8($sp)
+	jr	$31
+	daddiu	$sp,$sp,32
+
+	.align	3
+.L1844:
+	ld	$4,%got_page(.LC44)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC44)
+
+	ld	$31,24($sp)
+	move	$2,$16
+	ld	$28,16($sp)
+	ld	$16,8($sp)
+	jr	$31
+	daddiu	$sp,$sp,32
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l
+	.size	_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l, .-_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l
+	.section	.rodata.str1.8
+	.align	3
+.LC46:
+	.ascii	"getResidual_4x4 test fail\000"
+	.align	3
+.LC47:
+	.ascii	"getResidual_4x4 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl
+	.type	_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl, @function
+_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl:
+	.frame	$sp,16,$31		# vars= 0, regs= 2/0, args= 0, gp= 0
+	.mask	0x90000000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-16
+	dsll	$14,$7,1
+	vblw	$w2,0($5)
+	sd	$28,0($sp)
+	daddu	$8,$5,$7
+	daddu	$2,$4,$7
+	daddu	$10,$6,$14
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl)))
+	sd	$31,8($sp)
+	vblw	$w0,0($2)
+	daddu	$3,$8,$7
+	daddu	$2,$2,$7
+	vblw	$w4,0($8)
+	vblw	$w3,0($4)
+	daddu	$9,$10,$14
+	daddu	$28,$28,$25
+	vblw	$w1,0($2)
+	insve.w	$w3[1],$w0[0]
+	daddu	$8,$2,$7
+	vblw	$w0,0($3)
+	daddu	$2,$9,$14
+	insve.w	$w2[1],$w4[0]
+	daddu	$3,$3,$7
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl)))
+	vblw	$w5,0($8)
+	vextb_u.h	$w3,$w3
+	li	$13,4			# 0x4
+	vblw	$w4,0($3)
+	insve.w	$w1[1],$w5[0]
+	vextb_u.h	$w2,$w2
+	vextb_u.h	$w1,$w1
+	subv.h	$w2,$w3,$w2
+	insve.w	$w0[1],$w4[0]
+	vsd	$w2,0,0($6)
+	vextb_u.h	$w0,$w0
+	vsd	$w2,1,0($10)
+	subv.h	$w0,$w1,$w0
+	vsd	$w0,0,0($9)
+	vsd	$w0,1,0($2)
+.L1849:
+	move	$2,$6
+	move	$9,$4
+	move	$8,$5
+	daddiu	$12,$6,8
+.L1848:
+	lbu	$3,0($9)
+	daddiu	$2,$2,2
+	daddiu	$9,$9,1
+	lbu	$11,0($8)
+	lh	$10,-2($2)
+	subu	$3,$3,$11
+	bne	$10,$3,.L1853
+	daddiu	$8,$8,1
+
+	bne	$12,$2,.L1848
+	nop
+
+	addiu	$13,$13,-1
+	daddu	$4,$4,$7
+	daddu	$6,$6,$14
+	bne	$13,$0,.L1849
+	daddu	$5,$5,$7
+
+	ld	$4,%got_page(.LC47)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC47)
+
+	ld	$31,8($sp)
+	ld	$28,0($sp)
+	jr	$31
+	daddiu	$sp,$sp,16
+
+	.align	3
+.L1853:
+	ld	$4,%got_page(.LC46)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC46)
+
+	ld	$31,8($sp)
+	ld	$28,0($sp)
+	jr	$31
+	daddiu	$sp,$sp,16
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl
+	.size	_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl, .-_ZN12_GLOBAL__N_115getResidual_4x4EPKhS1_Psl
+	.section	.rodata.str1.8
+	.align	3
+.LC48:
+	.ascii	"sub_ps_4x4 test fail\000"
+	.align	3
+.LC49:
+	.ascii	"sub_ps_4x4 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll
+	.type	_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll, @function
+_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll:
+	.frame	$sp,16,$31		# vars= 0, regs= 2/0, args= 0, gp= 0
+	.mask	0x90000000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-16
+	dsll	$5,$5,1
+	vblw	$w3,0($6)
+	vblw	$w2,0($7)
+	sd	$28,0($sp)
+	daddu	$10,$6,$8
+	daddu	$2,$7,$9
+	daddu	$12,$4,$5
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll)))
+	sd	$31,8($sp)
+	vblw	$w6,0($2)
+	daddu	$3,$10,$8
+	daddu	$2,$2,$9
+	vblw	$w0,0($10)
+	insve.w	$w3[1],$w0[0]
+	daddu	$11,$12,$5
+	daddu	$28,$28,$25
+	vblw	$w1,0($3)
+	vblw	$w0,0($2)
+	daddu	$10,$2,$9
+	daddu	$3,$3,$8
+	vextb_u.h	$w3,$w3
+	insve.w	$w2[1],$w6[0]
+	daddu	$2,$11,$5
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll)))
+	vblw	$w4,0($3)
+	vblw	$w5,0($10)
+	li	$15,4			# 0x4
+	insve.w	$w1[1],$w4[0]
+	vextb_u.h	$w2,$w2
+	vextb_u.h	$w1,$w1
+	subv.h	$w2,$w3,$w2
+	insve.w	$w0[1],$w5[0]
+	vsd	$w2,0,0($4)
+	vextb_u.h	$w0,$w0
+	vsd	$w2,1,0($12)
+	subv.h	$w0,$w1,$w0
+	vsd	$w0,0,0($11)
+	vsd	$w0,1,0($2)
+.L1858:
+	move	$2,$4
+	move	$11,$6
+	move	$10,$7
+	daddiu	$14,$4,8
+.L1857:
+	lbu	$3,0($11)
+	daddiu	$2,$2,2
+	daddiu	$11,$11,1
+	lbu	$13,0($10)
+	lh	$12,-2($2)
+	subu	$3,$3,$13
+	bne	$12,$3,.L1862
+	daddiu	$10,$10,1
+
+	bne	$14,$2,.L1857
+	nop
+
+	addiu	$15,$15,-1
+	daddu	$6,$6,$8
+	daddu	$7,$7,$9
+	bne	$15,$0,.L1858
+	daddu	$4,$4,$5
+
+	ld	$4,%got_page(.LC49)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC49)
+
+	ld	$31,8($sp)
+	ld	$28,0($sp)
+	jr	$31
+	daddiu	$sp,$sp,16
+
+	.align	3
+.L1862:
+	ld	$4,%got_page(.LC48)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC48)
+
+	ld	$31,8($sp)
+	ld	$28,0($sp)
+	jr	$31
+	daddiu	$sp,$sp,16
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll
+	.size	_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll, .-_ZN12_GLOBAL__N_110sub_ps_4x4EPslPKhS2_ll
+	.section	.rodata.str1.8
+	.align	3
+.LC50:
+	.ascii	"getResidual_8x8 test fail\000"
+	.align	3
+.LC51:
+	.ascii	"getResidual_8x8 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl
+	.type	_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl, @function
+_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl:
+	.frame	$sp,16,$31		# vars= 0, regs= 2/0, args= 0, gp= 0
+	.mask	0x90000000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	dsll	$12,$7,1
+	dsll	$8,$7,2
+	vbld	$w0,0($5)
+	vextb_u.h	$w0,$w0
+	daddu	$15,$6,$12
+	daddiu	$sp,$sp,-16
+	daddu	$11,$15,$12
+	daddu	$2,$4,$8
+	sd	$28,0($sp)
+	sd	$31,8($sp)
+	daddu	$3,$5,$8
+	vbld	$w6,0($2)
+	daddu	$10,$11,$8
+	daddu	$2,$2,$7
+	daddu	$8,$4,$7
+	vbld	$w12,0($3)
+	vbld	$w9,0($4)
+	vbld	$w8,0($8)
+	vbld	$w5,0($2)
+	daddu	$9,$5,$7
+	daddu	$3,$3,$7
+	daddu	$24,$10,$12
+	daddu	$8,$8,$7
+	vbld	$w14,0($9)
+	vbld	$w11,0($3)
+	daddu	$2,$2,$7
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl)))
+	vbld	$w7,0($8)
+	vextb_u.h	$w9,$w9
+	vbld	$w4,0($2)
+	daddu	$9,$9,$7
+	daddu	$3,$3,$7
+	subv.h	$w9,$w9,$w0
+	daddu	$13,$24,$12
+	daddu	$8,$8,$7
+	vbld	$w13,0($9)
+	vbld	$w10,0($3)
+	daddu	$2,$2,$7
+	daddu	$28,$28,$25
+	vbld	$w2,0($8)
+	vextb_u.h	$w6,$w6
+	vbld	$w0,0($2)
+	daddu	$9,$9,$7
+	daddu	$3,$3,$7
+	vextb_u.h	$w8,$w8
+	daddu	$8,$11,$12
+	daddu	$2,$13,$12
+	vbld	$w3,0($9)
+	vbld	$w1,0($3)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl)))
+	li	$14,8			# 0x8
+	st.d	$w9,0($6)
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w7,$w7
+	vextb_u.h	$w2,$w2
+	vextb_u.h	$w5,$w5
+	subv.h	$w2,$w2,$w3
+	vextb_u.h	$w4,$w4
+	vextb_u.h	$w0,$w0
+	vextb_u.h	$w14,$w14
+	vextb_u.h	$w13,$w13
+	vextb_u.h	$w12,$w12
+	vextb_u.h	$w11,$w11
+	vextb_u.h	$w9,$w10
+	vextb_u.h	$w1,$w1
+	subv.h	$w8,$w8,$w14
+	subv.h	$w7,$w7,$w13
+	st.d	$w8,0($15)
+	subv.h	$w6,$w6,$w12
+	st.d	$w7,0($11)
+	subv.h	$w3,$w5,$w11
+	st.d	$w2,0($8)
+	subv.h	$w0,$w0,$w1
+	st.d	$w6,0($10)
+	subv.h	$w2,$w4,$w9
+	st.d	$w3,0($24)
+	st.d	$w2,0($13)
+	st.d	$w0,0($2)
+.L1867:
+	move	$2,$6
+	move	$9,$4
+	move	$8,$5
+	daddiu	$13,$6,16
+.L1866:
+	lbu	$3,0($9)
+	daddiu	$2,$2,2
+	daddiu	$9,$9,1
+	lbu	$11,0($8)
+	lh	$10,-2($2)
+	subu	$3,$3,$11
+	bne	$10,$3,.L1871
+	daddiu	$8,$8,1
+
+	bne	$13,$2,.L1866
+	nop
+
+	addiu	$14,$14,-1
+	daddu	$4,$4,$7
+	daddu	$6,$6,$12
+	bne	$14,$0,.L1867
+	daddu	$5,$5,$7
+
+	ld	$4,%got_page(.LC51)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC51)
+
+	ld	$31,8($sp)
+	ld	$28,0($sp)
+	jr	$31
+	daddiu	$sp,$sp,16
+
+	.align	3
+.L1871:
+	ld	$4,%got_page(.LC50)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC50)
+
+	ld	$31,8($sp)
+	ld	$28,0($sp)
+	jr	$31
+	daddiu	$sp,$sp,16
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl
+	.size	_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl, .-_ZN12_GLOBAL__N_115getResidual_8x8EPKhS1_Psl
+	.section	.rodata.str1.8
+	.align	3
+.LC52:
+	.ascii	"sub_ps_8x8 test fail\000"
+	.align	3
+.LC53:
+	.ascii	"sub_ps_8x8 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll
+	.type	_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll, @function
+_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll:
+	.frame	$sp,16,$31		# vars= 0, regs= 2/0, args= 0, gp= 0
+	.mask	0x90000000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	dsll	$14,$5,1
+	daddiu	$sp,$sp,-16
+	vbld	$w11,0($6)
+	vbld	$w15,0($7)
+	daddu	$3,$7,$9
+	daddu	$2,$6,$8
+	sd	$28,0($sp)
+	vextb_u.h	$w11,$w11
+	daddu	$24,$4,$14
+	sd	$31,8($sp)
+	daddu	$12,$3,$9
+	vbld	$w10,0($2)
+	daddu	$13,$24,$14
+	daddu	$2,$2,$8
+	vbld	$w6,0($3)
+	vbld	$w14,0($12)
+	dlsa	$11,$9,$12,1
+	dlsa	$10,$8,$2,1
+	vbld	$w9,0($2)
+	vextb_u.h	$w10,$w10
+	dlsa	$5,$5,$13,2
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll)))
+	vbld	$w8,0($10)
+	vbld	$w5,0($11)
+	daddu	$10,$10,$8
+	daddu	$3,$11,$9
+	vextb_u.h	$w9,$w9
+	vextb_u.h	$w15,$w15
+	daddu	$28,$28,$25
+	daddu	$25,$5,$14
+	vbld	$w2,0($10)
+	vbld	$w13,0($3)
+	daddu	$11,$10,$8
+	daddu	$3,$3,$9
+	vextb_u.h	$w2,$w2
+	vextb_u.h	$w6,$w6
+	daddu	$10,$25,$14
+	daddu	$2,$2,$8
+	vbld	$w7,0($11)
+	vbld	$w12,0($3)
+	daddu	$12,$12,$9
+	vbld	$w0,0($2)
+	daddu	$11,$11,$8
+	vextb_u.h	$w14,$w14
+	vbld	$w4,0($12)
+	daddu	$3,$3,$9
+	daddu	$12,$13,$14
+	vbld	$w3,0($11)
+	daddu	$2,$10,$14
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll)))
+	vbld	$w1,0($3)
+	vextb_u.h	$w0,$w0
+	li	$15,8			# 0x8
+	vextb_u.h	$w4,$w4
+	vextb_u.h	$w8,$w8
+	subv.h	$w0,$w0,$w4
+	vextb_u.h	$w7,$w7
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w5,$w5
+	vextb_u.h	$w13,$w13
+	vextb_u.h	$w12,$w12
+	vextb_u.h	$w1,$w1
+	subv.h	$w11,$w11,$w15
+	subv.h	$w6,$w10,$w6
+	st.d	$w11,0($4)
+	subv.h	$w9,$w9,$w14
+	st.d	$w6,0($24)
+	subv.h	$w5,$w8,$w5
+	st.d	$w9,0($13)
+	subv.h	$w1,$w3,$w1
+	st.d	$w0,0($12)
+	st.d	$w5,0($5)
+	subv.h	$w0,$w2,$w13
+	subv.h	$w2,$w7,$w12
+	st.d	$w0,0($25)
+	st.d	$w2,0($10)
+	st.d	$w1,0($2)
+.L1876:
+	move	$2,$4
+	move	$10,$6
+	move	$5,$7
+	daddiu	$13,$4,16
+.L1875:
+	lbu	$3,0($10)
+	daddiu	$2,$2,2
+	daddiu	$10,$10,1
+	lbu	$12,0($5)
+	lh	$11,-2($2)
+	subu	$3,$3,$12
+	bne	$11,$3,.L1880
+	daddiu	$5,$5,1
+
+	bne	$13,$2,.L1875
+	nop
+
+	addiu	$15,$15,-1
+	daddu	$6,$6,$8
+	daddu	$7,$7,$9
+	bne	$15,$0,.L1876
+	daddu	$4,$4,$14
+
+	ld	$4,%got_page(.LC53)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC53)
+
+	ld	$31,8($sp)
+	ld	$28,0($sp)
+	jr	$31
+	daddiu	$sp,$sp,16
+
+	.align	3
+.L1880:
+	ld	$4,%got_page(.LC52)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC52)
+
+	ld	$31,8($sp)
+	ld	$28,0($sp)
+	jr	$31
+	daddiu	$sp,$sp,16
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll
+	.size	_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll, .-_ZN12_GLOBAL__N_110sub_ps_8x8EPslPKhS2_ll
+	.section	.rodata.str1.8
+	.align	3
+.LC54:
+	.ascii	"getResidual_16x16 test fail\000"
+	.align	3
+.LC55:
+	.ascii	"getResidual_16x16 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl
+	.type	_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl, @function
+_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl:
+	.frame	$sp,80,$31		# vars= 0, regs= 9/0, args= 0, gp= 0
+	.mask	0x907f0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-80
+	dsll	$24,$7,1
+	sd	$28,64($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl)))
+	move	$8,$6
+	daddu	$28,$28,$25
+	dsll	$25,$7,2
+	sd	$16,8($sp)
+	daddu	$15,$24,$25
+	daddiu	$16,$7,8
+	sd	$31,72($sp)
+	sd	$22,56($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl)))
+	daddu	$15,$6,$15
+	sd	$21,48($sp)
+	move	$3,$5
+	move	$2,$4
+	sd	$20,40($sp)
+	li	$31,4			# 0x4
+	dsll	$20,$7,3
+	sd	$19,32($sp)
+	daddiu	$22,$24,16
+	daddiu	$19,$24,8
+	sd	$18,24($sp)
+	daddiu	$21,$25,16
+	daddu	$18,$7,$24
+	sd	$17,16($sp)
+	daddu	$17,$24,$16
+.L1882:
+	daddu	$14,$7,$2
+	daddu	$13,$2,$16
+	vbld	$w13,0($2)
+	vbld	$w12,8($2)
+	daddu	$12,$24,$2
+	daddu	$11,$2,$19
+	vbld	$w5,0($14)
+	vbld	$w4,0($13)
+	vbld	$w3,0($12)
+	vbld	$w2,0($11)
+	daddu	$10,$2,$18
+	daddu	$9,$17,$2
+	daddu	$14,$7,$3
+	daddu	$13,$3,$16
+	vbld	$w1,0($10)
+	vbld	$w0,0($9)
+	daddu	$12,$24,$3
+	daddu	$11,$3,$19
+	vbld	$w11,0($14)
+	vbld	$w10,0($13)
+	vbld	$w9,0($12)
+	vbld	$w8,0($11)
+	daddu	$10,$3,$18
+	daddu	$9,$17,$3
+	daddu	$14,$24,$8
+	daddu	$13,$8,$22
+	vbld	$w15,0($3)
+	vbld	$w14,8($3)
+	daddu	$12,$25,$8
+	daddu	$11,$8,$21
+	vbld	$w7,0($10)
+	vbld	$w6,0($9)
+	addiu	$31,$31,-1
+	vextb_u.h	$w13,$w13
+	vextb_u.h	$w12,$w12
+	vextb_u.h	$w5,$w5
+	vextb_u.h	$w4,$w4
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w2,$w2
+	vextb_u.h	$w1,$w1
+	vextb_u.h	$w0,$w0
+	vextb_u.h	$w15,$w15
+	vextb_u.h	$w14,$w14
+	vextb_u.h	$w11,$w11
+	vextb_u.h	$w10,$w10
+	vextb_u.h	$w9,$w9
+	vextb_u.h	$w8,$w8
+	vextb_u.h	$w7,$w7
+	vextb_u.h	$w6,$w6
+	subv.h	$w13,$w13,$w15
+	subv.h	$w12,$w12,$w14
+	st.d	$w13,0($8)
+	st.d	$w12,16($8)
+	subv.h	$w5,$w5,$w11
+	subv.h	$w4,$w4,$w10
+	st.d	$w5,0($14)
+	subv.h	$w3,$w3,$w9
+	st.d	$w4,0($13)
+	subv.h	$w2,$w2,$w8
+	st.d	$w3,0($12)
+	subv.h	$w1,$w1,$w7
+	st.d	$w2,0($11)
+	subv.h	$w0,$w0,$w6
+	st.d	$w1,0($15)
+	st.d	$w0,16($15)
+	daddu	$2,$25,$2
+	daddu	$15,$15,$20
+	daddu	$3,$25,$3
+	bne	$31,$0,.L1882
+	daddu	$8,$20,$8
+
+	li	$13,16			# 0x10
+.L1886:
+	move	$2,$6
+	move	$9,$4
+	move	$8,$5
+	b	.L1885
+	daddiu	$12,$6,32
+
+	.align	3
+.L1883:
+	beq	$12,$2,.L1891
+	nop
+
+.L1885:
+	lbu	$3,0($9)
+	daddiu	$2,$2,2
+	daddiu	$9,$9,1
+	lbu	$11,0($8)
+	lh	$10,-2($2)
+	subu	$3,$3,$11
+	beq	$10,$3,.L1883
+	daddiu	$8,$8,1
+
+	ld	$4,%got_page(.LC54)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC54)
+
+	ld	$31,72($sp)
+	ld	$28,64($sp)
+	ld	$22,56($sp)
+	ld	$21,48($sp)
+	ld	$20,40($sp)
+	ld	$19,32($sp)
+	ld	$18,24($sp)
+	ld	$17,16($sp)
+	ld	$16,8($sp)
+	jr	$31
+	daddiu	$sp,$sp,80
+
+	.align	3
+.L1891:
+	addiu	$13,$13,-1
+	daddu	$4,$4,$7
+	daddu	$6,$6,$24
+	bne	$13,$0,.L1886
+	daddu	$5,$5,$7
+
+	ld	$4,%got_page(.LC55)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC55)
+
+	ld	$31,72($sp)
+	ld	$28,64($sp)
+	ld	$22,56($sp)
+	ld	$21,48($sp)
+	ld	$20,40($sp)
+	ld	$19,32($sp)
+	ld	$18,24($sp)
+	ld	$17,16($sp)
+	ld	$16,8($sp)
+	jr	$31
+	daddiu	$sp,$sp,80
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl
+	.size	_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl, .-_ZN12_GLOBAL__N_117getResidual_16x16EPKhS1_Psl
+	.section	.rodata.str1.8
+	.align	3
+.LC56:
+	.ascii	"sub_ps_16x16 test fail\000"
+	.align	3
+.LC57:
+	.ascii	"sub_ps_16x16 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll
+	.type	_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll, @function
+_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll:
+	.frame	$sp,112,$31		# vars= 16, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-112
+	move	$3,$7
+	sd	$28,88($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll)))
+	move	$2,$6
+	sd	$21,64($sp)
+	dsll	$21,$5,2
+	daddu	$28,$28,$25
+	sd	$20,56($sp)
+	dsll	$20,$5,1
+	daddiu	$10,$21,16
+	sd	$16,24($sp)
+	dsll	$16,$8,1
+	daddu	$24,$20,$21
+	sd	$31,104($sp)
+	daddu	$31,$16,$8
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll)))
+	sd	$fp,96($sp)
+	dsll	$5,$5,3
+	daddu	$24,$4,$24
+	sd	$23,80($sp)
+	dsll	$fp,$8,2
+	daddu	$23,$9,$31
+	sd	$22,72($sp)
+	li	$25,4			# 0x4
+	daddiu	$22,$20,16
+	sd	$19,48($sp)
+	daddiu	$19,$8,8
+	sd	$18,40($sp)
+	daddiu	$18,$16,8
+	sd	$17,32($sp)
+	daddiu	$17,$31,8
+	sd	$9,8($sp)
+	move	$9,$4
+	sd	$10,0($sp)
+.L1893:
+	daddu	$12,$2,$18
+	daddu	$15,$2,$8
+	vbld	$w13,0($2)
+	vbld	$w12,8($2)
+	vbld	$w2,0($12)
+	daddu	$12,$3,$18
+	daddu	$14,$2,$19
+	vbld	$w5,0($15)
+	vbld	$w8,0($12)
+	ld	$12,0($sp)
+	daddu	$13,$16,$2
+	vbld	$w4,0($14)
+	vbld	$w3,0($13)
+	daddu	$11,$2,$31
+	daddu	$10,$2,$17
+	vbld	$w15,0($3)
+	daddu	$15,$3,$8
+	daddu	$14,$3,$19
+	vbld	$w1,0($11)
+	vbld	$w0,0($10)
+	daddu	$13,$16,$3
+	vbld	$w11,0($15)
+	vbld	$w10,0($14)
+	daddu	$11,$31,$3
+	vbld	$w9,0($13)
+	daddu	$10,$3,$17
+	daddu	$15,$20,$9
+	vbld	$w14,8($3)
+	daddu	$14,$9,$22
+	daddu	$13,$21,$9
+	vbld	$w7,0($11)
+	vbld	$w6,0($10)
+	daddu	$12,$9,$12
+	addiu	$25,$25,-1
+	vextb_u.h	$w13,$w13
+	vextb_u.h	$w12,$w12
+	vextb_u.h	$w5,$w5
+	vextb_u.h	$w4,$w4
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w2,$w2
+	vextb_u.h	$w1,$w1
+	vextb_u.h	$w0,$w0
+	vextb_u.h	$w15,$w15
+	vextb_u.h	$w14,$w14
+	vextb_u.h	$w11,$w11
+	vextb_u.h	$w10,$w10
+	vextb_u.h	$w9,$w9
+	vextb_u.h	$w8,$w8
+	vextb_u.h	$w7,$w7
+	vextb_u.h	$w6,$w6
+	subv.h	$w13,$w13,$w15
+	subv.h	$w12,$w12,$w14
+	st.d	$w13,0($9)
+	st.d	$w12,16($9)
+	subv.h	$w5,$w5,$w11
+	subv.h	$w4,$w4,$w10
+	st.d	$w5,0($15)
+	subv.h	$w3,$w3,$w9
+	st.d	$w4,0($14)
+	subv.h	$w2,$w2,$w8
+	st.d	$w3,0($13)
+	subv.h	$w1,$w1,$w7
+	st.d	$w2,0($12)
+	subv.h	$w0,$w0,$w6
+	st.d	$w1,0($24)
+	st.d	$w0,16($24)
+	daddu	$9,$5,$9
+	daddu	$24,$24,$5
+	daddu	$2,$2,$fp
+	bne	$25,$0,.L1893
+	daddu	$3,$3,$23
+
+	li	$13,16			# 0x10
+.L1897:
+	move	$2,$4
+	move	$9,$6
+	move	$5,$7
+	b	.L1896
+	daddiu	$12,$4,32
+
+	.align	3
+.L1894:
+	beq	$12,$2,.L1902
+	nop
+
+.L1896:
+	lbu	$3,0($9)
+	daddiu	$2,$2,2
+	daddiu	$9,$9,1
+	lbu	$11,0($5)
+	lh	$10,-2($2)
+	subu	$3,$3,$11
+	beq	$10,$3,.L1894
+	daddiu	$5,$5,1
+
+	ld	$4,%got_page(.LC56)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC56)
+
+	ld	$31,104($sp)
+	ld	$fp,96($sp)
+	ld	$28,88($sp)
+	ld	$23,80($sp)
+	ld	$22,72($sp)
+	ld	$21,64($sp)
+	ld	$20,56($sp)
+	ld	$19,48($sp)
+	ld	$18,40($sp)
+	ld	$17,32($sp)
+	ld	$16,24($sp)
+	jr	$31
+	daddiu	$sp,$sp,112
+
+	.align	3
+.L1902:
+	ld	$2,8($sp)
+	addiu	$13,$13,-1
+	daddu	$6,$6,$8
+	daddu	$4,$4,$20
+	bne	$13,$0,.L1897
+	daddu	$7,$7,$2
+
+	ld	$4,%got_page(.LC57)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC57)
+
+	ld	$31,104($sp)
+	ld	$fp,96($sp)
+	ld	$28,88($sp)
+	ld	$23,80($sp)
+	ld	$22,72($sp)
+	ld	$21,64($sp)
+	ld	$20,56($sp)
+	ld	$19,48($sp)
+	ld	$18,40($sp)
+	ld	$17,32($sp)
+	ld	$16,24($sp)
+	jr	$31
+	daddiu	$sp,$sp,112
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll
+	.size	_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll, .-_ZN12_GLOBAL__N_112sub_ps_16x16EPslPKhS2_ll
+	.section	.rodata.str1.8
+	.align	3
+.LC58:
+	.ascii	"getResidual_32x32 test fail\000"
+	.align	3
+.LC59:
+	.ascii	"getResidual_32x32 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl
+	.type	_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl, @function
+_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl:
+	.frame	$sp,64,$31		# vars= 0, regs= 7/0, args= 0, gp= 0
+	.mask	0x901f0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-64
+	move	$12,$6
+	sd	$28,48($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl)))
+	move	$3,$5
+	sd	$16,8($sp)
+	daddu	$28,$28,$25
+	dsll	$16,$7,1
+	sd	$31,56($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl)))
+	daddu	$13,$6,$16
+	sd	$20,40($sp)
+	move	$2,$4
+	dsll	$20,$7,2
+	sd	$19,32($sp)
+	li	$31,16			# 0x10
+	daddiu	$19,$7,8
+	sd	$18,24($sp)
+	daddiu	$18,$7,16
+	sd	$17,16($sp)
+	daddiu	$17,$7,24
+	.align	3
+.L1904:
+	daddu	$11,$7,$2
+	daddu	$10,$2,$19
+	vbld	$w11,0($2)
+	vbld	$w10,8($2)
+	daddu	$9,$2,$18
+	daddu	$8,$2,$17
+	vbld	$w9,16($2)
+	vbld	$w8,24($2)
+	daddu	$25,$7,$3
+	daddu	$24,$3,$19
+	vbld	$w15,0($3)
+	vbld	$w14,8($3)
+	daddu	$15,$3,$18
+	daddu	$14,$3,$17
+	vbld	$w13,16($3)
+	vbld	$w12,24($3)
+	addiu	$31,$31,-1
+	vbld	$w3,0($11)
+	vbld	$w2,0($10)
+	vbld	$w1,0($9)
+	vbld	$w0,0($8)
+	vbld	$w7,0($25)
+	vbld	$w6,0($24)
+	vbld	$w5,0($15)
+	vbld	$w4,0($14)
+	vextb_u.h	$w11,$w11
+	vextb_u.h	$w10,$w10
+	vextb_u.h	$w9,$w9
+	vextb_u.h	$w8,$w8
+	vextb_u.h	$w15,$w15
+	vextb_u.h	$w14,$w14
+	vextb_u.h	$w13,$w13
+	vextb_u.h	$w12,$w12
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w2,$w2
+	vextb_u.h	$w1,$w1
+	vextb_u.h	$w0,$w0
+	vextb_u.h	$w7,$w7
+	vextb_u.h	$w6,$w6
+	vextb_u.h	$w5,$w5
+	vextb_u.h	$w4,$w4
+	subv.h	$w11,$w11,$w15
+	subv.h	$w10,$w10,$w14
+	st.d	$w11,0($12)
+	st.d	$w10,16($12)
+	subv.h	$w9,$w9,$w13
+	subv.h	$w8,$w8,$w12
+	st.d	$w9,32($12)
+	st.d	$w8,48($12)
+	subv.h	$w3,$w3,$w7
+	subv.h	$w2,$w2,$w6
+	subv.h	$w1,$w1,$w5
+	subv.h	$w0,$w0,$w4
+	st.d	$w3,0($13)
+	st.d	$w2,16($13)
+	st.d	$w1,32($13)
+	st.d	$w0,48($13)
+	daddu	$2,$2,$16
+	daddu	$3,$3,$16
+	daddu	$12,$12,$20
+	bne	$31,$0,.L1904
+	daddu	$13,$13,$20
+
+	li	$13,32			# 0x20
+.L1908:
+	move	$2,$6
+	move	$9,$4
+	move	$8,$5
+	b	.L1907
+	daddiu	$12,$6,64
+
+	.align	3
+.L1905:
+	beq	$12,$2,.L1913
+	nop
+
+.L1907:
+	lbu	$3,0($9)
+	daddiu	$2,$2,2
+	daddiu	$9,$9,1
+	lbu	$11,0($8)
+	lh	$10,-2($2)
+	subu	$3,$3,$11
+	beq	$10,$3,.L1905
+	daddiu	$8,$8,1
+
+	ld	$4,%got_page(.LC58)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC58)
+
+	ld	$31,56($sp)
+.L1914:
+	ld	$28,48($sp)
+	ld	$20,40($sp)
+	ld	$19,32($sp)
+	ld	$18,24($sp)
+	ld	$17,16($sp)
+	ld	$16,8($sp)
+	jr	$31
+	daddiu	$sp,$sp,64
+
+	.align	3
+.L1913:
+	addiu	$13,$13,-1
+	daddu	$4,$4,$7
+	daddu	$6,$6,$16
+	bne	$13,$0,.L1908
+	daddu	$5,$5,$7
+
+	ld	$4,%got_page(.LC59)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC59)
+
+	b	.L1914
+	ld	$31,56($sp)
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl
+	.size	_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl, .-_ZN12_GLOBAL__N_117getResidual_32x32EPKhS1_Psl
+	.section	.rodata.str1.8
+	.align	3
+.LC60:
+	.ascii	"sub_ps_64x64 test fail\000"
+	.align	3
+.LC61:
+	.ascii	"sub_ps_64x64 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll
+	.type	_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll, @function
+_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll:
+	.frame	$sp,16,$31		# vars= 0, regs= 2/0, args= 0, gp= 0
+	.mask	0x90000000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-16
+	dsll	$5,$5,1
+	sd	$28,0($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll)))
+	move	$10,$7
+	daddu	$28,$28,$25
+	move	$3,$6
+	sd	$31,8($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll)))
+	move	$2,$4
+	li	$11,64			# 0x40
+	.align	3
+.L1916:
+	addiu	$11,$11,-1
+	vbld	$w7,0($3)
+	vbld	$w6,8($3)
+	vbld	$w5,16($3)
+	vbld	$w4,24($3)
+	vbld	$w15,0($10)
+	vbld	$w14,8($10)
+	vbld	$w13,16($10)
+	vbld	$w12,24($10)
+	vbld	$w3,32($3)
+	vbld	$w2,40($3)
+	vbld	$w1,48($3)
+	vbld	$w0,56($3)
+	vbld	$w11,32($10)
+	vbld	$w10,40($10)
+	vbld	$w9,48($10)
+	vbld	$w8,56($10)
+	vextb_u.h	$w7,$w7
+	vextb_u.h	$w6,$w6
+	vextb_u.h	$w5,$w5
+	vextb_u.h	$w4,$w4
+	vextb_u.h	$w15,$w15
+	vextb_u.h	$w14,$w14
+	vextb_u.h	$w13,$w13
+	vextb_u.h	$w12,$w12
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w2,$w2
+	vextb_u.h	$w1,$w1
+	vextb_u.h	$w0,$w0
+	vextb_u.h	$w11,$w11
+	vextb_u.h	$w10,$w10
+	vextb_u.h	$w9,$w9
+	vextb_u.h	$w8,$w8
+	subv.h	$w7,$w7,$w15
+	subv.h	$w6,$w6,$w14
+	subv.h	$w5,$w5,$w13
+	subv.h	$w4,$w4,$w12
+	subv.h	$w3,$w3,$w11
+	subv.h	$w2,$w2,$w10
+	subv.h	$w1,$w1,$w9
+	subv.h	$w0,$w0,$w8
+	st.d	$w7,0($2)
+	st.d	$w6,16($2)
+	st.d	$w5,32($2)
+	st.d	$w4,48($2)
+	st.d	$w3,64($2)
+	st.d	$w2,80($2)
+	st.d	$w1,96($2)
+	st.d	$w0,112($2)
+	daddu	$3,$3,$8
+	daddu	$10,$10,$9
+	bne	$11,$0,.L1916
+	daddu	$2,$2,$5
+
+	li	$15,64			# 0x40
+.L1920:
+	move	$2,$4
+	move	$11,$6
+	move	$10,$7
+	b	.L1919
+	daddiu	$14,$4,128
+
+	.align	3
+.L1917:
+	beq	$14,$2,.L1925
+	nop
+
+.L1919:
+	lbu	$3,0($11)
+	daddiu	$2,$2,2
+	daddiu	$11,$11,1
+	lbu	$13,0($10)
+	lh	$12,-2($2)
+	subu	$3,$3,$13
+	beq	$12,$3,.L1917
+	daddiu	$10,$10,1
+
+	ld	$4,%got_page(.LC60)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC60)
+
+	ld	$31,8($sp)
+.L1926:
+	ld	$28,0($sp)
+	jr	$31
+	daddiu	$sp,$sp,16
+
+.L1925:
+	addiu	$15,$15,-1
+	daddu	$6,$6,$8
+	daddu	$7,$7,$9
+	bne	$15,$0,.L1920
+	daddu	$4,$4,$5
+
+	ld	$4,%got_page(.LC61)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC61)
+
+	b	.L1926
+	ld	$31,8($sp)
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll
+	.size	_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll, .-_ZN12_GLOBAL__N_112sub_ps_64x64EPslPKhS2_ll
+	.section	.rodata.str1.8
+	.align	3
+.LC62:
+	.ascii	"sub_ps_32x32 test fail\000"
+	.align	3
+.LC63:
+	.ascii	"sub_ps_32x32 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll
+	.type	_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll, @function
+_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll:
+	.frame	$sp,112,$31		# vars= 16, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-112
+	dsll	$3,$5,1
+	sd	$28,88($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll)))
+	daddu	$14,$4,$3
+	daddu	$28,$28,$25
+	sd	$31,104($sp)
+	move	$2,$6
+	sd	$fp,96($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll)))
+	dsll	$fp,$8,1
+	sd	$23,80($sp)
+	move	$13,$4
+	dsll	$23,$9,1
+	sd	$22,72($sp)
+	li	$31,16			# 0x10
+	daddiu	$22,$8,8
+	sd	$21,64($sp)
+	daddiu	$21,$8,16
+	sd	$20,56($sp)
+	daddiu	$20,$8,24
+	sd	$19,48($sp)
+	daddiu	$19,$9,8
+	sd	$18,40($sp)
+	daddiu	$18,$9,16
+	sd	$17,32($sp)
+	daddiu	$17,$9,24
+	sd	$16,24($sp)
+	dsll	$16,$5,2
+	sd	$3,8($sp)
+	move	$3,$7
+	sd	$6,0($sp)
+	.align	3
+.L1928:
+	daddu	$12,$2,$8
+	daddu	$11,$2,$22
+	vbld	$w11,0($2)
+	vbld	$w10,8($2)
+	daddu	$10,$2,$21
+	daddu	$6,$2,$20
+	vbld	$w9,16($2)
+	vbld	$w8,24($2)
+	daddu	$5,$3,$9
+	daddu	$25,$3,$19
+	vbld	$w15,0($3)
+	vbld	$w14,8($3)
+	daddu	$24,$3,$18
+	daddu	$15,$3,$17
+	vbld	$w13,16($3)
+	vbld	$w12,24($3)
+	addiu	$31,$31,-1
+	vbld	$w3,0($12)
+	vbld	$w2,0($11)
+	vbld	$w1,0($10)
+	vbld	$w0,0($6)
+	vbld	$w7,0($5)
+	vbld	$w6,0($25)
+	vbld	$w5,0($24)
+	vbld	$w4,0($15)
+	vextb_u.h	$w11,$w11
+	vextb_u.h	$w10,$w10
+	vextb_u.h	$w9,$w9
+	vextb_u.h	$w8,$w8
+	vextb_u.h	$w15,$w15
+	vextb_u.h	$w14,$w14
+	vextb_u.h	$w13,$w13
+	vextb_u.h	$w12,$w12
+	vextb_u.h	$w3,$w3
+	vextb_u.h	$w2,$w2
+	vextb_u.h	$w1,$w1
+	vextb_u.h	$w0,$w0
+	vextb_u.h	$w7,$w7
+	vextb_u.h	$w6,$w6
+	vextb_u.h	$w5,$w5
+	vextb_u.h	$w4,$w4
+	subv.h	$w11,$w11,$w15
+	subv.h	$w10,$w10,$w14
+	st.d	$w11,0($13)
+	st.d	$w10,16($13)
+	subv.h	$w9,$w9,$w13
+	subv.h	$w8,$w8,$w12
+	st.d	$w9,32($13)
+	st.d	$w8,48($13)
+	subv.h	$w3,$w3,$w7
+	subv.h	$w2,$w2,$w6
+	subv.h	$w1,$w1,$w5
+	subv.h	$w0,$w0,$w4
+	st.d	$w3,0($14)
+	st.d	$w2,16($14)
+	st.d	$w1,32($14)
+	st.d	$w0,48($14)
+	daddu	$2,$2,$fp
+	daddu	$3,$3,$23
+	daddu	$13,$13,$16
+	bne	$31,$0,.L1928
+	daddu	$14,$14,$16
+
+	li	$13,32			# 0x20
+.L1932:
+	move	$2,$4
+	ld	$6,0($sp)
+	move	$5,$7
+	b	.L1931
+	daddiu	$12,$4,64
+
+	.align	3
+.L1929:
+	beq	$12,$2,.L1937
+	nop
+
+.L1931:
+	lbu	$3,0($6)
+	daddiu	$2,$2,2
+	daddiu	$6,$6,1
+	lbu	$11,0($5)
+	lh	$10,-2($2)
+	subu	$3,$3,$11
+	beq	$10,$3,.L1929
+	daddiu	$5,$5,1
+
+	ld	$4,%got_page(.LC62)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC62)
+
+	ld	$31,104($sp)
+.L1938:
+	ld	$fp,96($sp)
+	ld	$28,88($sp)
+	ld	$23,80($sp)
+	ld	$22,72($sp)
+	ld	$21,64($sp)
+	ld	$20,56($sp)
+	ld	$19,48($sp)
+	ld	$18,40($sp)
+	ld	$17,32($sp)
+	ld	$16,24($sp)
+	jr	$31
+	daddiu	$sp,$sp,112
+
+	.align	3
+.L1937:
+	ld	$2,0($sp)
+	addiu	$13,$13,-1
+	daddu	$7,$7,$9
+	daddu	$2,$2,$8
+	sd	$2,0($sp)
+	ld	$2,8($sp)
+	bne	$13,$0,.L1932
+	daddu	$4,$4,$2
+
+	ld	$4,%got_page(.LC63)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC63)
+
+	b	.L1938
+	ld	$31,104($sp)
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll
+	.size	_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll, .-_ZN12_GLOBAL__N_112sub_ps_32x32EPslPKhS2_ll
+	.section	.rodata.str1.8
+	.align	3
+.LC64:
+	.ascii	"pixelavg_pp_8x8 test fail\000"
+	.align	3
+.LC65:
 	.ascii	"pixelavg_pp_8x8 test success\000"
 	.text
 	.align	2
@@ -18088,12 +19045,12 @@ _ZN12_GLOBAL__N_115pixelavg_pp_8x8EPhlPKhlS2_li:
 	vsd	$w2,1,0($14)
 	vsd	$w3,1,0($11)
 	vsd	$w0,1,0($2)
-.L1883:
+.L1943:
 	move	$3,$4
 	move	$11,$6
 	move	$10,$8
 	daddiu	$14,$4,8
-.L1882:
+.L1942:
 	lbu	$2,0($11)
 	daddiu	$3,$3,1
 	daddiu	$11,$11,1
@@ -18102,23 +19059,23 @@ _ZN12_GLOBAL__N_115pixelavg_pp_8x8EPhlPKhlS2_li:
 	addu	$2,$2,$13
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$12,$2,.L1887
+	bne	$12,$2,.L1947
 	daddiu	$10,$10,1
 
-	bne	$14,$3,.L1882
+	bne	$14,$3,.L1942
 	nop
 
 	addiu	$15,$15,-1
 	daddu	$6,$6,$7
 	daddu	$8,$8,$9
-	bne	$15,$0,.L1883
+	bne	$15,$0,.L1943
 	daddu	$4,$4,$5
 
-	ld	$4,%got_page(.LC41)($28)
+	ld	$4,%got_page(.LC65)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC41)
+	daddiu	$4,$4,%got_ofst(.LC65)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -18126,12 +19083,12 @@ _ZN12_GLOBAL__N_115pixelavg_pp_8x8EPhlPKhlS2_li:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L1887:
-	ld	$4,%got_page(.LC40)($28)
+.L1947:
+	ld	$4,%got_page(.LC64)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC40)
+	daddiu	$4,$4,%got_ofst(.LC64)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -18144,25 +19101,25 @@ _ZN12_GLOBAL__N_115pixelavg_pp_8x8EPhlPKhlS2_li:
 	.size	_ZN12_GLOBAL__N_115pixelavg_pp_8x8EPhlPKhlS2_li, .-_ZN12_GLOBAL__N_115pixelavg_pp_8x8EPhlPKhlS2_li
 	.section	.rodata.str1.8
 	.align	3
-.LC42:
+.LC66:
 	.ascii	"frame_init_lowres_core test fail\000"
 	.align	3
-.LC43:
+.LC67:
 	.ascii	"fail at dst0\012right value %d\012wrong value %d\012\000"
 	.align	3
-.LC44:
+.LC68:
 	.ascii	"width is %d\012height is %d\012\000"
 	.align	3
-.LC45:
+.LC69:
 	.ascii	"fail at dsth\012right value %d\012wrong value %d\012\000"
 	.align	3
-.LC46:
+.LC70:
 	.ascii	"fail at dstv\012right value %d\012wrong value %d\012\000"
 	.align	3
-.LC47:
+.LC71:
 	.ascii	"fail at dstc\012right value %d\012wrong value %d\012\000"
 	.align	3
-.LC48:
+.LC72:
 	.ascii	"frame_init_lowres_core test success\000"
 	.text
 	.align	2
@@ -18212,7 +19169,7 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	daddu	$16,$6,$25
 	daddu	$18,$7,$25
 	dlsa	$2,$2,$4,1
-	blez	$19,.L1889
+	blez	$19,.L1949
 	daddu	$25,$8,$25
 
 	dsra	$23,$23,4
@@ -18228,14 +19185,14 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	move	$21,$0
 	dsll	$20,$20,4
 	.align	3
-.L1892:
+.L1952:
 	daddu	$3,$2,$9
 	ld.d	$w4,0($2)
 	daddu	$5,$3,$9
 	ld.b	$w0,0($3)
 	aver_u.b	$w4,$w4,$w0
 	ld.d	$w1,0($5)
-	blez	$23,.L1890
+	blez	$23,.L1950
 	aver_u.b	$w1,$w0,$w1
 
 	daddu	$15,$2,$fp
@@ -18244,7 +19201,7 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	move	$6,$16
 	move	$5,$17
 	.align	3
-.L1891:
+.L1951:
 	daddiu	$2,$2,-32
 	daddiu	$5,$5,-16
 	ld.d	$w3,16($2)
@@ -18282,27 +19239,27 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	pckod.b	$w0,$w1,$w0
 	st.d	$w2,0($7)
 	move.v	$w1,$w5
-	bne	$2,$15,.L1891
+	bne	$2,$15,.L1951
 	st.d	$w0,0($10)
 
 	daddu	$17,$17,$20
 	daddu	$16,$16,$20
 	daddu	$18,$18,$20
 	daddu	$25,$25,$20
-.L1890:
+.L1950:
 	addiu	$21,$21,1
 	daddu	$2,$2,$22
 	daddu	$17,$17,$31
 	daddu	$16,$16,$31
 	daddu	$18,$18,$31
-	bne	$19,$21,.L1892
+	bne	$19,$21,.L1952
 	daddu	$25,$25,$31
 
 	ld	$31,24($sp)
 	daddiu	$25,$4,1
 	sd	$0,16($sp)
-.L1900:
-	blez	$11,.L1893
+.L1960:
+	blez	$11,.L1953
 	daddu	$16,$9,$25
 
 	ld	$19,0($sp)
@@ -18311,11 +19268,11 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	daddu	$18,$9,$16
 	move	$14,$31
 	move	$17,$25
-	b	.L1899
+	b	.L1959
 	move	$22,$0
 
 	.align	3
-.L1894:
+.L1954:
 	lbu	$3,1($16)
 	lbu	$2,1($17)
 	lbu	$13,0($20)
@@ -18325,7 +19282,7 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	addu	$2,$2,$24
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$13,$2,.L1907
+	bne	$13,$2,.L1967
 	daddiu	$19,$19,1
 
 	lbu	$13,0($18)
@@ -18341,7 +19298,7 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	addu	$2,$2,$5
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	bne	$10,$2,.L1908
+	bne	$10,$2,.L1968
 	daddiu	$17,$17,2
 
 	lbu	$4,1($18)
@@ -18353,16 +19310,16 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	addu	$5,$3,$5
 	addiu	$5,$5,1
 	sra	$5,$5,1
-	bne	$2,$5,.L1909
-	ld	$4,%got_page(.LC42)($28)
+	bne	$2,$5,.L1969
+	ld	$4,%got_page(.LC66)($28)
 
 	addiu	$22,$22,1
 	daddiu	$16,$16,2
 	daddiu	$20,$20,1
-	beq	$11,$22,.L1893
+	beq	$11,$22,.L1953
 	daddiu	$18,$18,2
 
-.L1899:
+.L1959:
 	lbu	$4,-1($16)
 	daddiu	$3,$17,-1
 	daddiu	$fp,$16,-1
@@ -18382,15 +19339,15 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	addu	$2,$2,$24
 	addiu	$2,$2,1
 	sra	$2,$2,1
-	beq	$13,$2,.L1894
+	beq	$13,$2,.L1954
 	daddiu	$6,$18,1
 
-	ld	$4,%got_page(.LC42)($28)
+	ld	$4,%got_page(.LC66)($28)
 	ld	$25,%call16(puts)($28)
 	sd	$3,0($sp)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC42)
+	daddiu	$4,$4,%got_ofst(.LC66)
 
 	ld	$3,0($sp)
 	lbu	$4,0($fp)
@@ -18399,28 +19356,28 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	lbu	$3,0($16)
 	lbu	$6,0($19)
 	addu	$5,$5,$4
-	ld	$4,%got_page(.LC43)($28)
+	ld	$4,%got_page(.LC67)($28)
 	addu	$2,$2,$3
 	ld	$25,%call16(printf)($28)
 	addiu	$5,$5,1
 	addiu	$2,$2,1
 	sra	$5,$5,1
 	sra	$2,$2,1
-	daddiu	$4,$4,%got_ofst(.LC43)
-.L1906:
+	daddiu	$4,$4,%got_ofst(.LC67)
+.L1966:
 	addu	$5,$5,$2
 	addiu	$5,$5,1
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
 	dsrl	$5,$5,1
 
-	ld	$4,%got_page(.LC44)($28)
+	ld	$4,%got_page(.LC68)($28)
 	move	$5,$22
 	ld	$25,%call16(printf)($28)
 	ld	$6,16($sp)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC44)
+	daddiu	$4,$4,%got_ofst(.LC68)
 
 	ld	$31,136($sp)
 	ld	$fp,128($sp)
@@ -18436,7 +19393,7 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	jr	$31
 	daddiu	$sp,$sp,144
 
-.L1893:
+.L1953:
 	ld	$2,16($sp)
 	daddu	$25,$25,$12
 	ld	$4,0($sp)
@@ -18449,15 +19406,15 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	daddu	$8,$8,$2
 	ld	$4,8($sp)
 	daddu	$4,$4,$2
-	bne	$21,$3,.L1900
+	bne	$21,$3,.L1960
 	sd	$4,8($sp)
 
-.L1889:
-	ld	$4,%got_page(.LC48)($28)
+.L1949:
+	ld	$4,%got_page(.LC72)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC48)
+	daddiu	$4,$4,%got_ofst(.LC72)
 
 	ld	$31,136($sp)
 	ld	$fp,128($sp)
@@ -18473,13 +19430,13 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	jr	$31
 	daddiu	$sp,$sp,144
 
-.L1907:
-	ld	$4,%got_page(.LC42)($28)
+.L1967:
+	ld	$4,%got_page(.LC66)($28)
 	ld	$25,%call16(puts)($28)
 	sd	$10,0($sp)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC42)
+	daddiu	$4,$4,%got_ofst(.LC66)
 
 	ld	$10,0($sp)
 	lbu	$4,0($16)
@@ -18487,24 +19444,24 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	lbu	$2,0($10)
 	lbu	$3,0($23)
 	addu	$5,$5,$4
-	ld	$4,%got_page(.LC45)($28)
+	ld	$4,%got_page(.LC69)($28)
 	addiu	$5,$5,1
 	lbu	$6,0($20)
 	addu	$2,$2,$3
 	sra	$5,$5,1
 	ld	$25,%call16(printf)($28)
 	addiu	$2,$2,1
-	daddiu	$4,$4,%got_ofst(.LC45)
-	b	.L1906
+	daddiu	$4,$4,%got_ofst(.LC69)
+	b	.L1966
 	sra	$2,$2,1
 
-.L1908:
-	ld	$4,%got_page(.LC42)($28)
+.L1968:
+	ld	$4,%got_page(.LC66)($28)
 	ld	$25,%call16(puts)($28)
 	sd	$7,0($sp)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC42)
+	daddiu	$4,$4,%got_ofst(.LC66)
 
 	ld	$7,0($sp)
 	lbu	$5,0($fp)
@@ -18513,22 +19470,22 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	lbu	$3,0($18)
 	lbu	$6,0($20)
 	addu	$5,$5,$4
-	ld	$4,%got_page(.LC46)($28)
+	ld	$4,%got_page(.LC70)($28)
 	addu	$2,$2,$3
 	addiu	$5,$5,1
 	ld	$25,%call16(printf)($28)
 	addiu	$2,$2,1
 	sra	$5,$5,1
 	sra	$2,$2,1
-	b	.L1906
-	daddiu	$4,$4,%got_ofst(.LC46)
+	b	.L1966
+	daddiu	$4,$4,%got_ofst(.LC70)
 
-.L1909:
+.L1969:
 	ld	$25,%call16(puts)($28)
 	sd	$6,0($sp)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC42)
+	daddiu	$4,$4,%got_ofst(.LC66)
 
 	ld	$6,0($sp)
 	lbu	$4,0($18)
@@ -18536,15 +19493,15 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	lbu	$3,0($6)
 	lbu	$2,0($23)
 	addu	$5,$5,$4
-	ld	$4,%got_page(.LC47)($28)
+	ld	$4,%got_page(.LC71)($28)
 	addiu	$5,$5,1
 	lbu	$6,0($20)
 	addu	$2,$2,$3
 	sra	$5,$5,1
 	ld	$25,%call16(printf)($28)
 	addiu	$2,$2,1
-	daddiu	$4,$4,%got_ofst(.LC47)
-	b	.L1906
+	daddiu	$4,$4,%got_ofst(.LC71)
+	b	.L1966
 	sra	$2,$2,1
 
 	.set	macro
@@ -18553,23 +19510,17 @@ _ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii:
 	.size	_ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii, .-_ZN12_GLOBAL__N_1L22frame_init_lowres_coreEPKhPhS2_S2_S2_llii
 	.section	.rodata.str1.8
 	.align	3
-.LC49:
+.LC73:
 	.ascii	"weight_pp test fail\000"
 	.align	3
-.LC50:
+.LC74:
 	.ascii	"fail at %d %d\012\000"
 	.align	3
-.LC51:
+.LC75:
 	.ascii	"source is %d w0 is %d round is %d shift is %d offset is "
 	.ascii	"%d\012\000"
 	.align	3
-.LC52:
-	.ascii	"right value %d\012\000"
-	.align	3
-.LC53:
-	.ascii	"wrong value %d\012\000"
-	.align	3
-.LC54:
+.LC76:
 	.ascii	"weight_pp test success\000"
 	.text
 	.align	2
@@ -18608,7 +19559,7 @@ _ZN12_GLOBAL__N_1L9weight_ppEPKhPhliiiiii:
 	sd	$20,40($sp)
 	sd	$18,24($sp)
 	sd	$17,16($sp)
-	blez	$8,.L1911
+	blez	$8,.L1971
 	sd	$16,8($sp)
 
 	dsra	$14,$7,4
@@ -18624,15 +19575,15 @@ _ZN12_GLOBAL__N_1L9weight_ppEPKhPhliiiiii:
 	move	$9,$0
 	daddiu	$13,$13,16
 	.align	3
-.L1914:
-	blez	$14,.L1912
+.L1974:
+	blez	$14,.L1972
 	nop
 
 	move	$2,$10
 	move	$3,$11
 	daddu	$12,$13,$10
 	.align	3
-.L1913:
+.L1973:
 	vbld	$w2,0($2)
 	vbld	$w1,8($2)
 	daddiu	$3,$3,16
@@ -18665,19 +19616,19 @@ _ZN12_GLOBAL__N_1L9weight_ppEPKhPhliiiiii:
 	insve.d	$w2[1],$w1[0]
 	vsrlins_u.b	$w1,$w2,0
 	insve.d	$w0[1],$w1[0]
-	bne	$2,$12,.L1913
+	bne	$2,$12,.L1973
 	st.d	$w0,-16($3)
 
-.L1912:
+.L1972:
 	addiu	$9,$9,1
 	daddu	$10,$10,$6
-	bne	$8,$9,.L1914
+	bne	$8,$9,.L1974
 	daddu	$11,$11,$6
 
 	move	$22,$0
 	li	$10,255			# 0xff
-.L1921:
-	blez	$7,.L1915
+.L1981:
+	blez	$7,.L1975
 	nop
 
 	lbu	$2,0($4)
@@ -18693,15 +19644,15 @@ _ZN12_GLOBAL__N_1L9weight_ppEPKhPhliiiiii:
 	movn	$2,$0,$8
 	move	$16,$2
 	andi	$2,$2,0x00ff
-	bne	$3,$2,.L1929
+	bne	$3,$2,.L1989
 	daddiu	$3,$4,1
 
 	daddiu	$8,$5,1
-	b	.L1918
+	b	.L1978
 	move	$fp,$0
 
 	.align	3
-.L1920:
+.L1980:
 	lbu	$2,0($3)
 	move	$23,$3
 	daddiu	$8,$8,1
@@ -18717,26 +19668,26 @@ _ZN12_GLOBAL__N_1L9weight_ppEPKhPhliiiiii:
 	movn	$2,$0,$12
 	move	$16,$2
 	andi	$2,$2,0x00ff
-	bne	$11,$2,.L1916
+	bne	$11,$2,.L1976
 	daddiu	$3,$3,1
 
-.L1918:
+.L1978:
 	addiu	$fp,$fp,1
-	bne	$7,$fp,.L1920
+	bne	$7,$fp,.L1980
 	move	$21,$8
 
-.L1915:
+.L1975:
 	addiu	$22,$22,1
 	daddu	$4,$4,$6
-	bne	$9,$22,.L1921
+	bne	$9,$22,.L1981
 	daddu	$5,$5,$6
 
-.L1911:
-	ld	$4,%got_page(.LC54)($28)
+.L1971:
+	ld	$4,%got_page(.LC76)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC54)
+	daddiu	$4,$4,%got_ofst(.LC76)
 
 	ld	$31,88($sp)
 	ld	$fp,80($sp)
@@ -18752,26 +19703,26 @@ _ZN12_GLOBAL__N_1L9weight_ppEPKhPhliiiiii:
 	jr	$31
 	daddiu	$sp,$sp,96
 
-.L1929:
+.L1989:
 	move	$21,$5
 	move	$23,$4
 	move	$fp,$0
-.L1916:
-	ld	$4,%got_page(.LC49)($28)
+.L1976:
+	ld	$4,%got_page(.LC73)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC49)
+	daddiu	$4,$4,%got_ofst(.LC73)
 
-	ld	$4,%got_page(.LC50)($28)
+	ld	$4,%got_page(.LC74)($28)
 	move	$6,$fp
 	ld	$25,%call16(printf)($28)
 	move	$5,$22
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC50)
+	daddiu	$4,$4,%got_ofst(.LC74)
 
-	ld	$4,%got_page(.LC51)($28)
+	ld	$4,%got_page(.LC75)($28)
 	move	$9,$19
 	ld	$25,%call16(printf)($28)
 	move	$8,$20
@@ -18780,21 +19731,21 @@ _ZN12_GLOBAL__N_1L9weight_ppEPKhPhliiiiii:
 	move	$6,$17
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC51)
+	daddiu	$4,$4,%got_ofst(.LC75)
 
-	ld	$4,%got_page(.LC52)($28)
+	ld	$4,%got_page(.LC31)($28)
 	move	$5,$16
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC52)
+	daddiu	$4,$4,%got_ofst(.LC31)
 
-	ld	$4,%got_page(.LC53)($28)
+	ld	$4,%got_page(.LC32)($28)
 	lbu	$5,0($21)
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC53)
+	daddiu	$4,$4,%got_ofst(.LC32)
 
 	ld	$31,88($sp)
 	ld	$fp,80($sp)
@@ -18816,542 +19767,10 @@ _ZN12_GLOBAL__N_1L9weight_ppEPKhPhliiiiii:
 	.size	_ZN12_GLOBAL__N_1L9weight_ppEPKhPhliiiiii, .-_ZN12_GLOBAL__N_1L9weight_ppEPKhPhliiiiii
 	.section	.rodata.str1.8
 	.align	3
-.LC55:
-	.ascii	"sa8d_8x8_internal test success\000"
-	.align	3
-.LC56:
-	.ascii	"sa8d_8x8_internal test fail\000"
-	.align	3
-.LC57:
-	.ascii	"sa8d_16x16 test success\000"
-	.align	3
-.LC58:
-	.ascii	"sa8d_16x16 test fail\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
-	.type	_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l, @function
-_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l:
-	.frame	$sp,160,$31		# vars= 64, regs= 11/0, args= 0, gp= 0
-	.mask	0xd0ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-160
-	dsll	$2,$5,3
-	sd	$28,136($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)))
-	daddu	$28,$28,$25
-	sd	$2,32($sp)
-	dsll	$2,$7,3
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)))
-	sd	$2,40($sp)
-	li	$2,2			# 0x2
-	sd	$2,8($sp)
-	ld	$2,%got_page(_ZN12_GLOBAL__N_19_sa8d_8x8EPKhlS1_l)($28)
-	sd	$21,112($sp)
-	move	$21,$7
-	sd	$20,104($sp)
-	move	$20,$5
-	daddiu	$2,$2,%got_ofst(_ZN12_GLOBAL__N_19_sa8d_8x8EPKhlS1_l)
-	sd	$19,96($sp)
-	move	$19,$6
-	sd	$2,0($sp)
-	ld	$2,%got_page(.LC56)($28)
-	sd	$18,88($sp)
-	move	$18,$4
-	sd	$17,80($sp)
-	move	$17,$0
-	daddiu	$2,$2,%got_ofst(.LC56)
-	sd	$31,152($sp)
-	sd	$2,24($sp)
-	ld	$2,%got_page(.LC55)($28)
-	sd	$fp,144($sp)
-	sd	$23,128($sp)
-	daddiu	$2,$2,%got_ofst(.LC55)
-	sd	$22,120($sp)
-	sd	$16,72($sp)
-	sd	$4,16($sp)
-	sd	$6,56($sp)
-	sd	$2,48($sp)
-.L1934:
-	move	$fp,$18
-	move	$23,$19
-	daddiu	$22,$18,16
-.L1933:
-	daddu	$3,$20,$fp
-	daddu	$2,$21,$23
-	ld	$25,0($sp)
-	vbld	$w9,0($fp)
-	daddu	$4,$20,$3
-	daddu	$14,$21,$2
-	vbld	$w2,0($3)
-	vbld	$w1,0($2)
-	daddu	$5,$20,$4
-	daddu	$13,$21,$14
-	vbld	$w6,0($4)
-	vbld	$w4,0($14)
-	daddu	$15,$20,$5
-	daddu	$4,$21,$13
-	vbld	$w5,0($5)
-	vbld	$w3,0($13)
-	daddu	$6,$20,$15
-	daddu	$3,$21,$4
-	hadd_u.h	$w10,$w6,$w6
-	hadd_u.h	$w14,$w1,$w1
-	daddu	$5,$20,$6
-	daddu	$2,$21,$3
-	hadd_u.h	$w13,$w4,$w4
-	hadd_u.h	$w12,$w3,$w3
-	daddu	$12,$20,$5
-	daddu	$7,$21,$2
-	vbld	$w8,0($23)
-	hadd_u.h	$w11,$w9,$w9
-	hadd_u.h	$w15,$w8,$w8
-	hadd_u.h	$w7,$w2,$w2
-	hadd_u.h	$w0,$w5,$w5
-	hsub_u.h	$w9,$w9,$w9
-	hsub_u.h	$w2,$w2,$w2
-	insve.d	$w11[1],$w9[0]
-	insve.d	$w7[1],$w2[0]
-	vbld	$w9,0($7)
-	hsub_u.h	$w6,$w6,$w6
-	hsub_u.h	$w5,$w5,$w5
-	hsub_u.h	$w8,$w8,$w8
-	hsub_u.h	$w1,$w1,$w1
-	hsub_u.h	$w4,$w4,$w4
-	hsub_u.h	$w3,$w3,$w3
-	move.v	$w2,$w10
-	insve.d	$w0[1],$w5[0]
-	vbld	$w10,0($12)
-	move.v	$w5,$w0
-	insve.d	$w2[1],$w6[0]
-	move.v	$w0,$w15
-	move.v	$w6,$w2
-	insve.d	$w0[1],$w8[0]
-	move.v	$w2,$w13
-	move.v	$w8,$w0
-	insve.d	$w2[1],$w4[0]
-	subv.h	$w8,$w11,$w8
-	subv.h	$w2,$w6,$w2
-	move.v	$w0,$w14
-	vbld	$w6,0($5)
-	insve.d	$w0[1],$w1[0]
-	hadd_u.h	$w15,$w6,$w6
-	subv.h	$w1,$w7,$w0
-	hadd_u.h	$w17,$w9,$w9
-	addv.h	$w4,$w1,$w8
-	vbld	$w7,0($6)
-	subv.h	$w1,$w1,$w8
-	hadd_u.h	$w14,$w7,$w7
-	vbld	$w8,0($15)
-	move.v	$w0,$w12
-	hsub_u.h	$w18,$w8,$w8
-	insve.d	$w0[1],$w3[0]
-	hadd_u.h	$w16,$w8,$w8
-	subv.h	$w0,$w5,$w0
-	vbld	$w3,0($2)
-	addv.h	$w11,$w0,$w2
-	vbld	$w5,0($4)
-	addv.h	$w13,$w11,$w4
-	subv.h	$w0,$w0,$w2
-	subv.h	$w11,$w11,$w4
-	subv.h	$w2,$w0,$w1
-	addv.h	$w12,$w0,$w1
-	vbld	$w4,0($3)
-	hadd_u.h	$w20,$w5,$w5
-	hadd_u.h	$w19,$w4,$w4
-	hadd_u.h	$w1,$w10,$w10
-	hadd_u.h	$w0,$w3,$w3
-	hsub_u.h	$w7,$w7,$w7
-	hsub_u.h	$w6,$w6,$w6
-	hsub_u.h	$w10,$w10,$w10
-	hsub_u.h	$w5,$w5,$w5
-	insve.d	$w1[1],$w10[0]
-	hsub_u.h	$w4,$w4,$w4
-	hsub_u.h	$w3,$w3,$w3
-	hsub_u.h	$w9,$w9,$w9
-	insve.d	$w0[1],$w3[0]
-	insve.d	$w17[1],$w9[0]
-	insve.d	$w16[1],$w18[0]
-	move.v	$w8,$w14
-	insve.d	$w8[1],$w7[0]
-	move.v	$w7,$w8
-	move.v	$w8,$w15
-	insve.d	$w8[1],$w6[0]
-	move.v	$w6,$w8
-	move.v	$w8,$w20
-	insve.d	$w8[1],$w5[0]
-	move.v	$w5,$w19
-	subv.h	$w8,$w16,$w8
-	insve.d	$w5[1],$w4[0]
-	subv.h	$w4,$w7,$w5
-	subv.h	$w5,$w6,$w0
-	addv.h	$w10,$w4,$w8
-	subv.h	$w3,$w4,$w8
-	subv.h	$w0,$w1,$w17
-	addv.h	$w4,$w0,$w5
-	subv.h	$w0,$w0,$w5
-	addv.h	$w7,$w4,$w10
-	addv.h	$w6,$w0,$w3
-	subv.h	$w4,$w4,$w10
-	addv.h	$w1,$w7,$w13
-	addv.h	$w8,$w4,$w11
-	addv.h	$w5,$w6,$w12
-	subv.h	$w11,$w4,$w11
-	subv.h	$w0,$w0,$w3
-	subv.h	$w13,$w7,$w13
-	addv.h	$w3,$w0,$w2
-	pckod.h	$w7,$w13,$w1
-	subv.h	$w0,$w0,$w2
-	pckev.h	$w13,$w13,$w1
-	pckod.h	$w4,$w0,$w3
-	asub_s.h	$w10,$w7,$w13
-	pckev.h	$w0,$w0,$w3
-	subv.h	$w12,$w6,$w12
-	addv.h	$w13,$w7,$w13
-	pckod.h	$w6,$w12,$w5
-	vabs.h	$w13,$w13
-	pckev.h	$w12,$w12,$w5
-	ilvod.h	$w1,$w13,$w10
-	pckod.h	$w5,$w11,$w8
-	asub_s.h	$w2,$w6,$w12
-	pckev.h	$w11,$w11,$w8
-	addv.h	$w12,$w6,$w12
-	asub_s.h	$w8,$w4,$w0
-	asub_s.h	$w9,$w5,$w11
-	addv.h	$w4,$w4,$w0
-	vabs.h	$w12,$w12
-	addv.h	$w11,$w5,$w11
-	ilvod.h	$w0,$w12,$w2
-	vabs.h	$w11,$w11
-	ilvev.h	$w12,$w12,$w2
-	vabs.h	$w3,$w4
-	ilvod.h	$w2,$w11,$w9
-	ilvod.h	$w4,$w3,$w8
-	ilvev.h	$w13,$w13,$w10
-	ilvev.h	$w11,$w11,$w9
-	ilvev.h	$w3,$w3,$w8
-	max_s.h	$w1,$w1,$w13
-	max_s.h	$w0,$w0,$w12
-	max_s.h	$w2,$w2,$w11
-	max_s.h	$w3,$w4,$w3
-	hadd_s.w	$w1,$w1,$w1
-	hadd_s.w	$w3,$w3,$w3
-	hadd_s.w	$w0,$w0,$w0
-	hadd_s.w	$w2,$w2,$w2
-	addv.w	$w0,$w1,$w0
-	addv.w	$w2,$w2,$w3
-	addv.w	$w0,$w0,$w2
-	copy_s.w	$2,$w0[1]
-	copy_s.w	$16,$w0[0]
-	addu	$16,$16,$2
-	move	$7,$21
-	copy_s.w	$2,$w0[2]
-	move	$6,$23
-	addu	$16,$16,$2
-	copy_s.w	$2,$w0[3]
-	move	$5,$20
-	move	$4,$fp
-	jalr	$25
-	addu	$16,$16,$2
-
-	addiu	$16,$16,1
-	addiu	$2,$2,2
-	dsra	$16,$16,1
-	sra	$2,$2,2
-	beq	$2,$16,.L1940
-	ld	$25,%call16(puts)($28)
-
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	ld	$4,24($sp)
-
-	addu	$16,$16,$17
-.L1942:
-	daddiu	$fp,$fp,8
-	move	$17,$16
-	bne	$fp,$22,.L1933
-	daddiu	$23,$23,8
-
-	ld	$22,32($sp)
-	li	$2,1			# 0x1
-	ld	$23,40($sp)
-	ld	$3,8($sp)
-	daddu	$18,$18,$22
-	bne	$3,$2,.L1937
-	daddu	$19,$19,$23
-
-	ld	$19,16($sp)
-	move	$7,$21
-	move	$5,$20
-	ld	$fp,56($sp)
-	ld	$25,0($sp)
-	move	$4,$19
-	jalr	$25
-	move	$6,$fp
-
-	ld	$25,0($sp)
-	daddiu	$4,$19,8
-	move	$7,$21
-	move	$5,$20
-	daddiu	$6,$fp,8
-	jalr	$25
-	move	$18,$2
-
-	ld	$25,0($sp)
-	addiu	$18,$18,2
-	addiu	$2,$2,2
-	daddu	$4,$19,$22
-	sd	$19,16($sp)
-	move	$7,$21
-	move	$5,$20
-	sra	$2,$2,2
-	daddu	$6,$fp,$23
-	sra	$18,$18,2
-	jalr	$25
-	addu	$18,$18,$2
-
-	ld	$25,0($sp)
-	daddiu	$6,$23,8
-	addiu	$19,$2,2
-	ld	$2,16($sp)
-	daddiu	$4,$22,8
-	move	$7,$21
-	daddu	$6,$fp,$6
-	move	$5,$20
-	sra	$19,$19,2
-	daddu	$4,$2,$4
-	jalr	$25
-	addu	$19,$19,$18
-
-	addiu	$18,$2,2
-	sra	$18,$18,2
-	addu	$18,$18,$19
-	beq	$18,$16,.L1941
-	ld	$25,%call16(puts)($28)
-
-	ld	$4,%got_page(.LC58)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC58)
-
-	ld	$4,%got_page(.LC52)($28)
-	move	$5,$18
-	ld	$25,%call16(printf)($28)
-	.reloc	1f,R_MIPS_JALR,printf
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC52)
-
-	ld	$4,%got_page(.LC53)($28)
-	move	$5,$16
-	ld	$25,%call16(printf)($28)
-	.reloc	1f,R_MIPS_JALR,printf
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC53)
-
-	ld	$31,152($sp)
-	move	$2,$17
-	ld	$fp,144($sp)
-	ld	$28,136($sp)
-	ld	$23,128($sp)
-	ld	$22,120($sp)
-	ld	$21,112($sp)
-	ld	$20,104($sp)
-	ld	$19,96($sp)
-	ld	$18,88($sp)
-	ld	$17,80($sp)
-	ld	$16,72($sp)
-	jr	$31
-	daddiu	$sp,$sp,160
-
-	.align	3
-.L1940:
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	ld	$4,48($sp)
-
-	b	.L1942
-	addu	$16,$16,$17
-
-	.align	3
-.L1937:
-	li	$2,1			# 0x1
-	b	.L1934
-	sd	$2,8($sp)
-
-	.align	3
-.L1941:
-	ld	$4,%got_page(.LC57)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC57)
-
-	ld	$31,152($sp)
-	move	$2,$17
-	ld	$fp,144($sp)
-	ld	$28,136($sp)
-	ld	$23,128($sp)
-	ld	$22,120($sp)
-	ld	$21,112($sp)
-	ld	$20,104($sp)
-	ld	$19,96($sp)
-	ld	$18,88($sp)
-	ld	$17,80($sp)
-	ld	$16,72($sp)
-	jr	$31
-	daddiu	$sp,$sp,160
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
-	.size	_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l, .-_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l
-	.type	_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l, @function
-_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l:
-	.frame	$sp,96,$31		# vars= 0, regs= 11/0, args= 0, gp= 0
-	.mask	0xd0ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-96
-	sd	$28,72($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l)))
-	daddu	$28,$28,$25
-	sd	$19,32($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l)))
-	sd	$fp,80($sp)
-	li	$fp,4			# 0x4
-	ld	$19,%got_page(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)($28)
-	sd	$23,64($sp)
-	dsll	$23,$5,4
-	sd	$22,56($sp)
-	dsll	$22,$7,4
-	sd	$21,48($sp)
-	daddiu	$19,$19,%got_ofst(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)
-	move	$21,$5
-	sd	$20,40($sp)
-	move	$20,$7
-	sd	$18,24($sp)
-	move	$18,$4
-	sd	$17,16($sp)
-	move	$17,$6
-	sd	$16,8($sp)
-	move	$16,$0
-	sd	$31,88($sp)
-.L1944:
-	move	$6,$17
-	move	$4,$18
-	move	$7,$20
-	move	$5,$21
-	move	$25,$19
-	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
-1:	jalr	$25
-	addiu	$fp,$fp,-1
-
-	daddiu	$6,$17,16
-	daddiu	$4,$18,16
-	move	$7,$20
-	move	$5,$21
-	move	$25,$19
-	addu	$16,$2,$16
-	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
-1:	jalr	$25
-	daddu	$18,$18,$23
-
-	daddu	$17,$17,$22
-	addu	$2,$2,$16
-	bne	$fp,$0,.L1944
-	move	$16,$2
-
-	ld	$31,88($sp)
-	ld	$fp,80($sp)
-	ld	$28,72($sp)
-	ld	$23,64($sp)
-	ld	$22,56($sp)
-	ld	$21,48($sp)
-	ld	$20,40($sp)
-	ld	$19,32($sp)
-	ld	$18,24($sp)
-	ld	$17,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,96
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l
-	.size	_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l
-	.type	_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l, @function
-_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l:
-	.frame	$sp,64,$31		# vars= 0, regs= 7/0, args= 0, gp= 0
-	.mask	0x901f0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-64
-	sd	$28,48($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l)))
-	daddu	$28,$28,$25
-	sd	$16,8($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l)))
-	sd	$20,40($sp)
-	move	$20,$7
-	ld	$16,%got_page(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)($28)
-	sd	$19,32($sp)
-	move	$19,$6
-	sd	$18,24($sp)
-	move	$18,$5
-	daddiu	$16,$16,%got_ofst(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)
-	sd	$17,16($sp)
-	move	$25,$16
-	sd	$31,56($sp)
-	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
-1:	jalr	$25
-	move	$17,$4
-
-	dlsa	$6,$20,$19,4
-	dlsa	$4,$18,$17,4
-	move	$7,$20
-	move	$5,$18
-	move	$25,$16
-	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
-1:	jalr	$25
-	move	$17,$2
-
-	ld	$31,56($sp)
-	addu	$2,$2,$17
-	ld	$28,48($sp)
-	ld	$20,40($sp)
-	ld	$19,32($sp)
-	ld	$18,24($sp)
-	ld	$17,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,64
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l
-	.size	_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l
-	.section	.rodata.str1.8
-	.align	3
-.LC59:
+.LC77:
 	.ascii	"sa8d_8x8 test success\000"
 	.align	3
-.LC60:
+.LC78:
 	.ascii	"sa8d_8x8 test fail\000"
 	.text
 	.align	2
@@ -19549,30 +19968,30 @@ _ZN12_GLOBAL__N_18sa8d_8x8EPKhlS1_l:
 	addiu	$2,$2,2
 	sra	$16,$16,1
 	sra	$17,$2,2
-	beq	$17,$16,.L1953
+	beq	$17,$16,.L1994
 	move	$18,$16
 
-	ld	$4,%got_page(.LC60)($28)
+	ld	$4,%got_page(.LC78)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC60)
+	daddiu	$4,$4,%got_ofst(.LC78)
 
-	ld	$4,%got_page(.LC52)($28)
+	ld	$4,%got_page(.LC31)($28)
 	move	$5,$17
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC52)
+	daddiu	$4,$4,%got_ofst(.LC31)
 
-	ld	$4,%got_page(.LC53)($28)
+	ld	$4,%got_page(.LC32)($28)
 	move	$5,$16
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC53)
+	daddiu	$4,$4,%got_ofst(.LC32)
 
 	ld	$31,40($sp)
-.L1954:
+.L1995:
 	move	$2,$18
 	ldc1	$f31,104($sp)
 	ld	$28,32($sp)
@@ -19590,13 +20009,13 @@ _ZN12_GLOBAL__N_18sa8d_8x8EPKhlS1_l:
 	daddiu	$sp,$sp,112
 
 	.align	3
-.L1953:
-	ld	$4,%got_page(.LC59)($28)
+.L1994:
+	ld	$4,%got_page(.LC77)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC59)
+	daddiu	$4,$4,%got_ofst(.LC77)
 
-	b	.L1954
+	b	.L1995
 	ld	$31,40($sp)
 
 	.set	macro
@@ -19662,10 +20081,10 @@ _ZN12_GLOBAL__N_15sa8d8ILi8ELi16EEEiPKhlS2_l:
 	.size	_ZN12_GLOBAL__N_15sa8d8ILi8ELi16EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15sa8d8ILi8ELi16EEEiPKhlS2_l
 	.section	.rodata.str1.8
 	.align	3
-.LC61:
+.LC79:
 	.ascii	"satd8_16x16 test success\000"
 	.align	3
-.LC62:
+.LC80:
 	.ascii	"satd8_16x16 test fail\000"
 	.text
 	.align	2
@@ -19717,7 +20136,7 @@ _ZN12_GLOBAL__N_111satd8_16x16EPKhlS1_l:
 	sdc1	$f26,128($sp)
 	sdc1	$f25,120($sp)
 	sdc1	$f24,112($sp)
-.L1958:
+.L1999:
 	daddu	$9,$2,$21
 	daddu	$25,$3,$20
 	vbld	$w17,0($3)
@@ -19853,7 +20272,7 @@ _ZN12_GLOBAL__N_111satd8_16x16EPKhlS1_l:
 	addu	$fp,$2,$fp
 	daddu	$7,$7,$8
 	daddu	$3,$14,$12
-	bne	$10,$0,.L1958
+	bne	$10,$0,.L1999
 	daddu	$2,$13,$11
 
 	ld	$23,%got_page(_ZN12_GLOBAL__N_1L10satd_c_8x4EPKhlS1_l)($28)
@@ -19862,7 +20281,7 @@ _ZN12_GLOBAL__N_111satd8_16x16EPKhlS1_l:
 	li	$22,4			# 0x4
 	move	$19,$0
 	daddiu	$23,$23,%got_ofst(_ZN12_GLOBAL__N_1L10satd_c_8x4EPKhlS1_l)
-.L1959:
+.L2000:
 	move	$6,$16
 	move	$4,$18
 	sd	$8,0($sp)
@@ -19885,19 +20304,19 @@ _ZN12_GLOBAL__N_111satd8_16x16EPKhlS1_l:
 
 	ld	$8,0($sp)
 	addu	$19,$2,$19
-	bne	$22,$0,.L1959
+	bne	$22,$0,.L2000
 	daddu	$16,$16,$8
 
-	beq	$fp,$19,.L1965
+	beq	$fp,$19,.L2006
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC62)($28)
+	ld	$4,%got_page(.LC80)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC62)
+	daddiu	$4,$4,%got_ofst(.LC80)
 
 	ld	$31,104($sp)
-.L1966:
+.L2007:
 	move	$2,$fp
 	ldc1	$f31,168($sp)
 	ld	$fp,96($sp)
@@ -19921,13 +20340,13 @@ _ZN12_GLOBAL__N_111satd8_16x16EPKhlS1_l:
 	daddiu	$sp,$sp,176
 
 	.align	3
-.L1965:
-	ld	$4,%got_page(.LC61)($28)
+.L2006:
+	ld	$4,%got_page(.LC79)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC61)
+	daddiu	$4,$4,%got_ofst(.LC79)
 
-	b	.L1966
+	b	.L2007
 	ld	$31,104($sp)
 
 	.set	macro
@@ -19936,10 +20355,10 @@ _ZN12_GLOBAL__N_111satd8_16x16EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_111satd8_16x16EPKhlS1_l, .-_ZN12_GLOBAL__N_111satd8_16x16EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC63:
+.LC81:
 	.ascii	"satd_8x4 test success\000"
 	.align	3
-.LC64:
+.LC82:
 	.ascii	"satd_8x4 test fail\000"
 	.text
 	.align	2
@@ -20038,7 +20457,7 @@ _ZN12_GLOBAL__N_1L8satd_8x4EPKhlS1_l:
 	move	$8,$sp
 	copy_s.w	$2,$w0[3]
 	addu	$16,$16,$2
-.L1968:
+.L2009:
 	lbu	$13,5($6)
 	daddiu	$12,$12,16
 	lbu	$11,5($4)
@@ -20087,14 +20506,14 @@ _ZN12_GLOBAL__N_1L8satd_8x4EPKhlS1_l:
 	sw	$13,-16($12)
 	sw	$9,-8($12)
 	sw	$10,-12($12)
-	bne	$24,$12,.L1968
+	bne	$24,$12,.L2009
 	sw	$2,-4($12)
 
 	li	$9,65536			# 0x10000
 	daddiu	$11,$8,16
 	move	$10,$0
 	addiu	$9,$9,1
-.L1969:
+.L2010:
 	lw	$6,0($8)
 	daddiu	$8,$8,4
 	lw	$4,12($8)
@@ -20135,20 +20554,20 @@ _ZN12_GLOBAL__N_1L8satd_8x4EPKhlS1_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$11,$8,.L1969
+	bne	$11,$8,.L2010
 	addu	$10,$2,$10
 
 	srl	$2,$10,16
 	andi	$10,$10,0xffff
 	addu	$10,$2,$10
 	srl	$10,$10,1
-	beq	$10,$16,.L1976
+	beq	$10,$16,.L2017
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC64)($28)
+	ld	$4,%got_page(.LC82)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC64)
+	daddiu	$4,$4,%got_ofst(.LC82)
 
 	ld	$31,104($sp)
 	move	$2,$16
@@ -20160,11 +20579,11 @@ _ZN12_GLOBAL__N_1L8satd_8x4EPKhlS1_l:
 	daddiu	$sp,$sp,112
 
 	.align	3
-.L1976:
-	ld	$4,%got_page(.LC63)($28)
+.L2017:
+	ld	$4,%got_page(.LC81)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC63)
+	daddiu	$4,$4,%got_ofst(.LC81)
 
 	ld	$31,104($sp)
 	move	$2,$16
@@ -20240,86 +20659,6 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi4EEEiPKhlS2_l:
 	.align	3
 	.set	nomips16
 	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l
-	.type	_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l, @function
-_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l:
-	.frame	$sp,96,$31		# vars= 0, regs= 11/0, args= 0, gp= 0
-	.mask	0xd0ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-96
-	sd	$28,72($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l)))
-	daddu	$28,$28,$25
-	sd	$19,32($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l)))
-	sd	$fp,80($sp)
-	li	$fp,3			# 0x3
-	ld	$19,%got_page(_ZN12_GLOBAL__N_1L8satd_8x4EPKhlS1_l)($28)
-	sd	$23,64($sp)
-	dsll	$23,$5,2
-	sd	$22,56($sp)
-	dsll	$22,$7,2
-	sd	$21,48($sp)
-	daddiu	$19,$19,%got_ofst(_ZN12_GLOBAL__N_1L8satd_8x4EPKhlS1_l)
-	move	$21,$5
-	sd	$20,40($sp)
-	move	$20,$7
-	sd	$18,24($sp)
-	move	$18,$4
-	sd	$17,16($sp)
-	move	$17,$6
-	sd	$16,8($sp)
-	move	$16,$0
-	sd	$31,88($sp)
-.L1980:
-	move	$6,$17
-	move	$4,$18
-	move	$7,$20
-	move	$5,$21
-	move	$25,$19
-	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_1L8satd_8x4EPKhlS1_l
-1:	jalr	$25
-	addiu	$fp,$fp,-1
-
-	daddiu	$6,$17,8
-	daddiu	$4,$18,8
-	move	$7,$20
-	move	$5,$21
-	move	$25,$19
-	addu	$16,$2,$16
-	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_1L8satd_8x4EPKhlS1_l
-1:	jalr	$25
-	daddu	$18,$18,$23
-
-	daddu	$17,$17,$22
-	addu	$2,$2,$16
-	bne	$fp,$0,.L1980
-	move	$16,$2
-
-	ld	$31,88($sp)
-	ld	$fp,80($sp)
-	ld	$28,72($sp)
-	ld	$23,64($sp)
-	ld	$22,56($sp)
-	ld	$21,48($sp)
-	ld	$20,40($sp)
-	ld	$19,32($sp)
-	ld	$18,24($sp)
-	ld	$17,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,96
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l
-	.size	_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
 	.ent	_ZN12_GLOBAL__N_15satd8ILi8ELi16EEEiPKhlS2_l
 	.type	_ZN12_GLOBAL__N_15satd8ILi8ELi16EEEiPKhlS2_l, @function
 _ZN12_GLOBAL__N_15satd8ILi8ELi16EEEiPKhlS2_l:
@@ -20353,7 +20692,7 @@ _ZN12_GLOBAL__N_15satd8ILi8ELi16EEEiPKhlS2_l:
 	sd	$16,8($sp)
 	li	$16,4			# 0x4
 	sd	$31,88($sp)
-.L1984:
+.L2021:
 	move	$6,$17
 	move	$4,$18
 	move	$7,$20
@@ -20366,7 +20705,7 @@ _ZN12_GLOBAL__N_15satd8ILi8ELi16EEEiPKhlS2_l:
 	daddu	$18,$18,$23
 	addu	$2,$2,$fp
 	daddu	$17,$17,$22
-	bne	$16,$0,.L1984
+	bne	$16,$0,.L2021
 	move	$fp,$2
 
 	ld	$31,88($sp)
@@ -20424,7 +20763,7 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi8EEEiPKhlS2_l:
 	sd	$16,8($sp)
 	move	$16,$0
 	sd	$31,88($sp)
-.L1988:
+.L2025:
 	move	$6,$fp
 	move	$4,$21
 	move	$7,$18
@@ -20446,7 +20785,7 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi8EEEiPKhlS2_l:
 	li	$3,1			# 0x1
 	addu	$2,$2,$16
 	daddu	$fp,$fp,$22
-	bne	$20,$3,.L1989
+	bne	$20,$3,.L2026
 	move	$16,$2
 
 	ld	$31,88($sp)
@@ -20464,8 +20803,8 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi8EEEiPKhlS2_l:
 	daddiu	$sp,$sp,96
 
 	.align	3
-.L1989:
-	b	.L1988
+.L2026:
+	b	.L2025
 	li	$20,1			# 0x1
 
 	.set	macro
@@ -20474,10 +20813,10 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi8EEEiPKhlS2_l:
 	.size	_ZN12_GLOBAL__N_15satd8ILi16ELi8EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi16ELi8EEEiPKhlS2_l
 	.section	.rodata.str1.8
 	.align	3
-.LC65:
+.LC83:
 	.ascii	"satd8_8x8 test success\000"
 	.align	3
-.LC66:
+.LC84:
 	.ascii	"satd8_8x8 test fail\000"
 	.text
 	.align	2
@@ -20663,30 +21002,30 @@ _ZN12_GLOBAL__N_19satd8_8x8EPKhlS1_l:
 	move	$22,$16
 
 	addu	$17,$2,$17
-	beq	$17,$16,.L1995
+	beq	$17,$16,.L2032
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC66)($28)
+	ld	$4,%got_page(.LC84)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC66)
+	daddiu	$4,$4,%got_ofst(.LC84)
 
-	ld	$4,%got_page(.LC52)($28)
+	ld	$4,%got_page(.LC31)($28)
 	move	$5,$17
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC52)
+	daddiu	$4,$4,%got_ofst(.LC31)
 
-	ld	$4,%got_page(.LC53)($28)
+	ld	$4,%got_page(.LC32)($28)
 	move	$5,$16
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC53)
+	daddiu	$4,$4,%got_ofst(.LC32)
 
 	ld	$31,72($sp)
-.L1996:
+.L2033:
 	move	$2,$22
 	ldc1	$f28,120($sp)
 	ld	$28,64($sp)
@@ -20705,13 +21044,13 @@ _ZN12_GLOBAL__N_19satd8_8x8EPKhlS1_l:
 	daddiu	$sp,$sp,128
 
 	.align	3
-.L1995:
-	ld	$4,%got_page(.LC65)($28)
+.L2032:
+	ld	$4,%got_page(.LC83)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC65)
+	daddiu	$4,$4,%got_ofst(.LC83)
 
-	b	.L1996
+	b	.L2033
 	ld	$31,72($sp)
 
 	.set	macro
@@ -20720,10 +21059,10 @@ _ZN12_GLOBAL__N_19satd8_8x8EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_19satd8_8x8EPKhlS1_l, .-_ZN12_GLOBAL__N_19satd8_8x8EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC67:
+.LC85:
 	.ascii	"satd_4x4 test success\000"
 	.align	3
-.LC68:
+.LC86:
 	.ascii	"satd_4x4 test fail\000"
 	.text
 	.align	2
@@ -20801,7 +21140,7 @@ _ZN12_GLOBAL__N_1L8satd_4x4EPKhlS1_l:
 	daddiu	$24,$sp,32
 	addu	$16,$16,$2
 	move	$12,$sp
-.L1998:
+.L2035:
 	lbu	$2,0($4)
 	daddiu	$12,$12,8
 	lbu	$25,1($6)
@@ -20830,14 +21169,14 @@ _ZN12_GLOBAL__N_1L8satd_4x4EPKhlS1_l:
 	addu	$8,$2,$3
 	subu	$2,$2,$3
 	sw	$8,-8($12)
-	bne	$24,$12,.L1998
+	bne	$24,$12,.L2035
 	sw	$2,-4($12)
 
 	li	$7,65536			# 0x10000
 	daddiu	$10,$13,8
 	move	$9,$0
 	addiu	$7,$7,1
-.L1999:
+.L2036:
 	lw	$2,0($13)
 	daddiu	$13,$13,4
 	lw	$5,4($13)
@@ -20881,17 +21220,17 @@ _ZN12_GLOBAL__N_1L8satd_4x4EPKhlS1_l:
 	srl	$3,$2,16
 	andi	$2,$2,0xffff
 	addu	$2,$3,$2
-	bne	$10,$13,.L1999
+	bne	$10,$13,.L2036
 	addu	$9,$2,$9
 
 	srl	$9,$9,1
-	beq	$9,$16,.L2006
+	beq	$9,$16,.L2043
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC68)($28)
+	ld	$4,%got_page(.LC86)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC68)
+	daddiu	$4,$4,%got_ofst(.LC86)
 
 	ld	$31,56($sp)
 	move	$2,$16
@@ -20901,11 +21240,11 @@ _ZN12_GLOBAL__N_1L8satd_4x4EPKhlS1_l:
 	daddiu	$sp,$sp,64
 
 	.align	3
-.L2006:
-	ld	$4,%got_page(.LC67)($28)
+.L2043:
+	ld	$4,%got_page(.LC85)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC67)
+	daddiu	$4,$4,%got_ofst(.LC85)
 
 	ld	$31,56($sp)
 	move	$2,$16
@@ -20956,7 +21295,7 @@ _ZN12_GLOBAL__N_15satd4ILi4ELi32EEEiPKhlS2_l:
 	li	$16,8			# 0x8
 	sd	$31,88($sp)
 	.align	3
-.L2008:
+.L2045:
 	move	$6,$17
 	move	$4,$18
 	move	$7,$20
@@ -20969,7 +21308,7 @@ _ZN12_GLOBAL__N_15satd4ILi4ELi32EEEiPKhlS2_l:
 	daddu	$18,$18,$23
 	addu	$2,$2,$fp
 	daddu	$17,$17,$22
-	bne	$16,$0,.L2008
+	bne	$16,$0,.L2045
 	move	$fp,$2
 
 	ld	$31,88($sp)
@@ -21031,11 +21370,11 @@ _ZN12_GLOBAL__N_15satd4ILi12ELi32EEEiPKhlS2_l:
 	sd	$17,48($sp)
 	sd	$2,0($sp)
 	.align	3
-.L2013:
+.L2050:
 	daddiu	$17,$16,12
 	move	$18,$22
 	move	$fp,$16
-.L2012:
+.L2049:
 	ld	$25,0($sp)
 	move	$6,$18
 	move	$4,$fp
@@ -21046,14 +21385,14 @@ _ZN12_GLOBAL__N_15satd4ILi12ELi32EEEiPKhlS2_l:
 	daddiu	$18,$18,4
 
 	addu	$2,$2,$23
-	bne	$fp,$17,.L2012
+	bne	$fp,$17,.L2049
 	move	$23,$2
 
 	ld	$3,8($sp)
 	addiu	$21,$21,-1
 	daddu	$16,$16,$3
 	ld	$3,16($sp)
-	bne	$21,$0,.L2013
+	bne	$21,$0,.L2050
 	daddu	$22,$22,$3
 
 	ld	$31,120($sp)
@@ -21168,7 +21507,7 @@ _ZN12_GLOBAL__N_15satd4ILi8ELi12EEEiPKhlS2_l:
 	sd	$16,8($sp)
 	move	$16,$0
 	sd	$31,88($sp)
-.L2020:
+.L2057:
 	move	$6,$17
 	move	$4,$18
 	move	$7,$20
@@ -21190,7 +21529,7 @@ _ZN12_GLOBAL__N_15satd4ILi8ELi12EEEiPKhlS2_l:
 
 	daddu	$17,$17,$22
 	addu	$2,$2,$16
-	bne	$fp,$0,.L2020
+	bne	$fp,$0,.L2057
 	move	$16,$2
 
 	ld	$31,88($sp)
@@ -21244,7 +21583,7 @@ _ZN12_GLOBAL__N_15satd4ILi16ELi4EEEiPKhlS2_l:
 	sd	$16,8($sp)
 	move	$16,$4
 	sd	$31,72($sp)
-.L2024:
+.L2061:
 	move	$6,$17
 	move	$4,$16
 	move	$7,$21
@@ -21256,7 +21595,7 @@ _ZN12_GLOBAL__N_15satd4ILi16ELi4EEEiPKhlS2_l:
 
 	daddiu	$17,$17,4
 	addu	$2,$2,$18
-	bne	$16,$20,.L2024
+	bne	$16,$20,.L2061
 	move	$18,$2
 
 	ld	$31,72($sp)
@@ -21315,11 +21654,11 @@ _ZN12_GLOBAL__N_15satd4ILi16ELi12EEEiPKhlS2_l:
 	sd	$fp,112($sp)
 	sd	$16,40($sp)
 	sd	$2,0($sp)
-.L2029:
+.L2066:
 	daddiu	$16,$20,16
 	move	$17,$22
 	move	$fp,$20
-.L2028:
+.L2065:
 	ld	$25,0($sp)
 	move	$6,$17
 	move	$4,$fp
@@ -21330,14 +21669,14 @@ _ZN12_GLOBAL__N_15satd4ILi16ELi12EEEiPKhlS2_l:
 	daddiu	$17,$17,4
 
 	addu	$2,$2,$23
-	bne	$fp,$16,.L2028
+	bne	$fp,$16,.L2065
 	move	$23,$2
 
 	ld	$3,8($sp)
 	addiu	$21,$21,-1
 	daddu	$20,$20,$3
 	ld	$3,16($sp)
-	bne	$21,$0,.L2029
+	bne	$21,$0,.L2066
 	daddu	$22,$22,$3
 
 	ld	$31,120($sp)
@@ -21395,7 +21734,7 @@ _ZN12_GLOBAL__N_15satd4ILi4ELi16EEEiPKhlS2_l:
 	sd	$16,8($sp)
 	li	$16,4			# 0x4
 	sd	$31,88($sp)
-.L2034:
+.L2071:
 	move	$6,$17
 	move	$4,$18
 	move	$7,$20
@@ -21408,7 +21747,7 @@ _ZN12_GLOBAL__N_15satd4ILi4ELi16EEEiPKhlS2_l:
 	daddu	$18,$18,$23
 	addu	$2,$2,$fp
 	daddu	$17,$17,$22
-	bne	$16,$0,.L2034
+	bne	$16,$0,.L2071
 	move	$fp,$2
 
 	ld	$31,88($sp)
@@ -21469,11 +21808,11 @@ _ZN12_GLOBAL__N_15satd4ILi12ELi16EEEiPKhlS2_l:
 	sd	$fp,112($sp)
 	sd	$17,48($sp)
 	sd	$2,0($sp)
-.L2039:
+.L2076:
 	daddiu	$17,$16,12
 	move	$18,$22
 	move	$fp,$16
-.L2038:
+.L2075:
 	ld	$25,0($sp)
 	move	$6,$18
 	move	$4,$fp
@@ -21484,14 +21823,14 @@ _ZN12_GLOBAL__N_15satd4ILi12ELi16EEEiPKhlS2_l:
 	daddiu	$18,$18,4
 
 	addu	$2,$2,$23
-	bne	$fp,$17,.L2038
+	bne	$fp,$17,.L2075
 	move	$23,$2
 
 	ld	$3,8($sp)
 	addiu	$21,$21,-1
 	daddu	$16,$16,$3
 	ld	$3,16($sp)
-	bne	$21,$0,.L2039
+	bne	$21,$0,.L2076
 	daddu	$22,$22,$3
 
 	ld	$31,120($sp)
@@ -21571,10 +21910,10 @@ _ZN12_GLOBAL__N_15satd4ILi4ELi8EEEiPKhlS2_l:
 	.size	_ZN12_GLOBAL__N_15satd4ILi4ELi8EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd4ILi4ELi8EEEiPKhlS2_l
 	.section	.rodata.str1.8
 	.align	3
-.LC69:
+.LC87:
 	.ascii	"pixel_var_8x8 test success\000"
 	.align	3
-.LC70:
+.LC88:
 	.ascii	"pixel_var_8x8 test fail\000"
 	.text
 	.align	2
@@ -21652,36 +21991,36 @@ _ZN12_GLOBAL__N_113pixel_var_8x8EPKhl:
 	move	$3,$0
 	daddu	$16,$16,$2
 	.align	3
-.L2047:
+.L2084:
 	daddiu	$6,$4,8
 	.align	3
-.L2046:
+.L2083:
 	lbu	$2,0($4)
 	daddiu	$4,$4,1
 	madd	$2,$2
-	bne	$6,$4,.L2046
+	bne	$6,$4,.L2083
 	addu	$3,$2,$3
 
 	addiu	$7,$7,-1
-	beq	$7,$0,.L2052
+	beq	$7,$0,.L2089
 	move	$4,$8
 
-	b	.L2047
+	b	.L2084
 	daddu	$8,$8,$5
 
 	.align	3
-.L2052:
+.L2089:
 	mflo	$2
 	dext	$3,$3,0,32
 	dsll	$2,$2,32
 	daddu	$2,$2,$3
-	beq	$2,$16,.L2054
+	beq	$2,$16,.L2091
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC70)($28)
+	ld	$4,%got_page(.LC88)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC70)
+	daddiu	$4,$4,%got_ofst(.LC88)
 
 	ld	$31,24($sp)
 	move	$2,$16
@@ -21690,11 +22029,11 @@ _ZN12_GLOBAL__N_113pixel_var_8x8EPKhl:
 	jr	$31
 	daddiu	$sp,$sp,32
 
-.L2054:
-	ld	$4,%got_page(.LC69)($28)
+.L2091:
+	ld	$4,%got_page(.LC87)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC69)
+	daddiu	$4,$4,%got_ofst(.LC87)
 
 	ld	$31,24($sp)
 	move	$2,$16
@@ -21709,10 +22048,10 @@ _ZN12_GLOBAL__N_113pixel_var_8x8EPKhl:
 	.size	_ZN12_GLOBAL__N_113pixel_var_8x8EPKhl, .-_ZN12_GLOBAL__N_113pixel_var_8x8EPKhl
 	.section	.rodata.str1.8
 	.align	3
-.LC71:
+.LC89:
 	.ascii	"pixel_var_16x16 test success\000"
 	.align	3
-.LC72:
+.LC90:
 	.ascii	"pixel_var_16x16 test fail\000"
 	.text
 	.align	2
@@ -21924,35 +22263,35 @@ _ZN12_GLOBAL__N_115pixel_var_16x16EPKhl:
 	copy_s.d	$2,$w0[1]
 	daddu	$16,$16,$2
 	.align	3
-.L2057:
+.L2094:
 	daddiu	$6,$4,16
 	.align	3
-.L2056:
+.L2093:
 	lbu	$2,0($4)
 	daddiu	$4,$4,1
 	madd	$2,$2
-	bne	$6,$4,.L2056
+	bne	$6,$4,.L2093
 	addu	$3,$2,$3
 
 	addiu	$8,$8,-1
-	beq	$8,$0,.L2062
+	beq	$8,$0,.L2099
 	move	$4,$7
 
-	b	.L2057
+	b	.L2094
 	daddu	$7,$7,$5
 
-.L2062:
+.L2099:
 	mflo	$2
 	dext	$3,$3,0,32
 	dsll	$2,$2,32
 	daddu	$2,$2,$3
-	beq	$2,$16,.L2064
+	beq	$2,$16,.L2101
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC72)($28)
+	ld	$4,%got_page(.LC90)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC72)
+	daddiu	$4,$4,%got_ofst(.LC90)
 
 	ld	$31,24($sp)
 	move	$2,$16
@@ -21967,11 +22306,11 @@ _ZN12_GLOBAL__N_115pixel_var_16x16EPKhl:
 	jr	$31
 	daddiu	$sp,$sp,80
 
-.L2064:
-	ld	$4,%got_page(.LC71)($28)
+.L2101:
+	ld	$4,%got_page(.LC89)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC71)
+	daddiu	$4,$4,%got_ofst(.LC89)
 
 	ld	$31,24($sp)
 	move	$2,$16
@@ -21992,10 +22331,10 @@ _ZN12_GLOBAL__N_115pixel_var_16x16EPKhl:
 	.size	_ZN12_GLOBAL__N_115pixel_var_16x16EPKhl, .-_ZN12_GLOBAL__N_115pixel_var_16x16EPKhl
 	.section	.rodata.str1.8
 	.align	3
-.LC73:
+.LC91:
 	.ascii	"pixel_add_ps_32x32 test fail\000"
 	.align	3
-.LC74:
+.LC92:
 	.ascii	"pixel_add_ps_32x32 test success\000"
 	.text
 	.align	2
@@ -22040,7 +22379,7 @@ _ZN12_GLOBAL__N_118pixel_add_ps_32x32EPhlPKhPKsll:
 	move	$14,$6
 	li	$20,8			# 0x8
 	.align	3
-.L2066:
+.L2103:
 	addiu	$20,$20,-1
 	ld.h	$w24,0($15)
 	vbld	$w15,0($14)
@@ -22149,24 +22488,24 @@ _ZN12_GLOBAL__N_118pixel_add_ps_32x32EPhlPKhPKsll:
 	daddu	$24,$24,$18
 	daddu	$11,$11,$18
 	daddu	$2,$2,$18
-	bne	$20,$0,.L2066
+	bne	$20,$0,.L2103
 	daddu	$25,$25,$18
 
 	li	$15,32			# 0x20
 	li	$13,255			# 0xff
-.L2070:
+.L2107:
 	move	$3,$4
 	move	$10,$6
 	move	$9,$7
-	b	.L2069
+	b	.L2106
 	daddiu	$14,$4,32
 
 	.align	3
-.L2067:
-	beq	$14,$3,.L2075
+.L2104:
+	beq	$14,$3,.L2112
 	nop
 
-.L2069:
+.L2106:
 	lh	$12,0($9)
 	daddiu	$3,$3,1
 	daddiu	$10,$10,1
@@ -22178,17 +22517,17 @@ _ZN12_GLOBAL__N_118pixel_add_ps_32x32EPhlPKhPKsll:
 	slt	$12,$2,0
 	movn	$2,$0,$12
 	andi	$2,$2,0x00ff
-	beq	$11,$2,.L2067
+	beq	$11,$2,.L2104
 	daddiu	$9,$9,2
 
-	ld	$4,%got_page(.LC73)($28)
+	ld	$4,%got_page(.LC91)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC73)
+	daddiu	$4,$4,%got_ofst(.LC91)
 
 	ld	$31,56($sp)
-.L2076:
+.L2113:
 	ldc1	$f24,72($sp)
 	ld	$28,48($sp)
 	ld	$20,40($sp)
@@ -22200,20 +22539,20 @@ _ZN12_GLOBAL__N_118pixel_add_ps_32x32EPhlPKhPKsll:
 	daddiu	$sp,$sp,80
 
 	.align	3
-.L2075:
+.L2112:
 	addiu	$15,$15,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$17
-	bne	$15,$0,.L2070
+	bne	$15,$0,.L2107
 	daddu	$4,$4,$5
 
-	ld	$4,%got_page(.LC74)($28)
+	ld	$4,%got_page(.LC92)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC74)
+	daddiu	$4,$4,%got_ofst(.LC92)
 
-	b	.L2076
+	b	.L2113
 	ld	$31,56($sp)
 
 	.set	macro
@@ -22222,10 +22561,10 @@ _ZN12_GLOBAL__N_118pixel_add_ps_32x32EPhlPKhPKsll:
 	.size	_ZN12_GLOBAL__N_118pixel_add_ps_32x32EPhlPKhPKsll, .-_ZN12_GLOBAL__N_118pixel_add_ps_32x32EPhlPKhPKsll
 	.section	.rodata.str1.8
 	.align	3
-.LC75:
+.LC93:
 	.ascii	"pixel_add_ps_16x16 test fail\000"
 	.align	3
-.LC76:
+.LC94:
 	.ascii	"pixel_add_ps_16x16 test success\000"
 	.text
 	.align	2
@@ -22298,7 +22637,7 @@ _ZN12_GLOBAL__N_118pixel_add_ps_16x16EPhlPKhPKsll:
 	move	$3,$12
 	sd	$8,88($sp)
 	sd	$7,64($sp)
-.L2078:
+.L2115:
 	ld	$5,0($sp)
 	vbld	$w17,0($31)
 	vbld	$w16,8($31)
@@ -22444,7 +22783,7 @@ _ZN12_GLOBAL__N_118pixel_add_ps_16x16EPhlPKhPKsll:
 	daddu	$18,$18,$22
 	daddu	$13,$13,$22
 	daddu	$10,$10,$22
-	bne	$5,$6,.L2083
+	bne	$5,$6,.L2120
 	daddu	$16,$16,$22
 
 	ld	$11,48($sp)
@@ -22452,19 +22791,19 @@ _ZN12_GLOBAL__N_118pixel_add_ps_16x16EPhlPKhPKsll:
 	li	$8,255			# 0xff
 	ld	$12,56($sp)
 	ld	$13,64($sp)
-.L2082:
+.L2119:
 	move	$3,$11
 	move	$5,$12
 	move	$4,$13
-	b	.L2081
+	b	.L2118
 	daddiu	$9,$11,16
 
 	.align	3
-.L2079:
-	beq	$9,$3,.L2087
+.L2116:
+	beq	$9,$3,.L2124
 	ld	$2,88($sp)
 
-.L2081:
+.L2118:
 	lh	$7,0($4)
 	daddiu	$3,$3,1
 	daddiu	$5,$5,1
@@ -22476,14 +22815,14 @@ _ZN12_GLOBAL__N_118pixel_add_ps_16x16EPhlPKhPKsll:
 	slt	$7,$2,0
 	movn	$2,$0,$7
 	andi	$2,$2,0x00ff
-	beq	$6,$2,.L2079
+	beq	$6,$2,.L2116
 	daddiu	$4,$4,2
 
-	ld	$4,%got_page(.LC75)($28)
+	ld	$4,%got_page(.LC93)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC75)
+	daddiu	$4,$4,%got_ofst(.LC93)
 
 	ld	$31,184($sp)
 	ldc1	$f24,200($sp)
@@ -22501,26 +22840,26 @@ _ZN12_GLOBAL__N_118pixel_add_ps_16x16EPhlPKhPKsll:
 	daddiu	$sp,$sp,208
 
 	.align	3
-.L2083:
+.L2120:
 	li	$5,1			# 0x1
-	b	.L2078
+	b	.L2115
 	sd	$5,40($sp)
 
 	.align	3
-.L2087:
+.L2124:
 	addiu	$10,$10,-1
 	daddu	$12,$12,$2
 	ld	$2,72($sp)
 	daddu	$13,$13,$2
 	ld	$2,80($sp)
-	bne	$10,$0,.L2082
+	bne	$10,$0,.L2119
 	daddu	$11,$11,$2
 
-	ld	$4,%got_page(.LC76)($28)
+	ld	$4,%got_page(.LC94)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC76)
+	daddiu	$4,$4,%got_ofst(.LC94)
 
 	ld	$31,184($sp)
 	ldc1	$f24,200($sp)
@@ -22543,10 +22882,10 @@ _ZN12_GLOBAL__N_118pixel_add_ps_16x16EPhlPKhPKsll:
 	.size	_ZN12_GLOBAL__N_118pixel_add_ps_16x16EPhlPKhPKsll, .-_ZN12_GLOBAL__N_118pixel_add_ps_16x16EPhlPKhPKsll
 	.section	.rodata.str1.8
 	.align	3
-.LC77:
+.LC95:
 	.ascii	"pixel_add_ps_8x8 test fail\000"
 	.align	3
-.LC78:
+.LC96:
 	.ascii	"pixel_add_ps_8x8 test success\000"
 	.text
 	.align	2
@@ -22639,12 +22978,12 @@ _ZN12_GLOBAL__N_116pixel_add_ps_8x8EPhlPKhPKsll:
 	vsrains_u.b	$w0,$w2,0
 	vsd	$w1,0,0($10)
 	vsd	$w0,0,0($2)
-.L2092:
+.L2129:
 	move	$3,$4
 	move	$10,$6
 	move	$9,$7
 	daddiu	$13,$4,8
-.L2091:
+.L2128:
 	lh	$12,0($9)
 	daddiu	$3,$3,1
 	daddiu	$10,$10,1
@@ -22656,23 +22995,23 @@ _ZN12_GLOBAL__N_116pixel_add_ps_8x8EPhlPKhPKsll:
 	slt	$12,$2,0
 	movn	$2,$0,$12
 	andi	$2,$2,0x00ff
-	bne	$11,$2,.L2096
+	bne	$11,$2,.L2133
 	daddiu	$9,$9,2
 
-	bne	$13,$3,.L2091
+	bne	$13,$3,.L2128
 	nop
 
 	addiu	$24,$24,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$15
-	bne	$24,$0,.L2092
+	bne	$24,$0,.L2129
 	daddu	$4,$4,$5
 
-	ld	$4,%got_page(.LC78)($28)
+	ld	$4,%got_page(.LC96)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC78)
+	daddiu	$4,$4,%got_ofst(.LC96)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -22680,12 +23019,12 @@ _ZN12_GLOBAL__N_116pixel_add_ps_8x8EPhlPKhPKsll:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L2096:
-	ld	$4,%got_page(.LC77)($28)
+.L2133:
+	ld	$4,%got_page(.LC95)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC77)
+	daddiu	$4,$4,%got_ofst(.LC95)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -22698,10 +23037,10 @@ _ZN12_GLOBAL__N_116pixel_add_ps_8x8EPhlPKhPKsll:
 	.size	_ZN12_GLOBAL__N_116pixel_add_ps_8x8EPhlPKhPKsll, .-_ZN12_GLOBAL__N_116pixel_add_ps_8x8EPhlPKhPKsll
 	.section	.rodata.str1.8
 	.align	3
-.LC79:
+.LC97:
 	.ascii	"pixel_add_ps_4x4 test fail\000"
 	.align	3
-.LC80:
+.LC98:
 	.ascii	"pixel_add_ps_4x4 test success\000"
 	.text
 	.align	2
@@ -22756,12 +23095,12 @@ _ZN12_GLOBAL__N_116pixel_add_ps_4x4EPhlPKhPKsll:
 	vsw	$w0,0,0($12)
 	vsw	$w1,1,0($11)
 	vsw	$w0,1,0($2)
-.L2101:
+.L2138:
 	move	$3,$4
 	move	$11,$6
 	move	$10,$7
 	daddiu	$14,$4,4
-.L2100:
+.L2137:
 	lh	$13,0($10)
 	daddiu	$3,$3,1
 	daddiu	$11,$11,1
@@ -22773,23 +23112,23 @@ _ZN12_GLOBAL__N_116pixel_add_ps_4x4EPhlPKhPKsll:
 	slt	$13,$2,0
 	movn	$2,$0,$13
 	andi	$2,$2,0x00ff
-	bne	$12,$2,.L2105
+	bne	$12,$2,.L2142
 	daddiu	$10,$10,2
 
-	bne	$14,$3,.L2100
+	bne	$14,$3,.L2137
 	nop
 
 	addiu	$24,$24,-1
 	daddu	$6,$6,$8
 	daddu	$7,$7,$9
-	bne	$24,$0,.L2101
+	bne	$24,$0,.L2138
 	daddu	$4,$4,$5
 
-	ld	$4,%got_page(.LC80)($28)
+	ld	$4,%got_page(.LC98)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC80)
+	daddiu	$4,$4,%got_ofst(.LC98)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -22797,12 +23136,12 @@ _ZN12_GLOBAL__N_116pixel_add_ps_4x4EPhlPKhPKsll:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L2105:
-	ld	$4,%got_page(.LC79)($28)
+.L2142:
+	ld	$4,%got_page(.LC97)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC79)
+	daddiu	$4,$4,%got_ofst(.LC97)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -22815,10 +23154,10 @@ _ZN12_GLOBAL__N_116pixel_add_ps_4x4EPhlPKhPKsll:
 	.size	_ZN12_GLOBAL__N_116pixel_add_ps_4x4EPhlPKhPKsll, .-_ZN12_GLOBAL__N_116pixel_add_ps_4x4EPhlPKhPKsll
 	.section	.rodata.str1.8
 	.align	3
-.LC81:
+.LC99:
 	.ascii	"blockfill_s_4x4 test fail\000"
 	.align	3
-.LC82:
+.LC100:
 	.ascii	"blockfill_s_4x4 test success\000"
 	.text
 	.align	2
@@ -22853,25 +23192,25 @@ _ZN12_GLOBAL__N_115blockfill_s_4x4EPsls:
 	li	$8,4			# 0x4
 	vsd	$w0,0,0($2)
 	vsd	$w0,0,0($9)
-.L2110:
+.L2147:
 	daddiu	$2,$7,-8
-.L2109:
+.L2146:
 	lh	$3,0($2)
-	bne	$3,$6,.L2114
+	bne	$3,$6,.L2151
 	daddiu	$2,$2,2
 
-	bne	$2,$7,.L2109
+	bne	$2,$7,.L2146
 	nop
 
 	addiu	$8,$8,-1
-	bne	$8,$0,.L2110
+	bne	$8,$0,.L2147
 	daddu	$7,$2,$5
 
-	ld	$4,%got_page(.LC82)($28)
+	ld	$4,%got_page(.LC100)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC82)
+	daddiu	$4,$4,%got_ofst(.LC100)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -22879,12 +23218,12 @@ _ZN12_GLOBAL__N_115blockfill_s_4x4EPsls:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L2114:
-	ld	$4,%got_page(.LC81)($28)
+.L2151:
+	ld	$4,%got_page(.LC99)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC81)
+	daddiu	$4,$4,%got_ofst(.LC99)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -22897,10 +23236,10 @@ _ZN12_GLOBAL__N_115blockfill_s_4x4EPsls:
 	.size	_ZN12_GLOBAL__N_115blockfill_s_4x4EPsls, .-_ZN12_GLOBAL__N_115blockfill_s_4x4EPsls
 	.section	.rodata.str1.8
 	.align	3
-.LC83:
+.LC101:
 	.ascii	"blockfill_s_8x8 test fail\000"
 	.align	3
-.LC84:
+.LC102:
 	.ascii	"blockfill_s_8x8 test success\000"
 	.text
 	.align	2
@@ -22943,25 +23282,25 @@ _ZN12_GLOBAL__N_115blockfill_s_8x8EPsls:
 	li	$4,8			# 0x8
 	st.d	$w0,0($2)
 	st.d	$w0,0($5)
-.L2119:
+.L2156:
 	daddiu	$2,$7,-16
-.L2118:
+.L2155:
 	lh	$3,0($2)
-	bne	$3,$6,.L2123
+	bne	$3,$6,.L2160
 	daddiu	$2,$2,2
 
-	bne	$2,$7,.L2118
+	bne	$2,$7,.L2155
 	nop
 
 	addiu	$4,$4,-1
-	bne	$4,$0,.L2119
+	bne	$4,$0,.L2156
 	daddu	$7,$2,$8
 
-	ld	$4,%got_page(.LC84)($28)
+	ld	$4,%got_page(.LC102)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC84)
+	daddiu	$4,$4,%got_ofst(.LC102)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -22969,12 +23308,12 @@ _ZN12_GLOBAL__N_115blockfill_s_8x8EPsls:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L2123:
-	ld	$4,%got_page(.LC83)($28)
+.L2160:
+	ld	$4,%got_page(.LC101)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC83)
+	daddiu	$4,$4,%got_ofst(.LC101)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -22987,10 +23326,10 @@ _ZN12_GLOBAL__N_115blockfill_s_8x8EPsls:
 	.size	_ZN12_GLOBAL__N_115blockfill_s_8x8EPsls, .-_ZN12_GLOBAL__N_115blockfill_s_8x8EPsls
 	.section	.rodata.str1.8
 	.align	3
-.LC85:
+.LC103:
 	.ascii	"blockfill_s_16x16 test fail\000"
 	.align	3
-.LC86:
+.LC104:
 	.ascii	"blockfill_s_16x16 test success\000"
 	.text
 	.align	2
@@ -23065,25 +23404,25 @@ _ZN12_GLOBAL__N_117blockfill_s_16x16EPsls:
 	st.d	$w0,16($2)
 	st.d	$w0,0($3)
 	st.d	$w0,16($3)
-.L2128:
-	b	.L2127
+.L2165:
+	b	.L2164
 	daddiu	$2,$7,-32
 
 	.align	3
-.L2125:
-	beq	$2,$7,.L2132
+.L2162:
+	beq	$2,$7,.L2169
 	nop
 
-.L2127:
+.L2164:
 	lh	$3,0($2)
-	beq	$3,$6,.L2125
+	beq	$3,$6,.L2162
 	daddiu	$2,$2,2
 
-	ld	$4,%got_page(.LC85)($28)
+	ld	$4,%got_page(.LC103)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC85)
+	daddiu	$4,$4,%got_ofst(.LC103)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -23091,16 +23430,16 @@ _ZN12_GLOBAL__N_117blockfill_s_16x16EPsls:
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L2132:
+.L2169:
 	addiu	$11,$11,-1
-	bne	$11,$0,.L2128
+	bne	$11,$0,.L2165
 	daddu	$7,$2,$5
 
-	ld	$4,%got_page(.LC86)($28)
+	ld	$4,%got_page(.LC104)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC86)
+	daddiu	$4,$4,%got_ofst(.LC104)
 
 	ld	$31,8($sp)
 	ld	$28,0($sp)
@@ -23113,10 +23452,10 @@ _ZN12_GLOBAL__N_117blockfill_s_16x16EPsls:
 	.size	_ZN12_GLOBAL__N_117blockfill_s_16x16EPsls, .-_ZN12_GLOBAL__N_117blockfill_s_16x16EPsls
 	.section	.rodata.str1.8
 	.align	3
-.LC87:
+.LC105:
 	.ascii	"blockfill_s_32x32 test fail\000"
 	.align	3
-.LC88:
+.LC106:
 	.ascii	"blockfill_s_32x32 test success\000"
 	.text
 	.align	2
@@ -23303,45 +23642,45 @@ _ZN12_GLOBAL__N_117blockfill_s_32x32EPsls:
 	st.d	$w0,16($25)
 	st.d	$w0,32($25)
 	st.d	$w0,48($25)
-.L2137:
-	b	.L2136
+.L2174:
+	b	.L2173
 	daddiu	$2,$7,-64
 
 	.align	3
-.L2134:
-	beq	$2,$7,.L2141
+.L2171:
+	beq	$2,$7,.L2178
 	nop
 
-.L2136:
+.L2173:
 	lh	$3,0($2)
-	beq	$3,$6,.L2134
+	beq	$3,$6,.L2171
 	daddiu	$2,$2,2
 
-	ld	$4,%got_page(.LC87)($28)
+	ld	$4,%got_page(.LC105)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC87)
+	daddiu	$4,$4,%got_ofst(.LC105)
 
 	ld	$31,8($sp)
-.L2142:
+.L2179:
 	ld	$28,0($sp)
 	jr	$31
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L2141:
+.L2178:
 	addiu	$31,$31,-1
-	bne	$31,$0,.L2137
+	bne	$31,$0,.L2174
 	daddu	$7,$2,$5
 
-	ld	$4,%got_page(.LC88)($28)
+	ld	$4,%got_page(.LC106)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC88)
+	daddiu	$4,$4,%got_ofst(.LC106)
 
-	b	.L2142
+	b	.L2179
 	ld	$31,8($sp)
 
 	.set	macro
@@ -23350,170 +23689,10 @@ _ZN12_GLOBAL__N_117blockfill_s_32x32EPsls:
 	.size	_ZN12_GLOBAL__N_117blockfill_s_32x32EPsls, .-_ZN12_GLOBAL__N_117blockfill_s_32x32EPsls
 	.section	.rodata.str1.8
 	.align	3
-.LC89:
-	.ascii	"sse_pp_a_8x8 test success\000"
-	.align	3
-.LC90:
-	.ascii	"sse_pp_a_8x8 test fail\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l
-	.type	_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l, @function
-_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l:
-	.frame	$sp,32,$31		# vars= 0, regs= 3/0, args= 0, gp= 0
-	.mask	0x90010000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddu	$11,$4,$5
-	daddu	$10,$6,$7
-	daddu	$12,$10,$7
-	daddu	$2,$11,$5
-	dlsa	$9,$5,$2,1
-	dlsa	$15,$7,$12,1
-	daddu	$8,$9,$5
-	daddu	$14,$15,$7
-	daddiu	$sp,$sp,-32
-	daddu	$3,$8,$5
-	daddu	$13,$14,$7
-	sd	$28,16($sp)
-	daddu	$24,$12,$7
-	sd	$16,8($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l)))
-	mtlo	$0
-	sd	$31,24($sp)
-	vbld	$w2,0($2)
-	vbld	$w4,0($12)
-	daddu	$2,$2,$5
-	vbld	$w7,0($9)
-	daddu	$12,$13,$7
-	daddu	$9,$3,$5
-	vbld	$w1,0($2)
-	vextb_u.h	$w4,$w4
-	vbld	$w8,0($9)
-	vbld	$w0,0($4)
-	vbld	$w15,0($6)
-	vbld	$w3,0($11)
-	vextb_u.h	$w0,$w0
-	vextb_u.h	$w3,$w3
-	vextb_u.h	$w2,$w2
-	vbld	$w14,0($10)
-	subv.h	$w2,$w2,$w4
-	vextb_u.h	$w15,$w15
-	vextb_u.h	$w14,$w14
-	vbld	$w13,0($24)
-	subv.h	$w3,$w3,$w14
-	vextb_u.h	$w1,$w1
-	dotp_s.w	$w4,$w3,$w3
-	vextb_u.h	$w13,$w13
-	dotp_s.w	$w3,$w2,$w2
-	subv.h	$w1,$w1,$w13
-	vbld	$w6,0($8)
-	dotp_s.w	$w2,$w1,$w1
-	vextb_u.h	$w7,$w7
-	vextb_u.h	$w6,$w6
-	vbld	$w5,0($3)
-	vextb_u.h	$w8,$w8
-	vextb_u.h	$w5,$w5
-	vbld	$w11,0($15)
-	vbld	$w10,0($14)
-	vextb_u.h	$w11,$w11
-	vextb_u.h	$w10,$w10
-	vbld	$w9,0($13)
-	vbld	$w12,0($12)
-	vextb_u.h	$w9,$w9
-	vextb_u.h	$w12,$w12
-	subv.h	$w0,$w0,$w15
-	subv.h	$w7,$w7,$w11
-	subv.h	$w6,$w6,$w10
-	subv.h	$w5,$w5,$w9
-	subv.h	$w8,$w8,$w12
-	dotp_s.w	$w0,$w0,$w0
-	dpadd_s.w	$w3,$w5,$w5
-	dpadd_s.w	$w0,$w7,$w7
-	dpadd_s.w	$w2,$w8,$w8
-	move.v	$w1,$w0
-	addv.w	$w2,$w3,$w2
-	move.v	$w0,$w4
-	dpadd_s.w	$w0,$w6,$w6
-	addv.w	$w0,$w1,$w0
-	addv.w	$w0,$w0,$w2
-	copy_s.w	$2,$w0[1]
-	copy_s.w	$16,$w0[0]
-	addu	$16,$16,$2
-	daddu	$28,$28,$25
-	copy_s.w	$2,$w0[2]
-	addu	$16,$16,$2
-	copy_s.w	$2,$w0[3]
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l)))
-	li	$9,8			# 0x8
-	addu	$16,$16,$2
-	.align	3
-.L2145:
-	daddiu	$8,$4,8
-	.align	3
-.L2144:
-	daddiu	$6,$6,1
-	lbu	$3,0($4)
-	daddiu	$4,$4,1
-	lbu	$2,-1($6)
-	subu	$2,$3,$2
-	bne	$8,$4,.L2144
-	madd	$2,$2
-
-	addiu	$9,$9,-1
-	move	$4,$11
-	beq	$9,$0,.L2150
-	move	$6,$10
-
-	daddu	$11,$11,$5
-	b	.L2145
-	daddu	$10,$10,$7
-
-	.align	3
-.L2150:
-	mflo	$2
-	beq	$16,$2,.L2152
-	ld	$25,%call16(puts)($28)
-
-	ld	$4,%got_page(.LC90)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC90)
-
-	ld	$31,24($sp)
-	move	$2,$16
-	ld	$28,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,32
-
-.L2152:
-	ld	$4,%got_page(.LC89)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC89)
-
-	ld	$31,24($sp)
-	move	$2,$16
-	ld	$28,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,32
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l
-	.size	_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l, .-_ZN12_GLOBAL__N_112sse_pp_a_8x8EPKhlS1_l
-	.section	.rodata.str1.8
-	.align	3
-.LC91:
+.LC107:
 	.ascii	"sse_pp_a_16x16 test success\000"
 	.align	3
-.LC92:
+.LC108:
 	.ascii	"sse_pp_a_16x16 test fail\000"
 	.text
 	.align	2
@@ -23555,7 +23734,7 @@ _ZN12_GLOBAL__N_114sse_pp_a_16x16EPKhlS1_l:
 	sd	$17,8($sp)
 	dsll	$17,$7,2
 	sd	$21,40($sp)
-.L2154:
+.L2181:
 	daddu	$12,$2,$5
 	daddu	$9,$3,$7
 	vbld	$w1,0($3)
@@ -23622,7 +23801,7 @@ _ZN12_GLOBAL__N_114sse_pp_a_16x16EPKhlS1_l:
 	daddu	$10,$10,$18
 	daddu	$11,$11,$17
 	daddu	$2,$5,$2
-	bne	$25,$0,.L2154
+	bne	$25,$0,.L2181
 	daddu	$3,$7,$21
 
 	addv.w	$w0,$w0,$w15
@@ -23638,33 +23817,33 @@ _ZN12_GLOBAL__N_114sse_pp_a_16x16EPKhlS1_l:
 	addu	$16,$16,$2
 	mtlo	$0
 	.align	3
-.L2156:
+.L2183:
 	move	$8,$4
 	move	$9,$6
 	daddiu	$10,$4,16
 	.align	3
-.L2155:
+.L2182:
 	daddiu	$9,$9,1
 	lbu	$3,0($8)
 	daddiu	$8,$8,1
 	lbu	$2,-1($9)
 	subu	$2,$3,$2
-	bne	$10,$8,.L2155
+	bne	$10,$8,.L2182
 	madd	$2,$2
 
 	addiu	$11,$11,-1
 	daddu	$4,$4,$5
-	bne	$11,$0,.L2156
+	bne	$11,$0,.L2183
 	daddu	$6,$6,$7
 
 	mflo	$2
-	beq	$16,$2,.L2163
+	beq	$16,$2,.L2190
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC92)($28)
+	ld	$4,%got_page(.LC108)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC92)
+	daddiu	$4,$4,%got_ofst(.LC108)
 
 	ld	$31,56($sp)
 	move	$2,$16
@@ -23678,11 +23857,11 @@ _ZN12_GLOBAL__N_114sse_pp_a_16x16EPKhlS1_l:
 	jr	$31
 	daddiu	$sp,$sp,64
 
-.L2163:
-	ld	$4,%got_page(.LC91)($28)
+.L2190:
+	ld	$4,%got_page(.LC107)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC91)
+	daddiu	$4,$4,%got_ofst(.LC107)
 
 	ld	$31,56($sp)
 	move	$2,$16
@@ -23702,10 +23881,10 @@ _ZN12_GLOBAL__N_114sse_pp_a_16x16EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_114sse_pp_a_16x16EPKhlS1_l, .-_ZN12_GLOBAL__N_114sse_pp_a_16x16EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC93:
+.LC109:
 	.ascii	"sse_pp_a_64x64 test success\000"
 	.align	3
-.LC94:
+.LC110:
 	.ascii	"sse_pp_a_64x64 test fail\000"
 	.text
 	.align	2
@@ -23735,7 +23914,7 @@ _ZN12_GLOBAL__N_114sse_pp_a_64x64EPKhlS1_l:
 	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_114sse_pp_a_64x64EPKhlS1_l)))
 	sd	$16,8($sp)
 	.align	3
-.L2165:
+.L2192:
 	addiu	$8,$8,-1
 	vbld	$w7,0($2)
 	vbld	$w6,8($2)
@@ -23786,7 +23965,7 @@ _ZN12_GLOBAL__N_114sse_pp_a_64x64EPKhlS1_l:
 	dpadd_s.w	$w9,$w1,$w1
 	dpadd_s.w	$w10,$w0,$w0
 	daddu	$2,$2,$5
-	bne	$8,$0,.L2165
+	bne	$8,$0,.L2192
 	daddu	$3,$3,$7
 
 	addv.w	$w8,$w8,$w11
@@ -23802,33 +23981,33 @@ _ZN12_GLOBAL__N_114sse_pp_a_64x64EPKhlS1_l:
 	addu	$16,$16,$2
 	mtlo	$0
 	.align	3
-.L2167:
+.L2194:
 	move	$8,$4
 	move	$9,$6
 	daddiu	$10,$4,64
 	.align	3
-.L2166:
+.L2193:
 	daddiu	$9,$9,1
 	lbu	$3,0($8)
 	daddiu	$8,$8,1
 	lbu	$2,-1($9)
 	subu	$2,$3,$2
-	bne	$10,$8,.L2166
+	bne	$10,$8,.L2193
 	madd	$2,$2
 
 	addiu	$11,$11,-1
 	daddu	$4,$4,$5
-	bne	$11,$0,.L2167
+	bne	$11,$0,.L2194
 	daddu	$6,$6,$7
 
 	mflo	$2
-	beq	$16,$2,.L2174
+	beq	$16,$2,.L2201
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC94)($28)
+	ld	$4,%got_page(.LC110)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC94)
+	daddiu	$4,$4,%got_ofst(.LC110)
 
 	ld	$31,24($sp)
 	move	$2,$16
@@ -23837,11 +24016,11 @@ _ZN12_GLOBAL__N_114sse_pp_a_64x64EPKhlS1_l:
 	jr	$31
 	daddiu	$sp,$sp,32
 
-.L2174:
-	ld	$4,%got_page(.LC93)($28)
+.L2201:
+	ld	$4,%got_page(.LC109)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC93)
+	daddiu	$4,$4,%got_ofst(.LC109)
 
 	ld	$31,24($sp)
 	move	$2,$16
@@ -23856,10 +24035,10 @@ _ZN12_GLOBAL__N_114sse_pp_a_64x64EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_114sse_pp_a_64x64EPKhlS1_l, .-_ZN12_GLOBAL__N_114sse_pp_a_64x64EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC95:
+.LC111:
 	.ascii	"sse_pp_a_32x32 test success\000"
 	.align	3
-.LC96:
+.LC112:
 	.ascii	"sse_pp_a_32x32 test fail\000"
 	.text
 	.align	2
@@ -23902,7 +24081,7 @@ _ZN12_GLOBAL__N_114sse_pp_a_32x32EPKhlS1_l:
 	sd	$16,0($sp)
 	daddiu	$16,$7,16
 	.align	3
-.L2176:
+.L2203:
 	daddu	$15,$2,$5
 	daddu	$14,$2,$19
 	vbld	$w7,0($2)
@@ -23961,7 +24140,7 @@ _ZN12_GLOBAL__N_114sse_pp_a_32x32EPKhlS1_l:
 	dpadd_s.w	$w13,$w1,$w1
 	dpadd_s.w	$w14,$w0,$w0
 	daddu	$2,$2,$21
-	bne	$24,$0,.L2176
+	bne	$24,$0,.L2203
 	daddu	$3,$3,$20
 
 	addv.w	$w12,$w12,$w15
@@ -23977,33 +24156,33 @@ _ZN12_GLOBAL__N_114sse_pp_a_32x32EPKhlS1_l:
 	addu	$16,$16,$2
 	mtlo	$0
 	.align	3
-.L2178:
+.L2205:
 	move	$8,$4
 	move	$9,$6
 	daddiu	$10,$4,32
 	.align	3
-.L2177:
+.L2204:
 	daddiu	$9,$9,1
 	lbu	$3,0($8)
 	daddiu	$8,$8,1
 	lbu	$2,-1($9)
 	subu	$2,$3,$2
-	bne	$10,$8,.L2177
+	bne	$10,$8,.L2204
 	madd	$2,$2
 
 	addiu	$11,$11,-1
 	daddu	$4,$4,$5
-	bne	$11,$0,.L2178
+	bne	$11,$0,.L2205
 	daddu	$6,$6,$7
 
 	mflo	$2
-	beq	$16,$2,.L2185
+	beq	$16,$2,.L2212
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC96)($28)
+	ld	$4,%got_page(.LC112)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC96)
+	daddiu	$4,$4,%got_ofst(.LC112)
 
 	ld	$31,56($sp)
 	move	$2,$16
@@ -24017,11 +24196,11 @@ _ZN12_GLOBAL__N_114sse_pp_a_32x32EPKhlS1_l:
 	jr	$31
 	daddiu	$sp,$sp,64
 
-.L2185:
-	ld	$4,%got_page(.LC95)($28)
+.L2212:
+	ld	$4,%got_page(.LC111)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC95)
+	daddiu	$4,$4,%got_ofst(.LC111)
 
 	ld	$31,56($sp)
 	move	$2,$16
@@ -24041,128 +24220,10 @@ _ZN12_GLOBAL__N_114sse_pp_a_32x32EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_114sse_pp_a_32x32EPKhlS1_l, .-_ZN12_GLOBAL__N_114sse_pp_a_32x32EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC97:
-	.ascii	"sse_pp_a_4x4 test success\000"
-	.align	3
-.LC98:
-	.ascii	"sse_pp_a_4x4 test fail\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l
-	.type	_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l, @function
-_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l:
-	.frame	$sp,32,$31		# vars= 0, regs= 3/0, args= 0, gp= 0
-	.mask	0x90010000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddu	$11,$4,$5
-	daddu	$10,$6,$7
-	daddu	$2,$11,$5
-	daddu	$3,$10,$7
-	daddiu	$sp,$sp,-32
-	daddu	$9,$2,$5
-	daddu	$8,$3,$7
-	sd	$28,16($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l)))
-	sd	$16,8($sp)
-	daddu	$28,$28,$25
-	mtlo	$0
-	sd	$31,24($sp)
-	vblw	$w1,0($11)
-	vblw	$w2,0($2)
-	vblw	$w0,0($4)
-	vblw	$w3,0($6)
-	insve.w	$w0[1],$w1[0]
-	vblw	$w5,0($10)
-	vblw	$w1,0($9)
-	vextb_u.h	$w0,$w0
-	insve.w	$w2[1],$w1[0]
-	vblw	$w4,0($8)
-	vblw	$w1,0($3)
-	vextb_u.h	$w2,$w2
-	insve.w	$w3[1],$w5[0]
-	insve.w	$w1[1],$w4[0]
-	vextb_u.h	$w3,$w3
-	vextb_u.h	$w1,$w1
-	subv.h	$w0,$w0,$w3
-	subv.h	$w1,$w2,$w1
-	dotp_s.w	$w0,$w0,$w0
-	dpadd_s.w	$w0,$w1,$w1
-	copy_s.w	$2,$w0[1]
-	copy_s.w	$16,$w0[0]
-	addu	$16,$16,$2
-	copy_s.w	$3,$w0[2]
-	addu	$16,$16,$3
-	copy_s.w	$2,$w0[3]
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l)))
-	li	$9,4			# 0x4
-	addu	$16,$16,$2
-.L2188:
-	daddiu	$8,$4,4
-.L2187:
-	daddiu	$6,$6,1
-	lbu	$3,0($4)
-	daddiu	$4,$4,1
-	lbu	$2,-1($6)
-	subu	$2,$3,$2
-	bne	$8,$4,.L2187
-	madd	$2,$2
-
-	addiu	$9,$9,-1
-	move	$4,$11
-	beq	$9,$0,.L2193
-	move	$6,$10
-
-	daddu	$11,$11,$5
-	b	.L2188
-	daddu	$10,$10,$7
-
-	.align	3
-.L2193:
-	mflo	$2
-	beq	$16,$2,.L2195
-	ld	$25,%call16(puts)($28)
-
-	ld	$4,%got_page(.LC98)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC98)
-
-	ld	$31,24($sp)
-	move	$2,$16
-	ld	$28,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,32
-
-	.align	3
-.L2195:
-	ld	$4,%got_page(.LC97)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC97)
-
-	ld	$31,24($sp)
-	move	$2,$16
-	ld	$28,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,32
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l
-	.size	_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l, .-_ZN12_GLOBAL__N_112sse_pp_a_4x4EPKhlS1_l
-	.section	.rodata.str1.8
-	.align	3
-.LC99:
+.LC113:
 	.ascii	"sad_x4_8x8 test success\000"
 	.align	3
-.LC100:
+.LC114:
 	.ascii	"sad_x4_8x8 test fail\000"
 	.text
 	.align	2
@@ -24349,10 +24410,10 @@ _ZN12_GLOBAL__N_110sad_x4_8x8EPKhS1_S1_S1_S1_lPi:
 	sd	$2,0($sp)
 	sw	$2,12($10)
 	.align	3
-.L2198:
+.L2215:
 	daddiu	$18,$4,8
 	.align	3
-.L2197:
+.L2214:
 	daddiu	$5,$5,1
 	daddiu	$6,$6,1
 	lbu	$2,0($4)
@@ -24382,42 +24443,42 @@ _ZN12_GLOBAL__N_110sad_x4_8x8EPKhS1_S1_S1_S1_lPi:
 	addu	$25,$12,$25
 	addu	$31,$11,$31
 	addu	$16,$3,$16
-	bne	$18,$4,.L2197
+	bne	$18,$4,.L2214
 	addu	$17,$2,$17
 
 	move	$4,$19
 	move	$5,$22
 	move	$6,$23
 	move	$7,$21
-	beq	$19,$fp,.L2203
+	beq	$19,$fp,.L2220
 	move	$8,$20
 
 	daddiu	$19,$19,64
 	daddu	$22,$22,$9
 	daddu	$23,$23,$9
 	daddu	$21,$21,$9
-	b	.L2198
+	b	.L2215
 	daddu	$20,$20,$9
 
 	.align	3
-.L2203:
+.L2220:
 	lw	$2,0($10)
-	bne	$2,$25,.L2207
-	ld	$4,%got_page(.LC100)($28)
+	bne	$2,$25,.L2224
+	ld	$4,%got_page(.LC114)($28)
 
 	lw	$2,4($10)
-	beq	$2,$31,.L2205
+	beq	$2,$31,.L2222
 	nop
 
-.L2207:
+.L2224:
 	ld	$25,%call16(puts)($28)
-.L2208:
+.L2225:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC100)
+	daddiu	$4,$4,%got_ofst(.LC114)
 
 	ld	$31,104($sp)
-.L2206:
+.L2223:
 	ld	$fp,96($sp)
 	ld	$28,88($sp)
 	ld	$23,80($sp)
@@ -24431,21 +24492,21 @@ _ZN12_GLOBAL__N_110sad_x4_8x8EPKhS1_S1_S1_S1_lPi:
 	jr	$31
 	daddiu	$sp,$sp,112
 
-.L2205:
+.L2222:
 	lw	$2,8($10)
-	bne	$2,$16,.L2207
-	ld	$4,%got_page(.LC100)($28)
+	bne	$2,$16,.L2224
+	ld	$4,%got_page(.LC114)($28)
 
 	ld	$2,0($sp)
-	bne	$2,$17,.L2208
+	bne	$2,$17,.L2225
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC99)($28)
+	ld	$4,%got_page(.LC113)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC99)
+	daddiu	$4,$4,%got_ofst(.LC113)
 
-	b	.L2206
+	b	.L2223
 	ld	$31,104($sp)
 
 	.set	macro
@@ -24454,10 +24515,10 @@ _ZN12_GLOBAL__N_110sad_x4_8x8EPKhS1_S1_S1_S1_lPi:
 	.size	_ZN12_GLOBAL__N_110sad_x4_8x8EPKhS1_S1_S1_S1_lPi, .-_ZN12_GLOBAL__N_110sad_x4_8x8EPKhS1_S1_S1_S1_lPi
 	.section	.rodata.str1.8
 	.align	3
-.LC101:
+.LC115:
 	.ascii	"sad_x3_8x8 test success\000"
 	.align	3
-.LC102:
+.LC116:
 	.ascii	"sad_x3_8x8 test fail\000"
 	.text
 	.align	2
@@ -24606,10 +24667,10 @@ _ZN12_GLOBAL__N_110sad_x3_8x8EPKhS1_S1_S1_lPi:
 	move	$12,$0
 	sw	$17,8($9)
 	.align	3
-.L2211:
+.L2228:
 	daddiu	$14,$4,8
 	.align	3
-.L2210:
+.L2227:
 	daddiu	$5,$5,1
 	daddiu	$6,$6,1
 	lbu	$2,0($4)
@@ -24632,41 +24693,41 @@ _ZN12_GLOBAL__N_110sad_x3_8x8EPKhS1_S1_S1_lPi:
 	subu	$2,$2,$18
 	addu	$11,$10,$11
 	addu	$12,$3,$12
-	bne	$14,$4,.L2210
+	bne	$14,$4,.L2227
 	addu	$13,$2,$13
 
 	move	$4,$15
 	move	$5,$31
 	move	$6,$25
-	beq	$15,$16,.L2216
+	beq	$15,$16,.L2233
 	move	$7,$24
 
 	daddiu	$15,$15,64
 	daddu	$31,$31,$8
 	daddu	$25,$25,$8
-	b	.L2211
+	b	.L2228
 	daddu	$24,$24,$8
 
 	.align	3
-.L2216:
+.L2233:
 	lw	$2,0($9)
-	bne	$2,$11,.L2220
-	ld	$4,%got_page(.LC102)($28)
+	bne	$2,$11,.L2237
+	ld	$4,%got_page(.LC116)($28)
 
 	lw	$2,4($9)
-	beq	$2,$12,.L2218
+	beq	$2,$12,.L2235
 	nop
 
-.L2212:
-	ld	$4,%got_page(.LC102)($28)
-.L2220:
+.L2229:
+	ld	$4,%got_page(.LC116)($28)
+.L2237:
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC102)
+	daddiu	$4,$4,%got_ofst(.LC116)
 
 	ld	$31,56($sp)
-.L2219:
+.L2236:
 	ld	$28,48($sp)
 	ld	$21,40($sp)
 	ld	$20,32($sp)
@@ -24677,16 +24738,16 @@ _ZN12_GLOBAL__N_110sad_x3_8x8EPKhS1_S1_S1_lPi:
 	jr	$31
 	daddiu	$sp,$sp,64
 
-.L2218:
-	bne	$17,$13,.L2212
+.L2235:
+	bne	$17,$13,.L2229
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC101)($28)
+	ld	$4,%got_page(.LC115)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC101)
+	daddiu	$4,$4,%got_ofst(.LC115)
 
-	b	.L2219
+	b	.L2236
 	ld	$31,56($sp)
 
 	.set	macro
@@ -24695,10 +24756,10 @@ _ZN12_GLOBAL__N_110sad_x3_8x8EPKhS1_S1_S1_lPi:
 	.size	_ZN12_GLOBAL__N_110sad_x3_8x8EPKhS1_S1_S1_lPi, .-_ZN12_GLOBAL__N_110sad_x3_8x8EPKhS1_S1_S1_lPi
 	.section	.rodata.str1.8
 	.align	3
-.LC103:
+.LC117:
 	.ascii	"sad_8x8 test success\000"
 	.align	3
-.LC104:
+.LC118:
 	.ascii	"sad_8x8 test fail\000"
 	.text
 	.align	2
@@ -24781,10 +24842,10 @@ _ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l:
 	move	$8,$0
 	addu	$16,$16,$2
 	.align	3
-.L2223:
+.L2240:
 	daddiu	$9,$4,8
 	.align	3
-.L2222:
+.L2239:
 	daddiu	$6,$6,1
 	lbu	$2,0($4)
 	daddiu	$4,$4,1
@@ -24793,27 +24854,27 @@ _ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l:
 	sra	$3,$2,31
 	xor	$2,$3,$2
 	subu	$2,$2,$3
-	bne	$9,$4,.L2222
+	bne	$9,$4,.L2239
 	addu	$8,$2,$8
 
 	addiu	$10,$10,-1
 	move	$4,$12
-	beq	$10,$0,.L2228
+	beq	$10,$0,.L2245
 	move	$6,$11
 
 	daddu	$12,$12,$5
-	b	.L2223
+	b	.L2240
 	daddu	$11,$11,$7
 
 	.align	3
-.L2228:
-	beq	$16,$8,.L2230
+.L2245:
+	beq	$16,$8,.L2247
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC104)($28)
+	ld	$4,%got_page(.LC118)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC104)
+	daddiu	$4,$4,%got_ofst(.LC118)
 
 	ld	$31,24($sp)
 	move	$2,$16
@@ -24822,11 +24883,11 @@ _ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l:
 	jr	$31
 	daddiu	$sp,$sp,32
 
-.L2230:
-	ld	$4,%got_page(.LC103)($28)
+.L2247:
+	ld	$4,%got_page(.LC117)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC103)
+	daddiu	$4,$4,%got_ofst(.LC117)
 
 	ld	$31,24($sp)
 	move	$2,$16
@@ -24886,12 +24947,12 @@ _ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l:
 	sd	$6,24($sp)
 	sd	$2,0($sp)
 	.align	3
-.L2233:
+.L2250:
 	ld	$16,16($sp)
 	ld	$17,24($sp)
 	daddiu	$23,$16,64
 	.align	3
-.L2232:
+.L2249:
 	ld	$25,8($sp)
 	move	$4,$16
 	move	$6,$18
@@ -24932,7 +24993,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l:
 	sra	$3,$2,31
 	xor	$2,$3,$2
 	subu	$2,$2,$3
-	bne	$16,$23,.L2232
+	bne	$16,$23,.L2249
 	addu	$fp,$2,$fp
 
 	ld	$3,16($sp)
@@ -24945,7 +25006,7 @@ _ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l:
 	ld	$3,24($sp)
 	sd	$2,32($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2233
+	bne	$2,$0,.L2250
 	sd	$3,24($sp)
 
 	ld	$31,152($sp)
@@ -24969,22 +25030,22 @@ _ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l:
 	.size	_ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_l
 	.section	.rodata.str1.8
 	.align	3
-.LC105:
+.LC119:
 	.ascii	"psyCost_pp_8x8_internal test success\000"
 	.align	3
-.LC106:
+.LC120:
 	.ascii	"psyCost_pp_8x8_internal test fail\000"
 	.align	3
-.LC107:
+.LC121:
 	.ascii	"right source sa8d_8x8 %d\012\000"
 	.align	3
-.LC108:
+.LC122:
 	.ascii	"right source sad %d\012\000"
 	.align	3
-.LC109:
+.LC123:
 	.ascii	"right recon sa8d_8x8 %d\012\000"
 	.align	3
-.LC110:
+.LC124:
 	.ascii	"right recon sad %d\012\000"
 	.text
 	.align	2
@@ -25341,29 +25402,29 @@ _ZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_l:
 	sra	$5,$2,31
 	xor	$2,$5,$2
 	subu	$5,$2,$5
-	beq	$16,$5,.L2241
+	beq	$16,$5,.L2258
 	move	$fp,$16
 
-	ld	$4,%got_page(.LC106)($28)
+	ld	$4,%got_page(.LC120)($28)
 	ld	$25,%call16(puts)($28)
 	sd	$5,0($sp)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC106)
+	daddiu	$4,$4,%got_ofst(.LC120)
 
-	ld	$4,%got_page(.LC52)($28)
+	ld	$4,%got_page(.LC31)($28)
 	ld	$5,0($sp)
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC52)
+	daddiu	$4,$4,%got_ofst(.LC31)
 
-	ld	$4,%got_page(.LC53)($28)
+	ld	$4,%got_page(.LC32)($28)
 	move	$5,$16
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC53)
+	daddiu	$4,$4,%got_ofst(.LC32)
 
 	move	$7,$0
 	daddiu	$6,$17,%got_ofst(_ZZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_lE7zeroBuf)
@@ -25373,12 +25434,12 @@ _ZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_l:
 1:	jalr	$25
 	move	$4,$19
 
-	ld	$4,%got_page(.LC107)($28)
+	ld	$4,%got_page(.LC121)($28)
 	ld	$25,%call16(printf)($28)
 	move	$5,$2
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC107)
+	daddiu	$4,$4,%got_ofst(.LC121)
 
 	move	$7,$0
 	daddiu	$6,$17,%got_ofst(_ZZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_lE7zeroBuf)
@@ -25388,12 +25449,12 @@ _ZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_l:
 1:	jalr	$25
 	move	$4,$19
 
-	ld	$4,%got_page(.LC108)($28)
+	ld	$4,%got_page(.LC122)($28)
 	ld	$25,%call16(printf)($28)
 	sra	$5,$2,2
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC108)
+	daddiu	$4,$4,%got_ofst(.LC122)
 
 	move	$7,$0
 	daddiu	$6,$17,%got_ofst(_ZZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_lE7zeroBuf)
@@ -25403,12 +25464,12 @@ _ZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_l:
 1:	jalr	$25
 	move	$4,$18
 
-	ld	$4,%got_page(.LC109)($28)
+	ld	$4,%got_page(.LC123)($28)
 	ld	$25,%call16(printf)($28)
 	move	$5,$2
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC109)
+	daddiu	$4,$4,%got_ofst(.LC123)
 
 	move	$5,$20
 	move	$4,$18
@@ -25418,15 +25479,15 @@ _ZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_l:
 1:	jalr	$25
 	daddiu	$6,$17,%got_ofst(_ZZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_lE7zeroBuf)
 
-	ld	$4,%got_page(.LC110)($28)
+	ld	$4,%got_page(.LC124)($28)
 	ld	$25,%call16(printf)($28)
 	sra	$5,$2,2
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC110)
+	daddiu	$4,$4,%got_ofst(.LC124)
 
 	ld	$31,104($sp)
-.L2242:
+.L2259:
 	move	$2,$fp
 	ldc1	$f29,152($sp)
 	ld	$fp,96($sp)
@@ -25448,14 +25509,14 @@ _ZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_l:
 	daddiu	$sp,$sp,160
 
 	.align	3
-.L2241:
-	ld	$4,%got_page(.LC105)($28)
+.L2258:
+	ld	$4,%got_page(.LC119)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC105)
+	daddiu	$4,$4,%got_ofst(.LC119)
 
-	b	.L2242
+	b	.L2259
 	ld	$31,104($sp)
 
 	.set	macro
@@ -25464,10 +25525,10 @@ _ZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_l, .-_ZN12_GLOBAL__N_123psyCost_pp_8x8_internalEPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC111:
+.LC125:
 	.ascii	"psyCost_pp_32x32 test success\000"
 	.align	3
-.LC112:
+.LC126:
 	.ascii	"psyCost_pp_32x32 test fail\000"
 	.text
 	.align	2
@@ -25512,11 +25573,11 @@ _ZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_l:
 	sd	$4,8($sp)
 	sd	$6,16($sp)
 	sd	$2,0($sp)
-.L2245:
+.L2262:
 	move	$17,$18
 	move	$fp,$23
 	daddiu	$16,$18,32
-.L2244:
+.L2261:
 	ld	$25,0($sp)
 	move	$6,$fp
 	move	$4,$17
@@ -25526,14 +25587,14 @@ _ZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_l:
 	jalr	$25
 	daddiu	$fp,$fp,8
 
-	bne	$17,$16,.L2244
+	bne	$17,$16,.L2261
 	addu	$21,$2,$21
 
 	ld	$2,48($sp)
 	addiu	$22,$22,-1
 	daddu	$18,$18,$2
 	ld	$2,56($sp)
-	bne	$22,$0,.L2245
+	bne	$22,$0,.L2262
 	daddu	$23,$23,$2
 
 	ld	$2,8($sp)
@@ -25551,12 +25612,12 @@ _ZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_l:
 	ld	$2,%got_page(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)($28)
 	daddiu	$2,$2,%got_ofst(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)
 	sd	$2,0($sp)
-.L2247:
+.L2264:
 	ld	$16,32($sp)
 	ld	$17,24($sp)
 	daddiu	$2,$16,32
 	sd	$2,16($sp)
-.L2246:
+.L2263:
 	ld	$25,8($sp)
 	move	$4,$16
 	move	$6,$18
@@ -25598,7 +25659,7 @@ _ZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_l:
 	subu	$2,$2,$3
 	addu	$23,$2,$23
 	ld	$2,16($sp)
-	bne	$2,$16,.L2246
+	bne	$2,$16,.L2263
 	daddiu	$17,$17,8
 
 	ld	$3,32($sp)
@@ -25611,16 +25672,16 @@ _ZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_l:
 	ld	$3,24($sp)
 	sd	$2,40($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2247
+	bne	$2,$0,.L2264
 	sd	$3,24($sp)
 
-	beq	$21,$23,.L2255
+	beq	$21,$23,.L2272
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC112)($28)
+	ld	$4,%got_page(.LC126)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC112)
+	daddiu	$4,$4,%got_ofst(.LC126)
 
 	ld	$31,152($sp)
 	move	$2,$21
@@ -25638,11 +25699,11 @@ _ZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_l:
 	daddiu	$sp,$sp,160
 
 	.align	3
-.L2255:
-	ld	$4,%got_page(.LC111)($28)
+.L2272:
+	ld	$4,%got_page(.LC125)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC111)
+	daddiu	$4,$4,%got_ofst(.LC125)
 
 	ld	$31,152($sp)
 	move	$2,$21
@@ -25665,10 +25726,10 @@ _ZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_l, .-_ZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC113:
+.LC127:
 	.ascii	"psyCost_pp_16x16 test success\000"
 	.align	3
-.LC114:
+.LC128:
 	.ascii	"psyCost_pp_16x16 test fail\000"
 	.text
 	.align	2
@@ -25714,7 +25775,7 @@ _ZN12_GLOBAL__N_116psyCost_pp_16x16EPKhlS1_l:
 	sd	$22,136($sp)
 	sd	$2,56($sp)
 	sd	$0,24($sp)
-.L2257:
+.L2274:
 	move	$6,$fp
 	move	$4,$23
 	move	$7,$20
@@ -25741,7 +25802,7 @@ _ZN12_GLOBAL__N_116psyCost_pp_16x16EPKhlS1_l:
 	addu	$2,$2,$3
 	sd	$2,24($sp)
 	ld	$2,56($sp)
-	bne	$2,$18,.L2262
+	bne	$2,$18,.L2279
 	li	$2,1			# 0x1
 
 	li	$2,2			# 0x2
@@ -25757,12 +25818,12 @@ _ZN12_GLOBAL__N_116psyCost_pp_16x16EPKhlS1_l:
 	ld	$2,%got_page(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)($28)
 	daddiu	$2,$2,%got_ofst(_ZN12_GLOBAL__N_17sad_8x8EPKhlS1_l)
 	sd	$2,8($sp)
-.L2259:
+.L2276:
 	ld	$18,16($sp)
 	daddiu	$2,$23,16
 	move	$16,$23
 	sd	$2,32($sp)
-.L2258:
+.L2275:
 	ld	$25,0($sp)
 	move	$4,$16
 	move	$6,$17
@@ -25804,7 +25865,7 @@ _ZN12_GLOBAL__N_116psyCost_pp_16x16EPKhlS1_l:
 	subu	$2,$2,$3
 	addu	$fp,$2,$fp
 	ld	$2,32($sp)
-	bne	$2,$16,.L2258
+	bne	$2,$16,.L2275
 	daddiu	$18,$18,8
 
 	ld	$2,40($sp)
@@ -25815,17 +25876,17 @@ _ZN12_GLOBAL__N_116psyCost_pp_16x16EPKhlS1_l:
 	li	$3,1			# 0x1
 	sd	$2,16($sp)
 	ld	$2,64($sp)
-	bne	$2,$3,.L2263
+	bne	$2,$3,.L2280
 	ld	$2,56($sp)
 
 	ld	$2,24($sp)
-	beq	$fp,$2,.L2266
+	beq	$fp,$2,.L2283
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC114)($28)
+	ld	$4,%got_page(.LC128)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC114)
+	daddiu	$4,$4,%got_ofst(.LC128)
 
 	ld	$31,168($sp)
 	ld	$2,24($sp)
@@ -25843,21 +25904,21 @@ _ZN12_GLOBAL__N_116psyCost_pp_16x16EPKhlS1_l:
 	daddiu	$sp,$sp,176
 
 	.align	3
-.L2262:
-	b	.L2257
+.L2279:
+	b	.L2274
 	sd	$2,56($sp)
 
 	.align	3
-.L2263:
-	b	.L2259
+.L2280:
+	b	.L2276
 	sd	$2,64($sp)
 
 	.align	3
-.L2266:
-	ld	$4,%got_page(.LC113)($28)
+.L2283:
+	ld	$4,%got_page(.LC127)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC113)
+	daddiu	$4,$4,%got_ofst(.LC127)
 
 	ld	$31,168($sp)
 	ld	$2,24($sp)
@@ -25880,10 +25941,10 @@ _ZN12_GLOBAL__N_116psyCost_pp_16x16EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_116psyCost_pp_16x16EPKhlS1_l, .-_ZN12_GLOBAL__N_116psyCost_pp_16x16EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC115:
+.LC129:
 	.ascii	"psyCost_pp_8x8 test success\000"
 	.align	3
-.LC116:
+.LC130:
 	.ascii	"psyCost_pp_8x8 test fail\000"
 	.text
 	.align	2
@@ -26253,29 +26314,29 @@ _ZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_l:
 	sra	$5,$2,31
 	xor	$2,$5,$2
 	subu	$5,$2,$5
-	beq	$16,$5,.L2271
+	beq	$16,$5,.L2288
 	move	$fp,$16
 
-	ld	$4,%got_page(.LC116)($28)
+	ld	$4,%got_page(.LC130)($28)
 	ld	$25,%call16(puts)($28)
 	sd	$5,0($sp)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC116)
+	daddiu	$4,$4,%got_ofst(.LC130)
 
-	ld	$4,%got_page(.LC52)($28)
+	ld	$4,%got_page(.LC31)($28)
 	ld	$5,0($sp)
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC52)
+	daddiu	$4,$4,%got_ofst(.LC31)
 
-	ld	$4,%got_page(.LC53)($28)
+	ld	$4,%got_page(.LC32)($28)
 	move	$5,$16
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC53)
+	daddiu	$4,$4,%got_ofst(.LC32)
 
 	move	$7,$0
 	daddiu	$6,$17,%got_ofst(_ZZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_lE7zeroBuf)
@@ -26285,12 +26346,12 @@ _ZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_l:
 1:	jalr	$25
 	move	$4,$19
 
-	ld	$4,%got_page(.LC107)($28)
+	ld	$4,%got_page(.LC121)($28)
 	ld	$25,%call16(printf)($28)
 	move	$5,$2
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC107)
+	daddiu	$4,$4,%got_ofst(.LC121)
 
 	move	$7,$0
 	daddiu	$6,$17,%got_ofst(_ZZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_lE7zeroBuf)
@@ -26300,12 +26361,12 @@ _ZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_l:
 1:	jalr	$25
 	move	$4,$19
 
-	ld	$4,%got_page(.LC108)($28)
+	ld	$4,%got_page(.LC122)($28)
 	ld	$25,%call16(printf)($28)
 	sra	$5,$2,2
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC108)
+	daddiu	$4,$4,%got_ofst(.LC122)
 
 	move	$7,$0
 	daddiu	$6,$17,%got_ofst(_ZZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_lE7zeroBuf)
@@ -26315,12 +26376,12 @@ _ZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_l:
 1:	jalr	$25
 	move	$4,$18
 
-	ld	$4,%got_page(.LC109)($28)
+	ld	$4,%got_page(.LC123)($28)
 	ld	$25,%call16(printf)($28)
 	move	$5,$2
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC109)
+	daddiu	$4,$4,%got_ofst(.LC123)
 
 	move	$5,$20
 	move	$4,$18
@@ -26330,15 +26391,15 @@ _ZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_l:
 1:	jalr	$25
 	daddiu	$6,$17,%got_ofst(_ZZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_lE7zeroBuf)
 
-	ld	$4,%got_page(.LC110)($28)
+	ld	$4,%got_page(.LC124)($28)
 	ld	$25,%call16(printf)($28)
 	sra	$5,$2,2
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC110)
+	daddiu	$4,$4,%got_ofst(.LC124)
 
 	ld	$31,200($sp)
-.L2272:
+.L2289:
 	move	$2,$fp
 	ldc1	$f31,264($sp)
 	ld	$fp,192($sp)
@@ -26362,14 +26423,14 @@ _ZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_l:
 	daddiu	$sp,$sp,272
 
 	.align	3
-.L2271:
-	ld	$4,%got_page(.LC115)($28)
+.L2288:
+	ld	$4,%got_page(.LC129)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC115)
+	daddiu	$4,$4,%got_ofst(.LC129)
 
-	b	.L2272
+	b	.L2289
 	ld	$31,200($sp)
 
 	.set	macro
@@ -26378,10 +26439,10 @@ _ZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_l, .-_ZN12_GLOBAL__N_114psyCost_pp_8x8EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC117:
+.LC131:
 	.ascii	"sad_x4_16x16 test success\000"
 	.align	3
-.LC118:
+.LC132:
 	.ascii	"sad_x4_16x16 test fail\000"
 	.text
 	.align	2
@@ -26432,7 +26493,7 @@ _ZN12_GLOBAL__N_112sad_x4_16x16EPKhS1_S1_S1_S1_lPi:
 	sdc1	$f26,144($sp)
 	sdc1	$f25,136($sp)
 	sdc1	$f24,128($sp)
-.L2274:
+.L2291:
 	daddu	$18,$2,$9
 	daddu	$17,$3,$9
 	ld.b	$w6,0($23)
@@ -26517,7 +26578,7 @@ _ZN12_GLOBAL__N_112sad_x4_16x16EPKhS1_S1_S1_S1_lPi:
 	daddu	$2,$2,$15
 	daddu	$3,$3,$15
 	daddu	$11,$11,$15
-	bne	$23,$19,.L2274
+	bne	$23,$19,.L2291
 	daddu	$12,$12,$15
 
 	copy_s.w	$2,$w8[2]
@@ -26560,7 +26621,7 @@ _ZN12_GLOBAL__N_112sad_x4_16x16EPKhS1_S1_S1_S1_lPi:
 	sw	$3,8($10)
 	sw	$2,12($10)
 	.align	3
-.L2276:
+.L2293:
 	move	$15,$4
 	move	$16,$5
 	move	$31,$6
@@ -26568,7 +26629,7 @@ _ZN12_GLOBAL__N_112sad_x4_16x16EPKhS1_S1_S1_S1_lPi:
 	move	$24,$8
 	daddiu	$17,$4,16
 	.align	3
-.L2275:
+.L2292:
 	daddiu	$16,$16,1
 	daddiu	$31,$31,1
 	lbu	$2,0($15)
@@ -26598,33 +26659,33 @@ _ZN12_GLOBAL__N_112sad_x4_16x16EPKhS1_S1_S1_S1_lPi:
 	addu	$18,$11,$18
 	addu	$21,$10,$21
 	addu	$20,$3,$20
-	bne	$17,$15,.L2275
+	bne	$17,$15,.L2292
 	addu	$19,$2,$19
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$9
 	daddu	$6,$6,$9
 	daddu	$7,$7,$9
-	bne	$23,$4,.L2276
+	bne	$23,$4,.L2293
 	daddu	$8,$8,$9
 
-	bne	$fp,$18,.L2277
+	bne	$fp,$18,.L2294
 	ld	$2,0($sp)
 
-	beq	$2,$21,.L2283
+	beq	$2,$21,.L2300
 	ld	$2,8($sp)
 
-.L2277:
-	ld	$4,%got_page(.LC118)($28)
-.L2285:
+.L2294:
+	ld	$4,%got_page(.LC132)($28)
+.L2302:
 	ld	$25,%call16(puts)($28)
-.L2286:
+.L2303:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC118)
+	daddiu	$4,$4,%got_ofst(.LC132)
 
 	ld	$31,120($sp)
-.L2284:
+.L2301:
 	ldc1	$f27,152($sp)
 	ld	$fp,112($sp)
 	ldc1	$f26,144($sp)
@@ -26642,20 +26703,20 @@ _ZN12_GLOBAL__N_112sad_x4_16x16EPKhS1_S1_S1_S1_lPi:
 	jr	$31
 	daddiu	$sp,$sp,160
 
-.L2283:
-	bne	$2,$20,.L2285
-	ld	$4,%got_page(.LC118)($28)
+.L2300:
+	bne	$2,$20,.L2302
+	ld	$4,%got_page(.LC132)($28)
 
 	ld	$2,16($sp)
-	bne	$2,$19,.L2286
+	bne	$2,$19,.L2303
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC117)($28)
+	ld	$4,%got_page(.LC131)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC117)
+	daddiu	$4,$4,%got_ofst(.LC131)
 
-	b	.L2284
+	b	.L2301
 	ld	$31,120($sp)
 
 	.set	macro
@@ -26664,10 +26725,10 @@ _ZN12_GLOBAL__N_112sad_x4_16x16EPKhS1_S1_S1_S1_lPi:
 	.size	_ZN12_GLOBAL__N_112sad_x4_16x16EPKhS1_S1_S1_S1_lPi, .-_ZN12_GLOBAL__N_112sad_x4_16x16EPKhS1_S1_S1_S1_lPi
 	.section	.rodata.str1.8
 	.align	3
-.LC119:
+.LC133:
 	.ascii	"sad_x3_16x16 test success\000"
 	.align	3
-.LC120:
+.LC134:
 	.ascii	"sad_x3_16x16 test fail\000"
 	.text
 	.align	2
@@ -26708,7 +26769,7 @@ _ZN12_GLOBAL__N_112sad_x3_16x16EPKhS1_S1_S1_lPi:
 	sd	$19,24($sp)
 	sd	$18,16($sp)
 	sd	$16,0($sp)
-.L2288:
+.L2305:
 	daddu	$14,$2,$8
 	daddu	$24,$3,$8
 	ld.b	$w1,0($25)
@@ -26773,7 +26834,7 @@ _ZN12_GLOBAL__N_112sad_x3_16x16EPKhS1_S1_S1_lPi:
 	addv.d	$w9,$w0,$w2
 	daddu	$2,$2,$13
 	daddu	$3,$3,$13
-	bne	$25,$17,.L2288
+	bne	$25,$17,.L2305
 	daddu	$10,$10,$13
 
 	copy_s.w	$2,$w8[2]
@@ -26804,14 +26865,14 @@ _ZN12_GLOBAL__N_112sad_x3_16x16EPKhS1_S1_S1_lPi:
 	sw	$17,4($9)
 	sw	$16,8($9)
 	.align	3
-.L2290:
+.L2307:
 	move	$9,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,16
 	.align	3
-.L2289:
+.L2306:
 	daddiu	$12,$12,1
 	daddiu	$11,$11,1
 	lbu	$2,0($9)
@@ -26834,30 +26895,30 @@ _ZN12_GLOBAL__N_112sad_x3_16x16EPKhS1_S1_S1_lPi:
 	subu	$2,$2,$19
 	addu	$13,$18,$13
 	addu	$15,$3,$15
-	bne	$24,$9,.L2289
+	bne	$24,$9,.L2306
 	addu	$14,$2,$14
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L2290
+	bne	$25,$4,.L2307
 	daddu	$7,$7,$8
 
-	bne	$31,$13,.L2291
+	bne	$31,$13,.L2308
 	nop
 
-	beq	$17,$15,.L2297
+	beq	$17,$15,.L2314
 	nop
 
-.L2291:
-	ld	$4,%got_page(.LC120)($28)
+.L2308:
+	ld	$4,%got_page(.LC134)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC120)
+	daddiu	$4,$4,%got_ofst(.LC134)
 
 	ld	$31,56($sp)
-.L2298:
+.L2315:
 	ld	$28,48($sp)
 	ld	$21,40($sp)
 	ld	$20,32($sp)
@@ -26868,16 +26929,16 @@ _ZN12_GLOBAL__N_112sad_x3_16x16EPKhS1_S1_S1_lPi:
 	jr	$31
 	daddiu	$sp,$sp,64
 
-.L2297:
-	bne	$16,$14,.L2291
+.L2314:
+	bne	$16,$14,.L2308
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC119)($28)
+	ld	$4,%got_page(.LC133)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC119)
+	daddiu	$4,$4,%got_ofst(.LC133)
 
-	b	.L2298
+	b	.L2315
 	ld	$31,56($sp)
 
 	.set	macro
@@ -26886,10 +26947,10 @@ _ZN12_GLOBAL__N_112sad_x3_16x16EPKhS1_S1_S1_lPi:
 	.size	_ZN12_GLOBAL__N_112sad_x3_16x16EPKhS1_S1_S1_lPi, .-_ZN12_GLOBAL__N_112sad_x3_16x16EPKhS1_S1_S1_lPi
 	.section	.rodata.str1.8
 	.align	3
-.LC121:
+.LC135:
 	.ascii	"sad_x4_64x64 test success\000"
 	.align	3
-.LC122:
+.LC136:
 	.ascii	"sad_x4_64x64 test fail\000"
 	.text
 	.align	2
@@ -26935,7 +26996,7 @@ _ZN12_GLOBAL__N_112sad_x4_64x64EPKhS1_S1_S1_S1_lPi:
 	sd	$23,80($sp)
 	sd	$16,24($sp)
 	.align	3
-.L2300:
+.L2317:
 	ld.b	$w11,0($17)
 	ld.b	$w2,16($17)
 	ld.b	$w1,32($17)
@@ -27008,7 +27069,7 @@ _ZN12_GLOBAL__N_112sad_x4_64x64EPKhS1_S1_S1_S1_lPi:
 	daddu	$2,$2,$18
 	daddu	$3,$3,$18
 	daddu	$5,$5,$18
-	bne	$17,$7,.L2300
+	bne	$17,$7,.L2317
 	daddu	$6,$6,$18
 
 	copy_s.w	$2,$w20[2]
@@ -27034,14 +27095,14 @@ _ZN12_GLOBAL__N_112sad_x4_64x64EPKhS1_S1_S1_S1_lPi:
 	sw	$5,8($10)
 	sw	$2,12($10)
 	.align	3
-.L2302:
+.L2319:
 	move	$15,$19
 	move	$14,$20
 	move	$13,$21
 	move	$12,$22
 	daddiu	$16,$4,64
 	.align	3
-.L2301:
+.L2318:
 	daddiu	$15,$15,1
 	daddiu	$14,$14,1
 	lbu	$2,0($4)
@@ -27071,33 +27132,33 @@ _ZN12_GLOBAL__N_112sad_x4_64x64EPKhS1_S1_S1_S1_lPi:
 	addu	$31,$11,$31
 	addu	$9,$10,$9
 	addu	$8,$3,$8
-	bne	$16,$4,.L2301
+	bne	$16,$4,.L2318
 	addu	$7,$2,$7
 
 	move	$4,$16
 	daddu	$19,$19,$18
 	daddu	$20,$20,$18
 	daddu	$21,$21,$18
-	bne	$17,$16,.L2302
+	bne	$17,$16,.L2319
 	daddu	$22,$22,$18
 
-	bne	$fp,$31,.L2303
+	bne	$fp,$31,.L2320
 	nop
 
-	beq	$23,$9,.L2309
+	beq	$23,$9,.L2326
 	ld	$2,0($sp)
 
-.L2303:
-	ld	$4,%got_page(.LC122)($28)
-.L2311:
+.L2320:
+	ld	$4,%got_page(.LC136)($28)
+.L2328:
 	ld	$25,%call16(puts)($28)
-.L2312:
+.L2329:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC122)
+	daddiu	$4,$4,%got_ofst(.LC136)
 
 	ld	$31,104($sp)
-.L2310:
+.L2327:
 	ld	$fp,96($sp)
 	ld	$28,88($sp)
 	ld	$23,80($sp)
@@ -27111,20 +27172,20 @@ _ZN12_GLOBAL__N_112sad_x4_64x64EPKhS1_S1_S1_S1_lPi:
 	jr	$31
 	daddiu	$sp,$sp,112
 
-.L2309:
-	bne	$2,$8,.L2311
-	ld	$4,%got_page(.LC122)($28)
+.L2326:
+	bne	$2,$8,.L2328
+	ld	$4,%got_page(.LC136)($28)
 
 	ld	$2,8($sp)
-	bne	$2,$7,.L2312
+	bne	$2,$7,.L2329
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC121)($28)
+	ld	$4,%got_page(.LC135)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC121)
+	daddiu	$4,$4,%got_ofst(.LC135)
 
-	b	.L2310
+	b	.L2327
 	ld	$31,104($sp)
 
 	.set	macro
@@ -27133,10 +27194,10 @@ _ZN12_GLOBAL__N_112sad_x4_64x64EPKhS1_S1_S1_S1_lPi:
 	.size	_ZN12_GLOBAL__N_112sad_x4_64x64EPKhS1_S1_S1_S1_lPi, .-_ZN12_GLOBAL__N_112sad_x4_64x64EPKhS1_S1_S1_S1_lPi
 	.section	.rodata.str1.8
 	.align	3
-.LC123:
+.LC137:
 	.ascii	"sad_x4_32x32 test success\000"
 	.align	3
-.LC124:
+.LC138:
 	.ascii	"sad_x4_32x32 test fail\000"
 	.text
 	.align	2
@@ -27192,7 +27253,7 @@ _ZN12_GLOBAL__N_112sad_x4_32x32EPKhS1_S1_S1_S1_lPi:
 	sdc1	$f25,144($sp)
 	sdc1	$f24,136($sp)
 	.align	3
-.L2314:
+.L2331:
 	ld.b	$w6,0($19)
 	ld.b	$w5,16($19)
 	ld.b	$w1,64($19)
@@ -27273,7 +27334,7 @@ _ZN12_GLOBAL__N_112sad_x4_32x32EPKhS1_S1_S1_S1_lPi:
 	daddu	$2,$2,$7
 	daddu	$3,$3,$7
 	daddu	$4,$4,$7
-	bne	$19,$25,.L2314
+	bne	$19,$25,.L2331
 	daddu	$5,$5,$7
 
 	copy_s.w	$2,$w8[2]
@@ -27316,7 +27377,7 @@ _ZN12_GLOBAL__N_112sad_x4_32x32EPKhS1_S1_S1_S1_lPi:
 	sw	$3,8($10)
 	sw	$2,12($10)
 	.align	3
-.L2316:
+.L2333:
 	move	$12,$18
 	move	$24,$20
 	move	$15,$21
@@ -27324,7 +27385,7 @@ _ZN12_GLOBAL__N_112sad_x4_32x32EPKhS1_S1_S1_S1_lPi:
 	move	$13,$23
 	daddiu	$25,$18,32
 	.align	3
-.L2315:
+.L2332:
 	daddiu	$24,$24,1
 	daddiu	$15,$15,1
 	lbu	$2,0($12)
@@ -27354,33 +27415,33 @@ _ZN12_GLOBAL__N_112sad_x4_32x32EPKhS1_S1_S1_S1_lPi:
 	addu	$31,$5,$31
 	addu	$9,$4,$9
 	addu	$8,$3,$8
-	bne	$25,$12,.L2315
+	bne	$25,$12,.L2332
 	addu	$7,$2,$7
 
 	daddiu	$18,$18,64
 	daddu	$20,$20,$17
 	daddu	$21,$21,$17
 	daddu	$22,$22,$17
-	bne	$19,$18,.L2316
+	bne	$19,$18,.L2333
 	daddu	$23,$23,$17
 
-	bne	$fp,$31,.L2317
+	bne	$fp,$31,.L2334
 	ld	$2,0($sp)
 
-	beq	$2,$9,.L2323
+	beq	$2,$9,.L2340
 	ld	$2,8($sp)
 
-.L2317:
-	ld	$4,%got_page(.LC124)($28)
-.L2325:
+.L2334:
+	ld	$4,%got_page(.LC138)($28)
+.L2342:
 	ld	$25,%call16(puts)($28)
-.L2326:
+.L2343:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC124)
+	daddiu	$4,$4,%got_ofst(.LC138)
 
 	ld	$31,120($sp)
-.L2324:
+.L2341:
 	ldc1	$f26,152($sp)
 	ld	$fp,112($sp)
 	ldc1	$f25,144($sp)
@@ -27397,20 +27458,20 @@ _ZN12_GLOBAL__N_112sad_x4_32x32EPKhS1_S1_S1_S1_lPi:
 	jr	$31
 	daddiu	$sp,$sp,160
 
-.L2323:
-	bne	$2,$8,.L2325
-	ld	$4,%got_page(.LC124)($28)
+.L2340:
+	bne	$2,$8,.L2342
+	ld	$4,%got_page(.LC138)($28)
 
 	ld	$2,16($sp)
-	bne	$2,$7,.L2326
+	bne	$2,$7,.L2343
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC123)($28)
+	ld	$4,%got_page(.LC137)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC123)
+	daddiu	$4,$4,%got_ofst(.LC137)
 
-	b	.L2324
+	b	.L2341
 	ld	$31,120($sp)
 
 	.set	macro
@@ -27419,10 +27480,10 @@ _ZN12_GLOBAL__N_112sad_x4_32x32EPKhS1_S1_S1_S1_lPi:
 	.size	_ZN12_GLOBAL__N_112sad_x4_32x32EPKhS1_S1_S1_S1_lPi, .-_ZN12_GLOBAL__N_112sad_x4_32x32EPKhS1_S1_S1_S1_lPi
 	.section	.rodata.str1.8
 	.align	3
-.LC125:
+.LC139:
 	.ascii	"sad_x3_64x64 test success\000"
 	.align	3
-.LC126:
+.LC140:
 	.ascii	"sad_x3_64x64 test fail\000"
 	.text
 	.align	2
@@ -27457,7 +27518,7 @@ _ZN12_GLOBAL__N_112sad_x3_64x64EPKhS1_S1_S1_lPi:
 	sd	$17,16($sp)
 	sd	$16,8($sp)
 	.align	3
-.L2328:
+.L2345:
 	ld.b	$w0,0($25)
 	ld.b	$w5,16($25)
 	ld.b	$w4,32($25)
@@ -27513,7 +27574,7 @@ _ZN12_GLOBAL__N_112sad_x3_64x64EPKhS1_S1_S1_lPi:
 	addv.d	$w16,$w0,$w3
 	daddu	$2,$2,$8
 	daddu	$3,$3,$8
-	bne	$25,$11,.L2328
+	bne	$25,$11,.L2345
 	daddu	$10,$10,$8
 
 	copy_s.w	$2,$w1[2]
@@ -27532,13 +27593,13 @@ _ZN12_GLOBAL__N_112sad_x3_64x64EPKhS1_S1_S1_lPi:
 	sw	$16,4($9)
 	sw	$31,8($9)
 	.align	3
-.L2330:
+.L2347:
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,64
 	.align	3
-.L2329:
+.L2346:
 	daddiu	$12,$12,1
 	daddiu	$11,$11,1
 	lbu	$2,0($4)
@@ -27561,30 +27622,30 @@ _ZN12_GLOBAL__N_112sad_x3_64x64EPKhS1_S1_S1_lPi:
 	subu	$2,$2,$18
 	addu	$15,$9,$15
 	addu	$14,$3,$14
-	bne	$24,$4,.L2329
+	bne	$24,$4,.L2346
 	addu	$13,$2,$13
 
 	move	$4,$24
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$24,.L2330
+	bne	$25,$24,.L2347
 	daddu	$7,$7,$8
 
-	bne	$17,$15,.L2331
+	bne	$17,$15,.L2348
 	nop
 
-	beq	$16,$14,.L2337
+	beq	$16,$14,.L2354
 	nop
 
-.L2331:
-	ld	$4,%got_page(.LC126)($28)
+.L2348:
+	ld	$4,%got_page(.LC140)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC126)
+	daddiu	$4,$4,%got_ofst(.LC140)
 
 	ld	$31,56($sp)
-.L2338:
+.L2355:
 	ld	$28,48($sp)
 	ld	$20,40($sp)
 	ld	$19,32($sp)
@@ -27594,16 +27655,16 @@ _ZN12_GLOBAL__N_112sad_x3_64x64EPKhS1_S1_S1_lPi:
 	jr	$31
 	daddiu	$sp,$sp,64
 
-.L2337:
-	bne	$31,$13,.L2331
+.L2354:
+	bne	$31,$13,.L2348
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC125)($28)
+	ld	$4,%got_page(.LC139)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC125)
+	daddiu	$4,$4,%got_ofst(.LC139)
 
-	b	.L2338
+	b	.L2355
 	ld	$31,56($sp)
 
 	.set	macro
@@ -27612,10 +27673,10 @@ _ZN12_GLOBAL__N_112sad_x3_64x64EPKhS1_S1_S1_lPi:
 	.size	_ZN12_GLOBAL__N_112sad_x3_64x64EPKhS1_S1_S1_lPi, .-_ZN12_GLOBAL__N_112sad_x3_64x64EPKhS1_S1_S1_lPi
 	.section	.rodata.str1.8
 	.align	3
-.LC127:
+.LC141:
 	.ascii	"sad_x3_32x32 test success\000"
 	.align	3
-.LC128:
+.LC142:
 	.ascii	"sad_x3_32x32 test fail\000"
 	.text
 	.align	2
@@ -27656,7 +27717,7 @@ _ZN12_GLOBAL__N_112sad_x3_32x32EPKhS1_S1_S1_lPi:
 	sd	$18,16($sp)
 	sd	$16,0($sp)
 	.align	3
-.L2340:
+.L2357:
 	ld.b	$w1,0($25)
 	ld.b	$w5,16($25)
 	ld.b	$w0,64($25)
@@ -27718,7 +27779,7 @@ _ZN12_GLOBAL__N_112sad_x3_32x32EPKhS1_S1_S1_lPi:
 	addv.d	$w9,$w0,$w2
 	daddu	$2,$2,$12
 	daddu	$3,$3,$12
-	bne	$25,$17,.L2340
+	bne	$25,$17,.L2357
 	daddu	$10,$10,$12
 
 	copy_s.w	$2,$w8[2]
@@ -27749,14 +27810,14 @@ _ZN12_GLOBAL__N_112sad_x3_32x32EPKhS1_S1_S1_lPi:
 	sw	$16,4($9)
 	sw	$31,8($9)
 	.align	3
-.L2342:
+.L2359:
 	move	$9,$4
 	move	$12,$5
 	move	$11,$6
 	move	$10,$7
 	daddiu	$24,$4,32
 	.align	3
-.L2341:
+.L2358:
 	daddiu	$12,$12,1
 	daddiu	$11,$11,1
 	lbu	$2,0($9)
@@ -27779,30 +27840,30 @@ _ZN12_GLOBAL__N_112sad_x3_32x32EPKhS1_S1_S1_lPi:
 	subu	$2,$2,$19
 	addu	$15,$18,$15
 	addu	$14,$3,$14
-	bne	$24,$9,.L2341
+	bne	$24,$9,.L2358
 	addu	$13,$2,$13
 
 	daddiu	$4,$4,64
 	daddu	$5,$5,$8
 	daddu	$6,$6,$8
-	bne	$25,$4,.L2342
+	bne	$25,$4,.L2359
 	daddu	$7,$7,$8
 
-	bne	$17,$15,.L2343
+	bne	$17,$15,.L2360
 	nop
 
-	beq	$16,$14,.L2349
+	beq	$16,$14,.L2366
 	nop
 
-.L2343:
-	ld	$4,%got_page(.LC128)($28)
+.L2360:
+	ld	$4,%got_page(.LC142)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC128)
+	daddiu	$4,$4,%got_ofst(.LC142)
 
 	ld	$31,56($sp)
-.L2350:
+.L2367:
 	ld	$28,48($sp)
 	ld	$21,40($sp)
 	ld	$20,32($sp)
@@ -27813,16 +27874,16 @@ _ZN12_GLOBAL__N_112sad_x3_32x32EPKhS1_S1_S1_lPi:
 	jr	$31
 	daddiu	$sp,$sp,64
 
-.L2349:
-	bne	$31,$13,.L2343
+.L2366:
+	bne	$31,$13,.L2360
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC127)($28)
+	ld	$4,%got_page(.LC141)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC127)
+	daddiu	$4,$4,%got_ofst(.LC141)
 
-	b	.L2350
+	b	.L2367
 	ld	$31,56($sp)
 
 	.set	macro
@@ -27831,10 +27892,10 @@ _ZN12_GLOBAL__N_112sad_x3_32x32EPKhS1_S1_S1_lPi:
 	.size	_ZN12_GLOBAL__N_112sad_x3_32x32EPKhS1_S1_S1_lPi, .-_ZN12_GLOBAL__N_112sad_x3_32x32EPKhS1_S1_S1_lPi
 	.section	.rodata.str1.8
 	.align	3
-.LC129:
+.LC143:
 	.ascii	"sad_32x32 test success\000"
 	.align	3
-.LC130:
+.LC144:
 	.ascii	"sad_32x32 test fail\000"
 	.text
 	.align	2
@@ -27882,7 +27943,7 @@ _ZN12_GLOBAL__N_19sad_32x32EPKhlS1_l:
 	daddiu	$18,$16,16
 	sd	$17,8($sp)
 	daddiu	$17,$15,16
-.L2352:
+.L2369:
 	daddu	$14,$2,$5
 	daddu	$13,$2,$21
 	ld.d	$w3,0($2)
@@ -27937,7 +27998,7 @@ _ZN12_GLOBAL__N_19sad_32x32EPKhlS1_l:
 	addv.d	$w10,$w1,$w5
 	addv.d	$w9,$w0,$w4
 	daddu	$2,$2,$23
-	bne	$8,$0,.L2352
+	bne	$8,$0,.L2369
 	daddu	$3,$3,$22
 
 	copy_s.w	$2,$w8[2]
@@ -27958,12 +28019,12 @@ _ZN12_GLOBAL__N_19sad_32x32EPKhlS1_l:
 	addu	$16,$16,$8
 	addu	$16,$16,$2
 	.align	3
-.L2354:
+.L2371:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,32
 	.align	3
-.L2353:
+.L2370:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -27972,21 +28033,21 @@ _ZN12_GLOBAL__N_19sad_32x32EPKhlS1_l:
 	sra	$9,$2,31
 	xor	$2,$9,$2
 	subu	$2,$2,$9
-	bne	$11,$3,.L2353
+	bne	$11,$3,.L2370
 	addu	$10,$2,$10
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L2354
+	bne	$12,$0,.L2371
 	daddu	$6,$6,$7
 
-	beq	$16,$10,.L2361
+	beq	$16,$10,.L2378
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC130)($28)
+	ld	$4,%got_page(.LC144)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC130)
+	daddiu	$4,$4,%got_ofst(.LC144)
 
 	ld	$31,72($sp)
 	move	$2,$16
@@ -28002,11 +28063,11 @@ _ZN12_GLOBAL__N_19sad_32x32EPKhlS1_l:
 	jr	$31
 	daddiu	$sp,$sp,80
 
-.L2361:
-	ld	$4,%got_page(.LC129)($28)
+.L2378:
+	ld	$4,%got_page(.LC143)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC129)
+	daddiu	$4,$4,%got_ofst(.LC143)
 
 	ld	$31,72($sp)
 	move	$2,$16
@@ -28028,10 +28089,10 @@ _ZN12_GLOBAL__N_19sad_32x32EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_19sad_32x32EPKhlS1_l, .-_ZN12_GLOBAL__N_19sad_32x32EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC131:
+.LC145:
 	.ascii	"sad_16x16 test success\000"
 	.align	3
-.LC132:
+.LC146:
 	.ascii	"sad_16x16 test fail\000"
 	.text
 	.align	2
@@ -28183,10 +28244,10 @@ _ZN12_GLOBAL__N_19sad_16x16EPKhlS1_l:
 	addu	$16,$16,$2
 	move	$8,$0
 	.align	3
-.L2364:
+.L2381:
 	daddiu	$9,$4,16
 	.align	3
-.L2363:
+.L2380:
 	daddiu	$6,$6,1
 	lbu	$2,0($4)
 	daddiu	$4,$4,1
@@ -28195,26 +28256,26 @@ _ZN12_GLOBAL__N_19sad_16x16EPKhlS1_l:
 	sra	$3,$2,31
 	xor	$2,$3,$2
 	subu	$2,$2,$3
-	bne	$9,$4,.L2363
+	bne	$9,$4,.L2380
 	addu	$8,$2,$8
 
 	addiu	$10,$10,-1
 	move	$4,$12
-	beq	$10,$0,.L2369
+	beq	$10,$0,.L2386
 	move	$6,$11
 
 	daddu	$12,$12,$5
-	b	.L2364
+	b	.L2381
 	daddu	$11,$11,$7
 
-.L2369:
-	beq	$16,$8,.L2371
+.L2386:
+	beq	$16,$8,.L2388
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC132)($28)
+	ld	$4,%got_page(.LC146)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC132)
+	daddiu	$4,$4,%got_ofst(.LC146)
 
 	ld	$31,56($sp)
 	move	$2,$16
@@ -28227,11 +28288,11 @@ _ZN12_GLOBAL__N_19sad_16x16EPKhlS1_l:
 	jr	$31
 	daddiu	$sp,$sp,64
 
-.L2371:
-	ld	$4,%got_page(.LC131)($28)
+.L2388:
+	ld	$4,%got_page(.LC145)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC131)
+	daddiu	$4,$4,%got_ofst(.LC145)
 
 	ld	$31,56($sp)
 	move	$2,$16
@@ -28250,10 +28311,10 @@ _ZN12_GLOBAL__N_19sad_16x16EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_19sad_16x16EPKhlS1_l, .-_ZN12_GLOBAL__N_19sad_16x16EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC133:
+.LC147:
 	.ascii	"sad_64x64 test success\000"
 	.align	3
-.LC134:
+.LC148:
 	.ascii	"sad_64x64 test fail\000"
 	.text
 	.align	2
@@ -28295,7 +28356,7 @@ _ZN12_GLOBAL__N_19sad_64x64EPKhlS1_l:
 	daddiu	$17,$5,48
 	sd	$16,0($sp)
 	daddiu	$16,$7,32
-.L2373:
+.L2390:
 	daddu	$24,$2,$5
 	daddu	$15,$2,$19
 	ld.d	$w3,0($2)
@@ -28346,7 +28407,7 @@ _ZN12_GLOBAL__N_19sad_64x64EPKhlS1_l:
 	addv.d	$w10,$w1,$w5
 	addv.d	$w9,$w0,$w4
 	daddu	$2,$2,$21
-	bne	$8,$0,.L2373
+	bne	$8,$0,.L2390
 	daddu	$3,$3,$20
 
 	copy_s.w	$2,$w8[2]
@@ -28367,12 +28428,12 @@ _ZN12_GLOBAL__N_19sad_64x64EPKhlS1_l:
 	addu	$16,$16,$8
 	addu	$16,$16,$2
 	.align	3
-.L2375:
+.L2392:
 	move	$3,$4
 	move	$8,$6
 	daddiu	$11,$4,64
 	.align	3
-.L2374:
+.L2391:
 	daddiu	$8,$8,1
 	lbu	$2,0($3)
 	daddiu	$3,$3,1
@@ -28381,21 +28442,21 @@ _ZN12_GLOBAL__N_19sad_64x64EPKhlS1_l:
 	sra	$9,$2,31
 	xor	$2,$9,$2
 	subu	$2,$2,$9
-	bne	$11,$3,.L2374
+	bne	$11,$3,.L2391
 	addu	$10,$2,$10
 
 	addiu	$12,$12,-1
 	daddu	$4,$4,$5
-	bne	$12,$0,.L2375
+	bne	$12,$0,.L2392
 	daddu	$6,$6,$7
 
-	beq	$16,$10,.L2382
+	beq	$16,$10,.L2399
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC134)($28)
+	ld	$4,%got_page(.LC148)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC134)
+	daddiu	$4,$4,%got_ofst(.LC148)
 
 	ld	$31,56($sp)
 	move	$2,$16
@@ -28409,11 +28470,11 @@ _ZN12_GLOBAL__N_19sad_64x64EPKhlS1_l:
 	jr	$31
 	daddiu	$sp,$sp,64
 
-.L2382:
-	ld	$4,%got_page(.LC133)($28)
+.L2399:
+	ld	$4,%got_page(.LC147)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC133)
+	daddiu	$4,$4,%got_ofst(.LC147)
 
 	ld	$31,56($sp)
 	move	$2,$16
@@ -28433,10 +28494,10 @@ _ZN12_GLOBAL__N_19sad_64x64EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_19sad_64x64EPKhlS1_l, .-_ZN12_GLOBAL__N_19sad_64x64EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC135:
+.LC149:
 	.ascii	"sad_4x4 test success\000"
 	.align	3
-.LC136:
+.LC150:
 	.ascii	"sad_4x4 test fail\000"
 	.text
 	.align	2
@@ -28487,9 +28548,9 @@ _ZN12_GLOBAL__N_17sad_4x4EPKhlS1_l:
 	copy_s.w	$16,$w0[0]
 	copy_s.w	$2,$w0[2]
 	addu	$16,$16,$2
-.L2385:
+.L2402:
 	daddiu	$9,$4,4
-.L2384:
+.L2401:
 	daddiu	$6,$6,1
 	lbu	$2,0($4)
 	daddiu	$4,$4,1
@@ -28498,27 +28559,27 @@ _ZN12_GLOBAL__N_17sad_4x4EPKhlS1_l:
 	sra	$3,$2,31
 	xor	$2,$3,$2
 	subu	$2,$2,$3
-	bne	$9,$4,.L2384
+	bne	$9,$4,.L2401
 	addu	$8,$2,$8
 
 	addiu	$10,$10,-1
 	move	$4,$12
-	beq	$10,$0,.L2390
+	beq	$10,$0,.L2407
 	move	$6,$11
 
 	daddu	$12,$12,$5
-	b	.L2385
+	b	.L2402
 	daddu	$11,$11,$7
 
 	.align	3
-.L2390:
-	beq	$16,$8,.L2392
+.L2407:
+	beq	$16,$8,.L2409
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC136)($28)
+	ld	$4,%got_page(.LC150)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC136)
+	daddiu	$4,$4,%got_ofst(.LC150)
 
 	ld	$31,24($sp)
 	move	$2,$16
@@ -28528,11 +28589,11 @@ _ZN12_GLOBAL__N_17sad_4x4EPKhlS1_l:
 	daddiu	$sp,$sp,32
 
 	.align	3
-.L2392:
-	ld	$4,%got_page(.LC135)($28)
+.L2409:
+	ld	$4,%got_page(.LC149)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC135)
+	daddiu	$4,$4,%got_ofst(.LC149)
 
 	ld	$31,24($sp)
 	move	$2,$16
@@ -28547,10 +28608,10 @@ _ZN12_GLOBAL__N_17sad_4x4EPKhlS1_l:
 	.size	_ZN12_GLOBAL__N_17sad_4x4EPKhlS1_l, .-_ZN12_GLOBAL__N_17sad_4x4EPKhlS1_l
 	.section	.rodata.str1.8
 	.align	3
-.LC137:
+.LC151:
 	.ascii	"psyCost_pp_4x4 test success\000"
 	.align	3
-.LC138:
+.LC152:
 	.ascii	"psyCost_pp_4x4 test fail\000"
 	.text
 	.align	2
@@ -28708,27 +28769,27 @@ _ZN12_GLOBAL__N_114psyCost_pp_4x4EPKhlS1_l:
 	sra	$17,$2,31
 	xor	$2,$17,$2
 	subu	$17,$2,$17
-	beq	$17,$16,.L2397
+	beq	$17,$16,.L2414
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC138)($28)
+	ld	$4,%got_page(.LC152)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC138)
+	daddiu	$4,$4,%got_ofst(.LC152)
 
-	ld	$4,%got_page(.LC52)($28)
+	ld	$4,%got_page(.LC31)($28)
 	move	$5,$17
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC52)
+	daddiu	$4,$4,%got_ofst(.LC31)
 
-	ld	$4,%got_page(.LC53)($28)
+	ld	$4,%got_page(.LC32)($28)
 	move	$5,$16
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC53)
+	daddiu	$4,$4,%got_ofst(.LC32)
 
 	ld	$31,72($sp)
 	move	$2,$20
@@ -28745,11 +28806,11 @@ _ZN12_GLOBAL__N_114psyCost_pp_4x4EPKhlS1_l:
 	daddiu	$sp,$sp,80
 
 	.align	3
-.L2397:
-	ld	$4,%got_page(.LC137)($28)
+.L2414:
+	ld	$4,%got_page(.LC151)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC137)
+	daddiu	$4,$4,%got_ofst(.LC151)
 
 	ld	$31,72($sp)
 	move	$2,$20
@@ -28842,13 +28903,13 @@ _ZL17partialButterfly8PKsPsii.constprop.0:
 	sd	$3,152($sp)
 	sd	$2,160($sp)
 	.align	3
-.L2400:
+.L2417:
 	ld	$9,168($sp)
 	move	$7,$4
 	daddiu	$10,$4,14
 	move	$8,$sp
 	daddiu	$12,$4,8
-.L2399:
+.L2416:
 	daddiu	$10,$10,-2
 	lh	$2,0($7)
 	daddiu	$9,$9,4
@@ -28858,7 +28919,7 @@ _ZL17partialButterfly8PKsPsii.constprop.0:
 	addu	$11,$2,$3
 	subu	$2,$2,$3
 	sw	$11,-4($9)
-	bne	$7,$12,.L2399
+	bne	$7,$12,.L2416
 	sw	$2,-4($8)
 
 	lw	$2,4($sp)
@@ -28963,7 +29024,7 @@ _ZL17partialButterfly8PKsPsii.constprop.0:
 	sra	$7,$7,$6
 	sra	$11,$11,$6
 	sh	$7,78($5)
-	bne	$23,$5,.L2400
+	bne	$23,$5,.L2417
 	sh	$11,110($5)
 
 	ld	$fp,248($sp)
@@ -28983,81 +29044,877 @@ _ZL17partialButterfly8PKsPsii.constprop.0:
 	.set	reorder
 	.end	_ZL17partialButterfly8PKsPsii.constprop.0
 	.size	_ZL17partialButterfly8PKsPsii.constprop.0, .-_ZL17partialButterfly8PKsPsii.constprop.0
+	.section	.rodata.str1.8
+	.align	3
+.LC153:
+	.ascii	"dct8 test fail\000"
+	.align	3
+.LC154:
+	.ascii	"dct8 test success\000"
+	.text
 	.align	2
 	.align	3
 	.set	nomips16
 	.set	nomicromips
-	.ent	_ZL6dct8_cPKsPsl
-	.type	_ZL6dct8_cPKsPsl, @function
-_ZL6dct8_cPKsPsl:
-	.frame	$sp,336,$31		# vars= 288, regs= 5/0, args= 0, gp= 0
-	.mask	0x90070000,-8
-	.fmask	0x00000000,0
+	.ent	_ZL4dct8PKsPsl
+	.type	_ZL4dct8PKsPsl, @function
+_ZL4dct8PKsPsl:
+	.frame	$sp,576,$31		# vars= 432, regs= 9/8, args= 0, gp= 0
+	.mask	0x907f0000,-72
+	.fmask	0xff000000,-8
 	.set	noreorder
 	.set	nomacro
-	daddiu	$sp,$sp,-336
-	dsll	$6,$6,1
-	daddiu	$7,$sp,31
-	sd	$28,320($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZL6dct8_cPKsPsl)))
-	dsrl	$7,$7,5
+	daddiu	$sp,$sp,-576
+	sd	$22,488($sp)
+	move	$22,$4
+	daddiu	$4,$sp,31
+	sd	$28,496($sp)
+	dsrl	$4,$4,5
+	lui	$28,%hi(%neg(%gp_rel(_ZL4dct8PKsPsl)))
+	dsll	$4,$4,5
 	daddu	$28,$28,$25
-	sd	$18,312($sp)
-	dsll	$7,$7,5
-	sd	$16,296($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL6dct8_cPKsPsl)))
-	move	$18,$5
-	move	$2,$7
-	sd	$31,328($sp)
-	daddiu	$16,$7,128
-	sd	$17,304($sp)
+	sd	$20,472($sp)
+	sd	$19,464($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL4dct8PKsPsl)))
+	move	$19,$6
+	sd	$18,456($sp)
+	move	$3,$4
+	dsll	$20,$6,1
+	sd	$17,448($sp)
+	move	$2,$22
+	move	$17,$5
+	daddiu	$18,$4,128
+	sd	$31,504($sp)
+	sd	$21,480($sp)
+	sd	$16,440($sp)
+	sdc1	$f31,568($sp)
+	sdc1	$f30,560($sp)
+	sdc1	$f29,552($sp)
+	sdc1	$f28,544($sp)
+	sdc1	$f27,536($sp)
+	sdc1	$f26,528($sp)
+	sdc1	$f25,520($sp)
+	sdc1	$f24,512($sp)
 	.align	3
-.L2405:
-	ldl	$5,7($4)
-	daddiu	$2,$2,16
-	ldl	$3,15($4)
-	ldr	$5,0($4)
-	ldr	$3,8($4)
-	daddu	$4,$4,$6
-	sd	$5,-16($2)
-	bne	$16,$2,.L2405
-	sd	$3,-8($2)
+.L2422:
+	ldl	$6,7($2)
+	daddiu	$3,$3,16
+	ldl	$5,15($2)
+	ldr	$6,0($2)
+	ldr	$5,8($2)
+	daddu	$2,$2,$20
+	sd	$6,-16($3)
+	bne	$18,$3,.L2422
+	sd	$5,-8($3)
 
-	ld	$17,%got_page(_ZL17partialButterfly8PKsPsii.constprop.0)($28)
-	move	$5,$16
-	move	$4,$7
-	daddiu	$17,$17,%got_ofst(_ZL17partialButterfly8PKsPsii.constprop.0)
-	move	$25,$17
-	.reloc	1f,R_MIPS_JALR,_ZL17partialButterfly8PKsPsii.constprop.0
-1:	jalr	$25
-	li	$6,2			# 0x2
-
+	ld	$21,%got_page(_ZL17partialButterfly8PKsPsii.constprop.0)($28)
 	move	$5,$18
-	move	$4,$16
-	move	$25,$17
+	li	$6,2			# 0x2
+	daddiu	$21,$21,%got_ofst(_ZL17partialButterfly8PKsPsii.constprop.0)
+	move	$25,$21
 	.reloc	1f,R_MIPS_JALR,_ZL17partialButterfly8PKsPsii.constprop.0
 1:	jalr	$25
-	li	$6,9			# 0x9
+	daddiu	$16,$sp,288
 
-	ld	$31,328($sp)
-	ld	$28,320($sp)
-	ld	$18,312($sp)
-	ld	$17,304($sp)
-	ld	$16,296($sp)
+	move	$4,$18
+	li	$6,9			# 0x9
+	move	$5,$16
+	move	$25,$21
+	.reloc	1f,R_MIPS_JALR,_ZL17partialButterfly8PKsPsii.constprop.0
+1:	jalr	$25
+	move	$18,$17
+
+	daddu	$4,$22,$20
+	ld	$3,%got_disp(tab_dct8_2)($28)
+	ld.h	$w2,0($22)
+	daddu	$2,$4,$20
+	ld	$8,%got_disp(tab_dct8_1)($28)
+	ld.h	$w1,0($4)
+	ilvr.h	$w6,$w1,$w2
+	dlsa	$5,$19,$2,2
+	ld	$7,%got_disp(tab_dct8_11)($28)
+	ld.h	$w18,0($2)
+	daddu	$11,$2,$20
+	ld	$6,%got_disp(tab_dct4)($28)
+	daddu	$10,$5,$20
+	ld.w	$w7,64($3)
+	ld.w	$w10,80($3)
+	daddu	$9,$10,$20
+	ld.w	$w9,32($3)
+	ld.w	$w8,48($3)
+	ld.w	$w28,16($3)
+	daddu	$2,$9,$20
+	ld.w	$w29,0($3)
+	ld.h	$w13,0($10)
+	ld.h	$w25,0($8)
+	ld.h	$w14,0($2)
+	ld.h	$w24,32($8)
+	ld.h	$w23,0($7)
+	ld.h	$w17,32($7)
+	ld.h	$w15,32($6)
+	ld.h	$w12,48($6)
+	ld.h	$w3,0($11)
+	ld.h	$w4,0($5)
+	ld.h	$w16,0($9)
+	ld.h	$w21,16($8)
+	ld.h	$w20,48($8)
+	ld.h	$w19,16($7)
+	ld.h	$w5,48($7)
+	ld.h	$w11,0($6)
+	ld.h	$w22,16($6)
+	ilvr.h	$w0,$w3,$w18
+	ilvl.h	$w2,$w1,$w2
+	ilvl.h	$w3,$w3,$w18
+	ilvr.h	$w1,$w14,$w16
+	ilvr.h	$w18,$w13,$w4
+	ilvl.h	$w16,$w14,$w16
+	ilvl.h	$w4,$w13,$w4
+	ilvr.w	$w14,$w0,$w6
+	ilvr.w	$w13,$w1,$w18
+	ilvl.w	$w6,$w0,$w6
+	ilvl.w	$w1,$w1,$w18
+	ilvr.w	$w0,$w3,$w2
+	move	$19,$0
+	ilvl.w	$w2,$w3,$w2
+	shf.w	$w0,$w0,0x4e
+	shf.w	$w2,$w2,0x4e
+	subv.h	$w3,$w6,$w0
+	subv.h	$w18,$w14,$w2
+	addv.h	$w0,$w6,$w0
+	addv.h	$w2,$w14,$w2
+	ilvr.h	$w6,$w3,$w18
+	ilvr.d	$w14,$w0,$w2
+	ilvl.h	$w3,$w3,$w18
+	ilvl.d	$w0,$w2,$w0
+	ilvr.w	$w18,$w16,$w4
+	addv.h	$w26,$w14,$w0
+	shf.w	$w18,$w18,0x4e
+	ilvl.w	$w4,$w16,$w4
+	subv.h	$w2,$w1,$w18
+	shf.w	$w4,$w4,0x4e
+	addv.h	$w1,$w1,$w18
+	subv.h	$w16,$w13,$w4
+	dotp_s.w	$w18,$w3,$w21
+	addv.h	$w13,$w13,$w4
+	dpadd_s.w	$w18,$w6,$w25
+	ilvr.h	$w4,$w2,$w16
+	srari.w	$w18,$w18,2
+	ilvl.h	$w2,$w2,$w16
+	li	$4,64			# 0x40
+	ilvr.d	$w16,$w1,$w13
+	dotp_s.w	$w21,$w2,$w21
+	ilvl.d	$w1,$w13,$w1
+	dpadd_s.w	$w21,$w4,$w25
+	subv.h	$w13,$w14,$w0
+	srari.w	$w21,$w21,2
+	subv.h	$w0,$w0,$w14
+	shf.w	$w21,$w21,0x1b
+	addv.h	$w14,$w16,$w1
+	insve.d	$w0[0],$w13[0]
+	shf.w	$w14,$w14,0xd8
+	subv.h	$w13,$w16,$w1
+	shf.h	$w14,$w14,0xd8
+	subv.h	$w1,$w1,$w16
+	shf.w	$w0,$w0,0xd8
+	dotp_s.w	$w16,$w3,$w20
+	insve.d	$w1[0],$w13[0]
+	dpadd_s.w	$w16,$w6,$w24
+	dotp_s.w	$w13,$w3,$w19
+	dotp_s.w	$w20,$w2,$w20
+	dpadd_s.w	$w13,$w6,$w23
+	dpadd_s.w	$w20,$w4,$w24
+	dotp_s.w	$w3,$w3,$w5
+	dotp_s.w	$w19,$w2,$w19
+	dpadd_s.w	$w3,$w6,$w17
+	dpadd_s.w	$w19,$w4,$w23
+	dotp_s.w	$w5,$w2,$w5
+	shf.h	$w0,$w0,0xd8
+	dpadd_s.w	$w5,$w4,$w17
+	dotp_s.w	$w6,$w0,$w22
+	subv.w	$w17,$w18,$w21
+	shf.w	$w2,$w26,0xd8
+	srari.w	$w16,$w16,2
+	shf.h	$w2,$w2,0xd8
+	srari.w	$w13,$w13,2
+	dotp_s.w	$w4,$w2,$w11
+	srari.w	$w3,$w3,2
+	srari.w	$w4,$w4,2
+	srari.w	$w6,$w6,2
+	dotp_s.w	$w2,$w2,$w15
+	dotp_s.w	$w0,$w0,$w12
+	srari.w	$w2,$w2,2
+	srari.w	$w0,$w0,2
+	dotp_s.w	$w11,$w14,$w11
+	addv.w	$w18,$w18,$w21
+	dotp_s.w	$w14,$w14,$w15
+	dotp_s.d	$w21,$w17,$w7
+	srari.w	$w11,$w11,2
+	shf.w	$w18,$w18,0x36
+	shf.w	$w23,$w11,0x1b
+	shf.w	$w1,$w1,0xd8
+	subv.w	$w27,$w4,$w23
+	shf.h	$w1,$w1,0xd8
+	dotp_s.d	$w30,$w27,$w7
+	dotp_s.d	$w31,$w27,$w10
+	pckev.w	$w21,$w21,$w30
+	dotp_s.w	$w22,$w1,$w22
+	st.w	$w21,416($sp)
+	dotp_s.w	$w1,$w1,$w12
+	dotp_s.d	$w21,$w27,$w9
+	addv.w	$w4,$w4,$w23
+	dotp_s.d	$w27,$w27,$w8
+	dotp_s.d	$w23,$w17,$w10
+	shf.w	$w4,$w4,0x36
+	pckev.w	$w31,$w23,$w31
+	hsub_s.d	$w30,$w4,$w4
+	hsub_s.d	$w23,$w18,$w18
+	hadd_s.d	$w31,$w31,$w31
+	pckev.w	$w30,$w23,$w30
+	hadd_s.d	$w18,$w18,$w18
+	dotp_s.d	$w23,$w17,$w9
+	srari.w	$w20,$w20,2
+	dotp_s.d	$w17,$w17,$w8
+	shf.w	$w20,$w20,0x1b
+	pckev.w	$w23,$w23,$w21
+	subv.w	$w26,$w16,$w20
+	pckev.w	$w17,$w17,$w27
+	addv.w	$w16,$w16,$w20
+	mulv.w	$w27,$w30,$w28
+	hadd_s.d	$w17,$w17,$w17
+	hsub_s.d	$w27,$w27,$w27
+	shf.w	$w16,$w16,0x36
+	srari.w	$w19,$w19,2
+	srari.w	$w5,$w5,2
+	shf.w	$w19,$w19,0x1b
+	shf.w	$w5,$w5,0x1b
+	subv.w	$w25,$w13,$w19
+	subv.w	$w24,$w3,$w5
+	addv.w	$w13,$w13,$w19
+	addv.w	$w3,$w3,$w5
+	shf.w	$w13,$w13,0x36
+	shf.w	$w3,$w3,0x36
+	srari.w	$w22,$w22,2
+	srari.w	$w14,$w14,2
+	shf.w	$w22,$w22,0x1b
+	shf.w	$w14,$w14,0x1b
+	subv.w	$w15,$w6,$w22
+	subv.w	$w12,$w2,$w14
+	addv.w	$w6,$w6,$w22
+	dotp_s.d	$w19,$w12,$w8
+	dotp_s.d	$w22,$w15,$w9
+	shf.w	$w6,$w6,0x36
+	addv.w	$w14,$w2,$w14
+	srari.w	$w1,$w1,2
+	shf.w	$w14,$w14,0x36
+	shf.w	$w1,$w1,0x1b
+	hadd_s.d	$w2,$w14,$w14
+	subv.w	$w11,$w0,$w1
+	hsub_s.d	$w14,$w14,$w14
+	dotp_s.d	$w5,$w11,$w8
+	addv.w	$w1,$w0,$w1
+	hadd_s.d	$w4,$w4,$w4
+	shf.w	$w1,$w1,0x36
+	pckev.w	$w4,$w18,$w4
+	hadd_s.d	$w0,$w1,$w1
+	ld.w	$w18,416($sp)
+	slli.w	$w4,$w4,6
+	hadd_s.d	$w21,$w18,$w18
+	hsub_s.d	$w1,$w1,$w1
+	hadd_s.d	$w18,$w4,$w4
+	pckev.w	$w21,$w31,$w21
+	hadd_s.d	$w23,$w23,$w23
+	dotp_s.d	$w31,$w15,$w8
+	pckev.w	$w23,$w17,$w23
+	vsrarin.h	$w21,$w21,9
+	vsrarin.h	$w23,$w23,9
+	dotp_s.d	$w17,$w15,$w7
+	vsw	$w23,0,16($17)
+	dotp_s.d	$w15,$w15,$w10
+	vsw	$w23,1,48($17)
+	hsub_s.d	$w4,$w4,$w4
+	dotp_s.d	$w23,$w26,$w8
+	pckev.w	$w4,$w27,$w4
+	dotp_s.d	$w30,$w30,$w29
+	vsrarin.h	$w4,$w4,9
+	hadd_s.d	$w27,$w16,$w16
+	pckev.w	$w30,$w30,$w18
+	hsub_s.d	$w16,$w16,$w16
+	vsrarin.h	$w18,$w30,9
+	pckev.w	$w23,$w23,$w31
+	dotp_s.d	$w30,$w26,$w7
+	vsw	$w18,0,0($17)
+	vsw	$w18,1,32($17)
+	hadd_s.d	$w23,$w23,$w23
+	vsw	$w4,0,64($17)
+	dotp_s.d	$w18,$w26,$w9
+	vsw	$w4,1,96($17)
+	dotp_s.d	$w26,$w26,$w10
+	hadd_s.d	$w4,$w6,$w6
+	pckev.w	$w18,$w18,$w22
+	hsub_s.d	$w6,$w6,$w6
+	dotp_s.d	$w22,$w25,$w7
+	pckev.w	$w16,$w16,$w6
+	pckev.w	$w26,$w26,$w15
+	mulv.w	$w6,$w16,$w28
+	pckev.w	$w4,$w27,$w4
+	hsub_s.d	$w20,$w6,$w6
+	slli.w	$w4,$w4,6
+	hadd_s.d	$w26,$w26,$w26
+	hadd_s.d	$w27,$w4,$w4
+	pckev.w	$w17,$w30,$w17
+	hadd_s.d	$w18,$w18,$w18
+	hadd_s.d	$w17,$w17,$w17
+	pckev.w	$w18,$w23,$w18
+	pckev.w	$w6,$w26,$w17
+	vsrarin.h	$w15,$w18,9
+	dotp_s.d	$w26,$w12,$w9
+	dotp_s.d	$w18,$w25,$w9
+	dotp_s.d	$w23,$w25,$w8
+	dotp_s.d	$w17,$w12,$w7
+	vsrarin.h	$w6,$w6,9
+	dotp_s.d	$w12,$w12,$w10
+	dotp_s.d	$w25,$w25,$w10
+	pckev.w	$w17,$w22,$w17
+	hsub_s.d	$w4,$w4,$w4
+	hadd_s.d	$w17,$w17,$w17
+	pckev.w	$w4,$w20,$w4
+	dotp_s.d	$w16,$w16,$w29
+	hadd_s.d	$w20,$w13,$w13
+	vsrarin.h	$w4,$w4,9
+	pckev.w	$w2,$w20,$w2
+	pckev.w	$w16,$w16,$w27
+	slli.w	$w2,$w2,6
+	vsrarin.h	$w16,$w16,9
+	hadd_s.d	$w22,$w2,$w2
+	hsub_s.d	$w13,$w13,$w13
+	pckev.w	$w18,$w18,$w26
+	pckev.w	$w13,$w13,$w14
+	pckev.w	$w19,$w23,$w19
+	mulv.w	$w20,$w13,$w28
+	hadd_s.d	$w19,$w19,$w19
+	dotp_s.d	$w14,$w13,$w29
+	pckev.w	$w12,$w25,$w12
+	hadd_s.d	$w18,$w18,$w18
+	hadd_s.d	$w12,$w12,$w12
+	pckev.w	$w18,$w19,$w18
+	pckev.w	$w12,$w12,$w17
+	vsrarin.h	$w13,$w18,9
+	dotp_s.d	$w17,$w11,$w7
+	dotp_s.d	$w18,$w11,$w9
+	vsrarin.h	$w12,$w12,9
+	dotp_s.d	$w11,$w11,$w10
+	hadd_s.d	$w19,$w3,$w3
+	hsub_s.d	$w2,$w2,$w2
+	hsub_s.d	$w20,$w20,$w20
+	pckev.w	$w14,$w14,$w22
+	pckev.w	$w2,$w20,$w2
+	vsrarin.h	$w14,$w14,9
+	vsrarin.h	$w2,$w2,9
+	dotp_s.d	$w9,$w24,$w9
+	dotp_s.d	$w8,$w24,$w8
+	dotp_s.d	$w7,$w24,$w7
+	pckev.w	$w8,$w8,$w5
+	dotp_s.d	$w10,$w24,$w10
+	hsub_s.d	$w3,$w3,$w3
+	pckev.w	$w9,$w9,$w18
+	pckev.w	$w3,$w3,$w1
+	pckev.w	$w7,$w7,$w17
+	mulv.w	$w28,$w3,$w28
+	pckev.w	$w10,$w10,$w11
+	pckev.w	$w0,$w19,$w0
+	hadd_s.d	$w9,$w9,$w9
+	slli.w	$w0,$w0,6
+	hadd_s.d	$w8,$w8,$w8
+	hadd_s.d	$w5,$w0,$w0
+	hadd_s.d	$w7,$w7,$w7
+	hadd_s.d	$w10,$w10,$w10
+	hsub_s.d	$w0,$w0,$w0
+	dotp_s.d	$w3,$w3,$w29
+	hsub_s.d	$w28,$w28,$w28
+	pckev.w	$w1,$w8,$w9
+	pckev.w	$w10,$w10,$w7
+	vsrarin.h	$w1,$w1,9
+	vsrarin.h	$w10,$w10,9
+	pckev.w	$w3,$w3,$w5
+	pckev.w	$w0,$w28,$w0
+	vsrarin.h	$w3,$w3,9
+	vsrarin.h	$w0,$w0,9
+	vsw	$w21,0,80($17)
+	vsw	$w21,1,112($17)
+	vsw	$w16,0,4($17)
+	vsw	$w15,0,20($17)
+	vsw	$w16,1,36($17)
+	vsw	$w15,1,52($17)
+	vsw	$w4,0,68($17)
+	vsw	$w6,0,84($17)
+	vsw	$w4,1,100($17)
+	vsw	$w6,1,116($17)
+	vsw	$w14,0,8($17)
+	vsw	$w13,0,24($17)
+	vsw	$w14,1,40($17)
+	vsw	$w13,1,56($17)
+	vsw	$w2,0,72($17)
+	vsw	$w12,0,88($17)
+	vsw	$w2,1,104($17)
+	vsw	$w12,1,120($17)
+	vsw	$w3,0,12($17)
+	vsw	$w1,0,28($17)
+	vsw	$w3,1,44($17)
+	vsw	$w1,1,60($17)
+	vsw	$w0,0,76($17)
+	vsw	$w10,0,92($17)
+	vsw	$w0,1,108($17)
+	b	.L2425
+	vsw	$w10,1,124($17)
+
+	.align	3
+.L2423:
+	addiu	$19,$19,1
+	daddiu	$18,$18,2
+	beq	$19,$4,.L2429
+	daddiu	$16,$16,2
+
+.L2425:
+	lh	$3,0($18)
+	lh	$2,0($16)
+	beq	$3,$2,.L2423
+	ld	$25,%call16(puts)($28)
+
+	ld	$4,%got_page(.LC153)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC153)
+
+	ld	$4,%got_page(.LC31)($28)
+	lh	$5,0($16)
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC31)
+
+	ld	$4,%got_page(.LC32)($28)
+	lh	$5,0($18)
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC32)
+
+	ld	$4,%got_page(.LC40)($28)
+	move	$5,$19
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC40)
+
+	ld	$31,504($sp)
+.L2430:
+	ldc1	$f31,568($sp)
+	ld	$28,496($sp)
+	ldc1	$f30,560($sp)
+	ld	$22,488($sp)
+	ldc1	$f29,552($sp)
+	ld	$21,480($sp)
+	ldc1	$f28,544($sp)
+	ld	$20,472($sp)
+	ldc1	$f27,536($sp)
+	ld	$19,464($sp)
+	ldc1	$f26,528($sp)
+	ld	$18,456($sp)
+	ldc1	$f25,520($sp)
+	ld	$17,448($sp)
+	ldc1	$f24,512($sp)
+	ld	$16,440($sp)
 	jr	$31
-	daddiu	$sp,$sp,336
+	daddiu	$sp,$sp,576
+
+	.align	3
+.L2429:
+	ld	$4,%got_page(.LC154)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC154)
+
+	b	.L2430
+	ld	$31,504($sp)
 
 	.set	macro
 	.set	reorder
-	.end	_ZL6dct8_cPKsPsl
-	.size	_ZL6dct8_cPKsPsl, .-_ZL6dct8_cPKsPsl
+	.end	_ZL4dct8PKsPsl
+	.size	_ZL4dct8PKsPsl, .-_ZL4dct8PKsPsl
 	.align	2
 	.align	3
 	.set	nomips16
 	.set	nomicromips
-	.ent	_ZL17partialButterfly4PKsPsii.constprop.1
-	.type	_ZL17partialButterfly4PKsPsii.constprop.1, @function
-_ZL17partialButterfly4PKsPsii.constprop.1:
+	.ent	_ZL24partialButterflyInverse4PKsPsii.constprop.1
+	.type	_ZL24partialButterflyInverse4PKsPsii.constprop.1, @function
+_ZL24partialButterflyInverse4PKsPsii.constprop.1:
+	.frame	$sp,128,$31		# vars= 48, regs= 10/0, args= 0, gp= 0
+	.mask	0x50ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-128
+	addiu	$3,$6,-1
+	sd	$28,112($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZL24partialButterflyInverse4PKsPsii.constprop.1)))
+	li	$9,1			# 0x1
+	daddu	$28,$28,$25
+	sll	$9,$9,$3
+	sd	$fp,120($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL24partialButterflyInverse4PKsPsii.constprop.1)))
+	sd	$22,96($sp)
+	li	$14,32767			# 0x7fff
+	ld	$2,%got_disp(_ZN4x2654g_t4E)($28)
+	sd	$21,88($sp)
+	sd	$23,104($sp)
+	daddiu	$23,$4,8
+	lh	$3,26($2)
+	lh	$fp,8($2)
+	lh	$22,24($2)
+	sd	$3,0($sp)
+	lh	$3,0($2)
+	lh	$21,10($2)
+	sd	$20,80($sp)
+	sd	$3,8($sp)
+	lh	$3,16($2)
+	sd	$19,72($sp)
+	sd	$18,64($sp)
+	sd	$3,16($sp)
+	lh	$3,2($2)
+	lh	$2,18($2)
+	sd	$17,56($sp)
+	sd	$16,48($sp)
+	sd	$3,24($sp)
+	sd	$2,32($sp)
+	.align	3
+.L2436:
+	lh	$25,8($4)
+	li	$13,-32768			# 0xffffffffffff8000
+	li	$12,-32768			# 0xffffffffffff8000
+	lh	$24,24($4)
+	li	$11,-32768			# 0xffffffffffff8000
+	li	$10,-32768			# 0xffffffffffff8000
+	lh	$7,16($4)
+	daddiu	$4,$4,2
+	mul	$16,$fp,$25
+	ld	$15,0($sp)
+	ld	$8,16($sp)
+	gsmultu	$3,$22,$24
+	lh	$2,-2($4)
+	gsmultu	$24,$24,$15
+	ld	$15,32($sp)
+	gsmultu	$8,$8,$7
+	gsmultu	$7,$7,$15
+	mtlo	$8
+	addu	$15,$16,$3
+	ld	$3,8($sp)
+	madd	$3,$2
+	mflo	$8
+	mul	$3,$25,$21
+	addu	$24,$3,$24
+	move	$3,$8
+	subu	$3,$3,$15
+	addu	$8,$15,$8
+	ld	$15,24($sp)
+	addu	$8,$8,$9
+	addu	$3,$3,$9
+	sra	$8,$8,$6
+	sra	$3,$3,$6
+	mul	$25,$2,$15
+	slt	$16,$8,-32768
+	slt	$15,$3,-32768
+	slt	$20,$8,32767
+	slt	$17,$3,32767
+	seh	$8,$8
+	seh	$3,$3
+	addu	$2,$25,$7
+	addu	$7,$24,$2
+	subu	$2,$2,$24
+	addu	$7,$7,$9
+	addu	$2,$2,$9
+	sra	$7,$7,$6
+	sra	$2,$2,$6
+	slt	$25,$7,-32768
+	slt	$24,$2,-32768
+	slt	$19,$7,32767
+	slt	$18,$2,32767
+	seh	$7,$7
+	bne	$16,$0,.L2432
+	seh	$2,$2
+
+	movz	$8,$14,$20
+	move	$13,$8
+.L2432:
+	bne	$25,$0,.L2433
+	sh	$13,0($5)
+
+	movz	$7,$14,$19
+	move	$12,$7
+.L2433:
+	bne	$24,$0,.L2434
+	sh	$12,2($5)
+
+	movz	$2,$14,$18
+	move	$11,$2
+.L2434:
+	bne	$15,$0,.L2435
+	sh	$11,4($5)
+
+	movz	$3,$14,$17
+	move	$10,$3
+.L2435:
+	sh	$10,6($5)
+	bne	$23,$4,.L2436
+	daddiu	$5,$5,8
+
+	ld	$fp,120($sp)
+	ld	$28,112($sp)
+	ld	$23,104($sp)
+	ld	$22,96($sp)
+	ld	$21,88($sp)
+	ld	$20,80($sp)
+	ld	$19,72($sp)
+	ld	$18,64($sp)
+	ld	$17,56($sp)
+	ld	$16,48($sp)
+	jr	$31
+	daddiu	$sp,$sp,128
+
+	.set	macro
+	.set	reorder
+	.end	_ZL24partialButterflyInverse4PKsPsii.constprop.1
+	.size	_ZL24partialButterflyInverse4PKsPsii.constprop.1, .-_ZL24partialButterflyInverse4PKsPsii.constprop.1
+	.section	.rodata.str1.8
+	.align	3
+.LC158:
+	.ascii	"idct4 test fail\000"
+	.align	3
+.LC159:
+	.ascii	"idct4 test success\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZL5idct4PKsPsl
+	.type	_ZL5idct4PKsPsl, @function
+_ZL5idct4PKsPsl:
+	.frame	$fp,192,$31		# vars= 96, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-192
+	dsll	$2,$6,3
+	sd	$28,168($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZL5idct4PKsPsl)))
+	daddiu	$2,$2,16
+	daddu	$28,$28,$25
+	sd	$fp,176($sp)
+	move	$fp,$sp
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL5idct4PKsPsl)))
+	sd	$19,128($sp)
+	dsrl	$2,$2,4
+	sd	$16,104($sp)
+	daddiu	$16,$fp,31
+	dsll	$2,$2,4
+	ld	$19,%got_page(_ZL24partialButterflyInverse4PKsPsii.constprop.1)($28)
+	dsrl	$16,$16,5
+	dsll	$16,$16,5
+	sd	$17,112($sp)
+	daddiu	$17,$16,32
+	sd	$31,184($sp)
+	daddiu	$19,$19,%got_ofst(_ZL24partialButterflyInverse4PKsPsii.constprop.1)
+	sd	$23,160($sp)
+	move	$23,$4
+	sd	$22,152($sp)
+	move	$25,$19
+	move	$22,$6
+	sd	$21,144($sp)
+	li	$6,7			# 0x7
+	sd	$20,136($sp)
+	move	$20,$5
+	move	$5,$17
+	sd	$18,120($sp)
+	move	$18,$sp
+	.reloc	1f,R_MIPS_JALR,_ZL24partialButterflyInverse4PKsPsii.constprop.1
+1:	jalr	$25
+	dsubu	$sp,$sp,$2
+
+	move	$21,$sp
+	li	$6,12			# 0xc
+	move	$5,$16
+	move	$25,$19
+	.reloc	1f,R_MIPS_JALR,_ZL24partialButterflyInverse4PKsPsii.constprop.1
+1:	jalr	$25
+	move	$4,$17
+
+	dsll	$6,$22,1
+	move	$2,$21
+	move	$5,$16
+.L2448:
+	ld	$3,0($5)
+	daddiu	$5,$5,8
+	sdl	$3,7($2)
+	sdr	$3,0($2)
+	bne	$17,$5,.L2448
+	daddu	$2,$2,$6
+
+	ld	$3,%got_page(.LC155)($28)
+	daddu	$2,$20,$6
+	move	$22,$0
+	ld.h	$w1,16($23)
+	daddu	$5,$2,$6
+	li	$4,4			# 0x4
+	ld.h	$w4,0($23)
+	ldi.h	$w2,64
+	daddu	$8,$5,$6
+	li	$7,4			# 0x4
+	ilvr.h	$w0,$w1,$w4
+	ilvl.h	$w4,$w1,$w4
+	daddiu	$3,$3,%got_ofst(.LC155)
+	dotp_s.w	$w6,$w0,$w2
+	ld.h	$w8,0($3)
+	ld	$3,%got_page(.LC156)($28)
+	dotp_s.w	$w0,$w0,$w8
+	daddiu	$3,$3,%got_ofst(.LC156)
+	ld.h	$w5,0($3)
+	ld	$3,%got_page(.LC157)($28)
+	dotp_s.w	$w3,$w4,$w5
+	addv.w	$w1,$w6,$w3
+	subv.w	$w6,$w6,$w3
+	vsrarin.h	$w1,$w1,7
+	vsrarin.h	$w6,$w6,7
+	daddiu	$3,$3,%got_ofst(.LC157)
+	ld.h	$w7,0($3)
+	dotp_s.w	$w4,$w4,$w7
+	addv.w	$w3,$w0,$w4
+	subv.w	$w0,$w0,$w4
+	vsrarin.h	$w3,$w3,7
+	vsrarin.h	$w0,$w0,7
+	insve.d	$w1[1],$w3[0]
+	insve.d	$w0[1],$w6[0]
+	pckev.h	$w3,$w0,$w1
+	pckod.h	$w0,$w0,$w1
+	dotp_s.w	$w2,$w3,$w2
+	dotp_s.w	$w5,$w0,$w5
+	dotp_s.w	$w3,$w3,$w8
+	dotp_s.w	$w0,$w0,$w7
+	addv.w	$w1,$w2,$w5
+	addv.w	$w4,$w3,$w0
+	subv.w	$w2,$w2,$w5
+	subv.w	$w3,$w3,$w0
+	vsrarin.h	$w2,$w2,12
+	vsrarin.h	$w0,$w1,12
+	vsrarin.h	$w3,$w3,12
+	vsrarin.h	$w1,$w4,12
+	ilvr.h	$w3,$w3,$w0
+	ilvr.h	$w2,$w2,$w1
+	ilvr.h	$w0,$w2,$w3
+	ilvl.h	$w2,$w2,$w3
+	vsd	$w0,0,0($20)
+	vsd	$w0,1,0($2)
+	vsd	$w2,0,0($5)
+	vsd	$w2,1,0($8)
+.L2452:
+	move	$16,$20
+	move	$2,$21
+	move	$17,$0
+.L2451:
+	lh	$19,0($2)
+	lh	$3,0($16)
+	bne	$3,$19,.L2457
+	daddiu	$2,$2,2
+
+	addiu	$17,$17,1
+	bne	$17,$4,.L2451
+	daddiu	$16,$16,2
+
+	addiu	$22,$22,1
+	daddu	$21,$21,$6
+	bne	$22,$7,.L2452
+	daddu	$20,$20,$6
+
+	ld	$4,%got_page(.LC159)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC159)
+
+	move	$sp,$18
+	move	$sp,$fp
+	ld	$31,184($sp)
+	ld	$fp,176($sp)
+	ld	$28,168($sp)
+	ld	$23,160($sp)
+	ld	$22,152($sp)
+	ld	$21,144($sp)
+	ld	$20,136($sp)
+	ld	$19,128($sp)
+	ld	$18,120($sp)
+	ld	$17,112($sp)
+	ld	$16,104($sp)
+	jr	$31
+	daddiu	$sp,$sp,192
+
+	.align	3
+.L2457:
+	ld	$4,%got_page(.LC158)($28)
+	ld	$25,%call16(puts)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC158)
+
+	ld	$4,%got_page(.LC31)($28)
+	move	$5,$19
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC31)
+
+	ld	$4,%got_page(.LC32)($28)
+	lh	$5,0($16)
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC32)
+
+	ld	$4,%got_page(.LC33)($28)
+	move	$6,$17
+	ld	$25,%call16(printf)($28)
+	move	$5,$22
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC33)
+
+	move	$sp,$18
+	move	$sp,$fp
+	ld	$31,184($sp)
+	ld	$fp,176($sp)
+	ld	$28,168($sp)
+	ld	$23,160($sp)
+	ld	$22,152($sp)
+	ld	$21,144($sp)
+	ld	$20,136($sp)
+	ld	$19,128($sp)
+	ld	$18,120($sp)
+	ld	$17,112($sp)
+	ld	$16,104($sp)
+	jr	$31
+	daddiu	$sp,$sp,192
+
+	.set	macro
+	.set	reorder
+	.end	_ZL5idct4PKsPsl
+	.size	_ZL5idct4PKsPsl, .-_ZL5idct4PKsPsl
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZL17partialButterfly4PKsPsii.constprop.2
+	.type	_ZL17partialButterfly4PKsPsii.constprop.2, @function
+_ZL17partialButterfly4PKsPsii.constprop.2:
 	.frame	$sp,48,$31		# vars= 0, regs= 5/0, args= 0, gp= 0
 	.mask	0x100f0000,-8
 	.fmask	0x00000000,0
@@ -29066,12 +29923,12 @@ _ZL17partialButterfly4PKsPsii.constprop.1:
 	daddiu	$sp,$sp,-48
 	addiu	$3,$6,-1
 	sd	$28,40($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZL17partialButterfly4PKsPsii.constprop.1)))
+	lui	$28,%hi(%neg(%gp_rel(_ZL17partialButterfly4PKsPsii.constprop.2)))
 	li	$8,1			# 0x1
 	daddu	$28,$28,$25
 	sll	$8,$8,$3
 	sd	$19,32($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL17partialButterfly4PKsPsii.constprop.1)))
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL17partialButterfly4PKsPsii.constprop.2)))
 	daddiu	$24,$4,32
 	sd	$18,24($sp)
 	ld	$2,%got_disp(_ZN4x2654g_t4E)($28)
@@ -29086,7 +29943,7 @@ _ZL17partialButterfly4PKsPsii.constprop.1:
 	lh	$10,24($2)
 	lh	$9,26($2)
 	.align	3
-.L2409:
+.L2459:
 	lh	$17,2($4)
 	daddiu	$4,$4,8
 	daddiu	$5,$5,2
@@ -29120,7 +29977,7 @@ _ZL17partialButterfly4PKsPsii.constprop.1:
 	sra	$3,$3,$6
 	sra	$2,$2,$6
 	sh	$3,6($5)
-	bne	$4,$24,.L2409
+	bne	$4,$24,.L2459
 	sh	$2,22($5)
 
 	ld	$28,40($sp)
@@ -29133,17 +29990,14 @@ _ZL17partialButterfly4PKsPsii.constprop.1:
 
 	.set	macro
 	.set	reorder
-	.end	_ZL17partialButterfly4PKsPsii.constprop.1
-	.size	_ZL17partialButterfly4PKsPsii.constprop.1, .-_ZL17partialButterfly4PKsPsii.constprop.1
+	.end	_ZL17partialButterfly4PKsPsii.constprop.2
+	.size	_ZL17partialButterfly4PKsPsii.constprop.2, .-_ZL17partialButterfly4PKsPsii.constprop.2
 	.section	.rodata.str1.8
 	.align	3
-.LC142:
+.LC160:
 	.ascii	"dct4 test fail\000"
 	.align	3
-.LC143:
-	.ascii	"wrong at %d\012\000"
-	.align	3
-.LC144:
+.LC161:
 	.ascii	"dct4 test success\000"
 	.text
 	.align	2
@@ -29179,27 +30033,27 @@ _ZL4dct4PKsPsl:
 	sd	$31,184($sp)
 	sd	$20,160($sp)
 	sd	$16,128($sp)
-.L2413:
+.L2463:
 	ldl	$5,7($2)
 	daddiu	$3,$3,8
 	ldr	$5,0($2)
 	daddu	$2,$2,$18
-	bne	$19,$3,.L2413
+	bne	$19,$3,.L2463
 	sd	$5,-8($3)
 
-	ld	$20,%got_page(_ZL17partialButterfly4PKsPsii.constprop.1)($28)
+	ld	$20,%got_page(_ZL17partialButterfly4PKsPsii.constprop.2)($28)
 	move	$5,$19
 	li	$6,1			# 0x1
-	daddiu	$20,$20,%got_ofst(_ZL17partialButterfly4PKsPsii.constprop.1)
+	daddiu	$20,$20,%got_ofst(_ZL17partialButterfly4PKsPsii.constprop.2)
 	move	$25,$20
-	.reloc	1f,R_MIPS_JALR,_ZL17partialButterfly4PKsPsii.constprop.1
+	.reloc	1f,R_MIPS_JALR,_ZL17partialButterfly4PKsPsii.constprop.2
 1:	jalr	$25
 	daddiu	$16,$sp,96
 
 	move	$4,$19
 	li	$6,8			# 0x8
 	move	$25,$20
-	.reloc	1f,R_MIPS_JALR,_ZL17partialButterfly4PKsPsii.constprop.1
+	.reloc	1f,R_MIPS_JALR,_ZL17partialButterfly4PKsPsii.constprop.2
 1:	jalr	$25
 	move	$5,$16
 
@@ -29212,98 +30066,91 @@ _ZL4dct4PKsPsl:
 	insve.d	$w1[1],$w3[0]
 	daddu	$2,$3,$18
 	vbld	$w0,0($3)
-	shf.w	$w1,$w1,0xd8
 	move	$18,$0
 	vbld	$w2,0($2)
-	ld	$2,%got_page(.LC139)($28)
+	ld	$2,%got_page(.LC156)($28)
 	insve.d	$w0[1],$w2[0]
 	li	$4,16			# 0x10
-	shf.w	$w0,$w0,0xd8
-	move.v	$w2,$w1
-	insve.d	$w2[1],$w0[0]
-	ilvl.d	$w0,$w0,$w1
-	move.v	$w3,$w2
+	pckev.w	$w2,$w0,$w1
+	pckod.w	$w0,$w0,$w1
 	shf.h	$w0,$w0,0xb1
-	addv.h	$w2,$w2,$w0
-	subv.h	$w3,$w3,$w0
-	daddiu	$2,$2,%got_ofst(.LC139)
-	dotp_s.w	$w1,$w2,$w4
-	vsrarin.h	$w1,$w1,1
-	ld.h	$w5,0($2)
-	ld	$2,%got_page(.LC140)($28)
-	dotp_s.w	$w0,$w3,$w5
-	vsrarin.h	$w0,$w0,1
-	insve.d	$w1[1],$w0[0]
-	shf.w	$w1,$w1,0xd8
-	daddiu	$2,$2,%got_ofst(.LC140)
-	ld.h	$w7,0($2)
-	ld	$2,%got_page(.LC141)($28)
-	dotp_s.w	$w2,$w2,$w7
-	vsrarin.h	$w2,$w2,1
-	daddiu	$2,$2,%got_ofst(.LC141)
-	ld.h	$w6,0($2)
-	dotp_s.w	$w3,$w3,$w6
-	vsrarin.h	$w3,$w3,1
-	insve.d	$w2[1],$w3[0]
-	shf.w	$w0,$w2,0xd8
-	move.v	$w2,$w1
-	ilvl.d	$w1,$w0,$w1
-	insve.d	$w2[1],$w0[0]
-	shf.h	$w0,$w1,0xb1
 	addv.h	$w1,$w2,$w0
 	subv.h	$w0,$w2,$w0
-	dotp_s.w	$w4,$w1,$w4
-	dotp_s.w	$w5,$w0,$w5
+	dotp_s.w	$w2,$w1,$w4
+	vsrarin.h	$w2,$w2,1
+	daddiu	$2,$2,%got_ofst(.LC156)
+	ld.h	$w5,0($2)
+	ld	$2,%got_page(.LC155)($28)
+	dotp_s.w	$w3,$w0,$w5
+	vsrarin.h	$w3,$w3,1
+	insve.d	$w2[1],$w3[0]
+	daddiu	$2,$2,%got_ofst(.LC155)
+	ld.h	$w7,0($2)
+	ld	$2,%got_page(.LC157)($28)
 	dotp_s.w	$w1,$w1,$w7
+	vsrarin.h	$w1,$w1,1
+	daddiu	$2,$2,%got_ofst(.LC157)
+	ld.h	$w6,0($2)
+	dotp_s.w	$w0,$w0,$w6
+	vsrarin.h	$w3,$w0,1
+	insve.d	$w1[1],$w3[0]
+	pckev.w	$w0,$w1,$w2
+	pckod.w	$w1,$w1,$w2
+	shf.h	$w1,$w1,0xb1
+	addv.h	$w2,$w0,$w1
+	subv.h	$w0,$w0,$w1
+	dotp_s.w	$w4,$w2,$w4
+	dotp_s.w	$w5,$w0,$w5
+	dotp_s.w	$w2,$w2,$w7
 	dotp_s.w	$w0,$w0,$w6
 	vsrarin.h	$w4,$w4,8
 	vsrarin.h	$w5,$w5,8
-	vsrarin.h	$w1,$w1,8
+	vsrarin.h	$w2,$w2,8
 	vsrarin.h	$w0,$w0,8
 	insve.d	$w4[1],$w5[0]
-	insve.d	$w1[1],$w0[0]
+	insve.d	$w2[1],$w0[0]
 	st.d	$w4,0($21)
-	b	.L2416
-	st.d	$w1,16($21)
+	b	.L2466
+	st.d	$w2,16($21)
 
 	.align	3
-.L2414:
+.L2464:
 	addiu	$18,$18,1
 	daddiu	$17,$17,2
-	beq	$18,$4,.L2420
+	beq	$18,$4,.L2470
 	daddiu	$16,$16,2
 
-.L2416:
+.L2466:
 	lh	$3,0($17)
 	lh	$2,0($16)
-	beq	$3,$2,.L2414
+	beq	$3,$2,.L2464
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC142)($28)
+	ld	$4,%got_page(.LC160)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC142)
+	daddiu	$4,$4,%got_ofst(.LC160)
 
-	ld	$4,%got_page(.LC52)($28)
+	ld	$4,%got_page(.LC31)($28)
 	lh	$5,0($16)
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC52)
+	daddiu	$4,$4,%got_ofst(.LC31)
 
-	ld	$4,%got_page(.LC53)($28)
+	ld	$4,%got_page(.LC32)($28)
 	lh	$5,0($17)
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC53)
+	daddiu	$4,$4,%got_ofst(.LC32)
 
-	ld	$4,%got_page(.LC143)($28)
+	ld	$4,%got_page(.LC40)($28)
 	move	$5,$18
 	ld	$25,%call16(printf)($28)
 	.reloc	1f,R_MIPS_JALR,printf
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC143)
+	daddiu	$4,$4,%got_ofst(.LC40)
 
 	ld	$31,184($sp)
 	ld	$28,176($sp)
@@ -29317,12 +30164,12 @@ _ZL4dct4PKsPsl:
 	daddiu	$sp,$sp,192
 
 	.align	3
-.L2420:
-	ld	$4,%got_page(.LC144)($28)
+.L2470:
+	ld	$4,%got_page(.LC161)($28)
 	ld	$25,%call16(puts)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC144)
+	daddiu	$4,$4,%got_ofst(.LC161)
 
 	ld	$31,184($sp)
 	ld	$28,176($sp)
@@ -29341,10 +30188,10 @@ _ZL4dct4PKsPsl:
 	.size	_ZL4dct4PKsPsl, .-_ZL4dct4PKsPsl
 	.section	.rodata.str1.8
 	.align	3
-.LC145:
+.LC162:
 	.ascii	"satd8_64x64 test success\000"
 	.align	3
-.LC146:
+.LC163:
 	.ascii	"satd8_64x64 test fail\000"
 	.text
 	.align	2
@@ -29396,13 +30243,13 @@ _ZN12_GLOBAL__N_111satd8_64x64EPKhlS1_l:
 	sdc1	$f24,128($sp)
 	sd	$2,24($sp)
 	.align	3
-.L2423:
+.L2473:
 	move	$13,$21
 	daddiu	$24,$21,8
 	move	$15,$fp
 	daddiu	$14,$fp,8
 	daddiu	$23,$21,64
-.L2422:
+.L2472:
 	daddu	$6,$13,$19
 	daddu	$3,$24,$19
 	vbld	$w30,0($13)
@@ -29540,14 +30387,14 @@ _ZN12_GLOBAL__N_111satd8_64x64EPKhlS1_l:
 	addu	$2,$3,$2
 	daddiu	$15,$15,16
 	addu	$16,$2,$16
-	bne	$13,$23,.L2422
+	bne	$13,$23,.L2472
 	daddiu	$14,$14,16
 
 	ld	$2,16($sp)
 	addiu	$22,$22,-1
 	daddu	$21,$21,$2
 	ld	$2,24($sp)
-	bne	$22,$0,.L2423
+	bne	$22,$0,.L2473
 	daddu	$fp,$fp,$2
 
 	ld	$21,%got_page(_ZN12_GLOBAL__N_1L10satd_c_8x4EPKhlS1_l)($28)
@@ -29558,12 +30405,12 @@ _ZN12_GLOBAL__N_111satd8_64x64EPKhlS1_l:
 	sd	$2,8($sp)
 	daddiu	$21,$21,%got_ofst(_ZN12_GLOBAL__N_1L10satd_c_8x4EPKhlS1_l)
 	.align	3
-.L2425:
+.L2475:
 	ld	$fp,0($sp)
 	daddiu	$20,$22,64
 	move	$23,$22
 	.align	3
-.L2424:
+.L2474:
 	move	$6,$fp
 	move	$4,$23
 	move	$7,$18
@@ -29574,7 +30421,7 @@ _ZN12_GLOBAL__N_111satd8_64x64EPKhlS1_l:
 	daddiu	$23,$23,8
 
 	daddiu	$fp,$fp,8
-	bne	$20,$23,.L2424
+	bne	$20,$23,.L2474
 	addu	$17,$2,$17
 
 	ld	$3,16($sp)
@@ -29585,19 +30432,19 @@ _ZN12_GLOBAL__N_111satd8_64x64EPKhlS1_l:
 	addiu	$2,$2,-1
 	sd	$2,8($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2425
+	bne	$2,$0,.L2475
 	sd	$3,0($sp)
 
-	beq	$16,$17,.L2433
+	beq	$16,$17,.L2483
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC146)($28)
+	ld	$4,%got_page(.LC163)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC146)
+	daddiu	$4,$4,%got_ofst(.LC163)
 
 	ld	$31,120($sp)
-.L2434:
+.L2484:
 	move	$2,$16
 	ldc1	$f31,184($sp)
 	ld	$fp,112($sp)
@@ -29620,13 +30467,13 @@ _ZN12_GLOBAL__N_111satd8_64x64EPKhlS1_l:
 	jr	$31
 	daddiu	$sp,$sp,192
 
-.L2433:
-	ld	$4,%got_page(.LC145)($28)
+.L2483:
+	ld	$4,%got_page(.LC162)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC145)
+	daddiu	$4,$4,%got_ofst(.LC162)
 
-	b	.L2434
+	b	.L2484
 	ld	$31,120($sp)
 
 	.set	macro
@@ -29658,23 +30505,23 @@ _ZN12_GLOBAL__N_15satd8ILi48ELi64EEEiPKhlS2_l:
 	sd	$2,88($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$22,184($sp)
 	li	$22,65536			# 0x10000
 	sd	$fp,208($sp)
 	addiu	$22,$22,1
 	move	$fp,$5
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$23,192($sp)
 	move	$23,$7
 	sd	$2,72($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$18,152($sp)
 	dlsa	$18,$5,$5,1
 	sd	$17,144($sp)
 	move	$17,$0
 	sd	$16,136($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	daddiu	$16,$4,48
 	sd	$31,216($sp)
 	sd	$21,176($sp)
@@ -29683,7 +30530,7 @@ _ZN12_GLOBAL__N_15satd8ILi48ELi64EEEiPKhlS2_l:
 	sd	$6,80($sp)
 	sd	$2,96($sp)
 	.align	3
-.L2441:
+.L2491:
 	ld	$20,80($sp)
 	daddiu	$19,$16,-48
 	move	$2,$17
@@ -29691,7 +30538,7 @@ _ZN12_GLOBAL__N_15satd8ILi48ELi64EEEiPKhlS2_l:
 	move	$20,$19
 	move	$19,$2
 	.align	3
-.L2440:
+.L2490:
 	ld	$4,64($sp)
 	daddu	$2,$17,$23
 	daddu	$3,$20,$fp
@@ -29771,7 +30618,7 @@ _ZN12_GLOBAL__N_15satd8ILi48ELi64EEEiPKhlS2_l:
 	addu	$21,$21,$2
 	daddiu	$13,$sp,64
 	move	$12,$sp
-.L2436:
+.L2486:
 	lbu	$5,4($8)
 	daddiu	$12,$12,16
 	lbu	$7,4($9)
@@ -29818,12 +30665,12 @@ _ZN12_GLOBAL__N_15satd8ILi48ELi64EEEiPKhlS2_l:
 	sw	$7,-16($12)
 	sw	$4,-8($12)
 	sw	$5,-12($12)
-	bne	$13,$12,.L2436
+	bne	$13,$12,.L2486
 	sw	$2,-4($12)
 
 	daddiu	$13,$11,16
 	move	$12,$0
-.L2437:
+.L2487:
 	lw	$6,0($11)
 	daddiu	$11,$11,4
 	lw	$4,12($11)
@@ -29864,14 +30711,14 @@ _ZN12_GLOBAL__N_15satd8ILi48ELi64EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$13,$11,.L2437
+	bne	$13,$11,.L2487
 	addu	$12,$2,$12
 
 	andi	$2,$12,0xffff
 	srl	$12,$12,16
 	addu	$12,$2,$12
 	srl	$12,$12,1
-	beq	$12,$21,.L2447
+	beq	$12,$21,.L2497
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -29879,10 +30726,10 @@ _ZN12_GLOBAL__N_15satd8ILi48ELi64EEEiPKhlS2_l:
 	ld	$4,72($sp)
 
 	addu	$21,$21,$19
-.L2448:
+.L2498:
 	daddiu	$20,$20,8
 	move	$19,$21
-	bne	$16,$20,.L2440
+	bne	$16,$20,.L2490
 	daddiu	$17,$17,8
 
 	ld	$3,112($sp)
@@ -29894,7 +30741,7 @@ _ZN12_GLOBAL__N_15satd8ILi48ELi64EEEiPKhlS2_l:
 	addiu	$2,$2,-1
 	sd	$2,88($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2441
+	bne	$2,$0,.L2491
 	sd	$3,80($sp)
 
 	ld	$31,216($sp)
@@ -29913,12 +30760,12 @@ _ZN12_GLOBAL__N_15satd8ILi48ELi64EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2447:
+.L2497:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,96($sp)
 
-	b	.L2448
+	b	.L2498
 	addu	$21,$21,$19
 
 	.set	macro
@@ -29950,23 +30797,23 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l:
 	sd	$2,96($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$22,184($sp)
 	li	$22,65536			# 0x10000
 	sd	$fp,208($sp)
 	addiu	$22,$22,1
 	move	$fp,$5
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$23,192($sp)
 	move	$23,$7
 	sd	$2,72($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$18,152($sp)
 	dlsa	$18,$5,$5,1
 	sd	$17,144($sp)
 	move	$17,$0
 	sd	$16,136($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	daddiu	$16,$4,64
 	sd	$31,216($sp)
 	sd	$21,176($sp)
@@ -29975,7 +30822,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l:
 	sd	$6,80($sp)
 	sd	$2,88($sp)
 	.align	3
-.L2455:
+.L2505:
 	ld	$20,80($sp)
 	daddiu	$19,$16,-64
 	move	$2,$17
@@ -29983,7 +30830,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l:
 	move	$20,$19
 	move	$19,$2
 	.align	3
-.L2454:
+.L2504:
 	ld	$4,64($sp)
 	daddu	$2,$17,$23
 	daddu	$3,$20,$fp
@@ -30063,7 +30910,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l:
 	addu	$21,$21,$2
 	daddiu	$13,$sp,64
 	move	$12,$sp
-.L2450:
+.L2500:
 	lbu	$5,4($8)
 	daddiu	$12,$12,16
 	lbu	$7,4($9)
@@ -30110,12 +30957,12 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l:
 	sw	$7,-16($12)
 	sw	$4,-8($12)
 	sw	$5,-12($12)
-	bne	$13,$12,.L2450
+	bne	$13,$12,.L2500
 	sw	$2,-4($12)
 
 	daddiu	$13,$11,16
 	move	$12,$0
-.L2451:
+.L2501:
 	lw	$6,0($11)
 	daddiu	$11,$11,4
 	lw	$4,12($11)
@@ -30156,14 +31003,14 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$13,$11,.L2451
+	bne	$13,$11,.L2501
 	addu	$12,$2,$12
 
 	andi	$2,$12,0xffff
 	srl	$12,$12,16
 	addu	$12,$2,$12
 	srl	$12,$12,1
-	beq	$12,$21,.L2461
+	beq	$12,$21,.L2511
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -30171,10 +31018,10 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l:
 	ld	$4,72($sp)
 
 	addu	$21,$21,$19
-.L2462:
+.L2512:
 	daddiu	$20,$20,8
 	move	$19,$21
-	bne	$16,$20,.L2454
+	bne	$16,$20,.L2504
 	daddiu	$17,$17,8
 
 	ld	$3,112($sp)
@@ -30186,7 +31033,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l:
 	addiu	$2,$2,-1
 	sd	$2,96($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2455
+	bne	$2,$0,.L2505
 	sd	$3,80($sp)
 
 	ld	$31,216($sp)
@@ -30205,12 +31052,12 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2461:
+.L2511:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,88($sp)
 
-	b	.L2462
+	b	.L2512
 	addu	$21,$21,$19
 
 	.set	macro
@@ -30219,16 +31066,16 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l:
 	.size	_ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi64ELi48EEEiPKhlS2_l
 	.section	.rodata.str1.8
 	.align	3
-.LC147:
+.LC164:
 	.ascii	"sa8d_8x8_internal_64 test success\000"
 	.align	3
-.LC148:
+.LC165:
 	.ascii	"sa8d_8x8_internal_64 test fail\000"
 	.align	3
-.LC149:
+.LC166:
 	.ascii	"sa8d_64x64 test success\000"
 	.align	3
-.LC150:
+.LC167:
 	.ascii	"sa8d_64x64 test fail\000"
 	.text
 	.align	2
@@ -30262,21 +31109,21 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	sd	$2,136($sp)
 	li	$2,8			# 0x8
 	sd	$2,184($sp)
-	ld	$2,%got_page(.LC148)($28)
+	ld	$2,%got_page(.LC165)($28)
 	sd	$20,264($sp)
 	li	$20,65536			# 0x10000
 	sd	$22,280($sp)
 	addiu	$20,$20,1
 	move	$22,$0
-	daddiu	$2,$2,%got_ofst(.LC148)
+	daddiu	$2,$2,%got_ofst(.LC165)
 	sd	$17,240($sp)
 	move	$17,$7
 	sd	$2,152($sp)
-	ld	$2,%got_page(.LC147)($28)
+	ld	$2,%got_page(.LC164)($28)
 	sd	$16,232($sp)
 	move	$16,$5
 	sd	$31,312($sp)
-	daddiu	$2,$2,%got_ofst(.LC147)
+	daddiu	$2,$2,%got_ofst(.LC164)
 	sd	$fp,304($sp)
 	sd	$23,288($sp)
 	sd	$21,272($sp)
@@ -30286,13 +31133,13 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	sd	$6,216($sp)
 	sd	$2,176($sp)
 	.align	3
-.L2469:
+.L2519:
 	ld	$19,168($sp)
 	ld	$21,160($sp)
 	daddiu	$2,$19,64
 	sd	$2,128($sp)
 	.align	3
-.L2468:
+.L2518:
 	ld	$2,144($sp)
 	dsubu	$9,$19,$16
 	dsubu	$8,$21,$17
@@ -30466,7 +31313,7 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	move	$10,$sp
 	dsra	$18,$18,1
 	.align	3
-.L2464:
+.L2514:
 	lbu	$2,1($8)
 	daddiu	$10,$10,16
 	lbu	$5,1($9)
@@ -30521,12 +31368,12 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	sw	$6,-16($10)
 	sw	$7,-8($10)
 	sw	$4,-12($10)
-	bne	$11,$10,.L2464
+	bne	$11,$10,.L2514
 	sw	$2,-4($10)
 
 	daddiu	$23,$25,16
 	move	$31,$0
-.L2465:
+.L2515:
 	lw	$12,0($25)
 	daddiu	$25,$25,4
 	lw	$4,12($25)
@@ -30618,12 +31465,12 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	andi	$3,$2,0xffff
 	srl	$2,$2,16
 	addu	$2,$3,$2
-	bne	$23,$25,.L2465
+	bne	$23,$25,.L2515
 	addu	$31,$2,$31
 
 	addiu	$31,$31,2
 	sra	$31,$31,2
-	beq	$31,$18,.L2485
+	beq	$31,$18,.L2535
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -30631,10 +31478,10 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	ld	$4,152($sp)
 
 	ld	$2,128($sp)
-.L2487:
+.L2537:
 	daddiu	$19,$19,8
 	addu	$22,$18,$22
-	bne	$2,$19,.L2468
+	bne	$2,$19,.L2518
 	daddiu	$21,$21,8
 
 	ld	$3,168($sp)
@@ -30647,7 +31494,7 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	ld	$3,160($sp)
 	sd	$2,184($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2469
+	bne	$2,$0,.L2519
 	sd	$3,160($sp)
 
 	ld	$2,208($sp)
@@ -30663,18 +31510,18 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	li	$2,8			# 0x8
 	sd	$2,144($sp)
 	.align	3
-.L2473:
+.L2523:
 	ld	$2,128($sp)
 	ld	$22,136($sp)
 	daddiu	$21,$2,-64
 	.align	3
-.L2472:
+.L2522:
 	move	$11,$21
 	move	$10,$22
 	move	$25,$sp
 	move	$12,$sp
 	.align	3
-.L2470:
+.L2520:
 	lbu	$6,0($10)
 	daddiu	$12,$12,16
 	lbu	$3,0($11)
@@ -30729,12 +31576,12 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	sw	$6,-16($12)
 	sw	$7,-8($12)
 	sw	$4,-12($12)
-	bne	$19,$12,.L2470
+	bne	$19,$12,.L2520
 	sw	$2,-4($12)
 
 	daddiu	$20,$25,16
 	move	$18,$0
-.L2471:
+.L2521:
 	lw	$12,0($25)
 	daddiu	$25,$25,4
 	lw	$4,12($25)
@@ -30826,7 +31673,7 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	andi	$3,$2,0xffff
 	srl	$2,$2,16
 	addu	$2,$3,$2
-	bne	$20,$25,.L2471
+	bne	$20,$25,.L2521
 	addu	$18,$2,$18
 
 	ld	$2,128($sp)
@@ -30834,7 +31681,7 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	daddiu	$21,$21,8
 	sra	$18,$18,2
 	daddiu	$22,$22,8
-	bne	$2,$21,.L2472
+	bne	$2,$21,.L2522
 	addu	$23,$18,$23
 
 	ld	$3,128($sp)
@@ -30847,17 +31694,17 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	ld	$3,136($sp)
 	sd	$2,144($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2473
+	bne	$2,$0,.L2523
 	sd	$3,136($sp)
 
 	ld	$2,152($sp)
-	beq	$2,$23,.L2486
+	beq	$2,$23,.L2536
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC150)($28)
+	ld	$4,%got_page(.LC167)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC150)
+	daddiu	$4,$4,%got_ofst(.LC167)
 
 	ld	$31,312($sp)
 	ld	$2,152($sp)
@@ -30875,19 +31722,19 @@ _ZN12_GLOBAL__N_110sa8d_64x64EPKhlS1_l:
 	daddiu	$sp,$sp,320
 
 	.align	3
-.L2485:
+.L2535:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,176($sp)
 
-	b	.L2487
+	b	.L2537
 	ld	$2,128($sp)
 
-.L2486:
-	ld	$4,%got_page(.LC149)($28)
+.L2536:
+	ld	$4,%got_page(.LC166)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC149)
+	daddiu	$4,$4,%got_ofst(.LC166)
 
 	ld	$31,312($sp)
 	ld	$2,152($sp)
@@ -30933,23 +31780,23 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi64EEEiPKhlS2_l:
 	sd	$2,88($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$22,184($sp)
 	li	$22,65536			# 0x10000
 	sd	$fp,208($sp)
 	addiu	$22,$22,1
 	move	$fp,$5
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$23,192($sp)
 	move	$23,$7
 	sd	$2,80($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$18,152($sp)
 	dlsa	$18,$5,$5,1
 	sd	$17,144($sp)
 	move	$17,$0
 	sd	$16,136($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	daddiu	$16,$4,32
 	sd	$31,216($sp)
 	sd	$21,176($sp)
@@ -30958,14 +31805,14 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi64EEEiPKhlS2_l:
 	sd	$6,72($sp)
 	sd	$2,96($sp)
 	.align	3
-.L2494:
+.L2544:
 	ld	$20,72($sp)
 	daddiu	$19,$16,-32
 	move	$2,$17
 	move	$17,$20
 	move	$20,$19
 	move	$19,$2
-.L2493:
+.L2543:
 	ld	$4,64($sp)
 	daddu	$2,$17,$23
 	daddu	$3,$20,$fp
@@ -31045,7 +31892,7 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi64EEEiPKhlS2_l:
 	addu	$21,$21,$2
 	daddiu	$13,$sp,64
 	move	$12,$sp
-.L2489:
+.L2539:
 	lbu	$5,4($8)
 	daddiu	$12,$12,16
 	lbu	$7,4($9)
@@ -31092,12 +31939,12 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi64EEEiPKhlS2_l:
 	sw	$7,-16($12)
 	sw	$4,-8($12)
 	sw	$5,-12($12)
-	bne	$13,$12,.L2489
+	bne	$13,$12,.L2539
 	sw	$2,-4($12)
 
 	daddiu	$13,$11,16
 	move	$12,$0
-.L2490:
+.L2540:
 	lw	$6,0($11)
 	daddiu	$11,$11,4
 	lw	$4,12($11)
@@ -31138,14 +31985,14 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi64EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$13,$11,.L2490
+	bne	$13,$11,.L2540
 	addu	$12,$2,$12
 
 	andi	$2,$12,0xffff
 	srl	$12,$12,16
 	addu	$12,$2,$12
 	srl	$12,$12,1
-	beq	$12,$21,.L2500
+	beq	$12,$21,.L2550
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -31153,10 +32000,10 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi64EEEiPKhlS2_l:
 	ld	$4,80($sp)
 
 	addu	$21,$21,$19
-.L2501:
+.L2551:
 	daddiu	$20,$20,8
 	move	$19,$21
-	bne	$16,$20,.L2493
+	bne	$16,$20,.L2543
 	daddiu	$17,$17,8
 
 	ld	$3,112($sp)
@@ -31168,7 +32015,7 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi64EEEiPKhlS2_l:
 	addiu	$2,$2,-1
 	sd	$2,88($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2494
+	bne	$2,$0,.L2544
 	sd	$3,72($sp)
 
 	ld	$31,216($sp)
@@ -31187,12 +32034,12 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi64EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2500:
+.L2550:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,96($sp)
 
-	b	.L2501
+	b	.L2551
 	addu	$21,$21,$19
 
 	.set	macro
@@ -31224,23 +32071,23 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi32EEEiPKhlS2_l:
 	sd	$2,96($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$22,184($sp)
 	li	$22,65536			# 0x10000
 	sd	$fp,208($sp)
 	addiu	$22,$22,1
 	move	$fp,$5
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$23,192($sp)
 	move	$23,$7
 	sd	$2,72($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$18,152($sp)
 	dlsa	$18,$5,$5,1
 	sd	$17,144($sp)
 	move	$17,$0
 	sd	$16,136($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	daddiu	$16,$4,64
 	sd	$31,216($sp)
 	sd	$21,176($sp)
@@ -31249,7 +32096,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi32EEEiPKhlS2_l:
 	sd	$6,80($sp)
 	sd	$2,88($sp)
 	.align	3
-.L2508:
+.L2558:
 	ld	$20,80($sp)
 	daddiu	$19,$16,-64
 	move	$2,$17
@@ -31257,7 +32104,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi32EEEiPKhlS2_l:
 	move	$20,$19
 	move	$19,$2
 	.align	3
-.L2507:
+.L2557:
 	ld	$4,64($sp)
 	daddu	$2,$17,$23
 	daddu	$3,$20,$fp
@@ -31337,7 +32184,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi32EEEiPKhlS2_l:
 	addu	$21,$21,$2
 	daddiu	$13,$sp,64
 	move	$12,$sp
-.L2503:
+.L2553:
 	lbu	$5,4($8)
 	daddiu	$12,$12,16
 	lbu	$7,4($9)
@@ -31384,12 +32231,12 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi32EEEiPKhlS2_l:
 	sw	$7,-16($12)
 	sw	$4,-8($12)
 	sw	$5,-12($12)
-	bne	$13,$12,.L2503
+	bne	$13,$12,.L2553
 	sw	$2,-4($12)
 
 	daddiu	$13,$11,16
 	move	$12,$0
-.L2504:
+.L2554:
 	lw	$6,0($11)
 	daddiu	$11,$11,4
 	lw	$4,12($11)
@@ -31430,14 +32277,14 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi32EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$13,$11,.L2504
+	bne	$13,$11,.L2554
 	addu	$12,$2,$12
 
 	andi	$2,$12,0xffff
 	srl	$12,$12,16
 	addu	$12,$2,$12
 	srl	$12,$12,1
-	beq	$12,$21,.L2514
+	beq	$12,$21,.L2564
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -31445,10 +32292,10 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi32EEEiPKhlS2_l:
 	ld	$4,72($sp)
 
 	addu	$21,$21,$19
-.L2515:
+.L2565:
 	daddiu	$20,$20,8
 	move	$19,$21
-	bne	$16,$20,.L2507
+	bne	$16,$20,.L2557
 	daddiu	$17,$17,8
 
 	ld	$3,112($sp)
@@ -31460,7 +32307,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi32EEEiPKhlS2_l:
 	addiu	$2,$2,-1
 	sd	$2,96($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2508
+	bne	$2,$0,.L2558
 	sd	$3,80($sp)
 
 	ld	$31,216($sp)
@@ -31479,12 +32326,12 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi32EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2514:
+.L2564:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,88($sp)
 
-	b	.L2515
+	b	.L2565
 	addu	$21,$21,$19
 
 	.set	macro
@@ -31516,23 +32363,23 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi64EEEiPKhlS2_l:
 	sd	$2,88($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$21,176($sp)
 	li	$21,65536			# 0x10000
 	sd	$19,160($sp)
 	move	$19,$0
 	addiu	$21,$21,1
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$fp,208($sp)
 	move	$fp,$5
 	sd	$2,80($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$23,192($sp)
 	move	$23,$19
 	sd	$22,184($sp)
 	move	$22,$7
 	sd	$17,144($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	dlsa	$17,$5,$5,1
 	sd	$16,136($sp)
 	daddiu	$16,$4,24
@@ -31542,7 +32389,7 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi64EEEiPKhlS2_l:
 	sd	$6,72($sp)
 	sd	$2,112($sp)
 	.align	3
-.L2522:
+.L2572:
 	ld	$19,72($sp)
 	daddiu	$18,$16,-24
 	move	$2,$22
@@ -31550,7 +32397,7 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi64EEEiPKhlS2_l:
 	move	$19,$18
 	move	$18,$23
 	move	$23,$2
-.L2521:
+.L2571:
 	ld	$4,64($sp)
 	daddu	$2,$22,$23
 	daddu	$3,$19,$fp
@@ -31630,7 +32477,7 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi64EEEiPKhlS2_l:
 	addu	$20,$20,$2
 	daddiu	$13,$sp,64
 	move	$12,$sp
-.L2517:
+.L2567:
 	lbu	$5,4($8)
 	daddiu	$12,$12,16
 	lbu	$7,4($9)
@@ -31677,12 +32524,12 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi64EEEiPKhlS2_l:
 	sw	$7,-16($12)
 	sw	$4,-8($12)
 	sw	$5,-12($12)
-	bne	$13,$12,.L2517
+	bne	$13,$12,.L2567
 	sw	$2,-4($12)
 
 	daddiu	$13,$11,16
 	move	$12,$0
-.L2518:
+.L2568:
 	lw	$6,0($11)
 	daddiu	$11,$11,4
 	lw	$4,12($11)
@@ -31723,14 +32570,14 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi64EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$13,$11,.L2518
+	bne	$13,$11,.L2568
 	addu	$12,$2,$12
 
 	andi	$2,$12,0xffff
 	srl	$12,$12,16
 	addu	$12,$2,$12
 	srl	$12,$12,1
-	beq	$12,$20,.L2528
+	beq	$12,$20,.L2578
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -31738,10 +32585,10 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi64EEEiPKhlS2_l:
 	ld	$4,80($sp)
 
 	addu	$20,$20,$18
-.L2529:
+.L2579:
 	daddiu	$19,$19,8
 	move	$18,$20
-	bne	$16,$19,.L2521
+	bne	$16,$19,.L2571
 	daddiu	$22,$22,8
 
 	ld	$3,104($sp)
@@ -31754,7 +32601,7 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi64EEEiPKhlS2_l:
 	addiu	$2,$2,-1
 	sd	$2,88($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2522
+	bne	$2,$0,.L2572
 	sd	$3,72($sp)
 
 	ld	$31,216($sp)
@@ -31773,12 +32620,12 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi64EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2528:
+.L2578:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,112($sp)
 
-	b	.L2529
+	b	.L2579
 	addu	$20,$20,$18
 
 	.set	macro
@@ -31810,23 +32657,23 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi48EEEiPKhlS2_l:
 	sd	$2,88($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$22,184($sp)
 	li	$22,65536			# 0x10000
 	sd	$fp,208($sp)
 	addiu	$22,$22,1
 	move	$fp,$5
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$23,192($sp)
 	move	$23,$7
 	sd	$2,80($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$18,152($sp)
 	dlsa	$18,$5,$5,1
 	sd	$17,144($sp)
 	move	$17,$0
 	sd	$16,136($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	daddiu	$16,$4,32
 	sd	$31,216($sp)
 	sd	$21,176($sp)
@@ -31835,14 +32682,14 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi48EEEiPKhlS2_l:
 	sd	$6,72($sp)
 	sd	$2,96($sp)
 	.align	3
-.L2536:
+.L2586:
 	ld	$20,72($sp)
 	daddiu	$19,$16,-32
 	move	$2,$17
 	move	$17,$20
 	move	$20,$19
 	move	$19,$2
-.L2535:
+.L2585:
 	ld	$4,64($sp)
 	daddu	$2,$17,$23
 	daddu	$3,$20,$fp
@@ -31922,7 +32769,7 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi48EEEiPKhlS2_l:
 	addu	$21,$21,$2
 	daddiu	$13,$sp,64
 	move	$12,$sp
-.L2531:
+.L2581:
 	lbu	$5,4($8)
 	daddiu	$12,$12,16
 	lbu	$7,4($9)
@@ -31969,12 +32816,12 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi48EEEiPKhlS2_l:
 	sw	$7,-16($12)
 	sw	$4,-8($12)
 	sw	$5,-12($12)
-	bne	$13,$12,.L2531
+	bne	$13,$12,.L2581
 	sw	$2,-4($12)
 
 	daddiu	$13,$11,16
 	move	$12,$0
-.L2532:
+.L2582:
 	lw	$6,0($11)
 	daddiu	$11,$11,4
 	lw	$4,12($11)
@@ -32015,14 +32862,14 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi48EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$13,$11,.L2532
+	bne	$13,$11,.L2582
 	addu	$12,$2,$12
 
 	andi	$2,$12,0xffff
 	srl	$12,$12,16
 	addu	$12,$2,$12
 	srl	$12,$12,1
-	beq	$12,$21,.L2542
+	beq	$12,$21,.L2592
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -32030,10 +32877,10 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi48EEEiPKhlS2_l:
 	ld	$4,80($sp)
 
 	addu	$21,$21,$19
-.L2543:
+.L2593:
 	daddiu	$20,$20,8
 	move	$19,$21
-	bne	$16,$20,.L2535
+	bne	$16,$20,.L2585
 	daddiu	$17,$17,8
 
 	ld	$3,112($sp)
@@ -32045,7 +32892,7 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi48EEEiPKhlS2_l:
 	addiu	$2,$2,-1
 	sd	$2,88($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2536
+	bne	$2,$0,.L2586
 	sd	$3,72($sp)
 
 	ld	$31,216($sp)
@@ -32064,12 +32911,12 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi48EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2542:
+.L2592:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,96($sp)
 
-	b	.L2543
+	b	.L2593
 	addu	$21,$21,$19
 
 	.set	macro
@@ -32103,23 +32950,23 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi64EEEiPKhlS2_l:
 	sd	$2,72($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,80($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$21,176($sp)
 	li	$21,65536			# 0x10000
 	sd	$19,160($sp)
 	move	$19,$0
 	addiu	$21,$21,1
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$fp,208($sp)
 	move	$fp,$5
 	sd	$2,88($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$23,192($sp)
 	move	$23,$19
 	sd	$22,184($sp)
 	move	$22,$7
 	sd	$17,144($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	move	$17,$6
 	sd	$16,136($sp)
 	daddiu	$16,$4,16
@@ -32128,10 +32975,10 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi64EEEiPKhlS2_l:
 	sd	$18,152($sp)
 	sd	$2,112($sp)
 	.align	3
-.L2550:
+.L2600:
 	daddiu	$18,$16,-16
 	move	$19,$17
-.L2549:
+.L2599:
 	ld	$4,72($sp)
 	daddu	$2,$19,$22
 	daddu	$3,$18,$fp
@@ -32212,7 +33059,7 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi64EEEiPKhlS2_l:
 	move	$9,$sp
 	daddiu	$12,$sp,64
 	move	$11,$sp
-.L2545:
+.L2595:
 	lbu	$5,4($8)
 	daddiu	$11,$11,16
 	lbu	$7,4($10)
@@ -32259,12 +33106,12 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi64EEEiPKhlS2_l:
 	sw	$7,-16($11)
 	sw	$4,-8($11)
 	sw	$5,-12($11)
-	bne	$12,$11,.L2545
+	bne	$12,$11,.L2595
 	sw	$2,-4($11)
 
 	daddiu	$11,$9,16
 	move	$10,$0
-.L2546:
+.L2596:
 	lw	$6,0($9)
 	daddiu	$9,$9,4
 	lw	$4,12($9)
@@ -32305,14 +33152,14 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi64EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$11,$9,.L2546
+	bne	$11,$9,.L2596
 	addu	$10,$2,$10
 
 	andi	$2,$10,0xffff
 	srl	$10,$10,16
 	addu	$10,$2,$10
 	srl	$10,$10,1
-	beq	$10,$20,.L2556
+	beq	$10,$20,.L2606
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -32320,10 +33167,10 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi64EEEiPKhlS2_l:
 	ld	$4,88($sp)
 
 	addu	$20,$20,$23
-.L2557:
+.L2607:
 	daddiu	$18,$18,8
 	move	$23,$20
-	bne	$16,$18,.L2549
+	bne	$16,$18,.L2599
 	daddiu	$19,$19,8
 
 	ld	$3,104($sp)
@@ -32332,7 +33179,7 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi64EEEiPKhlS2_l:
 	ld	$3,96($sp)
 	addiu	$2,$2,-1
 	sd	$2,64($sp)
-	bne	$2,$0,.L2550
+	bne	$2,$0,.L2600
 	daddu	$17,$17,$3
 
 	ld	$31,216($sp)
@@ -32351,12 +33198,12 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi64EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2556:
+.L2606:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,112($sp)
 
-	b	.L2557
+	b	.L2607
 	addu	$20,$20,$23
 
 	.set	macro
@@ -32388,23 +33235,23 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l:
 	sd	$2,96($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$22,184($sp)
 	li	$22,65536			# 0x10000
 	sd	$fp,208($sp)
 	addiu	$22,$22,1
 	move	$fp,$5
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$23,192($sp)
 	move	$23,$7
 	sd	$2,72($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$18,152($sp)
 	dlsa	$18,$5,$5,1
 	sd	$17,144($sp)
 	move	$17,$0
 	sd	$16,136($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	daddiu	$16,$4,64
 	sd	$31,216($sp)
 	sd	$21,176($sp)
@@ -32412,7 +33259,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l:
 	sd	$19,160($sp)
 	sd	$6,80($sp)
 	sd	$2,88($sp)
-.L2564:
+.L2614:
 	ld	$20,80($sp)
 	daddiu	$19,$16,-64
 	move	$2,$17
@@ -32420,7 +33267,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l:
 	move	$20,$19
 	move	$19,$2
 	.align	3
-.L2563:
+.L2613:
 	ld	$4,64($sp)
 	daddu	$2,$17,$23
 	daddu	$3,$20,$fp
@@ -32500,7 +33347,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l:
 	addu	$21,$21,$2
 	daddiu	$13,$sp,64
 	move	$12,$sp
-.L2559:
+.L2609:
 	lbu	$5,4($8)
 	daddiu	$12,$12,16
 	lbu	$7,4($9)
@@ -32547,12 +33394,12 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l:
 	sw	$7,-16($12)
 	sw	$4,-8($12)
 	sw	$5,-12($12)
-	bne	$13,$12,.L2559
+	bne	$13,$12,.L2609
 	sw	$2,-4($12)
 
 	daddiu	$13,$11,16
 	move	$12,$0
-.L2560:
+.L2610:
 	lw	$6,0($11)
 	daddiu	$11,$11,4
 	lw	$4,12($11)
@@ -32593,14 +33440,14 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$13,$11,.L2560
+	bne	$13,$11,.L2610
 	addu	$12,$2,$12
 
 	andi	$2,$12,0xffff
 	srl	$12,$12,16
 	addu	$12,$2,$12
 	srl	$12,$12,1
-	beq	$12,$21,.L2570
+	beq	$12,$21,.L2620
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -32608,10 +33455,10 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l:
 	ld	$4,72($sp)
 
 	addu	$21,$21,$19
-.L2571:
+.L2621:
 	daddiu	$20,$20,8
 	move	$19,$21
-	bne	$16,$20,.L2563
+	bne	$16,$20,.L2613
 	daddiu	$17,$17,8
 
 	ld	$3,112($sp)
@@ -32623,7 +33470,7 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l:
 	addiu	$2,$2,-1
 	sd	$2,96($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2564
+	bne	$2,$0,.L2614
 	sd	$3,80($sp)
 
 	ld	$31,216($sp)
@@ -32642,12 +33489,12 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2570:
+.L2620:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,88($sp)
 
-	b	.L2571
+	b	.L2621
 	addu	$21,$21,$19
 
 	.set	macro
@@ -32656,10 +33503,10 @@ _ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l:
 	.size	_ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi64ELi16EEEiPKhlS2_l
 	.section	.rodata.str1.8
 	.align	3
-.LC151:
+.LC168:
 	.ascii	"satd8_32x32 test success\000"
 	.align	3
-.LC152:
+.LC169:
 	.ascii	"satd8_32x32 test fail\000"
 	.text
 	.align	2
@@ -32711,13 +33558,13 @@ _ZN12_GLOBAL__N_111satd8_32x32EPKhlS1_l:
 	sdc1	$f24,128($sp)
 	sd	$2,24($sp)
 	.align	3
-.L2574:
+.L2624:
 	move	$13,$25
 	daddiu	$24,$25,8
 	move	$15,$23
 	daddiu	$14,$23,8
 	daddiu	$21,$25,32
-.L2573:
+.L2623:
 	daddu	$6,$13,$19
 	daddu	$3,$24,$19
 	vbld	$w30,0($13)
@@ -32855,14 +33702,14 @@ _ZN12_GLOBAL__N_111satd8_32x32EPKhlS1_l:
 	addu	$2,$3,$2
 	daddiu	$15,$15,16
 	addu	$16,$2,$16
-	bne	$13,$21,.L2573
+	bne	$13,$21,.L2623
 	daddiu	$14,$14,16
 
 	ld	$2,16($sp)
 	addiu	$fp,$fp,-1
 	daddu	$25,$25,$2
 	ld	$2,24($sp)
-	bne	$fp,$0,.L2574
+	bne	$fp,$0,.L2624
 	daddu	$23,$23,$2
 
 	ld	$22,%got_page(_ZN12_GLOBAL__N_1L10satd_c_8x4EPKhlS1_l)($28)
@@ -32874,11 +33721,11 @@ _ZN12_GLOBAL__N_111satd8_32x32EPKhlS1_l:
 	daddiu	$2,$22,%got_ofst(_ZN12_GLOBAL__N_1L10satd_c_8x4EPKhlS1_l)
 	sd	$2,0($sp)
 	.align	3
-.L2576:
+.L2626:
 	daddiu	$20,$21,32
 	move	$23,$fp
 	move	$22,$21
-.L2575:
+.L2625:
 	ld	$25,0($sp)
 	move	$6,$23
 	move	$4,$22
@@ -32888,7 +33735,7 @@ _ZN12_GLOBAL__N_111satd8_32x32EPKhlS1_l:
 	jalr	$25
 	daddiu	$23,$23,8
 
-	bne	$20,$22,.L2575
+	bne	$20,$22,.L2625
 	addu	$17,$2,$17
 
 	ld	$3,16($sp)
@@ -32897,19 +33744,19 @@ _ZN12_GLOBAL__N_111satd8_32x32EPKhlS1_l:
 	ld	$3,24($sp)
 	addiu	$2,$2,-1
 	sd	$2,8($sp)
-	bne	$2,$0,.L2576
+	bne	$2,$0,.L2626
 	daddu	$fp,$fp,$3
 
-	beq	$16,$17,.L2584
+	beq	$16,$17,.L2634
 	ld	$25,%call16(puts)($28)
 
-	ld	$4,%got_page(.LC152)($28)
+	ld	$4,%got_page(.LC169)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC152)
+	daddiu	$4,$4,%got_ofst(.LC169)
 
 	ld	$31,120($sp)
-.L2585:
+.L2635:
 	move	$2,$16
 	ldc1	$f31,184($sp)
 	ld	$fp,112($sp)
@@ -32932,13 +33779,13 @@ _ZN12_GLOBAL__N_111satd8_32x32EPKhlS1_l:
 	jr	$31
 	daddiu	$sp,$sp,192
 
-.L2584:
-	ld	$4,%got_page(.LC151)($28)
+.L2634:
+	ld	$4,%got_page(.LC168)($28)
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC151)
+	daddiu	$4,$4,%got_ofst(.LC168)
 
-	b	.L2585
+	b	.L2635
 	ld	$31,120($sp)
 
 	.set	macro
@@ -32970,23 +33817,23 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi32EEEiPKhlS2_l:
 	sd	$2,88($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$21,176($sp)
 	li	$21,65536			# 0x10000
 	sd	$19,160($sp)
 	move	$19,$0
 	addiu	$21,$21,1
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$fp,208($sp)
 	move	$fp,$5
 	sd	$2,80($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$23,192($sp)
 	move	$23,$19
 	sd	$22,184($sp)
 	move	$22,$7
 	sd	$17,144($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	dlsa	$17,$5,$5,1
 	sd	$16,136($sp)
 	daddiu	$16,$4,24
@@ -32996,7 +33843,7 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi32EEEiPKhlS2_l:
 	sd	$6,72($sp)
 	sd	$2,112($sp)
 	.align	3
-.L2592:
+.L2642:
 	ld	$19,72($sp)
 	daddiu	$18,$16,-24
 	move	$2,$22
@@ -33004,7 +33851,7 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi32EEEiPKhlS2_l:
 	move	$19,$18
 	move	$18,$23
 	move	$23,$2
-.L2591:
+.L2641:
 	ld	$4,64($sp)
 	daddu	$2,$22,$23
 	daddu	$3,$19,$fp
@@ -33084,7 +33931,7 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi32EEEiPKhlS2_l:
 	addu	$20,$20,$2
 	daddiu	$13,$sp,64
 	move	$12,$sp
-.L2587:
+.L2637:
 	lbu	$5,4($8)
 	daddiu	$12,$12,16
 	lbu	$7,4($9)
@@ -33131,12 +33978,12 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi32EEEiPKhlS2_l:
 	sw	$7,-16($12)
 	sw	$4,-8($12)
 	sw	$5,-12($12)
-	bne	$13,$12,.L2587
+	bne	$13,$12,.L2637
 	sw	$2,-4($12)
 
 	daddiu	$13,$11,16
 	move	$12,$0
-.L2588:
+.L2638:
 	lw	$6,0($11)
 	daddiu	$11,$11,4
 	lw	$4,12($11)
@@ -33177,14 +34024,14 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi32EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$13,$11,.L2588
+	bne	$13,$11,.L2638
 	addu	$12,$2,$12
 
 	andi	$2,$12,0xffff
 	srl	$12,$12,16
 	addu	$12,$2,$12
 	srl	$12,$12,1
-	beq	$12,$20,.L2598
+	beq	$12,$20,.L2648
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -33192,10 +34039,10 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi32EEEiPKhlS2_l:
 	ld	$4,80($sp)
 
 	addu	$20,$20,$18
-.L2599:
+.L2649:
 	daddiu	$19,$19,8
 	move	$18,$20
-	bne	$16,$19,.L2591
+	bne	$16,$19,.L2641
 	daddiu	$22,$22,8
 
 	ld	$3,104($sp)
@@ -33208,7 +34055,7 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi32EEEiPKhlS2_l:
 	addiu	$2,$2,-1
 	sd	$2,88($sp)
 	daddu	$3,$3,$4
-	bne	$2,$0,.L2592
+	bne	$2,$0,.L2642
 	sd	$3,72($sp)
 
 	ld	$31,216($sp)
@@ -33227,12 +34074,12 @@ _ZN12_GLOBAL__N_15satd8ILi24ELi32EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2598:
+.L2648:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,112($sp)
 
-	b	.L2599
+	b	.L2649
 	addu	$20,$20,$18
 
 	.set	macro
@@ -33264,23 +34111,23 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi24EEEiPKhlS2_l:
 	sd	$2,88($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$22,184($sp)
 	li	$22,65536			# 0x10000
 	sd	$fp,208($sp)
 	addiu	$22,$22,1
 	move	$fp,$5
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$23,192($sp)
 	move	$23,$7
 	sd	$2,80($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$18,152($sp)
 	dlsa	$18,$5,$5,1
 	sd	$17,144($sp)
 	move	$17,$0
 	sd	$16,136($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	daddiu	$16,$4,32
 	sd	$31,216($sp)
 	sd	$21,176($sp)
@@ -33289,1244 +34136,6 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi24EEEiPKhlS2_l:
 	sd	$6,72($sp)
 	sd	$2,96($sp)
 	.align	3
-.L2606:
-	ld	$20,72($sp)
-	daddiu	$19,$16,-32
-	move	$2,$17
-	move	$17,$20
-	move	$20,$19
-	move	$19,$2
-.L2605:
-	ld	$4,64($sp)
-	daddu	$2,$17,$23
-	daddu	$3,$20,$fp
-	vbld	$w15,0($20)
-	daddu	$6,$2,$23
-	daddu	$7,$3,$fp
-	vbld	$w14,0($17)
-	vbld	$w3,0($2)
-	daddu	$5,$18,$20
-	vbld	$w13,0($7)
-	vbld	$w12,0($6)
-	vbld	$w5,0($3)
-	daddu	$4,$4,$17
-	hadd_u.h	$w0,$w12,$w12
-	vbld	$w9,0($5)
-	hadd_u.h	$w10,$w15,$w15
-	vbld	$w8,0($4)
-	hadd_u.h	$w7,$w5,$w5
-	hadd_u.h	$w6,$w8,$w8
-	hadd_u.h	$w2,$w13,$w13
-	hadd_u.h	$w4,$w14,$w14
-	hadd_u.h	$w11,$w3,$w3
-	hsub_u.h	$w17,$w15,$w15
-	hsub_u.h	$w5,$w5,$w5
-	hsub_u.h	$w15,$w13,$w13
-	hsub_u.h	$w16,$w14,$w14
-	hsub_u.h	$w3,$w3,$w3
-	hsub_u.h	$w14,$w12,$w12
-	insve.d	$w7[1],$w5[0]
-	hsub_u.h	$w12,$w8,$w8
-	insve.d	$w2[1],$w15[0]
-	hadd_u.h	$w1,$w9,$w9
-	move.v	$w8,$w2
-	hsub_u.h	$w13,$w9,$w9
-	insve.d	$w10[1],$w17[0]
-	insve.d	$w1[1],$w13[0]
-	insve.d	$w4[1],$w16[0]
-	move.v	$w5,$w1
-	subv.h	$w4,$w10,$w4
-	move.v	$w1,$w0
-	move.v	$w2,$w11
-	insve.d	$w1[1],$w14[0]
-	insve.d	$w2[1],$w3[0]
-	subv.h	$w7,$w7,$w2
-	subv.h	$w2,$w8,$w1
-	addv.h	$w0,$w7,$w4
-	move.v	$w1,$w6
-	subv.h	$w7,$w7,$w4
-	insve.d	$w1[1],$w12[0]
-	subv.h	$w1,$w5,$w1
-	addv.h	$w6,$w1,$w2
-	subv.h	$w1,$w1,$w2
-	asub_s.h	$w4,$w6,$w0
-	addv.h	$w5,$w1,$w7
-	addv.h	$w6,$w6,$w0
-	asub_s.h	$w1,$w1,$w7
-	vabs.h	$w6,$w6
-	vabs.h	$w3,$w1
-	ilvod.h	$w2,$w5,$w6
-	ilvod.h	$w1,$w3,$w4
-	ilvev.h	$w5,$w5,$w6
-	ilvev.h	$w3,$w3,$w4
-	max_s.h	$w2,$w2,$w5
-	max_s.h	$w1,$w1,$w3
-	hadd_s.w	$w2,$w2,$w2
-	hadd_s.w	$w1,$w1,$w1
-	addv.w	$w0,$w2,$w1
-	copy_s.w	$2,$w0[1]
-	copy_s.w	$21,$w0[0]
-	addu	$21,$21,$2
-	copy_s.w	$2,$w0[2]
-	move	$9,$20
-	addu	$21,$21,$2
-	move	$8,$17
-	copy_s.w	$2,$w0[3]
-	move	$11,$sp
-	addu	$21,$21,$2
-	daddiu	$13,$sp,64
-	move	$12,$sp
-.L2601:
-	lbu	$5,4($8)
-	daddiu	$12,$12,16
-	lbu	$7,4($9)
-	lbu	$4,5($8)
-	lbu	$14,7($8)
-	lbu	$2,5($9)
-	subu	$7,$7,$5
-	lbu	$5,7($9)
-	sll	$7,$7,16
-	lbu	$6,6($8)
-	lbu	$3,6($9)
-	subu	$2,$2,$4
-	lbu	$15,0($8)
-	subu	$5,$5,$14
-	sll	$2,$2,16
-	lbu	$10,0($9)
-	sll	$5,$5,16
-	lbu	$14,1($8)
-	subu	$3,$3,$6
-	lbu	$4,1($9)
-	sll	$6,$3,16
-	subu	$10,$10,$15
-	lbu	$3,2($9)
-	lbu	$15,2($8)
-	addu	$7,$7,$10
-	subu	$4,$4,$14
-	lbu	$10,3($9)
-	daddu	$9,$9,$fp
-	lbu	$14,3($8)
-	addu	$2,$2,$4
-	daddu	$8,$8,$23
-	subu	$3,$3,$15
-	addu	$4,$7,$2
-	addu	$3,$6,$3
-	subu	$2,$7,$2
-	subu	$6,$10,$14
-	addu	$5,$5,$6
-	addu	$6,$3,$5
-	subu	$3,$3,$5
-	addu	$7,$4,$6
-	addu	$5,$2,$3
-	subu	$4,$4,$6
-	subu	$2,$2,$3
-	sw	$7,-16($12)
-	sw	$4,-8($12)
-	sw	$5,-12($12)
-	bne	$13,$12,.L2601
-	sw	$2,-4($12)
-
-	daddiu	$13,$11,16
-	move	$12,$0
-.L2602:
-	lw	$6,0($11)
-	daddiu	$11,$11,4
-	lw	$4,12($11)
-	lw	$2,44($11)
-	lw	$3,28($11)
-	addu	$7,$6,$4
-	subu	$6,$6,$4
-	addu	$4,$3,$2
-	subu	$3,$3,$2
-	addu	$5,$6,$3
-	addu	$2,$7,$4
-	srl	$9,$2,15
-	subu	$4,$7,$4
-	srl	$8,$5,15
-	subu	$3,$6,$3
-	and	$9,$9,$22
-	and	$8,$8,$22
-	srl	$7,$4,15
-	sll	$14,$9,16
-	and	$7,$7,$22
-	sll	$10,$8,16
-	srl	$6,$3,15
-	subu	$9,$14,$9
-	subu	$8,$10,$8
-	and	$6,$6,$22
-	sll	$14,$7,16
-	sll	$10,$6,16
-	subu	$7,$14,$7
-	addu	$2,$2,$9
-	addu	$5,$5,$8
-	subu	$6,$10,$6
-	xor	$2,$2,$9
-	xor	$5,$5,$8
-	addu	$4,$4,$7
-	addu	$2,$2,$5
-	xor	$4,$4,$7
-	addu	$3,$3,$6
-	addu	$2,$2,$4
-	xor	$3,$3,$6
-	addu	$2,$2,$3
-	bne	$13,$11,.L2602
-	addu	$12,$2,$12
-
-	andi	$2,$12,0xffff
-	srl	$12,$12,16
-	addu	$12,$2,$12
-	srl	$12,$12,1
-	beq	$12,$21,.L2612
-	ld	$25,%call16(puts)($28)
-
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	ld	$4,80($sp)
-
-	addu	$21,$21,$19
-.L2613:
-	daddiu	$20,$20,8
-	move	$19,$21
-	bne	$16,$20,.L2605
-	daddiu	$17,$17,8
-
-	ld	$3,112($sp)
-	move	$17,$19
-	ld	$2,88($sp)
-	ld	$4,104($sp)
-	daddu	$16,$16,$3
-	ld	$3,72($sp)
-	addiu	$2,$2,-1
-	sd	$2,88($sp)
-	daddu	$3,$3,$4
-	bne	$2,$0,.L2606
-	sd	$3,72($sp)
-
-	ld	$31,216($sp)
-	move	$2,$21
-	ld	$fp,208($sp)
-	ld	$28,200($sp)
-	ld	$23,192($sp)
-	ld	$22,184($sp)
-	ld	$21,176($sp)
-	ld	$20,168($sp)
-	ld	$19,160($sp)
-	ld	$18,152($sp)
-	ld	$17,144($sp)
-	ld	$16,136($sp)
-	jr	$31
-	daddiu	$sp,$sp,224
-
-	.align	3
-.L2612:
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	ld	$4,96($sp)
-
-	b	.L2613
-	addu	$21,$21,$19
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_15satd8ILi32ELi24EEEiPKhlS2_l
-	.size	_ZN12_GLOBAL__N_15satd8ILi32ELi24EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi32ELi24EEEiPKhlS2_l
-	.section	.rodata.str1.8
-	.align	3
-.LC153:
-	.ascii	"sa8d_32x32 test success\000"
-	.align	3
-.LC154:
-	.ascii	"sa8d_32x32 test fail\000"
-	.text
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l
-	.type	_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l, @function
-_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l:
-	.frame	$sp,304,$31		# vars= 208, regs= 11/0, args= 0, gp= 0
-	.mask	0xd0ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-304
-	dsll	$2,$5,3
-	sd	$28,280($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l)))
-	daddu	$28,$28,$25
-	sd	$2,168($sp)
-	dsll	$2,$7,3
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l)))
-	sd	$2,176($sp)
-	li	$2,4			# 0x4
-	sd	$2,160($sp)
-	ld	$2,%got_page(.LC56)($28)
-	sd	$20,248($sp)
-	li	$20,65536			# 0x10000
-	sd	$19,240($sp)
-	addiu	$20,$20,1
-	move	$19,$7
-	daddiu	$2,$2,%got_ofst(.LC56)
-	sd	$18,232($sp)
-	move	$18,$5
-	sd	$2,152($sp)
-	ld	$2,%got_page(.LC55)($28)
-	sd	$16,216($sp)
-	move	$16,$0
-	sd	$31,296($sp)
-	daddiu	$2,$2,%got_ofst(.LC55)
-	sd	$fp,288($sp)
-	sd	$23,272($sp)
-	sd	$22,264($sp)
-	sd	$21,256($sp)
-	sd	$17,224($sp)
-	sd	$4,192($sp)
-	sd	$6,200($sp)
-	sd	$6,144($sp)
-	sd	$4,136($sp)
-	sd	$2,184($sp)
-.L2620:
-	ld	$2,136($sp)
-	ld	$22,144($sp)
-	move	$21,$2
-	daddiu	$2,$2,32
-	sd	$2,128($sp)
-.L2619:
-	daddu	$3,$18,$21
-	daddu	$2,$19,$22
-	vbld	$w8,0($21)
-	vbld	$w15,0($22)
-	daddu	$4,$18,$3
-	daddu	$9,$19,$2
-	vbld	$w6,0($3)
-	vbld	$w2,0($2)
-	daddu	$5,$18,$4
-	daddu	$8,$19,$9
-	vbld	$w14,0($4)
-	vbld	$w12,0($9)
-	daddu	$7,$18,$5
-	daddu	$4,$19,$8
-	vbld	$w13,0($5)
-	hadd_u.h	$w7,$w6,$w6
-	daddu	$6,$18,$7
-	daddu	$3,$19,$4
-	hadd_u.h	$w0,$w13,$w13
-	hadd_u.h	$w5,$w12,$w12
-	daddu	$2,$19,$3
-	daddu	$5,$18,$6
-	hsub_u.h	$w16,$w8,$w8
-	vbld	$w17,0($7)
-	daddu	$10,$19,$2
-	daddu	$11,$18,$5
-	vbld	$w11,0($8)
-	hadd_u.h	$w4,$w8,$w8
-	hadd_u.h	$w9,$w11,$w11
-	hsub_u.h	$w8,$w6,$w6
-	insve.d	$w4[1],$w16[0]
-	hsub_u.h	$w6,$w2,$w2
-	vbld	$w16,0($6)
-	vbld	$w20,0($11)
-	vbld	$w19,0($10)
-	hadd_u.h	$w10,$w14,$w14
-	hadd_u.h	$w3,$w15,$w15
-	hadd_u.h	$w1,$w2,$w2
-	hsub_u.h	$w14,$w14,$w14
-	insve.d	$w1[1],$w6[0]
-	insve.d	$w10[1],$w14[0]
-	hsub_u.h	$w13,$w13,$w13
-	hsub_u.h	$w15,$w15,$w15
-	hsub_u.h	$w12,$w12,$w12
-	hsub_u.h	$w11,$w11,$w11
-	move.v	$w2,$w7
-	insve.d	$w3[1],$w15[0]
-	insve.d	$w2[1],$w8[0]
-	subv.h	$w3,$w4,$w3
-	subv.h	$w7,$w2,$w1
-	vbld	$w15,0($5)
-	addv.h	$w1,$w7,$w3
-	move.v	$w8,$w0
-	subv.h	$w7,$w7,$w3
-	insve.d	$w8[1],$w13[0]
-	move.v	$w0,$w5
-	hadd_u.h	$w13,$w17,$w17
-	insve.d	$w0[1],$w12[0]
-	hsub_u.h	$w21,$w17,$w17
-	subv.h	$w4,$w10,$w0
-	vbld	$w12,0($4)
-	hadd_u.h	$w10,$w19,$w19
-	move.v	$w0,$w9
-	hadd_u.h	$w2,$w12,$w12
-	insve.d	$w0[1],$w11[0]
-	hadd_u.h	$w9,$w20,$w20
-	subv.h	$w0,$w8,$w0
-	vbld	$w11,0($3)
-	addv.h	$w5,$w0,$w4
-	hadd_u.h	$w8,$w16,$w16
-	subv.h	$w0,$w0,$w4
-	hadd_u.h	$w14,$w11,$w11
-	subv.h	$w6,$w0,$w7
-	addv.h	$w4,$w5,$w1
-	addv.h	$w3,$w0,$w7
-	subv.h	$w5,$w5,$w1
-	vbld	$w0,0($2)
-	hadd_u.h	$w7,$w15,$w15
-	hadd_u.h	$w1,$w0,$w0
-	hsub_u.h	$w18,$w16,$w16
-	hsub_u.h	$w17,$w15,$w15
-	hsub_u.h	$w16,$w12,$w12
-	hsub_u.h	$w15,$w11,$w11
-	hsub_u.h	$w0,$w0,$w0
-	insve.d	$w13[1],$w21[0]
-	move.v	$w12,$w8
-	move.v	$w11,$w7
-	insve.d	$w12[1],$w18[0]
-	insve.d	$w11[1],$w17[0]
-	move.v	$w7,$w14
-	insve.d	$w1[1],$w0[0]
-	insve.d	$w7[1],$w15[0]
-	move.v	$w0,$w1
-	subv.h	$w8,$w12,$w7
-	hsub_u.h	$w20,$w20,$w20
-	subv.h	$w7,$w11,$w0
-	insve.d	$w9[1],$w20[0]
-	move.v	$w0,$w10
-	hsub_u.h	$w19,$w19,$w19
-	insve.d	$w2[1],$w16[0]
-	insve.d	$w0[1],$w19[0]
-	subv.h	$w2,$w13,$w2
-	subv.h	$w0,$w9,$w0
-	addv.h	$w1,$w8,$w2
-	subv.h	$w8,$w8,$w2
-	addv.h	$w2,$w0,$w7
-	subv.h	$w0,$w0,$w7
-	addv.h	$w7,$w2,$w1
-	subv.h	$w2,$w2,$w1
-	addv.h	$w11,$w7,$w4
-	addv.h	$w1,$w0,$w8
-	subv.h	$w4,$w7,$w4
-	addv.h	$w9,$w1,$w3
-	addv.h	$w7,$w2,$w5
-	pckod.h	$w15,$w4,$w11
-	subv.h	$w0,$w0,$w8
-	subv.h	$w3,$w1,$w3
-	pckev.h	$w4,$w4,$w11
-	subv.h	$w1,$w2,$w5
-	pckod.h	$w14,$w3,$w9
-	addv.h	$w5,$w0,$w6
-	pckod.h	$w13,$w1,$w7
-	pckev.h	$w2,$w1,$w7
-	subv.h	$w0,$w0,$w6
-	pckev.h	$w3,$w3,$w9
-	pckod.h	$w1,$w0,$w5
-	asub_s.h	$w12,$w15,$w4
-	pckev.h	$w0,$w0,$w5
-	asub_s.h	$w10,$w14,$w3
-	asub_s.h	$w8,$w13,$w2
-	asub_s.h	$w6,$w1,$w0
-	addv.h	$w5,$w1,$w0
-	addv.h	$w4,$w15,$w4
-	addv.h	$w3,$w14,$w3
-	vabs.h	$w11,$w4
-	vabs.h	$w9,$w3
-	addv.h	$w2,$w13,$w2
-	vabs.h	$w5,$w5
-	vabs.h	$w7,$w2
-	ilvod.h	$w4,$w11,$w12
-	ilvod.h	$w3,$w9,$w10
-	ilvod.h	$w2,$w7,$w8
-	ilvod.h	$w1,$w5,$w6
-	ilvev.h	$w11,$w11,$w12
-	ilvev.h	$w9,$w9,$w10
-	ilvev.h	$w7,$w7,$w8
-	ilvev.h	$w5,$w5,$w6
-	max_s.h	$w4,$w4,$w11
-	max_s.h	$w3,$w3,$w9
-	max_s.h	$w2,$w2,$w7
-	max_s.h	$w1,$w1,$w5
-	hadd_s.w	$w4,$w4,$w4
-	hadd_s.w	$w3,$w3,$w3
-	hadd_s.w	$w2,$w2,$w2
-	hadd_s.w	$w1,$w1,$w1
-	addv.w	$w3,$w4,$w3
-	addv.w	$w1,$w2,$w1
-	addv.w	$w0,$w3,$w1
-	copy_s.w	$2,$w0[1]
-	copy_s.w	$17,$w0[0]
-	addu	$17,$17,$2
-	copy_s.w	$2,$w0[2]
-	move	$10,$21
-	addu	$17,$17,$2
-	copy_s.w	$2,$w0[3]
-	move	$9,$22
-	addu	$17,$17,$2
-	move	$25,$sp
-	addiu	$17,$17,1
-	daddiu	$12,$sp,128
-	dsra	$17,$17,1
-	move	$11,$sp
-	.align	3
-.L2615:
-	lbu	$2,1($9)
-	daddiu	$11,$11,16
-	lbu	$5,1($10)
-	lbu	$6,0($9)
-	lbu	$13,2($9)
-	lbu	$3,0($10)
-	subu	$5,$5,$2
-	lbu	$4,2($10)
-	lbu	$7,3($10)
-	lbu	$2,3($9)
-	subu	$3,$3,$6
-	subu	$4,$4,$13
-	lbu	$14,4($9)
-	subu	$8,$3,$5
-	lbu	$15,5($9)
-	addu	$3,$3,$5
-	sll	$8,$8,16
-	lbu	$6,4($10)
-	subu	$2,$7,$2
-	addu	$8,$8,$3
-	lbu	$13,5($10)
-	subu	$5,$4,$2
-	addu	$7,$4,$2
-	lbu	$4,6($10)
-	sll	$2,$5,16
-	subu	$6,$6,$14
-	lbu	$5,6($9)
-	addu	$2,$2,$7
-	subu	$13,$13,$15
-	lbu	$14,7($10)
-	addu	$7,$8,$2
-	lbu	$15,7($9)
-	subu	$3,$6,$13
-	addu	$13,$6,$13
-	subu	$5,$4,$5
-	sll	$3,$3,16
-	addu	$3,$3,$13
-	subu	$2,$8,$2
-	subu	$6,$14,$15
-	daddu	$10,$10,$18
-	subu	$4,$5,$6
-	addu	$5,$5,$6
-	sll	$4,$4,16
-	daddu	$9,$9,$19
-	addu	$4,$4,$5
-	addu	$5,$3,$4
-	subu	$3,$3,$4
-	addu	$6,$7,$5
-	addu	$4,$2,$3
-	subu	$7,$7,$5
-	subu	$2,$2,$3
-	sw	$6,-16($11)
-	sw	$7,-8($11)
-	sw	$4,-12($11)
-	bne	$12,$11,.L2615
-	sw	$2,-4($11)
-
-	daddiu	$23,$25,16
-	move	$31,$0
-.L2616:
-	lw	$12,0($25)
-	daddiu	$25,$25,4
-	lw	$4,12($25)
-	lw	$3,44($25)
-	lw	$8,28($25)
-	addu	$5,$12,$4
-	lw	$7,76($25)
-	subu	$12,$12,$4
-	lw	$6,108($25)
-	lw	$15,60($25)
-	addu	$2,$8,$3
-	subu	$8,$8,$3
-	lw	$4,92($25)
-	addu	$3,$5,$2
-	addu	$13,$12,$8
-	subu	$12,$12,$8
-	addu	$14,$15,$7
-	subu	$15,$15,$7
-	subu	$7,$5,$2
-	addu	$5,$4,$6
-	addu	$2,$14,$5
-	subu	$4,$4,$6
-	addu	$6,$15,$4
-	addu	$10,$3,$2
-	subu	$3,$3,$2
-	addu	$9,$13,$6
-	srl	$2,$10,15
-	srl	$fp,$3,15
-	subu	$5,$14,$5
-	and	$24,$2,$20
-	and	$11,$fp,$20
-	subu	$6,$13,$6
-	srl	$14,$9,15
-	addu	$8,$7,$5
-	and	$14,$14,$20
-	sll	$2,$24,16
-	sll	$fp,$11,16
-	srl	$13,$6,15
-	subu	$2,$2,$24
-	subu	$fp,$fp,$11
-	subu	$4,$15,$4
-	subu	$5,$7,$5
-	and	$13,$13,$20
-	sll	$15,$14,16
-	srl	$24,$8,15
-	subu	$15,$15,$14
-	and	$24,$24,$20
-	addu	$7,$12,$4
-	sll	$11,$13,16
-	srl	$14,$5,15
-	addu	$10,$10,$2
-	addu	$3,$3,$fp
-	subu	$13,$11,$13
-	subu	$4,$12,$4
-	xor	$10,$10,$2
-	and	$14,$14,$20
-	sll	$11,$24,16
-	srl	$12,$7,15
-	xor	$3,$3,$fp
-	addu	$9,$9,$15
-	subu	$11,$11,$24
-	and	$12,$12,$20
-	srl	$24,$4,15
-	addu	$3,$10,$3
-	xor	$9,$9,$15
-	addu	$2,$6,$13
-	sll	$fp,$14,16
-	addu	$3,$3,$9
-	subu	$14,$fp,$14
-	and	$10,$24,$20
-	sll	$6,$12,16
-	xor	$2,$2,$13
-	addu	$8,$8,$11
-	subu	$12,$6,$12
-	addu	$2,$3,$2
-	sll	$9,$10,16
-	xor	$11,$8,$11
-	addu	$5,$5,$14
-	subu	$3,$9,$10
-	addu	$2,$2,$11
-	xor	$5,$5,$14
-	addu	$7,$7,$12
-	addu	$4,$4,$3
-	addu	$2,$2,$5
-	xor	$7,$7,$12
-	xor	$4,$4,$3
-	addu	$2,$2,$7
-	addu	$2,$2,$4
-	andi	$3,$2,0xffff
-	srl	$2,$2,16
-	addu	$2,$3,$2
-	bne	$23,$25,.L2616
-	addu	$31,$2,$31
-
-	addiu	$31,$31,2
-	sra	$31,$31,2
-	beq	$31,$17,.L2636
-	ld	$25,%call16(puts)($28)
-
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	ld	$4,152($sp)
-
-	ld	$2,128($sp)
-.L2638:
-	daddiu	$21,$21,8
-	addu	$16,$17,$16
-	bne	$2,$21,.L2619
-	daddiu	$22,$22,8
-
-	ld	$3,136($sp)
-	ld	$4,168($sp)
-	ld	$2,160($sp)
-	daddu	$3,$3,$4
-	ld	$4,176($sp)
-	sd	$3,136($sp)
-	addiu	$2,$2,-1
-	ld	$3,144($sp)
-	sd	$2,160($sp)
-	daddu	$3,$3,$4
-	bne	$2,$0,.L2620
-	sd	$3,144($sp)
-
-	ld	$2,192($sp)
-	li	$17,65536			# 0x10000
-	move	$23,$0
-	daddiu	$7,$sp,128
-	addiu	$17,$17,1
-	sd	$16,152($sp)
-	daddiu	$2,$2,32
-	sd	$2,128($sp)
-	ld	$2,200($sp)
-	sd	$2,136($sp)
-	li	$2,4			# 0x4
-	sd	$2,144($sp)
-.L2624:
-	ld	$2,128($sp)
-	ld	$22,136($sp)
-	daddiu	$21,$2,-32
-.L2623:
-	move	$12,$21
-	move	$11,$22
-	move	$31,$sp
-	move	$13,$sp
-	.align	3
-.L2621:
-	lbu	$6,0($11)
-	daddiu	$13,$13,16
-	lbu	$3,0($12)
-	lbu	$2,1($11)
-	lbu	$5,1($12)
-	subu	$3,$3,$6
-	lbu	$4,2($12)
-	lbu	$6,2($11)
-	lbu	$8,3($12)
-	subu	$5,$5,$2
-	lbu	$2,3($11)
-	subu	$9,$3,$5
-	addu	$5,$3,$5
-	subu	$4,$4,$6
-	lbu	$3,4($12)
-	sll	$9,$9,16
-	lbu	$15,5($11)
-	addu	$9,$9,$5
-	lbu	$6,4($11)
-	subu	$2,$8,$2
-	lbu	$10,5($12)
-	subu	$5,$4,$2
-	addu	$8,$4,$2
-	lbu	$14,7($12)
-	sll	$2,$5,16
-	lbu	$4,6($12)
-	subu	$6,$3,$6
-	addu	$2,$2,$8
-	subu	$10,$10,$15
-	lbu	$5,6($11)
-	addu	$8,$9,$2
-	lbu	$15,7($11)
-	subu	$3,$6,$10
-	addu	$6,$6,$10
-	sll	$3,$3,16
-	subu	$2,$9,$2
-	addu	$3,$3,$6
-	subu	$5,$4,$5
-	subu	$6,$14,$15
-	daddu	$12,$12,$18
-	subu	$4,$5,$6
-	addu	$5,$5,$6
-	sll	$4,$4,16
-	daddu	$11,$11,$19
-	addu	$4,$4,$5
-	addu	$5,$3,$4
-	subu	$3,$3,$4
-	addu	$6,$8,$5
-	addu	$4,$2,$3
-	subu	$8,$8,$5
-	subu	$2,$2,$3
-	sw	$6,-16($13)
-	sw	$8,-8($13)
-	sw	$4,-12($13)
-	bne	$7,$13,.L2621
-	sw	$2,-4($13)
-
-	daddiu	$20,$31,16
-	move	$16,$0
-.L2622:
-	lw	$13,0($31)
-	daddiu	$31,$31,4
-	lw	$4,12($31)
-	lw	$3,44($31)
-	lw	$9,28($31)
-	addu	$5,$13,$4
-	lw	$8,76($31)
-	subu	$13,$13,$4
-	lw	$6,108($31)
-	lw	$24,60($31)
-	addu	$2,$9,$3
-	subu	$9,$9,$3
-	lw	$4,92($31)
-	addu	$3,$5,$2
-	addu	$14,$13,$9
-	subu	$13,$13,$9
-	addu	$15,$24,$8
-	subu	$24,$24,$8
-	subu	$8,$5,$2
-	addu	$5,$4,$6
-	addu	$2,$15,$5
-	subu	$4,$4,$6
-	addu	$6,$24,$4
-	addu	$11,$3,$2
-	subu	$3,$3,$2
-	addu	$10,$14,$6
-	srl	$2,$11,15
-	srl	$fp,$3,15
-	subu	$5,$15,$5
-	and	$25,$2,$17
-	and	$12,$fp,$17
-	subu	$6,$14,$6
-	srl	$15,$10,15
-	addu	$9,$8,$5
-	and	$15,$15,$17
-	sll	$2,$25,16
-	sll	$fp,$12,16
-	srl	$14,$6,15
-	subu	$2,$2,$25
-	subu	$fp,$fp,$12
-	subu	$4,$24,$4
-	subu	$5,$8,$5
-	and	$14,$14,$17
-	sll	$24,$15,16
-	srl	$25,$9,15
-	subu	$24,$24,$15
-	and	$25,$25,$17
-	addu	$8,$13,$4
-	sll	$12,$14,16
-	srl	$15,$5,15
-	addu	$11,$11,$2
-	addu	$3,$3,$fp
-	subu	$14,$12,$14
-	subu	$4,$13,$4
-	xor	$11,$11,$2
-	and	$15,$15,$17
-	sll	$12,$25,16
-	srl	$13,$8,15
-	xor	$3,$3,$fp
-	addu	$10,$10,$24
-	subu	$12,$12,$25
-	and	$13,$13,$17
-	srl	$25,$4,15
-	addu	$3,$11,$3
-	xor	$10,$10,$24
-	addu	$2,$6,$14
-	sll	$fp,$15,16
-	addu	$3,$3,$10
-	subu	$15,$fp,$15
-	and	$11,$25,$17
-	sll	$6,$13,16
-	xor	$2,$2,$14
-	addu	$9,$9,$12
-	subu	$13,$6,$13
-	addu	$2,$3,$2
-	sll	$10,$11,16
-	xor	$12,$9,$12
-	addu	$5,$5,$15
-	subu	$3,$10,$11
-	addu	$2,$2,$12
-	xor	$5,$5,$15
-	addu	$8,$8,$13
-	addu	$4,$4,$3
-	addu	$2,$2,$5
-	xor	$8,$8,$13
-	xor	$4,$4,$3
-	addu	$2,$2,$8
-	addu	$2,$2,$4
-	andi	$3,$2,0xffff
-	srl	$2,$2,16
-	addu	$2,$3,$2
-	bne	$20,$31,.L2622
-	addu	$16,$2,$16
-
-	ld	$2,128($sp)
-	addiu	$16,$16,2
-	daddiu	$21,$21,8
-	sra	$16,$16,2
-	daddiu	$22,$22,8
-	bne	$2,$21,.L2623
-	addu	$23,$16,$23
-
-	ld	$3,128($sp)
-	ld	$4,168($sp)
-	ld	$2,144($sp)
-	daddu	$3,$3,$4
-	ld	$4,176($sp)
-	sd	$3,128($sp)
-	addiu	$2,$2,-1
-	ld	$3,136($sp)
-	sd	$2,144($sp)
-	daddu	$3,$3,$4
-	bne	$2,$0,.L2624
-	sd	$3,136($sp)
-
-	ld	$2,152($sp)
-	beq	$2,$23,.L2637
-	ld	$25,%call16(puts)($28)
-
-	ld	$4,%got_page(.LC154)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC154)
-
-	ld	$31,296($sp)
-	ld	$2,152($sp)
-	ld	$fp,288($sp)
-	ld	$28,280($sp)
-	ld	$23,272($sp)
-	ld	$22,264($sp)
-	ld	$21,256($sp)
-	ld	$20,248($sp)
-	ld	$19,240($sp)
-	ld	$18,232($sp)
-	ld	$17,224($sp)
-	ld	$16,216($sp)
-	jr	$31
-	daddiu	$sp,$sp,304
-
-	.align	3
-.L2636:
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	ld	$4,184($sp)
-
-	b	.L2638
-	ld	$2,128($sp)
-
-.L2637:
-	ld	$4,%got_page(.LC153)($28)
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	daddiu	$4,$4,%got_ofst(.LC153)
-
-	ld	$31,296($sp)
-	ld	$2,152($sp)
-	ld	$fp,288($sp)
-	ld	$28,280($sp)
-	ld	$23,272($sp)
-	ld	$22,264($sp)
-	ld	$21,256($sp)
-	ld	$20,248($sp)
-	ld	$19,240($sp)
-	ld	$18,232($sp)
-	ld	$17,224($sp)
-	ld	$16,216($sp)
-	jr	$31
-	daddiu	$sp,$sp,304
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l
-	.size	_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l, .-_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l
-	.type	_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l, @function
-_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l:
-	.frame	$sp,208,$31		# vars= 112, regs= 11/0, args= 0, gp= 0
-	.mask	0xd0ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-208
-	sd	$28,184($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l)))
-	sd	$20,152($sp)
-	move	$20,$7
-	daddu	$28,$28,$25
-	dsll	$2,$20,1
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l)))
-	sd	$21,160($sp)
-	sd	$2,80($sp)
-	daddu	$2,$2,$20
-	dsll	$7,$5,1
-	sd	$2,72($sp)
-	move	$21,$5
-	daddu	$5,$7,$5
-	ld	$2,%got_page(.LC64)($28)
-	daddu	$3,$4,$7
-	sd	$23,176($sp)
-	li	$23,16			# 0x10
-	sd	$19,144($sp)
-	daddu	$19,$4,$5
-	daddiu	$2,$2,%got_ofst(.LC64)
-	sd	$17,128($sp)
-	dsll	$17,$5,1
-	sd	$2,88($sp)
-	ld	$2,%got_page(.LC63)($28)
-	sd	$16,120($sp)
-	move	$16,$0
-	sd	$31,200($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
-	sd	$fp,192($sp)
-	sd	$22,168($sp)
-	sd	$18,136($sp)
-	sd	$2,96($sp)
-	.align	3
-.L2644:
-	dsubu	$22,$3,$7
-	vbld	$w3,0($3)
-	ld	$3,72($sp)
-	daddu	$2,$6,$20
-	vbld	$w9,0($19)
-	daddu	$fp,$2,$20
-	dsubu	$19,$19,$7
-	vbld	$w4,0($2)
-	vbld	$w11,0($22)
-	vbld	$w10,0($19)
-	vbld	$w8,0($6)
-	vbld	$w7,0($fp)
-	daddu	$3,$3,$6
-	hadd_u.h	$w13,$w11,$w11
-	hadd_u.h	$w6,$w10,$w10
-	hadd_u.h	$w12,$w3,$w3
-	vbld	$w5,0($3)
-	hadd_u.h	$w2,$w9,$w9
-	hadd_u.h	$w15,$w8,$w8
-	hadd_u.h	$w0,$w4,$w4
-	hadd_u.h	$w14,$w7,$w7
-	hadd_u.h	$w1,$w5,$w5
-	hsub_u.h	$w10,$w10,$w10
-	hsub_u.h	$w3,$w3,$w3
-	insve.d	$w6[1],$w10[0]
-	hsub_u.h	$w4,$w4,$w4
-	hsub_u.h	$w5,$w5,$w5
-	insve.d	$w0[1],$w4[0]
-	insve.d	$w1[1],$w5[0]
-	subv.h	$w0,$w6,$w0
-	hsub_u.h	$w11,$w11,$w11
-	hsub_u.h	$w9,$w9,$w9
-	hsub_u.h	$w8,$w8,$w8
-	insve.d	$w2[1],$w9[0]
-	hsub_u.h	$w7,$w7,$w7
-	subv.h	$w1,$w2,$w1
-	insve.d	$w13[1],$w11[0]
-	move.v	$w10,$w12
-	insve.d	$w10[1],$w3[0]
-	move.v	$w3,$w15
-	insve.d	$w3[1],$w8[0]
-	subv.h	$w4,$w13,$w3
-	move.v	$w3,$w14
-	addv.h	$w6,$w0,$w4
-	insve.d	$w3[1],$w7[0]
-	subv.h	$w0,$w0,$w4
-	subv.h	$w3,$w10,$w3
-	addv.h	$w2,$w1,$w3
-	subv.h	$w1,$w1,$w3
-	asub_s.h	$w4,$w2,$w6
-	addv.h	$w5,$w1,$w0
-	addv.h	$w2,$w2,$w6
-	asub_s.h	$w0,$w1,$w0
-	vabs.h	$w2,$w2
-	vabs.h	$w0,$w0
-	ilvod.h	$w1,$w5,$w2
-	ilvod.h	$w3,$w0,$w4
-	ilvev.h	$w2,$w5,$w2
-	ilvev.h	$w0,$w0,$w4
-	max_s.h	$w1,$w1,$w2
-	max_s.h	$w0,$w3,$w0
-	hadd_s.w	$w1,$w1,$w1
-	hadd_s.w	$w0,$w0,$w0
-	addv.w	$w0,$w1,$w0
-	copy_s.w	$2,$w0[1]
-	copy_s.w	$18,$w0[0]
-	addu	$18,$18,$2
-	copy_s.w	$2,$w0[2]
-	addu	$18,$18,$2
-	move	$3,$22
-	copy_s.w	$2,$w0[3]
-	move	$11,$sp
-	addu	$18,$18,$2
-	daddiu	$25,$sp,64
-	move	$12,$sp
-.L2640:
-	lbu	$4,4($6)
-	daddiu	$12,$12,16
-	lbu	$2,5($6)
-	lbu	$31,7($3)
-	lbu	$9,4($3)
-	lbu	$14,5($3)
-	lbu	$8,7($6)
-	lbu	$24,0($3)
-	subu	$9,$9,$4
-	lbu	$15,0($6)
-	subu	$14,$14,$2
-	sll	$9,$9,16
-	lbu	$4,6($6)
-	subu	$8,$31,$8
-	sll	$14,$14,16
-	lbu	$31,1($6)
-	sll	$8,$8,16
-	lbu	$13,6($3)
-	subu	$15,$24,$15
-	lbu	$2,1($3)
-	addu	$9,$9,$15
-	lbu	$24,2($6)
-	subu	$13,$13,$4
-	lbu	$15,3($3)
-	lbu	$4,2($3)
-	subu	$2,$2,$31
-	sll	$13,$13,16
-	lbu	$31,3($6)
-	addu	$2,$14,$2
-	daddu	$3,$3,$21
-	addu	$14,$9,$2
-	subu	$2,$9,$2
-	subu	$4,$4,$24
-	daddu	$6,$6,$20
-	subu	$15,$15,$31
-	addu	$4,$13,$4
-	addu	$8,$8,$15
-	addu	$9,$4,$8
-	subu	$4,$4,$8
-	addu	$8,$14,$9
-	subu	$14,$14,$9
-	addu	$9,$2,$4
-	subu	$2,$2,$4
-	sw	$8,-16($12)
-	sw	$14,-8($12)
-	sw	$9,-12($12)
-	bne	$25,$12,.L2640
-	sw	$2,-4($12)
-
-	li	$15,65536			# 0x10000
-	daddiu	$25,$11,16
-	move	$24,$0
-	addiu	$15,$15,1
-.L2641:
-	lw	$6,0($11)
-	daddiu	$11,$11,4
-	lw	$4,12($11)
-	lw	$2,44($11)
-	lw	$3,28($11)
-	addu	$9,$6,$4
-	subu	$6,$6,$4
-	addu	$4,$3,$2
-	subu	$3,$3,$2
-	addu	$8,$6,$3
-	addu	$2,$9,$4
-	srl	$12,$8,15
-	subu	$4,$9,$4
-	srl	$13,$2,15
-	and	$31,$12,$15
-	subu	$3,$6,$3
-	and	$13,$13,$15
-	srl	$14,$4,15
-	sll	$9,$13,16
-	and	$14,$14,$15
-	sll	$12,$31,16
-	srl	$6,$3,15
-	subu	$13,$9,$13
-	subu	$12,$12,$31
-	and	$6,$6,$15
-	sll	$9,$14,16
-	sll	$31,$6,16
-	subu	$9,$9,$14
-	addu	$2,$2,$13
-	addu	$8,$8,$12
-	subu	$31,$31,$6
-	xor	$2,$2,$13
-	xor	$8,$8,$12
-	addu	$4,$4,$9
-	addu	$8,$2,$8
-	xor	$9,$4,$9
-	addu	$6,$3,$31
-	addu	$9,$8,$9
-	xor	$6,$6,$31
-	addu	$6,$9,$6
-	bne	$25,$11,.L2641
-	addu	$24,$6,$24
-
-	andi	$2,$24,0xffff
-	srl	$24,$24,16
-	sd	$7,64($sp)
-	addu	$24,$2,$24
-	srl	$24,$24,1
-	beq	$24,$18,.L2649
-	ld	$25,%call16(puts)($28)
-
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	ld	$4,88($sp)
-
-	ld	$7,64($sp)
-.L2643:
-	ld	$2,80($sp)
-	addu	$18,$18,$16
-	addiu	$23,$23,-1
-	move	$16,$18
-	daddu	$3,$17,$22
-	daddu	$19,$17,$19
-	bne	$23,$0,.L2644
-	daddu	$6,$2,$fp
-
-	ld	$31,200($sp)
-	move	$2,$18
-	ld	$fp,192($sp)
-	ld	$28,184($sp)
-	ld	$23,176($sp)
-	ld	$22,168($sp)
-	ld	$21,160($sp)
-	ld	$20,152($sp)
-	ld	$19,144($sp)
-	ld	$18,136($sp)
-	ld	$17,128($sp)
-	ld	$16,120($sp)
-	jr	$31
-	daddiu	$sp,$sp,208
-
-	.align	3
-.L2649:
-	.reloc	1f,R_MIPS_JALR,puts
-1:	jalr	$25
-	ld	$4,96($sp)
-
-	b	.L2643
-	ld	$7,64($sp)
-
-	.set	macro
-	.set	reorder
-	.end	_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l
-	.size	_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l
-	.type	_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l, @function
-_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l:
-	.frame	$sp,224,$31		# vars= 128, regs= 11/0, args= 0, gp= 0
-	.mask	0xd0ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-224
-	dsll	$2,$5,2
-	sd	$28,200($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l)))
-	sd	$2,112($sp)
-	dsll	$2,$7,2
-	daddu	$28,$28,$25
-	sd	$2,104($sp)
-	li	$2,4			# 0x4
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l)))
-	sd	$2,88($sp)
-	dlsa	$2,$7,$7,1
-	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
-	sd	$22,184($sp)
-	li	$22,65536			# 0x10000
-	sd	$fp,208($sp)
-	addiu	$22,$22,1
-	move	$fp,$5
-	daddiu	$2,$2,%got_ofst(.LC64)
-	sd	$23,192($sp)
-	move	$23,$7
-	sd	$2,80($sp)
-	ld	$2,%got_page(.LC63)($28)
-	sd	$18,152($sp)
-	dlsa	$18,$5,$5,1
-	sd	$17,144($sp)
-	move	$17,$0
-	sd	$16,136($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
-	daddiu	$16,$4,32
-	sd	$31,216($sp)
-	sd	$21,176($sp)
-	sd	$20,168($sp)
-	sd	$19,160($sp)
-	sd	$6,72($sp)
-	sd	$2,96($sp)
 .L2656:
 	ld	$20,72($sp)
 	daddiu	$19,$16,-32
@@ -34766,6 +34375,1250 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l:
 
 	.set	macro
 	.set	reorder
+	.end	_ZN12_GLOBAL__N_15satd8ILi32ELi24EEEiPKhlS2_l
+	.size	_ZN12_GLOBAL__N_15satd8ILi32ELi24EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi32ELi24EEEiPKhlS2_l
+	.section	.rodata.str1.8
+	.align	3
+.LC170:
+	.ascii	"sa8d_8x8_internal test success\000"
+	.align	3
+.LC171:
+	.ascii	"sa8d_8x8_internal test fail\000"
+	.align	3
+.LC172:
+	.ascii	"sa8d_32x32 test success\000"
+	.align	3
+.LC173:
+	.ascii	"sa8d_32x32 test fail\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l
+	.type	_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l, @function
+_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l:
+	.frame	$sp,304,$31		# vars= 208, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-304
+	dsll	$2,$5,3
+	sd	$28,280($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l)))
+	daddu	$28,$28,$25
+	sd	$2,168($sp)
+	dsll	$2,$7,3
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l)))
+	sd	$2,176($sp)
+	li	$2,4			# 0x4
+	sd	$2,160($sp)
+	ld	$2,%got_page(.LC171)($28)
+	sd	$20,248($sp)
+	li	$20,65536			# 0x10000
+	sd	$19,240($sp)
+	addiu	$20,$20,1
+	move	$19,$7
+	daddiu	$2,$2,%got_ofst(.LC171)
+	sd	$18,232($sp)
+	move	$18,$5
+	sd	$2,152($sp)
+	ld	$2,%got_page(.LC170)($28)
+	sd	$16,216($sp)
+	move	$16,$0
+	sd	$31,296($sp)
+	daddiu	$2,$2,%got_ofst(.LC170)
+	sd	$fp,288($sp)
+	sd	$23,272($sp)
+	sd	$22,264($sp)
+	sd	$21,256($sp)
+	sd	$17,224($sp)
+	sd	$4,192($sp)
+	sd	$6,200($sp)
+	sd	$6,144($sp)
+	sd	$4,136($sp)
+	sd	$2,184($sp)
+.L2670:
+	ld	$2,136($sp)
+	ld	$22,144($sp)
+	move	$21,$2
+	daddiu	$2,$2,32
+	sd	$2,128($sp)
+.L2669:
+	daddu	$3,$18,$21
+	daddu	$2,$19,$22
+	vbld	$w8,0($21)
+	vbld	$w15,0($22)
+	daddu	$4,$18,$3
+	daddu	$9,$19,$2
+	vbld	$w6,0($3)
+	vbld	$w2,0($2)
+	daddu	$5,$18,$4
+	daddu	$8,$19,$9
+	vbld	$w14,0($4)
+	vbld	$w12,0($9)
+	daddu	$7,$18,$5
+	daddu	$4,$19,$8
+	vbld	$w13,0($5)
+	hadd_u.h	$w7,$w6,$w6
+	daddu	$6,$18,$7
+	daddu	$3,$19,$4
+	hadd_u.h	$w0,$w13,$w13
+	hadd_u.h	$w5,$w12,$w12
+	daddu	$2,$19,$3
+	daddu	$5,$18,$6
+	hsub_u.h	$w16,$w8,$w8
+	vbld	$w17,0($7)
+	daddu	$10,$19,$2
+	daddu	$11,$18,$5
+	vbld	$w11,0($8)
+	hadd_u.h	$w4,$w8,$w8
+	hadd_u.h	$w9,$w11,$w11
+	hsub_u.h	$w8,$w6,$w6
+	insve.d	$w4[1],$w16[0]
+	hsub_u.h	$w6,$w2,$w2
+	vbld	$w16,0($6)
+	vbld	$w20,0($11)
+	vbld	$w19,0($10)
+	hadd_u.h	$w10,$w14,$w14
+	hadd_u.h	$w3,$w15,$w15
+	hadd_u.h	$w1,$w2,$w2
+	hsub_u.h	$w14,$w14,$w14
+	insve.d	$w1[1],$w6[0]
+	insve.d	$w10[1],$w14[0]
+	hsub_u.h	$w13,$w13,$w13
+	hsub_u.h	$w15,$w15,$w15
+	hsub_u.h	$w12,$w12,$w12
+	hsub_u.h	$w11,$w11,$w11
+	move.v	$w2,$w7
+	insve.d	$w3[1],$w15[0]
+	insve.d	$w2[1],$w8[0]
+	subv.h	$w3,$w4,$w3
+	subv.h	$w7,$w2,$w1
+	vbld	$w15,0($5)
+	addv.h	$w1,$w7,$w3
+	move.v	$w8,$w0
+	subv.h	$w7,$w7,$w3
+	insve.d	$w8[1],$w13[0]
+	move.v	$w0,$w5
+	hadd_u.h	$w13,$w17,$w17
+	insve.d	$w0[1],$w12[0]
+	hsub_u.h	$w21,$w17,$w17
+	subv.h	$w4,$w10,$w0
+	vbld	$w12,0($4)
+	hadd_u.h	$w10,$w19,$w19
+	move.v	$w0,$w9
+	hadd_u.h	$w2,$w12,$w12
+	insve.d	$w0[1],$w11[0]
+	hadd_u.h	$w9,$w20,$w20
+	subv.h	$w0,$w8,$w0
+	vbld	$w11,0($3)
+	addv.h	$w5,$w0,$w4
+	hadd_u.h	$w8,$w16,$w16
+	subv.h	$w0,$w0,$w4
+	hadd_u.h	$w14,$w11,$w11
+	subv.h	$w6,$w0,$w7
+	addv.h	$w4,$w5,$w1
+	addv.h	$w3,$w0,$w7
+	subv.h	$w5,$w5,$w1
+	vbld	$w0,0($2)
+	hadd_u.h	$w7,$w15,$w15
+	hadd_u.h	$w1,$w0,$w0
+	hsub_u.h	$w18,$w16,$w16
+	hsub_u.h	$w17,$w15,$w15
+	hsub_u.h	$w16,$w12,$w12
+	hsub_u.h	$w15,$w11,$w11
+	hsub_u.h	$w0,$w0,$w0
+	insve.d	$w13[1],$w21[0]
+	move.v	$w12,$w8
+	move.v	$w11,$w7
+	insve.d	$w12[1],$w18[0]
+	insve.d	$w11[1],$w17[0]
+	move.v	$w7,$w14
+	insve.d	$w1[1],$w0[0]
+	insve.d	$w7[1],$w15[0]
+	move.v	$w0,$w1
+	subv.h	$w8,$w12,$w7
+	hsub_u.h	$w20,$w20,$w20
+	subv.h	$w7,$w11,$w0
+	insve.d	$w9[1],$w20[0]
+	move.v	$w0,$w10
+	hsub_u.h	$w19,$w19,$w19
+	insve.d	$w2[1],$w16[0]
+	insve.d	$w0[1],$w19[0]
+	subv.h	$w2,$w13,$w2
+	subv.h	$w0,$w9,$w0
+	addv.h	$w1,$w8,$w2
+	subv.h	$w8,$w8,$w2
+	addv.h	$w2,$w0,$w7
+	subv.h	$w0,$w0,$w7
+	addv.h	$w7,$w2,$w1
+	subv.h	$w2,$w2,$w1
+	addv.h	$w11,$w7,$w4
+	addv.h	$w1,$w0,$w8
+	subv.h	$w4,$w7,$w4
+	addv.h	$w9,$w1,$w3
+	addv.h	$w7,$w2,$w5
+	pckod.h	$w15,$w4,$w11
+	subv.h	$w0,$w0,$w8
+	subv.h	$w3,$w1,$w3
+	pckev.h	$w4,$w4,$w11
+	subv.h	$w1,$w2,$w5
+	pckod.h	$w14,$w3,$w9
+	addv.h	$w5,$w0,$w6
+	pckod.h	$w13,$w1,$w7
+	pckev.h	$w2,$w1,$w7
+	subv.h	$w0,$w0,$w6
+	pckev.h	$w3,$w3,$w9
+	pckod.h	$w1,$w0,$w5
+	asub_s.h	$w12,$w15,$w4
+	pckev.h	$w0,$w0,$w5
+	asub_s.h	$w10,$w14,$w3
+	asub_s.h	$w8,$w13,$w2
+	asub_s.h	$w6,$w1,$w0
+	addv.h	$w5,$w1,$w0
+	addv.h	$w4,$w15,$w4
+	addv.h	$w3,$w14,$w3
+	vabs.h	$w11,$w4
+	vabs.h	$w9,$w3
+	addv.h	$w2,$w13,$w2
+	vabs.h	$w5,$w5
+	vabs.h	$w7,$w2
+	ilvod.h	$w4,$w11,$w12
+	ilvod.h	$w3,$w9,$w10
+	ilvod.h	$w2,$w7,$w8
+	ilvod.h	$w1,$w5,$w6
+	ilvev.h	$w11,$w11,$w12
+	ilvev.h	$w9,$w9,$w10
+	ilvev.h	$w7,$w7,$w8
+	ilvev.h	$w5,$w5,$w6
+	max_s.h	$w4,$w4,$w11
+	max_s.h	$w3,$w3,$w9
+	max_s.h	$w2,$w2,$w7
+	max_s.h	$w1,$w1,$w5
+	hadd_s.w	$w4,$w4,$w4
+	hadd_s.w	$w3,$w3,$w3
+	hadd_s.w	$w2,$w2,$w2
+	hadd_s.w	$w1,$w1,$w1
+	addv.w	$w3,$w4,$w3
+	addv.w	$w1,$w2,$w1
+	addv.w	$w0,$w3,$w1
+	copy_s.w	$2,$w0[1]
+	copy_s.w	$17,$w0[0]
+	addu	$17,$17,$2
+	copy_s.w	$2,$w0[2]
+	move	$10,$21
+	addu	$17,$17,$2
+	copy_s.w	$2,$w0[3]
+	move	$9,$22
+	addu	$17,$17,$2
+	move	$25,$sp
+	addiu	$17,$17,1
+	daddiu	$12,$sp,128
+	dsra	$17,$17,1
+	move	$11,$sp
+	.align	3
+.L2665:
+	lbu	$2,1($9)
+	daddiu	$11,$11,16
+	lbu	$5,1($10)
+	lbu	$6,0($9)
+	lbu	$13,2($9)
+	lbu	$3,0($10)
+	subu	$5,$5,$2
+	lbu	$4,2($10)
+	lbu	$7,3($10)
+	lbu	$2,3($9)
+	subu	$3,$3,$6
+	subu	$4,$4,$13
+	lbu	$14,4($9)
+	subu	$8,$3,$5
+	lbu	$15,5($9)
+	addu	$3,$3,$5
+	sll	$8,$8,16
+	lbu	$6,4($10)
+	subu	$2,$7,$2
+	addu	$8,$8,$3
+	lbu	$13,5($10)
+	subu	$5,$4,$2
+	addu	$7,$4,$2
+	lbu	$4,6($10)
+	sll	$2,$5,16
+	subu	$6,$6,$14
+	lbu	$5,6($9)
+	addu	$2,$2,$7
+	subu	$13,$13,$15
+	lbu	$14,7($10)
+	addu	$7,$8,$2
+	lbu	$15,7($9)
+	subu	$3,$6,$13
+	addu	$13,$6,$13
+	subu	$5,$4,$5
+	sll	$3,$3,16
+	addu	$3,$3,$13
+	subu	$2,$8,$2
+	subu	$6,$14,$15
+	daddu	$10,$10,$18
+	subu	$4,$5,$6
+	addu	$5,$5,$6
+	sll	$4,$4,16
+	daddu	$9,$9,$19
+	addu	$4,$4,$5
+	addu	$5,$3,$4
+	subu	$3,$3,$4
+	addu	$6,$7,$5
+	addu	$4,$2,$3
+	subu	$7,$7,$5
+	subu	$2,$2,$3
+	sw	$6,-16($11)
+	sw	$7,-8($11)
+	sw	$4,-12($11)
+	bne	$12,$11,.L2665
+	sw	$2,-4($11)
+
+	daddiu	$23,$25,16
+	move	$31,$0
+.L2666:
+	lw	$12,0($25)
+	daddiu	$25,$25,4
+	lw	$4,12($25)
+	lw	$3,44($25)
+	lw	$8,28($25)
+	addu	$5,$12,$4
+	lw	$7,76($25)
+	subu	$12,$12,$4
+	lw	$6,108($25)
+	lw	$15,60($25)
+	addu	$2,$8,$3
+	subu	$8,$8,$3
+	lw	$4,92($25)
+	addu	$3,$5,$2
+	addu	$13,$12,$8
+	subu	$12,$12,$8
+	addu	$14,$15,$7
+	subu	$15,$15,$7
+	subu	$7,$5,$2
+	addu	$5,$4,$6
+	addu	$2,$14,$5
+	subu	$4,$4,$6
+	addu	$6,$15,$4
+	addu	$10,$3,$2
+	subu	$3,$3,$2
+	addu	$9,$13,$6
+	srl	$2,$10,15
+	srl	$fp,$3,15
+	subu	$5,$14,$5
+	and	$24,$2,$20
+	and	$11,$fp,$20
+	subu	$6,$13,$6
+	srl	$14,$9,15
+	addu	$8,$7,$5
+	and	$14,$14,$20
+	sll	$2,$24,16
+	sll	$fp,$11,16
+	srl	$13,$6,15
+	subu	$2,$2,$24
+	subu	$fp,$fp,$11
+	subu	$4,$15,$4
+	subu	$5,$7,$5
+	and	$13,$13,$20
+	sll	$15,$14,16
+	srl	$24,$8,15
+	subu	$15,$15,$14
+	and	$24,$24,$20
+	addu	$7,$12,$4
+	sll	$11,$13,16
+	srl	$14,$5,15
+	addu	$10,$10,$2
+	addu	$3,$3,$fp
+	subu	$13,$11,$13
+	subu	$4,$12,$4
+	xor	$10,$10,$2
+	and	$14,$14,$20
+	sll	$11,$24,16
+	srl	$12,$7,15
+	xor	$3,$3,$fp
+	addu	$9,$9,$15
+	subu	$11,$11,$24
+	and	$12,$12,$20
+	srl	$24,$4,15
+	addu	$3,$10,$3
+	xor	$9,$9,$15
+	addu	$2,$6,$13
+	sll	$fp,$14,16
+	addu	$3,$3,$9
+	subu	$14,$fp,$14
+	and	$10,$24,$20
+	sll	$6,$12,16
+	xor	$2,$2,$13
+	addu	$8,$8,$11
+	subu	$12,$6,$12
+	addu	$2,$3,$2
+	sll	$9,$10,16
+	xor	$11,$8,$11
+	addu	$5,$5,$14
+	subu	$3,$9,$10
+	addu	$2,$2,$11
+	xor	$5,$5,$14
+	addu	$7,$7,$12
+	addu	$4,$4,$3
+	addu	$2,$2,$5
+	xor	$7,$7,$12
+	xor	$4,$4,$3
+	addu	$2,$2,$7
+	addu	$2,$2,$4
+	andi	$3,$2,0xffff
+	srl	$2,$2,16
+	addu	$2,$3,$2
+	bne	$23,$25,.L2666
+	addu	$31,$2,$31
+
+	addiu	$31,$31,2
+	sra	$31,$31,2
+	beq	$31,$17,.L2686
+	ld	$25,%call16(puts)($28)
+
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	ld	$4,152($sp)
+
+	ld	$2,128($sp)
+.L2688:
+	daddiu	$21,$21,8
+	addu	$16,$17,$16
+	bne	$2,$21,.L2669
+	daddiu	$22,$22,8
+
+	ld	$3,136($sp)
+	ld	$4,168($sp)
+	ld	$2,160($sp)
+	daddu	$3,$3,$4
+	ld	$4,176($sp)
+	sd	$3,136($sp)
+	addiu	$2,$2,-1
+	ld	$3,144($sp)
+	sd	$2,160($sp)
+	daddu	$3,$3,$4
+	bne	$2,$0,.L2670
+	sd	$3,144($sp)
+
+	ld	$2,192($sp)
+	li	$17,65536			# 0x10000
+	move	$23,$0
+	daddiu	$7,$sp,128
+	addiu	$17,$17,1
+	sd	$16,152($sp)
+	daddiu	$2,$2,32
+	sd	$2,128($sp)
+	ld	$2,200($sp)
+	sd	$2,136($sp)
+	li	$2,4			# 0x4
+	sd	$2,144($sp)
+.L2674:
+	ld	$2,128($sp)
+	ld	$22,136($sp)
+	daddiu	$21,$2,-32
+.L2673:
+	move	$12,$21
+	move	$11,$22
+	move	$31,$sp
+	move	$13,$sp
+	.align	3
+.L2671:
+	lbu	$6,0($11)
+	daddiu	$13,$13,16
+	lbu	$3,0($12)
+	lbu	$2,1($11)
+	lbu	$5,1($12)
+	subu	$3,$3,$6
+	lbu	$4,2($12)
+	lbu	$6,2($11)
+	lbu	$8,3($12)
+	subu	$5,$5,$2
+	lbu	$2,3($11)
+	subu	$9,$3,$5
+	addu	$5,$3,$5
+	subu	$4,$4,$6
+	lbu	$3,4($12)
+	sll	$9,$9,16
+	lbu	$15,5($11)
+	addu	$9,$9,$5
+	lbu	$6,4($11)
+	subu	$2,$8,$2
+	lbu	$10,5($12)
+	subu	$5,$4,$2
+	addu	$8,$4,$2
+	lbu	$14,7($12)
+	sll	$2,$5,16
+	lbu	$4,6($12)
+	subu	$6,$3,$6
+	addu	$2,$2,$8
+	subu	$10,$10,$15
+	lbu	$5,6($11)
+	addu	$8,$9,$2
+	lbu	$15,7($11)
+	subu	$3,$6,$10
+	addu	$6,$6,$10
+	sll	$3,$3,16
+	subu	$2,$9,$2
+	addu	$3,$3,$6
+	subu	$5,$4,$5
+	subu	$6,$14,$15
+	daddu	$12,$12,$18
+	subu	$4,$5,$6
+	addu	$5,$5,$6
+	sll	$4,$4,16
+	daddu	$11,$11,$19
+	addu	$4,$4,$5
+	addu	$5,$3,$4
+	subu	$3,$3,$4
+	addu	$6,$8,$5
+	addu	$4,$2,$3
+	subu	$8,$8,$5
+	subu	$2,$2,$3
+	sw	$6,-16($13)
+	sw	$8,-8($13)
+	sw	$4,-12($13)
+	bne	$7,$13,.L2671
+	sw	$2,-4($13)
+
+	daddiu	$20,$31,16
+	move	$16,$0
+.L2672:
+	lw	$13,0($31)
+	daddiu	$31,$31,4
+	lw	$4,12($31)
+	lw	$3,44($31)
+	lw	$9,28($31)
+	addu	$5,$13,$4
+	lw	$8,76($31)
+	subu	$13,$13,$4
+	lw	$6,108($31)
+	lw	$24,60($31)
+	addu	$2,$9,$3
+	subu	$9,$9,$3
+	lw	$4,92($31)
+	addu	$3,$5,$2
+	addu	$14,$13,$9
+	subu	$13,$13,$9
+	addu	$15,$24,$8
+	subu	$24,$24,$8
+	subu	$8,$5,$2
+	addu	$5,$4,$6
+	addu	$2,$15,$5
+	subu	$4,$4,$6
+	addu	$6,$24,$4
+	addu	$11,$3,$2
+	subu	$3,$3,$2
+	addu	$10,$14,$6
+	srl	$2,$11,15
+	srl	$fp,$3,15
+	subu	$5,$15,$5
+	and	$25,$2,$17
+	and	$12,$fp,$17
+	subu	$6,$14,$6
+	srl	$15,$10,15
+	addu	$9,$8,$5
+	and	$15,$15,$17
+	sll	$2,$25,16
+	sll	$fp,$12,16
+	srl	$14,$6,15
+	subu	$2,$2,$25
+	subu	$fp,$fp,$12
+	subu	$4,$24,$4
+	subu	$5,$8,$5
+	and	$14,$14,$17
+	sll	$24,$15,16
+	srl	$25,$9,15
+	subu	$24,$24,$15
+	and	$25,$25,$17
+	addu	$8,$13,$4
+	sll	$12,$14,16
+	srl	$15,$5,15
+	addu	$11,$11,$2
+	addu	$3,$3,$fp
+	subu	$14,$12,$14
+	subu	$4,$13,$4
+	xor	$11,$11,$2
+	and	$15,$15,$17
+	sll	$12,$25,16
+	srl	$13,$8,15
+	xor	$3,$3,$fp
+	addu	$10,$10,$24
+	subu	$12,$12,$25
+	and	$13,$13,$17
+	srl	$25,$4,15
+	addu	$3,$11,$3
+	xor	$10,$10,$24
+	addu	$2,$6,$14
+	sll	$fp,$15,16
+	addu	$3,$3,$10
+	subu	$15,$fp,$15
+	and	$11,$25,$17
+	sll	$6,$13,16
+	xor	$2,$2,$14
+	addu	$9,$9,$12
+	subu	$13,$6,$13
+	addu	$2,$3,$2
+	sll	$10,$11,16
+	xor	$12,$9,$12
+	addu	$5,$5,$15
+	subu	$3,$10,$11
+	addu	$2,$2,$12
+	xor	$5,$5,$15
+	addu	$8,$8,$13
+	addu	$4,$4,$3
+	addu	$2,$2,$5
+	xor	$8,$8,$13
+	xor	$4,$4,$3
+	addu	$2,$2,$8
+	addu	$2,$2,$4
+	andi	$3,$2,0xffff
+	srl	$2,$2,16
+	addu	$2,$3,$2
+	bne	$20,$31,.L2672
+	addu	$16,$2,$16
+
+	ld	$2,128($sp)
+	addiu	$16,$16,2
+	daddiu	$21,$21,8
+	sra	$16,$16,2
+	daddiu	$22,$22,8
+	bne	$2,$21,.L2673
+	addu	$23,$16,$23
+
+	ld	$3,128($sp)
+	ld	$4,168($sp)
+	ld	$2,144($sp)
+	daddu	$3,$3,$4
+	ld	$4,176($sp)
+	sd	$3,128($sp)
+	addiu	$2,$2,-1
+	ld	$3,136($sp)
+	sd	$2,144($sp)
+	daddu	$3,$3,$4
+	bne	$2,$0,.L2674
+	sd	$3,136($sp)
+
+	ld	$2,152($sp)
+	beq	$2,$23,.L2687
+	ld	$25,%call16(puts)($28)
+
+	ld	$4,%got_page(.LC173)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC173)
+
+	ld	$31,296($sp)
+	ld	$2,152($sp)
+	ld	$fp,288($sp)
+	ld	$28,280($sp)
+	ld	$23,272($sp)
+	ld	$22,264($sp)
+	ld	$21,256($sp)
+	ld	$20,248($sp)
+	ld	$19,240($sp)
+	ld	$18,232($sp)
+	ld	$17,224($sp)
+	ld	$16,216($sp)
+	jr	$31
+	daddiu	$sp,$sp,304
+
+	.align	3
+.L2686:
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	ld	$4,184($sp)
+
+	b	.L2688
+	ld	$2,128($sp)
+
+.L2687:
+	ld	$4,%got_page(.LC172)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC172)
+
+	ld	$31,296($sp)
+	ld	$2,152($sp)
+	ld	$fp,288($sp)
+	ld	$28,280($sp)
+	ld	$23,272($sp)
+	ld	$22,264($sp)
+	ld	$21,256($sp)
+	ld	$20,248($sp)
+	ld	$19,240($sp)
+	ld	$18,232($sp)
+	ld	$17,224($sp)
+	ld	$16,216($sp)
+	jr	$31
+	daddiu	$sp,$sp,304
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l
+	.size	_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l, .-_ZN12_GLOBAL__N_110sa8d_32x32EPKhlS1_l
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l
+	.type	_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l, @function
+_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l:
+	.frame	$sp,208,$31		# vars= 112, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-208
+	sd	$28,184($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l)))
+	sd	$20,152($sp)
+	move	$20,$7
+	daddu	$28,$28,$25
+	dsll	$2,$20,1
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l)))
+	sd	$21,160($sp)
+	sd	$2,80($sp)
+	daddu	$2,$2,$20
+	dsll	$7,$5,1
+	sd	$2,72($sp)
+	move	$21,$5
+	daddu	$5,$7,$5
+	ld	$2,%got_page(.LC82)($28)
+	daddu	$3,$4,$7
+	sd	$23,176($sp)
+	li	$23,16			# 0x10
+	sd	$19,144($sp)
+	daddu	$19,$4,$5
+	daddiu	$2,$2,%got_ofst(.LC82)
+	sd	$17,128($sp)
+	dsll	$17,$5,1
+	sd	$2,88($sp)
+	ld	$2,%got_page(.LC81)($28)
+	sd	$16,120($sp)
+	move	$16,$0
+	sd	$31,200($sp)
+	daddiu	$2,$2,%got_ofst(.LC81)
+	sd	$fp,192($sp)
+	sd	$22,168($sp)
+	sd	$18,136($sp)
+	sd	$2,96($sp)
+	.align	3
+.L2694:
+	dsubu	$22,$3,$7
+	vbld	$w3,0($3)
+	ld	$3,72($sp)
+	daddu	$2,$6,$20
+	vbld	$w9,0($19)
+	daddu	$fp,$2,$20
+	dsubu	$19,$19,$7
+	vbld	$w4,0($2)
+	vbld	$w11,0($22)
+	vbld	$w10,0($19)
+	vbld	$w8,0($6)
+	vbld	$w7,0($fp)
+	daddu	$3,$3,$6
+	hadd_u.h	$w13,$w11,$w11
+	hadd_u.h	$w6,$w10,$w10
+	hadd_u.h	$w12,$w3,$w3
+	vbld	$w5,0($3)
+	hadd_u.h	$w2,$w9,$w9
+	hadd_u.h	$w15,$w8,$w8
+	hadd_u.h	$w0,$w4,$w4
+	hadd_u.h	$w14,$w7,$w7
+	hadd_u.h	$w1,$w5,$w5
+	hsub_u.h	$w10,$w10,$w10
+	hsub_u.h	$w3,$w3,$w3
+	insve.d	$w6[1],$w10[0]
+	hsub_u.h	$w4,$w4,$w4
+	hsub_u.h	$w5,$w5,$w5
+	insve.d	$w0[1],$w4[0]
+	insve.d	$w1[1],$w5[0]
+	subv.h	$w0,$w6,$w0
+	hsub_u.h	$w11,$w11,$w11
+	hsub_u.h	$w9,$w9,$w9
+	hsub_u.h	$w8,$w8,$w8
+	insve.d	$w2[1],$w9[0]
+	hsub_u.h	$w7,$w7,$w7
+	subv.h	$w1,$w2,$w1
+	insve.d	$w13[1],$w11[0]
+	move.v	$w10,$w12
+	insve.d	$w10[1],$w3[0]
+	move.v	$w3,$w15
+	insve.d	$w3[1],$w8[0]
+	subv.h	$w4,$w13,$w3
+	move.v	$w3,$w14
+	addv.h	$w6,$w0,$w4
+	insve.d	$w3[1],$w7[0]
+	subv.h	$w0,$w0,$w4
+	subv.h	$w3,$w10,$w3
+	addv.h	$w2,$w1,$w3
+	subv.h	$w1,$w1,$w3
+	asub_s.h	$w4,$w2,$w6
+	addv.h	$w5,$w1,$w0
+	addv.h	$w2,$w2,$w6
+	asub_s.h	$w0,$w1,$w0
+	vabs.h	$w2,$w2
+	vabs.h	$w0,$w0
+	ilvod.h	$w1,$w5,$w2
+	ilvod.h	$w3,$w0,$w4
+	ilvev.h	$w2,$w5,$w2
+	ilvev.h	$w0,$w0,$w4
+	max_s.h	$w1,$w1,$w2
+	max_s.h	$w0,$w3,$w0
+	hadd_s.w	$w1,$w1,$w1
+	hadd_s.w	$w0,$w0,$w0
+	addv.w	$w0,$w1,$w0
+	copy_s.w	$2,$w0[1]
+	copy_s.w	$18,$w0[0]
+	addu	$18,$18,$2
+	copy_s.w	$2,$w0[2]
+	addu	$18,$18,$2
+	move	$3,$22
+	copy_s.w	$2,$w0[3]
+	move	$11,$sp
+	addu	$18,$18,$2
+	daddiu	$25,$sp,64
+	move	$12,$sp
+.L2690:
+	lbu	$4,4($6)
+	daddiu	$12,$12,16
+	lbu	$2,5($6)
+	lbu	$31,7($3)
+	lbu	$9,4($3)
+	lbu	$14,5($3)
+	lbu	$8,7($6)
+	lbu	$24,0($3)
+	subu	$9,$9,$4
+	lbu	$15,0($6)
+	subu	$14,$14,$2
+	sll	$9,$9,16
+	lbu	$4,6($6)
+	subu	$8,$31,$8
+	sll	$14,$14,16
+	lbu	$31,1($6)
+	sll	$8,$8,16
+	lbu	$13,6($3)
+	subu	$15,$24,$15
+	lbu	$2,1($3)
+	addu	$9,$9,$15
+	lbu	$24,2($6)
+	subu	$13,$13,$4
+	lbu	$15,3($3)
+	lbu	$4,2($3)
+	subu	$2,$2,$31
+	sll	$13,$13,16
+	lbu	$31,3($6)
+	addu	$2,$14,$2
+	daddu	$3,$3,$21
+	addu	$14,$9,$2
+	subu	$2,$9,$2
+	subu	$4,$4,$24
+	daddu	$6,$6,$20
+	subu	$15,$15,$31
+	addu	$4,$13,$4
+	addu	$8,$8,$15
+	addu	$9,$4,$8
+	subu	$4,$4,$8
+	addu	$8,$14,$9
+	subu	$14,$14,$9
+	addu	$9,$2,$4
+	subu	$2,$2,$4
+	sw	$8,-16($12)
+	sw	$14,-8($12)
+	sw	$9,-12($12)
+	bne	$25,$12,.L2690
+	sw	$2,-4($12)
+
+	li	$15,65536			# 0x10000
+	daddiu	$25,$11,16
+	move	$24,$0
+	addiu	$15,$15,1
+.L2691:
+	lw	$6,0($11)
+	daddiu	$11,$11,4
+	lw	$4,12($11)
+	lw	$2,44($11)
+	lw	$3,28($11)
+	addu	$9,$6,$4
+	subu	$6,$6,$4
+	addu	$4,$3,$2
+	subu	$3,$3,$2
+	addu	$8,$6,$3
+	addu	$2,$9,$4
+	srl	$12,$8,15
+	subu	$4,$9,$4
+	srl	$13,$2,15
+	and	$31,$12,$15
+	subu	$3,$6,$3
+	and	$13,$13,$15
+	srl	$14,$4,15
+	sll	$9,$13,16
+	and	$14,$14,$15
+	sll	$12,$31,16
+	srl	$6,$3,15
+	subu	$13,$9,$13
+	subu	$12,$12,$31
+	and	$6,$6,$15
+	sll	$9,$14,16
+	sll	$31,$6,16
+	subu	$9,$9,$14
+	addu	$2,$2,$13
+	addu	$8,$8,$12
+	subu	$31,$31,$6
+	xor	$2,$2,$13
+	xor	$8,$8,$12
+	addu	$4,$4,$9
+	addu	$8,$2,$8
+	xor	$9,$4,$9
+	addu	$6,$3,$31
+	addu	$9,$8,$9
+	xor	$6,$6,$31
+	addu	$6,$9,$6
+	bne	$25,$11,.L2691
+	addu	$24,$6,$24
+
+	andi	$2,$24,0xffff
+	srl	$24,$24,16
+	sd	$7,64($sp)
+	addu	$24,$2,$24
+	srl	$24,$24,1
+	beq	$24,$18,.L2699
+	ld	$25,%call16(puts)($28)
+
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	ld	$4,88($sp)
+
+	ld	$7,64($sp)
+.L2693:
+	ld	$2,80($sp)
+	addu	$18,$18,$16
+	addiu	$23,$23,-1
+	move	$16,$18
+	daddu	$3,$17,$22
+	daddu	$19,$17,$19
+	bne	$23,$0,.L2694
+	daddu	$6,$2,$fp
+
+	ld	$31,200($sp)
+	move	$2,$18
+	ld	$fp,192($sp)
+	ld	$28,184($sp)
+	ld	$23,176($sp)
+	ld	$22,168($sp)
+	ld	$21,160($sp)
+	ld	$20,152($sp)
+	ld	$19,144($sp)
+	ld	$18,136($sp)
+	ld	$17,128($sp)
+	ld	$16,120($sp)
+	jr	$31
+	daddiu	$sp,$sp,208
+
+	.align	3
+.L2699:
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	ld	$4,96($sp)
+
+	b	.L2693
+	ld	$7,64($sp)
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l
+	.size	_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi8ELi64EEEiPKhlS2_l
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l
+	.type	_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l, @function
+_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l:
+	.frame	$sp,224,$31		# vars= 128, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-224
+	dsll	$2,$5,2
+	sd	$28,200($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l)))
+	sd	$2,112($sp)
+	dsll	$2,$7,2
+	daddu	$28,$28,$25
+	sd	$2,104($sp)
+	li	$2,4			# 0x4
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l)))
+	sd	$2,88($sp)
+	dlsa	$2,$7,$7,1
+	sd	$2,64($sp)
+	ld	$2,%got_page(.LC82)($28)
+	sd	$22,184($sp)
+	li	$22,65536			# 0x10000
+	sd	$fp,208($sp)
+	addiu	$22,$22,1
+	move	$fp,$5
+	daddiu	$2,$2,%got_ofst(.LC82)
+	sd	$23,192($sp)
+	move	$23,$7
+	sd	$2,80($sp)
+	ld	$2,%got_page(.LC81)($28)
+	sd	$18,152($sp)
+	dlsa	$18,$5,$5,1
+	sd	$17,144($sp)
+	move	$17,$0
+	sd	$16,136($sp)
+	daddiu	$2,$2,%got_ofst(.LC81)
+	daddiu	$16,$4,32
+	sd	$31,216($sp)
+	sd	$21,176($sp)
+	sd	$20,168($sp)
+	sd	$19,160($sp)
+	sd	$6,72($sp)
+	sd	$2,96($sp)
+.L2706:
+	ld	$20,72($sp)
+	daddiu	$19,$16,-32
+	move	$2,$17
+	move	$17,$20
+	move	$20,$19
+	move	$19,$2
+.L2705:
+	ld	$4,64($sp)
+	daddu	$2,$17,$23
+	daddu	$3,$20,$fp
+	vbld	$w15,0($20)
+	daddu	$6,$2,$23
+	daddu	$7,$3,$fp
+	vbld	$w14,0($17)
+	vbld	$w3,0($2)
+	daddu	$5,$18,$20
+	vbld	$w13,0($7)
+	vbld	$w12,0($6)
+	vbld	$w5,0($3)
+	daddu	$4,$4,$17
+	hadd_u.h	$w0,$w12,$w12
+	vbld	$w9,0($5)
+	hadd_u.h	$w10,$w15,$w15
+	vbld	$w8,0($4)
+	hadd_u.h	$w7,$w5,$w5
+	hadd_u.h	$w6,$w8,$w8
+	hadd_u.h	$w2,$w13,$w13
+	hadd_u.h	$w4,$w14,$w14
+	hadd_u.h	$w11,$w3,$w3
+	hsub_u.h	$w17,$w15,$w15
+	hsub_u.h	$w5,$w5,$w5
+	hsub_u.h	$w15,$w13,$w13
+	hsub_u.h	$w16,$w14,$w14
+	hsub_u.h	$w3,$w3,$w3
+	hsub_u.h	$w14,$w12,$w12
+	insve.d	$w7[1],$w5[0]
+	hsub_u.h	$w12,$w8,$w8
+	insve.d	$w2[1],$w15[0]
+	hadd_u.h	$w1,$w9,$w9
+	move.v	$w8,$w2
+	hsub_u.h	$w13,$w9,$w9
+	insve.d	$w10[1],$w17[0]
+	insve.d	$w1[1],$w13[0]
+	insve.d	$w4[1],$w16[0]
+	move.v	$w5,$w1
+	subv.h	$w4,$w10,$w4
+	move.v	$w1,$w0
+	move.v	$w2,$w11
+	insve.d	$w1[1],$w14[0]
+	insve.d	$w2[1],$w3[0]
+	subv.h	$w7,$w7,$w2
+	subv.h	$w2,$w8,$w1
+	addv.h	$w0,$w7,$w4
+	move.v	$w1,$w6
+	subv.h	$w7,$w7,$w4
+	insve.d	$w1[1],$w12[0]
+	subv.h	$w1,$w5,$w1
+	addv.h	$w6,$w1,$w2
+	subv.h	$w1,$w1,$w2
+	asub_s.h	$w4,$w6,$w0
+	addv.h	$w5,$w1,$w7
+	addv.h	$w6,$w6,$w0
+	asub_s.h	$w1,$w1,$w7
+	vabs.h	$w6,$w6
+	vabs.h	$w3,$w1
+	ilvod.h	$w2,$w5,$w6
+	ilvod.h	$w1,$w3,$w4
+	ilvev.h	$w5,$w5,$w6
+	ilvev.h	$w3,$w3,$w4
+	max_s.h	$w2,$w2,$w5
+	max_s.h	$w1,$w1,$w3
+	hadd_s.w	$w2,$w2,$w2
+	hadd_s.w	$w1,$w1,$w1
+	addv.w	$w0,$w2,$w1
+	copy_s.w	$2,$w0[1]
+	copy_s.w	$21,$w0[0]
+	addu	$21,$21,$2
+	copy_s.w	$2,$w0[2]
+	move	$9,$20
+	addu	$21,$21,$2
+	move	$8,$17
+	copy_s.w	$2,$w0[3]
+	move	$11,$sp
+	addu	$21,$21,$2
+	daddiu	$13,$sp,64
+	move	$12,$sp
+.L2701:
+	lbu	$5,4($8)
+	daddiu	$12,$12,16
+	lbu	$7,4($9)
+	lbu	$4,5($8)
+	lbu	$14,7($8)
+	lbu	$2,5($9)
+	subu	$7,$7,$5
+	lbu	$5,7($9)
+	sll	$7,$7,16
+	lbu	$6,6($8)
+	lbu	$3,6($9)
+	subu	$2,$2,$4
+	lbu	$15,0($8)
+	subu	$5,$5,$14
+	sll	$2,$2,16
+	lbu	$10,0($9)
+	sll	$5,$5,16
+	lbu	$14,1($8)
+	subu	$3,$3,$6
+	lbu	$4,1($9)
+	sll	$6,$3,16
+	subu	$10,$10,$15
+	lbu	$3,2($9)
+	lbu	$15,2($8)
+	addu	$7,$7,$10
+	subu	$4,$4,$14
+	lbu	$10,3($9)
+	daddu	$9,$9,$fp
+	lbu	$14,3($8)
+	addu	$2,$2,$4
+	daddu	$8,$8,$23
+	subu	$3,$3,$15
+	addu	$4,$7,$2
+	addu	$3,$6,$3
+	subu	$2,$7,$2
+	subu	$6,$10,$14
+	addu	$5,$5,$6
+	addu	$6,$3,$5
+	subu	$3,$3,$5
+	addu	$7,$4,$6
+	addu	$5,$2,$3
+	subu	$4,$4,$6
+	subu	$2,$2,$3
+	sw	$7,-16($12)
+	sw	$4,-8($12)
+	sw	$5,-12($12)
+	bne	$13,$12,.L2701
+	sw	$2,-4($12)
+
+	daddiu	$13,$11,16
+	move	$12,$0
+.L2702:
+	lw	$6,0($11)
+	daddiu	$11,$11,4
+	lw	$4,12($11)
+	lw	$2,44($11)
+	lw	$3,28($11)
+	addu	$7,$6,$4
+	subu	$6,$6,$4
+	addu	$4,$3,$2
+	subu	$3,$3,$2
+	addu	$5,$6,$3
+	addu	$2,$7,$4
+	srl	$9,$2,15
+	subu	$4,$7,$4
+	srl	$8,$5,15
+	subu	$3,$6,$3
+	and	$9,$9,$22
+	and	$8,$8,$22
+	srl	$7,$4,15
+	sll	$14,$9,16
+	and	$7,$7,$22
+	sll	$10,$8,16
+	srl	$6,$3,15
+	subu	$9,$14,$9
+	subu	$8,$10,$8
+	and	$6,$6,$22
+	sll	$14,$7,16
+	sll	$10,$6,16
+	subu	$7,$14,$7
+	addu	$2,$2,$9
+	addu	$5,$5,$8
+	subu	$6,$10,$6
+	xor	$2,$2,$9
+	xor	$5,$5,$8
+	addu	$4,$4,$7
+	addu	$2,$2,$5
+	xor	$4,$4,$7
+	addu	$3,$3,$6
+	addu	$2,$2,$4
+	xor	$3,$3,$6
+	addu	$2,$2,$3
+	bne	$13,$11,.L2702
+	addu	$12,$2,$12
+
+	andi	$2,$12,0xffff
+	srl	$12,$12,16
+	addu	$12,$2,$12
+	srl	$12,$12,1
+	beq	$12,$21,.L2712
+	ld	$25,%call16(puts)($28)
+
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	ld	$4,80($sp)
+
+	addu	$21,$21,$19
+.L2713:
+	daddiu	$20,$20,8
+	move	$19,$21
+	bne	$16,$20,.L2705
+	daddiu	$17,$17,8
+
+	ld	$3,112($sp)
+	move	$17,$19
+	ld	$2,88($sp)
+	ld	$4,104($sp)
+	daddu	$16,$16,$3
+	ld	$3,72($sp)
+	addiu	$2,$2,-1
+	sd	$2,88($sp)
+	daddu	$3,$3,$4
+	bne	$2,$0,.L2706
+	sd	$3,72($sp)
+
+	ld	$31,216($sp)
+	move	$2,$21
+	ld	$fp,208($sp)
+	ld	$28,200($sp)
+	ld	$23,192($sp)
+	ld	$22,184($sp)
+	ld	$21,176($sp)
+	ld	$20,168($sp)
+	ld	$19,160($sp)
+	ld	$18,152($sp)
+	ld	$17,144($sp)
+	ld	$16,136($sp)
+	jr	$31
+	daddiu	$sp,$sp,224
+
+	.align	3
+.L2712:
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	ld	$4,96($sp)
+
+	b	.L2713
+	addu	$21,$21,$19
+
+	.set	macro
+	.set	reorder
 	.end	_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l
 	.size	_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi32ELi16EEEiPKhlS2_l
 	.align	2
@@ -34795,23 +35648,23 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi32EEEiPKhlS2_l:
 	sd	$2,72($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,80($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$21,176($sp)
 	li	$21,65536			# 0x10000
 	sd	$19,160($sp)
 	move	$19,$0
 	addiu	$21,$21,1
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$fp,208($sp)
 	move	$fp,$5
 	sd	$2,88($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$23,192($sp)
 	move	$23,$19
 	sd	$22,184($sp)
 	move	$22,$7
 	sd	$17,144($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	move	$17,$6
 	sd	$16,136($sp)
 	daddiu	$16,$4,16
@@ -34820,10 +35673,10 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi32EEEiPKhlS2_l:
 	sd	$18,152($sp)
 	sd	$2,112($sp)
 	.align	3
-.L2670:
+.L2720:
 	daddiu	$18,$16,-16
 	move	$19,$17
-.L2669:
+.L2719:
 	ld	$4,72($sp)
 	daddu	$2,$19,$22
 	daddu	$3,$18,$fp
@@ -34904,7 +35757,7 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi32EEEiPKhlS2_l:
 	move	$9,$sp
 	daddiu	$12,$sp,64
 	move	$11,$sp
-.L2665:
+.L2715:
 	lbu	$5,4($8)
 	daddiu	$11,$11,16
 	lbu	$7,4($10)
@@ -34951,12 +35804,12 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi32EEEiPKhlS2_l:
 	sw	$7,-16($11)
 	sw	$4,-8($11)
 	sw	$5,-12($11)
-	bne	$12,$11,.L2665
+	bne	$12,$11,.L2715
 	sw	$2,-4($11)
 
 	daddiu	$11,$9,16
 	move	$10,$0
-.L2666:
+.L2716:
 	lw	$6,0($9)
 	daddiu	$9,$9,4
 	lw	$4,12($9)
@@ -34997,14 +35850,14 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi32EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$11,$9,.L2666
+	bne	$11,$9,.L2716
 	addu	$10,$2,$10
 
 	andi	$2,$10,0xffff
 	srl	$10,$10,16
 	addu	$10,$2,$10
 	srl	$10,$10,1
-	beq	$10,$20,.L2676
+	beq	$10,$20,.L2726
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -35012,10 +35865,10 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi32EEEiPKhlS2_l:
 	ld	$4,88($sp)
 
 	addu	$20,$20,$23
-.L2677:
+.L2727:
 	daddiu	$18,$18,8
 	move	$23,$20
-	bne	$16,$18,.L2669
+	bne	$16,$18,.L2719
 	daddiu	$19,$19,8
 
 	ld	$3,104($sp)
@@ -35024,7 +35877,7 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi32EEEiPKhlS2_l:
 	ld	$3,96($sp)
 	addiu	$2,$2,-1
 	sd	$2,64($sp)
-	bne	$2,$0,.L2670
+	bne	$2,$0,.L2720
 	daddu	$17,$17,$3
 
 	ld	$31,216($sp)
@@ -35043,12 +35896,12 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi32EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2676:
+.L2726:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,112($sp)
 
-	b	.L2677
+	b	.L2727
 	addu	$20,$20,$23
 
 	.set	macro
@@ -35082,23 +35935,23 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi24EEEiPKhlS2_l:
 	sd	$2,72($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,80($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$21,176($sp)
 	li	$21,65536			# 0x10000
 	sd	$19,160($sp)
 	move	$19,$0
 	addiu	$21,$21,1
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$fp,208($sp)
 	move	$fp,$5
 	sd	$2,88($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$23,192($sp)
 	move	$23,$19
 	sd	$22,184($sp)
 	move	$22,$7
 	sd	$17,144($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	move	$17,$6
 	sd	$16,136($sp)
 	daddiu	$16,$4,16
@@ -35107,10 +35960,10 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi24EEEiPKhlS2_l:
 	sd	$18,152($sp)
 	sd	$2,112($sp)
 	.align	3
-.L2684:
+.L2734:
 	daddiu	$18,$16,-16
 	move	$19,$17
-.L2683:
+.L2733:
 	ld	$4,72($sp)
 	daddu	$2,$19,$22
 	daddu	$3,$18,$fp
@@ -35191,7 +36044,7 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi24EEEiPKhlS2_l:
 	move	$9,$sp
 	daddiu	$12,$sp,64
 	move	$11,$sp
-.L2679:
+.L2729:
 	lbu	$5,4($8)
 	daddiu	$11,$11,16
 	lbu	$7,4($10)
@@ -35238,12 +36091,12 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi24EEEiPKhlS2_l:
 	sw	$7,-16($11)
 	sw	$4,-8($11)
 	sw	$5,-12($11)
-	bne	$12,$11,.L2679
+	bne	$12,$11,.L2729
 	sw	$2,-4($11)
 
 	daddiu	$11,$9,16
 	move	$10,$0
-.L2680:
+.L2730:
 	lw	$6,0($9)
 	daddiu	$9,$9,4
 	lw	$4,12($9)
@@ -35284,14 +36137,14 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi24EEEiPKhlS2_l:
 	addu	$2,$2,$4
 	xor	$3,$3,$6
 	addu	$2,$2,$3
-	bne	$11,$9,.L2680
+	bne	$11,$9,.L2730
 	addu	$10,$2,$10
 
 	andi	$2,$10,0xffff
 	srl	$10,$10,16
 	addu	$10,$2,$10
 	srl	$10,$10,1
-	beq	$10,$20,.L2690
+	beq	$10,$20,.L2740
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -35299,10 +36152,10 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi24EEEiPKhlS2_l:
 	ld	$4,88($sp)
 
 	addu	$20,$20,$23
-.L2691:
+.L2741:
 	daddiu	$18,$18,8
 	move	$23,$20
-	bne	$16,$18,.L2683
+	bne	$16,$18,.L2733
 	daddiu	$19,$19,8
 
 	ld	$3,104($sp)
@@ -35311,7 +36164,7 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi24EEEiPKhlS2_l:
 	ld	$3,96($sp)
 	addiu	$2,$2,-1
 	sd	$2,64($sp)
-	bne	$2,$0,.L2684
+	bne	$2,$0,.L2734
 	daddu	$17,$17,$3
 
 	ld	$31,216($sp)
@@ -35330,12 +36183,12 @@ _ZN12_GLOBAL__N_15satd8ILi16ELi24EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2690:
+.L2740:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,112($sp)
 
-	b	.L2691
+	b	.L2741
 	addu	$20,$20,$23
 
 	.set	macro
@@ -35367,23 +36220,23 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi8EEEiPKhlS2_l:
 	sd	$2,88($sp)
 	dlsa	$2,$7,$7,1
 	sd	$2,64($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$22,184($sp)
 	li	$22,65536			# 0x10000
 	sd	$19,160($sp)
 	move	$19,$0
 	addiu	$22,$22,1
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$23,192($sp)
 	move	$23,$19
 	sd	$2,80($sp)
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$21,176($sp)
 	move	$21,$5
 	sd	$18,152($sp)
 	dlsa	$18,$5,$5,1
 	sd	$17,144($sp)
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	move	$17,$7
 	sd	$16,136($sp)
 	daddiu	$16,$4,32
@@ -35392,14 +36245,14 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi8EEEiPKhlS2_l:
 	sd	$20,168($sp)
 	sd	$6,72($sp)
 	sd	$2,96($sp)
-.L2698:
+.L2748:
 	ld	$fp,72($sp)
 	daddiu	$20,$16,-32
 	move	$19,$23
 	move	$23,$17
 	move	$17,$fp
 	move	$fp,$20
-.L2697:
+.L2747:
 	ld	$4,64($sp)
 	daddu	$2,$17,$23
 	daddu	$3,$fp,$21
@@ -35479,7 +36332,7 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi8EEEiPKhlS2_l:
 	addu	$20,$20,$2
 	move	$12,$sp
 	move	$2,$sp
-.L2693:
+.L2743:
 	lbu	$6,4($9)
 	daddiu	$12,$12,16
 	lbu	$8,4($10)
@@ -35526,12 +36379,12 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi8EEEiPKhlS2_l:
 	sw	$8,-16($12)
 	sw	$5,-8($12)
 	sw	$6,-12($12)
-	bne	$13,$12,.L2693
+	bne	$13,$12,.L2743
 	sw	$3,-4($12)
 
 	daddiu	$13,$2,16
 	move	$12,$0
-.L2694:
+.L2744:
 	lw	$7,0($2)
 	daddiu	$2,$2,4
 	lw	$5,12($2)
@@ -35572,14 +36425,14 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi8EEEiPKhlS2_l:
 	addu	$3,$3,$5
 	xor	$4,$4,$7
 	addu	$3,$3,$4
-	bne	$13,$2,.L2694
+	bne	$13,$2,.L2744
 	addu	$12,$3,$12
 
 	andi	$2,$12,0xffff
 	srl	$12,$12,16
 	addu	$12,$2,$12
 	srl	$12,$12,1
-	beq	$12,$20,.L2704
+	beq	$12,$20,.L2754
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -35587,10 +36440,10 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi8EEEiPKhlS2_l:
 	ld	$4,80($sp)
 
 	addu	$2,$20,$19
-.L2705:
+.L2755:
 	daddiu	$fp,$fp,8
 	move	$19,$2
-	bne	$16,$fp,.L2697
+	bne	$16,$fp,.L2747
 	daddiu	$17,$17,8
 
 	ld	$4,112($sp)
@@ -35602,7 +36455,7 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi8EEEiPKhlS2_l:
 	daddu	$4,$4,$5
 	sd	$4,72($sp)
 	ld	$4,88($sp)
-	bne	$4,$3,.L2699
+	bne	$4,$3,.L2749
 	move	$23,$19
 
 	ld	$31,216($sp)
@@ -35620,18 +36473,18 @@ _ZN12_GLOBAL__N_15satd8ILi32ELi8EEEiPKhlS2_l:
 	daddiu	$sp,$sp,224
 
 	.align	3
-.L2704:
+.L2754:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,96($sp)
 
-	b	.L2705
+	b	.L2755
 	addu	$2,$20,$19
 
 	.align	3
-.L2699:
+.L2749:
 	li	$2,1			# 0x1
-	b	.L2698
+	b	.L2748
 	sd	$2,88($sp)
 
 	.set	macro
@@ -35659,22 +36512,22 @@ _ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l:
 	daddu	$2,$2,$7
 	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l)))
 	sd	$2,72($sp)
-	ld	$2,%got_page(.LC64)($28)
+	ld	$2,%got_page(.LC82)($28)
 	sd	$fp,192($sp)
 	dsll	$fp,$5,1
 	sd	$21,160($sp)
 	daddu	$21,$4,$5
-	daddiu	$2,$2,%got_ofst(.LC64)
+	daddiu	$2,$2,%got_ofst(.LC82)
 	sd	$16,120($sp)
 	daddu	$16,$fp,$5
 	sd	$2,88($sp)
 	daddu	$3,$21,$5
-	ld	$2,%got_page(.LC63)($28)
+	ld	$2,%got_page(.LC81)($28)
 	sd	$22,168($sp)
 	move	$22,$5
 	sd	$20,152($sp)
 	move	$20,$7
-	daddiu	$2,$2,%got_ofst(.LC63)
+	daddiu	$2,$2,%got_ofst(.LC81)
 	sd	$18,136($sp)
 	move	$18,$0
 	sd	$17,128($sp)
@@ -35686,7 +36539,7 @@ _ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l:
 	sd	$19,144($sp)
 	sd	$2,64($sp)
 	.align	3
-.L2711:
+.L2761:
 	dsubu	$23,$3,$fp
 	vbld	$w3,0($3)
 	ld	$3,72($sp)
@@ -35762,7 +36615,7 @@ _ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l:
 	addu	$19,$19,$2
 	daddiu	$25,$sp,64
 	move	$12,$sp
-.L2707:
+.L2757:
 	lbu	$4,4($6)
 	daddiu	$12,$12,16
 	lbu	$2,5($6)
@@ -35809,14 +36662,14 @@ _ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l:
 	sw	$8,-16($12)
 	sw	$14,-8($12)
 	sw	$9,-12($12)
-	bne	$25,$12,.L2707
+	bne	$25,$12,.L2757
 	sw	$2,-4($12)
 
 	li	$15,65536			# 0x10000
 	daddiu	$25,$11,16
 	move	$24,$0
 	addiu	$15,$15,1
-.L2708:
+.L2758:
 	lw	$6,0($11)
 	daddiu	$11,$11,4
 	lw	$4,12($11)
@@ -35857,14 +36710,14 @@ _ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l:
 	addu	$9,$8,$9
 	xor	$6,$6,$31
 	addu	$6,$9,$6
-	bne	$25,$11,.L2708
+	bne	$25,$11,.L2758
 	addu	$24,$6,$24
 
 	andi	$2,$24,0xffff
 	srl	$24,$24,16
 	addu	$24,$2,$24
 	srl	$24,$24,1
-	beq	$24,$19,.L2716
+	beq	$24,$19,.L2766
 	ld	$25,%call16(puts)($28)
 
 	.reloc	1f,R_MIPS_JALR,puts
@@ -35872,14 +36725,14 @@ _ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l:
 	ld	$4,88($sp)
 
 	ld	$3,64($sp)
-.L2717:
+.L2767:
 	addu	$2,$19,$18
 	addiu	$17,$17,-1
 	ld	$4,80($sp)
 	move	$18,$2
 	daddu	$21,$fp,$21
 	daddu	$3,$3,$23
-	bne	$17,$0,.L2711
+	bne	$17,$0,.L2761
 	daddu	$6,$4,$16
 
 	ld	$31,200($sp)
@@ -35897,18 +36750,995 @@ _ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l:
 	daddiu	$sp,$sp,208
 
 	.align	3
-.L2716:
+.L2766:
 	.reloc	1f,R_MIPS_JALR,puts
 1:	jalr	$25
 	ld	$4,96($sp)
 
-	b	.L2717
+	b	.L2767
 	ld	$3,64($sp)
 
 	.set	macro
 	.set	reorder
 	.end	_ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l
 	.size	_ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi8ELi32EEEiPKhlS2_l
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l
+	.type	_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l, @function
+_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l:
+	.frame	$sp,224,$31		# vars= 128, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-224
+	dsll	$2,$5,2
+	sd	$2,104($sp)
+	dsll	$2,$7,2
+	sd	$28,200($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l)))
+	sd	$2,96($sp)
+	li	$2,3			# 0x3
+	daddu	$28,$28,$25
+	sd	$2,64($sp)
+	dlsa	$2,$5,$5,1
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l)))
+	sd	$2,72($sp)
+	dlsa	$2,$7,$7,1
+	sd	$2,80($sp)
+	ld	$2,%got_page(.LC82)($28)
+	sd	$21,176($sp)
+	li	$21,65536			# 0x10000
+	sd	$19,160($sp)
+	daddiu	$19,$4,16
+	addiu	$21,$21,1
+	daddiu	$2,$2,%got_ofst(.LC82)
+	sd	$18,152($sp)
+	move	$18,$0
+	sd	$2,88($sp)
+	ld	$2,%got_page(.LC81)($28)
+	sd	$fp,208($sp)
+	move	$fp,$5
+	sd	$22,184($sp)
+	move	$22,$18
+	sd	$20,168($sp)
+	daddiu	$2,$2,%got_ofst(.LC81)
+	move	$20,$19
+	sd	$17,144($sp)
+	move	$17,$6
+	sd	$16,136($sp)
+	move	$16,$7
+	sd	$31,216($sp)
+	sd	$23,192($sp)
+	sd	$2,112($sp)
+.L2774:
+	daddiu	$19,$20,-16
+	move	$18,$20
+	move	$23,$19
+	move	$20,$16
+	move	$16,$17
+.L2773:
+	ld	$4,72($sp)
+	daddu	$2,$16,$20
+	daddu	$3,$23,$fp
+	vbld	$w15,0($23)
+	daddu	$6,$2,$20
+	daddu	$7,$3,$fp
+	vbld	$w14,0($16)
+	vbld	$w3,0($2)
+	vbld	$w13,0($7)
+	vbld	$w12,0($6)
+	vbld	$w5,0($3)
+	hadd_u.h	$w0,$w12,$w12
+	daddu	$5,$4,$23
+	ld	$4,80($sp)
+	hadd_u.h	$w10,$w15,$w15
+	hadd_u.h	$w7,$w5,$w5
+	vbld	$w9,0($5)
+	hadd_u.h	$w2,$w13,$w13
+	hadd_u.h	$w4,$w14,$w14
+	hadd_u.h	$w11,$w3,$w3
+	hsub_u.h	$w17,$w15,$w15
+	hsub_u.h	$w5,$w5,$w5
+	hsub_u.h	$w15,$w13,$w13
+	hsub_u.h	$w16,$w14,$w14
+	daddu	$4,$4,$16
+	hsub_u.h	$w3,$w3,$w3
+	hsub_u.h	$w14,$w12,$w12
+	insve.d	$w7[1],$w5[0]
+	vbld	$w8,0($4)
+	insve.d	$w2[1],$w15[0]
+	hadd_u.h	$w6,$w8,$w8
+	hsub_u.h	$w12,$w8,$w8
+	hadd_u.h	$w1,$w9,$w9
+	move.v	$w8,$w2
+	hsub_u.h	$w13,$w9,$w9
+	insve.d	$w10[1],$w17[0]
+	insve.d	$w1[1],$w13[0]
+	insve.d	$w4[1],$w16[0]
+	move.v	$w5,$w1
+	subv.h	$w4,$w10,$w4
+	move.v	$w1,$w0
+	move.v	$w2,$w11
+	insve.d	$w1[1],$w14[0]
+	insve.d	$w2[1],$w3[0]
+	subv.h	$w7,$w7,$w2
+	subv.h	$w2,$w8,$w1
+	addv.h	$w0,$w7,$w4
+	move.v	$w1,$w6
+	subv.h	$w7,$w7,$w4
+	insve.d	$w1[1],$w12[0]
+	subv.h	$w1,$w5,$w1
+	addv.h	$w6,$w1,$w2
+	subv.h	$w1,$w1,$w2
+	asub_s.h	$w4,$w6,$w0
+	addv.h	$w5,$w1,$w7
+	addv.h	$w6,$w6,$w0
+	asub_s.h	$w1,$w1,$w7
+	vabs.h	$w6,$w6
+	vabs.h	$w3,$w1
+	ilvod.h	$w2,$w5,$w6
+	ilvod.h	$w1,$w3,$w4
+	ilvev.h	$w5,$w5,$w6
+	ilvev.h	$w3,$w3,$w4
+	max_s.h	$w2,$w2,$w5
+	max_s.h	$w1,$w1,$w3
+	hadd_s.w	$w2,$w2,$w2
+	hadd_s.w	$w1,$w1,$w1
+	addv.w	$w0,$w2,$w1
+	copy_s.w	$2,$w0[1]
+	copy_s.w	$19,$w0[0]
+	addu	$19,$19,$2
+	copy_s.w	$2,$w0[2]
+	addu	$19,$19,$2
+	move	$11,$23
+	copy_s.w	$2,$w0[3]
+	move	$9,$16
+	addu	$19,$19,$2
+	daddiu	$13,$sp,64
+	move	$2,$sp
+	move	$12,$sp
+.L2769:
+	lbu	$6,4($9)
+	daddiu	$12,$12,16
+	lbu	$8,4($11)
+	lbu	$5,5($9)
+	lbu	$14,7($9)
+	lbu	$3,5($11)
+	subu	$8,$8,$6
+	lbu	$6,7($11)
+	sll	$8,$8,16
+	lbu	$7,6($9)
+	lbu	$4,6($11)
+	subu	$3,$3,$5
+	lbu	$15,0($9)
+	subu	$6,$6,$14
+	sll	$3,$3,16
+	lbu	$10,0($11)
+	sll	$6,$6,16
+	lbu	$14,1($9)
+	subu	$4,$4,$7
+	lbu	$5,1($11)
+	sll	$7,$4,16
+	subu	$10,$10,$15
+	lbu	$4,2($11)
+	lbu	$15,2($9)
+	addu	$8,$8,$10
+	subu	$5,$5,$14
+	lbu	$10,3($11)
+	daddu	$11,$11,$fp
+	lbu	$14,3($9)
+	addu	$3,$3,$5
+	daddu	$9,$9,$20
+	subu	$4,$4,$15
+	addu	$5,$8,$3
+	addu	$4,$7,$4
+	subu	$3,$8,$3
+	subu	$7,$10,$14
+	addu	$6,$6,$7
+	addu	$7,$4,$6
+	subu	$4,$4,$6
+	addu	$8,$5,$7
+	addu	$6,$3,$4
+	subu	$5,$5,$7
+	subu	$3,$3,$4
+	sw	$8,-16($12)
+	sw	$5,-8($12)
+	sw	$6,-12($12)
+	bne	$13,$12,.L2769
+	sw	$3,-4($12)
+
+	daddiu	$12,$2,16
+	move	$11,$0
+.L2770:
+	lw	$7,0($2)
+	daddiu	$2,$2,4
+	lw	$5,12($2)
+	lw	$3,44($2)
+	lw	$4,28($2)
+	addu	$8,$7,$5
+	subu	$7,$7,$5
+	addu	$5,$4,$3
+	subu	$4,$4,$3
+	addu	$6,$7,$4
+	addu	$3,$8,$5
+	srl	$10,$3,15
+	subu	$5,$8,$5
+	srl	$9,$6,15
+	subu	$4,$7,$4
+	and	$10,$10,$21
+	and	$9,$9,$21
+	srl	$8,$5,15
+	sll	$14,$10,16
+	and	$8,$8,$21
+	sll	$13,$9,16
+	srl	$7,$4,15
+	subu	$10,$14,$10
+	subu	$9,$13,$9
+	and	$7,$7,$21
+	sll	$14,$8,16
+	sll	$13,$7,16
+	subu	$8,$14,$8
+	addu	$3,$3,$10
+	addu	$6,$6,$9
+	subu	$7,$13,$7
+	xor	$3,$3,$10
+	xor	$6,$6,$9
+	addu	$5,$5,$8
+	addu	$3,$3,$6
+	xor	$5,$5,$8
+	addu	$4,$4,$7
+	addu	$3,$3,$5
+	xor	$4,$4,$7
+	addu	$3,$3,$4
+	bne	$12,$2,.L2770
+	addu	$11,$3,$11
+
+	andi	$2,$11,0xffff
+	srl	$11,$11,16
+	addu	$11,$2,$11
+	srl	$11,$11,1
+	beq	$11,$19,.L2780
+	ld	$25,%call16(puts)($28)
+
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	ld	$4,88($sp)
+
+	addu	$2,$19,$22
+.L2781:
+	daddiu	$23,$23,8
+	move	$22,$2
+	bne	$18,$23,.L2773
+	daddiu	$16,$16,8
+
+	ld	$4,104($sp)
+	move	$16,$20
+	ld	$3,64($sp)
+	daddu	$20,$18,$4
+	ld	$4,96($sp)
+	addiu	$3,$3,-1
+	sd	$3,64($sp)
+	bne	$3,$0,.L2774
+	daddu	$17,$17,$4
+
+	ld	$31,216($sp)
+	ld	$fp,208($sp)
+	ld	$28,200($sp)
+	ld	$23,192($sp)
+	ld	$22,184($sp)
+	ld	$21,176($sp)
+	ld	$20,168($sp)
+	ld	$19,160($sp)
+	ld	$18,152($sp)
+	ld	$17,144($sp)
+	ld	$16,136($sp)
+	jr	$31
+	daddiu	$sp,$sp,224
+
+	.align	3
+.L2780:
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	ld	$4,112($sp)
+
+	b	.L2781
+	addu	$2,$19,$22
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l
+	.size	_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_15satd8ILi16ELi12EEEiPKhlS2_l
+	.section	.rodata.str1.8
+	.align	3
+.LC174:
+	.ascii	"sa8d_16x16 test success\000"
+	.align	3
+.LC175:
+	.ascii	"sa8d_16x16 test fail\000"
+	.text
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
+	.type	_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l, @function
+_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l:
+	.frame	$sp,304,$31		# vars= 208, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-304
+	dsll	$2,$5,3
+	sd	$28,280($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)))
+	daddu	$28,$28,$25
+	sd	$2,176($sp)
+	dsll	$2,$7,3
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)))
+	sd	$2,184($sp)
+	li	$2,2			# 0x2
+	sd	$2,160($sp)
+	ld	$2,%got_page(.LC171)($28)
+	sd	$20,248($sp)
+	li	$20,65536			# 0x10000
+	sd	$19,240($sp)
+	addiu	$20,$20,1
+	move	$19,$7
+	daddiu	$2,$2,%got_ofst(.LC171)
+	sd	$18,232($sp)
+	move	$18,$5
+	sd	$2,168($sp)
+	ld	$2,%got_page(.LC170)($28)
+	sd	$16,216($sp)
+	move	$16,$0
+	sd	$31,296($sp)
+	daddiu	$2,$2,%got_ofst(.LC170)
+	sd	$fp,288($sp)
+	sd	$23,272($sp)
+	sd	$22,264($sp)
+	sd	$21,256($sp)
+	sd	$17,224($sp)
+	sd	$4,152($sp)
+	sd	$6,200($sp)
+	sd	$6,136($sp)
+	sd	$4,128($sp)
+	sd	$2,192($sp)
+.L2788:
+	ld	$2,128($sp)
+	ld	$22,136($sp)
+	move	$21,$2
+	daddiu	$2,$2,16
+	sd	$2,144($sp)
+.L2787:
+	daddu	$3,$18,$21
+	daddu	$2,$19,$22
+	vbld	$w8,0($21)
+	vbld	$w15,0($22)
+	daddu	$4,$18,$3
+	daddu	$9,$19,$2
+	vbld	$w6,0($3)
+	vbld	$w2,0($2)
+	daddu	$5,$18,$4
+	daddu	$8,$19,$9
+	vbld	$w14,0($4)
+	vbld	$w12,0($9)
+	daddu	$7,$18,$5
+	daddu	$4,$19,$8
+	vbld	$w13,0($5)
+	hadd_u.h	$w7,$w6,$w6
+	daddu	$6,$18,$7
+	daddu	$3,$19,$4
+	hadd_u.h	$w0,$w13,$w13
+	hadd_u.h	$w5,$w12,$w12
+	daddu	$2,$19,$3
+	daddu	$5,$18,$6
+	hsub_u.h	$w16,$w8,$w8
+	vbld	$w17,0($7)
+	daddu	$10,$19,$2
+	daddu	$11,$18,$5
+	vbld	$w11,0($8)
+	hadd_u.h	$w4,$w8,$w8
+	hadd_u.h	$w9,$w11,$w11
+	hsub_u.h	$w8,$w6,$w6
+	insve.d	$w4[1],$w16[0]
+	hsub_u.h	$w6,$w2,$w2
+	vbld	$w16,0($6)
+	vbld	$w20,0($11)
+	vbld	$w19,0($10)
+	hadd_u.h	$w10,$w14,$w14
+	hadd_u.h	$w3,$w15,$w15
+	hadd_u.h	$w1,$w2,$w2
+	hsub_u.h	$w14,$w14,$w14
+	insve.d	$w1[1],$w6[0]
+	insve.d	$w10[1],$w14[0]
+	hsub_u.h	$w13,$w13,$w13
+	hsub_u.h	$w15,$w15,$w15
+	hsub_u.h	$w12,$w12,$w12
+	hsub_u.h	$w11,$w11,$w11
+	move.v	$w2,$w7
+	insve.d	$w3[1],$w15[0]
+	insve.d	$w2[1],$w8[0]
+	subv.h	$w3,$w4,$w3
+	subv.h	$w7,$w2,$w1
+	vbld	$w15,0($5)
+	addv.h	$w1,$w7,$w3
+	move.v	$w8,$w0
+	subv.h	$w7,$w7,$w3
+	insve.d	$w8[1],$w13[0]
+	move.v	$w0,$w5
+	hadd_u.h	$w13,$w17,$w17
+	insve.d	$w0[1],$w12[0]
+	hsub_u.h	$w21,$w17,$w17
+	subv.h	$w4,$w10,$w0
+	vbld	$w12,0($4)
+	hadd_u.h	$w10,$w19,$w19
+	move.v	$w0,$w9
+	hadd_u.h	$w2,$w12,$w12
+	insve.d	$w0[1],$w11[0]
+	hadd_u.h	$w9,$w20,$w20
+	subv.h	$w0,$w8,$w0
+	vbld	$w11,0($3)
+	addv.h	$w5,$w0,$w4
+	hadd_u.h	$w8,$w16,$w16
+	subv.h	$w0,$w0,$w4
+	hadd_u.h	$w14,$w11,$w11
+	subv.h	$w6,$w0,$w7
+	addv.h	$w4,$w5,$w1
+	addv.h	$w3,$w0,$w7
+	subv.h	$w5,$w5,$w1
+	vbld	$w0,0($2)
+	hadd_u.h	$w7,$w15,$w15
+	hadd_u.h	$w1,$w0,$w0
+	hsub_u.h	$w18,$w16,$w16
+	hsub_u.h	$w17,$w15,$w15
+	hsub_u.h	$w16,$w12,$w12
+	hsub_u.h	$w15,$w11,$w11
+	hsub_u.h	$w0,$w0,$w0
+	insve.d	$w13[1],$w21[0]
+	move.v	$w12,$w8
+	move.v	$w11,$w7
+	insve.d	$w12[1],$w18[0]
+	insve.d	$w11[1],$w17[0]
+	move.v	$w7,$w14
+	insve.d	$w1[1],$w0[0]
+	insve.d	$w7[1],$w15[0]
+	move.v	$w0,$w1
+	subv.h	$w8,$w12,$w7
+	hsub_u.h	$w20,$w20,$w20
+	subv.h	$w7,$w11,$w0
+	insve.d	$w9[1],$w20[0]
+	move.v	$w0,$w10
+	hsub_u.h	$w19,$w19,$w19
+	insve.d	$w2[1],$w16[0]
+	insve.d	$w0[1],$w19[0]
+	subv.h	$w2,$w13,$w2
+	subv.h	$w0,$w9,$w0
+	addv.h	$w1,$w8,$w2
+	subv.h	$w8,$w8,$w2
+	addv.h	$w2,$w0,$w7
+	subv.h	$w0,$w0,$w7
+	addv.h	$w7,$w2,$w1
+	subv.h	$w2,$w2,$w1
+	addv.h	$w11,$w7,$w4
+	addv.h	$w1,$w0,$w8
+	subv.h	$w4,$w7,$w4
+	addv.h	$w9,$w1,$w3
+	addv.h	$w7,$w2,$w5
+	pckod.h	$w15,$w4,$w11
+	subv.h	$w0,$w0,$w8
+	subv.h	$w3,$w1,$w3
+	pckev.h	$w4,$w4,$w11
+	subv.h	$w1,$w2,$w5
+	pckod.h	$w14,$w3,$w9
+	addv.h	$w5,$w0,$w6
+	pckod.h	$w13,$w1,$w7
+	pckev.h	$w2,$w1,$w7
+	subv.h	$w0,$w0,$w6
+	pckev.h	$w3,$w3,$w9
+	pckod.h	$w1,$w0,$w5
+	asub_s.h	$w12,$w15,$w4
+	pckev.h	$w0,$w0,$w5
+	asub_s.h	$w10,$w14,$w3
+	asub_s.h	$w8,$w13,$w2
+	asub_s.h	$w6,$w1,$w0
+	addv.h	$w5,$w1,$w0
+	addv.h	$w4,$w15,$w4
+	addv.h	$w3,$w14,$w3
+	vabs.h	$w11,$w4
+	vabs.h	$w9,$w3
+	addv.h	$w2,$w13,$w2
+	vabs.h	$w5,$w5
+	vabs.h	$w7,$w2
+	ilvod.h	$w4,$w11,$w12
+	ilvod.h	$w3,$w9,$w10
+	ilvod.h	$w2,$w7,$w8
+	ilvod.h	$w1,$w5,$w6
+	ilvev.h	$w11,$w11,$w12
+	ilvev.h	$w9,$w9,$w10
+	ilvev.h	$w7,$w7,$w8
+	ilvev.h	$w5,$w5,$w6
+	max_s.h	$w4,$w4,$w11
+	max_s.h	$w3,$w3,$w9
+	max_s.h	$w2,$w2,$w7
+	max_s.h	$w1,$w1,$w5
+	hadd_s.w	$w4,$w4,$w4
+	hadd_s.w	$w3,$w3,$w3
+	hadd_s.w	$w2,$w2,$w2
+	hadd_s.w	$w1,$w1,$w1
+	addv.w	$w3,$w4,$w3
+	addv.w	$w1,$w2,$w1
+	addv.w	$w0,$w3,$w1
+	copy_s.w	$2,$w0[1]
+	copy_s.w	$17,$w0[0]
+	addu	$17,$17,$2
+	copy_s.w	$2,$w0[2]
+	move	$10,$21
+	addu	$17,$17,$2
+	copy_s.w	$2,$w0[3]
+	move	$9,$22
+	addu	$17,$17,$2
+	move	$25,$sp
+	addiu	$17,$17,1
+	daddiu	$12,$sp,128
+	dsra	$17,$17,1
+	move	$11,$sp
+	.align	3
+.L2783:
+	lbu	$2,1($9)
+	daddiu	$11,$11,16
+	lbu	$5,1($10)
+	lbu	$6,0($9)
+	lbu	$13,2($9)
+	lbu	$3,0($10)
+	subu	$5,$5,$2
+	lbu	$4,2($10)
+	lbu	$7,3($10)
+	lbu	$2,3($9)
+	subu	$3,$3,$6
+	subu	$4,$4,$13
+	lbu	$14,4($9)
+	subu	$8,$3,$5
+	lbu	$15,5($9)
+	addu	$3,$3,$5
+	sll	$8,$8,16
+	lbu	$6,4($10)
+	subu	$2,$7,$2
+	addu	$8,$8,$3
+	lbu	$13,5($10)
+	subu	$5,$4,$2
+	addu	$7,$4,$2
+	lbu	$4,6($10)
+	sll	$2,$5,16
+	subu	$6,$6,$14
+	lbu	$5,6($9)
+	addu	$2,$2,$7
+	subu	$13,$13,$15
+	lbu	$14,7($10)
+	addu	$7,$8,$2
+	lbu	$15,7($9)
+	subu	$3,$6,$13
+	addu	$13,$6,$13
+	subu	$5,$4,$5
+	sll	$3,$3,16
+	addu	$3,$3,$13
+	subu	$2,$8,$2
+	subu	$6,$14,$15
+	daddu	$10,$10,$18
+	subu	$4,$5,$6
+	addu	$5,$5,$6
+	sll	$4,$4,16
+	daddu	$9,$9,$19
+	addu	$4,$4,$5
+	addu	$5,$3,$4
+	subu	$3,$3,$4
+	addu	$6,$7,$5
+	addu	$4,$2,$3
+	subu	$7,$7,$5
+	subu	$2,$2,$3
+	sw	$6,-16($11)
+	sw	$7,-8($11)
+	sw	$4,-12($11)
+	bne	$12,$11,.L2783
+	sw	$2,-4($11)
+
+	daddiu	$23,$25,16
+	move	$31,$0
+.L2784:
+	lw	$12,0($25)
+	daddiu	$25,$25,4
+	lw	$4,12($25)
+	lw	$3,44($25)
+	lw	$8,28($25)
+	addu	$5,$12,$4
+	lw	$7,76($25)
+	subu	$12,$12,$4
+	lw	$6,108($25)
+	lw	$15,60($25)
+	addu	$2,$8,$3
+	subu	$8,$8,$3
+	lw	$4,92($25)
+	addu	$3,$5,$2
+	addu	$13,$12,$8
+	subu	$12,$12,$8
+	addu	$14,$15,$7
+	subu	$15,$15,$7
+	subu	$7,$5,$2
+	addu	$5,$4,$6
+	addu	$2,$14,$5
+	subu	$4,$4,$6
+	addu	$6,$15,$4
+	addu	$10,$3,$2
+	subu	$3,$3,$2
+	addu	$9,$13,$6
+	srl	$2,$10,15
+	srl	$fp,$3,15
+	subu	$5,$14,$5
+	and	$24,$2,$20
+	and	$11,$fp,$20
+	subu	$6,$13,$6
+	srl	$14,$9,15
+	addu	$8,$7,$5
+	and	$14,$14,$20
+	sll	$2,$24,16
+	sll	$fp,$11,16
+	srl	$13,$6,15
+	subu	$2,$2,$24
+	subu	$fp,$fp,$11
+	subu	$4,$15,$4
+	subu	$5,$7,$5
+	and	$13,$13,$20
+	sll	$15,$14,16
+	srl	$24,$8,15
+	subu	$15,$15,$14
+	and	$24,$24,$20
+	addu	$7,$12,$4
+	sll	$11,$13,16
+	srl	$14,$5,15
+	addu	$10,$10,$2
+	addu	$3,$3,$fp
+	subu	$13,$11,$13
+	subu	$4,$12,$4
+	xor	$10,$10,$2
+	and	$14,$14,$20
+	sll	$11,$24,16
+	srl	$12,$7,15
+	xor	$3,$3,$fp
+	addu	$9,$9,$15
+	subu	$11,$11,$24
+	and	$12,$12,$20
+	srl	$24,$4,15
+	addu	$3,$10,$3
+	xor	$9,$9,$15
+	addu	$2,$6,$13
+	sll	$fp,$14,16
+	addu	$3,$3,$9
+	subu	$14,$fp,$14
+	and	$10,$24,$20
+	sll	$6,$12,16
+	xor	$2,$2,$13
+	addu	$8,$8,$11
+	subu	$12,$6,$12
+	addu	$2,$3,$2
+	sll	$9,$10,16
+	xor	$11,$8,$11
+	addu	$5,$5,$14
+	subu	$3,$9,$10
+	addu	$2,$2,$11
+	xor	$5,$5,$14
+	addu	$7,$7,$12
+	addu	$4,$4,$3
+	addu	$2,$2,$5
+	xor	$7,$7,$12
+	xor	$4,$4,$3
+	addu	$2,$2,$7
+	addu	$2,$2,$4
+	andi	$3,$2,0xffff
+	srl	$2,$2,16
+	addu	$2,$3,$2
+	bne	$23,$25,.L2784
+	addu	$31,$2,$31
+
+	addiu	$31,$31,2
+	sra	$31,$31,2
+	beq	$31,$17,.L2796
+	ld	$25,%call16(puts)($28)
+
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	ld	$4,168($sp)
+
+	ld	$2,144($sp)
+.L2798:
+	addu	$17,$17,$16
+	daddiu	$21,$21,8
+	move	$16,$17
+	bne	$2,$21,.L2787
+	daddiu	$22,$22,8
+
+	ld	$3,128($sp)
+	li	$2,1			# 0x1
+	ld	$22,176($sp)
+	ld	$23,184($sp)
+	daddu	$3,$3,$22
+	sd	$3,128($sp)
+	ld	$3,136($sp)
+	daddu	$3,$3,$23
+	sd	$3,136($sp)
+	ld	$3,160($sp)
+	bne	$3,$2,.L2791
+	ld	$2,%got_page(_ZN12_GLOBAL__N_19_sa8d_8x8EPKhlS1_l)($28)
+
+	move	$5,$18
+	move	$7,$19
+	ld	$fp,200($sp)
+	ld	$20,152($sp)
+	daddiu	$21,$2,%got_ofst(_ZN12_GLOBAL__N_19_sa8d_8x8EPKhlS1_l)
+	move	$6,$fp
+	move	$25,$21
+	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_19_sa8d_8x8EPKhlS1_l
+1:	jalr	$25
+	move	$4,$20
+
+	move	$5,$18
+	sd	$20,152($sp)
+	daddiu	$4,$20,8
+	move	$7,$19
+	daddiu	$6,$fp,8
+	move	$25,$21
+	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_19_sa8d_8x8EPKhlS1_l
+1:	jalr	$25
+	move	$20,$2
+
+	ld	$3,152($sp)
+	addiu	$20,$20,2
+	addiu	$2,$2,2
+	move	$5,$18
+	move	$7,$19
+	sra	$2,$2,2
+	daddu	$4,$3,$22
+	daddu	$6,$fp,$23
+	move	$25,$21
+	sra	$20,$20,2
+	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_19_sa8d_8x8EPKhlS1_l
+1:	jalr	$25
+	addu	$20,$20,$2
+
+	ld	$3,152($sp)
+	daddiu	$6,$23,8
+	addiu	$2,$2,2
+	daddiu	$4,$22,8
+	sra	$2,$2,2
+	move	$5,$18
+	move	$25,$21
+	move	$7,$19
+	daddu	$6,$fp,$6
+	daddu	$4,$3,$4
+	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_19_sa8d_8x8EPKhlS1_l
+1:	jalr	$25
+	addu	$18,$2,$20
+
+	addiu	$20,$2,2
+	sra	$20,$20,2
+	addu	$20,$20,$18
+	beq	$20,$17,.L2797
+	ld	$25,%call16(puts)($28)
+
+	ld	$4,%got_page(.LC175)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC175)
+
+	ld	$4,%got_page(.LC31)($28)
+	move	$5,$20
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC31)
+
+	ld	$4,%got_page(.LC32)($28)
+	move	$5,$17
+	ld	$25,%call16(printf)($28)
+	.reloc	1f,R_MIPS_JALR,printf
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC32)
+
+	ld	$31,296($sp)
+	move	$2,$16
+	ld	$fp,288($sp)
+	ld	$28,280($sp)
+	ld	$23,272($sp)
+	ld	$22,264($sp)
+	ld	$21,256($sp)
+	ld	$20,248($sp)
+	ld	$19,240($sp)
+	ld	$18,232($sp)
+	ld	$17,224($sp)
+	ld	$16,216($sp)
+	jr	$31
+	daddiu	$sp,$sp,304
+
+	.align	3
+.L2796:
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	ld	$4,192($sp)
+
+	b	.L2798
+	ld	$2,144($sp)
+
+	.align	3
+.L2791:
+	li	$2,1			# 0x1
+	b	.L2788
+	sd	$2,160($sp)
+
+.L2797:
+	ld	$4,%got_page(.LC174)($28)
+	.reloc	1f,R_MIPS_JALR,puts
+1:	jalr	$25
+	daddiu	$4,$4,%got_ofst(.LC174)
+
+	ld	$31,296($sp)
+	move	$2,$16
+	ld	$fp,288($sp)
+	ld	$28,280($sp)
+	ld	$23,272($sp)
+	ld	$22,264($sp)
+	ld	$21,256($sp)
+	ld	$20,248($sp)
+	ld	$19,240($sp)
+	ld	$18,232($sp)
+	ld	$17,224($sp)
+	ld	$16,216($sp)
+	jr	$31
+	daddiu	$sp,$sp,304
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
+	.size	_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l, .-_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l
+	.type	_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l, @function
+_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l:
+	.frame	$sp,96,$31		# vars= 0, regs= 11/0, args= 0, gp= 0
+	.mask	0xd0ff0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-96
+	sd	$28,72($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l)))
+	daddu	$28,$28,$25
+	sd	$19,32($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l)))
+	sd	$fp,80($sp)
+	li	$fp,4			# 0x4
+	ld	$19,%got_page(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)($28)
+	sd	$23,64($sp)
+	dsll	$23,$5,4
+	sd	$22,56($sp)
+	dsll	$22,$7,4
+	sd	$21,48($sp)
+	daddiu	$19,$19,%got_ofst(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)
+	move	$21,$5
+	sd	$20,40($sp)
+	move	$20,$7
+	sd	$18,24($sp)
+	move	$18,$4
+	sd	$17,16($sp)
+	move	$17,$6
+	sd	$16,8($sp)
+	move	$16,$0
+	sd	$31,88($sp)
+.L2800:
+	move	$6,$17
+	move	$4,$18
+	move	$7,$20
+	move	$5,$21
+	move	$25,$19
+	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
+1:	jalr	$25
+	addiu	$fp,$fp,-1
+
+	daddiu	$6,$17,16
+	daddiu	$4,$18,16
+	move	$7,$20
+	move	$5,$21
+	move	$25,$19
+	addu	$16,$2,$16
+	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
+1:	jalr	$25
+	daddu	$18,$18,$23
+
+	daddu	$17,$17,$22
+	addu	$2,$2,$16
+	bne	$fp,$0,.L2800
+	move	$16,$2
+
+	ld	$31,88($sp)
+	ld	$fp,80($sp)
+	ld	$28,72($sp)
+	ld	$23,64($sp)
+	ld	$22,56($sp)
+	ld	$21,48($sp)
+	ld	$20,40($sp)
+	ld	$19,32($sp)
+	ld	$18,24($sp)
+	ld	$17,16($sp)
+	ld	$16,8($sp)
+	jr	$31
+	daddiu	$sp,$sp,96
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l
+	.size	_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_16sa8d16ILi32ELi64EEEiPKhlS2_l
+	.align	2
+	.align	3
+	.set	nomips16
+	.set	nomicromips
+	.ent	_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l
+	.type	_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l, @function
+_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l:
+	.frame	$sp,64,$31		# vars= 0, regs= 7/0, args= 0, gp= 0
+	.mask	0x901f0000,-8
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	daddiu	$sp,$sp,-64
+	sd	$28,48($sp)
+	lui	$28,%hi(%neg(%gp_rel(_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l)))
+	daddu	$28,$28,$25
+	sd	$16,8($sp)
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l)))
+	sd	$20,40($sp)
+	move	$20,$7
+	ld	$16,%got_page(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)($28)
+	sd	$19,32($sp)
+	move	$19,$6
+	sd	$18,24($sp)
+	move	$18,$5
+	daddiu	$16,$16,%got_ofst(_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l)
+	sd	$17,16($sp)
+	move	$25,$16
+	sd	$31,56($sp)
+	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
+1:	jalr	$25
+	move	$17,$4
+
+	dlsa	$6,$20,$19,4
+	dlsa	$4,$18,$17,4
+	move	$7,$20
+	move	$5,$18
+	move	$25,$16
+	.reloc	1f,R_MIPS_JALR,_ZN12_GLOBAL__N_110sa8d_16x16EPKhlS1_l
+1:	jalr	$25
+	move	$17,$2
+
+	ld	$31,56($sp)
+	addu	$2,$2,$17
+	ld	$28,48($sp)
+	ld	$20,40($sp)
+	ld	$19,32($sp)
+	ld	$18,24($sp)
+	ld	$17,16($sp)
+	ld	$16,8($sp)
+	jr	$31
+	daddiu	$sp,$sp,64
+
+	.set	macro
+	.set	reorder
+	.end	_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l
+	.size	_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l, .-_ZN12_GLOBAL__N_16sa8d16ILi16ELi32EEEiPKhlS2_l
 	.align	2
 	.align	3
 	.globl	_Z2LDPKh
@@ -36378,6 +38208,37 @@ _Z7LD_V4_HPKhPDv2_xS2_S2_S2_:
 	.set	reorder
 	.end	_Z7LD_V4_HPKhPDv2_xS2_S2_S2_
 	.size	_Z7LD_V4_HPKhPDv2_xS2_S2_S2_, .-_Z7LD_V4_HPKhPDv2_xS2_S2_S2_
+	.align	2
+	.align	3
+	.globl	_Z7LD_V6_HPKhPDv2_xS2_S2_S2_S2_S2_
+	.set	nomips16
+	.set	nomicromips
+	.ent	_Z7LD_V6_HPKhPDv2_xS2_S2_S2_S2_S2_
+	.type	_Z7LD_V6_HPKhPDv2_xS2_S2_S2_S2_S2_, @function
+_Z7LD_V6_HPKhPDv2_xS2_S2_S2_S2_S2_:
+	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, gp= 0
+	.mask	0x00000000,0
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	ld.d	$w0,0($4)
+	st.d	$w0,0($5)
+	ld.d	$w0,16($4)
+	st.d	$w0,0($6)
+	ld.d	$w0,32($4)
+	st.d	$w0,0($7)
+	ld.d	$w0,48($4)
+	st.d	$w0,0($8)
+	ld.d	$w0,64($4)
+	st.d	$w0,0($9)
+	ld.d	$w0,80($4)
+	jr	$31
+	st.d	$w0,0($10)
+
+	.set	macro
+	.set	reorder
+	.end	_Z7LD_V6_HPKhPDv2_xS2_S2_S2_S2_S2_
+	.size	_Z7LD_V6_HPKhPDv2_xS2_S2_S2_S2_S2_, .-_Z7LD_V6_HPKhPDv2_xS2_S2_S2_S2_S2_
 	.align	2
 	.align	3
 	.globl	_Z5LD_V8PKhlPDv2_xS2_S2_S2_S2_S2_S2_S2_
@@ -37094,6 +38955,42 @@ _Z7ST_V4_HDv2_xS_S_S_Ph:
 	.size	_Z7ST_V4_HDv2_xS_S_S_Ph, .-_Z7ST_V4_HDv2_xS_S_S_Ph
 	.align	2
 	.align	3
+	.globl	_Z7ST_V6_HDv2_xS_S_S_S_S_Ph
+	.set	nomips16
+	.set	nomicromips
+	.ent	_Z7ST_V6_HDv2_xS_S_S_S_S_Ph
+	.type	_Z7ST_V6_HDv2_xS_S_S_S_S_Ph, @function
+_Z7ST_V6_HDv2_xS_S_S_S_S_Ph:
+	.frame	$sp,0,$31		# vars= 0, regs= 0/0, args= 0, gp= 0
+	.mask	0x00000000,0
+	.fmask	0x00000000,0
+	.set	noreorder
+	.set	nomacro
+	ld	$2,32($sp)
+	insert.d	$w3[0],$4
+	insert.d	$w2[0],$6
+	insert.d	$w3[1],$5
+	insert.d	$w2[1],$7
+	insert.d	$w1[0],$8
+	insert.d	$w0[0],$10
+	insert.d	$w1[1],$9
+	insert.d	$w0[1],$11
+	st.d	$w3,0($2)
+	st.d	$w2,16($2)
+	st.d	$w1,32($2)
+	st.d	$w0,48($2)
+	ld.d	$w0,0($sp)
+	st.d	$w0,64($2)
+	ld.d	$w0,16($sp)
+	jr	$31
+	st.d	$w0,80($2)
+
+	.set	macro
+	.set	reorder
+	.end	_Z7ST_V6_HDv2_xS_S_S_S_S_Ph
+	.size	_Z7ST_V6_HDv2_xS_S_S_S_S_Ph, .-_Z7ST_V6_HDv2_xS_S_S_S_S_Ph
+	.align	2
+	.align	3
 	.globl	_ZN4x26515extendPicBorderEPhliiii
 	.set	nomips16
 	.set	nomicromips
@@ -37129,13 +39026,13 @@ _ZN4x26515extendPicBorderEPhliiii:
 	jalr	$25
 	sd	$17,8($sp)
 
-	blez	$19,.L2802
+	blez	$19,.L2893
 	dsubu	$18,$21,$16
 
 	move	$17,$0
 	ld	$25,%call16(memcpy)($28)
 	.align	3
-.L2809:
+.L2900:
 	move	$4,$18
 	move	$6,$16
 	move	$5,$21
@@ -37144,7 +39041,7 @@ _ZN4x26515extendPicBorderEPhliiii:
 1:	jalr	$25
 	dsubu	$18,$18,$16
 
-	bne	$17,$19,.L2809
+	bne	$17,$19,.L2900
 	ld	$25,%call16(memcpy)($28)
 
 	addiu	$23,$23,-1
@@ -37154,7 +39051,7 @@ _ZN4x26515extendPicBorderEPhliiii:
 	daddu	$20,$20,$22
 	daddu	$18,$20,$16
 	.align	3
-.L2810:
+.L2901:
 	move	$4,$18
 	move	$6,$16
 	move	$5,$20
@@ -37163,10 +39060,10 @@ _ZN4x26515extendPicBorderEPhliiii:
 1:	jalr	$25
 	daddu	$18,$18,$16
 
-	bne	$17,$19,.L2810
+	bne	$17,$19,.L2901
 	ld	$25,%call16(memcpy)($28)
 
-.L2802:
+.L2893:
 	ld	$31,72($sp)
 	ld	$28,64($sp)
 	ld	$23,56($sp)
@@ -38700,12 +40597,21 @@ _ZN4x26522setupPixelPrimitives_cERNS_17EncoderPrimitivesE:
 	ld	$2,%got_page(_ZL4dct4PKsPsl)($28)
 	daddiu	$2,$2,%got_ofst(_ZL4dct4PKsPsl)
 	sd	$2,3200($4)
-	ld	$2,%got_page(_ZL6dct8_cPKsPsl)($28)
+	ld	$2,%got_page(_ZL4dct8PKsPsl)($28)
+	daddiu	$2,$2,%got_ofst(_ZL4dct8PKsPsl)
+	sd	$2,3696($4)
+	ld	$2,%got_page(_ZL5idct4PKsPsl)($28)
+	daddiu	$2,$2,%got_ofst(_ZL5idct4PKsPsl)
+	sd	$2,3208($4)
+	ld	$2,%got_page(_ZL4dst4PKsPsl)($28)
+	daddiu	$2,$2,%got_ofst(_ZL4dst4PKsPsl)
+	sd	$2,5680($4)
+	ld	$2,%got_page(_ZL5idst4PKsPsl)($28)
 	ld	$28,256($sp)
 	daddiu	$sp,$sp,272
-	daddiu	$2,$2,%got_ofst(_ZL6dct8_cPKsPsl)
+	daddiu	$2,$2,%got_ofst(_ZL5idst4PKsPsl)
 	jr	$31
-	sd	$2,3696($4)
+	sd	$2,5688($4)
 
 	.set	macro
 	.set	reorder
@@ -38713,6 +40619,147 @@ _ZN4x26522setupPixelPrimitives_cERNS_17EncoderPrimitivesE:
 	.size	_ZN4x26522setupPixelPrimitives_cERNS_17EncoderPrimitivesE, .-_ZN4x26522setupPixelPrimitives_cERNS_17EncoderPrimitivesE
 	.local	_ZZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_lE7zeroBuf
 	.comm	_ZZN12_GLOBAL__N_110psyCost_ppILi4EEEiPKhlS2_lE7zeroBuf,8,8
+	.globl	tab_dct8_2
+	.data
+	.align	3
+	.type	tab_dct8_2, @object
+	.size	tab_dct8_2, 96
+tab_dct8_2:
+	.word	36
+	.word	83
+	.word	36
+	.word	83
+	.word	83
+	.word	36
+	.word	83
+	.word	36
+	.word	89
+	.word	75
+	.word	50
+	.word	18
+	.word	75
+	.word	-18
+	.word	-89
+	.word	-50
+	.word	50
+	.word	-89
+	.word	18
+	.word	75
+	.word	18
+	.word	-50
+	.word	75
+	.word	-89
+	.globl	tab_dct4
+	.align	3
+	.type	tab_dct4, @object
+	.size	tab_dct4, 64
+tab_dct4:
+	.half	64
+	.half	64
+	.half	64
+	.half	64
+	.half	64
+	.half	64
+	.half	64
+	.half	64
+	.half	83
+	.half	36
+	.half	83
+	.half	36
+	.half	83
+	.half	36
+	.half	83
+	.half	36
+	.half	64
+	.half	-64
+	.half	64
+	.half	-64
+	.half	64
+	.half	-64
+	.half	64
+	.half	-64
+	.half	36
+	.half	-83
+	.half	36
+	.half	-83
+	.half	36
+	.half	-83
+	.half	36
+	.half	-83
+	.globl	tab_dct8_11
+	.align	3
+	.type	tab_dct8_11, @object
+	.size	tab_dct8_11, 64
+tab_dct8_11:
+	.half	50
+	.half	18
+	.half	50
+	.half	18
+	.half	50
+	.half	18
+	.half	50
+	.half	18
+	.half	-89
+	.half	75
+	.half	-89
+	.half	75
+	.half	-89
+	.half	75
+	.half	-89
+	.half	75
+	.half	18
+	.half	75
+	.half	18
+	.half	75
+	.half	18
+	.half	75
+	.half	18
+	.half	75
+	.half	-50
+	.half	-89
+	.half	-50
+	.half	-89
+	.half	-50
+	.half	-89
+	.half	-50
+	.half	-89
+	.globl	tab_dct8_1
+	.align	3
+	.type	tab_dct8_1, @object
+	.size	tab_dct8_1, 64
+tab_dct8_1:
+	.half	89
+	.half	50
+	.half	89
+	.half	50
+	.half	89
+	.half	50
+	.half	89
+	.half	50
+	.half	75
+	.half	18
+	.half	75
+	.half	18
+	.half	75
+	.half	18
+	.half	75
+	.half	18
+	.half	75
+	.half	-89
+	.half	75
+	.half	-89
+	.half	75
+	.half	-89
+	.half	75
+	.half	-89
+	.half	-18
+	.half	-50
+	.half	-18
+	.half	-50
+	.half	-18
+	.half	-50
+	.half	-18
+	.half	-50
 	.local	_ZZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_lE7zeroBuf
 	.comm	_ZZN12_GLOBAL__N_116psyCost_pp_32x32EPKhlS1_lE7zeroBuf,8,8
 	.local	_ZZN12_GLOBAL__N_116psyCost_pp_16x16EPKhlS1_lE7zeroBuf
@@ -38742,7 +40789,137 @@ _ZN4x26522setupPixelPrimitives_cERNS_17EncoderPrimitivesE:
 	.word	1105199104
 	.section	.rodata.cst16,"aM",@progbits,16
 	.align	4
-.LC139:
+.LC22:
+	.half	29
+	.half	84
+	.half	29
+	.half	84
+	.half	29
+	.half	84
+	.half	29
+	.half	84
+	.align	4
+.LC23:
+	.half	55
+	.half	-29
+	.half	55
+	.half	-29
+	.half	55
+	.half	-29
+	.half	55
+	.half	-29
+	.align	4
+.LC24:
+	.half	74
+	.half	-74
+	.half	74
+	.half	-74
+	.half	74
+	.half	-74
+	.half	74
+	.half	-74
+	.align	4
+.LC25:
+	.half	84
+	.half	55
+	.half	84
+	.half	55
+	.half	84
+	.half	55
+	.half	84
+	.half	55
+	.align	4
+.LC26:
+	.half	74
+	.half	55
+	.half	74
+	.half	55
+	.half	74
+	.half	55
+	.half	74
+	.half	55
+	.align	4
+.LC27:
+	.half	74
+	.half	-84
+	.half	74
+	.half	-84
+	.half	74
+	.half	-84
+	.half	74
+	.half	-84
+	.align	4
+.LC28:
+	.half	0
+	.half	74
+	.half	0
+	.half	74
+	.half	0
+	.half	74
+	.half	0
+	.half	74
+	.align	4
+.LC29:
+	.half	-74
+	.half	-29
+	.half	-74
+	.half	-29
+	.half	-74
+	.half	-29
+	.half	-74
+	.half	-29
+	.align	4
+.LC35:
+	.half	29
+	.half	55
+	.half	74
+	.half	84
+	.half	29
+	.half	55
+	.half	74
+	.half	84
+	.align	4
+.LC36:
+	.half	74
+	.half	74
+	.half	0
+	.half	-74
+	.half	74
+	.half	74
+	.half	0
+	.half	-74
+	.align	4
+.LC37:
+	.half	84
+	.half	-29
+	.half	-74
+	.half	55
+	.half	84
+	.half	-29
+	.half	-74
+	.half	55
+	.align	4
+.LC38:
+	.half	55
+	.half	-84
+	.half	74
+	.half	-29
+	.half	55
+	.half	-84
+	.half	74
+	.half	-29
+	.align	4
+.LC155:
+	.half	64
+	.half	-64
+	.half	64
+	.half	-64
+	.half	64
+	.half	-64
+	.half	64
+	.half	-64
+	.align	4
+.LC156:
 	.half	83
 	.half	36
 	.half	83
@@ -38752,17 +40929,7 @@ _ZN4x26522setupPixelPrimitives_cERNS_17EncoderPrimitivesE:
 	.half	83
 	.half	36
 	.align	4
-.LC140:
-	.half	64
-	.half	-64
-	.half	64
-	.half	-64
-	.half	64
-	.half	-64
-	.half	64
-	.half	-64
-	.align	4
-.LC141:
+.LC157:
 	.half	36
 	.half	-83
 	.half	36

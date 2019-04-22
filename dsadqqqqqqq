@@ -1,0 +1,114 @@
+[33mcommit 818300140ffa8c2226ae0a1c28b4e0ace0d447a0[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Tue Apr 16 19:10:53 2019 +0800
+
+    This version has optimized blockcopy_pp, blockcopy_ss, pixel_add_ps and dct4. But the pixel_add_ps_16x16 function has a problem containing a stack operation in its circulation. In order to optimize dct, dct.cpp's content is add to pixel.cpp, so that ld_st.h can be used.
+
+[33mcommit 562929e425497002fdb34a52b31466244a30fe48[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Fri Apr 12 09:48:51 2019 +0800
+
+    This version has optimized psyCost_pp function, but there are still some problems in psyCost_pp_8x8_internal leading to some problems in psyCost_pp_16x16 and psyCost_pp_32x32 such as stack operation.
+
+[33mcommit cd34b769299aae255e40a5ac6fc4f75d3d96f5c9[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Wed Apr 10 15:03:24 2019 +0800
+
+    This version has optimized pixel_var, but only supporting 8x8 and 16x16 size.
+
+[33mcommit 622fbcc592f8145fd89c5d8455c8cd5ac6e4fc58[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Wed Apr 10 09:37:29 2019 +0800
+
+    This version has optimized function frame_init_lowres_core.
+
+[33mcommit a70ec69dee51295c49c6be96c8805e937f850b24[m
+Merge: 67cc5de 23cdb06
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Mon Apr 8 15:13:00 2019 +0800
+
+    Merge branch 'debug'
+
+[33mcommit 23cdb0652b93bf8e9ea6b2e8ceab7301d5ba97ff[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Mon Apr 8 15:12:29 2019 +0800
+
+    Test merging.
+
+[33mcommit 67cc5dec9448a01b32c3636ae566790c71e7fbb1[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Mon Apr 8 14:44:05 2019 +0800
+
+    This version has optimized satd8, sa8d, blockfill_s, getResidual, weight_pp, pixelavg_pp_8x8, and pixel.cpp's structure has also been optimized. Absolutely I always try to make all the assembly function better, improving all the time!
+
+[33mcommit 8350d9fd4ec6308421eda183467f2e51bf510343[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Wed Mar 27 15:51:10 2019 +0800
+
+    Fix the sub_ps_8x8's problem.
+
+[33mcommit b154e93f3e6a0f3ada5d25447efa89334d55dc06[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Tue Mar 26 23:04:05 2019 +0800
+
+    This version has optimized sad_x3, sad_x4, sse_pp_a, satd_4x4, assembly code has been optimal! maybe?
+
+[33mcommit 857f1d0b4ad8d2e8d4de8b7738e3c2371c1c0aee[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Sat Mar 16 22:56:20 2019 +0800
+
+    Bug in sub_ps_32x32 has been solved.
+
+[33mcommit 51b84afcdf98c019201d7beda4262464520ba890[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Sat Mar 16 21:03:08 2019 +0800
+
+    Sad_x3's 8x8, 16x16, 32x32 is changed with assembly, and sad's load module is improved.
+
+[33mcommit 91e60e2892b8e67e7e0e7fd102ba9285c08f0c8f[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Thu Mar 14 20:48:38 2019 +0800
+
+    This version needn't input message. The executing command is ./x265 -o test.265 --input ./test_176x144_15.yuv --input-res 176x144  --fps 15 -f 2.
+
+[33mcommit 51547422c7275936a865b6c790ec467becb3a874[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Mon Apr 8 14:44:05 2019 +0800
+
+    This version has optimized satd8, sa8d, blockfill_s, getResidual, weight_pp, pixelavg_pp_8x8. And absolutely I always try to make all the assembly function better, improving all the time!
+
+[33mcommit 97e1e15b1f545bb54e495943721261b171dc428f[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Wed Mar 27 15:51:10 2019 +0800
+
+    fix the sub_ps_8x8's problem
+
+[33mcommit 7495973fa7cbdf540bfd4f8b50e4cc045efe937d[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Tue Mar 26 23:04:05 2019 +0800
+
+    this version has optimized sad_x3 sad_x4 sse_pp_a satd, assembly code has been optimal! maybe.
+
+[33mcommit 879ec9965d4b20b36fe98abcabce3e0f2ffc172e[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Sat Mar 16 22:56:20 2019 +0800
+
+    bug in sub_ps_32x32 is solved
+
+[33mcommit 9500ec93beddaa9bc04c91b934844cdd3c409c8d[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Sat Mar 16 21:03:08 2019 +0800
+
+    sad_x3's 8x8 16x16 32x32 is changed with assembly, sad's load module is improved
+
+[33mcommit d925b50d453138d977739de626ecf7fde8abc03a[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Thu Mar 14 20:48:38 2019 +0800
+
+    this version needn't input message. The command is ./x265 -o test.265 --input ./test_176x144_15.yuv --input-res 176x144  --fps 15 -f 2
+
+[33mcommit 13e8a0afbe670832e070465d82586762871c79ca[m
+Author: czshuai <chen_ze_shuai@163.com>
+Date:   Thu Mar 14 09:51:46 2019 +0800
+
+    common/sub_ps and common/sad are changed with assembly language(msa)

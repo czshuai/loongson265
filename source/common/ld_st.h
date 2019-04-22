@@ -157,6 +157,14 @@ void LD_V4_H(const pixel *psrc, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *ou
 	LD_V2_H(psrc + 32, out2, out3);
 }
 
+void LD_V6_H(const pixel *psrc, v2i64 *out0, v2i64 *out1, v2i64 *out2, v2i64 *out3, v2i64 *out4, v2i64 *out5)
+{
+	LD_V2_H(psrc, out0, out1);
+	LD_V2_H(psrc + 32, out2, out3);
+	LD_V2_H(psrc + 64, out4, out5);
+}
+
+
 #define LD_UB4(...) LD_V4(v16u8, __VA_ARGS__)
 #define LD_SB4(...) LD_V4(v16i8, __VA_ARGS__)
 #define LD_UH4(...) LD_V4(v8u16, __VA_ARGS__)
@@ -391,6 +399,13 @@ void ST_V4_H(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, pixel *pdst)
 {
 	ST_V2_H(in0, in1, pdst);
 	ST_V2_H(in2, in3, pdst + 32);
+}
+
+void ST_V6_H(v2i64 in0, v2i64 in1, v2i64 in2, v2i64 in3, v2i64 in4, v2i64 in5, pixel *pdst)
+{
+	ST_V2_H(in0, in1, pdst);
+	ST_V2_H(in2, in3, pdst + 32);
+	ST_V2_H(in4, in5, pdst + 64);	
 }
 
 #define ST_V6(in0, in1, in2, in3, in4, in5, pdst, stride)	\

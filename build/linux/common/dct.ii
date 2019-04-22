@@ -19132,27 +19132,7 @@ static void fastForwardDst(const int16_t* block, int16_t* coeff, int shift)
         coeff[12 + i] = (int16_t)((55 * c[2] - 29 * c[1] + c[3] + rnd_factor) >> shift);
     }
 }
-
-static void inversedst(const int16_t* tmp, int16_t* block, int shift)
-{
-    int i, c[4];
-    int rnd_factor = 1 << (shift - 1);
-
-    for (i = 0; i < 4; i++)
-    {
-
-        c[0] = tmp[i] + tmp[8 + i];
-        c[1] = tmp[8 + i] + tmp[12 + i];
-        c[2] = tmp[i] - tmp[12 + i];
-        c[3] = 74 * tmp[4 + i];
-
-        block[4 * i + 0] = (int16_t)x265_clip3(-32768, 32767, (29 * c[0] + 55 * c[1] + c[3] + rnd_factor) >> shift);
-        block[4 * i + 1] = (int16_t)x265_clip3(-32768, 32767, (55 * c[2] - 29 * c[1] + c[3] + rnd_factor) >> shift);
-        block[4 * i + 2] = (int16_t)x265_clip3(-32768, 32767, (74 * (tmp[i] - tmp[8 + i] + tmp[12 + i]) + rnd_factor) >> shift);
-        block[4 * i + 3] = (int16_t)x265_clip3(-32768, 32767, (55 * c[0] + 29 * c[2] - c[3] + rnd_factor) >> shift);
-    }
-}
-
+# 87 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
 static void partialButterfly16(const int16_t* src, int16_t* dst, int shift, int line)
 {
     int j, k;
@@ -19274,32 +19254,7 @@ static void partialButterfly32(const int16_t* src, int16_t* dst, int shift, int 
         dst++;
     }
 }
-# 246 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-static void partialButterflyInverse4(const int16_t* src, int16_t* dst, int shift, int line)
-{
-    int j;
-    int E[2], O[2];
-    int add = 1 << (shift - 1);
-
-    for (j = 0; j < line; j++)
-    {
-
-        O[0] = g_t4[1][0] * src[line] + g_t4[3][0] * src[3 * line];
-        O[1] = g_t4[1][1] * src[line] + g_t4[3][1] * src[3 * line];
-        E[0] = g_t4[0][0] * src[0] + g_t4[2][0] * src[2 * line];
-        E[1] = g_t4[0][1] * src[0] + g_t4[2][1] * src[2 * line];
-
-
-        dst[0] = (int16_t)(x265_clip3(-32768, 32767, (E[0] + O[0] + add) >> shift));
-        dst[1] = (int16_t)(x265_clip3(-32768, 32767, (E[1] + O[1] + add) >> shift));
-        dst[2] = (int16_t)(x265_clip3(-32768, 32767, (E[1] - O[1] + add) >> shift));
-        dst[3] = (int16_t)(x265_clip3(-32768, 32767, (E[0] - O[0] + add) >> shift));
-
-        src++;
-        dst += 4;
-    }
-}
-
+# 275 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
 static void partialButterflyInverse8(const int16_t* src, int16_t* dst, int shift, int line)
 {
     int j, k;
@@ -19450,24 +19405,7 @@ static void partialButterflyInverse32(const int16_t* src, int16_t* dst, int shif
         dst += 32;
     }
 }
-# 449 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
-static void dst4_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
-{
-    const int shift_1st = 1 + 8 - 8;
-    const int shift_2nd = 8;
-
-    int16_t coef[4 * 4] __attribute__((aligned(32)));
-    int16_t block[4 * 4] __attribute__((aligned(32)));
-
-    for (int i = 0; i < 4; i++)
-    {
-        memcpy(&block[i * 4], &src[i * srcStride], 4 * sizeof(int16_t));
-    }
-
-    fastForwardDst(block, coef, shift_1st);
-    fastForwardDst(coef, dst, shift_2nd);
-}
-# 614 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 620 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
 static void dct16_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
 {
     const int shift_1st = 3 + 8 - 8;
@@ -19501,41 +19439,7 @@ static void dct32_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
     partialButterfly32(block, coef, shift_1st, 32);
     partialButterfly32(coef, dst, shift_2nd, 32);
 }
-
-static void idst4_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
-{
-    const int shift_1st = 7;
-    const int shift_2nd = 12 - (8 - 8);
-
-    int16_t coef[4 * 4] __attribute__((aligned(32)));
-    int16_t block[4 * 4] __attribute__((aligned(32)));
-
-    inversedst(src, coef, shift_1st);
-    inversedst(coef, block, shift_2nd);
-
-    for (int i = 0; i < 4; i++)
-    {
-        memcpy(&dst[i * dstStride], &block[i * 4], 4 * sizeof(int16_t));
-    }
-}
-
-static void idct4_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
-{
-    const int shift_1st = 7;
-    const int shift_2nd = 12 - (8 - 8);
-
-    int16_t coef[4 * 4] __attribute__((aligned(32)));
-    int16_t block[4 * 4] __attribute__((aligned(32)));
-
-    partialButterflyInverse4(src, coef, shift_1st, 4);
-    partialButterflyInverse4(coef, block, shift_2nd, 4);
-
-    for (int i = 0; i < 4; i++)
-    {
-        memcpy(&dst[i * dstStride], &block[i * 4], 4 * sizeof(int16_t));
-    }
-}
-
+# 692 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
 static void idct8_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
 {
     const int shift_1st = 7;
@@ -19852,30 +19756,30 @@ static uint32_t costCoeffNxN_c(const uint16_t *scan, const coeff_t *coeff, intpt
             sum += stateBits;
         }
         
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
        ({ if (
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
        numNonZero <= 15
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
        ) ; else __assert_fail (
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
        "numNonZero <= 15"
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
-       , "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp", 997, __PRETTY_FUNCTION__); })
-# 997 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+       , "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp", 1007, __PRETTY_FUNCTION__); })
+# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
                                ;
         
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
        ({ if (
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
        blkPos <= 15
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
        ) ; else __assert_fail (
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
        "blkPos <= 15"
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
-       , "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp", 998, __PRETTY_FUNCTION__); })
-# 998 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+       , "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp", 1008, __PRETTY_FUNCTION__); })
+# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
                            ;
         absCoeff[numNonZero] = tmpCoeff[blkPos];
         numNonZero += sig;
@@ -19995,13 +19899,13 @@ void setupDCTPrimitives_c(EncoderPrimitives& p)
     p.dequant_normal = dequant_normal_c;
     p.quant = quant_c;
     p.nquant = nquant_c;
-    p.dst4x4 = dst4_c;
+
 
 
     p.cu[BLOCK_16x16].dct = dct16_c;
     p.cu[BLOCK_32x32].dct = dct32_c;
-    p.idst4x4 = idst4_c;
-    p.cu[BLOCK_4x4].idct = idct4_c;
+
+
     p.cu[BLOCK_8x8].idct = idct8_c;
     p.cu[BLOCK_16x16].idct = idct16_c;
     p.cu[BLOCK_32x32].idct = idct32_c;

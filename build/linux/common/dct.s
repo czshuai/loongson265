@@ -10,214 +10,6 @@
 	.align	3
 	.set	nomips16
 	.set	nomicromips
-	.ent	_ZL14fastForwardDstPKsPsi
-	.type	_ZL14fastForwardDstPKsPsi, @function
-_ZL14fastForwardDstPKsPsi:
-	.frame	$sp,16,$31		# vars= 0, regs= 1/0, args= 0, gp= 0
-	.mask	0x10000000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	addiu	$2,$6,-1
-	li	$9,1			# 0x1
-	daddiu	$sp,$sp,-16
-	sll	$9,$9,$2
-	daddiu	$10,$4,32
-.L2:
-	lh	$3,0($4)
-	daddiu	$4,$4,8
-	daddiu	$5,$5,2
-	lh	$11,-2($4)
-	lh	$12,-6($4)
-	lh	$13,-4($4)
-	addu	$15,$3,$11
-	addu	$11,$11,$12
-	sll	$8,$15,3
-	lsa	$7,$11,$11,2
-	lsa	$2,$13,$13,3
-	subu	$8,$8,$15
-	lsa	$7,$7,$11,1
-	lsa	$2,$2,$13,2
-	lsa	$8,$8,$15,2
-	lsa	$7,$7,$7,2
-	sll	$13,$2,1
-	addu	$8,$8,$7
-	subu	$12,$3,$12
-	addu	$8,$8,$13
-	sll	$7,$12,3
-	addu	$8,$8,$9
-	lsa	$3,$12,$12,2
-	sra	$8,$8,$6
-	subu	$7,$7,$12
-	sh	$8,-2($5)
-	lsa	$2,$3,$12,1
-	lsa	$3,$7,$12,2
-	lh	$8,-8($4)
-	lsa	$14,$15,$15,2
-	sll	$24,$11,4
-	lh	$25,-6($4)
-	lsa	$14,$14,$15,1
-	subu	$15,$11,$24
-	lh	$12,-2($4)
-	lsa	$14,$14,$14,2
-	lsa	$2,$2,$2,2
-	lsa	$11,$15,$11,1
-	addu	$3,$3,$14
-	addu	$7,$8,$25
-	addu	$2,$2,$11
-	subu	$8,$7,$12
-	subu	$3,$3,$13
-	lsa	$7,$8,$8,3
-	addu	$2,$2,$13
-	lsa	$7,$7,$8,2
-	addu	$3,$3,$9
-	lsa	$7,$7,$9,1
-	addu	$2,$2,$9
-	sra	$7,$7,$6
-	sra	$3,$3,$6
-	sra	$2,$2,$6
-	sh	$7,6($5)
-	sh	$3,14($5)
-	bne	$10,$4,.L2
-	sh	$2,22($5)
-
-	jr	$31
-	daddiu	$sp,$sp,16
-
-	.set	macro
-	.set	reorder
-	.end	_ZL14fastForwardDstPKsPsi
-	.size	_ZL14fastForwardDstPKsPsi, .-_ZL14fastForwardDstPKsPsi
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZL10inversedstPKsPsi
-	.type	_ZL10inversedstPKsPsi, @function
-_ZL10inversedstPKsPsi:
-	.frame	$sp,48,$31		# vars= 0, regs= 5/0, args= 0, gp= 0
-	.mask	0x100f0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	addiu	$2,$6,-1
-	li	$7,1			# 0x1
-	daddiu	$sp,$sp,-48
-	sll	$7,$7,$2
-	daddiu	$13,$4,8
-	li	$12,32767			# 0x7fff
-	sd	$19,32($sp)
-	sd	$18,24($sp)
-	sd	$17,16($sp)
-	sd	$16,8($sp)
-.L11:
-	lh	$15,0($4)
-	li	$11,-32768			# 0xffffffffffff8000
-	li	$10,-32768			# 0xffffffffffff8000
-	lh	$24,16($4)
-	li	$9,-32768			# 0xffffffffffff8000
-	li	$8,-32768			# 0xffffffffffff8000
-	lh	$19,24($4)
-	lh	$25,8($4)
-	addu	$17,$15,$24
-	addu	$24,$24,$19
-	sll	$3,$17,3
-	lsa	$16,$24,$24,2
-	sll	$2,$24,4
-	subu	$3,$3,$17
-	lsa	$16,$16,$24,1
-	subu	$15,$15,$19
-	subu	$2,$24,$2
-	lsa	$3,$3,$17,2
-	lsa	$16,$16,$16,2
-	lsa	$24,$2,$24,1
-	lsa	$18,$17,$17,2
-	lsa	$14,$25,$25,3
-	addu	$3,$3,$16
-	lsa	$2,$15,$15,2
-	sll	$16,$15,3
-	lsa	$18,$18,$17,1
-	lsa	$14,$14,$25,2
-	lsa	$2,$2,$15,1
-	subu	$16,$16,$15
-	sll	$25,$14,1
-	lsa	$15,$16,$15,2
-	lsa	$18,$18,$18,2
-	lsa	$2,$2,$2,2
-	addu	$14,$18,$15
-	addu	$2,$2,$24
-	addu	$3,$3,$25
-	addu	$2,$2,$25
-	subu	$14,$14,$25
-	addu	$3,$3,$7
-	sra	$3,$3,$6
-	addu	$2,$2,$7
-	addu	$14,$14,$7
-	sra	$2,$2,$6
-	sra	$14,$14,$6
-	slt	$16,$3,-32768
-	slt	$25,$2,-32768
-	slt	$15,$14,-32768
-	slt	$18,$3,32767
-	slt	$17,$2,32767
-	slt	$24,$14,32767
-	seh	$3,$3
-	seh	$2,$2
-	bne	$16,$0,.L7
-	seh	$14,$14
-
-	movz	$3,$12,$18
-	move	$11,$3
-.L7:
-	bne	$25,$0,.L8
-	sh	$11,0($5)
-
-	movz	$2,$12,$17
-	move	$10,$2
-.L8:
-	sh	$10,2($5)
-	daddiu	$4,$4,2
-	lh	$10,14($4)
-	lh	$2,-2($4)
-	lh	$3,22($4)
-	subu	$2,$2,$10
-	addu	$3,$2,$3
-	lsa	$2,$3,$3,3
-	lsa	$2,$2,$3,2
-	lsa	$2,$2,$7,1
-	sra	$2,$2,$6
-	slt	$3,$2,-32768
-	bne	$3,$0,.L9
-	slt	$10,$2,32767
-
-	seh	$9,$2
-	movz	$9,$12,$10
-.L9:
-	bne	$15,$0,.L10
-	sh	$9,4($5)
-
-	move	$8,$14
-	movz	$8,$12,$24
-.L10:
-	sh	$8,6($5)
-	bne	$4,$13,.L11
-	daddiu	$5,$5,8
-
-	ld	$19,32($sp)
-	ld	$18,24($sp)
-	ld	$17,16($sp)
-	ld	$16,8($sp)
-	jr	$31
-	daddiu	$sp,$sp,48
-
-	.set	macro
-	.set	reorder
-	.end	_ZL10inversedstPKsPsi
-	.size	_ZL10inversedstPKsPsi, .-_ZL10inversedstPKsPsi
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
 	.ent	_ZL16dequant_normal_cPKsPsiii
 	.type	_ZL16dequant_normal_cPKsPsiii, @function
 _ZL16dequant_normal_cPKsPsiii:
@@ -228,7 +20,7 @@ _ZL16dequant_normal_cPKsPsiii:
 	.set	nomacro
 	addiu	$2,$8,-1
 	li	$10,1			# 0x1
-	blez	$6,.L30
+	blez	$6,.L10
 	sll	$10,$10,$2
 
 	addiu	$6,$6,-1
@@ -237,7 +29,7 @@ _ZL16dequant_normal_cPKsPsiii:
 	li	$12,32767			# 0x7fff
 	dlsa	$6,$6,$2,1
 	.align	3
-.L25:
+.L4:
 	lh	$2,0($4)
 	li	$3,-32768			# 0xffffffffffff8000
 	daddiu	$4,$4,2
@@ -245,18 +37,18 @@ _ZL16dequant_normal_cPKsPsiii:
 	addu	$2,$9,$10
 	sra	$2,$2,$8
 	slt	$9,$2,-32768
-	bne	$9,$0,.L24
+	bne	$9,$0,.L3
 	slt	$11,$2,32767
 
 	seh	$2,$2
 	movz	$2,$12,$11
 	move	$3,$2
-.L24:
+.L3:
 	sh	$3,0($5)
-	bne	$4,$6,.L25
+	bne	$4,$6,.L4
 	daddiu	$5,$5,2
 
-.L30:
+.L10:
 	jr	$31
 	nop
 
@@ -278,12 +70,12 @@ _ZL17dequant_scaling_cPKsPKiPsiii:
 	.set	nomacro
 	addiu	$9,$9,4
 	slt	$2,$8,$9
-	beq	$2,$0,.L32
+	beq	$2,$0,.L12
 	li	$10,1			# 0x1
 
 	subu	$8,$9,$8
 	addiu	$2,$8,-1
-	blez	$7,.L50
+	blez	$7,.L30
 	sll	$10,$10,$2
 
 	addiu	$3,$7,-1
@@ -292,7 +84,7 @@ _ZL17dequant_scaling_cPKsPKiPsiii:
 	li	$12,32767			# 0x7fff
 	dlsa	$3,$3,$2,1
 	.align	3
-.L35:
+.L15:
 	lh	$2,0($4)
 	li	$7,-32768			# 0xffffffffffff8000
 	daddiu	$4,$4,2
@@ -302,67 +94,67 @@ _ZL17dequant_scaling_cPKsPKiPsiii:
 	addu	$2,$11,$10
 	sra	$2,$2,$8
 	slt	$9,$2,-32768
-	bne	$9,$0,.L34
+	bne	$9,$0,.L14
 	slt	$11,$2,32767
 
 	seh	$2,$2
 	movz	$2,$12,$11
 	move	$7,$2
-.L34:
+.L14:
 	sh	$7,0($6)
-	bne	$4,$3,.L35
+	bne	$4,$3,.L15
 	daddiu	$6,$6,2
 
-.L50:
+.L30:
 	jr	$31
 	nop
 
 	.align	3
-.L32:
-	bgtz	$7,.L47
+.L12:
+	bgtz	$7,.L27
 	addiu	$3,$7,-1
 
 	jr	$31
 	nop
 
 	.align	3
-.L47:
+.L27:
 	daddiu	$2,$4,2
 	dext	$3,$3,0,32
 	subu	$8,$8,$9
 	dlsa	$3,$3,$2,1
-	b	.L38
+	b	.L18
 	li	$11,32767			# 0x7fff
 
 	.align	3
-.L48:
+.L28:
 	movz	$2,$11,$9
-.L36:
+.L16:
 	sll	$2,$2,$8
 	daddiu	$4,$4,2
 	slt	$9,$2,-32768
 	slt	$10,$2,32767
 	li	$7,-32768			# 0xffffffffffff8000
-	bne	$9,$0,.L37
+	bne	$9,$0,.L17
 	seh	$2,$2
 
 	movz	$2,$11,$10
 	move	$7,$2
-.L37:
+.L17:
 	sh	$7,0($6)
 	daddiu	$5,$5,4
-	beq	$4,$3,.L50
+	beq	$4,$3,.L30
 	daddiu	$6,$6,2
 
-.L38:
+.L18:
 	lw	$7,0($5)
 	lh	$2,0($4)
 	gsmultu	$2,$2,$7
 	slt	$7,$2,-32768
-	beq	$7,$0,.L48
+	beq	$7,$0,.L28
 	slt	$9,$2,32767
 
-	b	.L36
+	b	.L16
 	li	$2,-32768			# 0xffffffffffff8000
 
 	.set	macro
@@ -381,7 +173,7 @@ _ZL7quant_cPKsPKiPiPsiii:
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	blez	$10,.L56
+	blez	$10,.L36
 	addiu	$13,$10,-1
 
 	daddiu	$sp,$sp,-16
@@ -392,16 +184,16 @@ _ZL7quant_cPKsPKiPiPsiii:
 	addiu	$14,$8,-8
 	move	$2,$0
 	li	$24,1			# 0x1
-	b	.L55
+	b	.L35
 	li	$15,-1			# 0xffffffffffffffff
 
 	.align	3
-.L54:
+.L34:
 	sh	$12,0($7)
-	beq	$13,$4,.L67
+	beq	$13,$4,.L47
 	daddiu	$7,$7,2
 
-.L55:
+.L35:
 	lh	$3,0($4)
 	move	$16,$15
 	daddiu	$4,$4,2
@@ -421,29 +213,29 @@ _ZL7quant_cPKsPKiPiPsiii:
 	gsmultu	$10,$16,$11
 	subu	$3,$3,$25
 	sra	$3,$3,$14
-	beq	$11,$0,.L54
+	beq	$11,$0,.L34
 	sw	$3,-4($6)
 
 	slt	$3,$10,-32768
 	li	$12,-32768			# 0xffffffffffff8000
-	bne	$3,$0,.L54
+	bne	$3,$0,.L34
 	addiu	$2,$2,1
 
 	slt	$3,$10,32767
-	beq	$3,$0,.L54
+	beq	$3,$0,.L34
 	li	$12,32767			# 0x7fff
 
-	b	.L54
+	b	.L34
 	seh	$12,$10
 
 	.align	3
-.L67:
+.L47:
 	ld	$16,0($sp)
 	jr	$31
 	daddiu	$sp,$sp,16
 
 	.align	3
-.L56:
+.L36:
 	jr	$31
 	move	$2,$0
 
@@ -464,7 +256,7 @@ _ZL8nquant_cPKsPKiPsiii:
 	.set	noreorder
 	.set	nomacro
 	daddiu	$sp,$sp,-16
-	blez	$9,.L73
+	blez	$9,.L53
 	addiu	$12,$9,-1
 
 	daddiu	$2,$4,2
@@ -472,16 +264,16 @@ _ZL8nquant_cPKsPKiPsiii:
 	li	$15,1			# 0x1
 	dlsa	$12,$12,$2,1
 	li	$14,-1			# 0xffffffffffffffff
-	b	.L72
+	b	.L52
 	move	$2,$0
 
 	.align	3
-.L71:
+.L51:
 	sh	$11,0($6)
-	beq	$12,$4,.L69
+	beq	$12,$4,.L49
 	daddiu	$6,$6,2
 
-.L72:
+.L52:
 	lh	$3,0($4)
 	move	$24,$14
 	daddiu	$4,$4,2
@@ -496,28 +288,28 @@ _ZL8nquant_cPKsPKiPsiii:
 	mul	$10,$3,$13
 	addu	$3,$10,$8
 	sra	$3,$3,$7
-	beq	$3,$0,.L71
+	beq	$3,$0,.L51
 	gsmultu	$9,$24,$3
 
 	slt	$3,$9,-32768
 	li	$11,-32768			# 0xffffffffffff8000
-	bne	$3,$0,.L71
+	bne	$3,$0,.L51
 	addiu	$2,$2,1
 
 	slt	$3,$9,32767
-	beq	$3,$0,.L71
+	beq	$3,$0,.L51
 	li	$11,32767			# 0x7fff
 
 	sra	$3,$9,31
 	xor	$9,$3,$9
 	subu	$3,$9,$3
-	b	.L71
+	b	.L51
 	seh	$11,$3
 
 	.align	3
-.L73:
+.L53:
 	move	$2,$0
-.L69:
+.L49:
 	jr	$31
 	daddiu	$sp,$sp,16
 
@@ -537,25 +329,25 @@ _ZL12denoiseDct_cPsPjPKti:
 	.fmask	0x00000000,0
 	.set	noreorder
 	.set	nomacro
-	blez	$7,.L89
+	blez	$7,.L69
 	addiu	$9,$7,-1
 
 	daddiu	$2,$4,2
 	dext	$9,$9,0,32
-	b	.L84
+	b	.L64
 	dlsa	$9,$9,$2,1
 
 	.align	3
-.L88:
+.L68:
 	subu	$7,$3,$7
 	daddiu	$4,$4,2
 	seh	$7,$7
 	daddiu	$5,$5,4
 	sh	$7,-2($4)
-	beq	$9,$4,.L89
+	beq	$9,$4,.L69
 	daddiu	$6,$6,2
 
-.L84:
+.L64:
 	lh	$3,0($4)
 	lw	$8,0($5)
 	lhu	$10,0($6)
@@ -565,17 +357,17 @@ _ZL12denoiseDct_cPsPjPKti:
 	addu	$8,$8,$2
 	subu	$2,$2,$10
 	xor	$3,$2,$7
-	bgez	$2,.L88
+	bgez	$2,.L68
 	sw	$8,0($5)
 
 	move	$7,$0
 	daddiu	$4,$4,2
 	sh	$7,-2($4)
 	daddiu	$5,$5,4
-	bne	$9,$4,.L84
+	bne	$9,$4,.L64
 	daddiu	$6,$6,2
 
-.L89:
+.L69:
 	jr	$31
 	nop
 
@@ -597,16 +389,16 @@ _ZL18findPosFirstLast_cPKslPKt:
 	.set	nomacro
 	daddiu	$8,$6,30
 	li	$7,15			# 0xf
-	b	.L93
+	b	.L73
 	li	$9,-1			# 0xffffffffffffffff
 
 	.align	3
-.L104:
+.L84:
 	addiu	$7,$7,-1
-	beq	$7,$9,.L103
+	beq	$7,$9,.L83
 	li	$10,-256			# 0xffffffffffffff00
 
-.L93:
+.L73:
 	lhu	$3,0($8)
 	dsrl	$2,$3,2
 	andi	$3,$3,0x3
@@ -614,23 +406,23 @@ _ZL18findPosFirstLast_cPKslPKt:
 	daddu	$2,$2,$3
 	dlsa	$2,$2,$4,1
 	lh	$2,0($2)
-	beq	$2,$0,.L104
+	beq	$2,$0,.L84
 	daddiu	$8,$8,-2
 
 	sll	$10,$7,8
-.L92:
+.L72:
 	move	$9,$6
 	move	$8,$0
-	b	.L96
+	b	.L76
 	li	$11,16			# 0x10
 
 	.align	3
-.L106:
+.L86:
 	addiu	$8,$8,1
-	beq	$8,$11,.L105
+	beq	$8,$11,.L85
 	move	$2,$0
 
-.L96:
+.L76:
 	lhu	$3,0($9)
 	dsrl	$2,$3,2
 	andi	$3,$3,0x3
@@ -638,12 +430,12 @@ _ZL18findPosFirstLast_cPKslPKt:
 	daddu	$2,$2,$3
 	dlsa	$2,$2,$4,1
 	lh	$2,0($2)
-	beq	$2,$0,.L106
+	beq	$2,$0,.L86
 	daddiu	$9,$9,2
 
 	slt	$3,$7,$8
 	move	$9,$8
-	bne	$3,$0,.L95
+	bne	$3,$0,.L75
 	move	$2,$0
 
 	subu	$3,$7,$8
@@ -654,7 +446,7 @@ _ZL18findPosFirstLast_cPKslPKt:
 	move	$8,$0
 	dlsa	$3,$3,$2,1
 	.align	3
-.L97:
+.L77:
 	lhu	$7,0($6)
 	daddiu	$6,$6,2
 	dsrl	$2,$7,2
@@ -663,22 +455,22 @@ _ZL18findPosFirstLast_cPKslPKt:
 	daddu	$2,$2,$7
 	dlsa	$2,$2,$4,1
 	lh	$7,0($2)
-	bne	$3,$6,.L97
+	bne	$3,$6,.L77
 	addu	$8,$7,$8
 
 	sll	$2,$8,31
-.L95:
+.L75:
 	or	$10,$9,$10
 	jr	$31
 	or	$2,$10,$2
 
 	.align	3
-.L103:
-	b	.L92
+.L83:
+	b	.L72
 	li	$7,-1			# 0xffffffffffffffff
 
 	.align	3
-.L105:
+.L85:
 	li	$9,16			# 0x10
 	or	$10,$9,$10
 	jr	$31
@@ -719,31 +511,31 @@ _ZL14costC1C2Flag_cPtlPhl:
 	li	$18,9			# 0x9
 	sd	$16,0($sp)
 	ld	$17,%got_disp(_ZN4x26511g_nextStateE)($28)
-	b	.L111
+	b	.L91
 	ld	$16,%got_disp(_ZN4x26513g_entropyBitsE)($28)
 
 	.align	3
-.L113:
+.L93:
 	move	$12,$0
-.L108:
+.L88:
 	addu	$2,$20,$8
-	bne	$2,$19,.L109
+	bne	$2,$19,.L89
 	addu	$8,$25,$8
 
 	sltu	$14,$14,3
 	sltu	$20,$14,1
-.L109:
-	bne	$8,$18,.L110
+.L89:
+	bne	$8,$18,.L90
 	nop
 
 	sll	$25,$13,0
-.L110:
+.L90:
 	daddiu	$13,$13,1
 	slt	$2,$13,$5
-	beq	$2,$0,.L116
+	beq	$2,$0,.L96
 	daddiu	$4,$4,2
 
-.L111:
+.L91:
 	dext	$10,$9,0,32
 	lhu	$14,0($4)
 	move	$9,$0
@@ -758,16 +550,16 @@ _ZL14costC1C2Flag_cPtlPhl:
 	lbu	$11,0($11)
 	lw	$2,0($3)
 	sb	$11,0($10)
-	beq	$15,$0,.L113
+	beq	$15,$0,.L93
 	addu	$24,$2,$24
 
 	andi	$9,$12,0x3
-	b	.L108
+	b	.L88
 	dext	$12,$12,2,30
 
 	.align	3
-.L116:
-	bne	$9,$0,.L112
+.L96:
+	bne	$9,$0,.L92
 	daddu	$6,$6,$7
 
 	lbu	$2,0($6)
@@ -779,7 +571,7 @@ _ZL14costC1C2Flag_cPtlPhl:
 	lbu	$2,0($14)
 	addu	$24,$3,$24
 	sb	$2,0($6)
-.L112:
+.L92:
 	sll	$9,$9,26
 	sll	$25,$25,28
 	ld	$28,40($sp)
@@ -815,12 +607,12 @@ _Z15count_nonzero_cILi4EEiPKs:
 	move	$3,$0
 	daddiu	$5,$4,32
 	.align	3
-.L118:
+.L98:
 	lh	$2,0($4)
 	daddiu	$4,$4,2
 	sltu	$2,$0,$2
 	addu	$2,$2,$3
-	bne	$5,$4,.L118
+	bne	$5,$4,.L98
 	move	$3,$2
 
 	jr	$31
@@ -847,12 +639,12 @@ _Z15count_nonzero_cILi8EEiPKs:
 	move	$3,$0
 	daddiu	$5,$4,128
 	.align	3
-.L122:
+.L102:
 	lh	$2,0($4)
 	daddiu	$4,$4,2
 	sltu	$2,$0,$2
 	addu	$2,$2,$3
-	bne	$5,$4,.L122
+	bne	$5,$4,.L102
 	move	$3,$2
 
 	jr	$31
@@ -879,12 +671,12 @@ _Z15count_nonzero_cILi16EEiPKs:
 	move	$3,$0
 	daddiu	$5,$4,512
 	.align	3
-.L126:
+.L106:
 	lh	$2,0($4)
 	daddiu	$4,$4,2
 	sltu	$2,$0,$2
 	addu	$2,$2,$3
-	bne	$5,$4,.L126
+	bne	$5,$4,.L106
 	move	$3,$2
 
 	jr	$31
@@ -911,12 +703,12 @@ _Z15count_nonzero_cILi32EEiPKs:
 	move	$3,$0
 	daddiu	$5,$4,2048
 	.align	3
-.L130:
+.L110:
 	lh	$2,0($4)
 	daddiu	$4,$4,2
 	sltu	$2,$0,$2
 	addu	$2,$2,$3
-	bne	$5,$4,.L130
+	bne	$5,$4,.L110
 	move	$3,$2
 
 	jr	$31
@@ -943,11 +735,11 @@ _Z10copy_countILi4EEjPsPKsl:
 	dsll	$6,$6,1
 	daddiu	$10,$4,32
 	move	$8,$0
-.L135:
+.L115:
 	daddiu	$9,$5,8
 	move	$7,$4
 	move	$3,$5
-.L134:
+.L114:
 	lh	$2,0($3)
 	daddiu	$7,$7,2
 	daddiu	$3,$3,2
@@ -955,11 +747,11 @@ _Z10copy_countILi4EEjPsPKsl:
 	lh	$2,-2($3)
 	sltu	$2,$0,$2
 	addu	$2,$2,$8
-	bne	$3,$9,.L134
+	bne	$3,$9,.L114
 	move	$8,$2
 
 	daddiu	$4,$4,8
-	bne	$4,$10,.L135
+	bne	$4,$10,.L115
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -987,12 +779,12 @@ _Z10copy_countILi8EEjPsPKsl:
 	daddiu	$10,$4,128
 	move	$8,$0
 	.align	3
-.L141:
+.L121:
 	daddiu	$9,$5,16
 	move	$7,$4
 	move	$3,$5
 	.align	3
-.L140:
+.L120:
 	lh	$2,0($3)
 	daddiu	$7,$7,2
 	daddiu	$3,$3,2
@@ -1000,11 +792,11 @@ _Z10copy_countILi8EEjPsPKsl:
 	lh	$2,-2($3)
 	sltu	$2,$0,$2
 	addu	$2,$2,$8
-	bne	$3,$9,.L140
+	bne	$3,$9,.L120
 	move	$8,$2
 
 	daddiu	$4,$4,16
-	bne	$4,$10,.L141
+	bne	$4,$10,.L121
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -1032,12 +824,12 @@ _Z10copy_countILi16EEjPsPKsl:
 	daddiu	$10,$4,512
 	move	$8,$0
 	.align	3
-.L147:
+.L127:
 	daddiu	$9,$5,32
 	move	$7,$4
 	move	$3,$5
 	.align	3
-.L146:
+.L126:
 	lh	$2,0($3)
 	daddiu	$7,$7,2
 	daddiu	$3,$3,2
@@ -1045,11 +837,11 @@ _Z10copy_countILi16EEjPsPKsl:
 	lh	$2,-2($3)
 	sltu	$2,$0,$2
 	addu	$2,$2,$8
-	bne	$3,$9,.L146
+	bne	$3,$9,.L126
 	move	$8,$2
 
 	daddiu	$4,$4,32
-	bne	$4,$10,.L147
+	bne	$4,$10,.L127
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -1077,12 +869,12 @@ _Z10copy_countILi32EEjPsPKsl:
 	daddiu	$10,$4,2048
 	move	$8,$0
 	.align	3
-.L153:
+.L133:
 	daddiu	$9,$5,64
 	move	$7,$4
 	move	$3,$5
 	.align	3
-.L152:
+.L132:
 	lh	$2,0($3)
 	daddiu	$7,$7,2
 	daddiu	$3,$3,2
@@ -1090,11 +882,11 @@ _Z10copy_countILi32EEjPsPKsl:
 	lh	$2,-2($3)
 	sltu	$2,$0,$2
 	addu	$2,$2,$8
-	bne	$3,$9,.L152
+	bne	$3,$9,.L132
 	move	$8,$2
 
 	daddiu	$4,$4,64
-	bne	$4,$10,.L153
+	bne	$4,$10,.L133
 	daddu	$5,$5,$6
 
 	jr	$31
@@ -1124,7 +916,7 @@ _ZL17costCoeffRemain_cPtii:
 	li	$14,1			# 0x1
 	li	$13,3			# 0x3
 	.align	3
-.L161:
+.L141:
 	lhu	$8,0($4)
 	slt	$3,$6,8
 	addu	$7,$9,$2
@@ -1138,24 +930,24 @@ _ZL17costCoeffRemain_cPtii:
 	slt	$12,$6,$5
 	daddiu	$4,$4,2
 	addiu	$8,$8,-3
-	bltz	$11,.L159
+	bltz	$11,.L139
 	li	$10,2			# 0x2
 
 	addiu	$2,$8,1
 	dext	$11,$9,2,30
 	clz	$2,$2
-	bltz	$8,.L160
+	bltz	$8,.L140
 	addiu	$15,$9,1
 
 	xori	$2,$2,0x1f
 	sll	$8,$2,1
-.L160:
-	beq	$3,$0,.L159
+.L140:
+	beq	$3,$0,.L139
 	addu	$2,$8,$7
 
 	subu	$9,$15,$11
-.L159:
-	bne	$12,$0,.L161
+.L139:
+	bne	$12,$0,.L141
 	nop
 
 	jr	$31
@@ -1213,7 +1005,7 @@ _ZL14costCoeffNxN_cPKtPKslPtPKhjPhiii:
 	sd	$18,88($sp)
 	sd	$17,80($sp)
 	sd	$16,72($sp)
-.L165:
+.L145:
 	lh	$17,0($5)
 	daddiu	$2,$2,8
 	lh	$16,2($5)
@@ -1235,7 +1027,7 @@ _ZL14costCoeffNxN_cPKtPKslPtPKhjPhiii:
 	subu	$3,$3,$18
 	sh	$16,-6($2)
 	sh	$25,-4($2)
-	bne	$20,$2,.L165
+	bne	$20,$2,.L145
 	sh	$3,-2($2)
 
 	ld	$16,%got_disp(x265_entropyStateBits)($28)
@@ -1243,29 +1035,29 @@ _ZL14costCoeffNxN_cPKtPKslPtPKhjPhiii:
 	move	$2,$0
 	li	$25,1			# 0x1
 	.align	3
-.L171:
+.L151:
 	lhu	$5,0($4)
 	addu	$3,$14,$12
 	andi	$6,$9,0x1
 	sltu	$3,$0,$3
 	dext	$9,$9,1,31
 	dsubu	$3,$0,$3
-	bne	$12,$0,.L166
+	bne	$12,$0,.L146
 	move	$17,$5
 
-	beq	$14,$0,.L166
+	beq	$14,$0,.L146
 	nop
 
-	bne	$13,$0,.L166
+	bne	$13,$0,.L146
 	nop
 
 	sltu	$3,$5,16
-	bne	$3,$0,.L183
+	bne	$3,$0,.L163
 	dlsa	$15,$17,$15,1
 
-.L174:
+.L154:
 	ld	$7,%got_page(_ZZL14costCoeffNxN_cPKtPKslPtPKhjPhiiiE19__PRETTY_FUNCTION__)($28)
-	li	$6,998			# 0x3e6
+	li	$6,1008			# 0x3f0
 	ld	$5,%got_page(.LC0)($28)
 	ld	$4,%got_page(.LC2)($28)
 	ld	$25,%call16(__assert_fail)($28)
@@ -1276,7 +1068,7 @@ _ZL14costCoeffNxN_cPKtPKslPtPKhjPhiii:
 	daddiu	$4,$4,%got_ofst(.LC2)
 
 	.align	3
-.L166:
+.L146:
 	daddu	$5,$8,$5
 	lbu	$5,0($5)
 	addu	$5,$5,$11
@@ -1286,20 +1078,20 @@ _ZL14costCoeffNxN_cPKtPKslPtPKhjPhiii:
 	lbu	$18,0($3)
 	xor	$5,$18,$6
 	dlsa	$19,$5,$16,2
-	beq	$5,$25,.L175
+	beq	$5,$25,.L155
 	lw	$19,0($19)
 
 	srl	$5,$19,24
 	andi	$18,$18,0x1
 	addu	$5,$5,$18
-.L168:
+.L148:
 	sltu	$18,$13,16
 	sb	$5,0($3)
-	beq	$18,$0,.L184
+	beq	$18,$0,.L164
 	addu	$2,$2,$19
 
 	sltu	$3,$17,16
-	beq	$3,$0,.L174
+	beq	$3,$0,.L154
 	dext	$3,$13,0,32
 
 	dlsa	$17,$17,$15,1
@@ -1309,24 +1101,24 @@ _ZL14costCoeffNxN_cPKtPKslPtPKhjPhiii:
 	dsubu	$3,$3,$24
 	addu	$13,$13,$6
 	daddiu	$4,$4,-2
-	bgez	$12,.L171
+	bgez	$12,.L151
 	sh	$5,0($3)
 
-	b	.L185
+	b	.L165
 	ld	$31,136($sp)
 
 	.align	3
-.L175:
-	b	.L168
+.L155:
+	b	.L148
 	move	$5,$6
 
 	.align	3
-.L183:
+.L163:
 	dsubu	$7,$7,$24
 	lhu	$3,0($15)
 	sh	$3,0($7)
 	ld	$31,136($sp)
-.L185:
+.L165:
 	ext	$2,$2,0,24
 	ld	$28,128($sp)
 	ld	$22,120($sp)
@@ -1339,9 +1131,9 @@ _ZL14costCoeffNxN_cPKtPKslPtPKhjPhiii:
 	jr	$31
 	daddiu	$sp,$sp,144
 
-.L184:
+.L164:
 	ld	$7,%got_page(_ZZL14costCoeffNxN_cPKtPKslPtPKhjPhiiiE19__PRETTY_FUNCTION__)($28)
-	li	$6,997			# 0x3e5
+	li	$6,1007			# 0x3ef
 	ld	$5,%got_page(.LC0)($28)
 	ld	$4,%got_page(.LC1)($28)
 	ld	$25,%call16(__assert_fail)($28)
@@ -1407,13 +1199,13 @@ _ZL13scanPosLast_cPKtPKsPtS3_PhiS0_i:
 	move	$5,$0
 
 	move	$4,$21
-	b	.L187
+	b	.L167
 	move	$2,$0
 
 	.align	3
-.L188:
+.L168:
 	move	$2,$8
-.L187:
+.L167:
 	lhu	$5,0($4)
 	dext	$3,$2,4,28
 	addiu	$8,$2,1
@@ -1437,7 +1229,7 @@ _ZL13scanPosLast_cPKtPKsPtS3_PhiS0_i:
 	sh	$6,0($3)
 	lbu	$3,0($10)
 	addu	$5,$3,$5
-	bgtz	$20,.L188
+	bgtz	$20,.L168
 	sb	$5,0($10)
 
 	ld	$31,56($sp)
@@ -1455,139 +1247,6 @@ _ZL13scanPosLast_cPKtPKsPtS3_PhiS0_i:
 	.set	reorder
 	.end	_ZL13scanPosLast_cPKtPKsPtS3_PhiS0_i
 	.size	_ZL13scanPosLast_cPKtPKsPtS3_PhiS0_i, .-_ZL13scanPosLast_cPKtPKsPtS3_PhiS0_i
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZL6dst4_cPKsPsl
-	.type	_ZL6dst4_cPKsPsl, @function
-_ZL6dst4_cPKsPsl:
-	.frame	$sp,144,$31		# vars= 96, regs= 5/0, args= 0, gp= 0
-	.mask	0x90070000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-144
-	dsll	$6,$6,1
-	daddiu	$7,$sp,31
-	sd	$28,128($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZL6dst4_cPKsPsl)))
-	dsrl	$7,$7,5
-	daddu	$28,$28,$25
-	sd	$18,120($sp)
-	dsll	$7,$7,5
-	sd	$16,104($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL6dst4_cPKsPsl)))
-	move	$18,$5
-	move	$2,$7
-	sd	$31,136($sp)
-	daddiu	$16,$7,32
-	sd	$17,112($sp)
-.L191:
-	ldl	$3,7($4)
-	daddiu	$2,$2,8
-	ldr	$3,0($4)
-	daddu	$4,$4,$6
-	bne	$16,$2,.L191
-	sd	$3,-8($2)
-
-	ld	$17,%got_page(_ZL14fastForwardDstPKsPsi)($28)
-	move	$5,$16
-	move	$4,$7
-	daddiu	$17,$17,%got_ofst(_ZL14fastForwardDstPKsPsi)
-	move	$25,$17
-	.reloc	1f,R_MIPS_JALR,_ZL14fastForwardDstPKsPsi
-1:	jalr	$25
-	li	$6,1			# 0x1
-
-	move	$5,$18
-	move	$4,$16
-	move	$25,$17
-	.reloc	1f,R_MIPS_JALR,_ZL14fastForwardDstPKsPsi
-1:	jalr	$25
-	li	$6,8			# 0x8
-
-	ld	$31,136($sp)
-	ld	$28,128($sp)
-	ld	$18,120($sp)
-	ld	$17,112($sp)
-	ld	$16,104($sp)
-	jr	$31
-	daddiu	$sp,$sp,144
-
-	.set	macro
-	.set	reorder
-	.end	_ZL6dst4_cPKsPsl
-	.size	_ZL6dst4_cPKsPsl, .-_ZL6dst4_cPKsPsl
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZL7idst4_cPKsPsl
-	.type	_ZL7idst4_cPKsPsl, @function
-_ZL7idst4_cPKsPsl:
-	.frame	$sp,160,$31		# vars= 96, regs= 7/0, args= 0, gp= 0
-	.mask	0x901f0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-160
-	sd	$28,144($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZL7idst4_cPKsPsl)))
-	daddiu	$2,$sp,31
-	daddu	$28,$28,$25
-	sd	$20,136($sp)
-	dsrl	$2,$2,5
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL7idst4_cPKsPsl)))
-	sd	$17,112($sp)
-	dsll	$17,$2,5
-	ld	$20,%got_page(_ZL10inversedstPKsPsi)($28)
-	sd	$19,128($sp)
-	daddiu	$19,$17,32
-	sd	$18,120($sp)
-	move	$18,$6
-	li	$6,7			# 0x7
-	daddiu	$20,$20,%got_ofst(_ZL10inversedstPKsPsi)
-	sd	$16,104($sp)
-	move	$16,$5
-	move	$25,$20
-	sd	$31,152($sp)
-	.reloc	1f,R_MIPS_JALR,_ZL10inversedstPKsPsi
-1:	jalr	$25
-	move	$5,$19
-
-	li	$6,12			# 0xc
-	move	$5,$17
-	move	$25,$20
-	.reloc	1f,R_MIPS_JALR,_ZL10inversedstPKsPsi
-1:	jalr	$25
-	move	$4,$19
-
-	dsll	$6,$18,1
-	move	$5,$16
-	move	$2,$17
-.L195:
-	ld	$3,0($2)
-	daddiu	$2,$2,8
-	sdl	$3,7($5)
-	sdr	$3,0($5)
-	bne	$19,$2,.L195
-	daddu	$5,$5,$6
-
-	ld	$31,152($sp)
-	ld	$28,144($sp)
-	ld	$20,136($sp)
-	ld	$19,128($sp)
-	ld	$18,120($sp)
-	ld	$17,112($sp)
-	ld	$16,104($sp)
-	jr	$31
-	daddiu	$sp,$sp,160
-
-	.set	macro
-	.set	reorder
-	.end	_ZL7idst4_cPKsPsl
-	.size	_ZL7idst4_cPKsPsl, .-_ZL7idst4_cPKsPsl
 	.align	2
 	.align	3
 	.set	nomips16
@@ -1670,7 +1329,7 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	sd	$3,448($sp)
 	sd	$2,456($sp)
 	.align	3
-.L208:
+.L180:
 	lh	$2,64($20)
 	move	$22,$sp
 	move	$24,$sp
@@ -1709,7 +1368,7 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	move	$21,$4
 	sd	$25,272($sp)
 	.align	3
-.L199:
+.L171:
 	lh	$4,128($15)
 	daddiu	$15,$15,2
 	daddiu	$24,$24,4
@@ -1755,7 +1414,7 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	mflo	$2
 	sw	$2,-4($24)
 	ld	$2,280($sp)
-	bne	$2,$15,.L199
+	bne	$2,$15,.L171
 	ld	$12,328($sp)
 
 	ld	$20,360($sp)
@@ -1774,7 +1433,7 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	lh	$13,1920($20)
 	ld	$10,%got_disp(_ZN4x2655g_t32E)($28)
 	.align	3
-.L200:
+.L172:
 	lh	$9,384($10)
 	daddiu	$10,$10,2
 	daddiu	$12,$12,4
@@ -1797,14 +1456,14 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	mflo	$2
 	sw	$2,-4($12)
 	ld	$2,288($sp)
-	bne	$2,$10,.L200
+	bne	$2,$10,.L172
 	ld	$6,320($sp)
 
 	lh	$10,256($20)
 	lh	$9,768($20)
 	lh	$8,1280($20)
 	lh	$7,1792($20)
-.L201:
+.L173:
 	lh	$5,768($23)
 	daddiu	$23,$23,2
 	daddiu	$6,$6,4
@@ -1819,7 +1478,7 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	mflo	$2
 	sw	$2,-4($6)
 	ld	$2,296($sp)
-	bne	$2,$23,.L201
+	bne	$2,$23,.L173
 	ld	$3,384($sp)
 
 	lh	$10,1536($20)
@@ -1872,10 +1531,10 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	move	$10,$24
 	sw	$12,12($4)
 	addu	$15,$3,$15
-	beq	$10,$5,.L202
+	beq	$10,$5,.L174
 	sw	$15,-4($4)
 
-.L220:
+.L192:
 	daddiu	$5,$5,-4
 	lw	$15,0($8)
 	daddiu	$4,$4,4
@@ -1888,17 +1547,17 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	addu	$15,$3,$15
 	subu	$12,$12,$9
 	sw	$15,-4($4)
-	bne	$10,$5,.L220
+	bne	$10,$5,.L192
 	sw	$12,12($4)
 
-.L202:
+.L174:
 	ld	$5,472($sp)
 	ld	$8,328($sp)
 	ld	$7,312($sp)
 	ld	$12,448($sp)
 	move	$6,$5
 	.align	3
-.L204:
+.L176:
 	daddiu	$11,$11,4
 	daddiu	$7,$7,-4
 	lw	$4,0($2)
@@ -1911,7 +1570,7 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	addu	$4,$4,$10
 	sw	$4,-4($5)
 	subu	$3,$3,$9
-	bne	$12,$2,.L204
+	bne	$12,$2,.L176
 	sw	$3,28($5)
 
 	ld	$5,304($sp)
@@ -1919,7 +1578,7 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	ld	$7,464($sp)
 	ld	$10,456($sp)
 	.align	3
-.L207:
+.L179:
 	lw	$2,0($22)
 	daddiu	$6,$6,4
 	li	$9,-32768			# 0xffffffffffff8000
@@ -1930,13 +1589,13 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	addu	$3,$3,$19
 	sra	$3,$3,$21
 	slt	$2,$3,-32768
-	bne	$2,$0,.L205
+	bne	$2,$0,.L177
 	slt	$11,$3,32767
 
 	seh	$3,$3
 	li	$9,32767			# 0x7fff
 	movn	$9,$3,$11
-.L205:
+.L177:
 	lw	$3,0($7)
 	daddiu	$8,$8,-4
 	daddiu	$7,$7,-4
@@ -1946,15 +1605,15 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	addu	$2,$2,$19
 	sra	$2,$2,$21
 	slt	$3,$2,-32768
-	bne	$3,$0,.L206
+	bne	$3,$0,.L178
 	slt	$9,$2,32767
 
 	seh	$2,$2
 	li	$4,32767			# 0x7fff
 	movn	$4,$2,$9
-.L206:
+.L178:
 	sh	$4,32($5)
-	bne	$10,$6,.L207
+	bne	$10,$6,.L179
 	daddiu	$5,$5,2
 
 	ld	$2,304($sp)
@@ -1962,7 +1621,7 @@ _ZL25partialButterflyInverse32PKsPsii.constprop.0:
 	daddiu	$2,$2,64
 	sd	$2,304($sp)
 	ld	$2,440($sp)
-	bne	$20,$2,.L208
+	bne	$20,$2,.L180
 	ld	$fp,584($sp)
 
 	ld	$28,576($sp)
@@ -2029,7 +1688,7 @@ _ZL8idct32_cPKsPsl:
 	move	$5,$16
 	move	$2,$17
 	.align	3
-.L222:
+.L194:
 	ld	$12,0($2)
 	daddiu	$2,$2,64
 	ld	$11,-56($2)
@@ -2055,7 +1714,7 @@ _ZL8idct32_cPKsPsl:
 	sdr	$4,48($5)
 	sdl	$3,63($5)
 	sdr	$3,56($5)
-	bne	$19,$2,.L222
+	bne	$19,$2,.L194
 	daddu	$5,$5,$6
 
 	ld	$31,4184($sp)
@@ -2137,7 +1796,7 @@ _ZL25partialButterflyInverse16PKsPsii.constprop.1:
 	sd	$2,184($sp)
 	ld	$13,%got_disp(_ZN4x2655g_t16E)($28)
 	.align	3
-.L244:
+.L216:
 	move	$14,$sp
 	move	$15,$sp
 	lh	$22,32($4)
@@ -2150,7 +1809,7 @@ _ZL25partialButterflyInverse16PKsPsii.constprop.1:
 	lh	$16,416($4)
 	lh	$25,480($4)
 	.align	3
-.L226:
+.L198:
 	lh	$11,96($12)
 	daddiu	$12,$12,2
 	daddiu	$15,$15,4
@@ -2171,7 +1830,7 @@ _ZL25partialButterflyInverse16PKsPsii.constprop.1:
 	madd	$3,$16
 	madd	$2,$25
 	mflo	$2
-	bne	$fp,$12,.L226
+	bne	$fp,$12,.L198
 	sw	$2,-4($15)
 
 	lh	$12,64($4)
@@ -2179,7 +1838,7 @@ _ZL25partialButterflyInverse16PKsPsii.constprop.1:
 	lh	$11,192($4)
 	lh	$10,320($4)
 	lh	$9,448($4)
-.L227:
+.L199:
 	lh	$7,192($13)
 	daddiu	$13,$13,2
 	daddiu	$8,$8,4
@@ -2194,7 +1853,7 @@ _ZL25partialButterflyInverse16PKsPsii.constprop.1:
 	mflo	$2
 	sw	$2,-4($8)
 	ld	$2,96($sp)
-	bne	$2,$13,.L227
+	bne	$2,$13,.L199
 	ld	$3,136($sp)
 
 	lh	$12,384($4)
@@ -2246,10 +1905,10 @@ _ZL25partialButterflyInverse16PKsPsii.constprop.1:
 	lw	$3,-4($8)
 	sw	$15,84($sp)
 	addu	$16,$3,$16
-	beq	$12,$7,.L228
+	beq	$12,$7,.L200
 	sw	$16,-4($5)
 
-.L243:
+.L215:
 	daddiu	$7,$7,-4
 	lw	$16,0($10)
 	daddiu	$5,$5,4
@@ -2262,16 +1921,16 @@ _ZL25partialButterflyInverse16PKsPsii.constprop.1:
 	addu	$16,$3,$16
 	subu	$13,$13,$11
 	sw	$16,-4($5)
-	bne	$12,$7,.L243
+	bne	$12,$7,.L215
 	sw	$13,12($5)
 
-.L228:
+.L200:
 	ld	$8,104($sp)
 	move	$10,$14
 	ld	$9,112($sp)
 	ld	$12,200($sp)
 	.align	3
-.L232:
+.L204:
 	lw	$3,0($14)
 	daddiu	$2,$2,4
 	li	$11,-32768			# 0xffffffffffff8000
@@ -2282,13 +1941,13 @@ _ZL25partialButterflyInverse16PKsPsii.constprop.1:
 	addu	$5,$5,$24
 	sra	$5,$5,$6
 	slt	$3,$5,-32768
-	bne	$3,$0,.L230
+	bne	$3,$0,.L202
 	slt	$13,$5,32767
 
 	seh	$5,$5
 	movz	$5,$23,$13
 	move	$11,$5
-.L230:
+.L202:
 	lw	$5,28($10)
 	daddiu	$9,$9,-4
 	daddiu	$10,$10,-4
@@ -2298,15 +1957,15 @@ _ZL25partialButterflyInverse16PKsPsii.constprop.1:
 	addu	$3,$3,$24
 	sra	$3,$3,$6
 	slt	$5,$3,-32768
-	bne	$5,$0,.L231
+	bne	$5,$0,.L203
 	slt	$11,$3,32767
 
 	seh	$3,$3
 	movz	$3,$23,$11
 	move	$7,$3
-.L231:
+.L203:
 	sh	$7,16($8)
-	bne	$12,$2,.L232
+	bne	$12,$2,.L204
 	daddiu	$8,$8,2
 
 	ld	$2,104($sp)
@@ -2314,7 +1973,7 @@ _ZL25partialButterflyInverse16PKsPsii.constprop.1:
 	daddiu	$2,$2,32
 	sd	$2,104($sp)
 	ld	$2,192($sp)
-	bne	$4,$2,.L244
+	bne	$4,$2,.L216
 	ld	$13,%got_disp(_ZN4x2655g_t16E)($28)
 
 	ld	$fp,296($sp)
@@ -2382,7 +2041,7 @@ _ZL8idct16_cPKsPsl:
 	move	$5,$16
 	move	$2,$17
 	.align	3
-.L246:
+.L218:
 	ld	$8,0($2)
 	daddiu	$2,$2,32
 	ld	$7,-24($2)
@@ -2396,7 +2055,7 @@ _ZL8idct16_cPKsPsl:
 	sdr	$4,16($5)
 	sdl	$3,31($5)
 	sdr	$3,24($5)
-	bne	$19,$2,.L246
+	bne	$19,$2,.L218
 	daddu	$5,$5,$6
 
 	ld	$31,1112($sp)
@@ -2462,14 +2121,14 @@ _ZL24partialButterflyInverse8PKsPsii.constprop.2:
 	sd	$3,48($sp)
 	sd	$2,56($sp)
 	.align	3
-.L255:
+.L227:
 	lh	$23,16($4)
 	move	$10,$sp
 	lh	$13,48($4)
 	lh	$12,80($4)
 	lh	$11,112($4)
 	ld	$9,%got_disp(_ZN4x2654g_t8E)($28)
-.L250:
+.L222:
 	lh	$8,48($9)
 	daddiu	$9,$9,2
 	daddiu	$10,$10,4
@@ -2482,7 +2141,7 @@ _ZL24partialButterflyInverse8PKsPsii.constprop.2:
 	madd	$3,$12
 	madd	$2,$11
 	mflo	$2
-	bne	$25,$9,.L250
+	bne	$25,$9,.L222
 	sw	$2,-4($10)
 
 	lh	$23,64($4)
@@ -2532,29 +2191,29 @@ _ZL24partialButterflyInverse8PKsPsii.constprop.2:
 	sw	$23,24($sp)
 	li	$8,-32768			# 0xffffffffffff8000
 	li	$23,-32768			# 0xffffffffffff8000
-	bne	$fp,$0,.L251
+	bne	$fp,$0,.L223
 	slt	$2,$7,32767
 
 	seh	$7,$7
-.L264:
+.L236:
 	movz	$7,$24,$2
 	move	$23,$7
-.L251:
+.L223:
 	lw	$2,0($10)
 	sh	$23,0($9)
 	subu	$2,$3,$2
 	addu	$2,$2,$14
 	sra	$2,$2,$6
 	slt	$3,$2,-32768
-	bne	$3,$0,.L252
+	bne	$3,$0,.L224
 	slt	$7,$2,32767
 
 	seh	$2,$2
 	movz	$2,$24,$7
 	move	$8,$2
-.L252:
+.L224:
 	sh	$8,8($9)
-	beq	$15,$10,.L253
+	beq	$15,$10,.L225
 	daddiu	$9,$9,2
 
 	lw	$fp,0($13)
@@ -2570,16 +2229,16 @@ _ZL24partialButterflyInverse8PKsPsii.constprop.2:
 	addu	$7,$7,$14
 	sra	$7,$7,$6
 	slt	$fp,$7,-32768
-	bne	$fp,$0,.L251
+	bne	$fp,$0,.L223
 	slt	$2,$7,32767
 
-	b	.L264
+	b	.L236
 	seh	$7,$7
 
 	.align	3
-.L253:
+.L225:
 	daddiu	$4,$4,2
-	bne	$4,$21,.L255
+	bne	$4,$21,.L227
 	daddiu	$5,$5,16
 
 	ld	$fp,152($sp)
@@ -2647,7 +2306,7 @@ _ZL7idct8_cPKsPsl:
 	move	$5,$16
 	move	$2,$17
 	.align	3
-.L266:
+.L238:
 	ld	$4,0($2)
 	daddiu	$2,$2,16
 	ld	$3,-8($2)
@@ -2655,7 +2314,7 @@ _ZL7idct8_cPKsPsl:
 	sdr	$4,0($5)
 	sdl	$3,15($5)
 	sdr	$3,8($5)
-	bne	$19,$2,.L266
+	bne	$19,$2,.L238
 	daddu	$5,$5,$6
 
 	ld	$31,344($sp)
@@ -2676,221 +2335,9 @@ _ZL7idct8_cPKsPsl:
 	.align	3
 	.set	nomips16
 	.set	nomicromips
-	.ent	_ZL24partialButterflyInverse4PKsPsii.constprop.3
-	.type	_ZL24partialButterflyInverse4PKsPsii.constprop.3, @function
-_ZL24partialButterflyInverse4PKsPsii.constprop.3:
-	.frame	$sp,128,$31		# vars= 48, regs= 10/0, args= 0, gp= 0
-	.mask	0x50ff0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-128
-	addiu	$3,$6,-1
-	sd	$28,112($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZL24partialButterflyInverse4PKsPsii.constprop.3)))
-	li	$9,1			# 0x1
-	daddu	$28,$28,$25
-	sll	$9,$9,$3
-	sd	$fp,120($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL24partialButterflyInverse4PKsPsii.constprop.3)))
-	sd	$22,96($sp)
-	li	$14,32767			# 0x7fff
-	ld	$2,%got_disp(_ZN4x2654g_t4E)($28)
-	sd	$21,88($sp)
-	sd	$23,104($sp)
-	daddiu	$23,$4,8
-	lh	$3,26($2)
-	lh	$fp,8($2)
-	lh	$22,24($2)
-	sd	$3,0($sp)
-	lh	$3,0($2)
-	lh	$21,10($2)
-	sd	$20,80($sp)
-	sd	$3,8($sp)
-	lh	$3,16($2)
-	sd	$19,72($sp)
-	sd	$18,64($sp)
-	sd	$3,16($sp)
-	lh	$3,2($2)
-	lh	$2,18($2)
-	sd	$17,56($sp)
-	sd	$16,48($sp)
-	sd	$3,24($sp)
-	sd	$2,32($sp)
-	.align	3
-.L274:
-	lh	$25,8($4)
-	li	$13,-32768			# 0xffffffffffff8000
-	li	$12,-32768			# 0xffffffffffff8000
-	lh	$24,24($4)
-	li	$11,-32768			# 0xffffffffffff8000
-	li	$10,-32768			# 0xffffffffffff8000
-	lh	$7,16($4)
-	daddiu	$4,$4,2
-	mul	$16,$fp,$25
-	ld	$15,0($sp)
-	ld	$8,16($sp)
-	gsmultu	$3,$22,$24
-	lh	$2,-2($4)
-	gsmultu	$24,$24,$15
-	ld	$15,32($sp)
-	gsmultu	$8,$8,$7
-	gsmultu	$7,$7,$15
-	mtlo	$8
-	addu	$15,$16,$3
-	ld	$3,8($sp)
-	madd	$3,$2
-	mflo	$8
-	mul	$3,$25,$21
-	addu	$24,$3,$24
-	move	$3,$8
-	subu	$3,$3,$15
-	addu	$8,$15,$8
-	ld	$15,24($sp)
-	addu	$8,$8,$9
-	addu	$3,$3,$9
-	sra	$8,$8,$6
-	sra	$3,$3,$6
-	mul	$25,$2,$15
-	slt	$16,$8,-32768
-	slt	$15,$3,-32768
-	slt	$20,$8,32767
-	slt	$17,$3,32767
-	seh	$8,$8
-	seh	$3,$3
-	addu	$2,$25,$7
-	addu	$7,$24,$2
-	subu	$2,$2,$24
-	addu	$7,$7,$9
-	addu	$2,$2,$9
-	sra	$7,$7,$6
-	sra	$2,$2,$6
-	slt	$25,$7,-32768
-	slt	$24,$2,-32768
-	slt	$19,$7,32767
-	slt	$18,$2,32767
-	seh	$7,$7
-	bne	$16,$0,.L270
-	seh	$2,$2
-
-	movz	$8,$14,$20
-	move	$13,$8
-.L270:
-	bne	$25,$0,.L271
-	sh	$13,0($5)
-
-	movz	$7,$14,$19
-	move	$12,$7
-.L271:
-	bne	$24,$0,.L272
-	sh	$12,2($5)
-
-	movz	$2,$14,$18
-	move	$11,$2
-.L272:
-	bne	$15,$0,.L273
-	sh	$11,4($5)
-
-	movz	$3,$14,$17
-	move	$10,$3
-.L273:
-	sh	$10,6($5)
-	bne	$23,$4,.L274
-	daddiu	$5,$5,8
-
-	ld	$fp,120($sp)
-	ld	$28,112($sp)
-	ld	$23,104($sp)
-	ld	$22,96($sp)
-	ld	$21,88($sp)
-	ld	$20,80($sp)
-	ld	$19,72($sp)
-	ld	$18,64($sp)
-	ld	$17,56($sp)
-	ld	$16,48($sp)
-	jr	$31
-	daddiu	$sp,$sp,128
-
-	.set	macro
-	.set	reorder
-	.end	_ZL24partialButterflyInverse4PKsPsii.constprop.3
-	.size	_ZL24partialButterflyInverse4PKsPsii.constprop.3, .-_ZL24partialButterflyInverse4PKsPsii.constprop.3
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZL7idct4_cPKsPsl
-	.type	_ZL7idct4_cPKsPsl, @function
-_ZL7idct4_cPKsPsl:
-	.frame	$sp,160,$31		# vars= 96, regs= 7/0, args= 0, gp= 0
-	.mask	0x901f0000,-8
-	.fmask	0x00000000,0
-	.set	noreorder
-	.set	nomacro
-	daddiu	$sp,$sp,-160
-	sd	$28,144($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZL7idct4_cPKsPsl)))
-	daddiu	$2,$sp,31
-	daddu	$28,$28,$25
-	sd	$20,136($sp)
-	dsrl	$2,$2,5
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL7idct4_cPKsPsl)))
-	sd	$17,112($sp)
-	dsll	$17,$2,5
-	ld	$20,%got_page(_ZL24partialButterflyInverse4PKsPsii.constprop.3)($28)
-	sd	$19,128($sp)
-	daddiu	$19,$17,32
-	sd	$18,120($sp)
-	move	$18,$6
-	li	$6,7			# 0x7
-	daddiu	$20,$20,%got_ofst(_ZL24partialButterflyInverse4PKsPsii.constprop.3)
-	sd	$16,104($sp)
-	move	$16,$5
-	move	$25,$20
-	sd	$31,152($sp)
-	.reloc	1f,R_MIPS_JALR,_ZL24partialButterflyInverse4PKsPsii.constprop.3
-1:	jalr	$25
-	move	$5,$19
-
-	li	$6,12			# 0xc
-	move	$5,$17
-	move	$25,$20
-	.reloc	1f,R_MIPS_JALR,_ZL24partialButterflyInverse4PKsPsii.constprop.3
-1:	jalr	$25
-	move	$4,$19
-
-	dsll	$6,$18,1
-	move	$5,$16
-	move	$2,$17
-.L286:
-	ld	$3,0($2)
-	daddiu	$2,$2,8
-	sdl	$3,7($5)
-	sdr	$3,0($5)
-	bne	$19,$2,.L286
-	daddu	$5,$5,$6
-
-	ld	$31,152($sp)
-	ld	$28,144($sp)
-	ld	$20,136($sp)
-	ld	$19,128($sp)
-	ld	$18,120($sp)
-	ld	$17,112($sp)
-	ld	$16,104($sp)
-	jr	$31
-	daddiu	$sp,$sp,160
-
-	.set	macro
-	.set	reorder
-	.end	_ZL7idct4_cPKsPsl
-	.size	_ZL7idct4_cPKsPsl, .-_ZL7idct4_cPKsPsl
-	.align	2
-	.align	3
-	.set	nomips16
-	.set	nomicromips
-	.ent	_ZL18partialButterfly32PKsPsii.constprop.4
-	.type	_ZL18partialButterfly32PKsPsii.constprop.4, @function
-_ZL18partialButterfly32PKsPsii.constprop.4:
+	.ent	_ZL18partialButterfly32PKsPsii.constprop.3
+	.type	_ZL18partialButterfly32PKsPsii.constprop.3, @function
+_ZL18partialButterfly32PKsPsii.constprop.3:
 	.frame	$sp,560,$31		# vars= 480, regs= 10/0, args= 0, gp= 0
 	.mask	0x50ff0000,-8
 	.fmask	0x00000000,0
@@ -2899,10 +2346,10 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	daddiu	$sp,$sp,-560
 	addiu	$3,$6,-1
 	sd	$28,544($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZL18partialButterfly32PKsPsii.constprop.4)))
+	lui	$28,%hi(%neg(%gp_rel(_ZL18partialButterfly32PKsPsii.constprop.3)))
 	daddu	$28,$28,$25
 	sd	$4,320($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL18partialButterfly32PKsPsii.constprop.4)))
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL18partialButterfly32PKsPsii.constprop.3)))
 	sd	$19,504($sp)
 	ld	$2,%got_disp(_ZN4x2655g_t32E)($28)
 	sd	$20,512($sp)
@@ -2958,7 +2405,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	sd	$3,432($sp)
 	sd	$2,400($sp)
 	.align	3
-.L296:
+.L248:
 	ld	$2,320($sp)
 	move	$5,$sp
 	ld	$4,328($sp)
@@ -2967,7 +2414,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	daddiu	$6,$2,62
 	move	$7,$4
 	.align	3
-.L290:
+.L242:
 	lh	$2,0($8)
 	daddiu	$4,$4,4
 	daddiu	$5,$5,4
@@ -2977,7 +2424,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	addu	$9,$2,$3
 	subu	$2,$2,$3
 	sw	$9,-4($4)
-	bne	$10,$4,.L290
+	bne	$10,$4,.L242
 	sw	$2,-4($5)
 
 	ld	$5,336($sp)
@@ -2986,7 +2433,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	ld	$10,424($sp)
 	move	$8,$5
 	.align	3
-.L291:
+.L243:
 	daddiu	$4,$4,-4
 	lw	$2,0($7)
 	daddiu	$5,$5,4
@@ -2996,14 +2443,14 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	addu	$9,$2,$3
 	subu	$2,$2,$3
 	sw	$9,-4($5)
-	bne	$10,$7,.L291
+	bne	$10,$7,.L243
 	sw	$2,-4($6)
 
 	ld	$6,448($sp)
 	ld	$5,440($sp)
 	ld	$4,336($sp)
 	ld	$9,432($sp)
-.L292:
+.L244:
 	daddiu	$4,$4,-4
 	lw	$2,0($8)
 	daddiu	$6,$6,4
@@ -3013,7 +2460,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	addu	$7,$2,$3
 	subu	$2,$2,$3
 	sw	$7,-4($6)
-	bne	$9,$8,.L292
+	bne	$9,$8,.L244
 	sw	$2,-4($5)
 
 	lw	$8,208($sp)
@@ -3063,7 +2510,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	addu	$2,$2,$19
 	sra	$2,$2,$20
 	sh	$2,1472($14)
-.L293:
+.L245:
 	lh	$6,258($11)
 	daddiu	$11,$11,512
 	daddiu	$3,$3,512
@@ -3080,7 +2527,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	sra	$2,$2,$20
 	sh	$2,-512($3)
 	ld	$2,312($sp)
-	bne	$2,$11,.L293
+	bne	$2,$11,.L245
 	ld	$2,304($sp)
 
 	lw	$18,128($sp)
@@ -3094,7 +2541,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	lw	$13,156($sp)
 	ld	$10,%got_disp(_ZN4x2655g_t32E)($28)
 	.align	3
-.L294:
+.L246:
 	lh	$9,130($10)
 	daddiu	$10,$10,256
 	daddiu	$12,$12,256
@@ -3117,7 +2564,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	mflo	$2
 	addu	$2,$2,$19
 	sra	$2,$2,$20
-	bne	$11,$10,.L294
+	bne	$11,$10,.L246
 	sh	$2,-256($12)
 
 	lw	$2,0($sp)
@@ -3148,7 +2595,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	lw	$2,44($sp)
 	sd	$2,280($sp)
 	.align	3
-.L295:
+.L247:
 	lh	$4,2($15)
 	daddiu	$15,$15,128
 	daddiu	$24,$24,128
@@ -3198,7 +2645,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	sra	$2,$2,$20
 	sh	$2,-128($24)
 	ld	$2,296($sp)
-	bne	$2,$15,.L295
+	bne	$2,$15,.L247
 	ld	$3,320($sp)
 
 	ld	$2,304($sp)
@@ -3206,7 +2653,7 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 	sd	$3,320($sp)
 	daddiu	$2,$2,2
 	ld	$3,408($sp)
-	bne	$3,$2,.L296
+	bne	$3,$2,.L248
 	sd	$2,304($sp)
 
 	ld	$fp,552($sp)
@@ -3224,8 +2671,8 @@ _ZL18partialButterfly32PKsPsii.constprop.4:
 
 	.set	macro
 	.set	reorder
-	.end	_ZL18partialButterfly32PKsPsii.constprop.4
-	.size	_ZL18partialButterfly32PKsPsii.constprop.4, .-_ZL18partialButterfly32PKsPsii.constprop.4
+	.end	_ZL18partialButterfly32PKsPsii.constprop.3
+	.size	_ZL18partialButterfly32PKsPsii.constprop.3, .-_ZL18partialButterfly32PKsPsii.constprop.3
 	.align	2
 	.align	3
 	.set	nomips16
@@ -3255,7 +2702,7 @@ _ZL7dct32_cPKsPsl:
 	daddiu	$16,$13,2048
 	sd	$18,4152($sp)
 	.align	3
-.L306:
+.L258:
 	ldl	$12,7($4)
 	daddiu	$2,$2,64
 	ldl	$11,15($4)
@@ -3281,22 +2728,22 @@ _ZL7dct32_cPKsPsl:
 	sd	$8,-32($2)
 	sd	$7,-24($2)
 	sd	$5,-16($2)
-	bne	$16,$2,.L306
+	bne	$16,$2,.L258
 	sd	$3,-8($2)
 
-	ld	$18,%got_page(_ZL18partialButterfly32PKsPsii.constprop.4)($28)
+	ld	$18,%got_page(_ZL18partialButterfly32PKsPsii.constprop.3)($28)
 	move	$5,$16
 	move	$4,$13
-	daddiu	$18,$18,%got_ofst(_ZL18partialButterfly32PKsPsii.constprop.4)
+	daddiu	$18,$18,%got_ofst(_ZL18partialButterfly32PKsPsii.constprop.3)
 	move	$25,$18
-	.reloc	1f,R_MIPS_JALR,_ZL18partialButterfly32PKsPsii.constprop.4
+	.reloc	1f,R_MIPS_JALR,_ZL18partialButterfly32PKsPsii.constprop.3
 1:	jalr	$25
 	li	$6,4			# 0x4
 
 	move	$5,$17
 	move	$4,$16
 	move	$25,$18
-	.reloc	1f,R_MIPS_JALR,_ZL18partialButterfly32PKsPsii.constprop.4
+	.reloc	1f,R_MIPS_JALR,_ZL18partialButterfly32PKsPsii.constprop.3
 1:	jalr	$25
 	li	$6,11			# 0xb
 
@@ -3316,9 +2763,9 @@ _ZL7dct32_cPKsPsl:
 	.align	3
 	.set	nomips16
 	.set	nomicromips
-	.ent	_ZL18partialButterfly16PKsPsii.constprop.5
-	.type	_ZL18partialButterfly16PKsPsii.constprop.5, @function
-_ZL18partialButterfly16PKsPsii.constprop.5:
+	.ent	_ZL18partialButterfly16PKsPsii.constprop.4
+	.type	_ZL18partialButterfly16PKsPsii.constprop.4, @function
+_ZL18partialButterfly16PKsPsii.constprop.4:
 	.frame	$sp,272,$31		# vars= 192, regs= 10/0, args= 0, gp= 0
 	.mask	0x50ff0000,-8
 	.fmask	0x00000000,0
@@ -3327,12 +2774,12 @@ _ZL18partialButterfly16PKsPsii.constprop.5:
 	daddiu	$sp,$sp,-272
 	addiu	$3,$6,-1
 	sd	$28,256($sp)
-	lui	$28,%hi(%neg(%gp_rel(_ZL18partialButterfly16PKsPsii.constprop.5)))
+	lui	$28,%hi(%neg(%gp_rel(_ZL18partialButterfly16PKsPsii.constprop.4)))
 	li	$15,1			# 0x1
 	daddu	$28,$28,$25
 	sll	$15,$15,$3
 	sd	$fp,264($sp)
-	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL18partialButterfly16PKsPsii.constprop.5)))
+	daddiu	$28,$28,%lo(%neg(%gp_rel(_ZL18partialButterfly16PKsPsii.constprop.4)))
 	sd	$23,248($sp)
 	daddiu	$24,$5,32
 	ld	$2,%got_disp(_ZN4x2655g_t16E)($28)
@@ -3370,7 +2817,7 @@ _ZL18partialButterfly16PKsPsii.constprop.5:
 	sd	$3,152($sp)
 	sd	$2,160($sp)
 	.align	3
-.L314:
+.L266:
 	ld	$7,96($sp)
 	move	$5,$4
 	daddiu	$9,$4,30
@@ -3378,7 +2825,7 @@ _ZL18partialButterfly16PKsPsii.constprop.5:
 	daddiu	$12,$4,16
 	move	$10,$7
 	.align	3
-.L310:
+.L262:
 	daddiu	$9,$9,-2
 	lh	$2,0($5)
 	daddiu	$7,$7,4
@@ -3388,13 +2835,13 @@ _ZL18partialButterfly16PKsPsii.constprop.5:
 	addu	$11,$2,$3
 	subu	$2,$2,$3
 	sw	$11,-4($7)
-	bne	$12,$5,.L310
+	bne	$12,$5,.L262
 	sw	$2,-4($8)
 
 	ld	$8,184($sp)
 	ld	$7,176($sp)
 	ld	$5,96($sp)
-.L311:
+.L263:
 	daddiu	$5,$5,-4
 	lw	$2,0($10)
 	daddiu	$8,$8,4
@@ -3404,7 +2851,7 @@ _ZL18partialButterfly16PKsPsii.constprop.5:
 	addu	$9,$2,$3
 	subu	$2,$2,$3
 	sw	$9,-4($8)
-	bne	$23,$10,.L311
+	bne	$23,$10,.L263
 	sw	$2,-4($7)
 
 	lw	$10,80($sp)
@@ -3454,7 +2901,7 @@ _ZL18partialButterfly16PKsPsii.constprop.5:
 	addu	$2,$2,$15
 	sra	$2,$2,$6
 	sh	$2,352($24)
-.L312:
+.L264:
 	lh	$8,66($13)
 	daddiu	$13,$13,128
 	daddiu	$3,$3,128
@@ -3469,7 +2916,7 @@ _ZL18partialButterfly16PKsPsii.constprop.5:
 	mflo	$2
 	addu	$2,$2,$15
 	sra	$2,$2,$6
-	bne	$fp,$13,.L312
+	bne	$fp,$13,.L264
 	sh	$2,-128($3)
 
 	lw	$22,0($sp)
@@ -3482,7 +2929,7 @@ _ZL18partialButterfly16PKsPsii.constprop.5:
 	lw	$16,24($sp)
 	lw	$25,28($sp)
 	.align	3
-.L313:
+.L265:
 	lh	$11,34($12)
 	daddiu	$12,$12,64
 	daddiu	$14,$14,64
@@ -3505,12 +2952,12 @@ _ZL18partialButterfly16PKsPsii.constprop.5:
 	mflo	$2
 	addu	$2,$2,$15
 	sra	$2,$2,$6
-	bne	$13,$12,.L313
+	bne	$13,$12,.L265
 	sh	$2,-64($14)
 
 	ld	$2,168($sp)
 	daddiu	$24,$24,2
-	bne	$2,$24,.L314
+	bne	$2,$24,.L266
 	daddiu	$4,$4,32
 
 	ld	$fp,264($sp)
@@ -3528,8 +2975,8 @@ _ZL18partialButterfly16PKsPsii.constprop.5:
 
 	.set	macro
 	.set	reorder
-	.end	_ZL18partialButterfly16PKsPsii.constprop.5
-	.size	_ZL18partialButterfly16PKsPsii.constprop.5, .-_ZL18partialButterfly16PKsPsii.constprop.5
+	.end	_ZL18partialButterfly16PKsPsii.constprop.4
+	.size	_ZL18partialButterfly16PKsPsii.constprop.4, .-_ZL18partialButterfly16PKsPsii.constprop.4
 	.align	2
 	.align	3
 	.set	nomips16
@@ -3559,7 +3006,7 @@ _ZL7dct16_cPKsPsl:
 	daddiu	$16,$9,512
 	sd	$17,1072($sp)
 	.align	3
-.L322:
+.L274:
 	ldl	$8,7($4)
 	daddiu	$2,$2,32
 	ldl	$7,15($4)
@@ -3573,22 +3020,22 @@ _ZL7dct16_cPKsPsl:
 	sd	$8,-32($2)
 	sd	$7,-24($2)
 	sd	$5,-16($2)
-	bne	$16,$2,.L322
+	bne	$16,$2,.L274
 	sd	$3,-8($2)
 
-	ld	$17,%got_page(_ZL18partialButterfly16PKsPsii.constprop.5)($28)
+	ld	$17,%got_page(_ZL18partialButterfly16PKsPsii.constprop.4)($28)
 	move	$5,$16
 	move	$4,$9
-	daddiu	$17,$17,%got_ofst(_ZL18partialButterfly16PKsPsii.constprop.5)
+	daddiu	$17,$17,%got_ofst(_ZL18partialButterfly16PKsPsii.constprop.4)
 	move	$25,$17
-	.reloc	1f,R_MIPS_JALR,_ZL18partialButterfly16PKsPsii.constprop.5
+	.reloc	1f,R_MIPS_JALR,_ZL18partialButterfly16PKsPsii.constprop.4
 1:	jalr	$25
 	li	$6,3			# 0x3
 
 	move	$5,$18
 	move	$4,$16
 	move	$25,$17
-	.reloc	1f,R_MIPS_JALR,_ZL18partialButterfly16PKsPsii.constprop.5
+	.reloc	1f,R_MIPS_JALR,_ZL18partialButterfly16PKsPsii.constprop.4
 1:	jalr	$25
 	li	$6,10			# 0xa
 
@@ -3632,21 +3079,12 @@ _ZN4x26520setupDCTPrimitives_cERNS_17EncoderPrimitivesE:
 	ld	$2,%got_page(_ZL8nquant_cPKsPKiPsiii)($3)
 	daddiu	$2,$2,%got_ofst(_ZL8nquant_cPKsPKiPsiii)
 	sd	$2,5704($4)
-	ld	$2,%got_page(_ZL6dst4_cPKsPsl)($3)
-	daddiu	$2,$2,%got_ofst(_ZL6dst4_cPKsPsl)
-	sd	$2,5680($4)
 	ld	$2,%got_page(_ZL7dct16_cPKsPsl)($3)
 	daddiu	$2,$2,%got_ofst(_ZL7dct16_cPKsPsl)
 	sd	$2,4192($4)
 	ld	$2,%got_page(_ZL7dct32_cPKsPsl)($3)
 	daddiu	$2,$2,%got_ofst(_ZL7dct32_cPKsPsl)
 	sd	$2,4688($4)
-	ld	$2,%got_page(_ZL7idst4_cPKsPsl)($3)
-	daddiu	$2,$2,%got_ofst(_ZL7idst4_cPKsPsl)
-	sd	$2,5688($4)
-	ld	$2,%got_page(_ZL7idct4_cPKsPsl)($3)
-	daddiu	$2,$2,%got_ofst(_ZL7idct4_cPKsPsl)
-	sd	$2,3208($4)
 	ld	$2,%got_page(_ZL7idct8_cPKsPsl)($3)
 	daddiu	$2,$2,%got_ofst(_ZL7idct8_cPKsPsl)
 	sd	$2,3704($4)
