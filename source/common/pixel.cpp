@@ -444,7 +444,7 @@ int sad_64x64(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr
 template<int lx, int ly>
 int sad(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t stride_pix2)
 {      
-    int sum = 0;
+    int sum = 0;/*
     if (lx == 4 && ly == 4)
 	{
 		sum = sad_4x4(pix1, stride_pix1, pix2, stride_pix2);
@@ -476,7 +476,7 @@ int sad(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t str
 		//abort();
 	}
     else
-    {
+    {*/
     	for (int y = 0; y < ly; y++)
     	{
         	for (int x = 0; x < lx; x++)
@@ -485,7 +485,7 @@ int sad(const pixel* pix1, intptr_t stride_pix1, const pixel* pix2, intptr_t str
         	pix1 += stride_pix1;
        	 	pix2 += stride_pix2;
     	}
-     }
+     //}
 
     return sum;
 }
@@ -8698,7 +8698,7 @@ int tab_dct8_2[24] =
 	//83, 36, 83, 36,//before
 	36, 83, 36, 83,//turn 
 	//36, 83, 36, 83,//before 
-	83, 36, 83, 36,//turn
+	-83, 36, -83, 36,//turn
 	89, 75, 50, 18,
 	75, -18, -89, -50,
 	50, -89, 18, 75,
@@ -8812,23 +8812,29 @@ static void dct8(const int16_t* src, int16_t* dst, intptr_t srcStride)
 	val6 = __builtin_msa_shf_w(val6, 78);
 	val7 = __builtin_msa_shf_w(val7, 78);
 
-	cen0 = __builtin_msa_addv_h((v8i16)val0, (v8i16)val3);
+	cen0 = __builtin_msa_addv_h((v8i16)val0, (v8i16)val3);//col1+col6, col0+col7
 	cen1 = __builtin_msa_subv_h((v8i16)val0, (v8i16)val3);
-	cen2 = __builtin_msa_addv_h((v8i16)val1, (v8i16)val2);
+	cen2 = __builtin_msa_addv_h((v8i16)val1, (v8i16)val2);//col3+col4, col2+col5
 	cen3 = __builtin_msa_subv_h((v8i16)val1, (v8i16)val2);
 
-	cen4 = __builtin_msa_addv_h((v8i16)val4, (v8i16)val7);
+	cen4 = __builtin_msa_addv_h((v8i16)val4, (v8i16)val7);//col1+col6, col0+col7
 	cen5 = __builtin_msa_subv_h((v8i16)val4, (v8i16)val7);
-	cen6 = __builtin_msa_addv_h((v8i16)val5, (v8i16)val6);
+	cen6 = __builtin_msa_addv_h((v8i16)val5, (v8i16)val6);//col3+col4, col2+col5
 	cen7 = __builtin_msa_subv_h((v8i16)val5, (v8i16)val6);
 	
 	//add
+	/*
 	tmp0 = __builtin_msa_ilvr_d((v2i64)cen2, (v2i64)cen0);//col2 + col5, col0 + col7
 	tmp1 = __builtin_msa_ilvl_d((v2i64)cen0, (v2i64)cen2);//col1 + col6, col3 + col4
 
 	tmp2 = __builtin_msa_ilvr_d((v2i64)cen6, (v2i64)cen4);//col2 + col5, col0 + col7
 	tmp3 = __builtin_msa_ilvl_d((v2i64)cen4, (v2i64)cen6);//col1 + col6, col3 + col4
+	*/
+	
+	cen2 = (v8i16)__builtin_msa_shf_w((v4i32)cen2, 78);//col2+col5, col3+col4
 
+	cen6 = (v8i16)__builtin_msa_shf_w((v4i32)cen6, 78);
+	
 	//sub
 	res0 = __builtin_msa_ilvr_h(cen3, cen1);//row3, row2, row1, row0(col2-5, col0-7)
 	res1 = __builtin_msa_ilvl_h(cen3, cen1);//col3-4, col1-6
@@ -8837,6 +8843,7 @@ static void dct8(const int16_t* src, int16_t* dst, intptr_t srcStride)
 	res5 = __builtin_msa_ilvl_h(cen7, cen5);
 
 	//add
+	/*
 	mid2 = __builtin_msa_addv_h((v8i16)tmp0, (v8i16)tmp1);
 	//col2 + col5 + col1 + col6, col0 + col7 + col3 + col4
 	mid3 = __builtin_msa_subv_h((v8i16)tmp0, (v8i16)tmp1);
@@ -8851,6 +8858,17 @@ static void dct8(const int16_t* src, int16_t* dst, intptr_t srcStride)
 	mid7 = __builtin_msa_subv_h((v8i16)tmp3, (v8i16)tmp2);
 
 	mid6 = (v8i16)__builtin_msa_insve_d((v2i64)mid7, 0, (v2i64)mid6);
+	//col1 + col6 - col2 - col5, col0 + col7 - col3 - col4	
+	*/
+
+	mid2 = __builtin_msa_addv_h(cen0, cen2);
+	//col2 + col5 + col1 + col6, col0 + col7 + col3 + col4
+	mid3 = __builtin_msa_subv_h(cen0, cen2);
+	//col1 + col6 - col2 - col5, col0 + col7 - col3 - col4	
+
+	mid5 = __builtin_msa_addv_h(cen4, cen6);
+	//col2 + col5 + col1 + col6, col0 + col7 + col3 + col4
+	mid6 = __builtin_msa_subv_h(cen4, cen6);
 	//col1 + col6 - col2 - col5, col0 + col7 - col3 - col4	
 
 	//sub
@@ -8945,7 +8963,6 @@ static void dct8(const int16_t* src, int16_t* dst, intptr_t srcStride)
 	out6 = (v4i32)__builtin_msa_hadd_s_d(out6, out6);
 	out7 = (v4i32)__builtin_msa_hadd_s_d(out7, out7);
 	*/
-
 	
 	//add
 	val8 = __builtin_msa_dotp_s_w(mid2, (v8i16)con4);//row0(0, 1, 2, 3) without shift
@@ -9112,9 +9129,11 @@ static void dct8(const int16_t* src, int16_t* dst, intptr_t srcStride)
 	out0 = (v4i32)__builtin_msa_hadd_s_d(val5, val5);
 	out2 = (v4i32)__builtin_msa_hsub_s_d(val5, val5);
 
-	out3 = __builtin_msa_mulv_w(val6, (v4i32)con1);
-	out3 = (v4i32)__builtin_msa_hsub_s_d(out3, out3);
+	//out3 = __builtin_msa_mulv_w(val6, (v4i32)con1);
+	//out3 = (v4i32)__builtin_msa_hsub_s_d(out3, out3);
 	
+	out3 = (v4i32)__builtin_msa_dotp_s_d(val6, (v4i32)con1);	
+
 	out1 = (v4i32)__builtin_msa_dotp_s_d(val6, (v4i32)con0);
 
 	//sub
@@ -9195,9 +9214,11 @@ static void dct8(const int16_t* src, int16_t* dst, intptr_t srcStride)
 	out0 = (v4i32)__builtin_msa_hadd_s_d(val5, val5);
 	out2 = (v4i32)__builtin_msa_hsub_s_d(val5, val5);
 
-	out3 = __builtin_msa_mulv_w(val6, (v4i32)con1);
-	out3 = (v4i32)__builtin_msa_hsub_s_d(out3, out3);
-	
+	//out3 = __builtin_msa_mulv_w(val6, (v4i32)con1);
+	//out3 = (v4i32)__builtin_msa_hsub_s_d(out3, out3);
+		
+	out3 = (v4i32)__builtin_msa_dotp_s_d(val6, (v4i32)con1);	
+
 	out1 = (v4i32)__builtin_msa_dotp_s_d(val6, (v4i32)con0);
 
 	//sub
@@ -9278,9 +9299,11 @@ static void dct8(const int16_t* src, int16_t* dst, intptr_t srcStride)
 	out0 = (v4i32)__builtin_msa_hadd_s_d(val5, val5);
 	out2 = (v4i32)__builtin_msa_hsub_s_d(val5, val5);
 
-	out3 = __builtin_msa_mulv_w(val6, (v4i32)con1);
-	out3 = (v4i32)__builtin_msa_hsub_s_d(out3, out3);
+	//out3 = __builtin_msa_mulv_w(val6, (v4i32)con1);
+	//out3 = (v4i32)__builtin_msa_hsub_s_d(out3, out3);
 	
+	out3 = (v4i32)__builtin_msa_dotp_s_d(val6, (v4i32)con1);
+
 	out1 = (v4i32)__builtin_msa_dotp_s_d(val6, (v4i32)con0);
 
 	//sub
@@ -9361,8 +9384,10 @@ static void dct8(const int16_t* src, int16_t* dst, intptr_t srcStride)
 	out0 = (v4i32)__builtin_msa_hadd_s_d(val5, val5);
 	out2 = (v4i32)__builtin_msa_hsub_s_d(val5, val5);
 
-	out3 = __builtin_msa_mulv_w(val6, (v4i32)con1);
-	out3 = (v4i32)__builtin_msa_hsub_s_d(out3, out3);
+	//out3 = __builtin_msa_mulv_w(val6, (v4i32)con1);
+	//out3 = (v4i32)__builtin_msa_hsub_s_d(out3, out3);
+	
+	out3 = (v4i32)__builtin_msa_dotp_s_d(val6, (v4i32)con1);	
 	
 	out1 = (v4i32)__builtin_msa_dotp_s_d(val6, (v4i32)con0);
 
