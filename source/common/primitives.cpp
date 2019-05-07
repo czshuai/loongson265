@@ -60,6 +60,8 @@ void setupSaoPrimitives_c(EncoderPrimitives &p);
 void setupSeaIntegralPrimitives_c(EncoderPrimitives &p);
 void setupLowPassPrimitives_c(EncoderPrimitives& p);
 
+void setupLoongson_asmPrimitives(EncoderPrimitives &p);
+
 void setupCPrimitives(EncoderPrimitives &p)
 {
     setupPixelPrimitives_c(p);      // pixel.cpp
@@ -70,6 +72,8 @@ void setupCPrimitives(EncoderPrimitives &p)
     setupLoopFilterPrimitives_c(p); // loopfilter.cpp
     setupSaoPrimitives_c(p);        // sao.cpp
     setupSeaIntegralPrimitives_c(p);  // framefilter.cpp
+
+    setupLoongson_asmPrimitives(p);   //loongson_asm.cpp
 }
 
 void enableLowpassDCTPrimitives(EncoderPrimitives &p)

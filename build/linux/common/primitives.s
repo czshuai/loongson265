@@ -312,6 +312,11 @@ _ZN4x26516setupCPrimitivesERNS_17EncoderPrimitivesE:
 1:	jalr	$25
 	move	$4,$16
 
+	ld	$25,%call16(_ZN4x26527setupLoongson_asmPrimitivesERNS_17EncoderPrimitivesE)($28)
+	.reloc	1f,R_MIPS_JALR,_ZN4x26527setupLoongson_asmPrimitivesERNS_17EncoderPrimitivesE
+1:	jalr	$25
+	move	$4,$16
+
 	ld	$31,24($sp)
 	ld	$28,16($sp)
 	ld	$16,8($sp)

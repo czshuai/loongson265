@@ -280,7 +280,6 @@ common/CMakeFiles/common.dir/pixel.cpp.o: /home/loongson/chenzeshuai/x265_v2.6/s
 common/CMakeFiles/common.dir/pixel.cpp.o: /home/loongson/chenzeshuai/x265_v2.6/source/common/constants.h
 common/CMakeFiles/common.dir/pixel.cpp.o: /home/loongson/chenzeshuai/x265_v2.6/source/common/contexts.h
 common/CMakeFiles/common.dir/pixel.cpp.o: /home/loongson/chenzeshuai/x265_v2.6/source/common/cpu.h
-common/CMakeFiles/common.dir/pixel.cpp.o: /home/loongson/chenzeshuai/x265_v2.6/source/common/ld_st.h
 common/CMakeFiles/common.dir/pixel.cpp.o: /home/loongson/chenzeshuai/x265_v2.6/source/common/lowres.h
 common/CMakeFiles/common.dir/pixel.cpp.o: /home/loongson/chenzeshuai/x265_v2.6/source/common/md5.h
 common/CMakeFiles/common.dir/pixel.cpp.o: /home/loongson/chenzeshuai/x265_v2.6/source/common/mv.h

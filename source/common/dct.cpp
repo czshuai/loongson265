@@ -42,6 +42,8 @@ using namespace X265_NS;
 
 // Fast DST Algorithm. Full matrix multiplication for DST and Fast DST algorithm
 // give identical results
+
+/*
 static void fastForwardDst(const int16_t* block, int16_t* coeff, int shift)  // input block, output coeff
 {
     int c[4];
@@ -61,6 +63,7 @@ static void fastForwardDst(const int16_t* block, int16_t* coeff, int shift)  // 
         coeff[12 + i] = (int16_t)((55 * c[2] - 29 * c[1] + c[3] + rnd_factor) >> shift);
     }
 }
+*/
 
 /*
 static void inversedst(const int16_t* tmp, int16_t* block, int shift)  // input tmp, output block

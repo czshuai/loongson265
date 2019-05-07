@@ -19106,33 +19106,7 @@ public:
 # 36 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 2
 
 using namespace x265;
-
-
-
-
-
-
-
-static void fastForwardDst(const int16_t* block, int16_t* coeff, int shift)
-{
-    int c[4];
-    int rnd_factor = 1 << (shift - 1);
-
-    for (int i = 0; i < 4; i++)
-    {
-
-        c[0] = block[4 * i + 0] + block[4 * i + 3];
-        c[1] = block[4 * i + 1] + block[4 * i + 3];
-        c[2] = block[4 * i + 0] - block[4 * i + 1];
-        c[3] = 74 * block[4 * i + 2];
-
-        coeff[i] = (int16_t)((29 * c[0] + 55 * c[1] + c[3] + rnd_factor) >> shift);
-        coeff[4 + i] = (int16_t)((74 * (block[4 * i + 0] + block[4 * i + 1] - block[4 * i + 3]) + rnd_factor) >> shift);
-        coeff[8 + i] = (int16_t)((29 * c[2] + 55 * c[0] - c[3] + rnd_factor) >> shift);
-        coeff[12 + i] = (int16_t)((55 * c[2] - 29 * c[1] + c[3] + rnd_factor) >> shift);
-    }
-}
-# 87 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 90 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
 static void partialButterfly16(const int16_t* src, int16_t* dst, int shift, int line)
 {
     int j, k;
@@ -19254,7 +19228,7 @@ static void partialButterfly32(const int16_t* src, int16_t* dst, int shift, int 
         dst++;
     }
 }
-# 275 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 278 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
 static void partialButterflyInverse8(const int16_t* src, int16_t* dst, int shift, int line)
 {
     int j, k;
@@ -19405,7 +19379,7 @@ static void partialButterflyInverse32(const int16_t* src, int16_t* dst, int shif
         dst += 32;
     }
 }
-# 620 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 623 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
 static void dct16_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
 {
     const int shift_1st = 3 + 8 - 8;
@@ -19439,7 +19413,7 @@ static void dct32_c(const int16_t* src, int16_t* dst, intptr_t srcStride)
     partialButterfly32(block, coef, shift_1st, 32);
     partialButterfly32(coef, dst, shift_2nd, 32);
 }
-# 692 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 695 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
 static void idct8_c(const int16_t* src, int16_t* dst, intptr_t dstStride)
 {
     const int shift_1st = 7;
@@ -19756,30 +19730,30 @@ static uint32_t costCoeffNxN_c(const uint16_t *scan, const coeff_t *coeff, intpt
             sum += stateBits;
         }
         
-# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+# 1010 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
        ({ if (
-# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1010 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
        numNonZero <= 15
-# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+# 1010 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
        ) ; else __assert_fail (
-# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1010 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
        "numNonZero <= 15"
-# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
-       , "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp", 1007, __PRETTY_FUNCTION__); })
-# 1007 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1010 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+       , "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp", 1010, __PRETTY_FUNCTION__); })
+# 1010 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
                                ;
         
-# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+# 1011 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
        ({ if (
-# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1011 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
        blkPos <= 15
-# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+# 1011 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
        ) ; else __assert_fail (
-# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1011 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
        "blkPos <= 15"
-# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
-       , "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp", 1008, __PRETTY_FUNCTION__); })
-# 1008 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
+# 1011 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp" 3 4
+       , "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp", 1011, __PRETTY_FUNCTION__); })
+# 1011 "/home/loongson/chenzeshuai/x265_v2.6/source/common/dct.cpp"
                            ;
         absCoeff[numNonZero] = tmpCoeff[blkPos];
         numNonZero += sig;

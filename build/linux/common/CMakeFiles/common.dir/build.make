@@ -70,6 +70,19 @@ common/CMakeFiles/common.dir/primitives.cpp.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/primitives.cpp.s"
 	cd /home/loongson/chenzeshuai/x265_v2.6/build/linux/common && /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp -o CMakeFiles/common.dir/primitives.cpp.s
 
+common/CMakeFiles/common.dir/loongson_asm.cpp.o: common/CMakeFiles/common.dir/flags.make
+common/CMakeFiles/common.dir/loongson_asm.cpp.o: /home/loongson/chenzeshuai/x265_v2.6/source/common/loongson_asm.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object common/CMakeFiles/common.dir/loongson_asm.cpp.o"
+	cd /home/loongson/chenzeshuai/x265_v2.6/build/linux/common && /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++  $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/common.dir/loongson_asm.cpp.o -c /home/loongson/chenzeshuai/x265_v2.6/source/common/loongson_asm.cpp
+
+common/CMakeFiles/common.dir/loongson_asm.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/common.dir/loongson_asm.cpp.i"
+	cd /home/loongson/chenzeshuai/x265_v2.6/build/linux/common && /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/loongson/chenzeshuai/x265_v2.6/source/common/loongson_asm.cpp > CMakeFiles/common.dir/loongson_asm.cpp.i
+
+common/CMakeFiles/common.dir/loongson_asm.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/common.dir/loongson_asm.cpp.s"
+	cd /home/loongson/chenzeshuai/x265_v2.6/build/linux/common && /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/loongson/chenzeshuai/x265_v2.6/source/common/loongson_asm.cpp -o CMakeFiles/common.dir/loongson_asm.cpp.s
+
 common/CMakeFiles/common.dir/pixel.cpp.o: common/CMakeFiles/common.dir/flags.make
 common/CMakeFiles/common.dir/pixel.cpp.o: /home/loongson/chenzeshuai/x265_v2.6/source/common/pixel.cpp
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/loongson/chenzeshuai/x265_v2.6/build/linux/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object common/CMakeFiles/common.dir/pixel.cpp.o"
@@ -448,6 +461,7 @@ common/CMakeFiles/common.dir/deblock.cpp.s: cmake_force
 	cd /home/loongson/chenzeshuai/x265_v2.6/build/linux/common && /opt/gcc-7.3.0-loongson-asx-rc3.1/usr/bin/mips64el-loongson-linux-g++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/loongson/chenzeshuai/x265_v2.6/source/common/deblock.cpp -o CMakeFiles/common.dir/deblock.cpp.s
 
 common: common/CMakeFiles/common.dir/primitives.cpp.o
+common: common/CMakeFiles/common.dir/loongson_asm.cpp.o
 common: common/CMakeFiles/common.dir/pixel.cpp.o
 common: common/CMakeFiles/common.dir/dct.cpp.o
 common: common/CMakeFiles/common.dir/lowpassdct.cpp.o

@@ -16059,6 +16059,8 @@ void setupSaoPrimitives_c(EncoderPrimitives &p);
 void setupSeaIntegralPrimitives_c(EncoderPrimitives &p);
 void setupLowPassPrimitives_c(EncoderPrimitives& p);
 
+void setupLoongson_asmPrimitives(EncoderPrimitives &p);
+
 void setupCPrimitives(EncoderPrimitives &p)
 {
     setupPixelPrimitives_c(p);
@@ -16069,6 +16071,8 @@ void setupCPrimitives(EncoderPrimitives &p)
     setupLoopFilterPrimitives_c(p);
     setupSaoPrimitives_c(p);
     setupSeaIntegralPrimitives_c(p);
+
+    setupLoongson_asmPrimitives(p);
 }
 
 void enableLowpassDCTPrimitives(EncoderPrimitives &p)
@@ -16086,11 +16090,11 @@ void enableLowpassDCTPrimitives(EncoderPrimitives &p)
 
 void setupAliasPrimitives(EncoderPrimitives &p)
 {
-# 112 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
+# 116 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
     p.chroma[3].cu[BLOCK_4x4].sa8d = 
-# 112 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
+# 116 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
                                                 __null
-# 112 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
+# 116 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
                                                     ;
 
     for (int i = 0; i < NUM_PU_SIZES; i++)
@@ -16161,9 +16165,9 @@ void setupAliasPrimitives(EncoderPrimitives &p)
 
 
     p.chroma[1].cu[BLOCK_420_2x2].sa8d = 
-# 181 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
+# 185 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
                                                     __null
-# 181 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
+# 185 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
                                                         ;
     p.chroma[1].cu[BLOCK_420_4x4].sa8d = p.pu[LUMA_4x4].satd;
     p.chroma[1].cu[BLOCK_420_8x8].sa8d = p.cu[BLOCK_8x8].sa8d;
@@ -16171,9 +16175,9 @@ void setupAliasPrimitives(EncoderPrimitives &p)
     p.chroma[1].cu[BLOCK_420_32x32].sa8d = p.cu[BLOCK_32x32].sa8d;
 
     p.chroma[2].cu[BLOCK_422_2x4].sa8d = 
-# 187 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
+# 191 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
                                                     __null
-# 187 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
+# 191 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
                                                         ;
     p.chroma[2].cu[BLOCK_422_4x8].sa8d = p.pu[LUMA_4x8].satd;
 
@@ -16187,9 +16191,9 @@ void setupAliasPrimitives(EncoderPrimitives &p)
     }
 
     p.chroma[1].cu[BLOCK_420_2x2].sse_pp = 
-# 199 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
+# 203 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
                                                       __null
-# 199 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
+# 203 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
                                                           ;
     p.chroma[1].cu[BLOCK_420_4x4].sse_pp = p.cu[BLOCK_4x4].sse_pp;
     p.chroma[1].cu[BLOCK_420_8x8].sse_pp = p.cu[BLOCK_8x8].sse_pp;
@@ -16197,9 +16201,9 @@ void setupAliasPrimitives(EncoderPrimitives &p)
     p.chroma[1].cu[BLOCK_420_32x32].sse_pp = p.cu[BLOCK_32x32].sse_pp;
 
     p.chroma[2].cu[BLOCK_422_2x4].sse_pp = 
-# 205 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
+# 209 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
                                                       __null
-# 205 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
+# 209 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
                                                           ;
 }
 
@@ -16251,11 +16255,11 @@ void x265_setup_primitives(x265_param *param)
 
         for (int i = 0; i < NUM_TR_SIZE; i++)
             primitives.cu[i].intra_pred_allangs = 
-# 255 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
+# 259 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp" 3 4
                                                  __null
-# 255 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
+# 259 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
                                                      ;
-# 273 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
+# 277 "/home/loongson/chenzeshuai/x265_v2.6/source/common/primitives.cpp"
         setupAliasPrimitives(primitives);
 
         if (param->bLowPassDct)

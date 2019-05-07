@@ -1057,7 +1057,7 @@ _ZL14costCoeffNxN_cPKtPKslPtPKhjPhiii:
 
 .L154:
 	ld	$7,%got_page(_ZZL14costCoeffNxN_cPKtPKslPtPKhjPhiiiE19__PRETTY_FUNCTION__)($28)
-	li	$6,1008			# 0x3f0
+	li	$6,1011			# 0x3f3
 	ld	$5,%got_page(.LC0)($28)
 	ld	$4,%got_page(.LC2)($28)
 	ld	$25,%call16(__assert_fail)($28)
@@ -1133,7 +1133,7 @@ _ZL14costCoeffNxN_cPKtPKslPtPKhjPhiii:
 
 .L164:
 	ld	$7,%got_page(_ZZL14costCoeffNxN_cPKtPKslPtPKhjPhiiiE19__PRETTY_FUNCTION__)($28)
-	li	$6,1007			# 0x3ef
+	li	$6,1010			# 0x3f2
 	ld	$5,%got_page(.LC0)($28)
 	ld	$4,%got_page(.LC1)($28)
 	ld	$25,%call16(__assert_fail)($28)
